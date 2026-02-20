@@ -375,6 +375,14 @@ The rationale around the issuance profile states that the national passport issu
 | --- | --- |
 | XX_XX | APTITUDE DTC SHALL support remote usage where the attestation can be transmitted in advance for identity validation and risk assessment |
 | XX_XX | APTITUDE DTC SHALL support proximity presentation at border control using border authority proximity control systems (e-gates, desktop equipment, mobile devices) |
+| XX_XX | APTITUDE DTC SHALL ensure explicit user consent in the wallet-based presentation flow |
+| XX_XX | APTITUDE DTC SHALL support selective disclosure / data minimisation |
+| XX_XX | APTITUDE DTC SHALL support an approach that accounts for the reported protocol gap between ISO/IEC 18013‑5 (wallet proximity) and ISO/IEC 14443/APDU (border inspection backwards compatibility) |
+
+#### Verification
+| Index | Requirement specification |
+| --- | --- |
+| XX_XX | APTITUDE DTC SHALL support cryptographic integrity verification |
 
 ## 5 Trust anchors
 ### Chapter overview and requirements
@@ -408,6 +416,17 @@ The rationale around the issuance profile states that the national passport issu
 | Index | Requirement specification |
 | --- | --- |
 | DTC_CM_01 | APTITUDE DTC SHALL support privacy-by-design expectations |
+### Requirements
+| Index | Requirement specification |
+| --- | --- |
+| XX_XX | APTITUDE DTC SHALL support a full DTC lifecycle covering issuance, verification, and revocation |
+| XX_XX | APTITUDE DTC SHALL support mechanisms for revocation and status checking |
+| XX_XX | APTITUDE DTC SHALL support alignment between EUDI Wallet attestation lifecycle and ICAO DTC lifecycle requirements |
+
+## 7 Compliance
+| Index | Requirement specification |
+| --- | --- |
+| XX_XX | APTITUDE DTC SHALL support privacy-by-design expectations |
 
 ## 8 References
 
