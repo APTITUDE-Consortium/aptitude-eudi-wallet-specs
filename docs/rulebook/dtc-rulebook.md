@@ -105,7 +105,8 @@ This section defines which data sets must be present and preserved.
 | XX_XX | APTITUDE DTC MAY contain additional attributes beyond the derived eMRTD dataset |
 
 
-## 3 Attestation encoding
+## 3 Attestation 
+### Chapter overview and requirements
 ### Chapter overview and requirements
 This chapter defines the encoding‑related requirements for the APTITUDE Digital Travel Credential (DTC) and establishes the technical constraints that any concrete encoding solution must satisfy.
 
@@ -368,7 +369,6 @@ The rationale around the issuance profile states that the national passport issu
 | DTC_VR_06 | The verifier SHALL support the verification of Selective Disclosure presentations (e.g., verifying a subset of attributes via SD-JWT) without compromising data authenticity. |
 | DTC_VR_07 | The system SHALL support cross-border interoperability, allowing border authorities of one Member State to verify a DTC issued by another Member State's authority. |
 | DTC_VR_08 | The verification SHALL include a biometric match (1:1) between the traveller and the DG2 (Face Image) contained within the verified DTC. |
-
 ### Chapter overview and requirements
 #### Presentation
 | Index | Requirement specification |
@@ -398,6 +398,7 @@ The rationale around the issuance profile states that the national passport issu
 | DTC_TA_08 | APTITUDE DTC SHALL support an option where the DTC is stored/handled as a Pub‑EAA to preserve issuer sovereignty |
 | DTC_TA_09 | APTITUDE DTC SHALL allow the applicable attestation trust type (e.g., QEAA vs Pub‑EAA) to be policy/configuration-driven |
 | DTC_TA_10 | APTITUDE DTC MAY be able to accommodate alternative/extra signing arrangements (e.g., a possible EU model where DTCs may need to be re-signed by eu‑LISA) |
+### Chapter overview and requirements
 
 ## 6 Revocation
 ### Chapter overview and requirements
@@ -416,7 +417,7 @@ The rationale around the issuance profile states that the national passport issu
 | Index | Requirement specification |
 | --- | --- |
 | DTC_CM_01 | APTITUDE DTC SHALL support privacy-by-design expectations |
-### Requirements
+### Chapter overview and requirements
 | Index | Requirement specification |
 | --- | --- |
 | XX_XX | APTITUDE DTC SHALL support a full DTC lifecycle covering issuance, verification, and revocation |
@@ -424,6 +425,7 @@ The rationale around the issuance profile states that the national passport issu
 | XX_XX | APTITUDE DTC SHALL support alignment between EUDI Wallet attestation lifecycle and ICAO DTC lifecycle requirements |
 
 ## 7 Compliance
+### Chapter overview and requirements
 | Index | Requirement specification |
 | --- | --- |
 | XX_XX | APTITUDE DTC SHALL support privacy-by-design expectations |
