@@ -1,10 +1,38 @@
+# Project information
 site_name: APTITUDE Technical Specification
 site_description: APTITUDE Technical Specification
 site_author: APTITUDE Consortium
-site_url: https://aptitude-project.eu/
+site_url: https://aptitude-consortium.github.io/aptitude-eudi-wallet-rfcs/
+
+# Repository
+repo_name: APTITUDE-Consortium/aptitude-eudi-wallet-rfcs
+repo_url: https://github.com/APTITUDE-Consortium/aptitude-eudi-wallet-rfcs
+
+# Copyright
+copyright: Copyright &copy; 2025 APTITUDE Consortium
+
+# Configuration for MkDocs Material theme
 theme:
   name: material
   custom_dir: docs/overrides
+  features:
+    - content.action.edit
+    - content.action.view
+    - content.code.annotate
+    - content.code.copy
+    - navigation.footer
+    - navigation.indexes
+    - navigation.instant
+    - navigation.instant.progress
+    - navigation.path
+    - navigation.tabs
+    - navigation.tabs.sticky
+    - navigation.top
+    - navigation.tracking
+    - search.highlight
+    - search.suggest
+    - toc.follow
+    - toc.integrate
   palette:
     - media: "(prefers-color-scheme: dark)"
       scheme: slate
@@ -16,29 +44,14 @@ theme:
       toggle:
         icon: material/brightness-7
         name: Switch to dark mode
-  features:
-    - navigation.tabs
-    - navigation.tabs.sticky
-    - navigation.path
-    - navigation.top
-    - toc.integrate
-    - toc.follow
-
+  font:
+    text: Roboto
+    code: Roboto Mono
   logo: img/logo.png
+
 extra_css:
   - media/extra.css
 
-markdown_extensions:
-  - footnotes
-  - sane_lists
-  - tables
-nav:
-  - Home: index.md
-  - Rulebook:
-    - Placeholder 1: rulebook/attestation-rulebook-1.md
-    - Placeholder 2: rulebook/attestation-rulebook-2.md
-  - Standards: standards.md
-  - Glossary: glossary.md
 plugins:
   - tags
   - search
@@ -47,3 +60,22 @@ plugins:
       locale: en
       fallback_to_build_date: true
       type: datetime  
+
+
+markdown_extensions:
+  - footnotes
+  - sane_lists
+  - tables
+  - toc:
+      permalink: true
+
+  
+nav:
+  - Home: index.md
+  - Rulebook:
+    - Placeholder 1: rulebook/attestation-rulebook-1.md
+    - Placeholder 2: rulebook/attestation-rulebook-2.md
+  - Standards: standards.md
+  - Glossary: glossary.md
+
+
