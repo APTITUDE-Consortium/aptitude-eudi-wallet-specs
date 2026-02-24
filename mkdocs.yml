@@ -56,10 +56,10 @@ plugins:
   - tags
   - search
   - git-revision-date
-  - git-revision-date-localized:  
+  - git-revision-date-localized:
       locale: en
       fallback_to_build_date: true
-      type: datetime  
+      type: datetime
 
 
 markdown_extensions:
