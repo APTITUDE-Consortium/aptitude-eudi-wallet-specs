@@ -28,6 +28,7 @@ The DTC attestation type is intended for use by national authorities issuing tra
 
 ### 1.2 Document structure
 ### 1.3 Key words
+This document uses the capitalised keywords 'SHALL', 'SHOULD' and 'MAY' as specified in [RFC 2119], i.e. to indicate requirements, recommendations and options specified in this document.
 ### 1.4 Terminology
 
 ## 2 Attestation attributes and metadata
@@ -106,6 +107,7 @@ The DTC attestation type is intended for use by national authorities issuing tra
 
 ## 8 References
 | **Item Reference** | **Standard name/details** |
+| [RFC 2119] | Key words for use in RFCs |
 | --- | --- |
 | ... | ...|
 | ... | ... |
