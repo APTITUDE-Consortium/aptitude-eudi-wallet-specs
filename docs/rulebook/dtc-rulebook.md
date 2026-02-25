@@ -62,9 +62,11 @@ This document uses the capitalised keywords 'SHALL', 'SHOULD' and 'MAY' as speci
 | XX_XX | APTITUDE DTC SHALL encode the photoID profile as per ISO/IEC 23220‑4 Annex C | 
 | XX_XX | APTITUDE DTC SHALL preserve the ICAO LDS semantics | 
 | XX_XX | APTITUDE DTC SHALL support SD‑JWT VC encoding | 
-| XX_XX | APTITUDE DTC SHALL ISO/IEC 18013‑5 mdoc-cbor encoding | 
+| XX_XX | APTITUDE DTC SHALL ISO/IEC 18013‑5 mdoc-cbor encoding for proximity presentation and interaction with EUDI Wallet readers. | 
 | XX_XX | APTITUDE DTC SHALL implement an encoding approach that addresses the incompatibility between ARF selective disclosure and ICAO LDS integrity‑bound | 
 | XX_XX | APTITUDE DTC SHALL adopt open, standard-based credential encodings to maximize interoperability and avoid vendor lock-in | 
+| XX_XX | The encoding SHALL support a dual-signature or hybrid structure to allow validation via both ICAO CSCA/DS (PKI) and eIDAS Trusted Lists. |
+| XX_XX | The encoding SHALL ensure that the cryptographic link (binding) between the VC and the EUDI Wallet device is preserved across different encoding formats. |
 
 ## 4 Attestation usage
 ### Chapter overview and requirements
