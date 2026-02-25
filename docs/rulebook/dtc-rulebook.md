@@ -404,6 +404,13 @@ The rationale around the issuance profile states that the national passport issu
 | Index | Requirement specification |
 | --- | --- |
 | XX_XX | APTITUDE DTC SHALL support cryptographic integrity verification |
+| XX_XX | The verification process SHALL support Passive Authentication (PA) to ensure that the Data Groups (DG1, DG2, etc.) have not been tampered with since issuance. |
+| XX_XX | The system SHALL support Active Authentication (AA) or equivalent protocols to verify that the DTC resides on the original secure device and has not been cloned. |
+| XX_XX | The Verifier SHALL be able to validate the credential using multiple trust anchors: ICAO PKD (Public Key Directory) for travel data and eIDAS Trusted Lists for Wallet attestations. |
+| XX_XX | The verification process SHALL support revocation checking in real-time or via Certificate Revocation Lists (CRLs) / OCSP, as required by the eIDAS 2.0 framework. |
+| XX_XX | The Verifier SHALL support the verification of Selective Disclosure presentations (e.g., verifying a subset of attributes via SD-JWT) without compromising data authenticity. |
+| XX_XX | The system SHALL support cross-border interoperability, allowing border authorities of one Member State to verify a DTC issued by another Member State's authority. |
+| XX_XX | The verification SHALL include a biometric match (1:1) between the traveller and the DG2 (Face Image) contained within the verified DTC. |
 
 ## 5 Trust anchors
 ### Chapter overview and requirements
