@@ -477,6 +477,8 @@ The rationale around the issuance profile states that the national passport issu
 | XX_XX | APTITUDE DTC SHALL support a full DTC lifecycle covering issuance, verification, and revocation |
 | XX_XX | APTITUDE DTC SHALL support mechanisms for revocation and status checking |
 | XX_XX | APTITUDE DTC SHALL support alignment between EUDI Wallet attestation lifecycle and ICAO DTC lifecycle requirements |
+| XX_XX | The revocation mechanism SHALL be compatible with the eIDAS 2.0 Trust Framework, utilizing the national Trusted Lists (TL) to signal the status of the Attestation Provider. |
+| XX_XX | The Verifier (Relying Party) SHALL be able to perform offline status verification if required by the specific border control use case, using periodically updated revocation lists. |
 
 ## 7 Compliance
 ### Chapter overview and requirements
