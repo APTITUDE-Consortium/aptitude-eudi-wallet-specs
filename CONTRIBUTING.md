@@ -62,19 +62,6 @@ The site will be available at `http://127.0.0.1:8000/` with live reload enabled.
 - Prevents version conflicts with other projects
 - Ensures reproducible builds across contributors and CI/CD
 
-### Updating the standards page
-
-The [standards page](docs/standards.md) is auto-generated from `doc/standards.xlsx`. To update it:
-
-1. Edit `doc/standards.xlsx` (modify the "Identification of standards&TS" sheet)
-2. Run the conversion script:
-
-   ```bash
-   .venv/bin/python script/excel_to_markdown.py
-   ```
-
-3. Commit both the Excel file and the generated `docs/standards.md`
-
 ## RFC authoring checklist
 
 - All RFCs and documentation must be created under the `/docs/` folder (this is the MkDocs source).

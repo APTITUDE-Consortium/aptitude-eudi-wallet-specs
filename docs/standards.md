@@ -1,7 +1,5 @@
 # Relevant Standards
 
-> **Note:** This page is auto-generated from `doc/standards.xlsx`.
-> To update, modify the Excel file and run: `.venv/bin/python script/excel_to_markdown.py`
 > **Note:** Tables on this page are designed to display at full browser width. On smaller screens, use horizontal scrolling to view all columns.
 
 ## Identification of standards&TS
