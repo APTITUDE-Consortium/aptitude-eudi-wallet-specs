@@ -37,62 +37,8 @@ Terminologies and definitions within Aptitude project are listed in [APTITUDE Gl
 This section defines the functional and semantic scope of the data composing the APTITUDE Digital Travel Credential (DTC), based on the evidence collected during the stock‑taking phase.
 
 The cross‑border value of a DTC critically depends on preserving full alignment with the ICAO data model while at the same time allowing extensions required for integration within the EUDI Wallet ecosystem and the eIDAS 2.0 framework.
-
-#### Data model
-International interoperability and backward compatibility with existing border‑control infrastructure remain core requirements for any realistic DTC deployment.
-
-This section defines which data sets must be present and preserved.
-| Index | Requirement specification |
-| --- | --- |
-| DTC_DM_01 | The APTITUDE DTC SHALL contain DG1, DG2, SOD as from the physical eMRTD passport |
-| DTC_DM_02 | The APTITUDE DTC SHALL contain fields like: dtcSecurityInfo, DTCIdentifier, DTCDOE, and a signature structure for validation |
-| DTC_DM_03 | The APTITUDE DTC SHALL be encapsulated as a Verifiable Credential (VC), ensuring compatibility with the EUDI Wallet data formats (SD-JWT or MDOC-CBOR). |
-| DTC_DM_04 | The APTITUDE DTC SHALL include a cryptographic binding between the Virtual Component (VC) and the Physical Component (PC) stored in the WSCD. |
-| DTC_DM_05 | APTITUDE DTC MAY contain additional attributes beyond the derived eMRTD dataset |
-| DTC_DM_06 | The data model SHALL support Selective Disclosure, allowing the traveller to share only the strictly necessary attributes (e.g., only DG2 for biometric match) with Relying Parties. |
-
-### Attributes
-
-#TODO: involve T2.1.2 and WP3
-
-#TODO: should we specify the source that requires an attribute? i.e. DTC or ICAO or EUDI?
-
-| **Data Identifier** | **Definition**          | **Data type**     | **Example value** |
-|---------------------|-------------------------|-------------------|-------------------|
-| *Provide a value*   | *Provide succinct text* | *Provide a value* | *Provide a value* |
-
-
-### Optional attributes
-
-| **Data Identifier** | **Definition**          | **Data type**     | **Example value** |
-|---------------------|-------------------------|-------------------|-------------------|
-| *Provide a value*   | *Provide succinct text* | *Provide a value* | *Provide a value* |
-
-### Conditional attributes
-
-| **Data Identifier** | **Definition**          | **Data type**     | **Example value** |
-|---------------------|-------------------------|-------------------|-------------------|
-| *Provide a value*   | *Provide succinct text* | *Provide a value* | *Provide a value* |
-
-### Mandatory metadata 
-
-| **Data Identifier** | **Definition**          | **Data type**     | **Example value** |
-|---------------------|-------------------------|-------------------|-------------------|
-| *Provide a value*   | *Provide succinct text* | *Provide a value* | *Provide a value* |
-
-
-### Optional metadata 
-
-| **Data Identifier** | **Definition**          | **Data type**     | **Example value** |
-|---------------------|-------------------------|-------------------|-------------------|
-| *Provide a value*   | *Provide succinct text* | *Provide a value* | *Provide a value* |
-
-### Conditional metadata 
-
-| **Data Identifier** | **Definition**          | **Data type**     | **Example value** |
-|---------------------|-------------------------|-------------------|-------------------|
-| *Provide a value*   | *Provide succinct text* | *Provide a value* | *Provide a value* |
 #### Issuance
+The rationale around the issuance profile states that the national passport issuing authority remains the sole legitimate entity for issuing and signing a DTC derived from an eMRTD.
 | Index | Requirement specification |
 | --- | --- |
 | XX_XX | The APTITUDE DTC SHALL be issued exclusively by the National Passport Issuing Authority of the Member State that issued the physical eMRTD. |
@@ -103,6 +49,10 @@ This section defines which data sets must be present and preserved.
 | XX_XX | The system SHALL support the complete lifecycle management of the DTC, including secure revocation and update mechanisms managed by the issuing authority. |
 
 #### Data model
+ International interoperability and backward compatibility with existing border‑control infrastructure remain core requirements for any realistic DTC deployment.
+ As a result, the ICAO LDS data model (DG1, DG2, SOD) constitutes the mandatory baseline.
+
+ This section defines which data sets must be present and preserved.
 | Index | Requirement specification |
 | --- | --- |
 | XX_XX | According to ICAO’s DTC-VC data model, the APTITUDE DTC SHALL contain DG1, DG2, SOD as from the physical eMRTD passport |
