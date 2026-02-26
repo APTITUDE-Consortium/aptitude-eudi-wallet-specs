@@ -54,6 +54,13 @@ The cross‑border value of a DTC critically depends on preserving full alignmen
 
 ## 3 Attestation encoding
 ### Chapter overview and requirements
+This chapter defines the encoding‑related requirements for the APTITUDE Digital Travel Credential (DTC) and establishes the technical constraints that any concrete encoding solution must satisfy.
+
+The objective of this chapter is not to mandate a single encoding format, but to specify what properties the encoding must preserve, which standards must be supported, and which interoperability conditions must be met for the DTC to function both as:
+
+- an ICAO‑aligned Digital Travel Credential suitable for border‑control use cases, and
+- an eIDAS‑compliant attestation that can be stored, managed, and presented within the EUDI Wallet ecosystem.
+
 | Index | Requirement specification |
 | --- | --- |
 | XX_XX | APTITUDE DTC SHALL be encoded as an eIDAS2 attestation compliant | 
@@ -68,6 +75,7 @@ The cross‑border value of a DTC critically depends on preserving full alignmen
 
 ## 4 Attestation usage
 ### Chapter overview and requirements
+This section defines functional usage requirements and implementation profiles for the DTC lifecycle including issuance, presentation, and verification.
 #### Issuance
 The rationale around the issuance profile states that the national passport issuing authority remains the sole legitimate entity for issuing and signing a DTC derived from an eMRTD.
 | Index | Requirement specification |
