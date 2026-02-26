@@ -5,7 +5,7 @@
 | ... | ... | ... |
 | ... | ... | ... |
 
-# APTITUDE - *Tickets & check-in rulebook*
+# APTITUDE - *Tickets and check-in rulebook*
 
 *Provide information about the author(s) of this Rulebook in the following form:*
 

@@ -5,7 +5,7 @@
 | ... | ... | ... |
 | ... | ... | ... |
 
-# APTITUDE - *SCA rulebook*
+# APTITUDE - *Payment and Banking rulebook*
 
 *Provide information about the author(s) of this Rulebook in the following form:*
 
