@@ -26,3 +26,6 @@
 [submodule "reference/eudi-doc-attestation-rulebooks-catalog"]
 	path = reference/eudi-doc-attestation-rulebooks-catalog
 	url = https://github.com/eu-digital-identity-wallet/eudi-doc-attestation-rulebooks-catalog.git
+[submodule "docs/rulebook/wp2-trust-specifications"]
+	path = docs/rulebook/wp2-trust-specifications
+	url = https://github.com/APTITUDE-Consortium/wp2-trust-specifications
