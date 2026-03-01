@@ -82,7 +82,6 @@
 |RFC 9901|RFC 9901 - Selective Disclosure for JSON Web Tokens|IETF|RFC||Published|<https://datatracker.ietf.org/doc/rfc9901>|Yes||||||Y|||||
 |SD-JWT-VC|SD-JWT-based Verifiable Credentials (SD-JWT VC)|IETF|RFC|draft-ietf-oauth-sd-jwt-vc-13|Draft|<https://datatracker.ietf.org/doc/draft-ietf-oauth-sd-jwt-vc/>|Yes||Credential format supporting selective disclosure||||Y|||||
 |Client authentication|OAuth 2.0 Attestation-Based Client Authentication|IETF|RFC|draft-ietf-oauth-attestation-based-client-auth-07|Draft|<https://datatracker.ietf.org/doc/draft-ietf-oauth-attestation-based-client-auth/>|Yes||Client authentication|||Y||||||
-|Oauth 2.1|The OAuth 2.1 Authorization Framework|IETF|RFC|draft-ietf-oauth-v2-1-14|Draft|<https://datatracker.ietf.org/doc/draft-ietf-oauth-v2-1/>|No||||Y|Y||||||
 |Token Status List|Token Status List (TSL)|IETF|RFC|draft-ietf-oauth-status-list-17|Draft|<https://datatracker.ietf.org/doc/draft-ietf-oauth-status-list/>|Yes||Useful for revocation/suspension||||||Y|Y||
 |18013-5|Personal identification — ISO-compliant<br>driving licence<br>Part 5: Mobile<br>driving licence (mDL) application|ISO/IEC|IS|2021|Published||Yes||mdoc concept<br>Proximity use case|||Y|Y|Y|Y|||
 |18013-5|Personal identification — ISO-compliant<br>driving licence<br>Part 5: Mobile<br>driving licence (mDL) application|ISO/IEC|IS|Ed2|Draft (DIS)||Yes||mdoc concept<br>Proximity use case|||Y|Y|Y|Y|||
