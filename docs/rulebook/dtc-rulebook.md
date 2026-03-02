@@ -46,8 +46,9 @@ The cross‑border value of a DTC critically depends on preserving full alignmen
 | --- | --- |
 | XX_XX | According to ICAO’s DTC-VC data model, the APTITUDE DTC SHALL contain DG1, DG2, SOD as from the physical eMRTD passport |
 | XX_XX | According to ICAO's DTC-VC data model, the APTITUDE DTC SHALL contain fields like: dtcSecurityInfo, DTCIdentifier, DTCDOE, and a signature structure for validation |
-| XX_XX | The APTITUDE DTC SHALL be encapsulated as a Verifiable Credential (VC), ensuring compatibility with the EUDI Wallet data formats (e.g., SD-JWT or mDL). |
-| XX_XX | For Type 2 credentials, the data model SHALL include a cryptographic binding between the Virtual Component (VC) and the Physical Component (PC) stored in the Wallet's secure element. |
+| XX_XX | The APTITUDE DTC SHALL be encapsulated as a Verifiable Credential (VC), ensuring compatibility with the EUDI Wallet data formats (SD-JWT or MDOC-CBOR). |
+| XX_XX | For ICAO Type 2 credentials, the attestation SHALL include a cryptographic binding between the Virtual Component (VC) and the Physical Component (PC) stored in the WSCD. |
+| XX_XX | If WSCD does not satisfy the highest assurance level, the eMRTD remains a fallback PC in addition to the EUDI wallet-device. In this case attestation is bound both to the passport and to to the wallet.|
 | XX_XX | APTITUDE DTC MAY contain additional attributes beyond the derived eMRTD dataset |
 | XX_XX | The data model SHALL support Selective Disclosure, allowing the traveller to share only the strictly necessary attributes (e.g., only DG2 for biometric match) with Relying Parties. |
 
@@ -64,14 +65,14 @@ The objective of this chapter is not to mandate a single encoding format, but to
 | Index | Requirement specification |
 | --- | --- |
 | XX_XX | APTITUDE DTC SHALL be encoded as an eIDAS2 attestation compliant | 
-| XX_XX | APTITUDE DTC SHALL encode the photoID profile as per ISO/IEC 23220‑4 Annex C | 
+| XX_XX | APTITUDE DTC SHALL encode the photoID profile as per ISO/IEC 23220 | 
 | XX_XX | APTITUDE DTC SHALL preserve the ICAO LDS semantics | 
 | XX_XX | APTITUDE DTC SHALL support SD‑JWT VC encoding | 
 | XX_XX | APTITUDE DTC SHALL ISO/IEC 18013‑5 mdoc-cbor encoding for proximity presentation and interaction with EUDI Wallet readers. | 
 | XX_XX | APTITUDE DTC SHALL implement an encoding approach that addresses the incompatibility between ARF selective disclosure and ICAO LDS integrity‑bound | 
 | XX_XX | APTITUDE DTC SHALL adopt open, standard-based credential encodings to maximize interoperability and avoid vendor lock-in | 
 | XX_XX | The encoding SHALL support a dual-signature or hybrid structure to allow validation via both ICAO CSCA/DS (PKI) and eIDAS Trusted Lists. |
-| XX_XX | The encoding SHALL ensure that the cryptographic link (binding) between the VC and the EUDI Wallet device is preserved across different encoding formats. |
+| XX_XX | The encoding SHOULD ensure that the cryptographic link (binding) between the VC and the EUDI Wallet device is preserved across different encoding formats. |
 
 ## 4 Attestation usage
 ### Chapter overview and requirements
@@ -95,8 +96,8 @@ The rationale around the issuance profile states that the national passport issu
 | XX_XX | APTITUDE DTC SHALL support selective disclosure / data minimisation |
 | XX_XX | APTITUDE DTC SHALL support an approach that accounts for the reported protocol gap between ISO/IEC 18013‑5 (wallet proximity) and ISO/IEC 14443/APDU (border inspection backwards compatibility) |
 | XX_XX | The presentation flow SHALL support Chip Authentication (CA) mechanisms to prevent cloning and ensure the DTC is bound to the Wallet instance. |
-| XX_XX | The system SHALL support offline presentation (e.g., via NFC or QR code) in scenarios with limited or no connectivity at the border crossing point. |
-| XX_XX | The presentation SHALL enable the Relying Party to verify the DTC's validity against both the ICAO PKD/CSCA and the eIDAS Trusted Lists (TL). |
+| XX_XX | The system SHOULD support offline presentation (e.g., via NFC or QR code) in scenarios with limited or no connectivity at the border crossing point. |
+| XX_XX | The presentation SHOULD enable the Relying Party to verify the DTC's validity against both the ICAO PKD/CSCA and the eIDAS Trusted Lists (TL). |
 | XX_XX | The presentation mechanism SHALL support the OpenID4VP (OpenID for Verifiable Presentations) protocol for remote/online interactions. |
 
 #### Verification
@@ -106,7 +107,7 @@ The rationale around the issuance profile states that the national passport issu
 | XX_XX | The verification process SHALL support Passive Authentication (PA) to ensure that the Data Groups (DG1, DG2, etc.) have not been tampered with since issuance. |
 | XX_XX | The system SHALL support Chip Authentication to verify that the DTC resides on the original secure device and has not been cloned. |
 | XX_XX | The Verifier SHALL be able to validate the credential using multiple trust anchors: ICAO PKD (Public Key Directory) for travel data and eIDAS Trusted Lists for Wallet attestations. |
-| XX_XX | The verification process SHALL support revocation checking in real-time or via Certificate Revocation Lists (CRLs) / OCSP, as required by the eIDAS 2.0 framework. |
+| XX_XX | The verification process SHALL support revocation checking in real-time, as required by the eIDAS 2.0 framework. |
 | XX_XX | The Verifier SHALL support the verification of Selective Disclosure presentations (e.g., verifying a subset of attributes via SD-JWT) without compromising data authenticity. |
 | XX_XX | The system SHALL support cross-border interoperability, allowing border authorities of one Member State to verify a DTC issued by another Member State's authority. |
 | XX_XX | The verification SHALL include a biometric match (1:1) between the traveller and the DG2 (Face Image) contained within the verified DTC. |
@@ -117,14 +118,14 @@ The rationale around the issuance profile states that the national passport issu
 | --- | --- |
 | XX_XX | APTITUDE DTC SHALL support an inspection system can verify it using the existing MRTD PKI infrastructure (CSCA/DS model) |
 | XX_XX | APTITUDE DTC SHALL shall enforce (or be configurable to enforce) the principle that the CSCA issuing APTITUDE DTC Signer certificates is the same CSCA that issues Document Signer certificates for the underlying eMRTD |
-| XX_XX | APTITUDE DTC SHALL support the same level of security as the eMRTD |
+| XX_XX | APTITUDE DTC SHOULD support the same level of security as the eMRTD |
 | XX_XX | APTITUDE DTC SHALL support reliance on EU-style governance artefacts needed for attestations, specifically: a trusted list of DTC issuers, an attestation catalogue, and rules for registering relying parties |
 | XX_XX | APTITUDE DTC SHALL support a design that acknowledges and manages the structural divergence between ICAO trust anchors (CSCA/DS certificates / PKD) and eIDAS trust anchors (QEAA/Pub‑EAA within EUDIW) |
 | XX_XX | APTITUDE DTC SHALL support a bridging approach/layer to enable interoperability when the attestation is not directly verifiable by non-EU inspection systems relying on existing PKI |
 | XX_XX | APTITUDE DTC SHALL not assume a trust model where the DTC must be issued as QEAA in a way that makes the issuer a QTSP instead of the passport authority, because the report flags this as contradicting ICAO principles requiring the Travel Document Issuing Authority to sign DTC data |
 | XX_XX | APTITUDE DTC SHALL support an option where the DTC is stored/handled as a Pub‑EAA to preserve issuer sovereignty |
 | XX_XX | APTITUDE DTC SHALL allow the applicable attestation trust type (e.g., QEAA vs Pub‑EAA) to be policy/configuration-driven |
-| XX_XX | APTITUDE DTC SHALL be able to accommodate alternative/extra signing arrangements (e.g., a possible EU model where DTCs may need to be re-signed by eu‑LISA) |
+| XX_XX | APTITUDE DTC MAY be able to accommodate alternative/extra signing arrangements (e.g., a possible EU model where DTCs may need to be re-signed by eu‑LISA) |
 
 ## 6 Revocation
 ### Chapter overview and requirements
@@ -133,8 +134,8 @@ The rationale around the issuance profile states that the national passport issu
 | XX_XX | APTITUDE DTC SHALL support a full DTC lifecycle covering issuance, verification, and revocation |
 | XX_XX | APTITUDE DTC SHALL support mechanisms for revocation and status checking |
 | XX_XX | APTITUDE DTC SHALL support alignment between EUDI Wallet attestation lifecycle and ICAO DTC lifecycle requirements |
-| XX_XX | The revocation mechanism SHALL be compatible with the eIDAS 2.0 Trust Framework, utilizing the national Trusted Lists (TL) to signal the status of the Attestation Provider. |
-| XX_XX | The Verifier (Relying Party) SHALL be able to perform offline status verification if required by the specific border control use case, using periodically updated revocation lists. |
+| XX_XX | The revocation mechanism SHALL be compatible with the eIDAS 2.0 Trust Framework. |
+| XX_XX | The Verifier (Relying Party) SHOULD be able to perform offline status verification if required by the specific border control use case, using periodically updated revocation lists. |
 
 ## 7 Compliance
 ### Chapter overview and requirements
