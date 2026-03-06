@@ -105,10 +105,10 @@ The objective of this chapter is not to mandate a single encoding format, but to
 | DTC_AE_01 | APTITUDE DTC SHALL support SD‑JWT VC encoding | 
 | DTC_AE_02 | APTITUDE DTC SHALL ISO/IEC 18013‑5 mdoc-cbor encoding for proximity presentation and interaction with EUDI Wallet readers. | 
 | DTC_AE_03 | APTITUDE DTC SHALL implement an encoding approach that addresses the incompatibility between ARF selective disclosure and ICAO LDS integrity‑bound |
-| DTC_AE_04 | APTITUDE DTC SHALL encode the photoID profile as per ISO/IEC 23220 | 
+| DTC_AE_04 | APTITUDE DTC SHALL encode the photoID profile as per ISO/IEC 23220-4 | 
 | DTC_AE_05 | APTITUDE DTC SHALL preserve the ICAO LDS semantics | 
 | DTC_AE_06 | APTITUDE DTC SHALL adopt open, standard-based credential encodings to maximize interoperability and avoid vendor lock-in | 
-| DTC_AE_07 | The encoding SHALL support a dual-signature or hybrid structure to allow validation via both ICAO CSCA/DS (PKI) and eIDAS Trusted Lists. |
+| DTC_AE_07 | The encoding SHALL support a dual-signature or hybrid structure to allow validation via both ICAO CSCA/DS (passive authentication according to Doc 9303 part 11) and eIDAS Trusted Lists. |
 | DTC_AE_08 | The encoding SHOULD ensure that the cryptographic link (binding) between the VC and the EUDI Wallet device is preserved across different encoding formats. |
 
 #TODO: Rewrite the following paragraphs
