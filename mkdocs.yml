@@ -78,8 +78,6 @@ nav:
   - Home: index.md
   - Rulebook:
     - Trust Framework: rulebook/wp2-trust-specifications/deliverable-2.1-trust.md
-    - Placeholder 1: rulebook/attestation-rulebook-1.md
-    - Placeholder 2: rulebook/attestation-rulebook-2.md    
   - Standards: standards.md
   - Glossary: glossary.md
 
