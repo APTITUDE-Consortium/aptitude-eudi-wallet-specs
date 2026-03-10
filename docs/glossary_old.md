@@ -1,5 +1,8 @@
-# Glossary
+# Glossary (archived)
 
+> **Status:** Archived.  
+> This document is a legacy copy of the glossary kept for historical/reference purposes.  
+> For the up-to-date glossary, see [Glossary](glossary.md).
 This glossary centralizes the terms most frequently used across the APTITUDE RFCs. All definitions are derived from the EUDI submodules pulled into this repository, primarily the Architecture Reference Framework (ARF) Annex 1 and the Commission Implementing Regulations it cites. Use the source links to trace back to the original wording when drafting or reviewing requirements.
 
 ## Sources
