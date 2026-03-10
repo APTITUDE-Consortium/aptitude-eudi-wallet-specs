@@ -80,7 +80,7 @@ Alternative without activation:
 - Put images in `docs/img/` and link with relative paths.
 - Add new pages to `nav:` in `mkdocs.yml` so they appear in the site menu.
 
-### Glossary terms
+### Glossary Terms
 
 Use glossary links for terms that need a consistent meaning across documents.
 
