@@ -77,10 +77,11 @@
 .mkdocs-ezglossary-link:focus-visible::after {
   content: attr(data-tooltip);
   position: absolute;
-  left: 0;
-  bottom: calc(100% + 8px);
+  left: 50%;
+  transform: translateX(-50%);
+  top: calc(100% + 8px);
   z-index: 50;
-  max-width: 36rem;
+  max-width: min(36rem, calc(100vw - 2rem));
   min-width: 14rem;
   padding: 0.5rem 0.625rem;
   border-radius: 0.4rem;
