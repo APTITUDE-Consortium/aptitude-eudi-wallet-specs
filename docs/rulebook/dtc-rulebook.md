@@ -95,12 +95,9 @@ This section defines which data sets must be present and preserved.
 #### Issuance
 | Index | Requirement specification |
 | --- | --- |
-| XX_XX | The APTITUDE DTC SHALL be issued exclusively by the National Passport Issuing Authority of the Member State that issued the physical eMRTD. |
-| XX_XX | APTITUDE DTC SHALL be derived from eMRTD chip data (Logical Data Structure - LDS) ensuring a cryptographic link to the physical travel document. |
-| XX_XX | APTITUDE DTC SHALL be derived both from newly issued and already issued eMRTDs. | 
-| XX_XX | The issuance process SHALL result in an ICAO DTC Type 2 (eMRTD-PC bound), where the virtual component is cryptographically linked to a physical secure element within the EUDI Wallet. |
-| XX_XX | APTITUDE DTC SHALL be digitally signed by the national issuing authority acting as a Trusted Attestation Provider within the eIDAS 2.0 framework. |
-| XX_XX | The system SHALL support the complete lifecycle management of the DTC, including secure revocation and update mechanisms managed by the issuing authority. |
+| XX_XX | APTITUDE DTC SHALL be derived from eMRTD chip data |
+| XX_XX | APTITUDE DTC SHALL be derived both from newly issued and already issued eMRTDs |
+| XX_XX | APTITUDE DTC SHALL be digitally signed by the national issuing authority |
 
 #### Data model
 | Index | Requirement specification |
