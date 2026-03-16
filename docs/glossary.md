@@ -13,3 +13,7 @@ This glossary centralizes key terms used across the APTITUDE RFCs.
 ## Credentials
 
 <glossary::credentials|theme=table>
+
+## Protocols
+
+<glossary::protocols|theme=table>

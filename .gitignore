@@ -17,3 +17,6 @@ venv/
 build/
 site/
 .cache/
+
+# Local draft notes
+docs/horizontal-RFCs/RFC002-ISO18013-7-alignment.md
