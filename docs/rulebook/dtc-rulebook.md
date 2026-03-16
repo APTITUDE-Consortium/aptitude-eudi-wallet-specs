@@ -105,7 +105,7 @@ This section defines which data sets must be present and preserved.
 | XX_XX | APTITUDE DTC MAY contain additional attributes beyond the derived eMRTD dataset |
 
 
-## 3 Attestation encoding
+## 3 Attestation 
 ### Chapter overview and requirements
 ### Chapter overview and requirements
 This chapter defines the encoding‑related requirements for the APTITUDE Digital Travel Credential (DTC) and establishes the technical constraints that any concrete encoding solution must satisfy.
@@ -307,15 +307,7 @@ Digital Identity Cooperation Group established pursuant to Article 46e(1) of the
 [RULEBOOK AUTHOR TO PROVIDE HUMAN READABLE EXAMPLE OF THE ISSUED ATTESTATION]
 
 [RULEBOOK AUTHOR TO PROVIDE AN EXAMPLE OF THE PROOF TYPE]
-| Index | Requirement specification |
-| --- | --- |
-| XX_XX | APTITUDE DTC SHALL be encoded as an eIDAS2 attestation compliant | 
-| XX_XX | APTITUDE DTC SHALL encode the photoID profile as per ISO/IEC 23220‑4 Annex C | 
-| XX_XX | APTITUDE DTC SHALL preserve the ICAO LDS semantics | 
-| XX_XX | APTITUDE DTC SHALL support SD‑JWT VC encoding | 
-| XX_XX | APTITUDE DTC SHALL ISO/IEC 18013‑5 mdoc-cbor encoding | 
-| XX_XX | APTITUDE DTC SHALL implement an encoding approach that addresses the incompatibility between ARF selective disclosure and ICAO LDS integrity‑bound | 
-| XX_XX | APTITUDE DTC SHALL adopt open, standard-based credential encodings to maximize interoperability and avoid vendor lock-in |
+
 
 ## 4 Attestation usage
 ### Chapter overview and requirements
