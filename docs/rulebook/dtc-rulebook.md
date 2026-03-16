@@ -425,7 +425,6 @@ The rationale around the issuance profile states that the national passport issu
 =======
 | XX_XX | APTITUDE DTC SHALL support an inspection system can verify it using the existing MRTD PKI infrastructure (CSCA/DS model) |
 | XX_XX | APTITUDE DTC SHALL shall enforce (or be configurable to enforce) the principle that the CSCA issuing APTITUDE DTC Signer certificates is the same CSCA that issues Document Signer certificates for the underlying eMRTD |
-| XX_XX | APTITUDE DTC SHALL support the same level of security as the eMRTD |
 | XX_XX | APTITUDE DTC SHALL support reliance on EU-style governance artefacts needed for attestations, specifically: a trusted list of DTC issuers, an attestation catalogue, and rules for registering relying parties |
 | XX_XX | APTITUDE DTC SHALL support a design that acknowledges and manages the structural divergence between ICAO trust anchors (CSCA/DS certificates / PKD) and eIDAS trust anchors (QEAA/Pub‑EAA within EUDIW) |
 | XX_XX | APTITUDE DTC SHALL support a bridging approach/layer to enable interoperability when the attestation is not directly verifiable by non-EU inspection systems relying on existing PKI |
