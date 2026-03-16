@@ -76,5 +76,8 @@
         "WSCA",
         "WSCD",
         "xelatex"
-    ]
+    ],
+    "chat.tools.terminal.autoApprove": {
+        "pip": true
+    }
 }
