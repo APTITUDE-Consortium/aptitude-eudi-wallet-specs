@@ -395,10 +395,6 @@ The rationale around the issuance profile states that the national passport issu
 | XX_XX | APTITUDE DTC SHALL ensure explicit user consent in the wallet-based presentation flow |
 | XX_XX | APTITUDE DTC SHALL support selective disclosure / data minimisation |
 | XX_XX | APTITUDE DTC SHALL support an approach that accounts for the reported protocol gap between ISO/IEC 18013‑5 (wallet proximity) and ISO/IEC 14443/APDU (border inspection backwards compatibility) |
-| XX_XX | The presentation flow SHALL support Active Authentication (AA) or Chip Authentication (CA) mechanisms to prevent cloning and ensure the DTC is bound to the Wallet instance. |
-| XX_XX | The system SHALL support offline presentation (e.g., via NFC or QR code) in scenarios with limited or no connectivity at the border crossing point. |
-| XX_XX | The presentation SHALL enable the Relying Party to verify the DTC's validity against both the ICAO PKD/CSCA and the eIDAS Trusted Lists (TL). |
-| XX_XX | The presentation mechanism SHALL support the OpenID4VP (OpenID for Verifiable Presentations) protocol for remote/online interactions. |
 
 #### Verification
 | Index | Requirement specification |
