@@ -1,27 +1,22 @@
 [submodule "reference/eudi-doc-architecture-and-reference-framework"]
 	path = reference/eudi-doc-architecture-and-reference-framework
 	url = https://github.com/eu-digital-identity-wallet/eudi-doc-architecture-and-reference-framework.git
+	branch = main
 [submodule "reference/eudi-doc-standards-and-technical-specifications"]
 	path = reference/eudi-doc-standards-and-technical-specifications
 	url = https://github.com/eu-digital-identity-wallet/eudi-doc-standards-and-technical-specifications.git
+	branch = main
 [submodule "reference/ewc-eudi-wallet-rulebooks-and-schemas"]
 	path = reference/ewc-eudi-wallet-rulebooks-and-schemas
 	url = https://github.com/EWC-consortium/eudi-wallet-rulebooks-and-schemas
+	branch = main
 [submodule "reference/eid-wallet-it-docs"]
 	path = reference/eid-wallet-it-docs
 	url = https://github.com/italia/eid-wallet-it-docs
+	branch = versione-corrente
 [submodule "reference/wp4-architecture"]
 	path = reference/webuild-wp4-architecture
 	url = https://github.com/webuild-consortium/wp4-architecture
-[submodule "eid-wallet-it-docs"]
-	branch = versione-corrente
-[submodule "eudi-doc-architecture-and-reference-framework"]
-	branch = main
-[submodule "eudi-doc-standards-and-technical-specifications"]
-	branch = main
-[submodule "ewc-eudi-wallet-rulebooks-and-schemas"]
-	branch = main
-[submodule "webuild-wp4-architecture"]
 	branch = main
 [submodule "reference/eudi-doc-attestation-rulebooks-catalog"]
 	path = reference/eudi-doc-attestation-rulebooks-catalog
@@ -33,6 +28,3 @@
 	path = docs/rulebook/wp5
 	url = https://github.com/APTITUDE-Consortium/WP5-RFC.git
 	branch = main
-[submodule "docs/rulebook/wp5"]
-	path = docs/rulebook/wp5
-	url = https://github.com/APTITUDE-Consortium/WP5-RFC.git
