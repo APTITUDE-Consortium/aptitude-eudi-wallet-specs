@@ -3,6 +3,7 @@
 This repository manages technical requirements for the APTITUDE project, piloting the European Digital Identity Wallet (EUDI Wallet).
 
 The published technical specifications are available on [GitHub Pages](https://aptitude-consortium.github.io/aptitude-eudi-wallet-rfcs/).
+
 ## Repository structure
 
 This repository produces **MkDocs-generated documentation** from the `/docs/` folder. View the built site at [APTITUDE Technical Specification](https://aptitude-consortium.github.io/aptitude-eudi-wallet-rfcs/).

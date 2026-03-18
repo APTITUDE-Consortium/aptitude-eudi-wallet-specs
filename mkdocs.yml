@@ -88,9 +88,12 @@ markdown_extensions:
 
 nav:
   - Home: index.md
-  - Rulebook:
+  - Rulebooks:
     - mVRC: rulebook/wp5/mVRC-rulebook.md
     - Trust Framework: rulebook/wp2-trust-specifications/deliverable-2.1-trust.md
+  - RFCs:
+    - RFC-01 Credential Issuance Profile: horizontal-RFCs/RFC001.md
+    - RFC-02 Presentation Profile: horizontal-RFCs/RFC002.md
   - Standards: standards.md
   - Glossary: glossary.md
 
