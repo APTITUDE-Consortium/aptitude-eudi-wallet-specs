@@ -1,5 +1,45 @@
 # Glossary
 
+**Administrative Validity Period (of a PID or Attestation)**  
+The date(s) from and/or up to which the attributes in the attestation are valid, which are represented as attribute(s) in the attestation.  
+*Note: Some attestations, for instance diplomas, do not have an administrative validity period.*
+
+[SOURCE: Architecture and Reference Framework]
+
+**Attestation**  
+When not further qualified, a collective term for a QEAA, PuB-EAA, or (non-qualified) EAA.
+
+[SOURCE: Architecture and Reference Framework]
+
+**Attestation Provider**  
+When not further qualified, a collective term for QEAA Provider, PuB-EAA Provider, or (non-qualified) EAA Provider.
+
+[SOURCE: Architecture and Reference Framework]
+
+**Attestation Revocation List**  
+A mechanism provided by a PID Provider or an Attestation Provider (or a trusted party acting on its behalf) for communicating the revocation status of PIDs and attestations, by publishing a list of identifiers of revoked PIDs or attestations.  
+*Note: See [Topic 7](../annex-2/annex-2.02-high-level-requirements-by-topic.md#a237-topic-7---attestation-revocation-and-revocation-checking).*
+
+[SOURCE: Architecture and Reference Framework]
+
+**Attestation Rulebook**  
+A document describing the attestation type, namespace(s), and other features for a specific attestation type.  
+*Note: See [Topic 12](../annex-2/annex-2.02-high-level-requirements-by-topic.md#a2312-topic-12---attestation-rulebooks).*
+
+[SOURCE: Architecture and Reference Framework]
+
+**Attestation Status List**  
+A mechanism provided by a PID Provider or an Attestation Provider (or a trusted party acting on its behalf) for communicating the revocation status of PIDs and attestations, by publishing status information (Valid or Invalid) for all relevant PIDs or attestations.  
+*Notes: -See [Topic 7](../annex-2/annex-2.02-high-level-requirements-by-topic.md#a237-topic-7---attestation-revocation-and-revocation-checking). -Which PIDs or attestations are relevant is determined by the entity publishing the status list. For example, a status list may contain all PIDs or attestations whose validity period is not over yet at the time of publication of the list.*
+
+[SOURCE: Architecture and Reference Framework]
+
+**Attestation type**  
+An identifier for a type of attestation, unique within the context of the EUDI Wallet ecosystem.  
+*Note: See [Topic 12](../annex-2/annex-2.02-high-level-requirements-by-topic.md#a2312-topic-12---attestation-rulebooks).*
+
+[SOURCE: Architecture and Reference Framework]
+
 **Attribute**  
 A characteristic, quality, right or permission of a natural or legal person or of an object.
 
@@ -14,6 +54,16 @@ A repository or system, held under the responsibility of a public sector body or
 An electronic process that enables the confirmation of the electronic identification of a natural or legal person or the confirmation of the origin and integrity of data in electronic form.
 
 [SOURCE: European Digital Identity Regulation]
+
+**Certificate Authority (CA)**  
+An entity which is trusted by one or more parties in the EUDI Wallet ecosystem to create and seal certificates.
+
+[SOURCE: Architecture and Reference Framework]
+
+**Certificate Policy (CP)**  
+A named set of rules that indicates the applicability of a certificate to a particular community and/or class of application with common security requirements.
+
+[SOURCE: Architecture and Reference Framework]
 
 **Conformity Assessment Body (CAB)**  
 A conformity assessment body as defined in [Article 2, point 13, of Regulation (EC) No 765/2008](https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=celex:32008R0765#d1e497-30-1), which is accredited in accordance with that Regulation as competent to carry out conformity assessment of a qualified trust service provider and the qualified trust services it provides, or as competent to carry out certification of European Digital Identity Wallets or electronic identification means.
@@ -55,6 +105,46 @@ A set of rules, embedded in an electronic attestation of attributes by its provi
 
 [SOURCE: Commission Implementing Regulations]
 
+**Holder (When Used in the Context of Wallet-to-Wallet Interactions)**  
+A User wishing to use their Wallet Unit to present attributes from a PID or attestation to the User of another Wallet Unit.  
+*Notes: See also Verifier. - See [Topic 30](../annex-2/annex-2.02-high-level-requirements-by-topic.md#a2330-topic-30---interaction-between-wallet-units).*
+
+[SOURCE: Architecture and Reference Framework]
+
+**Holder Wallet Unit**  
+A Wallet Unit used by a Holder.
+
+[SOURCE: Architecture and Reference Framework]
+
+**Intermediary**  
+A Relying Party that offers services to other (intermediated) Relying Parties to, on their behalf, connect to Wallet Units and request the User attributes that these intermediated Relying Parties need.  
+*Note: See [Topic 52](../annex-2/annex-2.02-high-level-requirements-by-topic.md#a2352-topic-52-relying-party-intermediaries).*
+
+[SOURCE: Architecture and Reference Framework]
+
+**Keystore**  
+A hardware-backed repository and service in which non-critical cryptographic assets are generated, stored, and used exclusively inside a dedicated hardware security boundary.  
+*Notes: - Examples include a Secure Element, a TPM, TEE, or secure enclave, or a remote HSM. - Critical cryptographic assets are generated, stored, and used in a WSCA/WSCD.*
+
+[SOURCE: Architecture and Reference Framework]
+
+**Namespace**  
+A specification of the attribute identifier, syntax and semantics of attributes that can be used in an attestation, having an identifier that is unique within the context of the EUDI Wallet ecosystem.  
+*Note: See [Topic 12](../annex-2/annex-2.02-high-level-requirements-by-topic.md#a2312-topic-12---attestation-rulebooks).*
+
+[SOURCE: Architecture and Reference Framework]
+
+**National Accreditation Bodies (NAB)**  
+A body that performs accreditation with authority derived from a Member State under [Regulation (EC) No 765/2008](https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=celex:32008R0765).
+
+[SOURCE: Architecture and Reference Framework]
+
+**Notification**  
+The act of transferring information to the European Commission.  
+*Note: see [Topics 31](../annex-2/annex-2.02-high-level-requirements-by-topic.md#a2331-topic-31---pid-provider-wallet-provider-attestation-provider-and-access-certificate-authority-notification-and-publication).*
+
+[SOURCE: Architecture and Reference Framework]
+
 **Person Identification Data (PID)**  
 A set of data that is issued in accordance with Union or national law and that enables the establishment of the identity of a natural or legal person, or of a natural person representing another natural person or a legal person.
 
@@ -74,6 +164,17 @@ A natural or legal person mandated by a Member State to issue Relying Party acce
 A natural or legal person mandated by a Member State to issue (wallet-relying party) registration certificates to (wallet-)relying parties registered in that Member State.
 
 [SOURCE: Commission Implementing Regulations]
+
+**Pseudonym**  
+Data uniquely representing a User which in itself does not allow to infer the User's attributes or person identification data, without the use of additional information that is kept separately by the issuer of the data uniquely representing the user.  
+*Note: See [Topic 11](../annex-2/annex-2.02-high-level-requirements-by-topic.md#a2311-topic-11---pseudonyms).*
+
+[SOURCE: Architecture and Reference Framework]
+
+**Public Key Infrastructure (PKI)**  
+Systems, software, and communication protocols that are used by EUDI Wallet ecosystem components to distribute, manage, and control public keys. A PKI publishes public keys and establishes trust within an environment by validating and verifying the public keys mapping to an entity.
+
+[SOURCE: Architecture and Reference Framework]
 
 **Public Sector Body**  
 A state, regional or local authority, a body governed by public law or an association formed by one or several such authorities or one or several such bodies governed by public law, or a private entity mandated by at least one of those authorities, bodies or associations to provide public services, when acting under such a mandate.
@@ -95,6 +196,11 @@ Configured software or hardware used to create an electronic signature that meet
 
 [SOURCE: European Digital Identity Regulation]
 
+**Qualified Electronic Signature Remote Creation Provider**  
+A natural or a legal person that offers services related to the remote creation, validation, and management of qualified electronic signatures that meet legal requirements and standards in the [European Digital Identity Regulation] to be considered as legally equivalent to handwritten signatures.
+
+[SOURCE: Architecture and Reference Framework]
+
 **Qualified Trust Service Provider (QTSP)**  
 Qualified Trust Service Provider means a trust service provider who provides one or more qualified trust services and is granted the qualified status by the supervisory body.
 
@@ -110,15 +216,59 @@ A natural or legal person that relies upon electronic identification, European D
 
 [SOURCE: European Digital Identity Regulation]
 
+**Relying Party Instance**  
+A software and/or hardware module with the capability to interact with a Wallet Unit and to perform Relying Party authentication, that is controlled by a Relying Party.
+
+[SOURCE: Architecture and Reference Framework]
+
+**Selective Disclosure**  
+The capability enabling the User to present a subset of the attributes included in a PID or attestation.
+
+[SOURCE: Architecture and Reference Framework]
+
 **Strong User Authentication**  
 An authentication based on the use of at least two authentication factors from different categories of either knowledge, something only the user knows, possession, something only the user possesses or inherence, something the user is, that are independent, in that the breach of one does not compromise the reliability of the others, and is designed in such a way as to protect the confidentiality of the authentication data.
 
 [SOURCE: European Digital Identity Regulation]
 
+**SUA Attestation**  
+An attestation used for strong user authentication in the context of electronic payments, such that, when a Relying Party sends a presentation request for the attestation to a Wallet Unit, it includes transactional data in the request.  
+*Note: See [Topic 20](../annex-2/annex-2.02-high-level-requirements-by-topic.md#a2320-topic-20---strong-user-authentication-for-electronic-payments).*
+
+[SOURCE: Architecture and Reference Framework]
+
+**Technical validity period (of a PID or Attestation)**  
+The dates (and possibly times) from and up to which the attestation is valid, which are represented as metadata of the attestation.  
+*Note: All PIDs and attestations have a technical validity period, which is typically much shorter than its administrative validity period (if existent). The technical validity period is chosen based on a risk analysis, e.g. with regard to User privacy.*
+
+[SOURCE: Architecture and Reference Framework]
+
+**Trust Anchor**  
+An authoritative entity represented by a public key and associated data.  
+*Note: Based on RFC 5914.*
+
+[SOURCE: Architecture and Reference Framework]
+
+**Trusted List**  
+Repository of information about authoritative entities in a particular legal or contractual context which provides information about their current and historical status.
+
+[SOURCE: Architecture and Reference Framework]
+
 **User**  
 A natural or legal person, or a natural person representing another natural person or a legal person, that uses trust services or electronic identification means provided in accordance with the [European Digital Identity Regulation].
 
 [SOURCE: European Digital Identity Regulation]
+
+**Verifier (when used in the context of Wallet-to-Wallet interactions)**  
+A User wishing to use their Wallet Unit to request attributes from a PID or attestation from the User of another Wallet Unit.  
+*Note: See [Topic 30](../annex-2/annex-2.02-high-level-requirements-by-topic.md#a2330-topic-30---interaction-between-wallet-units).*
+
+[SOURCE: Architecture and Reference Framework]
+
+**Verifier Wallet Unit**  
+A Wallet Unit used by a Verifier.
+
+[SOURCE: Architecture and Reference Framework]
 
 **Wallet Instance**  
 The application installed and configured on a Wallet Userâ€™s device or environment, which is part of a Wallet Unit, and that the Wallet User uses to interact with the Wallet Unit.
