@@ -92,6 +92,8 @@ nav:
     - mVRC: rulebook/wp5/mVRC-rulebook.md
     - Trust Framework: rulebook/wp2-trust-specifications/deliverable-2.1-trust.md
   - Standards: standards.md
-  - Glossary: glossary.md
+  - Glossary: 
+    - Glossary: glossary.md
+    - Definitions: glossary-definitions.md
 
 
