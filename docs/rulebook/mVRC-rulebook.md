@@ -415,7 +415,7 @@ EnvInfoEU = {
 
 ## 4 Attestation usage
 
-Use Case of an mVC are given in Annex A.1 and A.2 of [ISO/IEC 7367-2]. Moreover, a typical inspection procedure in a law enforcemnent use case includes the verification of an mDL, an mVC and mTR in one single request.
+Use Case of an mVC are given in Annex A.1 and A.2 of [ISO/IEC 7367-2]. Moreover, a typical inspection procedure in a law enforcement use case includes the verification of an mDL, an mVC and mTR in one single request.
 
 ## 5 Trust anchors
 
