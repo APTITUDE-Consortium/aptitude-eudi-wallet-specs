@@ -129,7 +129,7 @@ credentials:mVC (mobile Vehicle Certificate
 credentials:mTR (mobile Technical Report)
 : A mobile roadworthiness/inspection report (companion to mVRC/mDL) per ISO/IEC 7367‑3.
 
-credentilas:mDL (mobile Driving Licence)
+credentials:mDL (mobile Driving Licence)
 : The mobile driving licence per ISO/IEC 18013‑5/-7; used alongside mVRC and mTR in the EUDI Wallet.
 
 credentials:MSO (Mobile Security Object)
