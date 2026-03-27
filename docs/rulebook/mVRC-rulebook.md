@@ -18,7 +18,7 @@ Author(s):
 
 ### 1.1 Document scope and purpose
 
-This document specifies the “European Union mobile Vehicle Registration Certificate (EU-mVRC)” in accordance with EU Directive on the registration documents for vehicles \[EU DIR 2025/0096][EU DIR 1999/37]. An EU-mVRC is a mobile document, i.e. QEAA or Pub-EAA, managed by an EUDI Wallet according to [European Digital Identity Regulation]. The specification of the EU-mVRC is a profile of the mVC specified in [ISO/IEC 7367-2]. The approach of specifying the EU-mVRC profile is given in 2.1. The EU-mVRC as well as the mobile Technical Report (mTR) [ISO/IEC 7367-3] are considered campanion documents to the mDL as specified in ARF Annex 3.2 mDL Rulebook.
+This document specifies the “European Union mobile Vehicle Registration Certificate (EU-mVRC)” in accordance with EU Directive on the registration documents for vehicles \[EU DIR 2025/0096][EU DIR 1999/37]. An EU-mVRC is a mobile document, i.e. QEAA or Pub-EAA, managed by an EUDI Wallet according to [European Digital Identity Regulation]. The specification of the EU-mVRC is a profile of the mVC specified in [ISO/IEC 7367-2]. The approach of specifying the EU-mVRC profile is given in 2.1. The EU-mVRC as well as the mobile Technical Report (mTR) [ISO/IEC 7367-3] are considered companion documents to the mDL as specified in ARF Annex 3.2 mDL Rulebook.
 
 ### 1.2 Document structure
 
