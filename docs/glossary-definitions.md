@@ -135,7 +135,7 @@ credentials:CBOR (Concise Binary Object Representation)
 credentials:CDDL (Concise Data Definition Language)
 : The language to define CBOR structures (e.g., `tstr`, `uint`, `bstr`, `tdate`).
 
-credentials:eCoC (electronic Certificate of Conformity) 
+credentials:eCoC (electronic Certificate of Conformity)
 : Manufacturer’s electronic certificate; selected entries are mapped into EU‑mVRC.
 
 credentials:SD‑JWT VC (Selective Disclosure Java Web Token Verifiable Credential)
