@@ -145,7 +145,7 @@ The owner information in data element ``owners`` contains information describing
 | ``organization_name_latin1`` | EU - corresponding harmonised Union code: <br> **(C.1.1)** surname(s) or business name<br> **(C.2.1)** surname or business name<br> **(C.3.1)** surname or business name<br> Note: applicable if C.1.1, C.2.1 or C.3.1 refer to an organization | O |
 | ``supplemental_organization_data`` | no further Information | O |
 
-###### Table 4 — Adress - key details
+###### Table 4 — Address - key details
 
 | **Identifier** | **EU additional description** | **Presence** |
 | --- | --- | --- |
