@@ -123,7 +123,7 @@ The EU-mVRC ISO compliant data elements SHALL be as defined in Table 1 and belon
 
 The user information in data element ``users`` contains information describing the name and address of the **holder** (C.1) of the vehicle according to [EU DIR 2025/0096]. There SHALL be one holder. The data element ``users`` contains one recorded entity with the specific personal details. A holder SHALL be either a natural person with details given in Table 2 or an organization with details given in Table 3.
 
-The owner information in data element ``owners`` contains information describing the name and address of the recorded **owner(s)** (C.2) of the vehicle according to [EU DIR 2025/0096]. There can be more than one owner. The data element ``owners`` may contain more then one recorded entity with the specific personal details. One recorded entity of an owner shall be either a natural person with details given in Table 2 or an organization with details given in Table 3.
+The owner information in data element ``owners`` contains information describing the name and address of the recorded **owner(s)** (C.2) of the vehicle according to [EU DIR 2025/0096]. There can be more than one owner. The data element ``owners`` may contain more than one recorded entity with the specific personal details. One recorded entity of an owner shall be either a natural person with details given in Table 2 or an organization with details given in Table 3.
 
 ###### Table 2 — NaturalPerson - key details
 
