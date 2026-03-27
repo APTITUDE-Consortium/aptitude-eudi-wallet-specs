@@ -5,13 +5,13 @@
   * Jan Willem Stekelenburg, RDW, the Netherlands
 
 | Version | Date | Description |
-|---------|------------|------------|
+| --- | --- | --- |
 | 0.2 | 14.02.2026 | first draft of EU-mVRC |
 
 **Feedback:**
 
-* matthias.schwan@bdr.de
-* jstekelenburg@rdw.nl
+* <matthias.schwan@bdr.de>
+* <jstekelenburg@rdw.nl>
 
 ## 1 Introduction
 
@@ -90,7 +90,7 @@ The EU-mVRC ISO compliant data elements SHALL be as defined in Table 1 and belon
 **Table 1 — ISO compliant data elements**
 
 | **Identifier** | **EU additional description** | **Presence** |
-|----------------|-------------------------------|--------------|
+| --- | --- | --- |
 | ``issue_date`` | no further information | M |
 | ``expiry_date`` | EU - corresponding harmonised Union code: <br> **(H)** period of validity<br> Optional data element in ISO/IEC 7367-2<br> mandatory if not unlimited | C  |
 | ``issuing_authority_unicode`` | EU - the name of the competent authority according to Annex I, clause (d)(iii) of [EU DIR 2025/0096] | M |
@@ -127,7 +127,7 @@ The owner information in data element ``owners`` contains information describing
 **Table 2 — NaturalPerson - key details**
 
 | **Identifier** | **EU additional description** | **Presence** |
-|----------------|-------------------------------|--------------|
+| --- | --- | --- |
 | ``full_adress`` | no further information, see Table 4  | M |
 | ``family_name`` | EU - corresponding harmonised Union code: <br> **(C.1.1)** surname(s) or business name<br> **(C.2.1)** surname or business name<br> **(C.3.1)** surname or business name<br> Note: applicable if C.1.1, C.2.1 or C.3.1  refer to a natural person | M |
 | ``family_name_latin1``| EU - corresponding harmonised Union code: <br> **(C.1.1)** surname(s) or business name<br>  **(C.2.1)** surname or business Name<br>  **(C.3.1)** surname or business Name<br> Note: applicable if C.1.1, C.2.1 or C.3.1 refer to a natural person | O |
@@ -138,7 +138,7 @@ The owner information in data element ``owners`` contains information describing
 **Table 3 — Organization - key details**
 
 | **Identifier** | **EU additional description** | **Presence** |
-|----------------|-------------------------------|--------------|
+| --- | --- | --- |
 | ``full_adress`` | no further information, see Table 4  | M |
 | ``organization_name`` | EU - corresponding harmonised Union code: <br> **(C.1.1)** surname(s) or business name <br> **(C.2.1)** surname or business name<br> **(C.3.1)** surname or business name<br> Note: applicable if C.1.1, C.2.1 or C.3.1 refer to an organization | M |
 | ``organization_name_latin1`` | EU - corresponding harmonised Union code: <br> **(C.1.1)** surname(s) or business name<br> **(C.2.1)** surname or business name<br> **(C.3.1)** surname or business name<br> Note: applicable if C.1.1, C.2.1 or C.3.1 refer to an organization | O |
@@ -147,7 +147,7 @@ The owner information in data element ``owners`` contains information describing
 **Table 4 — Adress - key details**
 
 | **Identifier** | **EU additional description** | **Presence** |
-|----------------|-------------------------------|--------------|
+| --- | --- | --- |
 | ``address`` | EU - corresponding harmonised Union code:<br> **(C.1.3)** address in the Member State of registration, on the date of issue of the document<br> **(C.2.3)** address in the Member State of registration, on the date of issue of the document<br> **(C.3.3)** address in the Member State of registration, on the date of issue of the document | M |
 | ``address_latin1`` | EU - corresponding harmonised Union code:<br> **(C.1.3)** address in the Member State of registration, on the date of issue of the document<br> **(C.2.3)** address in the Member State of registration, on the date of issue of the document<br> **(C.3.3)** address in the Member State of registration, on the date of issue of the document | O |
 | ``city`` | EU - corresponding harmonised Union code: <br> **(C.1.3)** address in the Member State of registration, on the date of issue of the document<br> **(C.2.3)** address in the Member State of registration, on the date of issue of the document<br> **(C.3.3)** address in the Member State of registration, on the date of issue of the document | M |
@@ -165,7 +165,7 @@ The basic vehicle information contains information describing the basic data ele
 **Table 5 — Basic vehicle info key details**
 
 | **Identifier** | **EU additional description** | **Presence** |
-|----------------|-------------------------------|--------------|
+| --- | --- | --- |
 | ``vehicle_category_code`` | EU - the European vehicle category as mentioned in 167/2013, 168/2013 and 2018/858 <br> EU - corresponding harmonised Union code:<br> **(J)** vehicle category<br> eCoC corresponding code: VehicleCategory, mandatory if available | C |
 | ``vehicle_category_national`` | no further information | O |
 | ``approval_number`` | EU - corresponding harmonised Union code:<br> **(K)** whole-vehicle vehicle type-approval number or the European Individual approval number (if available),<br> CoC corresponding code: TypeApprovalNumber, mandatory if available | C |
@@ -185,7 +185,7 @@ The mass information contains information describing the mass data elements of a
 **Table 6 — mass info key details**
 
 | **Identifier** | **EU additional description** | **Presence** |
-|----------------|-------------------------------|--------------|
+| --- | --- | --- |
 | ``techn_perm_max_laden_mass`` | EU - corresponding harmonised Union code:<br> **(F.1)** maximum technically permissible laden mass, except for motorcycles<br> eCoC corresponding code: TechnPermMaxLadenMass | O |
 | ``vehicle_max_mass`` | EU - corresponding harmonised Union code:<br> **(F.2)** maximum permissible laden mass of the vehicle in service in the Member State of registration<br> eCoC corresponding code: InServiceMaximumPermissibleMass | O |
 | ``mass_in_running_order`` | EU - corresponding harmonised Union code:<br> **(G)** mass of the vehicle in service with bodywork, and with coupling device in the case of a towing vehicle in service from any category other than M1<br> eCoC corresponding code: MassOfTheVehicleInRunningOrder, mandatory if available | C |
@@ -199,7 +199,7 @@ The towed trailer mass information contains information about the towing vehicle
 **Table 7 — Towed trailer mass info key details**
 
 | **Identifier** | **EU additional description** | **Presence** |
-|----------------|-------------------------------|--------------|
+| --- | --- | --- |
 | ``tech_perm_max_tow_mass`` | EU - corresponding harmonised Union code:<br> **(O1)** technically permissible maximum towable mass of the trailer braked (in kg)<br> **(O2)** technically permissible maximum towable mass of the trailer unbraked (in kg)<br> For brake type see braked_type_trail_code | O |
 | ``technically_permissible_``<br>``maximum_combination_mass`` | no further information | O |
 | ``braked_type_trail_code`` | no further information | O |
@@ -212,7 +212,7 @@ The engine information contains information describing the relevant data element
 **Table 8 — Engine info key details**
 
 | **Identifier** | **EU additional description** | **Presence** |
-|----------------|-------------------------------|--------------|
+| --- | --- | --- |
 | ``engine_number`` | EU - corresponding harmonised Union code:<br> **(P.5)** engine identification number<br> eCoC corresponding code: EngineNumber | O |
 | ``engine_capacity`` | EU - corresponding harmonised Union code:<br> **(P.1)** capacity (in cm3)<br> eCoC corresponding code: EngineCapacity, mandatory if available | C |
 | ``engine_power`` | EU - corresponding harmonised Union code:<br> **(P.2)** maximum net power (in kW) (if available)<br> eCoC corresponding code: MaximumNetPower, MaximumContinuousRatedPower, RatedEngineNetPower, , mandatory if available | C |
@@ -226,7 +226,7 @@ The seating information contains information describing the seating and standing
 **Table 9 — seating info key details**
 
 | **Identifier** | **EU additional description** | **Presence** |
-|----------------|-------------------------------|--------------|
+| --- | --- | --- |
 | ``number_of_seating_positions_including_driver`` | EU - corresponding harmonised Union code:<br> **(S.1)** number of seats, including the driver's seat<br> eCoC corresponding code: NrOfSeatingPositions, mandatory if available | C |
 | ``number_of_standing_places`` | EU - corresponding harmonised Union code:<br> **(S.2)** number of standing places (where appropriate)<br> eCoC corresponding code: NumberOfStandingPlaces, mandatory if available | C |
 
@@ -237,7 +237,7 @@ The dimension information contains details about the dimensions of a vehicle suc
 **Table 10 — Dimensions info key details**
 
 | **Identifier** | **EU additional description** | **Presence** |
-|----------------|-------------------------------|--------------|
+| --- | --- | --- |
 | ``wheelbase`` | EU - corresponding harmonised Union code:<br> **(M)** wheelbase (in mm)<br> eCoC corresponding code: Wheelbase | C |
 | ``wheelbase_adjustable_min`` | no further information | C |
 | ``wheelbase_adjustable_max`` | no further information | C |
@@ -278,7 +278,7 @@ The EU data elements are grouped in five main data elements as given in Table 11
 **Table 11 - EU data elements - key details**
 
 | **Identifier** | **Meaning** | **Description** | **Presence** | Encoding format |
-|----------------|-------------|-----------------|--------------|-----------------|
+| --- | --- | --- | --- | --- |
 | ``vehicle_info_ext_eu`` | Vehicle info extended EU | The vehicle information specified in the European namespace | O | See 3.1.3.3 |
 | ``consumer_info_eu`` | Consumer info EU | EU - corresponding harmonised Union code:<br> **C.3)** natural or legal person who may use the vehicle by virtue of a legal right other than that of ownership | O | See 3.1.3.4 |
 | ``axle_info_eu`` | Axle info | The axle information of a vehicle | O | See 3.1.3.5 |
@@ -306,7 +306,7 @@ VehicleInfoExtEU = {
 **Table 12 – Vehicle info extended EU data elements - key details**
 
 | **Identifier** | **Meaning** | **Description** | **Presence** | Encoding format |
-|----------------|-------------|-----------------|--------------|-----------------|
+| --- | --- | --- | --- | --- |
 | ``bodywork`` | Bodywork | EU - corresponding harmonised Union code:<br> **(J.21)** bodywork<br> eCoC corresponding code: CodeForBodywork, mandatory if available | C  | tstr |
 | ``whole_vehicle_max_mass`` | Whole vehicle maximum mass | EU - corresponding harmonised Union code:<br> **(F.3)** maximum permissible laden mass of the whole vehicle in service in the Member State of registration<br> eCoC corresponding code: InServiceMaximumPermissibleMassCombination | O | uint |
 | ``power_mass_ratio`` | Power mass ratio | EU - corresponding harmonised Union code:<br> **(Q)** power/weight ratio (in kW/kg) (only for motorcycles)<br> eCoC corresponding code: PowerMassRatio, mandatory if available | C  | uint |
@@ -351,7 +351,7 @@ axledata =  {
 **Table 15 — Axle info EU key details**
 
 | **Identifier** | **Meaning** | **Description** | **Presence** | Encoding format |
-|----------------|-------------|-----------------|--------------|-----------------|
+| --- | --- | --- | --- | --- |
 | ``number_of_axles`` | Number of axles | EU - corresponding harmonised Union code:<br> **(L)** number of axles<br> eCoC corresponding code: numberOfAxles | O | uint |
 | ``axle_number`` | Axle number | EU - corresponding harmonised Union code:<br> **(N)** axle 1 (in kg), where appropriate | O | uint |
 | ``techn_perm_max_laden_mass_axle`` | technically permissible maximum laden mass on the axle | EU - corresponding harmonised Union code:<br> **(N)** (in kg), where appropriate | O | uint |
@@ -391,7 +391,7 @@ EnvInfoEU = {
 **Table 14 — Environmental info EU key details**
 
 | **Identifier** | **Meaning** | **Description** | **Presence** | Encoding format |
-|----------------|-------------|-----------------|--------------|-----------------|
+| --- | --- | --- | --- | --- |
 | ``sound_stat`` | sound level stationary | EU - corresponding harmonised Union code:<br> **(U.1)** sound level stationary (in dB(A))<br> eCoC corresponding code: SoundLevelStationary | O | uint |
 | ``sound_speed`` | sound level engine speed | EU - corresponding harmonised Union code:<br> **(U.2)** sound level engine speed (in min-1)<br> eCoC corresponding code: SoundLevelStationaryEngineSpeed | O | uint |
 | ``sound_drive_by`` | sound level drive-by | EU - corresponding harmonised Union code:<br> **(U.3)** sound level drive-by (in dB(A)) | O | uint |
@@ -431,7 +431,7 @@ The specification of the mVC is compliant to the ARF, i.e. the mdoc encoding of 
 ## 8 References
 
 | **Item Reference** | **Standard name/details**|
-|--------------------|---------------------------|
+| --- | --- |
 | [European Digital Identity Regulation] | [Regulation (EU) 2024/1183](https://eur-lex.europa.eu/legal-content/EN/TXT/HTML/?uri=OJ:L_202401183) of the European Parliament and of the Council of 11 April 2024 amending Regulation (EU) No 910/2014 as regards establishing the European Digital Identity Framework |
 | [HAIP] | Yasuda, K. *et al,* OpenID4VC High Assurance Interoperability Profile, OpenId Foundation, Version draft-03 |
 | [IANA-JWT-Claims] | IANA JSON Web Token Claims Registry. Available: <https://www.iana.org/assignments/jwt/jwt.xhtml> |
@@ -452,7 +452,7 @@ The specification of the mVC is compliant to the ARF, i.e. the mdoc encoding of 
 | [ISO/IEC 23220-4] | ISO/IEC TS 23220-4: Cards and Security Devices for Personal Identification – Building Blocks for Identity Management via Mobile Devices –Part 4: Protocols and services for the operational phase |
 | [ISO/IEC 7367-2] | ISO/IEC TS 7367-2: Personal identification – ISO compliant mdoc schemas – Part 2: Mobile Vehicle Certificate, 2026 (current status is DTS) |
 | [ISO/IEC 7367-3] | ISO/IEC TS 7367-3: Personal identification – ISO compliant mdoc schemas – Part 3: Mobile Technical Report, 2026 (current status is NWIP) |
-| [EU DIR 2025/0096] | COUNCIL DIRECTIVE 2025/0096 on the registration documents for vehicles and vehicle registration data recorded in national vehicle registers (repealing Council Directive 1999/37/EC, [EU DIR 1999/37]), Draft 27.11.2025, https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:52025PC0179 |
+| [EU DIR 2025/0096] | COUNCIL DIRECTIVE 2025/0096 on the registration documents for vehicles and vehicle registration data recorded in national vehicle registers (repealing Council Directive 1999/37/EC, [EU DIR 1999/37]), Draft 27.11.2025, <https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:52025PC0179> |
 | [EU DIR 1999/37] | COUNCIL DIRECTIVE 1999/37/EC of 29 April 1999 on the registration documents for vehicles |
 
 ## Annex A Mapping of data elements of COUNCIL DIRECTIVE
@@ -462,7 +462,7 @@ A mapping from elements of Part 1 of the Registration Certificate defined in Ann
 **Table A.1 — Mapping of data elements of COUNCIL DIRECTIVE to EU-mVRC**
 
 | **Part I (M/C/O)** | **mVRC (M/C/O)** | **Community Code** | **Description** | **Data element identifier** |
-|------------------|------------------|--------------------|-----------------|-----------------------------|
+| --- | --- | --- | --- | --- |
 | M | M | - | name of the Member State issuing the Registration Certificate |``issuing_country`` in<br>ISO namespace|
 | M | M | - | the name of the competent authority | ``issuing_authority_unicode`` in<br> ISO namespace |
 | M | M | - | the unambiguous consecutive number of the document as used within the Member State | ``document_number`` in <br> ISO namespace |
@@ -539,4 +539,4 @@ A mapping from elements of Part 1 of the Registration Certificate defined in Ann
 | M | C |  V.9 | indication of the exhaust emission level environmental category at entry 47 of part 2 of the Certificate of Conformity as defined in the Appendix to Annex VIII to Commission Implementing Regulation (EU) 2020/683 or at entry 47 of the individual approval certificate defined in Appendix 1 to Annex III to that Regulation | ``env_info_eu`` in<br> EU namespace |
 | O | O |  V.10 | CO2 emission class of heavy-duty vehicles determined at the moment of first registration, in accordance with Article 7ga(2) of Directive 1999/62/EC of the European Parliament and of the Council (5) | ``env_info_eu`` in<br> EU namespace |
 | O | O |  W | fuel tank(s) capacity (in litres)  | ``fuel_tank`` in<br> ISO namespace |
-| O | O |  X | proof of having passed the roadworthiness test, date of next roadworthiness test or expiry of current certificate on mobile registration certificates | ``expiry_date_technical_inspection`` in<br> ISO  namespace |
+| O | O |  X | proof of having passed the roadworthiness test, date of next roadworthiness test or expiry of current certificate on mobile registration certificates | ``expiry_date_technical_inspection`` in<br> ISO  namespace 
