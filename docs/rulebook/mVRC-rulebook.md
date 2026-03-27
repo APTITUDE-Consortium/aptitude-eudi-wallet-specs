@@ -341,10 +341,10 @@ The ``AxleInfoEU`` structure SHALL be encoded as CBOR for device retrieval and S
 ```cddl
 AxleInfoEU = {
  ? "number_of_axles" : uint,                ; according to Table 13
- ? "axle_info : [+ axledata]
+ ? "axle_info" : [+ axledata]               ; according to Table 13
  }
 axledata =  {
- ? "axle_number" : uint,                    : according to Table 13
+ ? "axle_number" : uint,                    ; according to Table 13
  ? "techn_perm_max_laden_mass_axle" : uint  ; according to Table 13
  }
 ```
