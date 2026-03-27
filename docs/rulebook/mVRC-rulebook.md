@@ -1,8 +1,9 @@
 # Attestation Rulebook for attestations of type  *EU-mVRC*
 
-* Author(s):
-  * Matthias Schwan, Bundesdruckerei GmbH, Germany
-  * Jan Willem Stekelenburg, RDW, the Netherlands
+Author(s):
+
+- Matthias Schwan, Bundesdruckerei GmbH, Germany
+- Jan Willem Stekelenburg, RDW, the Netherlands
 
 | Version | Date | Description |
 | --- | --- | --- |
@@ -10,24 +11,24 @@
 
 **Feedback:**
 
-* <matthias.schwan@bdr.de>
-* <jstekelenburg@rdw.nl>
+- <matthias.schwan@bdr.de>
+- <jstekelenburg@rdw.nl>
 
 ## 1 Introduction
 
 ### 1.1 Document scope and purpose
 
-This document specifies the “European Union mobile Vehicle Registration Certificate (EU-mVRC)” in accordance with EU Directive on the registration documents for vehicles [EU DIR 2025/0096][EU DIR 1999/37]. An EU-mVRC is a mobile document, i.e. QEAA or Pub-EAA, managed by an EUDI Wallet according to [European Digital Identity Regulation]. The specification of the EU-mVRC is a profile of the mVC specified in [ISO/IEC 7367-2]. The approach of specifying the EU-mVRC profile is given in 2.1. The EU-mVRC as well as the mobile Technical Report (mTR) [ISO/IEC 7367-3] are considered campanion documents to the mDL as specified in ARF Annex 3.2 mDL Rulebook.
+This document specifies the “European Union mobile Vehicle Registration Certificate (EU-mVRC)” in accordance with EU Directive on the registration documents for vehicles \[EU DIR 2025/0096][EU DIR 1999/37]. An EU-mVRC is a mobile document, i.e. QEAA or Pub-EAA, managed by an EUDI Wallet according to [European Digital Identity Regulation]. The specification of the EU-mVRC is a profile of the mVC specified in [ISO/IEC 7367-2]. The approach of specifying the EU-mVRC profile is given in 2.1. The EU-mVRC as well as the mobile Technical Report (mTR) [ISO/IEC 7367-3] are considered campanion documents to the mDL as specified in ARF Annex 3.2 mDL Rulebook.
 
 ### 1.2 Document structure
 
-* Chapter 2, which describes the approach of specifying the EU profile of an ISO-mVC
-* Chapter 3, which specifies how the attestation, attributes and metadata are encoded in case the attestation complies with [ISO/IEC 18013-5] .
-* Chapter 4, which specifies attestation usage.
-* Chapter 5, which defines how trust anchors for attestation verification can be obtained.
-* Chapter 6, which defines attestation revocation mechanisms.
-* Chapter 7, which provides compliance information.
-* Annex A, which describes a mapping of data elements of COUNCIL DIRECTIVE to the EU-mVRC
+- Chapter 2, which describes the approach of specifying the EU profile of an ISO-mVC
+- Chapter 3, which specifies how the attestation, attributes and metadata are encoded in case the attestation complies with [ISO/IEC 18013-5] .
+- Chapter 4, which specifies attestation usage.
+- Chapter 5, which defines how trust anchors for attestation verification can be obtained.
+- Chapter 6, which defines attestation revocation mechanisms.
+- Chapter 7, which provides compliance information.
+- Annex A, which describes a mapping of data elements of COUNCIL DIRECTIVE to the EU-mVRC
 
 ### 1.3 Key words
 
@@ -51,9 +52,9 @@ This document uses the terminology specified in Annex 1 of the ARF.
 
 This document describes the structure, type, data element identifiers, and logical organisation of the mandatory and optional attributes of the EU-mVRC attestation within the EUDI Wallet. It also describes how Member States can specify any possible national attributes.
 
-The specification of the EU-mVRC is a profile of the mVC specified in [ISO/IEC 7367-2]. The mVC [ISO/IEC 7367-2] references data structures and security mechanisms defined for mDL[ISO/IEC 18013-5][ISO/IEC 18013-7] and mdoc[ISO/IEC 23220-4], such as device request/response structures, IssuerSigned and IssuerAuth structures (MSO) as well as protocols for proximity and remote flows. These protocols and structures are mandatory features of the EUDI Wallet ecosystem . The EU-mVRC profile mandates the use of doc type and name space according to [ISO/IEC 7367-2] and gives more detailed information on the use of the data elements. A profile further specifies additional name spaces under responsibility of the EU and of respective Member States.
+The specification of the EU-mVRC is a profile of the mVC specified in [ISO/IEC 7367-2]. The mVC [ISO/IEC 7367-2] references data structures and security mechanisms defined for <credentilas:mDL> and <credentials:mdoc>, such as device request/response structures, IssuerSigned and IssuerAuth structures (MSO) as well as protocols for proximity and remote flows. These protocols and structures are mandatory features of the EUDI Wallet ecosystem . The EU-mVRC profile mandates the use of doc type and name space according to [ISO/IEC 7367-2] and gives more detailed information on the use of the data elements. A profile further specifies additional name spaces under responsibility of the EU and of respective Member States.
 
-<img width="1003" height="529" alt="image" src="https://github.com/APTITUDE-Consortium/aptitude-eudi-wallet-specs/blob/main/docs/img/EU_mVRC_profile.png" />
+![EU mVRC profile](../img/EU_mVRC_profile.png)
 
 ## 3 Attestation encoding
 
@@ -87,7 +88,7 @@ The data elements are specified in Table 1 in clause 3.1.2.2.
 
 The EU-mVRC ISO compliant data elements SHALL be as defined in Table 1 and belong to the namespace given in 3.1.1.
 
-**Table 1 — ISO compliant data elements**
+###### Table 1 — ISO compliant data elements
 
 | **Identifier** | **EU additional description** | **Presence** |
 | --- | --- | --- |
@@ -124,7 +125,7 @@ The user information in data element ``users`` contains information describing t
 
 The owner information in data element ``owners`` contains information describing the name and address of the recorded **owner(s)** (C.2) of the vehicle according to [EU DIR 2025/0096]. There can be more than one owner. The data element ``owners`` may contain more then one recorded entity with the specific personal details. One recorded entity of an owner shall be either a natural person with details given in Table 2 or an organization with details given in Table 3.
 
-**Table 2 — NaturalPerson - key details**
+###### Table 2 — NaturalPerson - key details
 
 | **Identifier** | **EU additional description** | **Presence** |
 | --- | --- | --- |
@@ -135,7 +136,7 @@ The owner information in data element ``owners`` contains information describing
 | ``given_name_latin1`` | EU - corresponding harmonised Union code:<br> **(C.1.2)** other name(s) or initial(s) (where appropriate)<br> **(C.2.2)** other name(s) or initial(s) (where appropriate)<br>  Note: applicable if C.1.2 or C.2.2 refer to a natural Person<br> **(C.3.2)** other name(s) or initial(s) (where appropriate)<br>  Note: applicable if C.1.2 or C.2.2 refer to a natural Person | O |
 | ``supplemental_person_data`` | **(C.1.4)** electronic address (e-mail) of the holder of the registration<br> **(C.2.4)** electronic address (e-mail) of the owner certificate<>EU - corresponding harmonised Union code:<br> In case of a holder optional element **(C.4)** Where the particulars specified in f, code C.2 are not included in the Registration Certificate, reference to the fact that the holder of the Registration Certificate: (a) is the vehicle owner, (b) is not the vehicle owner, (c) is not identified by the Registration Certificate as being the vehicle owner | M |
 
-**Table 3 — Organization - key details**
+###### Table 3 — Organization - key details
 
 | **Identifier** | **EU additional description** | **Presence** |
 | --- | --- | --- |
@@ -144,7 +145,7 @@ The owner information in data element ``owners`` contains information describing
 | ``organization_name_latin1`` | EU - corresponding harmonised Union code: <br> **(C.1.1)** surname(s) or business name<br> **(C.2.1)** surname or business name<br> **(C.3.1)** surname or business name<br> Note: applicable if C.1.1, C.2.1 or C.3.1 refer to an organization | O |
 | ``supplemental_organization_data`` | no further Information | O |
 
-**Table 4 — Adress - key details**
+###### Table 4 — Adress - key details
 
 | **Identifier** | **EU additional description** | **Presence** |
 | --- | --- | --- |
@@ -162,7 +163,7 @@ The owner information in data element ``owners`` contains information describing
 
 The basic vehicle information contains information describing the basic data elements of a vehicle according to clause 6.2.4.3 in [ISO/IEC 7367-2].
 
-**Table 5 — Basic vehicle info key details**
+###### Table 5 — Basic vehicle info key details
 
 | **Identifier** | **EU additional description** | **Presence** |
 | --- | --- | --- |
@@ -182,7 +183,7 @@ The basic vehicle information contains information describing the basic data ele
 
 The mass information contains information describing the mass data elements of a vehicle in kilograms.
 
-**Table 6 — mass info key details**
+###### Table 6 — mass info key details
 
 | **Identifier** | **EU additional description** | **Presence** |
 | --- | --- | --- |
@@ -196,7 +197,7 @@ The mass information contains information describing the mass data elements of a
 
 The towed trailer mass information contains information about the towing vehicle’s maximum allowable towed mass for both unbraked and braked trailers to be coupled in kilograms.
 
-**Table 7 — Towed trailer mass info key details**
+###### Table 7 — Towed trailer mass info key details
 
 | **Identifier** | **EU additional description** | **Presence** |
 | --- | --- | --- |
@@ -209,7 +210,7 @@ The towed trailer mass information contains information about the towing vehicle
 
 The engine information contains information describing the relevant data elements the engine.
 
-**Table 8 — Engine info key details**
+###### Table 8 — Engine info key details
 
 | **Identifier** | **EU additional description** | **Presence** |
 | --- | --- | --- |
@@ -223,7 +224,7 @@ The engine information contains information describing the relevant data element
 
 The seating information contains information describing the seating and standing elements of a vehicle.
 
-**Table 9 — seating info key details**
+###### Table 9 — seating info key details
 
 | **Identifier** | **EU additional description** | **Presence** |
 | --- | --- | --- |
@@ -234,7 +235,7 @@ The seating information contains information describing the seating and standing
 
 The dimension information contains details about the dimensions of a vehicle such as wheelbase, length, and width. All details are optional and can be absent.
 
-**Table 10 — Dimensions info key details**
+###### Table 10 — Dimensions info key details
 
 | **Identifier** | **EU additional description** | **Presence** |
 | --- | --- | --- |
@@ -275,7 +276,7 @@ The data elements are specified in Table 11 in clause 3.1.3.2.
 
 The EU data elements are grouped in five main data elements as given in Table 11. If an optional data element is encoded, it must contain at minimum all mandatory elements defined in the sub-structures.
 
-**Table 11 - EU data elements - key details**
+###### Table 11 - EU data elements - key details
 
 | **Identifier** | **Meaning** | **Description** | **Presence** | Encoding format |
 | --- | --- | --- | --- | --- |
@@ -290,9 +291,9 @@ The data element ``vehicle_info_ext_eu`` contains information describing extra c
 
 The structure is absent when none of the data elements are applicable.
 
-The ``VehicleInfoExtEU`` structure SHALL be encoded as CBOR for device retrieval and SHALL be formatted as following CDDL structure:
+The ``VehicleInfoExtEU`` structure SHALL be encoded as <credentials:CBOR> for device retrieval and SHALL be formatted as following <credentials:CDDL> structure:
 
-```
+```cddl
 VehicleInfoExtEU = {
  ? "bodywork" : tstr,                           ; according to Table 12
  ? "whole_vehicle_max_mass" : uint,             ; according to Table 12
@@ -303,7 +304,7 @@ VehicleInfoExtEU = {
 }
 ```
 
-**Table 12 – Vehicle info extended EU data elements - key details**
+###### Table 12 – Vehicle info extended EU data elements - key details
 
 | **Identifier** | **Meaning** | **Description** | **Presence** | Encoding format |
 | --- | --- | --- | --- | --- |
@@ -322,7 +323,7 @@ The structure is absent when none of the data elements is applicable.
 
 The ``ConsInfoExt`` structure SHALL be encoded as CBOR for device retrieval and SHALL be formatted as following CDDL structure:
 
-```
+```cddl
 ConsInfoExt = {
  ? naturalPerson: NaturalPerson,     ; according to paragraph 6.2.3.2 User information of [ISO/IEC 7367-2] and Table 2 of this document
  ? organization: Organization        ; according to paragraph 6.2.3.2 User information of [ISO/IEC 7367-2] and Table 3 of this document
@@ -337,7 +338,7 @@ The structure is absent when none of the data elements is applicable.
 
 The ``AxleInfoEU`` structure SHALL be encoded as CBOR for device retrieval and SHALL be formatted as following CDDL structure:
 
-```
+```cddl
 AxleInfoEU = {
  ? "number_of_axles" : uint,                ; according to Table 13
  ? "axle_info : [+ axledata]
@@ -348,7 +349,7 @@ axledata =  {
  }
 ```
 
-**Table 15 — Axle info EU key details**
+###### Table 15 — Axle info EU key details
 
 | **Identifier** | **Meaning** | **Description** | **Presence** | Encoding format |
 | --- | --- | --- | --- | --- |
@@ -364,7 +365,7 @@ The structure is absent when none of the data elements is applicable.
 
 The ``EnvInfoEU`` structure SHALL be encoded as CBOR for device retrieval and SHALL be formatted as following CDDL structure:
 
-```
+```cddl
 EnvInfoEU = {
  ? "sound_stat" : uint,               ; according to Table 14
  ? "sound_speed" : uint,              ; according to Table 14
@@ -388,7 +389,7 @@ EnvInfoEU = {
 }
 ```
 
-**Table 14 — Environmental info EU key details**
+###### Table 14 — Environmental info EU key details
 
 | **Identifier** | **Meaning** | **Description** | **Presence** | Encoding format |
 | --- | --- | --- | --- | --- |
@@ -436,7 +437,7 @@ The specification of the mVC is compliant to the ARF, i.e. the mdoc encoding of 
 | [HAIP] | Yasuda, K. *et al,* OpenID4VC High Assurance Interoperability Profile, OpenId Foundation, Version draft-03 |
 | [IANA-JWT-Claims] | IANA JSON Web Token Claims Registry. Available: <https://www.iana.org/assignments/jwt/jwt.xhtml> |
 | [ISO/IEC 18013-5] |  ISO/IEC 18013-5, Personal identification --- ISO-compliant driving licence - Part 5: Mobile driving licence (mDL) application, First edition, 2021-09 |
- [ISO/IEC 18013-5.2] |  ISO/IEC 18013-5, Personal identification --- ISO-compliant driving licence - Part 5: Mobile driving licence (mDL) application, second edition, 2026-xx (Status DIS) |
+| [ISO/IEC 18013-5.2] |  ISO/IEC 18013-5, Personal identification --- ISO-compliant driving licence - Part 5: Mobile driving licence (mDL) application, second edition, 2026-xx (Status DIS) |
 | [OIDC] | Sakimura, N. et al., "OpenID Connect Core 1.0", OpenID Foundation. Available: <https://openid.net/specs/openid-connect-core-1_0.html> |
 | [RFC 3339] | RFC 3339  - Date and Time on the Internet: Timestamps, G. Klyne et al., July 2002 |
 | [RFC 8610] | RFC 8610  - Concise Data Definition Language (CDDL): A Notational Convention to Express Concise Binary Object Representation (CBOR) and JSON Data Structures, H. Birkholz et al., June 2019 |
@@ -459,7 +460,7 @@ The specification of the mVC is compliant to the ARF, i.e. the mdoc encoding of 
 
 A mapping from elements of Part 1 of the Registration Certificate defined in Annex I of [EU DIR 2025/0096] to the data elements defined in clause 3 is given in Table A.1.
 
-**Table A.1 — Mapping of data elements of COUNCIL DIRECTIVE to EU-mVRC**
+### Table A.1 — Mapping of data elements of COUNCIL DIRECTIVE to EU-mVRC
 
 | **Part I (M/C/O)** | **mVRC (M/C/O)** | **Community Code** | **Description** | **Data element identifier** |
 | --- | --- | --- | --- | --- |
@@ -507,7 +508,7 @@ A mapping from elements of Part 1 of the Registration Certificate defined in Ann
 | O | O |  C.3.2 | other name(s) or initial(s) (where appropriate), | ``consumers`` in<br> EU namespace |
 | O | O |  C.3.3 | address in the Member State of registration, on the date of issue of the document | ``consumers`` in<br> EU namespace |
 | O | O |  C.5, C.6,<br> C.7, C.8 | where a change in the personal data given in code C.1, code C.2 and/or code C.3 does not give rise to the issue of a new Registration Certificate, the new personal data corresponding to these points may be included under codes (C.5), (C.6), (C.7) or (C.8); they are then broken down in accordance with the references in code C.1, code C.2,  code C3, code C4. | t.b.d |
-| - |  F  | mass |  |
+| - |  F  | mass | | |
 | O | O | F.2 | maximum permissible laden mass of the vehicle in service in the Member State of registration | ``vehicle_max_mass`` in<br> ISO namespace |
 | O | O | F.3 | maximum permissible laden mass of the whole vehicle in service in the Member State of registration | ``mass_in_running_order_variable_max`` in<br> ISO namespace |
 | O | O | J | vehicle category | ``vehicle_category_code`` in<br> ISO namespace |
@@ -539,4 +540,4 @@ A mapping from elements of Part 1 of the Registration Certificate defined in Ann
 | M | C |  V.9 | indication of the exhaust emission level environmental category at entry 47 of part 2 of the Certificate of Conformity as defined in the Appendix to Annex VIII to Commission Implementing Regulation (EU) 2020/683 or at entry 47 of the individual approval certificate defined in Appendix 1 to Annex III to that Regulation | ``env_info_eu`` in<br> EU namespace |
 | O | O |  V.10 | CO2 emission class of heavy-duty vehicles determined at the moment of first registration, in accordance with Article 7ga(2) of Directive 1999/62/EC of the European Parliament and of the Council (5) | ``env_info_eu`` in<br> EU namespace |
 | O | O |  W | fuel tank(s) capacity (in litres)  | ``fuel_tank`` in<br> ISO namespace |
-| O | O |  X | proof of having passed the roadworthiness test, date of next roadworthiness test or expiry of current certificate on mobile registration certificates | ``expiry_date_technical_inspection`` in<br> ISO  namespace 
+| O | O |  X | proof of having passed the roadworthiness test, date of next roadworthiness test or expiry of current certificate on mobile registration certificates | ``expiry_date_technical_inspection`` in<br> ISO  namespace|

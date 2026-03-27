@@ -84,6 +84,9 @@ markdown_extensions:
   - sane_lists
   - tables
   - def_list
+  - pymdownx.highlight:
+      use_pygments: true
+  - pymdownx.superfences
   - toc:
       permalink: true
 
