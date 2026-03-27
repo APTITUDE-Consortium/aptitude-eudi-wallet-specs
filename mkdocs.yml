@@ -89,7 +89,7 @@ markdown_extensions:
 nav:
   - Home: index.md
   - Rulebook:
-    - mVRC: rulebook/wp5/mVRC-rulebook.md
+    - mVRC: rulebook/mVRC-rulebook.md
     - Trust Framework: rulebook/wp2-trust-specifications/deliverable-2.1-trust.md
   - Standards: standards.md
   - Glossary: 
