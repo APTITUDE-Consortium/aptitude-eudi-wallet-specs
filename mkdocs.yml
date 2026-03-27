@@ -5,7 +5,7 @@ site_author: APTITUDE Consortium
 site_url: https://aptitude-consortium.github.io/aptitude-eudi-wallet-specs/
 
 # Repository
-repo_name: APTITUDE-Consortium/aptitude-eudi-wallet-rfcs
+repo_name: APTITUDE-Consortium/aptitude-eudi-wallet-specs
 repo_url: https://github.com/APTITUDE-Consortium/aptitude-eudi-wallet-specs
 edit_uri: edit/main/docs/
 
