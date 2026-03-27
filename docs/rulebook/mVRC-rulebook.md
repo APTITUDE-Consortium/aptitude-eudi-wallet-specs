@@ -380,8 +380,8 @@ EnvInfoEU = {
  ? "thc_nox_unit" : tstr,             ; according to Table 14
  ? "pm" : uint,                       ; according to Table 14
  ? "pm_unit" : tstr,                  ; according to Table 14
- ? "corr_abs_coefficient " : uint,    ; according to Table 14
- ? "co2 " : uint,                     ; according to Table 14
+ ? "corr_abs_coefficient" : uint,     ; according to Table 14
+ ? "co2" : uint,                      ; according to Table 14
  ? "co2_unit" : tstr,                 ; according to Table 14
  ? "comb_fuel_consumption" : uint,    ; according to Table 14
  ? "environmental_category" : tstr,   ; according to Table 14
