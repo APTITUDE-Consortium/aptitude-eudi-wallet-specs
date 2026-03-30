@@ -1,7 +1,8 @@
-# Example CODEOWNERS file
+# CODEOWNERS
+# Each line: <pattern> <owner>
 
-## Each line: <pattern> <owner>
+# Default:
+*  @APTITUDE-Consortium/wp2-leads
 
-*       @APTITUDE-Consortium/wp2-leads
-
+# WP5 owns the mVRC rulebook section
 /docs/rulebook/mVRC-rulebook.md @APTITUDE-Consortium/wp5-code-owners
