@@ -2,11 +2,11 @@
 site_name: APTITUDE Technical Specification
 site_description: APTITUDE Technical Specification
 site_author: APTITUDE Consortium
-site_url: https://aptitude-consortium.github.io/aptitude-eudi-wallet-rfcs/
+site_url: https://aptitude-consortium.github.io/aptitude-eudi-wallet-specs/
 
 # Repository
-repo_name: APTITUDE-Consortium/aptitude-eudi-wallet-rfcs
-repo_url: https://github.com/APTITUDE-Consortium/aptitude-eudi-wallet-rfcs
+repo_name: APTITUDE-Consortium/aptitude-eudi-wallet-specs
+repo_url: https://github.com/APTITUDE-Consortium/aptitude-eudi-wallet-specs
 edit_uri: edit/main/docs/
 
 # Copyright
@@ -83,13 +83,16 @@ markdown_extensions:
   - sane_lists
   - tables
   - def_list
+  - pymdownx.highlight:
+      use_pygments: true
+  - pymdownx.superfences
   - toc:
       permalink: true
 
 nav:
   - Home: index.md
   - Rulebook:
-    - mVRC: rulebook/wp5/mVRC-rulebook.md
+    - mVRC: rulebook/mVRC-rulebook.md
     - Trust Framework: rulebook/wp2-trust-specifications/deliverable-2.1-trust.md
   - Standards: standards.md
   - Glossary: 

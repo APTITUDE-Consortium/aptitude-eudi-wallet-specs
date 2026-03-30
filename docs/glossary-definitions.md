@@ -48,6 +48,9 @@ components:Wallet Unit Attestation (WUA)
 components:Keystore
 : Hardware-backed repository for generating, storing, and using non-critical cryptographic assets.
 
+component:Qualified Trust Service Provider (QTSP)
+: A qualified trust services provider authorised, among other things, to issue QEAA under eIDAS/eIDAS2.
+
 credentials:Person Identification Data (PID)
 : Data set that enables the establishment of a person's identity.
 
@@ -56,6 +59,9 @@ credentials:Electronic Attestation of Attributes (EAA)
 
 credentials:Qualified Electronic Attestation of Attributes (QEAA)
 : EAA issued by a Qualified Trust Service Provider in line with Annex V.
+
+credentials:Public Electronic Attestation of Attributes (PuB-EAA)
+: An attestation issued by a public sector body responsible for an authentic source of data (outside the qualified trust service regime).
 
 credentials:Attestation
 : Collective term for QEAA, PuB-EAA, or non-qualified EAA.
@@ -92,3 +98,60 @@ credentials:Pseudonym
 
 credentials:Selective Disclosure
 : Capability for a User to present only a subset of attributes from a PID or attestation.
+
+credentials:EU-mVRC (European Union mobile Vehicle Registration Certificate)
+: The mobile (digital) vehicle registration certificate as an attestation in the EUDI Wallet; a profile of mVC under ISO/IEC 7367‑2.
+
+credentials:mVC (mobile Vehicle Certificate
+: The family of mobile vehicle certificates defined in ISO/IEC 7367‑2, on which the EU‑mVRC is profiled.
+
+credentials:mTR (mobile Technical Report)
+: A mobile roadworthiness/inspection report (companion to mVRC/mDL) per ISO/IEC 7367‑3.
+
+credentials:mDL (mobile Driving Licence)
+: The mobile driving licence per ISO/IEC 18013‑5/-7; used alongside mVRC and mTR in the EUDI Wallet.
+
+credentials:MSO (Mobile Security Object)
+: A security object carrying metadata and the issuer’s signature over data elements in mdoc/mDL/mVRC.
+
+credentials:mdoc
+: The generic model and protocols for mobile documents per ISO/IEC 23220‑4.
+
+credentials:Proximity flow
+: Short‑range presentation protocol (NFC/BLE/Wi‑Fi Aware) per ISO/IEC 18013‑5/‑7.
+
+credentials:Remote flow
+: Remote presentation protocol (same‑device or cross‑device).
+
+credentials:Trust anchor
+: The root of trust (certificates/chain) required to verify an attestation’s signature.
+
+credentials:IACA
+: The issuing authority/CA used in the mDL/mVRC trust infrastructure under ISO (may be shared with mDL or set up separately).
+
+credentials:CBOR (Concise Binary Object Representation)
+: The binary serialisation format used for mdoc transfers.
+
+credentials:CDDL (Concise Data Definition Language)
+: The language to define CBOR structures (e.g., `tstr`, `uint`, `bstr`, `tdate`).
+
+credentials:eCoC (electronic Certificate of Conformity)
+: Manufacturer’s electronic certificate; selected entries are mapped into EU‑mVRC.
+
+credentials:SD‑JWT VC (Selective Disclosure Java Web Token Verifiable Credential)
+: A verifiable credential format based on Selective Disclosure JWT; one of the formats supported in EUDI for some attestations.
+
+credentials:W3C VCDM v2.0 (W3C Verifiable Credentials Data Model v2.0)
+: A family of specifications for VC data models.
+
+credentials:OID4VCI (OpenID for Verifiable Credentials Issuance)
+: OID4VCI is an open standard that defines a secure API for issuing Verifiable Credentials (VCs) to a user's digital wallet.
+
+credentials:OID4VP (OpenID for Verifiable Presentation)
+: OID4VP is a standard that defines how a user presents Verifiable Credentials from their wallet to a verifier.
+
+credentials:HAIP (High Assurance Interoperability Profile)
+: OpenID4VC profile aimed at higher assurance interoperability.
+
+credentials:IANA JWT Claims (Internet Assigned Numbers Authority JSON Web Token Claims)
+: IANA registry of standard JWT claim names.
