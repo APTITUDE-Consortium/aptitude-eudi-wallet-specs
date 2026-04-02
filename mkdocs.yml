@@ -98,7 +98,6 @@ nav:
   - Rulebook:
     - Overview: rulebook/index.md
     - mVRC: rulebook/mVRC-rulebook.md
-    - Trust Framework: rulebook/wp2-trust-specifications/deliverable-2.1-trust.md
   - RFCs:
     - Overview: horizontal-RFCs/index.md
     - RFC-01 Credential Issuance Profile: horizontal-RFCs/RFC001.md
