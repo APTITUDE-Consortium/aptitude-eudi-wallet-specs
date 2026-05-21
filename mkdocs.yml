@@ -126,6 +126,8 @@ nav:
     - Overview: horizontal-RFCs/index.md
     - RFC-01 Credential Issuance Profile: horizontal-RFCs/RFC001.md
     - RFC-02 Presentation Profile: horizontal-RFCs/RFC002.md
+  - Schemas:
+    - Overview: schema/index.md
   - Standards: standards.md
   - Glossary: 
     - Glossary: glossary.md
