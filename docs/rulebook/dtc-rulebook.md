@@ -1,9 +1,9 @@
 # APTITUDE - *Digital Travel Credential (DTC) rulebook*
 
 * Author(s):
-  * ...
+  * IPZS ...
+  * ANTS ...
   * [frank.dietrich@bdr.de](mailto:frank.dietrich@bdr.de)
-  * [joenne.kriener@bdr.de](mailto:joenne.kriener@bdr.de)
   
 | Version | Date | Description |
 |---------|------------|------------|
