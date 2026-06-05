@@ -9,7 +9,7 @@ roles:Certificate Authority (CA)
 : An entity which is trusted by one or more parties in the EUDI Wallet ecosystem to create and seal certificates. [ARF]
 
 roles:Conformity Assessment Body (CAB)
-: A conformity assessment body as defined in Article 2, point 13, of Regulation (EC) No 765/2008, which is accredited in accordance with that Regulation as competent to carry out conformity assessment of a qualified trust service provider and the qualified trust services it provides, or as competent to carry out certification of European Digital Identity Wallets or electronic identification means.
+: A conformity assessment body as defined in Article 2, point 13, of Regulation (EC) No 765/2008, which is accredited in accordance with that Regulation as competent to carry out conformity assessment of a qualified trust service provider and the qualified trust services it provides, or as competent to carry out certification of European Digital Identity Wallets or electronic identification means. [ARF]
 
 roles:EAA Provider
 : Provider of EEAs.
@@ -20,44 +20,50 @@ roles:Issuer Authority Certificate Authority (IACA)
 roles:LoTE Provider
 : A body responsible for maintaining, managing, and publishing Lists of Trusted Entities (LoTE). [ARF]
 
+roles:LoTE Scheme Operator (LoTESO)
+: The body that is responsible for the operation and/or management of the approval scheme under which the corresponding LoTE is published. [ETSI TS 119 602]
+
 roles:LOTL Scheme Operator (LOTLSO)
 : An entity responsible for maintaining, updating, and digitally signing the List of Trusted Lists (LOTL).
 
 roles:National Accreditation Bodies (NAB)
-: A body that performs accreditation with authority derived from a Member State under Regulation (EC) No 765/2008.
+: A body that performs accreditation with authority derived from a Member State under Regulation (EC) No 765/2008. [ARF]
 
 roles:Owner of a Scheme for the Attestation of Attribute
 : An entity responsible for establishing and maintaining a scheme for the attestation of attributes. [CIR 2025/1569]
 
-roles:PID Provider
-: Person Identification Data Provider. A natural or legal person responsible for issuing and revoking the person identification data and ensuring that the person identification data of a user is cryptographically bound to a Wallet Unit. [ARF, CIR 2024/2979]
+roles:Provider of Person Identification Data (PID Provider)
+: A natural or legal person responsible for issuing and revoking the person identification data and ensuring that the person identification data of a user is cryptographically bound to a Wallet Unit. [ARF]
 
 roles:Provider of Wallet Relying Party Access Certificate (Provider of WRPAC)
-: A natural or legal person mandated by a Member State to issue relying party access certificates to wallet-relying parties registered in that Member State. [ARF, CIR 2024/2979, CIR 2024/2980, CIR 2025/848]
+: A natural or legal person mandated by a Member State to issue Relying Party access certificates to (Wallet-) Relying Parties registered in that Member State. [ARF]
 
 roles:Provider of Wallet Relying Party Registration Certificate (Provider of WRPRC)
-: A natural or legal person mandated by a Member State to issue wallet-relying party registration certificates to wallet-relying parties registered in that Member State. [ARF, CIR 2025/848]
+: A natural or legal person mandated by a Member State to issue (wallet-relying party) registration certificates to (wallet-)relying parties registered in that Member State. [ARF]
 
 roles:PuB-EAA Provider
 : Provider of Public Electronic Attestation of Attributes (PuB-EAAs).
 
 roles:Public Sector Body
-: A state, regional or local authority, a body governed by public law or an association formed by one or several such authorities or one or several such bodies governed by public law, or a private entity mandated by at least one of those authorities, bodies or associations to provide public services, when acting under such a mandate.
+: A state, regional or local authority, a body governed by public law or an association formed by one or several such authorities or one or several such bodies governed by public law, or a private entity mandated by at least one of those authorities, bodies or associations to provide public services, when acting under such a mandate. [ARF]
 
 roles:QEAA Provider
-: Provider of Qualified Electronic Attestation of Attributes (QEEAs).
+: Provider of Qualified Electronic Attestation of Attributes (QEAAs).
 
 roles:Qualified Trust Service Provider (QTSP)
-: A qualified trust services provider authorised, among other things, to issue QEAA under eIDAS/eIDAS2.
+: Qualified Trust Service Provider means a trust service provider who provides one or more qualified trust services and is granted the qualified status by the supervisory body. [ARF]
 
 roles:Registrar
-: The body responsible for establishing and maintaining the list of registered wallet-relying parties established in their territory who has been designated by a Member State. [ARF, CIR 2024/2980, CIR 2025/848, ETSI TS 119 475]
+: The body responsible for establishing and maintaining the list of registered wallet-relying parties established in their territory who has been designated by a Member State. [ARF]
 
 roles:Relying Party (RP)
 : A natural or legal person that relies upon electronic identification, European Digital Identity Wallets or other electronic identification means, or upon a trust service. [ARF]
 
 roles:Relying Party Intermediary (RPI)
 : A Relying Party that offers services to other (intermediated) Relying Parties to, on their behalf, connect to Wallet Units and request the User attributes that these intermediated Relying Parties need. [ARF]
+
+roles:Supervisory Body
+: An entity responsible for supervisory tasks in the designating Member State as regards trust services. [REG-EU-2024/1183]
 
 roles:Trusted Entity
 : An entity that is recognized as trustworthy within a given approval scheme for a specific scope or purpose. [ETSI TS 119 602]
@@ -66,17 +72,20 @@ roles:Trusted List Provider
 : A body responsible for maintaining, managing, and publishing Trusted Lists. [ARF]
 
 roles:User
-: A natural or legal person, or a natural person representing another natural person or a legal person, that uses trust services or electronic identification means provided in accordance with the European Digital Identity Regulation. [ARF]
+: A natural or legal person, or a natural person representing another natural person or a legal person, that uses trust services or electronic identification means provided in accordance with the [European Digital Identity Regulation]. [ARF]
 
 roles:Wallet Provider (WP)
-: A natural or legal person who provides Wallet Solutions. [ARF, CIR 2024/2979, CIR 2024/2980, CIR 2025/848, CIR 2025/1569]
+: A natural or legal person who provides Wallet Solutions. [ARF]
 
 roles:Wallet-Relying Party (WRP)
-: An entity that intends to rely upon Wallet Units for the provision of public or private services by means of digital interaction. [Revised from ARF, CIR 2024/2979, CIR 2024/2980, CIR 2025/848]
+: A relying party that intends to rely upon Wallet Units for the provision of public or private services by means of digital interaction. [ARF]
 
 ---
 
 ## Components
+
+components:Authentic Source
+: A repository or system, held under the responsibility of a public sector body or private entity, that contains and provides attributes about a natural or legal person or object and that is considered to be a primary source of that information or recognised as authentic in accordance with Union law or national law, including administrative practice. [ARF]
 
 components:Authorisation Server
 : OAuth 2.0 / OpenID component responsible for authenticating the Holder and issuing tokens authorising access to protected endpoints.
@@ -85,10 +94,10 @@ components:EUDI Wallet
 : European Digital Identity Wallet used in APTITUDE pilots.
 
 components:Keystore
-: Hardware-backed repository for generating, storing, and using non-critical cryptographic assets.
+: A hardware-backed repository and service in which non-critical cryptographic assets are generated, stored, and used exclusively inside a dedicated hardware security boundary. [ARF]
 
 components:Public Key Infrastructure (PKI)
-: Systems, software, and communication protocols that are used by EUDI Wallet ecosystem components to distribute, manage, and control public keys. A PKI publishes public keys and establishes trust within an environment by validating and verifying the public keys mapping to an entity.
+: Systems, software, and communication protocols that are used by EUDI Wallet ecosystem components to distribute, manage, and control public keys. A PKI publishes public keys and establishes trust within an environment by validating and verifying the public keys mapping to an entity. [ARF]
 
 components:Register
 : An electronic register used by a Member State to make information on WRP registered in that Member State publicly available as set out in Article 5b(5) of Regulation (EU) No 910/2014. [CIR 2024/2980]
@@ -96,33 +105,30 @@ components:Register
 components:Relying Party Instance
 : A software and/or hardware module with the capability to interact with a Wallet Unit and to perform Relying Party authentication, that is controlled by a Relying Party. [ARF]
 
-components:Relying Party Instance
-: A software and/or hardware module with the capability to interact with a Wallet Unit and to perform Relying Party authentication, that is controlled by a Relying Party.
-
 components:Verifier Backend
 : Server-side component that creates presentation requests, receives presentation responses, validates them, and returns the result to the relying application.
 
 components:Wallet Instance
-: The application installed and configured on a User's device or environment, which is part of a Wallet Unit, and that the User uses to interact with the Wallet Unit. [ARF, CIR 2024/2979, CIR 2024/2980, CIR 2025/848, CIR 2025/1569]
+: The application installed and configured on a User's device or environment, which is part of a Wallet Unit, and that the User uses to interact with the Wallet Unit. [ARF]
 
 components:Wallet Secure Cryptographic Application (WSCA)
-: Application managing critical assets using the functions of a WSCD.
+: An application that manages critical assets by being linked to and using the cryptographic and non-cryptographic functions provided by the Wallet Secure Cryptographic Device. [ARF]
 
 components:Wallet Secure Cryptographic Device (WSCD)
-: Tamper-resistant device providing the secure environment and crypto functions used by a WSCA.
+: A tamper-resistant device that provides an environment that is linked to and used by the Wallet Secure Cryptographic Application to protect critical assets and provide cryptographic functions for the secure execution of critical operations. [ARF]
 
 components:Wallet Solution
-: A combination of software, hardware, services, settings, and configurations, including wallet instances, one or more wallet secure cryptographic applications and one or more wallet secure cryptographic devices. [CIR 2024/2979, CIR 2024/2980, CIR 2025/848, CIR 2025/1569]
+: A combination of software, hardware, services, settings, and configurations, including Wallet Instances, one or more Wallet Secure Cryptographic Applications and one or more Wallet Secure Cryptographic Devices. [ARF]
 
 components:Wallet Unit
-: A unique configuration of a wallet solution that includes wallet instances, wallet secure cryptographic applications and wallet secure cryptographic devices provided by a wallet provider to an individual User. [CIR 2024/2979, CIR 2024/2980, CIR 2025/848, CIR 2025/1569]
+: A unique configuration of a Wallet Solution that includes Wallet instances, Wallet Secure Cryptographic Applications and Wallet Secure Cryptographic Devices provided by a Wallet Provider to an individual Wallet User. [ARF]
 
 ---
 
 ## Artifacts
 
 artifacts:Attestation Rulebook
-: Document describing attestation type, namespaces, and related features.
+: A document describing the attestation type, namespace(s), and other features for a specific attestation type. [ARF]
 
 artifacts:Catalogue of Attributes
 : A digital repository of attributes that is maintained and published online by the Commission. [CIR 2025/1569]
@@ -140,21 +146,24 @@ artifacts:Credential Offer
 : Data structure created by a Credential Issuer to initiate issuer-initiated issuance, containing grant information and credential configuration references.
 
 artifacts:Electronic Seal
-: Data in electronic form which is attached to or logically associated with other data in electronic form to ensure the latter’s origin and integrity.
+: Data in electronic form which is attached to or logically associated with other data in electronic form to ensure the latter's origin and integrity. [ARF]
 
 artifacts:Electronic Signature
-: Data in electronic form which is attached to or logically associated with other data in electronic form and which is used by the signatory to sign.
+: Data in electronic form which is attached to or logically associated with other data in electronic form and which is used by the signatory to sign. [ARF]
 
 artifacts:Embedded Disclosure Policy (EDP)
-: A set of rules, embedded in an EAAs by its APs, that indicates the conditions that a WRP has to meet to access the EAAs. [ARF, CIR 2024/2979]
+: A set of rules, embedded in an electronic attestation of attributes by its provider, that indicates the conditions that a wallet-relying party has to meet to access the electronic attestation of attributes. [ARF]
 
 artifacts:EU Member State Trusted List (EUMS TL)
 : European Member State Trusted List.
 
-artifacts:LoTE
-: List of Trusted Entities. It takes the form of a list of entities that have been granted a particular status under the given approval scheme. [ETSI TS 119 602]
+artifacts:Key Attestation (KA)
+: A type of Wallet Unit Attestation that attests the certification and properties of a WSCA/WSCD or keystore available to the Wallet Unit, and that contains one or more public keys whose corresponding private keys are generated by and stored in that WSCA/WSCD or keystore, as well as a revocation reference for the WSCD or keystore. [ARF]
 
-artifacts:List of Trusted Lists (LoTL)
+artifacts:List of Trusted Entities (LoTE)
+: List of entities that are recognized as trustworthy within a given approval scheme for a specific scope or purpose. Based on [ETSI TS 119 602]. [ARF]
+
+artifacts:List Of Trusted Lists (LOTL)
 : In order to allow access to the TLs of all Member States in an easy manner, the European Commission (EC) publishes a central list, called the List of Trusted Lists (LoTL), with links to the locations where the TLs are published as notified by Member States. [ETSI TS 119 615]
 
 artifacts:mdoc
@@ -170,7 +179,7 @@ artifacts:Presentation Request
 : A request from a Verifier, conveyed in a Request Object, that specifies which credentials or attributes the Wallet must present, typically using a Presentation Definition (DIF PE).
 
 artifacts:Qualified Electronic Signature (QES)
-: An advanced electronic signature that is created by a qualified electronic signature creation device, and which is based on a qualified certificate for electronic signatures.
+: An advanced electronic signature that is created by a qualified electronic signature creation device, and which is based on a qualified certificate for electronic signatures. [ARF]
 
 artifacts:Request Object
 : A JWT carrying OAuth 2.0 authorization request parameters as defined in RFC 9101, which may be passed by value or by reference (JAR); used in OID4VP to convey the Verifier's presentation request.
@@ -178,29 +187,29 @@ artifacts:Request Object
 artifacts:Scheme for the Attestation of Attributes
 : A set of rules applicable to one or more types of electronic attestation of attributes. [CIR 2025/1569]
 
+artifacts:Status List Token
+: A token in JWT or CWT representation that contains a cryptographically secured Status List. [draft-ietf-oauth-status-list]
+
 artifacts:Strong User Authentication (SUA) Attestation
-: An attestation used for strong user authentication in the context of electronic payments, such that, when a Relying Party sends a presentation request for the attestation to a Wallet Unit, it includes transactional data in the request.
+: An attestation used for strong user authentication in the context of electronic payments, such that, when a Relying Party sends a presentation request for the attestation to a Wallet Unit, it includes transactional data in the request. [ARF]
 
 artifacts:Trust Anchor
 : An authoritative entity represented by a public key and associated data. [ARF]
 
 artifacts:Trusted List (TL)
-: A repository of information about authoritative entities in a particular legal or contractual context which provides information about their current and historical status. [ARF]
-
-artifacts:Key Attestation (KA)
-: An artifact containing attested information about the security of cryptographic keys stored in the Wallet Unit. KAs allow PID Providers and Attestation Providers to determine the security level of the keys to which they are binding PIDs or attestations, and to revoke their credentials (if needed) in case a security vulnerability affecting the WSCD or keystore is identified, or -- when the Wallet Provider uses a per-KA index -- upon user request. [TS03]
+: List that provides information about the status and the status history of the trust services from trust service providers regarding compliance with the applicable requirements and the relevant provisions of the applicable legislation. [ARF]
 
 artifacts:Wallet Instance Attestation (WIA)
-: An artifact containing attested information about the Wallet Instance. WIAs allow PID Providers and Attestation Providers to verify the integrity and authenticity of the Wallet Instance and to revoke their credentials (if needed) in case a Wallet Provider revokes a Wallet Instance. [TS03]
+: A type of Wallet Unit Attestation that attests the integrity and authenticity of a Wallet Instance, and that carries a revocation reference for the Wallet Instance, as well as information about the Wallet Solution, including its name, version, and certification. [ARF]
 
 artifacts:Wallet Unit Attestation (WUA)
-: A set of attestations provided by the Wallet Provider to PID Providers and Attestation Providers to ensure interoperability across the ecosystem. WUAs comprise two types: Wallet Instance Attestations (WIAs) and Key Attestations (KAs).
+: A data object that describes the components of the Wallet Unit or allows authentication and validation of those components. [ARF]
 
 artifacts:Wallet-Relying Party Access Certificate (WRPAC)
-: A certificate for electronic seals or signatures authenticating and validating the WRP issued by a Provider of WRPAC. [ARF, CIR 2024/2979, CIR 2024/2980, ETSI TS 119 475]
+: A certificate for electronic seals or signatures authenticating and validating the (Wallet-) Relying Party, issued by a provider of wallet-relying party access certificates. [ARF]
 
 artifacts:Wallet-Relying Party Registration Certificate (WRPRC)
-: Signed data object containing registered information about RPs or APs issued by Provider of WRPRCs. It indicates the intended use and attributes the RPs or APs has registered to request from users or issue to users. [Revised from ARF, CIR 2025/848, ETSI TS 119 475]
+: A data object that indicates the attributes the Relying Party has registered to intend to request from Users. [ARF]
 
 ---
 
@@ -231,7 +240,7 @@ credentials:mobile Vehicle Certificate (mVC)
 : The family of mobile vehicle certificates defined in ISO/IEC 7367-2, on which the EU-mVRC is profiled.
 
 credentials:Person Identification Data (PID)
-: Data set that enables the establishment of a person's identity.
+: A set of data that is issued in accordance with Union or national law and that enables the establishment of the identity of a natural or legal person, or of a natural person representing another natural person or a legal person. [ARF]
 
 credentials:Public Electronic Attestation of Attributes (PuB-EAA)
 : An electronic attestation of attributes issued by a public sector body that is responsible for an authentic source or by a public sector body that is designated by the Member State to issue such attestations of attributes on behalf of the public sector bodies responsible for authentic sources in accordance with Article 45f and with Annex VII. [ARF]
@@ -247,13 +256,13 @@ processes:Selective Disclosure Java Web Token Verifiable Credential (SD-JWT VC)
 ## Protocols
 
 protocols:Attestation Revocation List
-: List-based mechanism for communicating revoked PIDs or attestations.
+: A mechanism provided by a PID Provider or an Attestation Provider (or a trusted party acting on its behalf) for communicating the revocation status of PIDs and attestations, by publishing a list of identifiers of revoked PIDs or attestations. [ARF]
 
 protocols:Attestation Status List
-: Mechanism publishing status (valid/invalid) for relevant PIDs or attestations.
+: A mechanism provided by a PID Provider or an Attestation Provider (or a trusted party acting on its behalf) for communicating the revocation status of PIDs and attestations, by publishing status information (Valid or Invalid) for all relevant PIDs or attestations. [ARF]
 
 protocols:Certificate Policy (CP)
-: A named set of rules that indicates the applicability of a certificate to a particular community and/or class of application with common security requirements.
+: A named set of rules that indicates the applicability of a certificate to a particular community and/or class of application with common security requirements. [ARF]
 
 protocols:DPoP
 : Demonstrating Proof of Possession. A mechanism that binds access tokens and refresh tokens to a client key pair, preventing token replay by third parties. [RFC 9449]
@@ -284,13 +293,13 @@ protocols:Remote Flow
 ## Processes
 
 processes:Authentication
-: An electronic process that enables the confirmation of the electronic identification of a natural or legal person or the confirmation of the origin and integrity of data in electronic form.
+: An electronic process that enables the confirmation of the electronic identification of a natural or legal person or the confirmation of the origin and integrity of data in electronic form. [ARF]
 
 processes:Device Binding
 : Association of a credential or session with a specific device, establishing that the credential can only be used from the bound device.
 
 processes:Electronic Identification Scheme
-: A system for electronic identification under which electronic identification means are issued to natural or legal persons or natural persons representing other natural persons or legal persons.
+: A system for electronic identification under which electronic identification means are issued to natural or legal persons or natural persons representing other natural persons or legal persons. [ARF]
 
 processes:Key Binding
 : Cryptographic binding of a credential to a specific key pair held by the Wallet, ensuring only the key holder can present that credential.
@@ -302,10 +311,10 @@ processes:Proof of Possession
 : Cryptographic proof demonstrating control of a private key, produced by signing a server-issued challenge; used to bind credentials and tokens to a Wallet key.
 
 processes:Selective Disclosure
-: Capability for a User to present only a subset of attributes from a PID or attestation.
+: The capability enabling the User to present a subset of the attributes included in a PID or attestation. [ARF]
 
 processes:Strong User Authentication
-: An authentication based on the use of at least two authentication factors from different categories of either knowledge, something only the user knows, possession, something only the user possesses or inherence, something the user is, that are independent, in that the breach of one does not compromise the reliability of the others, and is designed in such a way as to protect the confidentiality of the authentication data.
+: An authentication based on the use of at least two authentication factors from different categories of either knowledge, something only the user knows, possession, something only the user possesses or inherence, something the user is, that are independent, in that the breach of one does not compromise the reliability of the others, and is designed in such a way as to protect the confidentiality of the authentication data. [ARF]
 
 ---
 
@@ -331,10 +340,10 @@ data-elements:Administrative Validity Period
 : Dates during which attributes in an attestation remain valid as represented inside it.
 
 data-elements:Attestation Type
-: Identifier for a type of attestation, unique within the EUDI Wallet ecosystem.
+: An identifier for a type of attestation, unique within the context of the EUDI Wallet ecosystem. [ARF]
 
 data-elements:Attribute
-: A characteristic, quality, right or permission of a natural or legal person or of an object.
+: A characteristic, quality, right or permission of a natural or legal person or of an object. [ARF]
 
 data-elements:Entitlement
 : It represents the WRP role and is uniquely identified by a suitable identifier in form of an OID or URI. [CIR 2025/848]
@@ -343,13 +352,13 @@ data-elements:Mobile Security Object (MSO)
 : A security object carrying metadata and the issuer's signature over data elements in mdoc/mDL/mVRC.
 
 data-elements:Namespace
-: Specification of attribute identifiers, syntax, and semantics for an attestation.
+: A specification of the attribute identifier, syntax and semantics of attributes that can be used in an attestation, having an identifier that is unique within the context of the EUDI Wallet ecosystem. [ARF]
 
 data-elements:Nonce
 : A single-use, unpredictable value issued by a server to prevent replay attacks; Wallets must include it verbatim in proofs or responses.
 
 data-elements:Pseudonym
-: Data uniquely representing a User without revealing their attributes by itself.
+: Data uniquely representing a User which in itself does not allow to infer the User's attributes or person identification data, without the use of additional information that is kept separately by the issuer of the data uniquely representing the user. [ARF]
 
 data-elements:Technical Validity Period
-: Metadata dates/times during which the attestation is valid; typically shorter than the administrative period.
+: The dates (and possibly times) from and up to which the attestation is valid, which are represented as metadata of the attestation. [ARF]
