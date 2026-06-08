@@ -9,7 +9,7 @@ roles:Conformity Assessment Body (CAB)
 : A conformity assessment body as defined in Article 2, point 13, of Regulation (EC) No 765/2008, which is accredited in accordance with that Regulation as competent to carry out conformity assessment of a qualified trust service provider and the qualified trust services it provides, or as competent to carry out certification of European Digital Identity Wallets or electronic identification means.
 
 roles:Issuer Authority Certificate Authority (IACA)
-: The issuing authority/CA used in the mDL/mVRC trust infrastructure under ISO standarts (may be shared with mDL or set up separately).
+: The issuing authority/CA used in the mDL/mVRC trust infrastructure under ISO standards (may be shared with mDL or set up separately).
 
 roles:National Accreditation Bodies (NAB)
 : A body that performs accreditation with authority derived from a Member State under Regulation (EC) No 765/2008.
