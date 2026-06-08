@@ -54,8 +54,10 @@ extra_css:
   - media/extra.css
 
 extra_javascript:
-  - https://unpkg.com/mermaid@10.9.1/dist/mermaid.min.js
+  - media/mermaid.min.js
   - media/mermaid-init.js
+  - media/mathjax-init.js
+  - media/mathjax-tex-mml-chtml.js
 
 plugins:
   - tags
@@ -109,13 +111,17 @@ markdown_extensions:
           format: !!python/name:pymdownx.superfences.fence_code_format
   - toc:
       permalink: true
+      toc_depth: 3
+  - pymdownx.arithmatex:
+      generic: true
 
 nav:
   - Home: index.md
-  - Rulebook:
+  - Attestation Rulebooks:
     - Overview: rulebook/index.md
     - mVRC: rulebook/mVRC-rulebook.md
-    - Trust Framework: rulebook/trust-rulebook.md
+  - Trust Specifications:
+    - Trust Framework: rulebook/trust-framework.md
   - RFCs:
     - Overview: horizontal-RFCs/index.md
     - RFC-01 Credential Issuance Profile: horizontal-RFCs/RFC001.md
