@@ -193,7 +193,7 @@ The mdoc SHALL include the document type `org.iso.23220.photoID.1` and SHALL con
 
 The APTITUDE DTC credential format profile is designed around four namespaces:
 
-* `org.iso.23220.photoID.1` contains the data elements for the photoID 
+* `org.iso.23220.photoID.1` contains the data elements for the photoID
 * `org.iso.23220.datagroups.1` contains the datagroups defined by ICAO 9303
 * `org.iso.23220.1` contains information for holder binding, will not be used for APPTITUDE DTC
 * A domestic or profile-specific namespace for any rulebook-specific attributes that are not part of the EU-wide core DTC profile.
