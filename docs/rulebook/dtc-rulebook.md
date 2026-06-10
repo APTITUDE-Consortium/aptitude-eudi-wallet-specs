@@ -63,7 +63,6 @@ The cross‑border value of a DTC critically depends on preserving full alignmen
 | XX_XX | APTITUDE DTC MAY contain additional attributes beyond the derived eMRTD dataset                                                                                                                |
 | XX_XX | The data model SHALL support Selective Disclosure, allowing the traveller to share only the strictly necessary attributes (e.g., only DG2 for biometric match) with Relying Parties.           |
 
-
 ### Attributes
 
 #### TODO: involve T2.1.2 and WP3
@@ -165,13 +164,13 @@ The APTITUDE DTC SHALL be encoded using the ISO/IEC 23220-4 PhotoID profile and 
 
 The APTITUDE DTC SHALL support the following:
 
-- ISO/IEC 23220-4 PhotoID as the canonical DTC credential format.
-- ISO/IEC 18013-5 mdoc-cbor encoding for proximity presentation and secure transport.
-- NFC engagement for reader interaction.
-- BLE data retrieval for proximity presentation on both Android and iOS devices.
-- Preservation of ICAO LDS semantics and the PhotoID profile.
-- A hybrid trust structure that allows DTC validation against both ICAO PKI and EUDI Wallet / eIDAS trust mechanisms.
-- A single payload model for issuance, storage, and presentation, avoiding a separate SD-JWT DTC format.
+* ISO/IEC 23220-4 PhotoID as the canonical DTC credential format.
+* ISO/IEC 18013-5 mdoc-cbor encoding for proximity presentation and secure transport.
+* NFC engagement for reader interaction.
+* BLE data retrieval for proximity presentation on both Android and iOS devices.
+* Preservation of ICAO LDS semantics and the PhotoID profile.
+* A hybrid trust structure that allows DTC validation against both ICAO PKI and EUDI Wallet / eIDAS trust mechanisms.
+* A single payload model for issuance, storage, and presentation, avoiding a separate SD-JWT DTC format.
 
 ### 3.1.2 PhotoID mdoc encoding profile
 
@@ -194,10 +193,10 @@ The mdoc SHALL include the document type `org.iso.23220.photoID.1` and SHALL con
 
 The APTITUDE DTC credential format profile is designed around four namespaces:
 
-- `org.iso.23220.photoID.1` contains the data elements for the photoID 
-- `org.iso.23220.datagroups.1` contains the datagroups defined by ICAO 9303
-- `org.iso.23220.1` contains information for holder binding, will not be used for APPTITUDE DTC
-- A domestic or profile-specific namespace for any rulebook-specific attributes that are not part of the EU-wide core DTC profile.
+* `org.iso.23220.photoID.1` contains the data elements for the photoID 
+* `org.iso.23220.datagroups.1` contains the datagroups defined by ICAO 9303
+* `org.iso.23220.1` contains information for holder binding, will not be used for APPTITUDE DTC
+* A domestic or profile-specific namespace for any rulebook-specific attributes that are not part of the EU-wide core DTC profile.
 
 | Data Identifier | Attribute identifier | Encoding format | Namespace |
 | --- |----------------------| --- | --- |
@@ -211,7 +210,6 @@ The APTITUDE DTC credential format profile is designed around four namespaces:
 | sod | dg2                  | bstr | org.iso.23220.datagroups.1 |
 | sod | dg14                 | bstr | org.iso.23220.datagroups.1 |
 | sod | sod                  | bstr | org.iso.23220.datagroups.1 |
-
 
 ### 3.1.4 Relationship to APTITUDE architecture
 
@@ -307,7 +305,6 @@ dtcOtherInfos [23] EXPLICIT DTCOtherInfos OPTIONAL,
 -- data.
 }
 ```
-
 ### 3.3 Mapping from photoId to ICAO based encoding
 
 |org.iso.23220.photoID.1 | org.iso.23220.datagroups.1 |eMRTD|
