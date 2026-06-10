@@ -305,6 +305,7 @@ dtcOtherInfos [23] EXPLICIT DTCOtherInfos OPTIONAL,
 -- data.
 }
 ```
+
 ### 3.3 Mapping from photoId to ICAO based encoding
 
 |org.iso.23220.photoID.1 | org.iso.23220.datagroups.1 |eMRTD|
