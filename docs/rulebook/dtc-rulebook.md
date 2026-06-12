@@ -35,6 +35,9 @@ This rulebook specifies:
 * Chapter 2, which describes the requirements on the APTITUDE DTC.
 * Chapter 3, which specifies how the attestation attributes and metadata are encoded in case the attestation complies with ISO/IEC 18013-5. Each encoding SHALL be specified in a separate section, or even in a separate chapter.
 * Chapter 4, which specifies attestation usage.
+* Chapter 5, which specifies trust anchors.
+* Chapter 6, which specifies revocation.
+* Chapter 7, which specificies compliance.
 
 ### 1.3 Key words
 
