@@ -169,7 +169,19 @@ The general PhotoID data elements of APTITUDE DTC SHALL be as defined in Table 1
 | ``version`` | no further information | M |
 | ``dg1`` | no further information | M |
 
-### 3.2 ICAO based encoding
+## 4 Attestation Usage
+
+## 5 Trust Anchors
+
+The APTITUDE DTC is derived from the physical eMRTD LDS data groups and signed by the national issuing authority. The PhotoID credential SHALL carry the same derived content as the DTC data model, ensuring the credential remains linked to the physical document and the wallet secure component.
+
+## 6 Revocation
+
+Revocation of the APTITUDE DTC SHALL be implemented according to ISO 18013-5 2nd edition, i.e. MSO revocation information..
+
+## 7 Compliance
+
+### 7.1 ICAO based encoding
 
 The ICAO based encoding for DTC-VC is defined in the Technical report "Virtual component data structure and PKI Mechanisms" version 1.2 october 2020.
 The ICAO based encoding for DTC-PC is defined in the Technical report "Physical component and protocols" version 1.1 october 2022.
@@ -258,7 +270,7 @@ dtcOtherInfos [23] EXPLICIT DTCOtherInfos OPTIONAL,
 }
 ```
 
-### 3.3 Mapping from photoId to ICAO based encoding
+### 7.3 Mapping from photoId to ICAO based encoding
 
 |org.iso.23220.photoID.1 | org.iso.23220.datagroups.1 |eMRTD|
 |----                   | ----------          |---|
@@ -269,10 +281,3 @@ dtcOtherInfos [23] EXPLICIT DTCOtherInfos OPTIONAL,
 |    |birth_date | EF.DG1 |
 |    |age_over_18 | EF.DG1 |
 |    |portrait | EF.DG2 |
-
-
-## 4 Attestation Usage
-
-## 5 Trust Anchors
-
-The APTITUDE DTC is derived from the physical eMRTD LDS data groups and signed by the national issuing authority. The PhotoID credential SHALL carry the same derived content as the DTC data model, ensuring the credential remains linked to the physical document and the wallet secure component.
