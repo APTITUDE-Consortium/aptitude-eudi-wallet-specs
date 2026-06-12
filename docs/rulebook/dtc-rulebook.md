@@ -126,17 +126,27 @@ The document type for the **APTITUDE DTC** SHALL be as specified in clause C.2.1
 *Note* The document type is ``org.iso.23220.photoid.1``.
 
 The namespace of APTITUDE DTC for **general PhotoID data elements** defined in clause 3.1.2 SHALL be as specified in clause C.2.1 of [ISO/IEC 23220-4] and 6.3.1.1 of [ISO/IEC 23220-2].
+
+*Note* The namespace identifier is ``org.iso.23220.1``.
+
 The namespace for **specific PhotoID data elements** defined in clause 3.1.3 SHALL be as specified in clause C.2.1 of [ISO/IEC 23220-4]. 
-### 3.1.2 General PhotoID data elements
+
+*Note* The namespace identifier is ``org.iso.23220.photoid.1``.
+
+Member States MAY add additional namespaces under their responsibility. The namespace for Member State specific data elements** SHALL be as specified in clauses C.1.2 of [ISO/IEC 23220-4].
+
+*Note* The domestic namespace of the European Union is ``org.iso.23220.photoid.EU.1`` with number 1 indicating the version of this namespace.
+
+The next section define general and specific data elements of the PhotoID.
+These elements are given in tables of three columns:
+
+* The "Identifier" column is the reference of the data element specified in [ISO/IEC 23220-4].
+* The “additional description” column gives further information on the usage of the respective data element in the context APTITUDE DTC.
+* The "Presence" column indicates whether the presence of the element on an EU-mVRC is mandatory (M), optional (O) or conditional (C). A mandatory data elemement SHALL be present in an APTITUTED DTC whereas an optional data element MAY be present. If a data element is conditional the respective condition is given in the specification. If the condition is met the data element SHALL be present.
+
+#### 3.1.2 General PhotoID data elements
 
 The general PhotoID data elements of APTITUDE DTC SHALL be as defined in Table 1 and belong to the namespace given in 3.1.1.
-
-— The "Identifier" column is the reference of the data element specified in [ISO/IEC 23220-4].
-
-— The “additional description” column gives further information on the usage of the respective data element in the context APTITUDE DTC.
-
-— The "Presence" column indicates whether the presence of the element on an EU-mVRC is mandatory (M), optional (O) or conditional (C). A mandatory data elemement SHALL be present in an APTITUTED DTC whereas an optional data element MAY be present. If a data element is conditional the respective condition is given in the specification. If the condition is met the data element SHALL be present.
-
 
 | **Identifier** | **additional description** | **Presence in APTITUDE DTC** |
 | --- | --- | --- |
