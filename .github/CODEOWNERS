@@ -10,7 +10,7 @@
 
 # Specific WPs - all folder with name wpX are owned by WPX code owners
 
-**/wp3 @APTITUDE-Consortium/wp3-code-owners
-**/wp4 @APTITUDE-Consortium/wp4-code-owners
-**/wp5 @APTITUDE-Consortium/wp5-code-owners
-**/wp6 @APTITUDE-Consortium/wp6-code-owners
+**/wp3/ @APTITUDE-Consortium/wp3-code-owners
+**/wp4/ @APTITUDE-Consortium/wp4-code-owners
+**/wp5/ @APTITUDE-Consortium/wp5-code-owners
+**/wp6/ @APTITUDE-Consortium/wp6-code-owners
