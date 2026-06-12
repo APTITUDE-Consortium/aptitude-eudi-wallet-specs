@@ -32,6 +32,13 @@ This rulebook specifies:
 
 ### 1.2 Document structure
 
+* Chapter 2, which describes the requirements on the APTITUDE DTC.
+* Chapter 3, which specifies how the attestation attributes and metadata are encoded in case the attestation complies with ISO/IEC 18013-5. Each encoding SHALL be specified in a separate section, or even in a separate chapter.
+* Chapter 4, which specifies attestation usage.
+* Chapter 5, which defines how trust anchors for attestation verification can be obtained.
+* Chapter 6, which defines attestation revocation mechanisms.
+* Chapter 7, which provides compliance information.
+
 ### 1.3 Key words
 
 This document uses the capitalised keywords 'SHALL', 'SHOULD' and 'MAY' as specified in [RFC 2119], i.e. to indicate requirements, recommendations and options specified in this document.
@@ -63,45 +70,9 @@ The cross‑border value of a DTC critically depends on preserving full alignmen
 | XX_XX | APTITUDE DTC MAY contain additional attributes beyond the derived eMRTD dataset                                                                                                                |
 | XX_XX | The data model SHALL support Selective Disclosure, allowing the traveller to share only the strictly necessary attributes (e.g., only DG2 for biometric match) with Relying Parties.           |
 
-### Attributes
+### 2.2 Requirements
 
-#### TODO: involve T2.1.2 and WP3
 
-#### TODO: should we specify the source that requires an attribute? i.e. DTC or ICAO or EUDI?
-
-| **Data Identifier** | **Definition**          | **Data type**     | **Example value** |
-|---------------------|-------------------------|-------------------|-------------------|
-| *Provide a value*   | *Provide succinct text* | *Provide a value* | *Provide a value* |
-
-### Optional attributes
-
-| **Data Identifier** | **Definition**          | **Data type**     | **Example value** |
-|---------------------|-------------------------|-------------------|-------------------|
-| *Provide a value*   | *Provide succinct text* | *Provide a value* | *Provide a value* |
-
-### Conditional attributes
-
-| **Data Identifier** | **Definition**          | **Data type**     | **Example value** |
-|---------------------|-------------------------|-------------------|-------------------|
-| *Provide a value*   | *Provide succinct text* | *Provide a value* | *Provide a value* |
-
-### Mandatory metadata
-
-| **Data Identifier** | **Definition**          | **Data type**     | **Example value** |
-|---------------------|-------------------------|-------------------|-------------------|
-| *Provide a value*   | *Provide succinct text* | *Provide a value* | *Provide a value* |
-
-### Optional metadata
-
-| **Data Identifier** | **Definition**          | **Data type**     | **Example value** |
-|---------------------|-------------------------|-------------------|-------------------|
-| *Provide a value*   | *Provide succinct text* | *Provide a value* | *Provide a value* |
-
-### Conditional metadata
-
-| **Data Identifier** | **Definition**          | **Data type**     | **Example value** |
-|---------------------|-------------------------|-------------------|-------------------|
-| *Provide a value*   | *Provide succinct text* | *Provide a value* | *Provide a value* |
 
 #### Issuance
 
@@ -129,9 +100,9 @@ This section defines which data sets must be present and preserved.
 | DTC_DM_05 | APTITUDE DTC MAY contain additional attributes beyond the derived eMRTD dataset |
 | DTC_DM_06 | The data model SHALL support Selective Disclosure, allowing the traveller to share only the strictly necessary attributes (e.g., only DG2 for biometric match) with Relying Parties. |
 
-## 3 Attestation
+## 3 Attestation Encoding
 
-### Chapter overview and requirements
+### 3.1 ISO/IEC 18013-5-compliant encoding
 
 This chapter defines the credential format and encoding requirements for the APTITUDE Digital Travel Credential (DTC). The APTITUDE DTC SHALL use exactly one credential format: the ISO/IEC 23220-4 PhotoID profile, encoded as ISO/IEC 18013-5 mdoc-cbor.
 
