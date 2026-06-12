@@ -118,9 +118,7 @@ This section defines which data sets must be present and preserved.
 ### 3.1 ISO/IEC 18013-5-compliant encoding
 
 
-The objective is to preserve a single interoperable DTC representation that is:
 
-* aligned with ICAO DTC Type 2 and eMRTD LDS semantics,
 * compatible with EUDI Wallet proximity presentation,
 * suitable for both on-site border-control use cases and remote wallet-driven presentations,
 * capable of preserving the cryptographic binding between the virtual credential and the Wallet Secure Component (WSCD).
@@ -136,12 +134,13 @@ The objective is to preserve a single interoperable DTC representation that is:
 | DTC_AE_07 | APTITUDE DTC SHALL preserve the cryptographic binding between the virtual credential and the Wallet Secure Component across issuance, storage, presentation, and verification. |
 | DTC_AE_08 | APTITUDE DTC SHALL support selective disclosure and minimisation as a layer on top of the single PhotoID credential format, not by introducing a second credential format. |
 
-The APTITUDE DTC SHALL be encoded using the ISO/IEC 23220-4 PhotoID profile and carried as an ISO/IEC 18013-5 mdoc-cbor payload with document type `org.iso.23220.photoID.1`.
+#### 3.1.1 APTITUDE DTC document type and namespaces
 
-* the DTC is derived from physical eMRTD LDS data groups,
-* the PhotoID format supports the border-control use case and wallet presentation flows.
+The objects ``docType`` and ``namespace`` are used to encapsulate the document type and the space in which the data elements are defined.
 
-### 3.1.1 Supported encoding and semantics
+The document type for the **APTITUDE DTC** SHALL be as specified in clause C.2.1 of [ISO/IEC 23220-4].
+The namespace for **general PhotoID data elements** defined in clause 3.1.2 SHALL be as specified in clause C.2.1 of [ISO/IEC 23220-4] and 6.3.1.1 of [ISO/IEC 23220-2].
+
 
 The APTITUDE DTC SHALL support the following:
 
@@ -153,7 +152,7 @@ The APTITUDE DTC SHALL support the following:
 * A hybrid trust structure that allows DTC validation against both ICAO PKI and EUDI Wallet / eIDAS trust mechanisms.
 * A single payload model for issuance, storage, and presentation, avoiding a separate SD-JWT DTC format.
 
-### 3.1.2 PhotoID mdoc encoding profile
+### 3.1.2 General PhotoID data elements
 
 For proximity presentation and wallet-native use, APTITUDE DTC SHALL use ISO/IEC 18013-5 mdoc-cbor with the PhotoID payload defined by ISO/IEC 23220-4 Annex C.
 
@@ -170,12 +169,9 @@ The following encoding rules SHALL apply:
 
 The mdoc SHALL include the document type `org.iso.23220.photoID.1` and SHALL contain the APTITUDE DTC payload as attestation content.
 
-### 3.1.3 Attribute namespace and identifiers
+### 3.1.3 Specific PhotoID data elements
 
 
-* `org.iso.23220.datagroups.1` contains the datagroups defined by ICAO 9303
-* `org.iso.23220.1` contains information for holder binding, will not be used for APPTITUDE DTC
-* A domestic or profile-specific namespace for any rulebook-specific attributes that are not part of the EU-wide core DTC profile.
 
 | Data Identifier | Attribute identifier | Encoding format | Namespace |
 | --- |----------------------| --- | --- |
