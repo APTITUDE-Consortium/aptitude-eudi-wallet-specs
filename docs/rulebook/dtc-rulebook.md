@@ -162,8 +162,6 @@ The general PhotoID data elements of APTITUDE DTC SHALL be as defined in Table 1
 
 ### 3.1.4 ICAO PhotoID data elements 
 
-The APTITUDE DTC is derived from the physical eMRTD LDS data groups and signed by the national issuing authority. The PhotoID credential SHALL carry the same derived content as the DTC data model, ensuring the credential remains linked to the physical document and the wallet secure component.
-
 ###### Table 3 — ICAO PhotoID data elements
 
 | **Identifier** | **EU additional description** | **Presence in EU-mVRC** |
@@ -271,3 +269,10 @@ dtcOtherInfos [23] EXPLICIT DTCOtherInfos OPTIONAL,
 |    |birth_date | EF.DG1 |
 |    |age_over_18 | EF.DG1 |
 |    |portrait | EF.DG2 |
+
+
+## 4 Attestation Usage
+
+## 5 Trust Anchors
+
+The APTITUDE DTC is derived from the physical eMRTD LDS data groups and signed by the national issuing authority. The PhotoID credential SHALL carry the same derived content as the DTC data model, ensuring the credential remains linked to the physical document and the wallet secure component.
