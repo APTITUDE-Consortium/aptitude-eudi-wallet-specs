@@ -140,13 +140,17 @@ Member States MAY add additional namespaces under their responsibility. The name
 The next section define general and specific data elements of the PhotoID.
 These elements are given in tables of three columns:
 
-* The "Identifier" column is the reference of the data element specified in [ISO/IEC 23220-4].
-* The “additional description” column gives further information on the usage of the respective data element in the context APTITUDE DTC.
-* The "Presence" column indicates whether the presence of the element on an EU-mVRC is mandatory (M), optional (O) or conditional (C). A mandatory data elemement SHALL be present in an APTITUTED DTC whereas an optional data element MAY be present. If a data element is conditional the respective condition is given in the specification. If the condition is met the data element SHALL be present.
+- The "Identifier" column is the reference of the data element specified in [ISO/IEC 23220-4].
+
+- The “additional description” column gives further information on the usage of the respective data element in the context APTITUDE DTC.
+
+- The "Presence" column indicates whether the presence of the element on an EU-mVRC is mandatory (M), optional (O) or conditional (C). A mandatory data elemement SHALL be present in an APTITUTED DTC whereas an optional data element MAY be present. If a data element is conditional the respective condition is given in the specification. If the condition is met the data element SHALL be present.
 
 #### 3.1.2 General PhotoID data elements
 
 The general PhotoID data elements of APTITUDE DTC SHALL be as defined in Table 1 and belong to the namespace given in 3.1.1.
+
+###### Table 1 — general PhotoID data elements
 
 | **Identifier** | **additional description** | **Presence in APTITUDE DTC** |
 | --- | --- | --- |
@@ -154,8 +158,8 @@ The general PhotoID data elements of APTITUDE DTC SHALL be as defined in Table 1
 | ``given_name`` | no further information | M  |
 
 
+#### 3.1.3 Specific PhotoID data elements
 
-### 3.1.3 Specific PhotoID data elements
 ###### Table 2 — specific PhotoID data elements
 
 | **Identifier** | **additional description** | **Presence in APTITUDE DTC** |
@@ -163,21 +167,7 @@ The general PhotoID data elements of APTITUDE DTC SHALL be as defined in Table 1
 | ``person_id`` | no further information | M |
 | ``birth_country`` | no further information | M |
 
-
-| Data Identifier | Attribute identifier | Encoding format | Namespace |
-| --- |----------------------| --- | --- |
-| family_name | family_name          | tstr | org.iso.23220.photoID.1 |
-| given_name | given_name           | tstr | org.iso.23220.photoID.1 |
-| date_of_birth | date_of_birth        | tdate | org.iso.23220.photoID.1 |
-| document_number | document_number      | tstr | org.iso.23220.photoID.1 |
-| nationality | nationality          | tstr | org.iso.23220.photoID.1 |
-| photo | face_image           | bstr | org.iso.23220.photoID.1 |
-| sod | dg1                  | bstr | org.iso.23220.datagroups.1 |
-| sod | dg2                  | bstr | org.iso.23220.datagroups.1 |
-| sod | dg14                 | bstr | org.iso.23220.datagroups.1 |
-| sod | sod                  | bstr | org.iso.23220.datagroups.1 |
-
-### 3.1.4 ICAO PhotoID data elements 
+#### 3.1.4 ICAO PhotoID data elements 
 
 ###### Table 3 — ICAO PhotoID data elements
 
