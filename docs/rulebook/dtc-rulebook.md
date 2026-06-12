@@ -131,6 +131,13 @@ The namespace for **specific PhotoID data elements** defined in clause 3.1.3 SHA
 
 The general PhotoID data elements of APTITUDE DTC SHALL be as defined in Table 1 and belong to the namespace given in 3.1.1.
 
+— The "Identifier" column is the reference of the data element specified in [ISO/IEC 23220-4].
+
+— The “additional description” column gives further information on the usage of the respective data element in the context APTITUDE DTC.
+
+— The "Presence" column indicates whether the presence of the element on an EU-mVRC is mandatory (M), optional (O) or conditional (C). A mandatory data elemement SHALL be present in an APTITUTED DTC whereas an optional data element MAY be present. If a data element is conditional the respective condition is given in the specification. If the condition is met the data element SHALL be present.
+
+
 | **Identifier** | **additional description** | **Presence in APTITUDE DTC** |
 | --- | --- | --- |
 | ``family_name`` | no further information | M |
