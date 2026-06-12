@@ -1,4 +1,4 @@
-# APTITUDE - *Digital Travel Credential (DTC) rulebook*
+# Attestation Rulebook for attestations of type  *APTITUDE DTC*
 
 * Author(s):
   * IPZS ...
@@ -10,6 +10,7 @@
 | 0.1 | 11-02-2026 | First draft version - Filled par 1.1 |
 | 0.2 | 27-05-2026 | Updated based on design assumptions from D3.1  |
 | 0.3 | 29-05-2026 | addition of schema and mapping |
+| 0.4 | 12-06-2026 | synchronization with PhotoID specification in [ISO/IEC 23220-4] |
 
 ## 1 Introduction
 
@@ -49,13 +50,12 @@ Terminologies and definitions within Aptitude project are listed in [APTITUDE Gl
 
 ## 2 Attestation attributes and metadata
 
-### Chapter overview and requirements
+### 2.1 Chapter overview and general requirements
 
 This section defines the functional and semantic scope of the data composing the APTITUDE Digital Travel Credential (DTC), based on the evidence collected during the stock‑taking phase.
 
 The cross‑border value of a DTC critically depends on preserving full alignment with the ICAO data model while at the same time allowing extensions required for integration within the EUDI Wallet ecosystem and the eIDAS 2.0 framework.
 
-#### Data model
 
  International interoperability and backward compatibility with existing border‑control infrastructure remain core requirements for any realistic DTC deployment.
  As a result, the ICAO LDS data model (DG1, DG2, SOD) constitutes the mandatory baseline.
@@ -70,8 +70,8 @@ The cross‑border value of a DTC critically depends on preserving full alignmen
 | XX_XX | APTITUDE DTC MAY contain additional attributes beyond the derived eMRTD dataset                                                                                                                |
 | XX_XX | The data model SHALL support Selective Disclosure, allowing the traveller to share only the strictly necessary attributes (e.g., only DG2 for biometric match) with Relying Parties.           |
 
-### 2.2 Requirements
-This chapter defines the credential format and encoding requirements for the APTITUDE Digital Travel Credential (DTC). The APTITUDE DTC SHALL use exactly one credential format: the ISO/IEC 23220-4 PhotoID profile, encoded as ISO/IEC 18013-5 mdoc-cbor.
+### 2.2 Technical requirements
+This chapter defines the credential format and encoding requirements for the APTITUDE Digital Travel Credential (DTC).
 
 The objective is to preserve a single interoperable DTC representation that is:
 
@@ -151,7 +151,7 @@ These elements are given in tables of three columns:
 
 #### 3.1.2 General PhotoID data elements
 
-The general PhotoID data elements of APTITUDE DTC SHALL be as defined in Table 1 and belong to the namespace given in 3.1.1.
+The general PhotoID data elements of APTITUDE DTC SHALL be as defined in Table 1 and belong to the namespace given in 3.1.1. The data element definitions given in clause C.2.1 and Table C.1 in [ISO/IEC 23220-4] apply if not stated otherwise. 
 
 ###### Table 1 — general PhotoID data elements
 
@@ -159,28 +159,78 @@ The general PhotoID data elements of APTITUDE DTC SHALL be as defined in Table 1
 | --- | --- | --- |
 | ``family_name`` | no further information | M |
 | ``given_name`` | no further information | M  |
+| ``family_name_viz`` | no further information | O  |
+| ``given_name_viz`` | no further information | O  |
+| ``birth_date`` | no further information | M  |
+| ``portrait`` | no further information | M  |
+| ``enrolment_portrait_image`` | no further information | O  |
+| ``issue_date`` | no further information | M  |
+| ``expiry_date`` | no further information | M  |
+| ``issuing_authority`` | no further information | M  |
+| ``age_over_18`` | no further information | M  |
+| ``age_in_years`` | no further information | O  |
+| ``age_birth_year`` | no further information | O  |
+| ``portrait_capture_date`` | no further information | O  |
+| ``birthplace`` | no further information | O  |
+| ``name_at_birth`` | no further information | O  |
+| ``resident_address`` | no further information | O  |
+| ``resident_city`` | no further information | O  |
+| ``resident_postal_code`` | no further information | O  |
+| ``resident_country`` | no further information | O  |
+| ``resident_city_latin1`` | no further information | O  |
+| ``sex`` | no further information | O  |
+| ``nationality`` | no further information | O  |
+| ``document_number`` | no further information | O  |
+| ``issuing_subdivision`` | no further information | O  |
+| ``family_name_latin1`` | no further information | O  |
+| ``given_name_latin1`` | no further information | O  |
 
 
 #### 3.1.3 Specific PhotoID data elements
-
+The specific PhotoID data elements of APTITUDE DTC SHALL be as defined in Table 2 and belong to the namespace given in 3.1.1. The data element definitions given in clause C.2.1 and Table C.2 in [ISO/IEC 23220-4] apply if not stated otherwise.
 ###### Table 2 — specific PhotoID data elements
 
 | **Identifier** | **additional description** | **Presence in APTITUDE DTC** |
 | --- | --- | --- |
 | ``person_id`` | no further information | M |
-| ``birth_country`` | no further information | M |
+| ``birth_country`` | no further information | O |
+| ``birth_state`` | no further information | O |
+| ``birth_city`` | no further information | O |
+| ``administrative_number`` | no further information | O |
+| ``resident_street`` | no further information | O |
+| ``resident_house_number`` | no further information | O |
+| ``travel_document_type`` | no further information | O |
+| ``travel_document_number`` | no further information | O |
+| ``resident_state`` | no further information | O |
+| ``travel_document_mrz`` | no further information | O |
 
 #### 3.1.4 ICAO PhotoID data elements 
-
+The ICAO PhotoID data elements of APTITUDE DTC SHALL be as defined in Table 3 and belong to the namespace given in 3.1.1. The data element definitions given in clause C.2.1 and Table C.3 in [ISO/IEC 23220-4] apply if not stated otherwise.
 ###### Table 3 — ICAO PhotoID data elements
 
 | **Identifier** | **EU additional description** | **Presence in EU-mVRC** |
 | --- | --- | --- |
 | ``version`` | no further information | M |
 | ``dg1`` | no further information | M |
+| ``dg2`` | no further information | M |
+| ``dg3`` | no further information | O |
+| ``dg4`` | no further information | O |
+| ``dg5`` | no further information | O |
+| ``dg6`` | no further information | O |
+| ``dg7`` | no further information | O |
+| ``dg8`` | no further information | O |
+| ``dg9`` | no further information | O |
+| ``dg10`` | no further information | O |
+| ``dg11`` | no further information | O |
+| ``dg12`` | no further information | O |
+| ``dg13`` | no further information | O |
+| ``dg14`` | no further information | O |
+| ``dg15`` | no further information | O |
+| ``dg16`` | no further information | O |
+| ``sod`` | no further information | M |
 
 ## 4 Attestation Usage
-
+t.b.d.
 ## 5 Trust Anchors
 
 The APTITUDE DTC is derived from the physical eMRTD LDS data groups and signed by the national issuing authority. The PhotoID credential SHALL carry the same derived content as the DTC data model, ensuring the credential remains linked to the physical document and the wallet secure component.
@@ -190,7 +240,7 @@ The APTITUDE DTC is derived from the physical eMRTD LDS data groups and signed b
 Revocation of the APTITUDE DTC SHALL be implemented according to ISO 18013-5 2nd edition, i.e. MSO revocation information..
 
 ## 7 Compliance
-
+If compliance to ICAO DTC-VC is required, a reader may after succsessfull processing the device response and the verification prodecure encapsule the data in the structure given in clause 7.1.  
 ### 7.1 ICAO based encoding
 
 The ICAO based encoding for DTC-VC is defined in the Technical report "Virtual component data structure and PKI Mechanisms" version 1.2 october 2020.
