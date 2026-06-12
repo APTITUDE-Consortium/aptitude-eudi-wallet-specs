@@ -117,40 +117,13 @@ This section defines which data sets must be present and preserved.
 
 ### 3.1 ISO/IEC 18013-5-compliant encoding
 
-
-
-* compatible with EUDI Wallet proximity presentation,
-* suitable for both on-site border-control use cases and remote wallet-driven presentations,
-* capable of preserving the cryptographic binding between the virtual credential and the Wallet Secure Component (WSCD).
-
-| Index | Requirement specification |
-| --- | --- |
-| DTC_AE_01 | APTITUDE DTC SHALL use ISO/IEC 23220-4 PhotoID as the sole credential format. |
-| DTC_AE_02 | APTITUDE DTC SHALL use ISO/IEC 18013-5 mdoc-cbor encoding for the PhotoID credential. |
-| DTC_AE_03 | APTITUDE DTC SHALL support NFC engagement for proximity presentation and BLE data retrieval for Android and iOS. |
-| DTC_AE_04 | APTITUDE DTC SHALL preserve ICAO LDS semantics, including EF.DG1, EF.DG2, EF.SOD, and the PhotoID profile. |
-| DTC_AE_05 | APTITUDE DTC SHALL adopt open, standard-based encoding to maximize interoperability and avoid vendor lock-in. |
-| DTC_AE_06 | APTITUDE DTC SHALL support a trust architecture that enables verification via ICAO CSCA/DS and EUDI Wallet / eIDAS trust anchors. |
-| DTC_AE_07 | APTITUDE DTC SHALL preserve the cryptographic binding between the virtual credential and the Wallet Secure Component across issuance, storage, presentation, and verification. |
-| DTC_AE_08 | APTITUDE DTC SHALL support selective disclosure and minimisation as a layer on top of the single PhotoID credential format, not by introducing a second credential format. |
-
 #### 3.1.1 APTITUDE DTC document type and namespaces
 
 The objects ``docType`` and ``namespace`` are used to encapsulate the document type and the space in which the data elements are defined.
 
 The document type for the **APTITUDE DTC** SHALL be as specified in clause C.2.1 of [ISO/IEC 23220-4].
+
 The namespace for **general PhotoID data elements** defined in clause 3.1.2 SHALL be as specified in clause C.2.1 of [ISO/IEC 23220-4] and 6.3.1.1 of [ISO/IEC 23220-2].
-
-
-The APTITUDE DTC SHALL support the following:
-
-* ISO/IEC 23220-4 PhotoID as the canonical DTC credential format.
-* ISO/IEC 18013-5 mdoc-cbor encoding for proximity presentation and secure transport.
-* NFC engagement for reader interaction.
-* BLE data retrieval for proximity presentation on both Android and iOS devices.
-* Preservation of ICAO LDS semantics and the PhotoID profile.
-* A hybrid trust structure that allows DTC validation against both ICAO PKI and EUDI Wallet / eIDAS trust mechanisms.
-* A single payload model for issuance, storage, and presentation, avoiding a separate SD-JWT DTC format.
 
 ### 3.1.2 General PhotoID data elements
 
