@@ -1,9 +1,8 @@
 # Attestation Rulebook for attestations of type  *APTITUDE DTC*
 
 * Author(s):
-  * IPZS ...
-  * ANTS ...
   * [frank.dietrich@bdr.de](mailto:frank.dietrich@bdr.de)
+  * [Matthias.Schwan@BDR.de](mailto:Matthias.Schwan@BDR.de)
   
 | Version | Date | Description |
 |---------|------------|------------|
