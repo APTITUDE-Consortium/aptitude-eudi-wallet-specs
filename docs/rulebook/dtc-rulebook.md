@@ -123,27 +123,26 @@ The objects ``docType`` and ``namespace`` are used to encapsulate the document t
 
 The document type for the **APTITUDE DTC** SHALL be as specified in clause C.2.1 of [ISO/IEC 23220-4].
 
-The namespace for **general PhotoID data elements** defined in clause 3.1.2 SHALL be as specified in clause C.2.1 of [ISO/IEC 23220-4] and 6.3.1.1 of [ISO/IEC 23220-2].
-
+The namespace of APTITUDE DTC for **general PhotoID data elements** defined in clause 3.1.2 SHALL be as specified in clause C.2.1 of [ISO/IEC 23220-4] and 6.3.1.1 of [ISO/IEC 23220-2].
+The namespace for **specific PhotoID data elements** defined in clause 3.1.3 SHALL be as specified in clause C.2.1 of [ISO/IEC 23220-4]. 
 ### 3.1.2 General PhotoID data elements
 
-For proximity presentation and wallet-native use, APTITUDE DTC SHALL use ISO/IEC 18013-5 mdoc-cbor with the PhotoID payload defined by ISO/IEC 23220-4 Annex C.
+The general PhotoID data elements of APTITUDE DTC SHALL be as defined in Table 1 and belong to the namespace given in 3.1.1.
 
-The following encoding rules SHALL apply:
+| **Identifier** | **additional description** | **Presence in APTITUDE DTC** |
+| --- | --- | --- |
+| ``family_name`` | no further information | M |
+| ``given_name`` | no further information | M  |
 
-* `tstr`, `uint`, `bstr`, `bool`, and `tdate` are CDDL representation types defined in RFC 8610.
-* A `tstr` SHALL be encoded in UTF-8 and SHALL support the full Unicode range.
-* `tstr` attributes SHALL be limited to 150 characters unless otherwise specified.
-* `full-date` SHALL be defined as `#6.1004(tstr)` per RFC 8943.
-* `tdate` attributes SHALL use RFC 3339 date-time strings.
-* Fractions of seconds SHALL NOT be used.
-* Time values SHALL use UTC (`Z`) only.
-* Canonical CBOR rules from RFC 8949 section 4.2 SHALL be followed.
 
-The mdoc SHALL include the document type `org.iso.23220.photoID.1` and SHALL contain the APTITUDE DTC payload as attestation content.
 
 ### 3.1.3 Specific PhotoID data elements
+###### Table 2 — specific PhotoID data elements
 
+| **Identifier** | **additional description** | **Presence in APTITUDE DTC** |
+| --- | --- | --- |
+| ``person_id`` | no further information | M |
+| ``birth_country`` | no further information | M |
 
 
 | Data Identifier | Attribute identifier | Encoding format | Namespace |
@@ -159,11 +158,16 @@ The mdoc SHALL include the document type `org.iso.23220.photoID.1` and SHALL con
 | sod | dg14                 | bstr | org.iso.23220.datagroups.1 |
 | sod | sod                  | bstr | org.iso.23220.datagroups.1 |
 
-### 3.1.4 Relationship to APTITUDE architecture
+### 3.1.4 ICAO PhotoID data elements 
 
 The APTITUDE DTC is derived from the physical eMRTD LDS data groups and signed by the national issuing authority. The PhotoID credential SHALL carry the same derived content as the DTC data model, ensuring the credential remains linked to the physical document and the wallet secure component.
 
-The APTITUDE DTC SHALL approximate an ICAO DTC Type 2 credential, by providing a PhotoID mdoc as DTC-VC and allowing for the eMRTD to serve as DTC-PC, unless the mobile device's Wallet Secure Component supports strong proof of possession.
+###### Table 3 — ICAO PhotoID data elements
+
+| **Identifier** | **EU additional description** | **Presence in EU-mVRC** |
+| --- | --- | --- |
+| ``version`` | no further information | M |
+| ``dg1`` | no further information | M |
 
 ### 3.2 ICAO based encoding
 
