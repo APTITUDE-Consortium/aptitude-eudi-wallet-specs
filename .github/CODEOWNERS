@@ -4,8 +4,7 @@
 # Default:
 *  @APTITUDE-Consortium/wp2-leads
 
-# WP5 owns the mVRC rulebook section
-# DEPRECATED
+# WP5 owns the mVRC rulebook section (explicit since it is not under a wp5/ folder)
 /docs/rulebook/mVRC-rulebook.md @APTITUDE-Consortium/wp5-code-owners
 /docs/img/EU_mVRC_profile.png @APTITUDE-Consortium/wp5-code-owners
 
