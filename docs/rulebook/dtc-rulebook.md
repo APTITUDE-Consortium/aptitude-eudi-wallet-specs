@@ -172,7 +172,6 @@ The mdoc SHALL include the document type `org.iso.23220.photoID.1` and SHALL con
 
 ### 3.1.3 Attribute namespace and identifiers
 
-The APTITUDE DTC credential format profile is designed around four namespaces:
 
 * `org.iso.23220.photoID.1` contains the data elements for the photoID
 * `org.iso.23220.datagroups.1` contains the datagroups defined by ICAO 9303
