@@ -117,7 +117,6 @@ This section defines which data sets must be present and preserved.
 
 ### 3.1 ISO/IEC 18013-5-compliant encoding
 
-This chapter defines the credential format and encoding requirements for the APTITUDE Digital Travel Credential (DTC). The APTITUDE DTC SHALL use exactly one credential format: the ISO/IEC 23220-4 PhotoID profile, encoded as ISO/IEC 18013-5 mdoc-cbor.
 
 The objective is to preserve a single interoperable DTC representation that is:
 
