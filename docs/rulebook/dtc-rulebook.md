@@ -68,7 +68,25 @@ The cross‑border value of a DTC critically depends on preserving full alignmen
 | XX_XX | The data model SHALL support Selective Disclosure, allowing the traveller to share only the strictly necessary attributes (e.g., only DG2 for biometric match) with Relying Parties.           |
 
 ### 2.2 Requirements
+This chapter defines the credential format and encoding requirements for the APTITUDE Digital Travel Credential (DTC). The APTITUDE DTC SHALL use exactly one credential format: the ISO/IEC 23220-4 PhotoID profile, encoded as ISO/IEC 18013-5 mdoc-cbor.
 
+The objective is to preserve a single interoperable DTC representation that is:
+
+* aligned with ICAO DTC Type 2 and eMRTD LDS semantics,
+* compatible with EUDI Wallet proximity presentation,
+* suitable for both on-site border-control use cases and remote wallet-driven presentations,
+* capable of preserving the cryptographic binding between the virtual credential and the Wallet Secure Component (WSCD).
+
+| Index | Requirement specification |
+| --- | --- |
+| DTC_AE_01 | APTITUDE DTC SHALL use ISO/IEC 23220-4 PhotoID as the sole credential format. |
+| DTC_AE_02 | APTITUDE DTC SHALL use ISO/IEC 18013-5 mdoc-cbor encoding for the PhotoID credential. |
+| DTC_AE_03 | APTITUDE DTC SHALL support NFC engagement for proximity presentation and BLE data retrieval for Android and iOS. |
+| DTC_AE_04 | APTITUDE DTC SHALL preserve ICAO LDS semantics, including EF.DG1, EF.DG2, EF.SOD, and the PhotoID profile. |
+| DTC_AE_05 | APTITUDE DTC SHALL adopt open, standard-based encoding to maximize interoperability and avoid vendor lock-in. |
+| DTC_AE_06 | APTITUDE DTC SHALL support a trust architecture that enables verification via ICAO CSCA/DS and EUDI Wallet / eIDAS trust anchors. |
+| DTC_AE_07 | APTITUDE DTC SHALL preserve the cryptographic binding between the virtual credential and the Wallet Secure Component across issuance, storage, presentation, and verification. |
+| DTC_AE_08 | APTITUDE DTC SHALL support selective disclosure and minimisation as a layer on top of the single PhotoID credential format, not by introducing a second credential format. |
 #### Issuance
 
 | Index | Requirement specification |
