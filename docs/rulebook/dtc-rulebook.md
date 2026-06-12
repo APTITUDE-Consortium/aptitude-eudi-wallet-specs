@@ -35,9 +35,6 @@ This rulebook specifies:
 * Chapter 2, which describes the requirements on the APTITUDE DTC.
 * Chapter 3, which specifies how the attestation attributes and metadata are encoded in case the attestation complies with ISO/IEC 18013-5. Each encoding SHALL be specified in a separate section, or even in a separate chapter.
 * Chapter 4, which specifies attestation usage.
-* Chapter 5, which defines how trust anchors for attestation verification can be obtained.
-* Chapter 6, which defines attestation revocation mechanisms.
-* Chapter 7, which provides compliance information.
 
 ### 1.3 Key words
 
@@ -71,8 +68,6 @@ The cross‑border value of a DTC critically depends on preserving full alignmen
 | XX_XX | The data model SHALL support Selective Disclosure, allowing the traveller to share only the strictly necessary attributes (e.g., only DG2 for biometric match) with Relying Parties.           |
 
 ### 2.2 Requirements
-
-
 
 #### Issuance
 
@@ -123,8 +118,6 @@ The objective is to preserve a single interoperable DTC representation that is:
 | DTC_AE_06 | APTITUDE DTC SHALL support a trust architecture that enables verification via ICAO CSCA/DS and EUDI Wallet / eIDAS trust anchors. |
 | DTC_AE_07 | APTITUDE DTC SHALL preserve the cryptographic binding between the virtual credential and the Wallet Secure Component across issuance, storage, presentation, and verification. |
 | DTC_AE_08 | APTITUDE DTC SHALL support selective disclosure and minimisation as a layer on top of the single PhotoID credential format, not by introducing a second credential format. |
-
-## 3.1 ISO/IEC 23220-4 PhotoID credential format
 
 The APTITUDE DTC SHALL be encoded using the ISO/IEC 23220-4 PhotoID profile and carried as an ISO/IEC 18013-5 mdoc-cbor payload with document type `org.iso.23220.photoID.1`.
 
