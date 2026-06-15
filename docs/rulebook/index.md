@@ -4,13 +4,13 @@ This section contains the official attestation rulebooks for the APTITUDE projec
 
 | ID | Document| Description |
 | --- | --- | --- |
-| RB01 | [Mobile Vehicle Registration Credential (mVRC)](mVRC-rulebook.md) | Attests the registration details of a vehicle being embarked on a ferry, linking the vehicle to the traveller's booking context |
+| RB01 | [Mobile Vehicle Registration Credential (mVRC)](wp5/mVRC-rulebook.md) | Attests the registration details of a vehicle being embarked on a ferry, linking the vehicle to the traveller's booking context |
+| RB02 | [Digital Travel Credential (DTC)](wp3/dtc-rulebook.md) | Passport-derived credential containing core biographic (DG1) and biometric facial (DG2) data for cross-border identity verification and API transmission |
 
 ## Candidate rulebooks
 
 | ID | Attestation Name | Description |
 | --- | --- | --- |
-| RB02 | Digital Travel Credential (DTC) | Passport-derived credential containing core biographic (DG1) and biometric facial (DG2) data for cross-border identity verification and API transmission |
 | RB03 | Digital Boarding Pass (air) | Attests the traveller's entitlement to board a specific flight, used at check-in, baggage drop, security, and boarding gate |
 | RB04 | Electronic Travel Authorization (ETA) | Attests that a traveller has been pre-authorised to enter a destination country, issued by the destination-country authority. |
 | RB05 | Biometric Profile Attestation | Carrier-held credential encapsulating the traveller's biometric reference data, enabling seamless automated verification across airport touchpoints. |
