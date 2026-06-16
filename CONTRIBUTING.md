@@ -139,8 +139,9 @@ Alternative without activation:
 * Create and edit documentation under `docs/`.
 * Use consistent terms across documents.
 * Link related RFCs, issues, and supporting references where relevant.
-* Put images in `docs/img/` and link them with relative paths.
+* Put images in `docs/img/` and, from pages under `docs/`, link them with relative paths such as `img/your-image.png`.
 * Add new pages to `nav:` in `mkdocs.yml` so they appear in the site navigation.
+* Do not edit files under `site/` directly; they are generated build artifacts.
 * Check that headings, terminology, and references remain consistent after your edits.
 
 ## Syntax for Diagrams
@@ -158,7 +159,7 @@ Diagram code
 ```
 ````
 
-This ensures diagrams are automatically rendered by GitHub.
+This ensures diagrams are automatically rendered in GitHub and in the MkDocs site.
 
 ### Example
 
@@ -187,6 +188,7 @@ Use [docs/glossary-definitions.md](docs/glossary-definitions.md) as the authorit
 ## About the `reference/` Folder
 
 * Treat `reference/` as read-only source material for rulebooks, schemas, and external specifications.
+* The folder is composed of Git submodules (for example `eid-wallet-it-docs`, `eudi-doc-attestation-rulebooks-catalog`, and `ewc-eudi-wallet-rulebooks-and-schemas`).
 * Cite the exact source path when deriving requirements or wording from reference material.
 * Do not edit files inside `reference/` unless you are explicitly working on a submodule update.
 
