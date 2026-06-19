@@ -119,7 +119,8 @@ nav:
   - Home: index.md
   - Attestation Rulebooks:
     - Overview: rulebook/index.md
-    - mVRC: rulebook/mVRC-rulebook.md
+    - mVRC: rulebook/wp5/mVRC-rulebook.md
+    - DTC: rulebook/wp3/dtc-rulebook.md
   - Trust Specifications:
     - Trust Framework: rulebook/trust-framework.md
   - RFCs:
