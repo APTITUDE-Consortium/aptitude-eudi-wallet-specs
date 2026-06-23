@@ -59,7 +59,7 @@ By doing so implementing parties have clear and coherent guideline on exactly wh
 Following diagram uses EUDI Wallet ecosystem roles diagram from [ARF 2.9](https://eudi.dev/2.9.0/architecture-and-reference-framework-main/#3-roles-within-the-eudi-wallet-ecosystem) as base and presents adaptations relevant for issuance process within
 the Aptitude LSP.
 
-<img src="Aptitude\_roles\_and\_interactions\_overview-issuance\_flow.png" style="width:6.26806in;height:7.11806in" />
+<img src="Aptitude_roles_and_interactions_overview-issuance_flow.png" style="width:6.26806in;height:7.11806in" />
 
 Aptitude has several specifics on how the trust framework specific roles are filled in where it differs from the way that the related roles will finally being filled in within the full production setup in the Europe.
 
@@ -240,7 +240,7 @@ E2E issuance flow is presented through sequence diagram (SD) and after that each
 * [Aptitude trust framework ver 0.2](https://github.com/APTITUDE-Consortium/wp2-trust-specifications/blob/main/docs/trust-framework.md)
 * ....
 
-<img src="{Q}EAA\_issuance\_Aptitude\_profile\_on\_top\_of\_HAIP\&ETSI\_profiles\_including\_trustframewor.png" style="width:3.63681in;height:9.69306in" />
+<img src="{Q}EAA_issuance_Aptitude_profile_on_top_of_HAIP&ETSI_profiles_including_trustframework.png" style="width:3.63681in;height:9.69306in" />
 
 ### 3.2.1 Steps mapping overview
 
