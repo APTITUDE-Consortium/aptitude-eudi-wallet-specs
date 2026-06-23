@@ -73,7 +73,7 @@ Here we are only clarifying which roles and/or interfaces are out of the scope o
 
 Following diagram uses Aptitude EUDI Wallet ecosystem diagram as starting point, keeping in the picture just the roles that are relevant for the scope of this flow specification. It labels each interaction between the two roles and classifies each interface as a design time (blue label) or as a runtime (red label) interface.
 
-<img src="Aptitude\_roles\_and\_interactions\_overview-issuance\_flow.png" style="width:5.25217in;height:6.88054in" />
+<img src="Aptitude_roles_and_interactions_overview-issuance_flow.png" style="width:5.25217in;height:6.88054in" />
 
 In following table for each identified interface one or more of the relevant standards are listed. Further down within this flow specification these interfaces and related standards will be further used and referenced.
 
