@@ -15,36 +15,17 @@ Version 0.1 (draft)
 
 ## Table of Contents
 
-[Table of Contents [1](#table-of-contents)](#table-of-contents)
-
-[1 Introduction [1](#introduction)](#introduction)
-
-[2. Aptitude landscape overview
-[2](#aptitude-landscape-overview)](#aptitude-landscape-overview)
-
-[2.1 Relation between different standards and interfaces
-[4](#_Toc232682932)](#\_Toc232682932)
-
-[3. Interaction details [6](#interaction-details)](#interaction-details)
-
-[3.1 Flow requirements [6](#flow-requirements)](#flow-requirements)
-
-[3.1.1 OID4VCI requirements
-[6](#oid4vci-requirements)](#oid4vci-requirements)
-
-[3.1.2 HAIP requirements [6](#haip-requirements)](#haip-requirements)
-
-[3.1.3 ETSI 119 472-3 requirements
-[6](#etsi-119-472-3-requirements)](#etsi-119-472-3-requirements)
-
-[3.1.4 Additional trust framework validation requirements
-[7](#additional-trust-framework-validation-requirements)](#additional-trust-framework-validation-requirements)
-
-[3.2 Detailed technical flow description (sequence diagram)
-[7](#detailed-technical-flow-description-sequence-diagram)](#detailed-technical-flow-description-sequence-diagram)
-
-[3.2.1 Steps mapping overview
-[9](#steps-mapping-overview)](#steps-mapping-overview)
+1. Introduction
+2. Aptitude landscape overview
+   - 2.1 Relation between different standards and interfaces
+3. Interaction details
+   - 3.1 Flow requirements
+     - 3.1.1 OID4VCI requirements
+     - 3.1.2 HAIP requirements
+     - 3.1.3 ETSI 119 472-3 requirements
+     - 3.1.4 Additional trust framework validation requirements
+   - 3.2 Detailed technical flow description (sequence diagram)
+     - 3.2.1 Steps mapping overview
 
 ## 1 Introduction
 
@@ -57,7 +38,7 @@ By doing so implementing parties have clear and coherent guideline on exactly wh
 Following diagram uses EUDI Wallet ecosystem roles diagram from [ARF 2.9](https://eudi.dev/2.9.0/architecture-and-reference-framework-main/#3-roles-within-the-eudi-wallet-ecosystem) as base and presents adaptations relevant for issuance process within
 the Aptitude LSP.
 
-<img src="Aptitude_roles_and_interactions_overview-issuance_flow.png" style="width:6.26806in;height:7.11806in" />
+![Aptitude roles and interactions overview - issuance flow](Aptitude_roles_and_interactions_overview-issuance_flow.png)
 
 Aptitude has several specifics on how the trust framework specific roles are filled in where it differs from the way that the related roles will finally being filled in within the full production setup in the Europe.
 
@@ -71,7 +52,7 @@ Here we are only clarifying which roles and/or interfaces are out of the scope o
 
 Following diagram uses Aptitude EUDI Wallet ecosystem diagram as starting point, keeping in the picture just the roles that are relevant for the scope of this flow specification. It labels each interaction between the two roles and classifies each interface as a design time (blue label) or as a runtime (red label) interface.
 
-<img src="Aptitude_roles_and_interactions_overview-issuance_flow.png" style="width:5.25217in;height:6.88054in" />
+![Aptitude roles and interactions overview - issuance flow](Aptitude_roles_and_interactions_overview-issuance_flow.png)
 
 In following table for each identified interface one or more of the relevant standards are listed. Further down within this flow specification these interfaces and related standards will be further used and referenced.
 
@@ -238,7 +219,7 @@ E2E issuance flow is presented through sequence diagram (SD) and after that each
 * [Aptitude trust framework ver 0.2](https://github.com/APTITUDE-Consortium/wp2-trust-specifications/blob/main/docs/trust-framework.md)
 * ....
 
-<img src="{Q}EAA_issuance_Aptitude_profile_on_top_of_HAIP&ETSI_profiles_including_trustframework.png" style="width:3.63681in;height:9.69306in" />
+![QEAA issuance Aptitude profile sequence diagram]({Q}EAA_issuance_Aptitude_profile_on_top_of_HAIP&ETSI_profiles_including_trustframework.png)
 
 ### 3.2.1 Steps mapping overview
 
