@@ -17,15 +17,15 @@ Version 0.1 (draft)
 
 1. Introduction
 2. Aptitude landscape overview
-   - 2.1 Relation between different standards and interfaces
+   * 2.1 Relation between different standards and interfaces
 3. Interaction details
-   - 3.1 Flow requirements
-     - 3.1.1 OID4VCI requirements
-     - 3.1.2 HAIP requirements
-     - 3.1.3 ETSI 119 472-3 requirements
-     - 3.1.4 Additional trust framework validation requirements
-   - 3.2 Detailed technical flow description (sequence diagram)
-     - 3.2.1 Steps mapping overview
+   * 3.1 Flow requirements
+     * 3.1.1 OID4VCI requirements
+     * 3.1.2 HAIP requirements
+     * 3.1.3 ETSI 119 472-3 requirements
+     * 3.1.4 Additional trust framework validation requirements
+   * 3.2 Detailed technical flow description (sequence diagram)
+     * 3.2.1 Steps mapping overview
 
 ## 1 Introduction
 
