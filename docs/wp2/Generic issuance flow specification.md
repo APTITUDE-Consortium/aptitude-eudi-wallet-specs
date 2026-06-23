@@ -1,3 +1,5 @@
+# Generic issuance flow specification
+
 Version 0.1 (draft)
 
 # Authors
@@ -11,42 +13,38 @@ Version 0.1 (draft)
 1. Degani Giancarlo, Infocert
 2. ...
 
-# 
-
 # Table of Contents
 
-\[Table of Contents [1](#table-of-contents)](#table-of-contents)
+[Table of Contents [1](#table-of-contents)](#table-of-contents)
 
-\[1 Introduction [1](#introduction)](#introduction)
+[1 Introduction [1](#introduction)](#introduction)
 
-\[2. Aptitude landscape overview
+[2. Aptitude landscape overview
 [2](#aptitude-landscape-overview)](#aptitude-landscape-overview)
 
-\[2.1 Relation between different standards and interfaces
+[2.1 Relation between different standards and interfaces
 [4](#_Toc232682932)](#\_Toc232682932)
 
-\[3. Interaction details [6](#interaction-details)](#interaction-details)
+[3. Interaction details [6](#interaction-details)](#interaction-details)
 
-\[3.1 Flow requirements [6](#flow-requirements)](#flow-requirements)
+[3.1 Flow requirements [6](#flow-requirements)](#flow-requirements)
 
-\[3.1.1 OID4VCI requirements
+[3.1.1 OID4VCI requirements
 [6](#oid4vci-requirements)](#oid4vci-requirements)
 
-\[3.1.2 HAIP requirements [6](#haip-requirements)](#haip-requirements)
+[3.1.2 HAIP requirements [6](#haip-requirements)](#haip-requirements)
 
-\[3.1.3 ETSI 119 472-3 requirements
+[3.1.3 ETSI 119 472-3 requirements
 [6](#etsi-119-472-3-requirements)](#etsi-119-472-3-requirements)
 
-\[3.1.4 Additional trust framework validation requirements
+[3.1.4 Additional trust framework validation requirements
 [7](#additional-trust-framework-validation-requirements)](#additional-trust-framework-validation-requirements)
 
-\[3.2 Detailed technical flow description (sequence diagram)
+[3.2 Detailed technical flow description (sequence diagram)
 [7](#detailed-technical-flow-description-sequence-diagram)](#detailed-technical-flow-description-sequence-diagram)
 
-\[3.2.1 Steps mapping overview
+[3.2.1 Steps mapping overview
 [9](#steps-mapping-overview)](#steps-mapping-overview)
-
-# 
 
 # 1 Introduction
 
