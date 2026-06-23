@@ -2,18 +2,18 @@
 
 Version 0.1 (draft)
 
-# Authors
+## Authors
 
 1. Aleksandar Simsic, ICTU
 2. ....
 3. ....
 
-# Reviewers
+## Reviewers
 
 1. Degani Giancarlo, Infocert
 2. ...
 
-# Table of Contents
+## Table of Contents
 
 [Table of Contents [1](#table-of-contents)](#table-of-contents)
 
@@ -46,13 +46,13 @@ Version 0.1 (draft)
 [3.2.1 Steps mapping overview
 [9](#steps-mapping-overview)](#steps-mapping-overview)
 
-# 1 Introduction
+## 1 Introduction
 
 This document is **APTITUDE horizontal interoperability flow** **specification for the generic credential issuance flow**. It provides high level overview linking on the one side defined architecture with wallet ecosystem roles and their interaction from ARF and on another hand links each line from the provided detailed sequence diagram towards API/message/process described in one of the underlying RFC specifications.
 
 By doing so implementing parties have clear and coherent guideline on exactly what needs to be implemented to support Aptitude generic issuance flow.
 
-# 2\. Aptitude landscape overview
+## 2\. Aptitude landscape overview
 
 Following diagram uses EUDI Wallet ecosystem roles diagram from [ARF 2.9](https://eudi.dev/2.9.0/architecture-and-reference-framework-main/#3-roles-within-the-eudi-wallet-ecosystem) as base and presents adaptations relevant for issuance process within
 the Aptitude LSP.
@@ -67,7 +67,7 @@ Here we are only clarifying which roles and/or interfaces are out of the scope o
 * We will not profile and test interface between the QTSP and catalogues of attributes 🡪 We assume that in none of WP’s we have scenario that citizen is approaching (random) QTSP, providing data and requesting QTSP to validate provided data and issue related VC in his/her EUDI Wallet.
 * We will not profile and test interface between the wallet and Aptitude register. 🡪 We assume that Aptitude Register Certificate Provider will, as part of onboarding each partner in the role of issuer, provide them with matching WRPRC. The latest information around update for 2025/848 IA suggest that registration certificate is becoming mandatory. This makes using of backup run-time lookup from wallet towards Aptitude register redundant. <span id="\_Toc232682932"class="anchor"></span>
 
-## 2.1 Relation between different standards and interfaces
+### 2.1 Relation between different standards and interfaces
 
 Following diagram uses Aptitude EUDI Wallet ecosystem diagram as starting point, keeping in the picture just the roles that are relevant for the scope of this flow specification. It labels each interaction between the two roles and classifies each interface as a design time (blue label) or as a runtime (red label) interface.
 
@@ -166,16 +166,16 @@ of proof types</td>
 The process behind O1, O2 and O3 is further explained in Apptitude on-boarding document, please look here <span class="mark"><</span>
 <span class="mark">[wp2-trust-specifications/docs/topics/onboarding-process.md at main · APTITUDE-Consortium/wp2-trust-specifications](https://github.com/APTITUDE-Consortium/wp2-trust-specifications/blob/main/docs/topics/onboarding-process.md)></span> for more details.
 
-# 3\. Interaction details
+## 3\. Interaction details
 
 In this section generic issuance flow is further detailed by identifying exact API/message or other mechanism that takes place at each step.
 After the diagram each step is then linked to the underlying RFC that provides more details on it’s usage.
 
-## 3.1 Flow requirements
+### 3.1 Flow requirements
 
 Here is the overview of the requirements taken from identified standard specifications that do have impact on flow diagram provided within this document.
 
-### 3.1.1 OID4VCI requirements
+#### 3.1.1 OID4VCI requirements
 
 In follow up table the requirements are listed with decision if it is in the scope or not of this version of the Aptitude issuance flow specification.
 
@@ -190,7 +190,7 @@ In follow up table the requirements are listed with decision if it is in the sco
 |Sending credential offer by value and by reference|In scope|
 |Notification Endpoint for credential lifecycle mngmt|Not in the scope|
 
-### 3.1.2 HAIP requirements
+#### 3.1.2 HAIP requirements
 
 Comparing to the OID4VCI the HAIP requirements are stricter on what must
 be implemented versus what may be implemented. In the following table
@@ -205,7 +205,7 @@ the requirements impacting issuance flow are listed.
 |Must support wallet attestation as OAuth client authentication|In scope|
 |Must support attestation proof type including nonce within KA|In scope|
 
-### 3.1.3 ETSI 119 472-3 requirements
+#### 3.1.3 ETSI 119 472-3 requirements
 
 ETSI profile is delivered on top of HAIP profile to clarify all the
 specifics for the EUDI wallet implementation. It includes clarifications
@@ -225,11 +225,11 @@ impacting issuance flow and designed validation checks.
 |Issuer metadata must be signed as per [OID4VCI instructions](https://openid.net/specs/openid-4-verifiable-credential-issuance-1_0.html#name-signed-metadata)|In scope|
 |Issuer metadata may include provision of EAA reuse policy|Not in the scope|
 
-### 3.1.4 Additional trust framework validation requirements
+#### 3.1.4 Additional trust framework validation requirements
 
 <TODO>
 
-## 3.2 Detailed technical flow description (sequence diagram)
+### 3.2 Detailed technical flow description (sequence diagram)
 
 E2E issuance flow is presented through sequence diagram (SD) and after that each step is linked to the relevant Aptitude profile specification document. Referenced specs are:
 
