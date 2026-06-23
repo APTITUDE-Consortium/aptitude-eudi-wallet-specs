@@ -460,4 +460,3 @@ href="https://github.com/APTITUDE-Consortium/aptitude-eudi-wallet-specs/blob/mai
 \[^1]: Note that wallet must implement both code flows, the issuer may choose to implement only one
 
 \[^2]: Note that pre-authorized code flow doesn’t meet requirements for issuing the attestation with Level of Assurance HIGH
-
