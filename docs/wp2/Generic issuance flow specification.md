@@ -46,13 +46,13 @@ Here we are only clarifying which roles and/or interfaces are out of the scope o
 
 * We will not profile and test interface between the (Q)EAA-Provider and Authentic source 🡪 We assume that issuance is already covered on national level, with other words that partner with the role of the Issuer already have decided on how they will be accessing data from the authentic source.
 * We will not profile and test interface between the QTSP and catalogues of attributes 🡪 We assume that in none of WP’s we have scenario that citizen is approaching (random) QTSP, providing data and requesting QTSP to validate provided data and issue related VC in his/her EUDI Wallet.
-* We will not profile and test interface between the wallet and Aptitude register. 🡪 We assume that Aptitude Register Certificate Provider will, as part of onboarding each partner in the role of issuer, provide them with matching WRPRC. The latest information around update for 2025/848 IA suggest that registration certificate is becoming mandatory. This makes using of backup run-time lookup from wallet towards Aptitude register redundant. <span id="\_Toc232682932"class="anchor"></span>
+* We will not profile and test interface between the wallet and Aptitude register. 🡪 We assume that Aptitude Register Certificate Provider will, as part of onboarding each partner in the role of issuer, provide them with matching WRPRC. The latest information around update for 2025/848 IA suggest that registration certificate is becoming mandatory. This makes using of backup run-time lookup from wallet towards Aptitude register redundant.
 
 ### 2.1 Relation between different standards and interfaces
 
 Following diagram uses Aptitude EUDI Wallet ecosystem diagram as starting point, keeping in the picture just the roles that are relevant for the scope of this flow specification. It labels each interaction between the two roles and classifies each interface as a design time (blue label) or as a runtime (red label) interface.
 
-![Aptitude roles and interactions overview - issuance flow](Aptitude_roles_and_interactions_overview-issuance_flow.png)
+![Aptitude issuance landscape roles and interfaces](Aptitude_issuance_landscape-roles_and_interfaces_overview.png)
 
 In following table for each identified interface one or more of the relevant standards are listed. Further down within this flow specification these interfaces and related standards will be further used and referenced.
 
