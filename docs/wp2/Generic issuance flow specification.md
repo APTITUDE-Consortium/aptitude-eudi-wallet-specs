@@ -44,9 +44,11 @@ Aptitude has several specifics on how the trust framework specific roles are fil
 
 Here we are only clarifying which roles and/or interfaces are out of the scope of this flow specification:
 
-* We will not profile and test interface between the (Q)EAA-Provider and Authentic source 🡪 We assume that issuance is already covered on national level, with other words that partner with the role of the Issuer already have decided on how they will be accessing data from the authentic source.
-* We will not profile and test interface between the QTSP and catalogues of attributes 🡪 We assume that in none of WP’s we have scenario that citizen is approaching (random) QTSP, providing data and requesting QTSP to validate provided data and issue related VC in his/her EUDI Wallet.
-* We will not profile and test interface between the wallet and Aptitude register. 🡪 We assume that Aptitude Register Certificate Provider will, as part of onboarding each partner in the role of issuer, provide them with matching WRPRC. The latest information around update for 2025/848 IA suggest that registration certificate is becoming mandatory. This makes using of backup run-time lookup from wallet towards Aptitude register redundant.
+| Interface | Description | Rationale |
+|-----------|-------------|-----------|
+| Authentic Source → Issuer | How the Issuer retrieves data from the national authentic source | Assumed to be resolved at national level by each partner acting as Issuer |
+| QTSP → Attribute Catalogue | Citizen-initiated flow where a QTSP validates and issues a VC from scratch | No WP in APTITUDE covers this scenario |
+| Wallet → APTITUDE Register (runtime) | Runtime lookup from Wallet to APTITUDE Register | Redundant: WRPRC is provisioned at onboarding time (design-time); registration certificate is becoming mandatory per 2025/848 IA |
 
 ### 2.1 Relation between different standards and interfaces
 
