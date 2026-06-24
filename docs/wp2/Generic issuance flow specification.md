@@ -30,9 +30,7 @@ Version 0.1 (draft)
 
 ## 1 Introduction
 
-This document is a **non-normative companion** to the APTITUDE horizontal 
-RFC specifications. It provides implementers with a single entry point for 
-the generic credential issuance flow by:
+This document is a **non-normative companion** to the APTITUDE horizontal RFC specifications. It provides implementers with a single entry point for the generic credential issuance flow by:
 
 * mapping the APTITUDE issuance flow end-to-end as a sequence diagram
 * identifying which RFC section governs each step
