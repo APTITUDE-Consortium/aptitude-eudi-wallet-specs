@@ -36,8 +36,7 @@ This document is a **non-normative companion** to the APTITUDE horizontal RFC sp
 * identifying which RFC section governs each step
 * clarifying which interfaces and scenarios are in or out of scope for APTITUDE
 
-It does not define new requirements — those are in the RFCs. In case of 
-conflict between this document and an RFC, the RFC takes precedence.
+It does not define new requirements — those are in the RFCs. In case of conflict between this document and an RFC, the RFC takes precedence.
 
 ## 2\. Aptitude landscape overview
 
