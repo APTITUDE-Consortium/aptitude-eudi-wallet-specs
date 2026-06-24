@@ -1,8 +1,10 @@
 # Attestation Rulebook for attestations of type  *APTITUDE DTC*
 
-* Author(s):
-  * ...
-  * ...
+Author(s):
+- Matthias Schwan, bdr, Germany
+- Corrado Guidobaldi, IPZS, Italy
+- Anthony Carmoy, ANTS, France
+- Antonio Maio, INCM, Portugal
   
 | Version | Date | Description |
 |---------|------------|------------|
@@ -10,6 +12,12 @@
 | 0.2 | 27-05-2026 | Updated based on design assumptions from D3.1  |
 | 0.3 | 29-05-2026 | addition of schema and mapping |
 | 0.4 | 12-06-2026 | synchronization with PhotoID specification in [ISO/IEC 23220-4] |
+
+Feedback:
+- <matthias.schwan@bdr.de>
+- <c.guidobaldi@ipzs.it>
+- <anthony.carmoy@interieur.gouv.fr>
+- <antonio.maio@incm.pt>
 
 ## 1 Introduction
 
@@ -126,19 +134,23 @@ The objects ``docType`` and ``namespace`` are used to encapsulate the document t
 
 The document type for the **APTITUDE DTC** SHALL be as specified in clause C.2.1 of [ISO/IEC 23220-4].
 
-*Note* The document type is ``org.iso.23220.photoid.1``.
+*Note:* The document type is ``org.iso.23220.photoid.1``.
 
 The namespace of APTITUDE DTC for **general PhotoID data elements** defined in clause 3.1.2 SHALL be as specified in clause C.2.1 of [ISO/IEC 23220-4] and 6.3.1.1 of [ISO/IEC 23220-2.2].
 
-*Note* The namespace identifier is ``org.iso.23220.1``.
+*Note:* The namespace identifier is ``org.iso.23220.1``.
 
 The namespace for **specific PhotoID data elements** defined in clause 3.1.3 SHALL be as specified in clause C.2.1 of [ISO/IEC 23220-4].
 
-*Note* The namespace identifier is ``org.iso.23220.photoid.1``.
+*Note:* The namespace identifier is ``org.iso.23220.photoid.1``.
 
-Member States MAY add additional namespaces under their responsibility. The namespace for Member State specific data elements** SHALL be as specified in clauses C.1.2 of [ISO/IEC 23220-4].
+The namespace for **ICAO PhotoID data elements** defined in clause 3.1.4 SHALL be as specified in clause C.2.1 of [ISO/IEC 23220-4].
 
-*Note* The domestic namespace of the European Union is ``org.iso.23220.photoid.EU.1`` with number 1 indicating the version of this namespace and excluding the versin number of photoid namespace.
+*Note:* The namespace identifier is ``org.iso.23220.datagroups.1``.
+
+Member States MAY add additional namespaces under their responsibility. The namespace for **Member State specific data elements** SHALL be as specified in clauses C.1.2 of [ISO/IEC 23220-4].
+
+*Note:* The domestic namespace of the European Union is ``org.iso.23220.photoid.EU.1`` with number 1 indicating the version of this namespace and excluding the version number of photoid namespace.
 
 The next section define general and specific data elements of the PhotoID.
 These elements are given in tables of three columns:
