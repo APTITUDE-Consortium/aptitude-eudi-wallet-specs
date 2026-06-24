@@ -1,10 +1,10 @@
 # Attestation Rulebook for attestations of type  *APTITUDE DTC*
 
 Author(s):
-- Matthias Schwan, bdr, Germany
-- Corrado Guidobaldi, IPZS, Italy
-- Anthony Carmoy, ANTS, France
-- Antonio Maio, INCM, Portugal
+* Matthias Schwan, bdr, Germany
+* Corrado Guidobaldi, IPZS, Italy
+* Anthony Carmoy, ANTS, France
+* Antonio Maio, INCM, Portugal
   
 | Version | Date | Description |
 |---------|------------|------------|
@@ -14,10 +14,10 @@ Author(s):
 | 0.4 | 12-06-2026 | synchronization with PhotoID specification in [ISO/IEC 23220-4] |
 
 Feedback:
-- <matthias.schwan@bdr.de>
-- <c.guidobaldi@ipzs.it>
-- <anthony.carmoy@interieur.gouv.fr>
-- <antonio.maio@incm.pt>
+* <matthias.schwan@bdr.de>
+* <c.guidobaldi@ipzs.it>
+* <anthony.carmoy@interieur.gouv.fr>
+* <antonio.maio@incm.pt>
 
 ## 1 Introduction
 
