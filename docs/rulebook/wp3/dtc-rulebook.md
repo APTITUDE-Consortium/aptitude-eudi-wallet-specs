@@ -63,7 +63,7 @@ The objective is to preserve a single interoperable DTC representation that is:
 * suitable for both on-site border-control use cases and remote wallet-driven presentations,
 * capable of preserving the cryptographic binding between the virtual credential and the Wallet Secure Component (WSCD).
 
-###### Table 1 — General requirements
+#### Table 1 — General requirements
 
 | Index | Requirement specification |
 | --- | --- |
@@ -73,8 +73,7 @@ The objective is to preserve a single interoperable DTC representation that is:
 | DTC_GR_04 | APTITUDE DTC MAY contain additional attributes beyond the derived eMRTD dataset |
 | DTC_GR_05 | The data model SHALL support Selective Disclosure, allowing the traveller to share only the strictly necessary attributes (e.g., only DG2 for biometric match) with Relying Parties.|
 
-
-###### Table 2 — Requirements on data model
+#### Table 2 — Requirements on data model
 
 | Index | Requirement specification |
 | --- | --- |
@@ -87,7 +86,7 @@ The objective is to preserve a single interoperable DTC representation that is:
 | DTC_AE_07 | APTITUDE DTC SHALL preserve the cryptographic binding between the virtual credential and the Wallet Secure Component across issuance, storage, presentation, and verification. |
 | DTC_AE_08 | APTITUDE DTC SHALL support selective disclosure and minimisation as a layer on top of the single PhotoID credential format, not by introducing a second credential format. |
 
-###### Table 3 — Requirements on issuing
+#### Table 3 — Requirements on issuing
 
 | Index | Requirement specification |
 | --- | --- |
@@ -98,12 +97,11 @@ The objective is to preserve a single interoperable DTC representation that is:
 | DTC_IS_05 | APTITUDE DTC SHALL be digitally signed by the national issuing authority acting as a Trusted Attestation Provider within the eIDAS 2.0 framework. |
 | DTC_IS_06 | The system SHALL support the complete lifecycle management of the DTC, including secure revocation and update mechanisms managed by the issuing authority. |
 
-
 ### 2.2 Mandatory and optional attributes
 
 Table 4 defines which data sets must be present and preserved.
 
-###### Table 4 — Requirements on data elements
+#### Table 4 — Requirements on data elements
 
 | Index | Requirement specification |
 | --- | --- |
