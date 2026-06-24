@@ -240,19 +240,23 @@ t.b.d.
 
 ## 5 Trust Anchors
 
-The APTITUDE DTC is derived from the physical eMRTD LDS data groups and signed by the national issuing authority. The issuing authority SHALL sign the issuer signed data, i.e. the MSO, using a document signer key and certificate under the respective CSCA root certificate. 
+The APTITUDE DTC is derived from the physical eMRTD LDS data groups and signed by the national issuing authority. The issuing authority SHALL sign the issuer signed data, i.e. the MSO, using a document signer key and certificate under the respective CSCA root certificate.
+
 It is recommended to make the CSCA root certificates of the EU Member States available to Relying Parties in the EUDI-Wallet ecosytem by a respective EU Trust List, i.e. APTITUDE DTC TL. In addition, it is recommended to make the content of the APTITUDE DTC TL available to Relying Parties outside of the EUDI-Wallet ecosystem by a VICAL according to [ISO/IEC 18013-5].
+
 CSCA root certificates MAY be also obtained from the ICAO PKD by any Relying Party.
 
 ## 6 Revocation
 
-Revocation of the APTITUDE DTC, i.e. the mdoc, SHALL be implemented according to [ISO/IEC 18013-5.2], i.e. MSO revocation information. The issuing authority SHALL provide the respective status list. 
-Revocation of the linked eMRTD and LDS data given in the ICAO PhotoID data elements remains unchanged. 
-If an APTITUDE DTC is marked revoked, a Relying Party SHALL reject all recieved data elements of the various name spaces. If parts of the data elemnts are encrypted according clause 3.1.5, the Relying Party shall also reject the encrypted data.     
+Revocation of the APTITUDE DTC, i.e. the mdoc, SHALL be implemented according to [ISO/IEC 18013-5.2], i.e. MSO revocation information. The issuing authority SHALL provide the respective status list.
+
+Revocation of the linked eMRTD and LDS data given in the ICAO PhotoID data elements remains unchanged.
+
+If an APTITUDE DTC is marked revoked, a Relying Party SHALL reject all recieved data elements of the various name spaces. If parts of the data elemnts are encrypted according clause 3.1.5, the Relying Party shall also reject the encrypted data.
 
 ## 7 Compliance
 
-If compliance to ICAO DTC-VC is required, a reader may after succsessfull processing the device response and the verification prodecure encapsule the data in the structure given in clause 7.1.  
+If compliance to ICAO DTC-VC is required, a reader may after succsessfull processing the device response and the verification prodecure encapsule the data in the structure given in clause 7.1.
 
 ### 7.1 ICAO based encoding
 
