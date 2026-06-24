@@ -10,8 +10,9 @@ Version 0.1 (draft)
 
 ## Reviewers
 
-1. Degani Giancarlo, Infocert
-2. ...
+1. Giancarlo Degani, Infocert
+2. Luca Vallone, IPZS
+3. ...
 
 ## Table of Contents
 
@@ -29,9 +30,16 @@ Version 0.1 (draft)
 
 ## 1 Introduction
 
-This document is **APTITUDE horizontal interoperability flow** **specification for the generic credential issuance flow**. It provides high level overview linking on the one side defined architecture with wallet ecosystem roles and their interaction from ARF and on another hand links each line from the provided detailed sequence diagram towards API/message/process described in one of the underlying RFC specifications.
+This document is a **non-normative companion** to the APTITUDE horizontal 
+RFC specifications. It provides implementers with a single entry point for 
+the generic credential issuance flow by:
 
-By doing so implementing parties have clear and coherent guideline on exactly what needs to be implemented to support Aptitude generic issuance flow.
+* mapping the APTITUDE issuance flow end-to-end as a sequence diagram
+* identifying which RFC section governs each step
+* clarifying which interfaces and scenarios are in or out of scope for APTITUDE
+
+It does not define new requirements — those are in the RFCs. In case of 
+conflict between this document and an RFC, the RFC takes precedence.
 
 ## 2\. Aptitude landscape overview
 
