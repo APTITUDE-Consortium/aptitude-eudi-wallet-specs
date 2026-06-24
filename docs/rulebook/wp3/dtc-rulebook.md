@@ -225,10 +225,14 @@ The ICAO PhotoID data elements of APTITUDE DTC SHALL be as defined in Table 3 an
 | ``dg11`` | no further information | O |
 | ``dg12`` | no further information | O |
 | ``dg13`` | no further information | O |
-| ``dg14`` | no further information | O |
-| ``dg15`` | no further information | O |
+| ``dg14`` | no further information<br><br> *Note:* DG14 is mandatory in EU eMRTDs | M |
+| ``dg15`` | no further information<br><br> *Condition:* mandatory if available in eMRTD | C |
 | ``dg16`` | no further information | O |
 | ``sod`` | no further information | M |
+
+#### 3.1.5 Additonal document encryption
+
+If a Relying Party requires document encryption in addition to the session encrption layer, it SHALL encode the document request according to [ISO/IEC 18013-5.2]. The EUDI-Wallet SHALL encrypt the requested data elements acording to [ISO/IEC 18013-5.2].  
 
 ## 4 Attestation Usage
 
@@ -236,11 +240,19 @@ t.b.d.
 
 ## 5 Trust Anchors
 
-The APTITUDE DTC is derived from the physical eMRTD LDS data groups and signed by the national issuing authority. The PhotoID credential SHALL carry the same derived content as the DTC data model, ensuring the credential remains linked to the physical document and the wallet secure component.
+The APTITUDE DTC is derived from the physical eMRTD LDS data groups and signed by the national issuing authority. The issuing authority SHALL sign the issuer signed data, i.e. the MSO, using a document signer key and certificate under the respective CSCA root certificate. 
+
+It is recommended to make the CSCA root certificates of the EU Member States available to Relying Parties in the EUDI-Wallet ecosytem by a respective EU Trust List, i.e. APTITUDE DTC TL. In addition, it is recommended to make the content of the APTITUDE DTC TL available to Relying Parties outside of the EUDI-Wallet ecosystem by a VICAL according to [ISO/IEC 18013-5].
+
+CSCA root certificates MAY be also obtained from the ICAO PKD by any Relying Party.
 
 ## 6 Revocation
 
-Revocation of the APTITUDE DTC SHALL be implemented according to ISO 18013-5 2nd edition, i.e. MSO revocation information..
+Revocation of the APTITUDE DTC, i.e. the mdoc, SHALL be implemented according to [ISO/IEC 18013-5.2], i.e. MSO revocation information. The issuing authority SHALL provide the respective status list. 
+
+Revocation of the linked eMRTD and LDS data given in the ICAO PhotoID data elements remains unchanged. 
+
+If an APTITUDE DTC is marked revoked, a Relying Party SHALL reject all recieved data elements of the various name spaces. If parts of the data elemnts are encrypted according clause 3.1.5, the Relying Party shall also reject the encrypted data.     
 
 ## 7 Compliance
 
