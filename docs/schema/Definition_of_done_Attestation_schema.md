@@ -26,9 +26,9 @@
 ### Technical Quality
 
 - Schema metadata is present at root level:
-    - `$schema` — declares the JSON Schema version (e.g. `"https://json-schema.org/draft/2020-12/schema"`)
-    - `title`
-    - `description`
+  - `$schema` — declares the JSON Schema version (e.g. `"https://json-schema.org/draft/2020-12/schema"`)
+  - `title`
+  - `description`
 - Schema is syntactically valid (well-formed JSON, no syntax errors)
 - All `$ref` references are resolvable
 - Schema passes a JSON Schema validator
