@@ -3,9 +3,9 @@
 Author(s):
 
 * Matthias Schwan, bdr, Germany
-* Corrado Guidobaldi, IPZS, Italy
-* Anthony Carmoy, ANTS, France
-* Antonio Maio, INCM, Portugal
+* ... , IPZS, Italy
+* ... , ANTS, France
+* ... , INCM, Portugal
   
 | Version | Date | Description |
 |---------|------------|------------|
@@ -17,9 +17,9 @@ Author(s):
 Feedback:
 
 * <matthias.schwan@bdr.de>
-* <c.guidobaldi@ipzs.it>
-* <anthony.carmoy@interieur.gouv.fr>
-* <antonio.maio@incm.pt>
+* ...
+* ...
+* ...
 
 ## 1 Introduction
 
