@@ -113,14 +113,19 @@ The objective is to preserve a single interoperable DTC representation that is:
 | **Identifier** | **Description** | **Example** |
 | --- | --- | --- |
 | ``family_name`` | according to [ISO/IEC 23220-2.2] | Hardt |
-| ``given_name`` | according to [ISO/IEC 23220-2.2 | Giovanni |
-| ``birth_date`` | according to [ISO/IEC 23220-2.2 | 01-01-1980 |
-| ``portrait`` | according to [ISO/IEC 23220-2.2 | ... |
-| ``age_over_18`` | according to [ISO/IEC 23220-2.2 | T  |
+| ``given_name`` | according to [ISO/IEC 23220-2.2] | Giovanni |
+| ``birth_date`` | according to [ISO/IEC 23220-2.2] | 01-01-1980 |
+| ``portrait`` | according to [ISO/IEC 23220-2.2] | ... |
+| ``age_over_18`` | according to [ISO/IEC 23220-2.2] | T  |
+| ``person_id`` | according to [ISO/IEC 23220-4] | 1234567890 |
+| ``dg1`` | according to [ISO/IEC 23220-4] | P<ITA<<HARDT<<GIOVANNI<<<<<<<<<<<<<<<< |
+| ``dg2`` | according to [ISO/IEC 23220-4] | ... |
 
 ### 2.3 Optional attributes
 
-...
+| **Identifier** | **Description** | **Example** |
+| --- | --- | --- |
+| ... | according to [ISO/IEC 23220-2.2 | ...  |
 
 ### 2.4 Mandatory metadata
 
@@ -128,11 +133,15 @@ The objective is to preserve a single interoperable DTC representation that is:
 | --- | --- | --- |
 | ``issue_date`` | according to [ISO/IEC 23220-2.2 | 20-04-2023 |
 | ``expiry_date`` | according to [ISO/IEC 23220-2.2 | 20-04-2033 |
-| ``issuing_authority`` | no further information | Ministero dell'Interno |
+| ``issuing_authority`` | according to [ISO/IEC 23220-2.2 | Ministero dell'Interno |
+| ``version`` | according to [ISO/IEC 23220-4] | 1.0 |
+| ``sod`` | Security object data of related eMRTD according to [ISO/IEC 23220-4] | ... |
 
 ### 2.4 Optional metadata
 
-...
+| **Identifier** | **Description** | **Example** |
+| --- | --- | --- |
+| ... | according to [ISO/IEC 23220-2.2 | ...  |
 
 ## 3 Attestation Encoding
 
