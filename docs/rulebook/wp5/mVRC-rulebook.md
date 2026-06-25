@@ -164,9 +164,9 @@ supplemental_organization_data = {
 }
 
 rel_holder_to_owner_value =
-     "is the vehicle owner" /
-     "is not the vehicle owner" /
-     "is not identified by the Regsistration Certificate as being the vehicle owner"              
+     "(a) is the vehicle owner" /
+     "(b) is not the vehicle owner" /
+     "(c) is not identified by the Regsistration Certificate as being the vehicle owner"              
 ```
 
 ###### Table 4 — Address - key details
@@ -257,7 +257,7 @@ The seating information contains information describing the seating and standing
 
 ##### 3.1.2.9   Dimensions info
 
-The dimension information contains details about the dimensions of a vehicle such as wheelbase, length, and width. All details are optional and can be absent.
+The dimension information contains details about the dimensions of a vehicle such as wheelbase, length and width. All elements within dimension information are optional and can be absent. If present, the conditions on some of the elements specified in [ISO/IEC 7367-2] apply. 
 
 ###### Table 10 — Dimensions info key details
 
@@ -450,6 +450,8 @@ If revocation of mVC is required the Pub-EAA provider SHALL provide a status lis
 ## 7 Compliance
 
 The specification of the EU-mVRC is compliant to the ARF, i.e. the mdoc encoding of a Pub-EAA, and [ISO/IEC 7367-2] as well as with [EU DIR 2025/0096].
+
+If the content of any optional data element or any optional element within a structure is not encoded as specified in the EU-mVRC rulebook, the reader SHALL ignore the content.
 
 ## 8 References
 
