@@ -27,10 +27,10 @@
 - Optional metadata are defined
 - Conditional metadata are defined (if applicable)
 - Each attribute includes:
-    - `identifier` — technical field name used in the encoding
-    - `definition` — human-readable business description
-    - `data type` — e.g. string, boolean, date, integer
-    - `example value` — a concrete, realistic value
+  - `identifier` — technical field name used in the encoding
+  - `definition` — human-readable business description
+  - `data type` — e.g. string, boolean, date, integer
+  - `example value` — a concrete, realistic value
 
 ### Trust
 
@@ -41,9 +41,9 @@
 
 - Credential format is identified (e.g. `mdoc` / ISO 18013-5, `SD-JWT VC` / OpenID)
 - Encoding requirements are documented — explicit rules on how attributes must be encoded, for example:
-    - *All string values SHALL be UTF-8 encoded*
-    - *Canonical CBOR encoding SHOULD be used*
-    - *The credential SHALL be ISO/IEC 18013-5 compliant*
+  - *All string values SHALL be UTF-8 encoded*
+  - *Canonical CBOR encoding SHOULD be used*
+  - *The credential SHALL be ISO/IEC 18013-5 compliant*
 - Credential namespace is defined (e.g. `eu.europa.ec.eudiw.mvrc.delegation_permission.1`)
 - At least one encoding example is provided
 
