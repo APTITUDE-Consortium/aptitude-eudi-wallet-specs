@@ -125,7 +125,9 @@ The objective is to preserve a single interoperable DTC representation that is:
 
 | **Identifier** | **Description** | **Example** |
 | --- | --- | --- |
-| ... | according to [ISO/IEC 23220-2.2 | ...  |
+| ``family_name_viz`` | according to [ISO/IEC 23220-4] | HARDT |
+| ``given_name_viz`` | according to [ISO/IEC 23220-4] | GIOVANNI |
+| ... | ... | ... |
 
 ### 2.4 Mandatory metadata
 
@@ -180,35 +182,35 @@ The general PhotoID data elements of APTITUDE DTC SHALL be as defined in Table 1
 
 ##### Table 1 — general PhotoID data elements
 
-| **Identifier** | **additional description** | **Presence in APTITUDE DTC** |
+| **Identifier** | **data element identifier according to [ISO/IEC 23220-4]** | **Presence in APTITUDE DTC** |
 | --- | --- | --- |
-| ``family_name`` | no further information | M |
-| ``given_name`` | no further information | M  |
-| ``family_name_viz`` | no further information | O  |
-| ``given_name_viz`` | no further information | O  |
-| ``birth_date`` | no further information | M  |
-| ``portrait`` | no further information | M  |
-| ``enrolment_portrait_image`` | no further information | O  |
-| ``issue_date`` | no further information | M  |
-| ``expiry_date`` | no further information | M  |
-| ``issuing_authority`` | no further information | M  |
-| ``age_over_18`` | no further information | M  |
-| ``age_in_years`` | no further information | O  |
-| ``age_birth_year`` | no further information | O  |
-| ``portrait_capture_date`` | no further information | O  |
-| ``birthplace`` | no further information | O  |
-| ``name_at_birth`` | no further information | O  |
-| ``resident_address`` | no further information | O  |
-| ``resident_city`` | no further information | O  |
-| ``resident_postal_code`` | no further information | O  |
-| ``resident_country`` | no further information | O  |
-| ``resident_city_latin1`` | no further information | O  |
-| ``sex`` | no further information | O  |
-| ``nationality`` | no further information | O  |
-| ``document_number`` | no further information | O  |
-| ``issuing_subdivision`` | no further information | O  |
-| ``family_name_latin1`` | no further information | O  |
-| ``given_name_latin1`` | no further information | O  |
+| ``family_name`` | ``family_name`` | M |
+| ``given_name`` | ``given_name`` | M  |
+| ``family_name_viz`` | ``family_name_viz`` | O  |
+| ``given_name_viz`` | ``given_name_viz`` | O  |
+| ``birth_date`` | ``birth_date`` | M  |
+| ``portrait`` | ``portrait`` | M  |
+| ``enrolment_portrait_image`` | ``enrolment_portrait_image`` | O  |
+| ``issue_date`` | ``issue_date`` | M  |
+| ``expiry_date`` | ``expiry_date`` | M  |
+| ``issuing_authority`` | ``issuing_authority`` | M  |
+| ``age_over_18`` | ``age_over_18`` | M  |
+| ``age_in_years`` | ``age_in_years`` | O  |
+| ``age_birth_year`` | ``age_birth_year`` | O  |
+| ``portrait_capture_date`` | ``portrait_capture_date`` | O  |
+| ``birthplace`` | ``birthplace`` | O  |
+| ``name_at_birth`` | ``name_at_birth`` | O  |
+| ``resident_address`` | ``resident_address`` | O  |
+| ``resident_city`` | ``resident_city`` | O  |
+| ``resident_postal_code`` | ``resident_postal_code`` | O  |
+| ``resident_country`` | ``resident_country`` | O  |
+| ``resident_city_latin1`` | ``resident_city_latin1`` | O  |
+| ``sex`` | ``sex`` | O  |
+| ``nationality`` | ``nationality`` | O  |
+| ``document_number`` | ``document_number`` | O  |
+| ``issuing_subdivision`` | ``issuing_subdivision`` | O  |
+| ``family_name_latin1`` | ``family_name_latin1`` | O  |
+| ``given_name_latin1`` | ``given_name_latin1`` | O  |
 
 #### 3.1.3 Specific PhotoID data elements
 
