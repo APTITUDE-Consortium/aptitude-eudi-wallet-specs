@@ -97,10 +97,6 @@ The objective is to preserve a single interoperable DTC representation that is:
 | DTC_IS_05 | APTITUDE DTC SHALL be digitally signed by the national issuing authority acting as a Trusted Attestation Provider within the eIDAS 2.0 framework. |
 | DTC_IS_06 | The system SHALL support the complete lifecycle management of the DTC, including secure revocation and update mechanisms managed by the issuing authority. |
 
-### 2.2 Mandatory and optional attributes
-
-Table 4 defines which data sets must be present and preserved.
-
 #### Table 4 — Requirements on data elements
 
 | Index | Requirement specification |
@@ -111,6 +107,32 @@ Table 4 defines which data sets must be present and preserved.
 | DTC_DM_04 | The APTITUDE DTC SHALL include a cryptographic binding between the Virtual Component (VC) and the Physical Component (PC) stored in the WSCD. |
 | DTC_DM_05 | APTITUDE DTC MAY contain additional attributes beyond the derived eMRTD dataset |
 | DTC_DM_06 | The data model SHALL support Selective Disclosure, allowing the traveller to share only the strictly necessary attributes (e.g., only DG2 for biometric match) with Relying Parties. |
+
+### 2.2 Mandatory attributes
+
+| **Identifier** | **Description** | **Example** |
+| --- | --- | --- |
+| ``family_name`` | according to [ISO/IEC 23220-2.2] | Hardt |
+| ``given_name`` | according to [ISO/IEC 23220-2.2 | Giovanni |
+| ``birth_date`` | according to [ISO/IEC 23220-2.2 | 01-01-1980 |
+| ``portrait`` | according to [ISO/IEC 23220-2.2 | ... |
+| ``age_over_18`` | according to [ISO/IEC 23220-2.2 | T  |
+
+### 2.3 Optional attributes
+
+...
+
+### 2.4 Mandatory metadata
+
+| **Identifier** | **Description** | **Example** |
+| --- | --- | --- |
+| ``issue_date`` | according to [ISO/IEC 23220-2.2 | 20-04-2023 |
+| ``expiry_date`` | according to [ISO/IEC 23220-2.2 | 20-04-2033 |
+| ``issuing_authority`` | no further information | Ministero dell'Interno |
+
+### 2.4 Optional metadata
+
+...
 
 ## 3 Attestation Encoding
 
