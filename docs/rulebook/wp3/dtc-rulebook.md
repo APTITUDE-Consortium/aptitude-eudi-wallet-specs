@@ -127,15 +127,35 @@ The objective is to preserve a single interoperable DTC representation that is:
 | --- | --- | --- |
 | ``family_name_viz`` | according to [ISO/IEC 23220-4] | HARDT |
 | ``given_name_viz`` | according to [ISO/IEC 23220-4] | GIOVANNI |
-| ... | ... | ... |
+| ``enrolment_portrait_image`` | according to [ISO/IEC 23220-4] | ...  |
+| ``age_in_years`` | according to [ISO/IEC 23220-4] | 28  |
+| ``age_birth_year`` | according to [ISO/IEC 23220-4] | 1998  |
+| ``portrait_capture_date`` | according to [ISO/IEC 23220-4] | 20-04-2023 |
+| ``birthplace`` | according to [ISO/IEC 23220-4] | Italy, Trento |
+| ``name_at_birth`` | according to [ISO/IEC 23220-4] | Nick |
+| ``resident_address`` | according to [ISO/IEC 23220-4] | Sommarive, 18 |
+| ``resident_city`` | according to [ISO/IEC 23220-4] | Trento |
+| ``resident_postal_code`` | according to [ISO/IEC 23220-4] | 38122 |
+| ``resident_country`` | according to [ISO/IEC 23220-4] | IT |
+| ``resident_city_latin1`` | according to [ISO/IEC 23220-4] | ... |
+| ``sex`` | according to [ISO/IEC 23220-4] | M |
+| ``nationality`` | according to [ISO/IEC 23220-4] | IT  |
+| ``family_name_latin1`` | according to [ISO/IEC 23220-4] | ...  |
+| ``given_name_latin1`` | according to [ISO/IEC 23220-4] | ...  |
+| ``birth_country`` |  according to [ISO/IEC 23220-4] | IT |
+| ``birth_state`` |  according to [ISO/IEC 23220-4] | Trento |
+| ``birth_city`` |  according to [ISO/IEC 23220-4] | Trento |
+| ``resident_street`` | according to [ISO/IEC 23220-4] | Sommarive |
+| ``resident_house_number`` | according to [ISO/IEC 23220-4] | 18 |
+| ``resident_state`` | according to [ISO/IEC 23220-4] | IT |
 
 ### 2.4 Mandatory metadata
 
 | **Identifier** | **Description** | **Example** |
 | --- | --- | --- |
-| ``issue_date`` | according to [ISO/IEC 23220-2.2 | 20-04-2023 |
-| ``expiry_date`` | according to [ISO/IEC 23220-2.2 | 20-04-2033 |
-| ``issuing_authority`` | according to [ISO/IEC 23220-2.2 | Ministero dell'Interno |
+| ``issue_date`` | according to [ISO/IEC 23220-2.2] | 20-04-2023 |
+| ``expiry_date`` | according to [ISO/IEC 23220-2.2] | 20-04-2033 |
+| ``issuing_authority`` | according to [ISO/IEC 23220-2.2] | Ministero dell'Interno |
 | ``version`` | according to [ISO/IEC 23220-4] | 1.0 |
 | ``sod`` | Security object data of related eMRTD according to [ISO/IEC 23220-4] | ... |
 
@@ -143,7 +163,12 @@ The objective is to preserve a single interoperable DTC representation that is:
 
 | **Identifier** | **Description** | **Example** |
 | --- | --- | --- |
-| ... | according to [ISO/IEC 23220-2.2 | ...  |
+| ``document_number`` | according to [ISO/IEC 23220-2.2] | YA1234567 |
+| ``issuing_subdivision`` | according to [ISO/IEC 23220-2.2] | TN  |
+| ``administrative_number`` | according to [ISO/IEC 23220-2.2] | 9876543210 |
+| ``travel_document_type`` | according to [ISO/IEC 23220-2.2] | Passport |
+| ``travel_document_number`` | according to [ISO/IEC 23220-2.2] | I13235678 |
+| ``travel_document_mrz`` | according to [ISO/IEC 23220-2.2] | P<ITA<<HARDT<<GIOVANNI<<<<<<<<<<<<<<<< |
 
 ## 3 Attestation Encoding
 
@@ -220,17 +245,17 @@ The specific PhotoID data elements of APTITUDE DTC SHALL be as defined in Table 
 
 | **Identifier** | **additional description** | **Presence in APTITUDE DTC** |
 | --- | --- | --- |
-| ``person_id`` | no further information | M |
-| ``birth_country`` | no further information | O |
-| ``birth_state`` | no further information | O |
-| ``birth_city`` | no further information | O |
-| ``administrative_number`` | no further information | O |
-| ``resident_street`` | no further information | O |
-| ``resident_house_number`` | no further information | O |
-| ``travel_document_type`` | no further information | O |
-| ``travel_document_number`` | no further information | O |
-| ``resident_state`` | no further information | O |
-| ``travel_document_mrz`` | no further information | O |
+| ``person_id`` | ``person_id`` | M |
+| ``birth_country`` | ``birth_country`` | O |
+| ``birth_state`` | ``birth_state`` | O |
+| ``birth_city`` | ``birth_city`` | O |
+| ``administrative_number`` | ``administrative_number`` | O |
+| ``resident_street`` | ``resident_street`` | O |
+| ``resident_house_number`` | ``resident_house_number`` | O |
+| ``travel_document_type`` | ``travel_document_type`` | O |
+| ``travel_document_number`` | ``travel_document_number`` | O |
+| ``resident_state`` | ``resident_state`` | O |
+| ``travel_document_mrz`` | ``travel_document_mrz`` | O |
 
 #### 3.1.4 ICAO PhotoID data elements
 
@@ -240,24 +265,24 @@ The ICAO PhotoID data elements of APTITUDE DTC SHALL be as defined in Table 3 an
 
 | **Identifier** | **EU additional description** | **Presence in EU-mVRC** |
 | --- | --- | --- |
-| ``version`` | no further information | M |
-| ``dg1`` | no further information | M |
-| ``dg2`` | no further information | M |
-| ``dg3`` | no further information | O |
-| ``dg4`` | no further information | O |
-| ``dg5`` | no further information | O |
-| ``dg6`` | no further information | O |
-| ``dg7`` | no further information | O |
-| ``dg8`` | no further information | O |
-| ``dg9`` | no further information | O |
-| ``dg10`` | no further information | O |
-| ``dg11`` | no further information | O |
-| ``dg12`` | no further information | O |
-| ``dg13`` | no further information | O |
-| ``dg14`` | no further information | O |
-| ``dg15`` | no further information | O |
-| ``dg16`` | no further information | O |
-| ``sod`` | no further information | M |
+| ``version`` | ``version`` | M |
+| ``dg1`` | ``dg1`` | M |
+| ``dg2`` | ``dg2`` | M |
+| ``dg3`` | ``dg3`` | O |
+| ``dg4`` | ``dg4`` | O |
+| ``dg5`` | ``dg5`` | O |
+| ``dg6`` | ``dg6`` | O |
+| ``dg7`` | ``dg7`` | O |
+| ``dg8`` | ``dg8`` | O |
+| ``dg9`` | ``dg9`` | O |
+| ``dg10`` | ``dg10`` | O |
+| ``dg11`` | ``dg11`` | O |
+| ``dg12`` | ``dg12`` | O |
+| ``dg13`` | ``dg13`` | O |
+| ``dg14`` | ``dg14`` | O |
+| ``dg15`` | ``dg15`` | O |
+| ``dg16`` | ``dg16`` | O |
+| ``sod`` | ``sod`` | M |
 
 ## 4 Attestation Usage
 
