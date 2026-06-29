@@ -47,7 +47,7 @@ statements of fact.
 
 ### 1.4 Terminology
 
-Terminologies and definitions within Aptitude project are listed in [APTITUDE Glossary](../glossary.md)
+Terminologies and definitions within Aptitude project are listed in [APTITUDE Glossary](/docs/glossary.md)
 
 ## 2 Attestation attributes and metadata
 
@@ -57,7 +57,7 @@ This document describes the structure, type, data element identifiers, and logic
 
 The specification of the EU-mVRC is a profile of the mVC specified in [ISO/IEC 7367-2]. The mVC [ISO/IEC 7367-2] references data structures and security mechanisms defined for <credentials:mDL> and <credentials:mdoc>, such as device request/response structures, IssuerSigned and IssuerAuth structures (MSO) as well as protocols for proximity and remote flows. These protocols and structures are mandatory features of the EUDI Wallet ecosystem . The EU-mVRC profile mandates the use of doc type and name space according to [ISO/IEC 7367-2] and gives more detailed information on the use of the data elements. A profile further specifies additional name spaces under responsibility of the EU and of respective Member States.
 
-![EU mVRC profile](../img/EU_mVRC_profile.png)
+![EU mVRC profile](/docs/img/EU_mVRC_profile.png)
 
 ## 3 Attestation encoding
 
