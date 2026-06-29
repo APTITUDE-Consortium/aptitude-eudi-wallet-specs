@@ -47,7 +47,7 @@ statements of fact.
 
 ### 1.4 Terminology
 
-Terminologies and definitions within Aptitude project are listed in [APTITUDE Glossary](docs/glossary.md)
+Terminologies and definitions within Aptitude project are listed in [APTITUDE Glossary](/docs/glossary.md)
 
 ## 2 Attestation attributes and metadata
 
