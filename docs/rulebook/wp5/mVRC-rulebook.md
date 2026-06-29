@@ -166,7 +166,7 @@ supplemental_organization_data = {
 rel_holder_to_owner_value =
      "(a) is the vehicle owner" /
      "(b) is not the vehicle owner" /
-     "(c) is not identified by the Regsistration Certificate as being the vehicle owner"              
+     "(c) is not identified by the Regsistration Certificate as being the vehicle owner"
 ```
 
 ###### Table 4 — Address - key details
@@ -257,7 +257,7 @@ The seating information contains information describing the seating and standing
 
 ##### 3.1.2.9   Dimensions info
 
-The dimension information contains details about the dimensions of a vehicle such as wheelbase, length and width. All elements within dimension information are optional and can be absent. If present, the conditions on some of the elements specified in [ISO/IEC 7367-2] apply. 
+The dimension information contains details about the dimensions of a vehicle such as wheelbase, length and width. All elements within dimension information are optional and can be absent. If present, the conditions on some of the elements specified in [ISO/IEC 7367-2] apply.
 
 ###### Table 10 — Dimensions info key details
 
