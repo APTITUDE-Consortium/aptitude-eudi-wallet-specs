@@ -11,7 +11,7 @@
 | 0.3 | 29-05-2026 | addition of schema and mapping |
 | 0.4 | 12-06-2026 | synchronization with PhotoID specification in [ISO/IEC 23220-4] |
 
-## 1 Introduction
+### 1 Introduction
 
 ### 1.1 Document scope and purpose
 
