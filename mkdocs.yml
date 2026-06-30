@@ -119,13 +119,16 @@ nav:
   - Home: index.md
   - Attestation Rulebooks:
     - Overview: rulebook/index.md
-    - mVRC: rulebook/mVRC-rulebook.md
+    - mVRC: rulebook/wp5/mVRC-rulebook.md
+    - DTC: rulebook/wp3/dtc-rulebook.md
   - Trust Specifications:
     - Trust Framework: rulebook/trust-framework.md
   - RFCs:
     - Overview: horizontal-RFCs/index.md
     - RFC-01 Credential Issuance Profile: horizontal-RFCs/RFC001.md
     - RFC-02 Presentation Profile: horizontal-RFCs/RFC002.md
+  - Schemas:
+    - Overview: schema/index.md
   - Standards: standards.md
   - Glossary: 
     - Glossary: glossary.md
