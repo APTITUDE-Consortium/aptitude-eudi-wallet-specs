@@ -1,8 +1,11 @@
 # Attestation Rulebook for attestations of type  *APTITUDE DTC*
 
-* Author(s):
-  * [frank.dietrich@bdr.de](mailto:frank.dietrich@bdr.de)
-  * [Matthias.Schwan@BDR.de](mailto:Matthias.Schwan@BDR.de)
+Author(s):
+
+* Matthias Schwan, bdr, Germany
+* ... , IPZS, Italy
+* ... , ANTS, France
+* ... , INCM, Portugal
   
 | Version | Date | Description |
 |---------|------------|------------|
@@ -10,6 +13,13 @@
 | 0.2 | 27-05-2026 | Updated based on design assumptions from D3.1  |
 | 0.3 | 29-05-2026 | addition of schema and mapping |
 | 0.4 | 12-06-2026 | synchronization with PhotoID specification in [ISO/IEC 23220-4] |
+
+Feedback:
+
+* <matthias.schwan@bdr.de>
+* ...
+* ...
+* ...
 
 ## 1 Introduction
 
@@ -126,26 +136,30 @@ The objects ``docType`` and ``namespace`` are used to encapsulate the document t
 
 The document type for the **APTITUDE DTC** SHALL be as specified in clause C.2.1 of [ISO/IEC 23220-4].
 
-*Note* The document type is ``org.iso.23220.photoid.1``.
+*Note:* The document type is ``org.iso.23220.photoid.1``.
 
-The namespace of APTITUDE DTC for **general PhotoID data elements** defined in clause 3.1.2 SHALL be as specified in clause C.2.1 of [ISO/IEC 23220-4] and 6.3.1.1 of [ISO/IEC 23220-2].
+The namespace of APTITUDE DTC for **general PhotoID data elements** defined in clause 3.1.2 SHALL be as specified in clause C.2.1 of [ISO/IEC 23220-4] and 6.3.1.1 of [ISO/IEC 23220-2.2].
 
-*Note* The namespace identifier is ``org.iso.23220.1``.
+*Note:* The namespace identifier is ``org.iso.23220.1``.
 
 The namespace for **specific PhotoID data elements** defined in clause 3.1.3 SHALL be as specified in clause C.2.1 of [ISO/IEC 23220-4].
 
-*Note* The namespace identifier is ``org.iso.23220.photoid.1``.
+*Note:* The namespace identifier is ``org.iso.23220.photoid.1``.
 
-Member States MAY add additional namespaces under their responsibility. The namespace for Member State specific data elements** SHALL be as specified in clauses C.1.2 of [ISO/IEC 23220-4].
+The namespace for **ICAO PhotoID data elements** defined in clause 3.1.4 SHALL be as specified in clause C.2.1 of [ISO/IEC 23220-4].
 
-*Note* The domestic namespace of the European Union is ``org.iso.23220.photoid.EU.1`` with number 1 indicating the version of this namespace.
+*Note:* The namespace identifier is ``org.iso.23220.datagroups.1``.
+
+Member States MAY add additional namespaces under their responsibility. The namespace for **Member State specific data elements** SHALL be as specified in clauses C.1.2 of [ISO/IEC 23220-4].
+
+*Note:* The domestic namespace of the European Union is ``org.iso.23220.photoid.EU.1`` with number 1 indicating the version of this namespace and excluding the version number of photoid namespace.
 
 The next section define general and specific data elements of the PhotoID.
 These elements are given in tables of three columns:
 
 * The "Identifier" column is the reference of the data element specified in [ISO/IEC 23220-4].
 * The “additional description” column gives further information on the usage of the respective data element in the context APTITUDE DTC.
-* The "Presence" column indicates whether the presence of the element on an EU-mVRC is mandatory (M), optional (O) or conditional (C). A mandatory data elemement SHALL be present in an APTITUTED DTC whereas an optional data element MAY be present. If a data element is conditional the respective condition is given in the specification. If the condition is met the data element SHALL be present.
+* The "Presence" column indicates whether the presence of the element on an APTITUDE DTC is mandatory (M), optional (O) or conditional (C). A mandatory data elemement SHALL be present in an APTITUTED DTC whereas an optional data element MAY be present. If a data element is conditional the respective condition is given in the specification. If the condition is met the data element SHALL be present.
 
 #### 3.1.2 General PhotoID data elements
 
@@ -209,7 +223,7 @@ The ICAO PhotoID data elements of APTITUDE DTC SHALL be as defined in Table 3 an
 
 ##### Table 3 — ICAO PhotoID data elements
 
-| **Identifier** | **EU additional description** | **Presence in EU-mVRC** |
+| **Identifier** | **EU additional description** | **Presence in APTITUDE DTC** |
 | --- | --- | --- |
 | ``version`` | no further information | M |
 | ``dg1`` | no further information | M |
@@ -240,7 +254,7 @@ The APTITUDE DTC is derived from the physical eMRTD LDS data groups and signed b
 
 ## 6 Revocation
 
-Revocation of the APTITUDE DTC SHALL be implemented according to ISO 18013-5 2nd edition, i.e. MSO revocation information..
+Revocation of the APTITUDE DTC SHALL be implemented according to [ISO/IEC 18013-5.2], i.e. MSO revocation information.
 
 ## 7 Compliance
 
@@ -335,7 +349,7 @@ dtcOtherInfos [23] EXPLICIT DTCOtherInfos OPTIONAL,
 }
 ```
 
-### 7.3 Mapping from photoId to ICAO based encoding
+### 7.2 Mapping from photoId to ICAO based encoding
 
 |org.iso.23220.photoID.1 | org.iso.23220.datagroups.1 |eMRTD|
 |----                   | ----------          |---|
@@ -346,3 +360,13 @@ dtcOtherInfos [23] EXPLICIT DTCOtherInfos OPTIONAL,
 |    |birth_date | EF.DG1 |
 |    |age_over_18 | EF.DG1 |
 |    |portrait | EF.DG2 |
+
+## 8 References
+
+| **Item Reference** | **Standard name/details**|
+| --- | --- |
+| [ISO/IEC 18013-5] |  ISO/IEC 18013-5, Personal identification --- ISO-compliant driving licence - Part 5: Mobile driving licence (mDL) application, First edition, 2021-09 |
+| [ISO/IEC 18013-5.2] |  ISO/IEC 18013-5, Personal identification --- ISO-compliant driving licence - Part 5: Mobile driving licence (mDL) application, second edition, 2026-xx (Status DIS) |
+| [ISO/IEC 23220-4] | ISO/IEC TS 23220-4: Cards and Security Devices for Personal Identification – Building Blocks for Identity Management via Mobile Devices –Part 4: Protocols and services for the operational phase, First edition, 2026-04  |
+| [ISO/IEC 23220-2.2] | ISO/IEC TS 23220-2: Cards and Security Devices for Personal Identification – Building Blocks for Identity Management via Mobile Devices –Part 2: Data objects and encoding rules for generic eID systems, Second edition, 2026-04  |
+ | [RFC 2119] | RFC 2119 - Key words for use in RFCs to Indicate Requirement Levels, S. Bradner, March 1997 |
