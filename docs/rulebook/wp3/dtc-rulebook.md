@@ -301,9 +301,9 @@ t.b.d.
 
 ## 5 Trust Anchors
 
-The APTITUDE DTC is derived from the physical eMRTD LDS data groups and signed by the national issuing authority. The issuing authority SHALL sign the issuer signed data, i.e. the MSO, using a document signer key and certificate under the respective CSCA root certificate according to clause 2.2 in [ICAO-DTC-TR].
+The APTITUDE DTC is derived from the physical eMRTD LDS data groups and signed by the national issuing authority. The issuing authority SHALL sign the issuer signed data, i.e. the MSO, using a document signer key and certificate under the respective CSCA root certificate according to clause 2.2 in [ICAO-DTC-VC-TR].
 
-*Note:* According to [ICAO-DTC-TR], the DTC signer certificate includes a dedicated OID in the extendedKeyUsage extension, i.e. ``2.23.136.1.1.12.1``.
+*Note:* According to [ICAO-DTC-VC-TR], the DTC signer certificate includes a dedicated OID in the extendedKeyUsage extension, i.e. ``2.23.136.1.1.12.1``.
 
 It is recommended to make the CSCA root certificates of the EU Member States available to Relying Parties in the EUDI-Wallet ecosytem by a respective EU Trust List, i.e. APTITUDE DTC TL. In addition, it is recommended to make the content of the APTITUDE DTC TL available to Relying Parties outside of the EUDI-Wallet ecosystem by a VICAL according to [ISO/IEC 18013-5].
 
@@ -319,12 +319,13 @@ If an APTITUDE DTC is marked revoked, a Relying Party SHALL reject all recieved 
 
 ## 7 Compliance
 
-If compliance to ICAO DTC-VC is required, a reader may after succsessfull processing the device response and the verification prodecure encapsule the data in the structure given in clause 7.1.
+If compliance to ICAO DTC-VC Type 1 is required, a reader may after succsessfull processing the device response and the verification prodecure encapsule the data in the structure given in clause 7.1. The reader SHALL use the option eMRTD bound for DTC-VC encoding. The ICAO based encoding for DTC-VC is defined in [ICAO-DTC-VC-TR] and encoding for DTC-PC is defined in [ICAO-DTC-PC-TR]. The reader SHALL use the option eMRTD bound for DTC-VC encoding.
+
+*Note:* Option eMRTD bound does not include elemts dtcTBS, dtcSignerInfo, DTCSecurityInfo and DTCOtherInfo.  
 
 ### 7.1 ICAO based encoding
 
-The ICAO based encoding for DTC-VC is defined in the Technical report "Virtual component data structure and PKI Mechanisms" version 1.2 october 2020.
-The ICAO based encoding for DTC-PC is defined in the Technical report "Physical component and protocols" version 1.1 october 2022.
+The ICAO based encoding for DTC-VC is defined in [ICAO-DTC-VC-TR] and encoding for DTC-PC is defined in [ICAO-DTC-PC-TR].
 
 ```asn.1
 DTCContentInfo ::= SEQUENCE {
@@ -431,4 +432,5 @@ dtcOtherInfos [23] EXPLICIT DTCOtherInfos OPTIONAL,
 | [ISO/IEC 23220-4] | ISO/IEC TS 23220-4: Cards and Security Devices for Personal Identification – Building Blocks for Identity Management via Mobile Devices –Part 4: Protocols and services for the operational phase, First edition, 2026-04  |
 | [ISO/IEC 23220-2.2] | ISO/IEC TS 23220-2: Cards and Security Devices for Personal Identification – Building Blocks for Identity Management via Mobile Devices –Part 2: Data objects and encoding rules for generic eID systems, Second edition, 2026-04  |
  | [RFC 2119] | RFC 2119 - Key words for use in RFCs to Indicate Requirement Levels, S. Bradner, March 1997 |
- | [ICAO-DTC-TR] | ICAO Technical Report, Digital Travel Credentials (DTC) - Virtual Component Data Structure and PKI Mechanisms, Version 1.2, October 2020 |
+ | [ICAO-DTC-VC-TR] | ICAO Technical Report, Digital Travel Credentials (DTC) - Virtual Component Data Structure and PKI Mechanisms, Version 1.2, October 2020 |
+ | [ICAO-DTC-PC-TR] | ICAO Technical Report, Digital Travel Credentials (DTC) - Physical Component and Protocols, Version 1.1, October 2022 |
