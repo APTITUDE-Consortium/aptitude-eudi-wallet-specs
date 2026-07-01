@@ -131,6 +131,8 @@ The objective is to preserve a single interoperable DTC representation that is:
 | ``person_id`` | according to [ISO/IEC 23220-4] | 1234567890 |
 | ``dg1`` | according to [ISO/IEC 23220-4] | P<ITA<<HARDT<<GIOVANNI<<<<<<<<<<<<<<<< |
 | ``dg2`` | according to [ISO/IEC 23220-4] | ... |
+| ``dg14`` | according to [ISO/IEC 23220-4] | ... |
+| ``dg15`` | according to [ISO/IEC 23220-4] | ... |
 
 ### 2.3 Optional attributes
 
