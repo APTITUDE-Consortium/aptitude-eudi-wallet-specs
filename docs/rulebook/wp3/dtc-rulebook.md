@@ -112,7 +112,7 @@ The objective is to preserve a single interoperable DTC representation that is:
 
 | Index | Requirement specification |
 | --- | --- |
-| DTC_DM_01 | The APTITUDE DTC SHALL contain DG1, DG2, SOD as from the physical eMRTD passport |
+| DTC_DM_01 | The APTITUDE DTC SHALL contain DG1, DG2, DG14, DG15, SOD as from the physical eMRTD passport |
 | DTC_DM_02 | The APTITUDE DTC SHALL contain fields like: dtcSecurityInfo, DTCIdentifier, DTCDOE, and a signature structure for validation |
 | DTC_DM_03 | The APTITUDE DTC SHALL be encapsulated as a Verifiable Credential (VC), ensuring compatibility with the EUDI Wallet data formats (SD-JWT or MDOC-CBOR). |
 | DTC_DM_04 | The APTITUDE DTC SHALL include a cryptographic binding between the Virtual Component (VC) and the Physical Component (PC) stored in the WSCD. |
