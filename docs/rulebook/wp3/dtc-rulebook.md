@@ -29,8 +29,6 @@ This Attestation Rulebook defines the Digital Travel Credential (DTC) as an elec
 
 The primary objective of the DTC is to facilitate secure and privacy-preserving identity verification and travel document validation at border crossing points and during travel. The DTC is designed to complement existing physical travel documents (e.g. passports, visas) by providing a digital equivalent that supports selective disclosure, offline presentation and strong cryptographic verification.
 
-Within the Aptitude context, the target model is the ICAO DTC Type 2, bound to a physical eMRTD and derived using mechanisms aligned with European regulations and ICAO guidelines.
-
 Within the Aptitude context, the target model is the ICAO DTC Type 2, bound to a physical eMRTD and derived using mechanisms aligned with European regulations and ICAO guidelines. Type 2 is therefore considered the primary and preferred implementation model. However, the framework may also support ICAO DTC Type 1 where it is based on an LDS (Logical Data Structure) signed by the official passport authority. In such cases, the DTC is encapsulated within an attestation stored in the EUDI Wallet, ensuring that it remains cryptographically linked to a physical component and provides sufficient assurance for border control use cases.
 
 This rulebook specifies:
@@ -59,7 +57,7 @@ Terminologies and definitions within Aptitude project are listed in [APTITUDE Gl
 
 ## 2 Attestation attributes and metadata
 
-### 2.1 Chapter overview and general requirements
+### 2.1 Introduction
 
 This section defines the functional and semantic scope of the data composing the APTITUDE Digital Travel Credential (DTC), based on the evidence collected during the stock‑taking phase.
 
@@ -68,26 +66,24 @@ The cross‑border value of a DTC critically depends on preserving full alignmen
 International interoperability and backward compatibility with existing border‑control infrastructure remain core requirements for any realistic DTC deployment.
 As a result, the ICAO LDS data model (DG1, DG2, SOD) constitutes the mandatory baseline.
 
-This section defines which data sets must be present and preserved.
-
-| Index | Requirement specification |
-| --- | --- |
-| XX_XX | According to ICAO’s DTC-VC data model, the APTITUDE DTC SHALL contain DG1, DG2, SOD as from the physical eMRTD passport.|
-| XX_XX | According to ICAO's DTC-VC data model, the APTITUDE DTC MAY contain fields like: dtcSecurityInfo, DTCIdentifier, DTCDOE, and a signature structure for validation in case of eMRTD-PC bound    |
-| XX_XX | The APTITUDE DTC SHALL be encapsulated as a Verifiable Credential (VC), ensuring compatibility with the EUDI Wallet data formats (e.g., SD-JWT or mDoc acc. ISO 23220-4).                      |
-| XX_XX | APTITUDE DTC MAY contain additional attributes beyond the derived eMRTD dataset                                                                                                                |
-| XX_XX | The data model SHALL support Selective Disclosure, allowing the traveller to share only the strictly necessary attributes (e.g., only DG2 for biometric match) with Relying Parties.           |
-
-### 2.2 Technical requirements
-
-This chapter defines the credential format and encoding requirements for the APTITUDE Digital Travel Credential (DTC).
-
 The objective is to preserve a single interoperable DTC representation that is:
 
 * aligned with ICAO DTC Type 2 and eMRTD LDS semantics,
 * compatible with EUDI Wallet proximity presentation,
 * suitable for both on-site border-control use cases and remote wallet-driven presentations,
 * capable of preserving the cryptographic binding between the virtual credential and the Wallet Secure Component (WSCD).
+
+#### Table 1 — General requirements
+
+| Index | Requirement specification |
+| --- | --- |
+| DTC_GR_01 | According to ICAO’s DTC-VC data model, the APTITUDE DTC SHALL contain DG1, DG2, SOD as from the physical eMRTD passport.|
+| DTC_GR_02 | According to ICAO's DTC-VC data model, the APTITUDE DTC MAY contain fields like: dtcSecurityInfo, DTCIdentifier, DTCDOE, and a signature structure for validation in case of eMRTD-PC bound    |
+| DTC_GR_03 | The APTITUDE DTC SHALL be encapsulated as a Verifiable Credential (VC), ensuring compatibility with the EUDI Wallet data formats (e.g., SD-JWT or mDoc acc. ISO 23220-4).  |
+| DTC_GR_04 | APTITUDE DTC MAY contain additional attributes beyond the derived eMRTD dataset |
+| DTC_GR_05 | The data model SHALL support Selective Disclosure, allowing the traveller to share only the strictly necessary attributes (e.g., only DG2 for biometric match) with Relying Parties.|
+
+#### Table 2 — Requirements on data model
 
 | Index | Requirement specification |
 | --- | --- |
@@ -100,22 +96,18 @@ The objective is to preserve a single interoperable DTC representation that is:
 | DTC_AE_07 | APTITUDE DTC SHALL preserve the cryptographic binding between the virtual credential and the Wallet Secure Component across issuance, storage, presentation, and verification. |
 | DTC_AE_08 | APTITUDE DTC SHALL support selective disclosure and minimisation as a layer on top of the single PhotoID credential format, not by introducing a second credential format. |
 
-#### Issuance
+#### Table 3 — Requirements on issuing
 
 | Index | Requirement specification |
 | --- | --- |
-| XX_XX | The APTITUDE DTC SHALL be issued exclusively by the National Passport Issuing Authority of the Member State that issued the physical eMRTD. |
-| XX_XX | APTITUDE DTC SHALL be derived from eMRTD chip data (Logical Data Structure - LDS) ensuring a cryptographic link to the physical travel document. |
-| XX_XX | APTITUDE DTC SHALL be derived both from newly issued and already issued eMRTDs, except where the national authentic sources require a restriction. |
-| XX_XX | The issuance process SHALL result in an ICAO DTC Type 2 (eMRTD-PC bound), where the virtual component is cryptographically linked to a physical secure element within the EUDI Wallet. |
-| XX_XX | APTITUDE DTC SHALL be digitally signed by the national issuing authority acting as a Trusted Attestation Provider within the eIDAS 2.0 framework. |
-| XX_XX | The system SHALL support the complete lifecycle management of the DTC, including secure revocation and update mechanisms managed by the issuing authority. |
+| DTC_IS_01 | The APTITUDE DTC SHALL be issued exclusively by the National Passport Issuing Authority of the Member State that issued the physical eMRTD. |
+| DTC_IS_02 | APTITUDE DTC SHALL be derived from eMRTD chip data (Logical Data Structure - LDS) ensuring a cryptographic link to the physical travel document. |
+| DTC_IS_03 | APTITUDE DTC SHALL be derived both from newly issued and already issued eMRTDs, except where the national authentic sources require a restriction. |
+| DTC_IS_04 | The issuance process SHALL result in an ICAO DTC Type 2 (eMRTD-PC bound), where the virtual component is cryptographically linked to a physical secure element within the EUDI Wallet. |
+| DTC_IS_05 | APTITUDE DTC SHALL be digitally signed by the national issuing authority acting as a Trusted Attestation Provider within the eIDAS 2.0 framework. |
+| DTC_IS_06 | The system SHALL support the complete lifecycle management of the DTC, including secure revocation and update mechanisms managed by the issuing authority. |
 
-#### Data model
-
-International interoperability and backward compatibility with existing border‑control infrastructure remain core requirements for any realistic DTC deployment.
-
-This section defines which data sets must be present and preserved.
+#### Table 4 — Requirements on data elements
 
 | Index | Requirement specification |
 | --- | --- |
@@ -125,6 +117,68 @@ This section defines which data sets must be present and preserved.
 | DTC_DM_04 | The APTITUDE DTC SHALL include a cryptographic binding between the Virtual Component (VC) and the Physical Component (PC) stored in the WSCD. |
 | DTC_DM_05 | APTITUDE DTC MAY contain additional attributes beyond the derived eMRTD dataset |
 | DTC_DM_06 | The data model SHALL support Selective Disclosure, allowing the traveller to share only the strictly necessary attributes (e.g., only DG2 for biometric match) with Relying Parties. |
+
+### 2.2 Mandatory attributes
+
+| **Identifier** | **Description** | **Example** |
+| --- | --- | --- |
+| ``family_name`` | according to [ISO/IEC 23220-2.2] | Hardt |
+| ``given_name`` | according to [ISO/IEC 23220-2.2] | Giovanni |
+| ``birth_date`` | according to [ISO/IEC 23220-2.2] | 01-01-1980 |
+| ``portrait`` | according to [ISO/IEC 23220-2.2] | ... |
+| ``age_over_18`` | according to [ISO/IEC 23220-2.2] | T  |
+| ``person_id`` | according to [ISO/IEC 23220-4] | 1234567890 |
+| ``dg1`` | according to [ISO/IEC 23220-4] | P<ITA<<HARDT<<GIOVANNI<<<<<<<<<<<<<<<< |
+| ``dg2`` | according to [ISO/IEC 23220-4] | ... |
+
+### 2.3 Optional attributes
+
+| **Identifier** | **Description** | **Example** |
+| --- | --- | --- |
+| ``family_name_viz`` | according to [ISO/IEC 23220-4] | HARDT |
+| ``given_name_viz`` | according to [ISO/IEC 23220-4] | GIOVANNI |
+| ``enrolment_portrait_image`` | according to [ISO/IEC 23220-4] | ...  |
+| ``age_in_years`` | according to [ISO/IEC 23220-4] | 28  |
+| ``age_birth_year`` | according to [ISO/IEC 23220-4] | 1998  |
+| ``portrait_capture_date`` | according to [ISO/IEC 23220-4] | 20-04-2023 |
+| ``birthplace`` | according to [ISO/IEC 23220-4] | Italy, Trento |
+| ``name_at_birth`` | according to [ISO/IEC 23220-4] | Nick |
+| ``resident_address`` | according to [ISO/IEC 23220-4] | Sommarive, 18 |
+| ``resident_city`` | according to [ISO/IEC 23220-4] | Trento |
+| ``resident_postal_code`` | according to [ISO/IEC 23220-4] | 38122 |
+| ``resident_country`` | according to [ISO/IEC 23220-4] | IT |
+| ``resident_city_latin1`` | according to [ISO/IEC 23220-4] | ... |
+| ``sex`` | according to [ISO/IEC 23220-4] | M |
+| ``nationality`` | according to [ISO/IEC 23220-4] | IT  |
+| ``family_name_latin1`` | according to [ISO/IEC 23220-4] | ...  |
+| ``given_name_latin1`` | according to [ISO/IEC 23220-4] | ...  |
+| ``birth_country`` |  according to [ISO/IEC 23220-4] | IT |
+| ``birth_state`` |  according to [ISO/IEC 23220-4] | Trento |
+| ``birth_city`` |  according to [ISO/IEC 23220-4] | Trento |
+| ``resident_street`` | according to [ISO/IEC 23220-4] | Sommarive |
+| ``resident_house_number`` | according to [ISO/IEC 23220-4] | 18 |
+| ``resident_state`` | according to [ISO/IEC 23220-4] | IT |
+
+### 2.4 Mandatory metadata
+
+| **Identifier** | **Description** | **Example** |
+| --- | --- | --- |
+| ``issue_date`` | according to [ISO/IEC 23220-2.2] | 20-04-2023 |
+| ``expiry_date`` | according to [ISO/IEC 23220-2.2] | 20-04-2033 |
+| ``issuing_authority`` | according to [ISO/IEC 23220-2.2] | Ministero dell'Interno |
+| ``version`` | according to [ISO/IEC 23220-4] | 1.0 |
+| ``sod`` | Security object data of related eMRTD according to [ISO/IEC 23220-4] | ... |
+
+### 2.4 Optional metadata
+
+| **Identifier** | **Description** | **Example** |
+| --- | --- | --- |
+| ``document_number`` | according to [ISO/IEC 23220-2.2] | YA1234567 |
+| ``issuing_subdivision`` | according to [ISO/IEC 23220-2.2] | TN  |
+| ``administrative_number`` | according to [ISO/IEC 23220-2.2] | 9876543210 |
+| ``travel_document_type`` | according to [ISO/IEC 23220-2.2] | Passport |
+| ``travel_document_number`` | according to [ISO/IEC 23220-2.2] | I13235678 |
+| ``travel_document_mrz`` | according to [ISO/IEC 23220-2.2] | P<ITA<<HARDT<<GIOVANNI<<<<<<<<<<<<<<<< |
 
 ## 3 Attestation Encoding
 
@@ -167,35 +221,35 @@ The general PhotoID data elements of APTITUDE DTC SHALL be as defined in Table 1
 
 ##### Table 1 — general PhotoID data elements
 
-| **Identifier** | **additional description** | **Presence in APTITUDE DTC** |
+| **Identifier** | **data element identifier according to [ISO/IEC 23220-4]** | **Presence in APTITUDE DTC** |
 | --- | --- | --- |
-| ``family_name`` | no further information | M |
-| ``given_name`` | no further information | M  |
-| ``family_name_viz`` | no further information | O  |
-| ``given_name_viz`` | no further information | O  |
-| ``birth_date`` | no further information | M  |
-| ``portrait`` | no further information | M  |
-| ``enrolment_portrait_image`` | no further information | O  |
-| ``issue_date`` | no further information | M  |
-| ``expiry_date`` | no further information | M  |
-| ``issuing_authority`` | no further information | M  |
-| ``age_over_18`` | no further information | M  |
-| ``age_in_years`` | no further information | O  |
-| ``age_birth_year`` | no further information | O  |
-| ``portrait_capture_date`` | no further information | O  |
-| ``birthplace`` | no further information | O  |
-| ``name_at_birth`` | no further information | O  |
-| ``resident_address`` | no further information | O  |
-| ``resident_city`` | no further information | O  |
-| ``resident_postal_code`` | no further information | O  |
-| ``resident_country`` | no further information | O  |
-| ``resident_city_latin1`` | no further information | O  |
-| ``sex`` | no further information | O  |
-| ``nationality`` | no further information | O  |
-| ``document_number`` | no further information | O  |
-| ``issuing_subdivision`` | no further information | O  |
-| ``family_name_latin1`` | no further information | O  |
-| ``given_name_latin1`` | no further information | O  |
+| ``family_name`` | ``family_name`` | M |
+| ``given_name`` | ``given_name`` | M  |
+| ``family_name_viz`` | ``family_name_viz`` | O  |
+| ``given_name_viz`` | ``given_name_viz`` | O  |
+| ``birth_date`` | ``birth_date`` | M  |
+| ``portrait`` | ``portrait`` | M  |
+| ``enrolment_portrait_image`` | ``enrolment_portrait_image`` | O  |
+| ``issue_date`` | ``issue_date`` | M  |
+| ``expiry_date`` | ``expiry_date`` | M  |
+| ``issuing_authority`` | ``issuing_authority`` | M  |
+| ``age_over_18`` | ``age_over_18`` | M  |
+| ``age_in_years`` | ``age_in_years`` | O  |
+| ``age_birth_year`` | ``age_birth_year`` | O  |
+| ``portrait_capture_date`` | ``portrait_capture_date`` | O  |
+| ``birthplace`` | ``birthplace`` | O  |
+| ``name_at_birth`` | ``name_at_birth`` | O  |
+| ``resident_address`` | ``resident_address`` | O  |
+| ``resident_city`` | ``resident_city`` | O  |
+| ``resident_postal_code`` | ``resident_postal_code`` | O  |
+| ``resident_country`` | ``resident_country`` | O  |
+| ``resident_city_latin1`` | ``resident_city_latin1`` | O  |
+| ``sex`` | ``sex`` | O  |
+| ``nationality`` | ``nationality`` | O  |
+| ``document_number`` | ``document_number`` | O  |
+| ``issuing_subdivision`` | ``issuing_subdivision`` | O  |
+| ``family_name_latin1`` | ``family_name_latin1`` | O  |
+| ``given_name_latin1`` | ``given_name_latin1`` | O  |
 
 #### 3.1.3 Specific PhotoID data elements
 
@@ -205,17 +259,17 @@ The specific PhotoID data elements of APTITUDE DTC SHALL be as defined in Table 
 
 | **Identifier** | **additional description** | **Presence in APTITUDE DTC** |
 | --- | --- | --- |
-| ``person_id`` | no further information | M |
-| ``birth_country`` | no further information | O |
-| ``birth_state`` | no further information | O |
-| ``birth_city`` | no further information | O |
-| ``administrative_number`` | no further information | O |
-| ``resident_street`` | no further information | O |
-| ``resident_house_number`` | no further information | O |
-| ``travel_document_type`` | no further information | O |
-| ``travel_document_number`` | no further information | O |
-| ``resident_state`` | no further information | O |
-| ``travel_document_mrz`` | no further information | O |
+| ``person_id`` | ``person_id`` | M |
+| ``birth_country`` | ``birth_country`` | O |
+| ``birth_state`` | ``birth_state`` | O |
+| ``birth_city`` | ``birth_city`` | O |
+| ``administrative_number`` | ``administrative_number`` | O |
+| ``resident_street`` | ``resident_street`` | O |
+| ``resident_house_number`` | ``resident_house_number`` | O |
+| ``travel_document_type`` | ``travel_document_type`` | O |
+| ``travel_document_number`` | ``travel_document_number`` | O |
+| ``resident_state`` | ``resident_state`` | O |
+| ``travel_document_mrz`` | ``travel_document_mrz`` | O |
 
 #### 3.1.4 ICAO PhotoID data elements
 
@@ -225,24 +279,24 @@ The ICAO PhotoID data elements of APTITUDE DTC SHALL be as defined in Table 3 an
 
 | **Identifier** | **EU additional description** | **Presence in APTITUDE DTC** |
 | --- | --- | --- |
-| ``version`` | no further information | M |
-| ``dg1`` | no further information | M |
-| ``dg2`` | no further information | M |
-| ``dg3`` | no further information | O |
-| ``dg4`` | no further information | O |
-| ``dg5`` | no further information | O |
-| ``dg6`` | no further information | O |
-| ``dg7`` | no further information | O |
-| ``dg8`` | no further information | O |
-| ``dg9`` | no further information | O |
-| ``dg10`` | no further information | O |
-| ``dg11`` | no further information | O |
-| ``dg12`` | no further information | O |
-| ``dg13`` | no further information | O |
-| ``dg14`` | no further information<br><br> *Note:* DG14 is mandatory in EU eMRTDs | M |
-| ``dg15`` | no further information<br><br> *Condition:* mandatory if available in eMRTD | C |
-| ``dg16`` | no further information | O |
-| ``sod`` | no further information | M |
+| ``version`` | ``version`` | M |
+| ``dg1`` | ``dg1`` | M |
+| ``dg2`` | ``dg2`` | M |
+| ``dg3`` | ``dg3`` | O |
+| ``dg4`` | ``dg4`` | O |
+| ``dg5`` | ``dg5`` | O |
+| ``dg6`` | ``dg6`` | O |
+| ``dg7`` | ``dg7`` | O |
+| ``dg8`` | ``dg8`` | O |
+| ``dg9`` | ``dg9`` | O |
+| ``dg10`` | ``dg10`` | O |
+| ``dg11`` | ``dg11`` | O |
+| ``dg12`` | ``dg12`` | O |
+| ``dg13`` | ``dg13`` | O |
+| ``dg14`` | ``dg14`` | O |
+| ``dg15`` | ``dg15`` | O |
+| ``dg16`` | ``dg16`` | O |
+| ``sod`` | ``sod`` | M |
 
 #### 3.1.5 Additonal document encryption
 
