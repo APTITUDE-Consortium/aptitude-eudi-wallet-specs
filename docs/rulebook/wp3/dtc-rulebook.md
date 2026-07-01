@@ -297,7 +297,7 @@ The ICAO PhotoID data elements of APTITUDE DTC SHALL be as defined in Table 3 an
 | ``dg12`` | ``dg12`` | O |
 | ``dg13`` | ``dg13`` | O |
 | ``dg14`` | ``dg14`` | O |
-| ``dg15`` | ``dg15`` | O |
+| ``dg15`` | no further information<br><br> *Condition:* mandatory if available in eMRTD | C |
 | ``dg16`` | ``dg16`` | O |
 | ``sod`` | ``sod`` | M |
 
