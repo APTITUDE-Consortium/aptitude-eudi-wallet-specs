@@ -13,6 +13,7 @@ Author(s):
 | 0.2 | 27-05-2026 | Updated based on design assumptions from D3.1  |
 | 0.3 | 29-05-2026 | addition of schema and mapping |
 | 0.4 | 12-06-2026 | synchronization with PhotoID specification in [ISO/IEC 23220-4] |
+| 0.5 | 31-06-2026 | align clause 2 and 3 with rulebook template, biblopgraphy added, trust model and revocation added |
 
 Feedback:
 
@@ -211,8 +212,8 @@ Member States MAY add additional namespaces under their responsibility. The name
 The next section define general and specific data elements of the PhotoID.
 These elements are given in tables of three columns:
 
-* The "Identifier" column is the reference of the data element specified in [ISO/IEC 23220-4].
-* The “additional description” column gives further information on the usage of the respective data element in the context APTITUDE DTC.
+* The "Identifier" column is the reference of the data element specified in clause 2.
+* The “data element identifier according to [ISO/IEC 23220-4]” column gives the mapping of the data element to the data element identifier specified in [ISO/IEC 23220-4].
 * The "Presence" column indicates whether the presence of the element on an APTITUDE DTC is mandatory (M), optional (O) or conditional (C). A mandatory data elemement SHALL be present in an APTITUTED DTC whereas an optional data element MAY be present. If a data element is conditional the respective condition is given in the specification. If the condition is met the data element SHALL be present.
 
 #### 3.1.2 General PhotoID data elements
@@ -221,7 +222,7 @@ The general PhotoID data elements of APTITUDE DTC SHALL be as defined in Table 1
 
 ##### Table 1 — general PhotoID data elements
 
-| **Identifier** | **data element identifier according to [ISO/IEC 23220-4]** | **Presence in APTITUDE DTC** |
+| **Identifier** | **data element identifier**<br> **according to [ISO/IEC 23220-4]** | **Presence in**<br> **APTITUDE DTC** |
 | --- | --- | --- |
 | ``family_name`` | ``family_name`` | M |
 | ``given_name`` | ``given_name`` | M  |
@@ -257,7 +258,7 @@ The specific PhotoID data elements of APTITUDE DTC SHALL be as defined in Table 
 
 ##### Table 2 — specific PhotoID data elements
 
-| **Identifier** | **additional description** | **Presence in APTITUDE DTC** |
+| **Identifier** | **data element identifier**<br> **according to [ISO/IEC 23220-4]** | **Presence in**<br> **APTITUDE DTC** |
 | --- | --- | --- |
 | ``person_id`` | ``person_id`` | M |
 | ``birth_country`` | ``birth_country`` | O |
@@ -277,7 +278,7 @@ The ICAO PhotoID data elements of APTITUDE DTC SHALL be as defined in Table 3 an
 
 ##### Table 3 — ICAO PhotoID data elements
 
-| **Identifier** | **EU additional description** | **Presence in APTITUDE DTC** |
+| **Identifier** | **data element identifier**<br> **according to [ISO/IEC 23220-4]** | **Presence in**<br> **APTITUDE DTC** |
 | --- | --- | --- |
 | ``version`` | ``version`` | M |
 | ``dg1`` | ``dg1`` | M |
@@ -308,7 +309,9 @@ t.b.d.
 
 ## 5 Trust Anchors
 
-The APTITUDE DTC is derived from the physical eMRTD LDS data groups and signed by the national issuing authority. The issuing authority SHALL sign the issuer signed data, i.e. the MSO, using a document signer key and certificate under the respective CSCA root certificate.
+The APTITUDE DTC is derived from the physical eMRTD LDS data groups and signed by the national issuing authority. The issuing authority SHALL sign the issuer signed data, i.e. the MSO, using a document signer key and certificate under the respective CSCA root certificate according to clause 2.2 in [ICAO-DTC-TR].
+
+*Note:* According to [ICAO-DTC-TR], the DTC signer certificate includes a dedicated OID in the extendedKeyUsage extension, i.e. ``2.23.136.1.1.12.1``. 
 
 It is recommended to make the CSCA root certificates of the EU Member States available to Relying Parties in the EUDI-Wallet ecosytem by a respective EU Trust List, i.e. APTITUDE DTC TL. In addition, it is recommended to make the content of the APTITUDE DTC TL available to Relying Parties outside of the EUDI-Wallet ecosystem by a VICAL according to [ISO/IEC 18013-5].
 
@@ -436,3 +439,4 @@ dtcOtherInfos [23] EXPLICIT DTCOtherInfos OPTIONAL,
 | [ISO/IEC 23220-4] | ISO/IEC TS 23220-4: Cards and Security Devices for Personal Identification – Building Blocks for Identity Management via Mobile Devices –Part 4: Protocols and services for the operational phase, First edition, 2026-04  |
 | [ISO/IEC 23220-2.2] | ISO/IEC TS 23220-2: Cards and Security Devices for Personal Identification – Building Blocks for Identity Management via Mobile Devices –Part 2: Data objects and encoding rules for generic eID systems, Second edition, 2026-04  |
  | [RFC 2119] | RFC 2119 - Key words for use in RFCs to Indicate Requirement Levels, S. Bradner, March 1997 |
+ | [ICAO-DTC-TR] ICAO Technical Report, Digital Travel Credentials (DTC) - Virtual Component Data Structure and PKI Mechanisms, Version 1.2, October 2020 |
