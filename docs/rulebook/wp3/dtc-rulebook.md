@@ -65,7 +65,7 @@ This section defines the functional and semantic scope of the data composing the
 The cross‑border value of a DTC critically depends on preserving full alignment with the ICAO data model while at the same time allowing extensions required for integration within the EUDI Wallet ecosystem and the eIDAS 2.0 framework.
 
 International interoperability and backward compatibility with existing border‑control infrastructure remain core requirements for any realistic DTC deployment.
-As a result, the ICAO LDS data model (DG1, DG2, SOD) constitutes the mandatory baseline.
+As a result, the ICAO LDS data model (DG1, DG2, DG14, DG15, SOD) constitutes the mandatory baseline.
 
 The objective is to preserve a single interoperable DTC representation that is:
 
