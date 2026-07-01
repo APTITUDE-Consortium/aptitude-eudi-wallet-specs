@@ -13,6 +13,7 @@ Author(s):
 | 0.2 | 27-05-2026 | Updated based on design assumptions from D3.1  |
 | 0.3 | 29-05-2026 | addition of schema and mapping |
 | 0.4 | 12-06-2026 | synchronization with PhotoID specification in [ISO/IEC 23220-4] |
+| 0.5 | 31-06-2026 | align clause 2 and 3 with rulebook template, biblopgraphy added, trust model and revocation added |
 
 Feedback:
 
@@ -64,7 +65,7 @@ This section defines the functional and semantic scope of the data composing the
 The cross‑border value of a DTC critically depends on preserving full alignment with the ICAO data model while at the same time allowing extensions required for integration within the EUDI Wallet ecosystem and the eIDAS 2.0 framework.
 
 International interoperability and backward compatibility with existing border‑control infrastructure remain core requirements for any realistic DTC deployment.
-As a result, the ICAO LDS data model (DG1, DG2, SOD) constitutes the mandatory baseline.
+As a result, the ICAO LDS data model (DG1, DG2, DG14, DG15, SOD) constitutes the mandatory baseline.
 
 The objective is to preserve a single interoperable DTC representation that is:
 
@@ -73,30 +74,20 @@ The objective is to preserve a single interoperable DTC representation that is:
 * suitable for both on-site border-control use cases and remote wallet-driven presentations,
 * capable of preserving the cryptographic binding between the virtual credential and the Wallet Secure Component (WSCD).
 
-#### Table 1 — General requirements
-
-| Index | Requirement specification |
-| --- | --- |
-| DTC_GR_01 | According to ICAO’s DTC-VC data model, the APTITUDE DTC SHALL contain DG1, DG2, SOD as from the physical eMRTD passport.|
-| DTC_GR_02 | According to ICAO's DTC-VC data model, the APTITUDE DTC MAY contain fields like: dtcSecurityInfo, DTCIdentifier, DTCDOE, and a signature structure for validation in case of eMRTD-PC bound    |
-| DTC_GR_03 | The APTITUDE DTC SHALL be encapsulated as a Verifiable Credential (VC), ensuring compatibility with the EUDI Wallet data formats (e.g., SD-JWT or mDoc acc. ISO 23220-4).  |
-| DTC_GR_04 | APTITUDE DTC MAY contain additional attributes beyond the derived eMRTD dataset |
-| DTC_GR_05 | The data model SHALL support Selective Disclosure, allowing the traveller to share only the strictly necessary attributes (e.g., only DG2 for biometric match) with Relying Parties.|
-
-#### Table 2 — Requirements on data model
+#### Table 1 — Requirements on data model
 
 | Index | Requirement specification |
 | --- | --- |
 | DTC_AE_01 | APTITUDE DTC SHALL use ISO/IEC 23220-4 PhotoID as the sole credential format. |
 | DTC_AE_02 | APTITUDE DTC SHALL use ISO/IEC 18013-5 mdoc-cbor encoding for the PhotoID credential. |
 | DTC_AE_03 | APTITUDE DTC SHALL support NFC engagement for proximity presentation and BLE data retrieval for Android and iOS. |
-| DTC_AE_04 | APTITUDE DTC SHALL preserve ICAO LDS semantics, including EF.DG1, EF.DG2, EF.SOD, and the PhotoID profile. |
+| DTC_AE_04 | APTITUDE DTC SHALL preserve ICAO LDS semantics, including EF.DG1, EF.DG2, DG14, DG15, EF.SOD, and the PhotoID profile. |
 | DTC_AE_05 | APTITUDE DTC SHALL adopt open, standard-based encoding to maximize interoperability and avoid vendor lock-in. |
 | DTC_AE_06 | APTITUDE DTC SHALL support a trust architecture that enables verification via ICAO CSCA/DS and EUDI Wallet / eIDAS trust anchors. |
 | DTC_AE_07 | APTITUDE DTC SHALL preserve the cryptographic binding between the virtual credential and the Wallet Secure Component across issuance, storage, presentation, and verification. |
 | DTC_AE_08 | APTITUDE DTC SHALL support selective disclosure and minimisation as a layer on top of the single PhotoID credential format, not by introducing a second credential format. |
 
-#### Table 3 — Requirements on issuing
+#### Table 2 — Requirements on issuing
 
 | Index | Requirement specification |
 | --- | --- |
@@ -107,11 +98,11 @@ The objective is to preserve a single interoperable DTC representation that is:
 | DTC_IS_05 | APTITUDE DTC SHALL be digitally signed by the national issuing authority acting as a Trusted Attestation Provider within the eIDAS 2.0 framework. |
 | DTC_IS_06 | The system SHALL support the complete lifecycle management of the DTC, including secure revocation and update mechanisms managed by the issuing authority. |
 
-#### Table 4 — Requirements on data elements
+#### Table 3 — Requirements on data elements
 
 | Index | Requirement specification |
 | --- | --- |
-| DTC_DM_01 | The APTITUDE DTC SHALL contain DG1, DG2, SOD as from the physical eMRTD passport |
+| DTC_DM_01 | The APTITUDE DTC SHALL contain DG1, DG2, DG14, DG15, SOD as from the physical eMRTD passport |
 | DTC_DM_02 | The APTITUDE DTC SHALL contain fields like: dtcSecurityInfo, DTCIdentifier, DTCDOE, and a signature structure for validation |
 | DTC_DM_03 | The APTITUDE DTC SHALL be encapsulated as a Verifiable Credential (VC), ensuring compatibility with the EUDI Wallet data formats (SD-JWT or MDOC-CBOR). |
 | DTC_DM_04 | The APTITUDE DTC SHALL include a cryptographic binding between the Virtual Component (VC) and the Physical Component (PC) stored in the WSCD. |
@@ -130,6 +121,8 @@ The objective is to preserve a single interoperable DTC representation that is:
 | ``person_id`` | according to [ISO/IEC 23220-4] | 1234567890 |
 | ``dg1`` | according to [ISO/IEC 23220-4] | P<ITA<<HARDT<<GIOVANNI<<<<<<<<<<<<<<<< |
 | ``dg2`` | according to [ISO/IEC 23220-4] | ... |
+| ``dg14`` | according to [ISO/IEC 23220-4] | ... |
+| ``dg15`` | according to [ISO/IEC 23220-4] | ... |
 
 ### 2.3 Optional attributes
 
@@ -211,8 +204,8 @@ Member States MAY add additional namespaces under their responsibility. The name
 The next section define general and specific data elements of the PhotoID.
 These elements are given in tables of three columns:
 
-* The "Identifier" column is the reference of the data element specified in [ISO/IEC 23220-4].
-* The “additional description” column gives further information on the usage of the respective data element in the context APTITUDE DTC.
+* The "Identifier" column is the reference of the data element specified in clause 2.
+* The “data element identifier according to [ISO/IEC 23220-4]” column gives the mapping of the data element to the data element identifier specified in [ISO/IEC 23220-4].
 * The "Presence" column indicates whether the presence of the element on an APTITUDE DTC is mandatory (M), optional (O) or conditional (C). A mandatory data elemement SHALL be present in an APTITUTED DTC whereas an optional data element MAY be present. If a data element is conditional the respective condition is given in the specification. If the condition is met the data element SHALL be present.
 
 #### 3.1.2 General PhotoID data elements
@@ -221,7 +214,7 @@ The general PhotoID data elements of APTITUDE DTC SHALL be as defined in Table 1
 
 ##### Table 1 — general PhotoID data elements
 
-| **Identifier** | **data element identifier according to [ISO/IEC 23220-4]** | **Presence in APTITUDE DTC** |
+| **Identifier** | **data element identifier**<br> **according to [ISO/IEC 23220-4]** | **Presence in**<br> **APTITUDE DTC** |
 | --- | --- | --- |
 | ``family_name`` | ``family_name`` | M |
 | ``given_name`` | ``given_name`` | M  |
@@ -257,7 +250,7 @@ The specific PhotoID data elements of APTITUDE DTC SHALL be as defined in Table 
 
 ##### Table 2 — specific PhotoID data elements
 
-| **Identifier** | **additional description** | **Presence in APTITUDE DTC** |
+| **Identifier** | **data element identifier**<br> **according to [ISO/IEC 23220-4]** | **Presence in**<br> **APTITUDE DTC** |
 | --- | --- | --- |
 | ``person_id`` | ``person_id`` | M |
 | ``birth_country`` | ``birth_country`` | O |
@@ -277,7 +270,7 @@ The ICAO PhotoID data elements of APTITUDE DTC SHALL be as defined in Table 3 an
 
 ##### Table 3 — ICAO PhotoID data elements
 
-| **Identifier** | **EU additional description** | **Presence in APTITUDE DTC** |
+| **Identifier** | **data element identifier**<br> **according to [ISO/IEC 23220-4]** | **Presence in**<br> **APTITUDE DTC** |
 | --- | --- | --- |
 | ``version`` | ``version`` | M |
 | ``dg1`` | ``dg1`` | M |
@@ -293,8 +286,8 @@ The ICAO PhotoID data elements of APTITUDE DTC SHALL be as defined in Table 3 an
 | ``dg11`` | ``dg11`` | O |
 | ``dg12`` | ``dg12`` | O |
 | ``dg13`` | ``dg13`` | O |
-| ``dg14`` | ``dg14`` | O |
-| ``dg15`` | ``dg15`` | O |
+| ``dg14`` | no further information<br><br> *Note:* DG14 is mandatory in EU eMRTDs | M |
+| ``dg15`` | no further information<br><br> *Condition:* mandatory if available in eMRTD | C |
 | ``dg16`` | ``dg16`` | O |
 | ``sod`` | ``sod`` | M |
 
@@ -308,7 +301,9 @@ t.b.d.
 
 ## 5 Trust Anchors
 
-The APTITUDE DTC is derived from the physical eMRTD LDS data groups and signed by the national issuing authority. The issuing authority SHALL sign the issuer signed data, i.e. the MSO, using a document signer key and certificate under the respective CSCA root certificate.
+The APTITUDE DTC is derived from the physical eMRTD LDS data groups and signed by the national issuing authority. The issuing authority SHALL sign the issuer signed data, i.e. the MSO, using a document signer key and certificate under the respective CSCA root certificate according to clause 2.2 in [ICAO-DTC-TR].
+
+*Note:* According to [ICAO-DTC-TR], the DTC signer certificate includes a dedicated OID in the extendedKeyUsage extension, i.e. ``2.23.136.1.1.12.1``.
 
 It is recommended to make the CSCA root certificates of the EU Member States available to Relying Parties in the EUDI-Wallet ecosytem by a respective EU Trust List, i.e. APTITUDE DTC TL. In addition, it is recommended to make the content of the APTITUDE DTC TL available to Relying Parties outside of the EUDI-Wallet ecosystem by a VICAL according to [ISO/IEC 18013-5].
 
@@ -436,3 +431,4 @@ dtcOtherInfos [23] EXPLICIT DTCOtherInfos OPTIONAL,
 | [ISO/IEC 23220-4] | ISO/IEC TS 23220-4: Cards and Security Devices for Personal Identification – Building Blocks for Identity Management via Mobile Devices –Part 4: Protocols and services for the operational phase, First edition, 2026-04  |
 | [ISO/IEC 23220-2.2] | ISO/IEC TS 23220-2: Cards and Security Devices for Personal Identification – Building Blocks for Identity Management via Mobile Devices –Part 2: Data objects and encoding rules for generic eID systems, Second edition, 2026-04  |
  | [RFC 2119] | RFC 2119 - Key words for use in RFCs to Indicate Requirement Levels, S. Bradner, March 1997 |
+ | [ICAO-DTC-TR] | ICAO Technical Report, Digital Travel Credentials (DTC) - Virtual Component Data Structure and PKI Mechanisms, Version 1.2, October 2020 |
