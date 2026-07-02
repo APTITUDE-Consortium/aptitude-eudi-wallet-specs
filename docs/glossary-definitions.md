@@ -3,7 +3,7 @@
 ## Roles
 
 roles:Attestation Provider (AP)
-: When not further qualified, a collective term for QEAA Provider, PuB-EAA Provider, or (non-qualified) EAA Provider. [ARF]
+: When not further qualified, a collective term for QEAA Provider, PuB-EAA Provider, or (non-qualified) EAA Provider [ARF], acting as an Issuer of electronic attestations of attributes.
 
 roles:Certificate Authority (CA)
 : An entity which is trusted by one or more parties in the EUDI Wallet ecosystem to create and seal certificates. [ARF]
@@ -15,7 +15,7 @@ roles:EAA Provider
 : Provider of EEAs.
 
 roles:Issuer Authority Certificate Authority (IACA)
-: The issuing authority/CA used in the mDL/mVRC trust infrastructure under ISO (may be shared with mDL or set up separately).
+: The issuing authority/CA used in the mDL/mVRC trust infrastructure under ISO standards (may be shared with mDL or set up separately).
 
 roles:List of Trusted Entities Provider (LoTE Provider)
 : The body that is responsible for the operation and/or management of the approval scheme under which the corresponding LoTE is published. [ETSI TS 119 602]
@@ -85,10 +85,10 @@ components:Authentic Source
 : A repository or system, held under the responsibility of a public sector body or private entity, that contains and provides attributes about a natural or legal person or object and that is considered to be a primary source of that information or recognised as authentic in accordance with Union law or national law, including administrative practice. [ARF]
 
 components:Authorisation Server
-: OAuth 2.0 / OpenID component responsible for authenticating the Holder and issuing tokens authorising access to protected endpoints.
+: OAuth 2.0 / OpenID component responsible for authenticating the User (Holder) and issuing tokens authorising access to protected endpoints.
 
 components:EUDI Wallet
-: European Digital Identity Wallet used in APTITUDE pilots.
+: European Digital Identity Wallet, in accordance with Regulation (EU) 910/2014 (as amended), used in APTITUDE pilots.
 
 components:Keystore
 : A hardware-backed repository and service in which non-critical cryptographic assets are generated, stored, and used exclusively inside a dedicated hardware security boundary. [ARF]
