@@ -17,7 +17,7 @@ When submitting the report, include the following:
 - Tested component role: Issuer, Verifier, Wallet Unit, or combination
 - Targeted APTITUDE RFCs and profiles
 - Date of test execution
-- Downloaded conformance statement report
+- Attach the downloaded conformance statement report
 - Relevant comments, limitations, or known issues
 
 ## Related Guidance
