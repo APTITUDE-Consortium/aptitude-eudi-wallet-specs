@@ -2,7 +2,7 @@
 
 This document defines the acceptance criteria that an Attestation Schema must satisfy before being considered complete and ready for review. It provides a common reference for assessing the completeness, consistency and quality of the artefact.
 
-## Coverage 
+## Coverage
 
 - All Rulebook attributes are represented in the schema.
 - No undocumented attributes are included.
