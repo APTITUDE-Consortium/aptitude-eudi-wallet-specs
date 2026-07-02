@@ -6,7 +6,7 @@ To demonstrate conformance to the relevant APTITUDE RFCs, participants should su
 
 The report may be submitted through one of the following channels:
 
-- Email to the WP2 leads
+- Email to the WP2 leads (using the contact details provided during onboarding)
 - APTITUDE Slack support channel: `#itb-support`
 
 ## Required Information
