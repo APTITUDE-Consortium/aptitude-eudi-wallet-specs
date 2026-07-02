@@ -2,7 +2,7 @@
 
 This document defines the acceptance criteria that a Rulebook must satisfy before being considered complete and ready for review. It provides a common reference for assessing the completeness, consistency and quality of the artefact.
 
-### Scope & Purpose
+## Scope & Purpose
 
 - The purpose of the credential is clearly defined:
   - The document explicitly states the business problem addressed by the credential.
@@ -17,7 +17,7 @@ This document defines the acceptance criteria that a Rulebook must satisfy befor
   - The operational context in which the credential is intended to be used is described.
   - Relationships with other credentials, systems or business processes are documented (if applicable).
 
-### Lifecycle & Actors
+## Lifecycle & Actors
 
 - Actors are identified:
   - Issuer is identified.
@@ -42,7 +42,7 @@ This document defines the acceptance criteria that a Rulebook must satisfy befor
   - Usage limitations are documented.
   - Environmental or operational constraints are documented (if applicable).
 
-### Attribute Definition
+## Attribute Definition
 
 - Mandatory attributes are defined.
 - Optional attributes are defined.
@@ -56,7 +56,7 @@ This document defines the acceptance criteria that a Rulebook must satisfy befor
   - `data type` — e.g. string, boolean, date, integer.
   - `example value` — a concrete, realistic value.
 
-### Trust
+## Trust
 
 - Trust anchor requirements are documented:
   - Trust anchor(s) are identified.
@@ -67,7 +67,7 @@ This document defines the acceptance criteria that a Rulebook must satisfy befor
   - Credential status validation process is documented.
   - Justification is provided when revocation is not applicable.
 
-### Encoding
+## Encoding
 
 - Credential format is identified:
   - Supported credential format(s) are explicitly identified (e.g. `mdoc`, `SD-JWT VC`).
@@ -83,7 +83,7 @@ This document defines the acceptance criteria that a Rulebook must satisfy befor
 - At least one encoding example is provided:
   - The example conforms to the defined encoding rules.
 
-### Compliance & Standards Alignment
+## Compliance & Standards Alignment
 
 - Compliance requirements are documented:
   - Applicable compliance obligations are identified.
@@ -97,13 +97,13 @@ This document defines the acceptance criteria that a Rulebook must satisfy befor
   - Each deviation is explicitly identified.
   - The rationale for the deviation is documented.
 
-### Traceability
+## Traceability
 
 - References to the related Attestation Schema are provided.
 - References to related RFCs are provided (if applicable).
 - References are valid and consistent with the corresponding artefacts.
 
-### Governance
+## Governance
 
 - All TODOs and TBDs are resolved.
 - Review comments are addressed:
