@@ -338,7 +338,7 @@ Context: Traveller presents their DTC from the EUDIW at the border control point
 
 Flow: proximity (device engagement / NFC or mdoc proximity per chosen implementation). D3.1 notes both ISO/IEC 18013‑5 (EUDIW proximity) and ISO/IEC 14443/APDU (ICAO backwards compatibility) and does not mandate one universal mode — the pilot must specify which mode(s) will be tested.
 
-Requested attributes: APTITUDE DTC (org.iso.23220.photoid.1) — priority attributes for on‑site verification and biometric matching: dg2 (portrait), dg1 (biographic / MRZ), sod, dg14 (if the Member State uses it for inspection), version, person_id, expiry_date, issuing_authority. age_over_18 and portrait/enrolment_portrait_image are optional depending on the check (age verification, biometric fallback). 
+Requested attributes: APTITUDE DTC (org.iso.23220.photoid.1) — priority attributes for on‑site verification and biometric matching: dg2 (portrait), dg1 (biographic / MRZ), sod, dg14 (if the Member State uses it for inspection), version, person_id, expiry_date, issuing_authority. age_over_18 and portrait/enrolment_portrait_image are optional depending on the check (age verification, biometric fallback).
 
 [//]: # (Chosen attributes reflect rulebook §2 priorities and D3.1 emphasis on DG2/SOD for biometric anchoring.)
 
