@@ -335,7 +335,7 @@ APTITUDE DTC:
 
 APTITUDE DTC:
 
-* General PhotoID data elements: ``family_name``, ``given_name``, ``birth_date``, ``issue_date``, ``expiry_date``, ``issuing_authority``, ``document_number``, ``age_over_18``, ``portrait`` 
+* General PhotoID data elements: ``family_name``, ``given_name``, ``birth_date``, ``issue_date``, ``expiry_date``, ``issuing_authority``, ``document_number``, ``age_over_18``, ``portrait``
 * Special PhotoID data elements: ``travel_document_mrz``
 
 The request may include ``age_over_18`` or ``portrait`` if required by the Member State for biometric pre‑matching.
@@ -352,7 +352,7 @@ The request may include ``age_over_18`` or ``portrait`` if required by the Membe
 
 **Flow:** proximity (device engagement / NFC or mdoc proximity per chosen implementation). D3.1 notes both ISO/IEC 18013‑5 (EUDIW proximity) and ISO/IEC 14443/APDU (ICAO backwards compatibility) and does not mandate one universal mode — the pilot must specify which mode(s) will be tested.
 
-**Requested attributes:** 
+**Requested attributes:**
 
 APTITUDE DTC
 
@@ -378,7 +378,7 @@ Priority attributes for on‑site verification and biometric matching are ``dg2`
 
 APTITUDE DTC
 
-* General PhotoID data elements: ``family_name``, ``given_name``, ``birth_date``, ``issue_date``, ``expiry_date``, ``issuing_authority``, ``document_number``, ``portrait`` 
+* General PhotoID data elements: ``family_name``, ``given_name``, ``birth_date``, ``issue_date``, ``expiry_date``, ``issuing_authority``, ``document_number``, ``portrait``
 * Special PhotoID data elements: ``travel_document_mrz``
 
 [//]: # (D3.1 does not define which attributes a receiving non‑EU authority will require; this baseline reflects rulebook §2 mandatory/priority elements typically needed for equivalence to an eMRTD.)
