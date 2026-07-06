@@ -302,21 +302,32 @@ This section briefly describes how attestions of type *APTITUDE DTC* are intende
 ### 4.1 Airline-mediated remote pre‑clearance (airline registers passenger with Border Control)
 
 Context: Passenger who booked an international flight checks in remotely (app or website) and the airline must register the passenger with the Member State Border Authority for pre‑clearance (advance checks / pre‑assessment).
+
 [//]: # (See D3.1: Stock‑Taking, Analysis and Specifications — pilot use cases and advance submission, 27‑02‑2026.)
+
 Flow: remote (airline backend → Border Authority submission endpoint / Traveller Router).
+
 [//]: # (D3.1 documents airline‑mediated pre‑assessment patterns but does not mandate a single transport/envelope.)
+
 Requested attributes: APTITUDE DTC (org.iso.23220.photoid.1) — family_name, given_name, birth_date, issue_date, expiry_date, issuing_authority, document_number, travel_document_mrz, dg1, dg2, dg14, sod.
+
 [//]: # (These are the rulebook §2 mandatory/priority attributes; D3.1 does not define a stricter per‑scenario list.)
+
 Post‑processing: the airline backend (or its designated submission service) MUST verify holder proof/possession assertions from the wallet (if applicable), validate the DTC signature and certificate chain and check revocation/status using the applicable trust anchors (CSCA/DS and/or EU trust lists). The airline then packages the verified data for server‑to‑server submission to the Border Authority (mapping of DTC elements to the receiving envelope is a Member State decision; legacy readers may require extraction/encapsulation into ICAO DTCContentInfo/ASN.1). The Border Authority performs full verification (passive authentication: SOD/DG hash checks, PKI chain, revocation/status) and ingests dg1, dg2, dg14 and sod for registration and risk checks.
+
 [//]: # (D3.1 describes the pre‑assessment use case and the need for an interoperable transmission protocol; it does not mandate a single packaging mechanism — implementers must document the chosen transport and envelope.)
 
 ### 4.2 Traveller direct pre‑registration (traveller → Member State pre‑travel system)
 
 Context: EU national uses their EUDIW or the EU Digital Travel Application to submit their DTC directly to a Member State’s pre‑travel system for advance checks within a 36‑hour window.
+
 [//]: # (See D3.1 §§1.2 and 3.2 for traveller‑initiated advance submission.)
+
 Flow: remote (wallet → Traveller Router or direct submission endpoint → Border backend). The exact presentation protocol (OpenID4VP, mdoc, Traveller Router) is not mandated in D3.1 and must be chosen by implementers.
 Requested attributes: APTITUDE DTC (org.iso.23220.photoid.1) — family_name, given_name, birth_date, issue_date, expiry_date, issuing_authority, document_number, travel_document_mrz, dg1, dg2, sod. Optionally include age_over_18, portrait / enrolment_portrait_image if required by the Member State for biometric pre‑matching.
+
 [//]: # (These follow the rulebook §2 attribute set; D3.1 does not specify per‑scenario attribute subsets.)
+
 Post‑processing: the receiving Border backend validates the wallet presentation (proof of possession), verifies the DTC signature and PKI chain and checks revocation/status. Verification outcome drives pre‑assessment workflows (EES/ETIAS/API/SIS/SLTD queries). If selective disclosure was used, the backend MUST verify integrity (for example by checking SOD/DG hashes or using a documented bridging mechanism) before accepting partial disclosures.
 
 [//]: # (D3.1 highlights the selective‑disclosure vs LDS integrity tension but does not prescribe a single resolution, so the Member State policy must define acceptance criteria.)
@@ -328,16 +339,22 @@ Context: Traveller presents their DTC from the EUDIW at the border control point
 Flow: proximity (device engagement / NFC or mdoc proximity per chosen implementation). D3.1 notes both ISO/IEC 18013‑5 (EUDIW proximity) and ISO/IEC 14443/APDU (ICAO backwards compatibility) and does not mandate one universal mode — the pilot must specify which mode(s) will be tested.
 
 Requested attributes: APTITUDE DTC (org.iso.23220.photoid.1) — priority attributes for on‑site verification and biometric matching: dg2 (portrait), dg1 (biographic / MRZ), sod, dg14 (if the Member State uses it for inspection), version, person_id, expiry_date, issuing_authority. age_over_18 and portrait/enrolment_portrait_image are optional depending on the check (age verification, biometric fallback). 
+
 [//]: # (Chosen attributes reflect rulebook §2 priorities and D3.1 emphasis on DG2/SOD for biometric anchoring.)
+
 Post‑processing: the proximity reader / e‑gate performs device engagement, retrieves the DTC, validates SOD / passive authentication (signature verification and PKI chain to CSCA/PKD), checks revocation/status and carries out biometric 1:1 matching of the live capture to dg2. The gate/backend then forwards verification results and any required DGs (dg1/dg2/sod and selected metadata) to backend systems for database checks (EES, SIS, SLTD) and final decision. The pilot MUST state whether translation to ASN.1 DTCContentInfo is required for legacy inspection systems; D3.1 signals this requirement as a possible necessity but does not fix the mapping responsibilities.
 
 ### 4.4 Cross‑jurisdiction proximity presentation (EU traveller arriving outside Schengen — optional)
 
 Context: EU national with an EUDIW‑stored DTC presents the credential in proximity to a non‑EU local border authority to test cross‑jurisdiction interoperability.
+
 [//]: # (D3.1 lists the outside‑Schengen arrival scenario as optional and highlights interoperability constraints.)
+
 Flow: proximity (wallet → non‑EU verifier). The destination’s native inspection interface determines the mode (NFC/APDU, mdoc, or other). D3.1 notes that non‑EU systems may expect ICAO ASN.1 structures and PKI anchors.
 Requested attributes: APTITUDE DTC (org.iso.23220.photoid.1) family_name, given_name, birth_date, dg1, dg2, dg14, sod, version, expiry_date, travel_document_mrz.
+
 [//]: # (D3.1 does not define which attributes a receiving non‑EU authority will require; this baseline reflects rulebook §2 mandatory/priority elements typically needed for equivalence to an eMRTD.)
+
 Post‑processing: the non‑EU verifier validates the credential using ICAO PKI (CSCA/DS via PKD) and its local acceptance policy. If the receiving system requires ICAO ASN.1 DTCContentInfo, an intermediate gateway or the wallet/traveller router may need to extract dg1/dg2/sod and encapsulate them accordingly; D3.1 documents that such translation and trust alignment are common cross‑jurisdiction issues but does not prescribe which actor must perform the translation. If the verifier cannot validate under available trust anchors, the fallback/acceptance policy is a matter for the receiving authority.
 
 ## 5 Trust Anchors
