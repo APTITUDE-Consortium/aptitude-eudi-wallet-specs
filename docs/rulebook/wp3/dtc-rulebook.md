@@ -13,7 +13,7 @@ Author(s):
 | 0.2 | 27-05-2026 | Updated based on design assumptions from D3.1  |
 | 0.3 | 29-05-2026 | addition of schema and mapping |
 | 0.4 | 12-06-2026 | synchronization with PhotoID specification in [ISO/IEC 23220-4] |
-| 0.5 | 31-06-2026 | align clause 2 and 3 with rulebook template, biblopgraphy added, trust model and revocation added |
+| 0.5 | 01-07-2026 | align clause 2 and 3 with rulebook template, biblopgraphy added, trust model and revocation added |
 
 Feedback:
 
