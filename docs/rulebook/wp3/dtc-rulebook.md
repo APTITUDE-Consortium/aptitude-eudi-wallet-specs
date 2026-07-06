@@ -317,7 +317,8 @@ Context: EU national uses their EUDIW or the EU Digital Travel Application to su
 Flow: remote (wallet → Traveller Router or direct submission endpoint → Border backend). The exact presentation protocol (OpenID4VP, mdoc, Traveller Router) is not mandated in D3.1 and must be chosen by implementers.
 Requested attributes: APTITUDE DTC (org.iso.23220.photoid.1) — family_name, given_name, birth_date, issue_date, expiry_date, issuing_authority, document_number, travel_document_mrz, dg1, dg2, sod. Optionally include age_over_18, portrait / enrolment_portrait_image if required by the Member State for biometric pre‑matching.
 [//]: # (These follow the rulebook §2 attribute set; D3.1 does not specify per‑scenario attribute subsets.)
-Post‑processing: the receiving Border backend validates the wallet presentation (proof of possession), verifies the DTC signature and PKI chain and checks revocation/status. Verification outcome drives pre‑assessment workflows (EES/ETIAS/API/SIS/SLTD queries). If selective disclosure was used, the backend MUST verify integrity (for example by checking SOD/DG hashes or using a documented bridging mechanism) before accepting partial disclosures. 
+Post‑processing: the receiving Border backend validates the wallet presentation (proof of possession), verifies the DTC signature and PKI chain and checks revocation/status. Verification outcome drives pre‑assessment workflows (EES/ETIAS/API/SIS/SLTD queries). If selective disclosure was used, the backend MUST verify integrity (for example by checking SOD/DG hashes or using a documented bridging mechanism) before accepting partial disclosures.
+
 [//]: # (D3.1 highlights the selective‑disclosure vs LDS integrity tension but does not prescribe a single resolution, so the Member State policy must define acceptance criteria.)
 
 ### 4.3 Proximity presentation at border control (on‑site verification / e‑gate or officer kiosk)
