@@ -309,7 +309,7 @@ This section briefly describes how attestions of type *APTITUDE DTC* are intende
 
 [//]: # (D3.1 documents airline‑mediated pre‑assessment patterns but does not mandate a single transport/envelope.)
 
-**Requested attributes:** 
+**Requested attributes:**
 
 APTITUDE DTC:
 
