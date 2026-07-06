@@ -324,7 +324,9 @@ Post‑processing: the receiving Border backend validates the wallet presentatio
 ### 4.3 Proximity presentation at border control (on‑site verification / e‑gate or officer kiosk)
 
 Context: Traveller presents their DTC from the EUDIW at the border control point (e‑gate, kiosk or officer reader) for immediate verification and biometric match. (D3.1 describes proximity presentation requirements and the need to reconcile ISO/IEC 18013‑5 and ICAO NFC/APDU approaches.)
+
 Flow: proximity (device engagement / NFC or mdoc proximity per chosen implementation). D3.1 notes both ISO/IEC 18013‑5 (EUDIW proximity) and ISO/IEC 14443/APDU (ICAO backwards compatibility) and does not mandate one universal mode — the pilot must specify which mode(s) will be tested.
+
 Requested attributes: APTITUDE DTC (org.iso.23220.photoid.1) — priority attributes for on‑site verification and biometric matching: dg2 (portrait), dg1 (biographic / MRZ), sod, dg14 (if the Member State uses it for inspection), version, person_id, expiry_date, issuing_authority. age_over_18 and portrait/enrolment_portrait_image are optional depending on the check (age verification, biometric fallback). 
 [//]: # (Chosen attributes reflect rulebook §2 priorities and D3.1 emphasis on DG2/SOD for biometric anchoring.)
 Post‑processing: the proximity reader / e‑gate performs device engagement, retrieves the DTC, validates SOD / passive authentication (signature verification and PKI chain to CSCA/PKD), checks revocation/status and carries out biometric 1:1 matching of the live capture to dg2. The gate/backend then forwards verification results and any required DGs (dg1/dg2/sod and selected metadata) to backend systems for database checks (EES, SIS, SLTD) and final decision. The pilot MUST state whether translation to ASN.1 DTCContentInfo is required for legacy inspection systems; D3.1 signals this requirement as a possible necessity but does not fix the mapping responsibilities.
