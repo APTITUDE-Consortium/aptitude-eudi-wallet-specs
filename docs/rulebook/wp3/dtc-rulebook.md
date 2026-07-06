@@ -301,19 +301,25 @@ This section briefly describes how attestions of type *APTITUDE DTC* are intende
 
 ### 4.1 Airline-mediated remote pre‑clearance (airline registers passenger with Border Control)
 
-Context: Passenger who booked an international flight checks in remotely (app or website) and the airline must register the passenger with the Member State Border Authority for pre‑clearance (advance checks / pre‑assessment).
+**Context:** Passenger who booked an international flight checks in remotely (app or website) and the airline must register the passenger with the Member State Border Authority for pre‑clearance (advance checks / pre‑assessment), see [APTITUDE-D3.1].
 
 [//]: # (See D3.1: Stock‑Taking, Analysis and Specifications — pilot use cases and advance submission, 27‑02‑2026.)
 
-Flow: remote (airline backend → Border Authority submission endpoint / Traveller Router).
+**Flow:** remote (airline backend → Border Authority submission endpoint / Traveller Router).
 
 [//]: # (D3.1 documents airline‑mediated pre‑assessment patterns but does not mandate a single transport/envelope.)
 
-Requested attributes: APTITUDE DTC (org.iso.23220.photoid.1) — family_name, given_name, birth_date, issue_date, expiry_date, issuing_authority, document_number, travel_document_mrz, dg1, dg2, dg14, sod.
+**Requested attributes:** 
+
+APTITUDE DTC:
+
+* General PhotoID data elements: family_name, given_name, birth_date, issue_date, expiry_date, issuing_authority, document_number
+* Special PhotoID data elements: travel_document_mrz
+* ICAO PhotoID data elements: dg1, dg2, dg14, sod.
 
 [//]: # (These are the rulebook §2 mandatory/priority attributes; D3.1 does not define a stricter per‑scenario list.)
 
-Post‑processing: the airline backend (or its designated submission service) MUST verify holder proof/possession assertions from the wallet (if applicable), validate the DTC signature and certificate chain and check revocation/status using the applicable trust anchors (CSCA/DS and/or EU trust lists). The airline then packages the verified data for server‑to‑server submission to the Border Authority (mapping of DTC elements to the receiving envelope is a Member State decision; legacy readers may require extraction/encapsulation into ICAO DTCContentInfo/ASN.1). The Border Authority performs full verification (passive authentication: SOD/DG hash checks, PKI chain, revocation/status) and ingests dg1, dg2, dg14 and sod for registration and risk checks.
+**Post‑processing:** the airline backend (or its designated submission service) MUST verify holder proof/possession assertions from the wallet (if applicable), validate the DTC signature and certificate chain and check revocation/status using the applicable trust anchors (CSCA/DS and/or EU trust lists). The airline then packages the verified data for server‑to‑server submission to the Border Authority (mapping of DTC elements to the receiving envelope is a Member State decision; legacy readers may require extraction/encapsulation into ICAO DTCContentInfo/ASN.1). The Border Authority performs full verification (passive authentication: SOD/DG hash checks, PKI chain, revocation/status) and ingests dg1, dg2, dg14 and sod for registration and risk checks.
 
 [//]: # (D3.1 describes the pre‑assessment use case and the need for an interoperable transmission protocol; it does not mandate a single packaging mechanism — implementers must document the chosen transport and envelope.)
 
@@ -484,7 +490,7 @@ dtcOtherInfos [23] EXPLICIT DTCOtherInfos OPTIONAL,
 ## 8 References
 
 | **Item Reference** | **Standard name/details**|
-| --- | --- |
+| -----              | ----- |
 | [ISO/IEC 18013-5] |  ISO/IEC 18013-5, Personal identification --- ISO-compliant driving licence - Part 5: Mobile driving licence (mDL) application, First edition, 2021-09 |
 | [ISO/IEC 18013-5.2] |  ISO/IEC 18013-5, Personal identification --- ISO-compliant driving licence - Part 5: Mobile driving licence (mDL) application, second edition, 2026-xx (Status DIS) |
 | [ISO/IEC 23220-4] | ISO/IEC TS 23220-4: Cards and Security Devices for Personal Identification – Building Blocks for Identity Management via Mobile Devices –Part 4: Protocols and services for the operational phase, First edition, 2026-04  |
@@ -492,3 +498,4 @@ dtcOtherInfos [23] EXPLICIT DTCOtherInfos OPTIONAL,
  | [RFC 2119] | RFC 2119 - Key words for use in RFCs to Indicate Requirement Levels, S. Bradner, March 1997 |
  | [ICAO-DTC-VC-TR] | ICAO Technical Report, Digital Travel Credentials (DTC) - Virtual Component Data Structure and PKI Mechanisms, Version 1.2, October 2020 |
  | [ICAO-DTC-PC-TR] | ICAO Technical Report, Digital Travel Credentials (DTC) - Physical Component and Protocols, Version 1.1, October 2022 |
+ | [APTITUDE-D3.1] | APTITUDE, D3.1: Stock‑Taking, Analysis and Specifications — pilot use cases and advance submission, 27‑02‑2026. |
