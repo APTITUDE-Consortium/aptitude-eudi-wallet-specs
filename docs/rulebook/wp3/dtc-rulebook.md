@@ -385,6 +385,33 @@ APTITUDE DTC
 
 **Post‑processing:** the non‑EU verifier validates the credential using ICAO PKI (CSCA/DS via PKD) and its local acceptance policy. If the receiving system requires ICAO ASN.1 DTCContentInfo, an intermediate gateway or the wallet/traveller router may need to extract dg1/dg2/sod and encapsulate them accordingly; D3.1 documents that such translation and trust alignment are common cross‑jurisdiction issues but does not prescribe which actor must perform the translation. If the verifier cannot validate under available trust anchors, the fallback/acceptance policy is a matter for the receiving authority.
 
+### 4.5 Booklet-based proximity presentation to legacy eGate (“fallback”)
+
+**Context:** Use casess 4.1 or 4.2 have succeeded such that traveler has been successfully registered. Traveler approaches legacy eGate in order to cross border, with booklet passport.
+
+**Flow:**
+
+Option 1: MRZ Scan (traditional)
+
+* Scan the Machine Readable Zone (MRZ) on the travel document.
+* Open the chip.
+* Link the document to the pre-registration data by matching dg1 for example
+* Perform biometric verification.
+* Active/Chip Authentication
+
+Option 2: Tap&go
+
+* biometric identification.
+* Link person to the pre-registration data
+* open the chip with dg1 from pre-registration data
+* Active/Chip Authentication
+
+**Requested attributes:**
+
+APTITUDE DTC (see pre-registration use cases 4.1 or 4.2)
+
+* ICAO PhotoID data elements: ``dg1``, ``dg2``, ``dg14``, ``sod``
+
 ## 5 Trust Anchors
 
 The APTITUDE DTC is derived from the physical eMRTD LDS data groups and signed by the national issuing authority. The issuing authority SHALL sign the issuer signed data, i.e. the MSO, using a document signer key and certificate under the respective CSCA root certificate according to clause 2.2 in [ICAO-DTC-VC-TR].
