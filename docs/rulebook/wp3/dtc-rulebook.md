@@ -3,9 +3,10 @@
 Author(s):
 
 * Matthias Schwan, bdr, Germany
-* ... , IPZS, Italy
-* ... , ANTS, France
-* ... , INCM, Portugal
+* Corrado Guidobaldi , IPZS, Italy
+* Amir Sharif, fbk, Italy
+* Anthony Carmoy, ANTS, France
+* Antonio Maio , INCM, Portugal
   
 | Version | Date | Description |
 |---------|------------|------------|
@@ -14,21 +15,23 @@ Author(s):
 | 0.3 | 29-05-2026 | addition of schema and mapping |
 | 0.4 | 12-06-2026 | synchronization with PhotoID specification in [ISO/IEC 23220-4] |
 | 0.5 | 01-07-2026 | align clause 2 and 3 with rulebook template, biblopgraphy added, trust model and revocation added |
+| 0.6 | 08-07-2026 | use cases added in clause 4, editorial changes |
 
 Feedback:
 
 * <matthias.schwan@bdr.de>
-* ...
-* ...
-* ...
+* <c.guidobaldi@ipzs.it>
+* <asharif@fbk.eu>
+* <anthony.carmoy@interieur.gouv.fr>
+* <antonio.maio@incm.pt>
 
 ## 1 Introduction
 
 ### 1.1 Document scope and purpose
 
-This Attestation Rulebook defines the Digital Travel Credential (DTC) as an electronic attestation of attributes for the EUDI Wallet ecosystem. The DTC enables travellers to store and present identity and travel authorization data in their Wallet Unit for border control and travel-related use cases.
+This Attestation Rulebook defines the Digital Travel Credential (DTC) as an electronic attestation of attributes for the EUDI Wallet ecosystem. The DTC enables travellers to store and present identity data in their Wallet Unit for border control and travel-related use cases.
 
-The primary objective of the DTC is to facilitate secure and privacy-preserving identity verification and travel document validation at border crossing points and during travel. The DTC is designed to complement existing physical travel documents (e.g. passports, visas) by providing a digital equivalent that supports selective disclosure, offline presentation and strong cryptographic verification.
+The primary objective of the DTC is to facilitate secure and privacy-preserving identity verification and travel document validation at border crossing points and during travel. The DTC is designed to complement existing physical travel documents (e.g. passports, visas) by providing a digital equivalent that supports selective disclosure, offline and online presentation and strong cryptographic verification.
 
 Within the Aptitude context, the target model is the ICAO DTC Type 2, bound to a physical eMRTD and derived using mechanisms aligned with European regulations and ICAO guidelines. Type 2 is therefore considered the primary and preferred implementation model. However, the framework may also support ICAO DTC Type 1 where it is based on an LDS (Logical Data Structure) signed by the official passport authority. In such cases, the DTC is encapsulated within an attestation stored in the EUDI Wallet, ensuring that it remains cryptographically linked to a physical component and provides sufficient assurance for border control use cases.
 
@@ -60,12 +63,7 @@ Terminologies and definitions within Aptitude project are listed in [APTITUDE Gl
 
 ### 2.1 Introduction
 
-This section defines the functional and semantic scope of the data composing the APTITUDE Digital Travel Credential (DTC), based on the evidence collected during the stock‑taking phase.
-
-The cross‑border value of a DTC critically depends on preserving full alignment with the ICAO data model while at the same time allowing extensions required for integration within the EUDI Wallet ecosystem and the eIDAS 2.0 framework.
-
-International interoperability and backward compatibility with existing border‑control infrastructure remain core requirements for any realistic DTC deployment.
-As a result, the ICAO LDS data model (DG1, DG2, DG14, DG15, SOD) constitutes the mandatory baseline.
+This section defines the functional and semantic scope of the data composing the APTITUDE Digital Travel Credential (DTC), based on the evidence collected during the stock‑taking phase. The cross‑border value of a DTC critically depends on preserving full alignment with the ICAO data model while at the same time allowing extensions required for integration within the EUDI Wallet ecosystem and the eIDAS 2.0 framework. Minimization of impact on existing border‑control infrastructure would be valuable for DTC deployment. As a result, the ICAO LDS data model (DG1, DG2, DG14, DG15, SOD) constitutes the mandatory baseline.
 
 The objective is to preserve a single interoperable DTC representation that is:
 
@@ -325,7 +323,7 @@ If compliance to ICAO DTC-VC Type 1 is required, a reader may after succsessfull
 
 ### 7.1 ICAO based encoding
 
-The ICAO based encoding for DTC-VC is defined in [ICAO-DTC-VC-TR] and encoding for DTC-PC is defined in [ICAO-DTC-PC-TR].
+The ICAO based encoding for DTC-VC is defined in [ICAO-DTC-VC-TR] and encoding for DTC-PC is defined in [ICAO-DTC-PC-TR]. The ASN.1 definition below reproduces the generic ICAO DTC-VC encoding. For APTITUDE DTC, only the eMRTD-bound encoding is applicable. The eMRTD-PC-bound encoding is retained for comparison with the ICAO Type 2 model, while the PC-bound encoding is outside the scope of the current profile.
 
 ```asn.1
 DTCContentInfo ::= SEQUENCE {
