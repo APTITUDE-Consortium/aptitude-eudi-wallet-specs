@@ -79,7 +79,7 @@ The objective is to preserve a single interoperable DTC representation that is:
 | DTC_AE_01 | APTITUDE DTC SHALL use ISO/IEC 23220-4 PhotoID as the sole credential format. |
 | DTC_AE_02 | APTITUDE DTC SHALL use ISO/IEC 18013-5 mdoc-cbor encoding for the PhotoID credential. |
 | DTC_AE_03 | APTITUDE DTC SHALL support NFC engagement for proximity presentation and BLE data retrieval for Android and iOS. |
-| DTC_AE_04 | APTITUDE DTC SHALL preserve ICAO LDS semantics, including EF.DG1, EF.DG2, DG14, DG15, EF.SOD, and the PhotoID profile. |
+| DTC_AE_04 | APTITUDE DTC SHALL preserve ICAO LDS semantics, including e.g. EF.DG1, EF.DG2, DG14, EF.SOD, and the PhotoID profile. |
 | DTC_AE_05 | APTITUDE DTC SHALL adopt open, standard-based encoding to maximize interoperability and avoid vendor lock-in. |
 | DTC_AE_06 | APTITUDE DTC SHALL support a trust architecture that enables verification via ICAO CSCA/DS and EUDI Wallet / eIDAS trust anchors. |
 | DTC_AE_07 | APTITUDE DTC SHALL preserve the cryptographic binding between the virtual credential and the Wallet Secure Component across issuance, storage, presentation, and verification. |
@@ -89,23 +89,18 @@ The objective is to preserve a single interoperable DTC representation that is:
 
 | Index | Requirement specification |
 | --- | --- |
-| DTC_IS_01 | The APTITUDE DTC SHALL be issued exclusively by the National Passport Issuing Authority of the Member State that issued the physical eMRTD. |
-| DTC_IS_02 | APTITUDE DTC SHALL be derived from eMRTD chip data (Logical Data Structure - LDS) ensuring a cryptographic link to the physical travel document. |
-| DTC_IS_03 | APTITUDE DTC SHALL be derived both from newly issued and already issued eMRTDs, except where the national authentic sources require a restriction. |
-| DTC_IS_04 | The issuance process SHALL result in an ICAO DTC Type 2 (eMRTD-PC bound), where the virtual component is cryptographically linked to a physical secure element within the EUDI Wallet. |
-| DTC_IS_05 | APTITUDE DTC SHALL be digitally signed by the national issuing authority acting as a Trusted Attestation Provider within the eIDAS 2.0 framework. |
-| DTC_IS_06 | The system SHALL support the complete lifecycle management of the DTC, including secure revocation and update mechanisms managed by the issuing authority. |
+| DTC_IS_01 | APTITUDE DTC SHALL be issued exclusively by the National Passport Issuing Authority of the Member State that issued the corresponding physical eMRTD. |
+| DTC_IS_02 | APTITUDE DTC SHALL be derived both from newly issued and already issued eMRTDs, except where the national authentic sources require a restriction. |
+| DTC_IS_03 | The issuance process SHALL result in an ICAO DTC Type 2 (eMRTD-PC bound), where the virtual component is cryptographically linked to the WSCD being the physical component within the EUDI Wallet. |
+| DTC_IS_04 | The system SHALL support the complete lifecycle management of the DTC, including secure revocation and update mechanisms managed by the issuing authority. |
 
 #### Table 3 — Requirements on data elements
 
 | Index | Requirement specification |
 | --- | --- |
-| DTC_DM_01 | The APTITUDE DTC SHALL contain DG1, DG2, DG14, DG15, SOD as from the physical eMRTD passport |
-| DTC_DM_02 | The APTITUDE DTC SHALL contain fields like: dtcSecurityInfo, DTCIdentifier, DTCDOE, and a signature structure for validation |
-| DTC_DM_03 | The APTITUDE DTC SHALL be encapsulated as a Verifiable Credential (VC), ensuring compatibility with the EUDI Wallet data formats (SD-JWT or MDOC-CBOR). |
-| DTC_DM_04 | The APTITUDE DTC SHALL include a cryptographic binding between the Virtual Component (VC) and the Physical Component (PC) stored in the WSCD. |
-| DTC_DM_05 | APTITUDE DTC MAY contain additional attributes beyond the derived eMRTD dataset |
-| DTC_DM_06 | The data model SHALL support Selective Disclosure, allowing the traveller to share only the strictly necessary attributes (e.g., only DG2 for biometric match) with Relying Parties. |
+| DTC_DM_01 | The APTITUDE DTC SHALL contain DG1, DG2, DG14, SOD  as from the physical eMRTD passport and MAY contain other data groups allowed by ICAO DTC-VC specifications, as long as they are also present in the corresponding physical eMRTD |
+| DTC_DM_02 | APTITUDE DTC MAY contain additional attributes beyond the derived eMRTD dataset |
+| DTC_DM_03 | The data model SHALL support Selective Disclosure, allowing the traveller to share only the strictly necessary attributes (e.g., only DG2 for biometric match) with Relying Parties. |
 
 ### 2.2 Mandatory attributes
 
@@ -116,6 +111,7 @@ The objective is to preserve a single interoperable DTC representation that is:
 | ``birth_date`` | according to [ISO/IEC 23220-2.2] | 01-01-1980 |
 | ``portrait`` | according to [ISO/IEC 23220-2.2] | ... |
 | ``age_over_18`` | according to [ISO/IEC 23220-2.2] | T  |
+| ``document_number`` | according to [ISO/IEC 23220-2.2] | YA1234567 |
 | ``person_id`` | according to [ISO/IEC 23220-4] | 1234567890 |
 | ``dg1`` | according to [ISO/IEC 23220-4] | P<ITA<<HARDT<<GIOVANNI<<<<<<<<<<<<<<<< |
 | ``dg2`` | according to [ISO/IEC 23220-4] | ... |
@@ -149,6 +145,18 @@ The objective is to preserve a single interoperable DTC representation that is:
 | ``resident_street`` | according to [ISO/IEC 23220-4] | Sommarive |
 | ``resident_house_number`` | according to [ISO/IEC 23220-4] | 18 |
 | ``resident_state`` | according to [ISO/IEC 23220-4] | IT |
+| ``dg3`` | according to [ISO/IEC 23220-4] | ... |
+| ``dg4`` | according to [ISO/IEC 23220-4] | ... |
+| ``dg5`` | according to [ISO/IEC 23220-4] | ... |
+| ``dg6`` | according to [ISO/IEC 23220-4] | ... |
+| ``dg7`` | according to [ISO/IEC 23220-4] | ... |
+| ``dg8`` | according to [ISO/IEC 23220-4] | ... |
+| ``dg9`` | according to [ISO/IEC 23220-4] | ... |
+| ``dg10`` | according to [ISO/IEC 23220-4] | ... |
+| ``dg11`` | according to [ISO/IEC 23220-4] | ... |
+| ``dg12`` | according to [ISO/IEC 23220-4] | ... |
+| ``dg13`` | according to [ISO/IEC 23220-4] | ... |
+| ``dg16`` | according to [ISO/IEC 23220-4] | ... |
 
 ### 2.4 Mandatory metadata
 
@@ -160,11 +168,10 @@ The objective is to preserve a single interoperable DTC representation that is:
 | ``version`` | according to [ISO/IEC 23220-4] | 1.0 |
 | ``sod`` | Security object data of related eMRTD according to [ISO/IEC 23220-4] | ... |
 
-### 2.4 Optional metadata
+### 2.5 Optional metadata
 
 | **Identifier** | **Description** | **Example** |
 | --- | --- | --- |
-| ``document_number`` | according to [ISO/IEC 23220-2.2] | YA1234567 |
 | ``issuing_subdivision`` | according to [ISO/IEC 23220-2.2] | TN  |
 | ``administrative_number`` | according to [ISO/IEC 23220-2.2] | 9876543210 |
 | ``travel_document_type`` | according to [ISO/IEC 23220-2.2] | Passport |
@@ -237,7 +244,7 @@ The general PhotoID data elements of APTITUDE DTC SHALL be as defined in Table 1
 | ``resident_city_latin1`` | ``resident_city_latin1`` | O  |
 | ``sex`` | ``sex`` | O  |
 | ``nationality`` | ``nationality`` | O  |
-| ``document_number`` | ``document_number`` | O  |
+| ``document_number`` | ``document_number`` | M  |
 | ``issuing_subdivision`` | ``issuing_subdivision`` | O  |
 | ``family_name_latin1`` | ``family_name_latin1`` | O  |
 | ``given_name_latin1`` | ``given_name_latin1`` | O  |
