@@ -3,9 +3,10 @@
 Author(s):
 
 * Matthias Schwan, bdr, Germany
-* ... , IPZS, Italy
-* ... , ANTS, France
-* ... , INCM, Portugal
+* Corrado Guidobaldi , IPZS, Italy
+* Amir Sharif, fbk, Italy
+* Anthony Carmoy, ANTS, France
+* Antonio Maio , INCM, Portugal
   
 | Version | Date | Description |
 |---------|------------|------------|
@@ -14,21 +15,23 @@ Author(s):
 | 0.3 | 29-05-2026 | addition of schema and mapping |
 | 0.4 | 12-06-2026 | synchronization with PhotoID specification in [ISO/IEC 23220-4] |
 | 0.5 | 01-07-2026 | align clause 2 and 3 with rulebook template, biblopgraphy added, trust model and revocation added |
+| 0.6 | 08-07-2026 | use cases added in clause 4, editorial changes |
 
 Feedback:
 
 * <matthias.schwan@bdr.de>
-* ...
-* ...
-* ...
+* <c.guidobaldi@ipzs.it>
+* <asharif@fbk.eu>
+* <anthony.carmoy@interieur.gouv.fr>
+* <antonio.maio@incm.pt>
 
 ## 1 Introduction
 
 ### 1.1 Document scope and purpose
 
-This Attestation Rulebook defines the Digital Travel Credential (DTC) as an electronic attestation of attributes for the EUDI Wallet ecosystem. The DTC enables travellers to store and present identity and travel authorization data in their Wallet Unit for border control and travel-related use cases.
+This Attestation Rulebook defines the Digital Travel Credential (DTC) as an electronic attestation of attributes for the EUDI Wallet ecosystem. The DTC enables travellers to store and present identity data in their Wallet Unit for border control and travel-related use cases.
 
-The primary objective of the DTC is to facilitate secure and privacy-preserving identity verification and travel document validation at border crossing points and during travel. The DTC is designed to complement existing physical travel documents (e.g. passports, visas) by providing a digital equivalent that supports selective disclosure, offline presentation and strong cryptographic verification.
+The primary objective of the DTC is to facilitate secure and privacy-preserving identity verification and travel document validation at border crossing points and during travel. The DTC is designed to complement existing physical travel documents (e.g. passports, visas) by providing a digital equivalent that supports selective disclosure, offline and online presentation and strong cryptographic verification.
 
 Within the Aptitude context, the target model is the ICAO DTC Type 2, bound to a physical eMRTD and derived using mechanisms aligned with European regulations and ICAO guidelines. Type 2 is therefore considered the primary and preferred implementation model. However, the framework may also support ICAO DTC Type 1 where it is based on an LDS (Logical Data Structure) signed by the official passport authority. In such cases, the DTC is encapsulated within an attestation stored in the EUDI Wallet, ensuring that it remains cryptographically linked to a physical component and provides sufficient assurance for border control use cases.
 
@@ -60,12 +63,7 @@ Terminologies and definitions within Aptitude project are listed in [APTITUDE Gl
 
 ### 2.1 Introduction
 
-This section defines the functional and semantic scope of the data composing the APTITUDE Digital Travel Credential (DTC), based on the evidence collected during the stock‑taking phase.
-
-The cross‑border value of a DTC critically depends on preserving full alignment with the ICAO data model while at the same time allowing extensions required for integration within the EUDI Wallet ecosystem and the eIDAS 2.0 framework.
-
-International interoperability and backward compatibility with existing border‑control infrastructure remain core requirements for any realistic DTC deployment.
-As a result, the ICAO LDS data model (DG1, DG2, DG14, DG15, SOD) constitutes the mandatory baseline.
+This section defines the functional and semantic scope of the data composing the APTITUDE Digital Travel Credential (DTC), based on the evidence collected during the stock‑taking phase. The cross‑border value of a DTC critically depends on preserving full alignment with the ICAO data model while at the same time allowing extensions required for integration within the EUDI Wallet ecosystem and the eIDAS 2.0 framework. Minimization of impact on existing border‑control infrastructure would be valuable for DTC deployment. As a result, the ICAO LDS data model (DG1, DG2, DG14, DG15, SOD) constitutes the mandatory baseline.
 
 The objective is to preserve a single interoperable DTC representation that is:
 
@@ -81,7 +79,7 @@ The objective is to preserve a single interoperable DTC representation that is:
 | DTC_AE_01 | APTITUDE DTC SHALL use ISO/IEC 23220-4 PhotoID as the sole credential format. |
 | DTC_AE_02 | APTITUDE DTC SHALL use ISO/IEC 18013-5 mdoc-cbor encoding for the PhotoID credential. |
 | DTC_AE_03 | APTITUDE DTC SHALL support NFC engagement for proximity presentation and BLE data retrieval for Android and iOS. |
-| DTC_AE_04 | APTITUDE DTC SHALL preserve ICAO LDS semantics, including EF.DG1, EF.DG2, DG14, DG15, EF.SOD, and the PhotoID profile. |
+| DTC_AE_04 | APTITUDE DTC SHALL preserve ICAO LDS semantics, including e.g. EF.DG1, EF.DG2, DG14, EF.SOD, and the PhotoID profile. |
 | DTC_AE_05 | APTITUDE DTC SHALL adopt open, standard-based encoding to maximize interoperability and avoid vendor lock-in. |
 | DTC_AE_06 | APTITUDE DTC SHALL support a trust architecture that enables verification via ICAO CSCA/DS and EUDI Wallet / eIDAS trust anchors. |
 | DTC_AE_07 | APTITUDE DTC SHALL preserve the cryptographic binding between the virtual credential and the Wallet Secure Component across issuance, storage, presentation, and verification. |
@@ -91,23 +89,18 @@ The objective is to preserve a single interoperable DTC representation that is:
 
 | Index | Requirement specification |
 | --- | --- |
-| DTC_IS_01 | The APTITUDE DTC SHALL be issued exclusively by the National Passport Issuing Authority of the Member State that issued the physical eMRTD. |
-| DTC_IS_02 | APTITUDE DTC SHALL be derived from eMRTD chip data (Logical Data Structure - LDS) ensuring a cryptographic link to the physical travel document. |
-| DTC_IS_03 | APTITUDE DTC SHALL be derived both from newly issued and already issued eMRTDs, except where the national authentic sources require a restriction. |
-| DTC_IS_04 | The issuance process SHALL result in an ICAO DTC Type 2 (eMRTD-PC bound), where the virtual component is cryptographically linked to a physical secure element within the EUDI Wallet. |
-| DTC_IS_05 | APTITUDE DTC SHALL be digitally signed by the national issuing authority acting as a Trusted Attestation Provider within the eIDAS 2.0 framework. |
-| DTC_IS_06 | The system SHALL support the complete lifecycle management of the DTC, including secure revocation and update mechanisms managed by the issuing authority. |
+| DTC_IS_01 | APTITUDE DTC SHALL be issued exclusively by the National Passport Issuing Authority of the Member State that issued the corresponding physical eMRTD. |
+| DTC_IS_02 | APTITUDE DTC SHALL be derived both from newly issued and already issued eMRTDs, except where the national authentic sources require a restriction. |
+| DTC_IS_03 | The issuance process SHALL result in an ICAO DTC Type 2 (eMRTD-PC bound), where the virtual component is cryptographically linked to the WSCD being the physical component within the EUDI Wallet. |
+| DTC_IS_04 | The system SHALL support the complete lifecycle management of the DTC, including secure revocation and update mechanisms managed by the issuing authority. |
 
 #### Table 3 — Requirements on data elements
 
 | Index | Requirement specification |
 | --- | --- |
-| DTC_DM_01 | The APTITUDE DTC SHALL contain DG1, DG2, DG14, DG15, SOD as from the physical eMRTD passport |
-| DTC_DM_02 | The APTITUDE DTC SHALL contain fields like: dtcSecurityInfo, DTCIdentifier, DTCDOE, and a signature structure for validation |
-| DTC_DM_03 | The APTITUDE DTC SHALL be encapsulated as a Verifiable Credential (VC), ensuring compatibility with the EUDI Wallet data formats (SD-JWT or MDOC-CBOR). |
-| DTC_DM_04 | The APTITUDE DTC SHALL include a cryptographic binding between the Virtual Component (VC) and the Physical Component (PC) stored in the WSCD. |
-| DTC_DM_05 | APTITUDE DTC MAY contain additional attributes beyond the derived eMRTD dataset |
-| DTC_DM_06 | The data model SHALL support Selective Disclosure, allowing the traveller to share only the strictly necessary attributes (e.g., only DG2 for biometric match) with Relying Parties. |
+| DTC_DM_01 | The APTITUDE DTC SHALL contain DG1, DG2, DG14, SOD  as from the physical eMRTD passport and MAY contain other data groups allowed by ICAO DTC-VC specifications, as long as they are also present in the corresponding physical eMRTD |
+| DTC_DM_02 | APTITUDE DTC MAY contain additional attributes beyond the derived eMRTD dataset |
+| DTC_DM_03 | The data model SHALL support Selective Disclosure, allowing the traveller to share only the strictly necessary attributes (e.g., only DG2 for biometric match) with Relying Parties. |
 
 ### 2.2 Mandatory attributes
 
@@ -118,6 +111,7 @@ The objective is to preserve a single interoperable DTC representation that is:
 | ``birth_date`` | according to [ISO/IEC 23220-2.2] | 01-01-1980 |
 | ``portrait`` | according to [ISO/IEC 23220-2.2] | ... |
 | ``age_over_18`` | according to [ISO/IEC 23220-2.2] | T  |
+| ``document_number`` | according to [ISO/IEC 23220-2.2] | YA1234567 |
 | ``person_id`` | according to [ISO/IEC 23220-4] | 1234567890 |
 | ``dg1`` | according to [ISO/IEC 23220-4] | P<ITA<<HARDT<<GIOVANNI<<<<<<<<<<<<<<<< |
 | ``dg2`` | according to [ISO/IEC 23220-4] | ... |
@@ -151,6 +145,18 @@ The objective is to preserve a single interoperable DTC representation that is:
 | ``resident_street`` | according to [ISO/IEC 23220-4] | Sommarive |
 | ``resident_house_number`` | according to [ISO/IEC 23220-4] | 18 |
 | ``resident_state`` | according to [ISO/IEC 23220-4] | IT |
+| ``dg3`` | according to [ISO/IEC 23220-4] | ... |
+| ``dg4`` | according to [ISO/IEC 23220-4] | ... |
+| ``dg5`` | according to [ISO/IEC 23220-4] | ... |
+| ``dg6`` | according to [ISO/IEC 23220-4] | ... |
+| ``dg7`` | according to [ISO/IEC 23220-4] | ... |
+| ``dg8`` | according to [ISO/IEC 23220-4] | ... |
+| ``dg9`` | according to [ISO/IEC 23220-4] | ... |
+| ``dg10`` | according to [ISO/IEC 23220-4] | ... |
+| ``dg11`` | according to [ISO/IEC 23220-4] | ... |
+| ``dg12`` | according to [ISO/IEC 23220-4] | ... |
+| ``dg13`` | according to [ISO/IEC 23220-4] | ... |
+| ``dg16`` | according to [ISO/IEC 23220-4] | ... |
 
 ### 2.4 Mandatory metadata
 
@@ -162,11 +168,10 @@ The objective is to preserve a single interoperable DTC representation that is:
 | ``version`` | according to [ISO/IEC 23220-4] | 1.0 |
 | ``sod`` | Security object data of related eMRTD according to [ISO/IEC 23220-4] | ... |
 
-### 2.4 Optional metadata
+### 2.5 Optional metadata
 
 | **Identifier** | **Description** | **Example** |
 | --- | --- | --- |
-| ``document_number`` | according to [ISO/IEC 23220-2.2] | YA1234567 |
 | ``issuing_subdivision`` | according to [ISO/IEC 23220-2.2] | TN  |
 | ``administrative_number`` | according to [ISO/IEC 23220-2.2] | 9876543210 |
 | ``travel_document_type`` | according to [ISO/IEC 23220-2.2] | Passport |
@@ -239,7 +244,7 @@ The general PhotoID data elements of APTITUDE DTC SHALL be as defined in Table 1
 | ``resident_city_latin1`` | ``resident_city_latin1`` | O  |
 | ``sex`` | ``sex`` | O  |
 | ``nationality`` | ``nationality`` | O  |
-| ``document_number`` | ``document_number`` | O  |
+| ``document_number`` | ``document_number`` | M  |
 | ``issuing_subdivision`` | ``issuing_subdivision`` | O  |
 | ``family_name_latin1`` | ``family_name_latin1`` | O  |
 | ``given_name_latin1`` | ``given_name_latin1`` | O  |
@@ -438,7 +443,7 @@ If compliance to ICAO DTC-VC Type 1 is required, a reader may after succsessfull
 
 ### 7.1 ICAO based encoding
 
-The ICAO based encoding for DTC-VC is defined in [ICAO-DTC-VC-TR] and encoding for DTC-PC is defined in [ICAO-DTC-PC-TR].
+The ICAO based encoding for DTC-VC is defined in [ICAO-DTC-VC-TR] and encoding for DTC-PC is defined in [ICAO-DTC-PC-TR]. The ASN.1 definition below reproduces the generic ICAO DTC-VC encoding. For APTITUDE DTC, only the eMRTD-bound encoding is applicable. The eMRTD-PC-bound encoding is retained for comparison with the ICAO Type 2 model, while the PC-bound encoding is outside the scope of the current profile.
 
 ```asn.1
 DTCContentInfo ::= SEQUENCE {
