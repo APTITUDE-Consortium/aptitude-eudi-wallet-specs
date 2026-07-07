@@ -389,7 +389,7 @@ APTITUDE DTC
 
 **Context:** Use casess 4.1 or 4.2 have succeeded such that traveler has been successfully registered. Traveler approaches legacy eGate in order to cross border, with booklet passport.
 
-**Flow:** 
+**Flow:**
 
 Option 1: MRZ Scan (traditional)
 
@@ -406,7 +406,7 @@ Option 2: Tap&go
 * open the chip with dg1 from pre-registration data
 * Active/Chip Authentication
 
-**Requested attributes** 
+**Requested attributes**
 
 APTITUDE DTC (see pr-registration use cases 4.1 or 4.2)
 
