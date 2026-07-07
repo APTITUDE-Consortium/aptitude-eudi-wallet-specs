@@ -406,11 +406,11 @@ Option 2: Tap&go
 * open the chip with dg1 from pre-registration data
 * Active/Chip Authentication
 
-**Requested attributes**
+**Requested attributes:**
 
-APTITUDE DTC (see pr-registration use cases 4.1 or 4.2)
+APTITUDE DTC (see pre-registration use cases 4.1 or 4.2)
 
-* ICAO PhotoID data elements: ``dg1``, ``dg2``, ``dg14``, ``sod``,
+* ICAO PhotoID data elements: ``dg1``, ``dg2``, ``dg14``, ``sod``
 
 ## 5 Trust Anchors
 
