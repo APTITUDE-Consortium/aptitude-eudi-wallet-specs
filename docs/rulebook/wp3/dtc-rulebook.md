@@ -116,7 +116,7 @@ The objective is to preserve a single interoperable DTC representation that is:
 | ``dg1`` | according to [ISO/IEC 23220-4] | P<ITA<<HARDT<<GIOVANNI<<<<<<<<<<<<<<<< |
 | ``dg2`` | according to [ISO/IEC 23220-4] | ... |
 | ``dg14`` | according to [ISO/IEC 23220-4] | ... |
-| ``dg15`` | according to [ISO/IEC 23220-4] | ... |
+
 
 ### 2.3 Optional attributes
 
@@ -156,6 +156,7 @@ The objective is to preserve a single interoperable DTC representation that is:
 | ``dg11`` | according to [ISO/IEC 23220-4] | ... |
 | ``dg12`` | according to [ISO/IEC 23220-4] | ... |
 | ``dg13`` | according to [ISO/IEC 23220-4] | ... |
+| ``dg15`` | according to [ISO/IEC 23220-4] | ... | 
 | ``dg16`` | according to [ISO/IEC 23220-4] | ... |
 
 ### 2.4 Mandatory metadata
