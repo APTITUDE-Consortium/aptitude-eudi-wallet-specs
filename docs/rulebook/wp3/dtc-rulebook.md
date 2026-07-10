@@ -4,7 +4,7 @@ Author(s):
 
 * Matthias Schwan, bdr, Germany
 * Corrado Guidobaldi , IPZS, Italy
-* Amir Sharif, fbk, Italy
+* Zahra Ebadi Ansaroudi, FBK, Italy
 * Anthony Carmoy, ANTS, France
 * Antonio Maio , INCM, Portugal
   
@@ -21,7 +21,7 @@ Feedback:
 
 * <matthias.schwan@bdr.de>
 * <c.guidobaldi@ipzs.it>
-* <asharif@fbk.eu>
+* <zebadiansaroudi@fbk.eu>
 * <anthony.carmoy@interieur.gouv.fr>
 * <antonio.maio@incm.pt>
 
