@@ -280,8 +280,8 @@ The ICAO PhotoID data elements of APTITUDE DTC SHALL be as defined in Table 3 an
 | ``version`` | ``version`` | M |
 | ``dg1`` | ``dg1`` | M |
 | ``dg2`` | ``dg2`` | M |
-| ``dg3`` | ``dg3`` | O |
-| ``dg4`` | ``dg4`` | O |
+| ``dg3`` | ``dg3`` | Not present |
+| ``dg4`` | ``dg4`` | Not present |
 | ``dg5`` | ``dg5`` | O |
 | ``dg6`` | ``dg6`` | O |
 | ``dg7`` | ``dg7`` | O |
