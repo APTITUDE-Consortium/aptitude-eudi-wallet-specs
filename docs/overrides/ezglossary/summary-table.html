@@ -4,9 +4,6 @@
         <tr>
             <th>Term</th>
             <th>Definition</th>
-            {% if 'refs' in types %}
-            <th>References</th>
-            {% endif %}
         </tr>
     </thead>
     <tbody>
@@ -26,17 +23,6 @@
                 {% endif %}
             </td>
             <td>{{ definition | safe }}</td>
-            {% if 'refs' in types %}
-            <td>
-                <ul>
-                {% for entry in glossary.get(section, term, 'refs') %}
-                    <li>
-                        <a href="{{ root }}{{ entry.page.url }}#{{ entry.target }}">{{ entry.page.title }}</a>
-                    </li>
-                {% endfor %}
-                </ul>
-            </td>
-            {% endif %}
         </tr>
         {% endfor %}
     </tbody>

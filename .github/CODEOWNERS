@@ -4,6 +4,13 @@
 # Default:
 *  @APTITUDE-Consortium/wp2-leads
 
-# WP5 owns the mVRC rulebook section
+# WP5 owns the mVRC rulebook section (explicit since it is not under a wp5/ folder)
 /docs/rulebook/mVRC-rulebook.md @APTITUDE-Consortium/wp5-code-owners
 /docs/img/EU_mVRC_profile.png @APTITUDE-Consortium/wp5-code-owners
+
+# Specific WPs - all folders with name wpX are owned by WPX code owners
+
+**/wp3/ @APTITUDE-Consortium/wp3-code-owners
+**/wp4/ @APTITUDE-Consortium/wp4-code-owners
+**/wp5/ @APTITUDE-Consortium/wp5-code-owners
+**/wp6/ @APTITUDE-Consortium/wp6-code-owners

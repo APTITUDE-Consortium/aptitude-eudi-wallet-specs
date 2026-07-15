@@ -24,3 +24,4 @@
 [submodule "docs/rulebook/wp2-trust-specifications"]
 	path = docs/rulebook/wp2-trust-specifications
 	url = https://github.com/APTITUDE-Consortium/wp2-trust-specifications
+	branch = main

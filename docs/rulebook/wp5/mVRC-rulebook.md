@@ -8,6 +8,9 @@ Author(s):
 | Version | Date | Description |
 | --- | --- | --- |
 | 0.2 | 14.02.2026 | first draft of EU-mVRC |
+| 0.3 | 17.04.2026 | refinement of description of presence of data elements and encoding of user, holder and consumer; some changes from conditional to optional |
+| 0.4 | 11.05.2026 | synchronization with final version of [ISO/IEC 7367-2], e.g. changed identifiers chassis_number and class_off_hybrid_vehicle_code as well as editorial changes |
+| 0.5 | 15.06.2026 | Structure added in supplemental_person_data and supplemental_organization_data and changed to conditional; editorial changes |
 
 **Feedback:**
 
@@ -44,7 +47,7 @@ statements of fact.
 
 ### 1.4 Terminology
 
-This document uses the terminology specified in Annex 1 of the ARF.
+Terminologies and definitions within Aptitude project are listed in [APTITUDE Glossary](/docs/glossary.md)
 
 ## 2 Attestation attributes and metadata
 
@@ -54,7 +57,7 @@ This document describes the structure, type, data element identifiers, and logic
 
 The specification of the EU-mVRC is a profile of the mVC specified in [ISO/IEC 7367-2]. The mVC [ISO/IEC 7367-2] references data structures and security mechanisms defined for <credentials:mDL> and <credentials:mdoc>, such as device request/response structures, IssuerSigned and IssuerAuth structures (MSO) as well as protocols for proximity and remote flows. These protocols and structures are mandatory features of the EUDI Wallet ecosystem . The EU-mVRC profile mandates the use of doc type and name space according to [ISO/IEC 7367-2] and gives more detailed information on the use of the data elements. A profile further specifies additional name spaces under responsibility of the EU and of respective Member States.
 
-![EU mVRC profile](../img/EU_mVRC_profile.png)
+![EU mVRC profile](/docs/img/EU_mVRC_profile.png)
 
 ## 3 Attestation encoding
 
@@ -80,25 +83,25 @@ The data elements are specified in Table 1 in clause 3.1.2.2.
 
 — The "Identifier" column is the reference of the data element specified in [ISO/IEC 7367-2].
 
-— The “EU additional description” column gives further information on the usage of the respective data element in the context of [EU DIR 2025/0096].
+— The “EU additional description” column gives further information on the usage of the respective data element in the context of [EU DIR 2025/0096]. The description in [ISO/IEC 7367-2] applies.
 
-— The "Presence" column indicates whether the presence of the element on an EU-mVRC is mandatory (M), optional (O) or conditional (C). If an element is conditional the respective condition is given.
+— The "Presence" column indicates whether the presence of the element on an EU-mVRC is mandatory (M), optional (O) or conditional (C). A mandatory data elemement SHALL be present in an EU-mVRC whereas an optional data element MAY be present. If a data element is conditional the respective condition is given in the specification. If the condition is met the data element SHALL be present.
 
 ##### 3.1.2.2 ISO compliant data elements
 
-The EU-mVRC ISO compliant data elements SHALL be as defined in Table 1 and belong to the namespace given in 3.1.1.
+The EU-mVRC ISO compliant data elements SHALL be as defined in Table 1 and belong to the namespace given in 3.1.1. The encoding of the data elements as given in [ISO/IEC 7367-2] applies.
 
 ###### Table 1 — ISO compliant data elements
 
-| **Identifier** | **EU additional description** | **Presence** |
+| **Identifier** | **EU additional description** | **Presence in EU-mVRC** |
 | --- | --- | --- |
 | ``issue_date`` | no further information | M |
-| ``expiry_date`` | EU - corresponding harmonised Union code: <br> **(H)** period of validity<br> Optional data element in ISO/IEC 7367-2<br> mandatory if not unlimited | C  |
+| ``expiry_date`` | EU - corresponding harmonised Union code: <br> **(H)** period of validity<br><br> *Condition:* mandatory if not unlimited | C  |
 | ``issuing_authority_unicode`` | EU - the name of the competent authority according to Annex I, clause (d)(iii) of [EU DIR 2025/0096] | M |
 | ``issuing_authority_latin1`` | no further information | M |
 | ``issuing_country`` | no further information | M |
 | ``issuing_subdivision`` | no further information | O |
-| ``document_number`` | no further information<br> Optional data element in ISO/IEC 7367-2 | M |
+| ``document_number`` | no further information | M |
 | ``un_distinguishing_sign`` | no further information | M |
 | ``registration_number`` | EU - corresponding harmonised Union code: <br> **(A)** registration number | M |
 | ``registration_number_type`` | no further information | O |
@@ -108,10 +111,10 @@ The EU-mVRC ISO compliant data elements SHALL be as defined in Table 1 and belon
 | ``date_of_first_registration`` | EU - corresponding harmonised Union code: <br> **(B)** date of first registration of the vehicle<br> Optional data element in ISO/IEC 7367-2 | M |
 | ``document_number_techn_insp_report`` | no further information | O |
 | ``approval_date_technical_inspection`` | no further information | O |
-| ``expiry_date_technical_inspection`` | EU - corresponding harmonised Union code: <br> **(X)** proof of having passed the roadworthiness test, date of next roadworthiness test or expiry of current certificate. expiry date of the technical inspection from the roadworthiness certificate is mandatory if a technical inspection is relevant for the vehicle<br> Optional data element in ISO/IEC 7367-2 | C |
-| ``chassis_number`` | EU - corresponding harmonised Union code: <br> **(E)** vehicle identification number <br> eCoC corresponding code: VehicleIdentificationNumber | M |
-| ``users`` | EU - corresponding harmonised Union code: <br> **(C.1)** holder of the Registration Certificate <br> Specification according to clause 6.2.3.2 in [ISO/IEC 7367-2] and clause 3.1.2.3<br> Conditional data element in ISO/IEC 7367-2 | M |
-| ``owners`` | EU - corresponding harmonised Union code: <br> **(C.2)** owner of the vehicle (repeated as many times as there are owners) <br> Specification according to clause 6.2.3.3 in [ISO/IEC 7367-2] and clause 3.1.2.3<br> Conditional data element in ISO/IEC 7367-2 | O |
+| ``expiry_date_technical_inspection`` | EU - corresponding harmonised Union code: <br> **(X)** proof of having passed the roadworthiness test, date of next roadworthiness test or expiry of current certificate<br><br> *Condition:* mandatory if a technical inspection is relevant for the vehicle | C |
+| ``chassis_number_info`` | EU - corresponding harmonised Union code: <br> **(E)** vehicle identification number <br> eCoC corresponding code: VehicleIdentificationNumber | M |
+| ``users`` | EU - corresponding harmonised Union code: <br> **(C.1)** holder of the Registration Certificate <br> Specification according to clause 6.2.3.2 in [ISO/IEC 7367-2] and clause 3.1.2.3 below<br> a holder is either a natural person or an organization according to Table 2 in [ISO/IEC 7367-2] | M |
+| ``owners`` | EU - corresponding harmonised Union code: <br> **(C.2)** owner of the vehicle (repeated as many times as there are owners) <br> Specification according to clause 6.2.3.3 in [ISO/IEC 7367-2] and clause 3.1.2.3<br> an owner is either a natural person or an organization according to Table 2 in [ISO/IEC 7367-2] | O |
 | ``basic_vehicle_info`` | Specification according to clause 6.2.4.3 in [ISO/IEC 7367-2] and Table 5 in clause 3.1.2.4  | M |
 | ``mass_info`` | Specification according to clause 6.2.4.4 in [ISO/IEC 7367-2] and Table 6 in clause 3.1.2.5 | O |
 | ``towed_trailer_mass_info`` | Specification according to clause 6.2.4.5 in [ISO/IEC 7367-2] and Table 7 in clause 3.1.2.6 | O |
@@ -121,33 +124,54 @@ The EU-mVRC ISO compliant data elements SHALL be as defined in Table 1 and belon
 
 ##### 3.1.2.3   User and owner data elements
 
-The user information in data element ``users`` contains information describing the name and address of the **holder** (C.1) of the vehicle according to [EU DIR 2025/0096]. There SHALL be one holder. The data element ``users`` contains one recorded entity with the specific personal details. A holder SHALL be either a natural person with details given in Table 2 or an organization with details given in Table 3.
+The user information in data element ``users`` contains information describing the name and address of the **holder** (C.1) of the vehicle according to [EU DIR 2025/0096]. There SHALL be one holder. The data element ``users`` contains one recorded entity with the specific personal details. A holder SHALL be either a natural person with details given in Table 2 or an organization with details given in Table 3. The encoding of the data elements as given in clause 6.2.3.2 in [ISO/IEC 7367-2] applies.
 
-The owner information in data element ``owners`` contains information describing the name and address of the recorded **owner(s)** (C.2) of the vehicle according to [EU DIR 2025/0096]. There can be more than one owner. The data element ``owners`` may contain more than one recorded entity with the specific personal details. One recorded entity of an owner shall be either a natural person with details given in Table 2 or an organization with details given in Table 3.
+The owner information in data element ``owners`` contains information describing the name and address of the recorded **owner(s)** (C.2) of the vehicle according to [EU DIR 2025/0096]. There can be more than one owner. The data element ``owners`` MAY contain more than one recorded entity with the specific personal details. One recorded entity of an owner SHALL be either a natural person with details given in Table 2 or an organization with details given in Table 3. The encoding of the data elements as given in clause 6.2.3.3 in [ISO/IEC 7367-2] applies.
 
 ###### Table 2 — NaturalPerson - key details
 
-| **Identifier** | **EU additional description** | **Presence** |
+| **Identifier** | **EU additional description** | **Presence in EU-mVRC** |
 | --- | --- | --- |
-| ``full_adress`` | no further information, see Table 4  | M |
-| ``family_name`` | EU - corresponding harmonised Union code: <br> **(C.1.1)** surname(s) or business name<br> **(C.2.1)** surname or business name<br> **(C.3.1)** surname or business name<br> Note: applicable if C.1.1, C.2.1 or C.3.1  refer to a natural person | M |
-| ``family_name_latin1``| EU - corresponding harmonised Union code: <br> **(C.1.1)** surname(s) or business name<br>  **(C.2.1)** surname or business Name<br>  **(C.3.1)** surname or business Name<br> Note: applicable if C.1.1, C.2.1 or C.3.1 refer to a natural person | O |
-| ``given_name`` | EU - corresponding harmonised Union code:<br>  **(C.1.2)** other name(s) or initial(s) (where appropriate)<br>  **(C.2.2)** other name(s) or initial(s) (where appropriate)<br> **(C.3.2)** other name(s) or initial(s) (where appropriate)<br> Note: applicable if C.1.2, C.2.2 or C.3.2refer to a natural Person<br> in case not available use '-'  | M |
-| ``given_name_latin1`` | EU - corresponding harmonised Union code:<br> **(C.1.2)** other name(s) or initial(s) (where appropriate)<br> **(C.2.2)** other name(s) or initial(s) (where appropriate)<br>  Note: applicable if C.1.2 or C.2.2 refer to a natural Person<br> **(C.3.2)** other name(s) or initial(s) (where appropriate)<br>  Note: applicable if C.1.2 or C.2.2 refer to a natural Person | O |
-| ``supplemental_person_data`` | **(C.1.4)** electronic address (e-mail) of the holder of the registration<br> **(C.2.4)** electronic address (e-mail) of the owner certificate<>EU - corresponding harmonised Union code:<br> In case of a holder optional element **(C.4)** Where the particulars specified in f, code C.2 are not included in the Registration Certificate, reference to the fact that the holder of the Registration Certificate: (a) is the vehicle owner, (b) is not the vehicle owner, (c) is not identified by the Registration Certificate as being the vehicle owner | M |
+| ``full_address`` | no further information, see Table 4  | M |
+| ``family_name`` | EU - corresponding harmonised Union code: <br> **(C.1.1)** surname(s) or business name<br> **(C.2.1)** surname or business name<br> **(C.3.1)** surname or business name<br> *Note:* applicable if C.1.1, C.2.1 or C.3.1  refer to a natural person | M |
+| ``family_name_latin1``| EU - corresponding harmonised Union code: <br> **(C.1.1)** surname(s) or business name<br>  **(C.2.1)** surname or business Name<br>  **(C.3.1)** surname or business Name<br> *Note:* applicable if C.1.1, C.2.1 or C.3.1 refer to a natural person | O |
+| ``given_name`` | EU - corresponding harmonised Union code:<br>  **(C.1.2)** other name(s) or initial(s) (where appropriate)<br>  **(C.2.2)** other name(s) or initial(s) (where appropriate)<br> **(C.3.2)** other name(s) or initial(s) (where appropriate)<br> *Note:* applicable if C.1.2, C.2.2 or C.3.2refer to a natural Person<br> in case not available use '-'  | M |
+| ``given_name_latin1`` | EU - corresponding harmonised Union code:<br> **(C.1.2)** other name(s) or initial(s) (where appropriate)<br> **(C.2.2)** other name(s) or initial(s) (where appropriate)<br> *Note:* applicable if C.1.2 or C.2.2 refer to a natural Person<br> **(C.3.2)** other name(s) or initial(s) (where appropriate)<br> *Note:* applicable if C.1.2 or C.2.2 refer to a natural Person | O |
+| ``supplemental_person_data`` | encoding as given after the table<br><br> EU - corresponding harmonised Union code:<br> **(C.1.4)** electronic address (e-mail) of the holder of the registration<br> **(C.2.4)** electronic address (e-mail) of the owner certificate<br> **(C.4)** Where the particulars specified in f, code C.2 are not included in the Registration Certificate, reference to the fact that the holder of the Registration Certificate: (a) is the vehicle owner, (b) is not the vehicle owner, (c) is not identified by the Registration Certificate as being the vehicle owner<br><br> *Condition:* mandatory if one of the items **(C.1.4)**, **(C.2.4)**, **(C.4)** apply | C |
 
 ###### Table 3 — Organization - key details
 
-| **Identifier** | **EU additional description** | **Presence** |
+| **Identifier** | **EU additional description** | **Presence in EU-mVRC** |
 | --- | --- | --- |
 | ``full_adress`` | no further information, see Table 4  | M |
-| ``organization_name`` | EU - corresponding harmonised Union code: <br> **(C.1.1)** surname(s) or business name <br> **(C.2.1)** surname or business name<br> **(C.3.1)** surname or business name<br> Note: applicable if C.1.1, C.2.1 or C.3.1 refer to an organization | M |
-| ``organization_name_latin1`` | EU - corresponding harmonised Union code: <br> **(C.1.1)** surname(s) or business name<br> **(C.2.1)** surname or business name<br> **(C.3.1)** surname or business name<br> Note: applicable if C.1.1, C.2.1 or C.3.1 refer to an organization | O |
-| ``supplemental_organization_data`` | no further Information | O |
+| ``organization_name`` | EU - corresponding harmonised Union code: <br> **(C.1.1)** surname(s) or business name <br> **(C.2.1)** surname or business name<br> **(C.3.1)** surname or business name<br> *Note:* applicable if C.1.1, C.2.1 or C.3.1 refer to an organization | M |
+| ``organization_name_latin1`` | EU - corresponding harmonised Union code: <br> **(C.1.1)** surname(s) or business name<br> **(C.2.1)** surname or business name<br> **(C.3.1)** surname or business name<br> *Note:* applicable if C.1.1, C.2.1 or C.3.1 refer to an organization | O |
+| ``supplemental_organization_data`` | encoding as given after the table<br><br> EU - corresponding harmonised Union code:<br> **(C.1.4)** electronic address (e-mail) of the holder of the registration<br> **(C.2.4)** electronic address (e-mail) of the owner certificate<br> **(C.4)** Where the particulars specified in f, code C.2 are not included in the Registration Certificate, reference to the fact that the holder of the Registration Certificate: (a) is the vehicle owner, (b) is not the vehicle owner, (c) is not identified by the Registration Certificate as being the vehicle owner<br><br> *Condition:* mandatory if one of the items **(C.1.4)**, **(C.2.4)**, **(C.4)** apply | C |
+
+The elements ``supplemental_person_data`` and ``supplemental_organization_data`` are defined as a map structure in clause 6.2.3.2 in [ISO/IEC 7367-2]. In the EU-mVRC this map SHALL be encoded as follows. The element ``additional_info`` MAY contain any additional information.
+
+```cddl
+supplemental_person_data = {
+ ? "email" : tstr,                                         ; according to Table 2
+ ? "rel_holder_to_owner" : rel_holder_to_owner_value,      ; according to Table 2
+ ? "additional_info" : tstr
+}
+
+supplemental_organization_data = {
+ ? "email" : tstr,                                         ; according to Table 3
+ ? "rel_holder_to_owner" : rel_holder_to_owner_value,      ; according to Table 3
+ ? "additional_info" : tstr
+}
+
+rel_holder_to_owner_value =
+     "(a) is the vehicle owner" /
+     "(b) is not the vehicle owner" /
+     "(c) is not identified by the Regsistration Certificate as being the vehicle owner"
+```
 
 ###### Table 4 — Address - key details
 
-| **Identifier** | **EU additional description** | **Presence** |
+| **Identifier** | **EU additional description** | **Presence in EU-mVRC** |
 | --- | --- | --- |
 | ``address`` | EU - corresponding harmonised Union code:<br> **(C.1.3)** address in the Member State of registration, on the date of issue of the document<br> **(C.2.3)** address in the Member State of registration, on the date of issue of the document<br> **(C.3.3)** address in the Member State of registration, on the date of issue of the document | M |
 | ``address_latin1`` | EU - corresponding harmonised Union code:<br> **(C.1.3)** address in the Member State of registration, on the date of issue of the document<br> **(C.2.3)** address in the Member State of registration, on the date of issue of the document<br> **(C.3.3)** address in the Member State of registration, on the date of issue of the document | O |
@@ -157,7 +181,7 @@ The owner information in data element ``owners`` contains information describing
 | ``state_latin1`` | EU - corresponding harmonised Union code:<br> **(C.1.3)** address in the Member State of registration, on the date of issue of the document<br> **(C.2.3)** address in the Member State of registration, on the date of issue of the document<br> **(C.3.3)** address in the Member State of registration, on the date of issue of the document | O |
 | ``postal_code`` | EU - corresponding harmonised Union code:<br> **(C.1.3)** address in the Member State of registration, on the date of issue of the document<br> **(C.2.3)** address in the Member State of registration, on the date of issue of the document<br> **(C.3.3)** address in the Member State of registration, on the date of issue of the document | O |
 | ``country`` | EU - corresponding harmonised Union code:<br> **(C.1.3)** address in the Member State of registration, on the date of issue of the document<br> **(C.2.3)** address in the Member State of registration, on the date of issue of the document<br> **(C.3.3)** address in the Member State of registration, on the date of issue of the document | M |
-| ``supplemental_location_info`` | no further information | O |
+| ``supplemental_location_data`` | no further information | O |
 
 ##### 3.1.2.4   Basic vehicle info
 
@@ -165,16 +189,16 @@ The basic vehicle information contains information describing the basic data ele
 
 ###### Table 5 — Basic vehicle info key details
 
-| **Identifier** | **EU additional description** | **Presence** |
+| **Identifier** | **EU additional description** | **Presence in EU-mVRC** |
 | --- | --- | --- |
-| ``vehicle_category_code`` | EU - the European vehicle category as mentioned in 167/2013, 168/2013 and 2018/858 <br> EU - corresponding harmonised Union code:<br> **(J)** vehicle category<br> eCoC corresponding code: VehicleCategory, mandatory if available | C |
+| ``vehicle_category_code`` | EU - the European vehicle category as mentioned in 167/2013, 168/2013 and 2018/858 <br> EU - corresponding harmonised Union code:<br> **(J)** vehicle category<br> eCoC corresponding code: VehicleCategory, <br> *Note:* according to [EU DIR 2025/0096] it is mandatory if available | O |
 | ``vehicle_category_national`` | no further information | O |
 | ``approval_number`` | EU - corresponding harmonised Union code:<br> **(K)** whole-vehicle vehicle type-approval number or the European Individual approval number (if available),<br> CoC corresponding code: TypeApprovalNumber, mandatory if available | C |
 | ``make`` | EU - corresponding harmonised Union code:<br> **(D.1)** make<br> eCoC corresponding code: Make | M |
-| ``type`` | EU - corresponding harmonised Union code:<br> **(D.2)** type<br>, mandatory if available <br> Optional data element in ISO/IEC 7367-2 | C  |
-| ``variant`` | EU - corresponding harmonised Union code:<br> **(D.2.1)** variant<br>, mandatory if available | C |
-| ``version`` | EU - corresponding harmonised Union code:<br> **(D.2.2)** version<br>, mandatory if available | C |
-| ``commercial_name`` | EU - corresponding harmonised Union code:<br> **(D.3)** commercial description(s)<br> eCoC corresponding code: CommercialName<br> Optional data element in ISO/IEC 7367-2, mandatory if available | C |
+| ``type`` | EU - corresponding harmonised Union code:<br> **(D.2)** type,<br> *Note:* according to [EU DIR 2025/0096] it is mandatory if available | O  |
+| ``variant`` | EU - corresponding harmonised Union code:<br> **(D.2.1)** variant,<br> *Note:* according to [EU DIR 2025/0096] it is mandatory if available | O |
+| ``version`` | EU - corresponding harmonised Union code:<br> **(D.2.2)** version,<br> *Note:* according to [EU DIR 2025/0096] it is mandatory if available | O |
+| ``commercial_name`` | EU - corresponding harmonised Union code:<br> **(D.3)** commercial description(s)<br> eCoC corresponding code: CommercialName,<br> *Note:* according to [EU DIR 2025/0096] it is mandatory if available | O |
 | ``colours`` | EU - corresponding harmonised Union code:<br> **(R)** colour of the vehicle<br> eCoC corresponding code: Colour | O |
 | ``automation_level`` | no further information | O |
 | ``status_vehicle`` | no further information | O |
@@ -185,11 +209,11 @@ The mass information contains information describing the mass data elements of a
 
 ###### Table 6 — mass info key details
 
-| **Identifier** | **EU additional description** | **Presence** |
+| **Identifier** | **EU additional description** | **Presence in EU-mVRC** |
 | --- | --- | --- |
 | ``techn_perm_max_laden_mass`` | EU - corresponding harmonised Union code:<br> **(F.1)** maximum technically permissible laden mass, except for motorcycles<br> eCoC corresponding code: TechnPermMaxLadenMass | O |
 | ``vehicle_max_mass`` | EU - corresponding harmonised Union code:<br> **(F.2)** maximum permissible laden mass of the vehicle in service in the Member State of registration<br> eCoC corresponding code: InServiceMaximumPermissibleMass | O |
-| ``mass_in_running_order`` | EU - corresponding harmonised Union code:<br> **(G)** mass of the vehicle in service with bodywork, and with coupling device in the case of a towing vehicle in service from any category other than M1<br> eCoC corresponding code: MassOfTheVehicleInRunningOrder, mandatory if available | C |
+| ``mass_in_running_order`` | EU - corresponding harmonised Union code:<br> **(G)** mass of the vehicle in service with bodywork, and with coupling device in the case of a towing vehicle in service from any category other than M1<br> eCoC corresponding code: MassOfTheVehicleInRunningOrder, <br> *Note:* according to [EU DIR 2025/0096] it is mandatory if available | O |
 | ``mass_in_running_order_variable_min`` | no further information | O |
 | ``mass_in_running_order_variable_max`` | no further information | O |
 
@@ -199,7 +223,7 @@ The towed trailer mass information contains information about the towing vehicle
 
 ###### Table 7 — Towed trailer mass info key details
 
-| **Identifier** | **EU additional description** | **Presence** |
+| **Identifier** | **EU additional description** | **Presence in EU-mVRC** |
 | --- | --- | --- |
 | ``tech_perm_max_tow_mass`` | EU - corresponding harmonised Union code:<br> **(O1)** technically permissible maximum towable mass of the trailer braked (in kg)<br> **(O2)** technically permissible maximum towable mass of the trailer unbraked (in kg)<br> For brake type see braked_type_trail_code | O |
 | ``technically_permissible_``<br>``maximum_combination_mass`` | no further information | O |
@@ -212,13 +236,13 @@ The engine information contains information describing the relevant data element
 
 ###### Table 8 — Engine info key details
 
-| **Identifier** | **EU additional description** | **Presence** |
+| **Identifier** | **EU additional description** | **Presence in EU-mVRC** |
 | --- | --- | --- |
 | ``engine_number`` | EU - corresponding harmonised Union code:<br> **(P.5)** engine identification number<br> eCoC corresponding code: EngineNumber | O |
 | ``engine_capacity`` | EU - corresponding harmonised Union code:<br> **(P.1)** capacity (in cm3)<br> eCoC corresponding code: EngineCapacity, mandatory if available | C |
 | ``engine_power`` | EU - corresponding harmonised Union code:<br> **(P.2)** maximum net power (in kW) (if available)<br> eCoC corresponding code: MaximumNetPower, MaximumContinuousRatedPower, RatedEngineNetPower, , mandatory if available | C |
-| ``class_off_hybrid_vehicle_code`` | no further information | O |
-| ``energy_source`` | EU - corresponding harmonised Union code:<br> **(P.3)** type of fuel or power source (where applicable)<br> eCoC corresponding code: EnergySource, , mandatory if available | C |
+| ``class_of_hybrid_vehicle_code`` | no further information | O |
+| ``energy_sources`` | EU - corresponding harmonised Union code:<br> **(P.3)** type of fuel or power source (where applicable)<br> eCoC corresponding code: EnergySource, <br> *Note:* according to [EU DIR 2025/0096] it is mandatory if available | O |
 
 ##### 3.1.2.8 Seating info
 
@@ -226,37 +250,37 @@ The seating information contains information describing the seating and standing
 
 ###### Table 9 — seating info key details
 
-| **Identifier** | **EU additional description** | **Presence** |
+| **Identifier** | **EU additional description** | **Presence in EU-mVRC** |
 | --- | --- | --- |
-| ``number_of_seating_positions_including_driver`` | EU - corresponding harmonised Union code:<br> **(S.1)** number of seats, including the driver's seat<br> eCoC corresponding code: NrOfSeatingPositions, mandatory if available | C |
-| ``number_of_standing_places`` | EU - corresponding harmonised Union code:<br> **(S.2)** number of standing places (where appropriate)<br> eCoC corresponding code: NumberOfStandingPlaces, mandatory if available | C |
+| ``number_of_seating_positions_including_driver`` | EU - corresponding harmonised Union code:<br> **(S.1)** number of seats, including the driver's seat<br> eCoC corresponding code: NrOfSeatingPositions, <br> *Note:* according to [EU DIR 2025/0096] it is mandatory if available | O |
+| ``number_of_standing_places`` | EU - corresponding harmonised Union code:<br> **(S.2)** number of standing places (where appropriate)<br> eCoC corresponding code: NumberOfStandingPlaces, <br> *Note:* according to [EU DIR 2025/0096] it is mandatory if available | O |
 
 ##### 3.1.2.9   Dimensions info
 
-The dimension information contains details about the dimensions of a vehicle such as wheelbase, length, and width. All details are optional and can be absent.
+The dimension information contains details about the dimensions of a vehicle such as wheelbase, length and width. All elements within dimension information are optional and can be absent. If present, the conditions on some of the elements specified in [ISO/IEC 7367-2] apply.
 
 ###### Table 10 — Dimensions info key details
 
-| **Identifier** | **EU additional description** | **Presence** |
+| **Identifier** | **EU additional description** | **Presence in EU-mVRC** |
 | --- | --- | --- |
-| ``wheelbase`` | EU - corresponding harmonised Union code:<br> **(M)** wheelbase (in mm)<br> eCoC corresponding code: Wheelbase | C |
-| ``wheelbase_adjustable_min`` | no further information | C |
-| ``wheelbase_adjustable_max`` | no further information | C |
-| ``length`` | no further information | C |
-| ``length_adjustable_min`` | no further information | C |
-| ``length_adjustable_max`` | no further information | C |
-| ``width`` | no further information | C |
-| ``width_adjustable_min`` | no further information | C |
-| ``width_adjustable_max`` | no further information | C |
-| ``height`` | no further information | C |
-| ``height_adjustable_min`` | no further information | C |
-| ``height_adjustable_max`` | no further information | C |
-| ``distance_frontend_centrecoupling`` | no further information | C |
-| ``distance_frontend_centrecoupling_adjustable_min`` | no further information | C |
-| ``distance_frontend_centrecoupling_adjustable_max`` | no further information | C |
-| ``distance_centrecoupling_rearend`` | no further information | C |
-| ``distance_centrecoupling_rearend_adjustable_min`` | no further information | C |
-| ``distance_centrecoupling_rearend_adjustable_max`` | no further information | C |
+| ``wheelbase`` | EU - corresponding harmonised Union code:<br> **(M)** wheelbase (in mm)<br> eCoC corresponding code: Wheelbase | O |
+| ``wheelbase_adjustable_min`` | no further information | O |
+| ``wheelbase_adjustable_max`` | no further information | O |
+| ``length`` | no further information | O |
+| ``length_adjustable_min`` | no further information | O |
+| ``length_adjustable_max`` | no further information | O |
+| ``width`` | no further information | O |
+| ``width_adjustable_min`` | no further information | O |
+| ``width_adjustable_max`` | no further information | O |
+| ``height`` | no further information | O |
+| ``height_adjustable_min`` | no further information | O |
+| ``height_adjustable_max`` | no further information | O |
+| ``distance_frontend_centrecoupling`` | no further information | O |
+| ``distance_frontend_centrecoupling_adjustable_min`` | no further information | O |
+| ``distance_frontend_centrecoupling_adjustable_max`` | no further information | O |
+| ``distance_centrecoupling_rearend`` | no further information | O |
+| ``distance_centrecoupling_rearend_adjustable_min`` | no further information | O |
+| ``distance_centrecoupling_rearend_adjustable_max`` | no further information | O |
 
 #### 3.1.3 EU-mVRC EU data elements
 
@@ -266,7 +290,7 @@ The data elements are specified in Table 11 in clause 3.1.3.2.
 
 — The "Identifier" column is used for ``DataElementIdentifier`` in the mdoc request in accordance with ISO/IEC TS 23220-4.
 
-— The "Presence" column indicates whether the presence of the element on an mVC is mandatory (M), optional (O) or conditional (C). If an element is conditional the respective condition is given.
+— The "Presence" column indicates whether the presence of the element on an mVC is mandatory (M), optional (O) or conditional (C). A mandatory data elemement SHALL be present in an EU-mVRC whereas an optional data element MAY be present. If a data element is conditional the respective condition is given in the specification. If the condition is met the data element SHALL be present.
 
 — The “Encoding format” column indicates how the data elements SHALL be encoded. “tstr”, “uint”, “bstr”, “bool” and “tdate” are CDDL representation types as defined in RFC 8610. “full-date” SHALL be implemented according to the additional information tag 1004 for full-date elements as defined in RFC 8943.
 
@@ -308,29 +332,27 @@ VehicleInfoExtEU = {
 
 | **Identifier** | **Meaning** | **Description** | **Presence** | Encoding format |
 | --- | --- | --- | --- | --- |
-| ``bodywork`` | Bodywork | EU - corresponding harmonised Union code:<br> **(J.21)** bodywork<br> eCoC corresponding code: CodeForBodywork, mandatory if available | C  | tstr |
+| ``bodywork`` | Bodywork | EU - corresponding harmonised Union code:<br> **(J.21)** bodywork<br> eCoC corresponding code: CodeForBodywork, <br> *Note:* according to [EU DIR 2025/0096] it is mandatory if available | O  | tstr |
 | ``whole_vehicle_max_mass`` | Whole vehicle maximum mass | EU - corresponding harmonised Union code:<br> **(F.3)** maximum permissible laden mass of the whole vehicle in service in the Member State of registration<br> eCoC corresponding code: InServiceMaximumPermissibleMassCombination | O | uint |
-| ``power_mass_ratio`` | Power mass ratio | EU - corresponding harmonised Union code:<br> **(Q)** power/weight ratio (in kW/kg) (only for motorcycles)<br> eCoC corresponding code: PowerMassRatio, mandatory if available | C  | uint |
+| ``power_mass_ratio`` | Power mass ratio | EU - corresponding harmonised Union code:<br> **(Q)** power/weight ratio (in kW/kg) (only for motorcycles)<br> eCoC corresponding code: PowerMassRatio, <br> *Note:* according to [EU DIR 2025/0096] it is mandatory if available | O  | uint |
 | ``rated_speed`` | Rated speed | EU - corresponding harmonised Union code:<br> **(P.4)** rated speed (in min-1) | O | uint |
 | ``max_speed`` | Maximum speed | EU - corresponding harmonised Union code:<br> **(T)** maximum speed (in km/h)<br> eCoC corresponding code: MaximumSpeed | O | uint |
 | ``fuel_tank`` | Capacity fuel tank | EU - corresponding harmonised Union code:<br> **(W)** fuel tank(s) capacity (in litres) | O | uint |
 
-##### 3.1.3.5 Consumer info extended EU
+##### 3.1.3.4 Consumer info extended EU
 
-The data element ``consumer_info_ext_eu`` contains information describing the name and address of the recorded consumer of the vehicle. A consumer is natural person or organization who may use the vehicle by virtue of a legal right other than that of ownership. There can only be one consumer. The definition of the elements in the personal information are given in paragraph 6.2.3.2 User information of [ISO/IEC 7367-2] and Table 2, Table 3 and Table 4 of this document.
+The data element ``consumer_info_ext_eu`` contains information describing the name and address of the recorded consumer of the vehicle. A consumer is natural person or organization who may use the vehicle by virtue of a legal right other than that of ownership. There SHALL be one consumer. The data element ``consumer_info_ext_eu`` contains one recorded entity with the specific personal details. A consumer SHALL be either a natural person with details given in Table 2 or an organization with details given in Table 3. The encoding of the structure ``RecordedEntity`` as given in clause 6.2.3.2 in [ISO/IEC 7367-2] applies.
 
 The structure is absent when none of the data elements is applicable.
 
 The ``ConsInfoExt`` structure SHALL be encoded as CBOR for device retrieval and SHALL be formatted as following CDDL structure:
 
 ```cddl
-ConsInfoExt = {
- ? naturalPerson: NaturalPerson,     ; according to paragraph 6.2.3.2 User information of [ISO/IEC 7367-2] and Table 2 of this document
- ? organization: Organization        ; according to paragraph 6.2.3.2 User information of [ISO/IEC 7367-2] and Table 3 of this document
-}
+ConsInfoExt = [+RecordedEntity]      ; according to paragraph 6.2.3.2 User information of [ISO/IEC 7367-2] and
+                                     ; Table 2 and Table 3 of this document
 ```
 
-##### 3.1.3.6 Axle info EU
+##### 3.1.3.5 Axle info EU
 
 The data element ``axle_info_eu`` contains details about the distribution of the technically permissible maximum laden mass among the axles of vehicles with a total exceeding 3 500 kg. The definition of the elements in the axle information can be found in Table 13.
 
@@ -349,7 +371,7 @@ axledata =  {
  }
 ```
 
-###### Table 15 — Axle info EU key details
+###### Table 13 — Axle info EU key details
 
 | **Identifier** | **Meaning** | **Description** | **Presence** | Encoding format |
 | --- | --- | --- | --- | --- |
@@ -357,7 +379,7 @@ axledata =  {
 | ``axle_number`` | Axle number | EU - corresponding harmonised Union code:<br> **(N)** axle 1 (in kg), where appropriate | O | uint |
 | ``techn_perm_max_laden_mass_axle`` | technically permissible maximum laden mass on the axle | EU - corresponding harmonised Union code:<br> **(N)** (in kg), where appropriate | O | uint |
 
-##### 3.1.3.7 Environmental info EU
+##### 3.1.3.6 Environmental info EU
 
 The data element ``env_info_eu`` contains about the environmental aspects of vehicles. The definition of the elements in the environmental information can be found in Table 14.
 
@@ -397,20 +419,20 @@ EnvInfoEU = {
 | ``sound_speed`` | sound level engine speed | EU - corresponding harmonised Union code:<br> **(U.2)** sound level engine speed (in min-1)<br> eCoC corresponding code: SoundLevelStationaryEngineSpeed | O | uint |
 | ``sound_drive_by`` | sound level drive-by | EU - corresponding harmonised Union code:<br> **(U.3)** sound level drive-by (in dB(A)) | O | uint |
 | ``co`` | CO | EU - corresponding harmonised Union code:<br> **(V.1)** Value of the CO ((in g/km, mg/km, g/kWh or mg/kWh) | O | uint |
-| ``co_unit`` | unit of CO | unit ((in g/km, mg/km, g/kWh or mg/kWh) of the CO as mentioned in item CO, mandatory in case of a CO-value, not present if co-element is not present<br> EU - corresponding harmonised Union code:<br> **(V.1)** Value of the CO ((in g/km, mg/km, g/kWh or mg/kWh) | C | tstr |
+| ``co_unit`` | unit of CO | unit ((in g/km, mg/km, g/kWh or mg/kWh) of the CO as mentioned in item CO, <br> EU - corresponding harmonised Union code:<br> **(V.1)** Value of the CO ((in g/km, mg/km, g/kWh or mg/kWh) <br><br> *Condition:* mandatory in case of a CO-value, not present if co-element is not present | C | tstr |
 | ``thc`` | THC | EU - corresponding harmonised Union code:<br> **(V.2)** THC (in g/km or g/kWh) | O | uint |
-| ``thc_unit`` | unit of THC | unit ((in g/km, mg/km, g/kWh or mg/kWh) of the THC as mentioned in item thc, mandatory in case of a thc-value, not present if thc-element is not present<br> EU - corresponding harmonised Union code:<br> **(V.2)** THC (in g/km or g/kWh) | C | tstr |
+| ``thc_unit`` | unit of THC | unit ((in g/km, mg/km, g/kWh or mg/kWh) of the THC as mentioned in item thc,<br> EU - corresponding harmonised Union code:<br> **(V.2)** THC (in g/km or g/kWh) <br><br> *Condition:* mandatory in case of a thc-value, not present if thc-element is not present | C | tstr |
 | ``nox`` | NOx | EU - corresponding harmonised Union code:<br> **(V.3)** NOx (in g/km, mg/km, g/kWh or mg/kWh) | O | uint |
-| ``nox_unit`` | unit of NOx | unit (in g/km or/kWh) of the NOx as mentioned in item nox, mandatory in case of a nox-value, not present if nox-elment is not present<br> EU - corresponding harmonised Union code:<br> **(V.3)** NOx (in g/km, mg/km, g/kWh or mg/kWh) | C | tstr |
+| ``nox_unit`` | unit of NOx | unit (in g/km or/kWh) of the NOx as mentioned in item nox, <br> EU - corresponding harmonised Union code:<br> **(V.3)** NOx (in g/km, mg/km, g/kWh or mg/kWh) <br><br> *Condition:* mandatory in case of a nox-value, not present if nox-elment is not present | C | tstr |
 | ``thc_nox`` | THC and NOx | EU - corresponding harmonised Union code:<br> **(V.4)** THC + NOx (in g/km) | O | uint |
-| ``thc_nox_unit`` | unit of THC and NOx | unit (in g/km) of the THC and NOx as mentioned in item thc_nox, mandatory in case of a thc_nox-value, not present if thc_nox-element is not present<br> EU - corresponding harmonised Union code:<br> **(V.4)** THC + NOx (in g/km) | C | tstr |
+| ``thc_nox_unit`` | unit of THC and NOx | unit (in g/km) of the THC and NOx as mentioned in item thc_nox, <br> EU - corresponding harmonised Union code:<br> **(V.4)** THC + NOx (in g/km) <br><br> *Condition:* mandatory in case of a thc_nox-value, not present if thc_nox-element is not present | C | tstr |
 | ``pm`` | Mass of particulate matter | EU - corresponding harmonised Union code:<br> **(V.5)** Mass of particulate matter (PM) (in g/km or g/kWh) | O | uint |
-| ``pm_unit`` | unit of Mass of particulate matter | unit  (in g/km or g/kWh) of the mass of particulate matter (PM) as mentioned in item pm, mandatory in case of a pm-value, not present if pm-element is not present<br> EU - corresponding harmonised Union code:<br> **(V.5)** Mass of particulate matter (PM) (in g/km or g/kWh) | C | tstr |
+| ``pm_unit`` | unit of Mass of particulate matter | unit  (in g/km or g/kWh) of the mass of particulate matter (PM) as mentioned in item pm, <br> EU - corresponding harmonised Union code:<br> **(V.5)** Mass of particulate matter (PM) (in g/km or g/kWh) <br><br> *Condition:* mandatory in case of a pm-value, not present if pm-element is not present | C | tstr |
 | ``corr_abs_coefficient`` | corrected absorption coefficient | EU - corresponding harmonised Union code:<br> **(V.6)** corrected absorption coefficient for diesel (in min-1) | O | uint |
-| ``co2`` | CO2 | EU - corresponding harmonised Union code:<br> **(V.7)** CO2 (in g/km) or Specific CO2 emissions where indicated at entry 49.5 of the Certificate of Conformity of heavy-duty vehicles defined in the Appendix to Annex VIII to Commission Implementing Regulation (EU) 2020/6831 or at entry 49.5 of the individual vehicle approval certificate defined in Appendix 1 to Annex III to that Regulation, mandatory if available | C  | uint |
-| ``co2_unit`` | unit of CO2 | unit  (in g/km or g/kWh) of the CO2 as mentioned in item CO2, mandatory in case of a CO2-value, not present if CO2-element is not present<br> EU - corresponding harmonised Union code:<br> **(V.7)** CO2 (in g/km) or Specific CO2 emissions where indicated at entry 49.5 of the Certificate of Conformity of heavy-duty vehicles defined in the Appendix to Annex VIII to Commission Implementing Regulation (EU) 2020/6831 or at entry 49.5 of the individual vehicle approval certificate defined in Appendix 1 to Annex III to that Regulation | C | tstr |
+| ``co2`` | CO2 | EU - corresponding harmonised Union code:<br> **(V.7)** CO2 (in g/km) or Specific CO2 emissions where indicated at entry 49.5 of the Certificate of Conformity of heavy-duty vehicles defined in the Appendix to Annex VIII to Commission Implementing Regulation (EU) 2020/6831 or at entry 49.5 of the individual vehicle approval certificate defined in Appendix 1 to Annex III to that Regulation, <br> *Note:* according to [EU DIR 2025/0096] it is mandatory if available | O  | uint |
+| ``co2_unit`` | unit of CO2 | unit  (in g/km or g/kWh) of the CO2 as mentioned in item CO2, <br> EU - corresponding harmonised Union code:<br> **(V.7)** CO2 (in g/km) or Specific CO2 emissions where indicated at entry 49.5 of the Certificate of Conformity of heavy-duty vehicles defined in the Appendix to Annex VIII to Commission Implementing Regulation (EU) 2020/6831 or at entry 49.5 of the individual vehicle approval certificate defined in Appendix 1 to Annex III to that Regulation <br><br> *Condition:* mandatory in case of a CO2-value, not present if CO2-element is not present | C | tstr |
 | ``comb_fuel_consumption`` | combined fuel consumption | EU - corresponding harmonised Union code:<br> **(V.8)** combined fuel consumption (in l/100 km), | O | uint |
-| ``environmental_category`` | exhaust emission level environmental category | EU - corresponding harmonised Union code:<br> **(V.9)** indication of the exhaust emission level environmental category at entry 47 of part 2 of the Certificate of Conformity as defined in the Appendix to Annex VIII to Commission Implementing Regulation (EU) 2020/683 or at entry 47 of the individual approval certificate defined in Appendix 1 to Annex III to that Regulation, mandatory if available | C  | tstr |
+| ``environmental_category`` | exhaust emission level environmental category | EU - corresponding harmonised Union code:<br> **(V.9)** indication of the exhaust emission level environmental category at entry 47 of part 2 of the Certificate of Conformity as defined in the Appendix to Annex VIII to Commission Implementing Regulation (EU) 2020/683 or at entry 47 of the individual approval certificate defined in Appendix 1 to Annex III to that Regulation, <br> *Note:* according to [EU DIR 2025/0096] it is mandatory if available | O  | tstr |
 | ``co2_emission_class`` | CO2 emission class | EU - corresponding harmonised Union code:<br> **(V.10)** CO2 emission class of heavy-duty vehicles determined at the moment of first registration, in accordance with Article 7ga(2) of Directive 1999/62/EC of the European Parliament and of the Council (5) | O | tstr |
 
 ## 4 Attestation usage
@@ -427,7 +449,9 @@ If revocation of mVC is required the Pub-EAA provider SHALL provide a status lis
 
 ## 7 Compliance
 
-The specification of the mVC is compliant to the ARF, i.e. the mdoc encoding of a Pub-EAA, and [ISO/IEC 7367-2] as well as with [EU DIR 2025/0096].
+The specification of the EU-mVRC is compliant to the ARF, i.e. the mdoc encoding of a Pub-EAA, and [ISO/IEC 7367-2] as well as with [EU DIR 2025/0096].
+
+If the content of any optional data element or any optional element within a structure is not encoded as specified in the EU-mVRC rulebook, the reader SHALL ignore the content.
 
 ## 8 References
 
@@ -482,7 +506,7 @@ A mapping from elements of Part 1 of the Registration Certificate defined in Ann
 | C | C | D.2.1 | variant (if available) | ``variant in``<br> ISO namespace |
 | C | C | D.2.2 | version (if available); | ``version`` in<br> ISO namespace |
 | M | C | D.3 | commercial description(s) | ``commercial_name`` in<br> ISO namespace |
-| M | M | E | vehicle identification number | ``chassis_number`` in<br> ISO namespace |
+| M | M | E | vehicle identification number | ``chassis_number_info`` in<br> ISO namespace |
 | - | - | F | mass: | - |
 | O | O | F.1 | maximum technically permissible laden mass, except for motorcycles | ``techn_perm_max_laden_mass`` in<br> ISO namespace |
 | C | C | G | mass of the vehicle in service with bodywork, and with coupling device in the case of a towing vehicle in service from any category other than M1 | ``mass_in_running_order`` in<br> ISO namespace |

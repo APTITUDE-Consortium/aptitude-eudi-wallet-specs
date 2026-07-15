@@ -53,6 +53,12 @@ theme:
 extra_css:
   - media/extra.css
 
+extra_javascript:
+  - media/mermaid.min.js
+  - media/mermaid-init.js
+  - media/mathjax-init.js
+  - media/mathjax-tex-mml-chtml.js
+
 plugins:
   - tags
   - exclude:
@@ -63,6 +69,9 @@ plugins:
         - 'rulebook/wp2-trust-specifications/references/**'
         - 'rulebook/wp2-trust-specifications/requirements/**'
         - 'rulebook/wp2-trust-specifications/topics/**'
+        - 'rulebook/wp2-trust-specifications/docs/topics/**'
+  - include-markdown:
+      comments: true
   - search
   - ezglossary:
       strict: true
@@ -74,8 +83,12 @@ plugins:
       sections:
         - roles
         - components
+        - artifacts
         - credentials
         - protocols
+        - processes
+        - formats
+        - data-elements
   - git-revision-date-localized:
       locale: en
       fallback_to_build_date: true
@@ -87,21 +100,40 @@ markdown_extensions:
   - sane_lists
   - tables
   - def_list
+  - admonition
+  - pymdownx.details
   - pymdownx.highlight:
       use_pygments: true
-  - pymdownx.superfences
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
   - toc:
       permalink: true
+      toc_depth: 3
+  - pymdownx.arithmatex:
+      generic: true
 
 nav:
   - Home: index.md
-  - Rulebook:
+  - Attestation Rulebooks:
     - Overview: rulebook/index.md
-    - mVRC: rulebook/mVRC-rulebook.md
+    - mVRC: rulebook/wp5/mVRC-rulebook.md
+    - DTC: rulebook/wp3/dtc-rulebook.md
+  - Trust Specifications:
+    - Trust Framework: rulebook/trust-framework.md
   - RFCs:
     - Overview: horizontal-RFCs/index.md
     - RFC-01 Credential Issuance Profile: horizontal-RFCs/RFC001.md
     - RFC-02 Presentation Profile: horizontal-RFCs/RFC002.md
+    - RFC-04 Revocation Profile: horizontal-RFCs/RFC004.md
+  - Testing and Conformance:
+    - Overview: itb_plus_user_onboarding/index.md
+    - ITB+ User Onboarding Guide: itb_plus_user_onboarding/aptitude-itb-user-onboarding-manual.md
+    - Reporting Conformance Results: itb_plus_user_onboarding/report-submission.md
+  - Schemas:
+    - Overview: schema/index.md
   - Standards: standards.md
   - Glossary: 
     - Glossary: glossary.md
