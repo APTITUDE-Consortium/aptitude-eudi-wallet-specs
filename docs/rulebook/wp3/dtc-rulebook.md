@@ -117,7 +117,6 @@ The objective is to preserve a single interoperable DTC representation that is:
 | ``dg2`` | according to [ISO/IEC 23220-4] | ... |
 | ``dg14`` | according to [ISO/IEC 23220-4] | ... |
 
-
 ### 2.3 Optional attributes
 
 | **Identifier** | **Description** | **Example** |
