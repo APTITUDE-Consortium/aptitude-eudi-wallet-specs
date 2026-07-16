@@ -63,7 +63,7 @@ Terminologies and definitions within Aptitude project are listed in [APTITUDE Gl
 
 ### 2.1 Introduction
 
-This section defines the functional and semantic scope of the data composing the APTITUDE Digital Travel Credential (DTC), based on the evidence collected during the stock‑taking phase. The cross‑border value of a DTC critically depends on preserving full alignment with the ICAO data model while at the same time allowing extensions required for integration within the EUDI Wallet ecosystem and the eIDAS 2.0 framework. Minimization of impact on existing border‑control infrastructure would be valuable for DTC deployment. As a result, the ICAO LDS data model (DG1, DG2, DG14, DG15, SOD) constitutes the mandatory baseline.
+This section defines the functional and semantic scope of the data composing the APTITUDE Digital Travel Credential (DTC), based on the evidence collected during the stock‑taking phase. The cross‑border value of a DTC critically depends on preserving full alignment with the ICAO data model while at the same time allowing extensions required for integration within the EUDI Wallet ecosystem and the eIDAS 2.0 framework. Minimization of impact on existing border‑control infrastructure would be valuable for DTC deployment. As a result, the ICAO LDS data model (DG1, DG2, DG14, SOD) constitutes the mandatory baseline.
 
 The objective is to preserve a single interoperable DTC representation that is:
 
