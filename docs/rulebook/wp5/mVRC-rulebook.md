@@ -47,7 +47,7 @@ statements of fact.
 
 ### 1.4 Terminology
 
-Terminologies and definitions within Aptitude project are listed in [APTITUDE Glossary](/docs/glossary.md)
+Terminologies and definitions within Aptitude project are listed in [APTITUDE Glossary](../../glossary.md)
 
 ## 2 Attestation attributes and metadata
 
@@ -55,9 +55,9 @@ Terminologies and definitions within Aptitude project are listed in [APTITUDE Gl
 
 This document describes the structure, type, data element identifiers, and logical organisation of the mandatory and optional attributes of the EU-mVRC attestation within the EUDI Wallet. It also describes how Member States can specify any possible national attributes.
 
-The specification of the EU-mVRC is a profile of the mVC specified in [ISO/IEC 7367-2]. The mVC [ISO/IEC 7367-2] references data structures and security mechanisms defined for <credentials:mDL> and <credentials:mdoc>, such as device request/response structures, IssuerSigned and IssuerAuth structures (MSO) as well as protocols for proximity and remote flows. These protocols and structures are mandatory features of the EUDI Wallet ecosystem . The EU-mVRC profile mandates the use of doc type and name space according to [ISO/IEC 7367-2] and gives more detailed information on the use of the data elements. A profile further specifies additional name spaces under responsibility of the EU and of respective Member States.
+The specification of the EU-mVRC is a profile of the mVC specified in [ISO/IEC 7367-2]. The mVC [ISO/IEC 7367-2] references data structures and security mechanisms defined for <credentials:mobile Driving Licence (mDL)|mDL> and <artifacts:mdoc>, such as device request/response structures, IssuerSigned and IssuerAuth structures (MSO) as well as protocols for proximity and remote flows. These protocols and structures are mandatory features of the EUDI Wallet ecosystem . The EU-mVRC profile mandates the use of doc type and name space according to [ISO/IEC 7367-2] and gives more detailed information on the use of the data elements. A profile further specifies additional name spaces under responsibility of the EU and of respective Member States.
 
-![EU mVRC profile](/docs/img/EU_mVRC_profile.png)
+![EU mVRC profile](../../img/EU_mVRC_profile.png)
 
 ## 3 Attestation encoding
 
@@ -315,7 +315,7 @@ The data element ``vehicle_info_ext_eu`` contains information describing extra c
 
 The structure is absent when none of the data elements are applicable.
 
-The ``VehicleInfoExtEU`` structure SHALL be encoded as <credentials:CBOR> for device retrieval and SHALL be formatted as following <credentials:CDDL> structure:
+The ``VehicleInfoExtEU`` structure SHALL be encoded as <formats:Concise Binary Object Representation (CBOR)|CBOR> for device retrieval and SHALL be formatted as following <formats:Concise Data Definition Language (CDDL)|CDDL> structure:
 
 ```cddl
 VehicleInfoExtEU = {
