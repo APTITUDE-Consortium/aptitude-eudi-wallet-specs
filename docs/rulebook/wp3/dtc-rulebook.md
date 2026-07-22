@@ -57,7 +57,7 @@ This document uses the capitalised keywords 'SHALL', 'SHOULD' and 'MAY' as speci
 
 ### 1.4 Terminology
 
-Terminology and definitions within APTITUDE project are listed in [APTITUDE Glossary](../glossary.md)
+Terminology and definitions within APTITUDE project are listed in [APTITUDE Glossary](../../glossary.md)
 
 ## 2 Attestation attributes and metadata
 
