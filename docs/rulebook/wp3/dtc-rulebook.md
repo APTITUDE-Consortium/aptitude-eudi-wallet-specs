@@ -427,7 +427,7 @@ Option 2: Tap&go
 
 * Biometric identification.
 * Link person to the pre-registration data
-* Open the chip using the document-supported access mechanism, then link the result to the pre-registration data, for example by matching ``dg1`` or the corresponding ``document_number``
+* Open the chip using the document-supported access mechanism, then link the result to the pre-registration data, for example by matching ``dg1`` or the corresponding ``document_number``.
 * Active/Chip Authentication
 
 **Requested attributes:**
