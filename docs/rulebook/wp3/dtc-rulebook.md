@@ -357,7 +357,7 @@ The request may include ``age_over_18`` or ``portrait`` if required by the Membe
 
 **Flow:** proximity (device engagement / NFC or mdoc proximity per chosen implementation). D3.1 notes both ISO/IEC 18013‑5 (EUDIW proximity) and ISO/IEC 14443/APDU (ICAO backwards compatibility) and does not mandate one universal mode — the pilot must specify which mode(s) will be tested.
 
-**Modalities (as defined in D3.2 Chapter 10.3 Functional Flow):** 
+**Modalities (as defined in D3.2 Chapter 10.3 Functional Flow):**
 
 1. Proximity presentation of the DTC‑VC and 1:1 matching: The user presents its DTC-VC from the EUDI Wallet, with device engagement, allowing gates to retrieve the DTC-VC from the wallet with biometric verification in 1:1 between the passenger and the photo contained in his DTC-VC.
 
