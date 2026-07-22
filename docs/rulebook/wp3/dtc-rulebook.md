@@ -3,10 +3,11 @@
 Author(s):
 
 * Matthias Schwan, bdr, Germany
-* Corrado Guidobaldi , IPZS, Italy
+* Corrado Guidobaldi, IPZS, Italy
 * Zahra Ebadi Ansaroudi, FBK, Italy
 * Anthony Carmoy, ANTS, France
-* Antonio Maio , INCM, Portugal
+* Antonio Maio, INCM, Portugal
+* Arjan Geluk, ..., ...
   
 | Version | Date | Description |
 |---------|------------|------------|
@@ -24,6 +25,7 @@ Feedback:
 * <zebadiansaroudi@fbk.eu>
 * <anthony.carmoy@interieur.gouv.fr>
 * <antonio.maio@incm.pt>
+* <arjan.geluk@a4advisory.com>
 
 ## 1 Introduction
 
@@ -145,6 +147,7 @@ The objective is to preserve a single interoperable DTC representation that is:
 | ``resident_street`` | according to [ISO/IEC 23220-4] | Roma |
 | ``resident_house_number`` | according to [ISO/IEC 23220-4] | 45 |
 | ``resident_state`` | according to [ISO/IEC 23220-4] | IT |
+| ``enrolment_portrait_image`` | according to [ISO/IEC 23220-4]; portrait image captured at time of issuance of APTITUDE-DTC that can be different to image in ``portrait``  | ... |
 | ``dg3`` | according to [ISO/IEC 23220-4] | ... |
 | ``dg4`` | according to [ISO/IEC 23220-4] | ... |
 | ``dg5`` | according to [ISO/IEC 23220-4] | ... |
@@ -269,6 +272,9 @@ The specific PhotoID data elements of APTITUDE DTC SHALL be as defined in Table 
 | ``travel_document_number`` | ``travel_document_number`` | O |
 | ``resident_state`` | ``resident_state`` | O |
 | ``travel_document_mrz`` | ``travel_document_mrz`` | O |
+| ``family_name_viz`` | ``family_name_viz`` | HARDT |
+| ``given_name_viz`` | ``given_name_viz`` | GIOVANNI |
+| ``enrolment_portrait_image`` | ``enrolment_portrait_image`` | O |
 
 #### 3.1.4 ICAO PhotoID data elements
 
@@ -457,6 +463,8 @@ The APTITUDE DTC is derived from data contained in the LDS data groups of the co
 It is recommended to make the CSCA root certificates of the EU Member States available to Relying Parties in the EUDI Wallet ecosytem by a respective EU Trust List, i.e. APTITUDE DTC TL. In addition, it is recommended to make the content of the APTITUDE DTC TL available to Relying Parties outside of the EUDI Wallet ecosystem by a VICAL according to [ISO/IEC 18013-5].
 
 CSCA root certificates MAY also be obtained from the ICAO PKD by any Relying Party.
+
+For the purpose of interoperability tests and pilotig, issung authority are requested to provide a certificates of a test CSCA, that is technically equivalent to the CSCA.
 
 ## 6 Revocation
 
