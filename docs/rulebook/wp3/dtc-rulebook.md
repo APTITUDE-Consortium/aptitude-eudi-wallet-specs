@@ -82,7 +82,7 @@ The objective is to preserve a single interoperable DTC representation that is:
 | DTC_AE_04 | APTITUDE DTC SHALL preserve ICAO LDS semantics, including e.g. EF.DG1, EF.DG2, EF.DG14, EF.SOD.|
 | DTC_AE_05 | APTITUDE DTC SHALL preserve the ISO/IEC 23220-4 PhotoID profile. |
 | DTC_AE_06 | APTITUDE DTC SHALL adopt open, standard-based encoding to maximize interoperability and avoid vendor lock-in. |
-| DTC_AE_07 | APTITUDE DTC SHALL support a trust architecture that enables verification via ICAO CSCA/DS and EUDI Wallet / eIDAS trust anchors. |
+| DTC_AE_07 | APTITUDE DTC SHALL support a trust architecture that enables verification via ICAO CSCA/DS and EUDI Wallet/eIDAS trust anchors. |
 | DTC_AE_08 | APTITUDE DTC SHALL preserve the cryptographic binding between the virtual credential and the Wallet Secure Component across issuance, storage, presentation, and verification. |
 | DTC_AE_09 | APTITUDE DTC SHALL support selective disclosure and minimisation as a layer on top of the single PhotoID credential format, not by introducing a second credential format. |
 
