@@ -187,9 +187,9 @@ the requirements impacting issuance flow are listed.
 |**Requirement**|**Scope decision**|
 |-|-|
 |Authorization code flow must be supported|In scope|
-|Must use PKCE with s256 as the code challenge method ([RFC7636](https://www.rfc-editor.org/rfc/rfc7636.txt))|In scope|
-|Must use Pushed Authorization Request – PAR ([RFC9126](https://www.rfc-editor.org/rfc/rfc9126.txt))|In scope|
-|Must support DPOP including DPOP-Nonce HTTP header ([RFC9449](https://www.rfc-editor.org/rfc/rfc9449.txt))|In scope|
+|Must use PKCE with s256 as the code challenge method ([RFC7636](http://web.archive.org/web/20260428050927/https://www.rfc-editor.org/rfc/rfc7636.txt))|In scope|
+|Must use Pushed Authorization Request – PAR ([RFC9126](http://web.archive.org/web/20260107011451/https://www.rfc-editor.org/rfc/rfc9126.txt))|In scope|
+|Must support DPOP including DPOP-Nonce HTTP header ([RFC9449](http://web.archive.org/web/20260107005436/https://www.rfc-editor.org/rfc/rfc9449.txt))|In scope|
 |Must support wallet attestation as OAuth client authentication|In scope|
 |Must support attestation proof type including nonce within KA|In scope|
 
