@@ -452,7 +452,7 @@ CSCA root certificates MAY also be obtained from the ICAO PKD by any Relying Par
 
 ### 6.1 Reasons for revocation 
 
-Reasons for revocation or invalidation may include, but are not limited to, loss or compromise of the Wallet Unit, revocation or replacement of the corresponding physical eMRTD, compromise of the APTITUDE DTC issuer certificate or issuer trust chain, incorrect or fraudulently issued APTITUDE DTC data, or invalidation of the applicable ICAO certificate chain.
+Reasons for revocation or invalidation may include, but are not limited to, device loss or compromise of the Wallet Unit, revocation or replacement of the corresponding physical eMRTD, compromise of the APTITUDE DTC issuer certificate or issuer trust chain, incorrect or fraudulently issued APTITUDE DTC data, or invalidation of the applicable ICAO certificate chain.
 
 ### 6.2 APTITUDE DTC revocation
 
