@@ -579,12 +579,14 @@ dtcOtherInfos [23] EXPLICIT DTCOtherInfos OPTIONAL,
 -- data.
 }
 ```
+
 ## 8 Consideration for issuance of DTC-VC credentials
 
 APTITUDE DTC is bound to an existing eMRTD, either issued before the APTITUDE DTC (preexisting eMRTD) or issued simultaneously.
 Many of the attributes contained in the APTITUDE DTC are or may be also present in the underlying eMRTD. Therefore it is of the utmost importance to ensure their consistency with the eMRTD content to (1) avoid creation of flawed APTITUDE DTC and (2) avoid errors when the APTITUDE DTC is processed by a relying party. Where the issuing authority reads out the eMRTD and reuses its content for APTITUDE DTC issuance, consistency is directly ensured. Alternatively, issuing authority may also issue an APTITUDE DTC with attributes obtained from its own registers, provided consistency with eMRTD content is guaranteed.
 Other attributes contained in the APTITUDE DTC are not present in eMRTD, and therefore have to be provided by the issuing authority at DTC issuance. These attributes are either attributes related to the holder which are absent from eMRTD LDS, or relating to the APTITUDE DTC credential.
 The first table below aims at showing for each attribute of the APTITUDE DTC whether:
+
 * it is present in the underlying eMRTD;
 * it may be present in the underlying eMRTD, and if absent, it shall be provided by the issuing authority;
 * it is not present in the underlying eMRTD and shall be provided by the issuing authority;
@@ -652,8 +654,8 @@ The first table below aims at showing for each attribute of the APTITUDE DTC whe
 | ``travel_document_number`` | X | | |
 | ``travel_document_mrz`` | X | | |
 
+The second table below defines the rules applicable to each of these attributes including:
 
-The second table below defines the rules applicable to each of these attributes including 
 * requirements to ensure overall consistency between the APTITUDE DTC and the underlying eMRTD;
 * clarification as to whether it refers to the  eMRTD or APTITUDE DTC (where applicable);
 * the origin of the attribute;
