@@ -488,7 +488,7 @@ Revocation of the linked eMRTD and LDS data given in the ICAO PhotoID data eleme
 
 ## 7 Compliance
 
-If compliance to ICAO DTC-VC Type 1 is required, a reader may after succsessful processing the device response and the verification procedure encapsulate the data in the structure given in clause 7.1. The reader SHALL use the option eMRTD bound for DTC-VC encoding. The ICAO based encoding for DTC-VC is defined in [ICAO-DTC-VC-TR] and encoding for DTC-PC is defined in [ICAO-DTC-PC-TR]. The reader SHALL use the option eMRTD bound for DTC-VC encoding.
+If compliance to ICAO DTC-VC Type 1 is required, a reader may after successfully processing the device response and the verification procedure encapsulate the data in the structure given in clause 7.1. The reader SHALL use the option eMRTD bound for DTC-VC encoding. The ICAO based encoding for DTC-VC is defined in [ICAO-DTC-VC-TR] and encoding for DTC-PC is defined in [ICAO-DTC-PC-TR]. The reader SHALL use the option eMRTD bound for DTC-VC encoding.
 
 *Note:* Option eMRTD bound does not include elements dtcTBS, dtcSignerInfo, DTCSecurityInfo and DTCOtherInfo.  
 
