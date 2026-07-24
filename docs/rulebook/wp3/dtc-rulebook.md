@@ -141,7 +141,7 @@ The objective is to preserve a single interoperable DTC representation that is:
 | ``resident_postal_code`` | according to [ISO/IEC 23220-4] | 38122 |
 | ``resident_country`` | according to [ISO/IEC 23220-4] | IT |
 | ``resident_city_latin1`` | according to [ISO/IEC 23220-4] | ... |
-| ``sex`` | according to [ISO/IEC 23220-4] | M |
+| ``sex`` | according to [ISO/IEC 23220-4] | '1' (for men) |
 | ``nationality`` | according to [ISO/IEC 23220-4] | IT  |
 | ``family_name_latin1`` | according to [ISO/IEC 23220-4] | ...  |
 | ``given_name_latin1`` | according to [ISO/IEC 23220-4] | ...  |
