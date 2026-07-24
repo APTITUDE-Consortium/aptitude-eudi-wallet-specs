@@ -1,4 +1,4 @@
-# Attestation Rulebook for attestations of type Student Status / ERUA Academic Credential
+# Attestation Rulebook for attestations of type Student ID
 
 * Author(s):
     * Nikos Triantafyllou, University of the Aegean, UAegean i4m Lab
@@ -6,7 +6,8 @@
 
 | Version | Date | Description |
 |---------|------------|------------|
-| 0.1 | 23-07-2026 | Initial draft based on the SEDIT-X use case, ERUA-iD materials, the European Student Card VC pilot context and the APTITUDE Attestation Rulebook template. |
+| 0.1 | 23-07-2026 | Initial draft based on the SEDIT-X use case, ERUA-iD materials and the APTITUDE Attestation Rulebook template. |
+| 0.2 | 24-07-2026 | Aligned data model and SD-JWT VC encoding with the StudentID Attestation model. |
 
 **Feedback:**
 
@@ -14,45 +15,40 @@
 
 > **Draft status**
 >
-> This Rulebook is an implementation-oriented draft. The available SEDIT-X material
-> defines the credential at a high level as a Student Status Credential issued by a
-> participating university or alliance authority and used for verified discounts,
-> university access and federated campus services. ERUA materials additionally
-> distinguish an Educational ID, proving institutional affiliation, from an Alliance ID,
-> proving ERUA membership.
->
-> This draft defines a unified **Student Status / ERUA Academic Credential** pilot profile
-> that can carry both institutional student status and ERUA alliance affiliation. This
-> unification is a proposed harmonisation, not yet a formally approved ERUA or APTITUDE
-> data model. A deployment MAY instead issue Educational ID and Alliance ID as separate
-> attestations, provided equivalent semantics and verification outcomes are preserved.
+> This Rulebook defines the StudentID Attestation for the APTITUDE / SEDIT-X education
+> and student-service pilot context. The attribute model, metadata, integrity rules and
+> SD-JWT VC encoding below are the normative claim set for this attestation type.
 
 ## 1 Introduction
 
 ### 1.1 Document scope and purpose
 
-This Rulebook defines the **Student Status / ERUA Academic Credential**, an Electronic
-Attestation of Attributes stored in a student's EUDI Wallet.
+This Rulebook defines the **StudentID Attestation** for use in the European Digital
+Identity Wallet ecosystem.
 
-The credential provides portable proof that its holder:
+The StudentID Attestation expresses the real-world fact that a natural person is, or was
+during the applicable validity period, affiliated with an educational organisation in a
+student capacity. It enables relying parties to verify student status and selected
+identity or affiliation attributes using the EUDI Wallet.
 
-1. has a current student relationship with a recognised Higher Education Institution;
-2. belongs to, or is eligible to participate in, the European Reform University Alliance
-   (ERUA), where applicable; and
-3. may exercise explicitly stated student or alliance service entitlements during the
-   credential's validity period.
+The attestation is intended to be issued by an authentic source, such as a university,
+higher-education institution, or authorised academic identity provider. The Holder is the
+natural person to whom the student status applies. Relying Parties may include campus
+service providers, libraries, laboratories, access-control systems, mobility services,
+student-discount service providers, ferry or other transport operators accepting student
+status, public or private service providers accepting student status, and other
+authorised verifiers.
 
-The credential is intended to support privacy-preserving verification in contexts such as:
+In practical terms, the attestation enables a student to present proof of student status
+through an EUDI Wallet using selective disclosure. It can reduce reliance on paper
+student cards, manual checks, or real-time backend lookups, provided that the relying
+party can verify the issuer, credential signature, validity period, credential status
+where applicable, and the disclosed attributes needed for the transaction.
 
-* student discounts for ferry or other transport services;
-* access to ERUA and university online services;
-* campus, library, laboratory, event or facility access;
-* event and course registration;
-* attendance and Tap2Enter-style services;
-* student meal or cafeteria eligibility;
-* participation in alliance activities;
-* mobility and visiting-student scenarios; and
-* other services requiring proof of current student status or ERUA affiliation.
+The attestation supports education and student-service use cases, including online and
+offline verification for campus services, discounted services, access control, mobility
+scenarios, academic services, and other scenarios where proof of student affiliation is
+required.
 
 The credential is an **identity and affiliation credential**. It SHALL NOT be interpreted
 as proof of:
@@ -61,777 +57,503 @@ as proof of:
 * academic grades or credit achievement;
 * award of a diploma, degree or micro-credential;
 * payment completion; or
-* entitlement to every service offered by the issuing institution or alliance.
+* entitlement to every service offered by the issuing institution.
 
 Academic achievements SHALL be represented through separate credentials such as a
 Transcript of Records, diploma, diploma supplement, micro-credential, badge or other
 achievement credential.
 
-### 1.2 Relationship to Educational ID, Alliance ID and European Student Card
-
-ERUA-iD materials define two core credential concepts:
-
-* **Educational ID**, confirming affiliation with the holder's Higher Education Institution;
-* **Alliance ID**, confirming membership or participation in ERUA.
-
-The European Student Card Verifiable Credential provides another portable proof of
-student status and may be issued through an ESC Router-based or decentralised flow.
-
-This Rulebook defines a common semantic profile that can be implemented in either of
-these deployment patterns:
-
-1. **Unified credential:** one Student Status / ERUA Academic Credential contains both
-   institutional student status and ERUA affiliation.
-2. **Separate credentials:** an Educational ID or ESC VC proves student status, while an
-   Alliance ID separately proves ERUA affiliation.
-3. **Student-status-only credential:** a participating university issues student status
-   without ERUA affiliation for services where alliance membership is irrelevant.
-
-A Relying Party SHALL request only the credential or attributes required for the service.
-It SHALL NOT require ERUA affiliation where proof of ordinary student status is sufficient.
-
-### 1.3 Document structure
+### 1.2 Document structure
 
 This Rulebook is structured as follows:
 
-* Chapter 2 defines the attestation attributes and metadata in an
-  encoding-independent manner.
-* Chapter 3 defines the SD-JWT VC encoding and discusses optional mdoc support.
-* Chapter 4 specifies issuance, presentation and verification usage.
-* Chapter 5 defines how trust anchors are obtained.
-* Chapter 6 specifies validity, status and revocation.
-* Chapter 7 describes compliance with the EUDI Wallet framework and ERUA/SEDIT-X
-  privacy requirements.
+* Chapter 2 describes the attestation attributes and metadata in an encoding-independent manner.
+* Chapter 3 specifies how the attestation attributes and metadata are encoded using SD-JWT VC. ISO/IEC 18013-5 and W3C VCDM encodings are not defined in this version of the Rulebook.
+* Chapter 4 specifies attestation usage, including presentation and verification expectations.
+* Chapter 5 defines how trust anchors for attestation verification can be obtained.
+* Chapter 6 defines revocation and expiry mechanisms.
+* Chapter 7 provides compliance information.
 * Chapter 8 lists references.
 
-### 1.4 Key words
+### 1.3 Key words
 
 This document uses the capitalised key words **SHALL**, **SHOULD** and **MAY** as
-specified in [RFC 2119].
+specified in [RFC 2119], i.e., to indicate requirements, recommendations and options
+specified in this document.
 
-In addition, *must* in lower case indicates an external constraint that is not established
-by this Rulebook. The word *can* indicates a capability. Other words such as *will*,
-*is* and *are* are statements of fact.
+In addition, 'must' (non-capitalised) is used to indicate an external constraint, i.e.,
+a requirement that is not mandated by this document, but, for instance, by an external
+document. The word 'can' indicates a capability, whereas other words, such as 'will',
+and 'is' or 'are' are intended as statements of fact.
 
-### 1.5 Terminology
+### 1.4 Terminology
 
-This document uses the terminology specified in Annex 1 of the EUDI Wallet Architecture
-and Reference Framework.
+This document uses the terminology specified in Annex 1 of the ARF.
 
-For this Rulebook:
+In addition, the following domain-specific terms are used:
 
-* **Home institution** means the recognised Higher Education Institution at which the
-  student holds the relevant student relationship.
-* **ERUA affiliation** means a verified relationship with ERUA derived from membership
-  in a participating institution or from an approved alliance-participation arrangement.
-* **Student status** means the current institutional status defined by the issuer, such as
-  active, temporarily suspended or otherwise valid for a defined period.
-* **Educational ID** means an institutional affiliation credential in the ERUA-iD model.
-* **Alliance ID** means an ERUA membership or alliance-affiliation credential.
-* **ESC VC** means a European Student Card represented as a Verifiable Credential.
-* **Service entitlement** means an explicitly stated eligibility outcome, not a general
-  permission to access every institutional or alliance service.
+| Term | Meaning |
+|------|---------|
+| StudentID Attestation | A Verifiable Credential representing a person's student affiliation and selected student identity attributes. |
+| Educational organisation | A university, higher-education institution, or other authorised academic organisation acting as the authentic source for student status. |
+| Authorised academic identity provider | A system or organisation authorised by an educational organisation to issue or manage student identity attestations. |
+| Student | The natural person to whom the student affiliation applies. |
+| Relying Party | An organisation or system that verifies the StudentID Attestation to make an access, eligibility, discount, or service decision. |
+| SCHAC | Schema for Academia, a set of attributes commonly used in research and education identity federations. |
+| eduPerson | A set of attributes commonly used to represent persons and affiliations in education and research identity federations. |
 
 ## 2 Attestation attributes and metadata
 
 ### Chapter overview and requirements
 
-This chapter defines all attributes and metadata in an encoding-independent manner.
+This chapter defines the attributes and metadata that a StudentID Attestation may
+contain. The attributes are defined in an encoding-independent manner. Each attribute is
+classified as mandatory, optional, or conditional.
 
-For the SEDIT-X and ERUA pilot, the credential is defined as a **non-qualified EAA**.
-Its category value is:
+The StudentID Attestation is typically medium- to long-lived, for example for an
+academic year, and is intended for repeated presentation with selective disclosure. The
+attribute set is designed to support data minimisation by allowing a Holder to disclose
+only the student attributes required for a specific transaction.
 
-```text
-eaa:eu:non-qualified
-```
+### 2.1 Introduction
 
-The credential SHALL be designed around affiliation, status and service eligibility.
-It SHOULD use pseudonymous identifiers and SHALL avoid unnecessary replication of PID
-attributes.
+The StudentID Attestation is defined as a non-qualified Electronic Attestation of
+Attributes unless a future version of this Rulebook explicitly defines a qualified or
+public-sector legal category.
 
-### 2.1 Design principles
+The attribute `attestation_legal_category` SHALL be included and SHALL have the value
+`non-qualified-EAA`.
 
-The following design principles apply:
+The attestation model consists of the following logical groups:
 
-1. **Authoritative institutional status:** the home institution or another authorised
-   academic issuer remains authoritative for the student's institutional relationship.
-2. **Alliance affiliation:** ERUA affiliation SHALL be based on a recognised institutional
-   or alliance source.
-3. **Data minimisation:** a service SHOULD normally request only a status indicator,
-   issuing institution and validity period.
-4. **Separation from civil identity:** legal name, date of birth, nationality and document
-   identifiers SHOULD remain in the PID unless indispensable for a service.
-5. **Separation from achievement:** course completion, grades and credits SHALL use
-   dedicated learning or achievement credentials.
-6. **Selective disclosure:** programme, study level, campus and entitlements SHALL be
-   disclosed only when needed.
-7. **Cross-border usability:** institution, programme and level identifiers SHOULD use
-   stable European or nationally recognised identifiers where available.
-8. **Current-status verification:** status and validity SHALL be checked at presentation.
-9. **Service-specific decisions:** the verifier SHALL apply its own service policy after
-   verifying the credential.
-10. **Non-discrimination:** absence of optional alliance or programme information SHALL
-    not be treated as lack of student status where the mandatory student-status claims are valid.
+* student identification attributes;
+* organisation attributes;
+* core identity attributes for holder matching;
+* contact attributes;
+* affiliation and status attributes;
+* credential metadata.
+
+The attestation is issued as a Verifiable Credential compatible with the EUDI Wallet
+using SD-JWT VC. The model aligns with the following issuer metadata parameters:
+
+* `scope`: `StudentID`;
+* `format`: `vc+sd-jwt`;
+* `vct`: `VerifiableStudentID`;
+* `claims`: the claims defined in this Rulebook;
+* `proof_types_supported`: issuer-defined, including `jwt` where supported;
+* `cryptographic_binding_methods_supported`: issuer-defined, for example `jwk` or
+  `cose_key`.
 
 ### 2.2 Mandatory attributes
 
-| **Data Identifier** | **Definition** | **Data type** | **Example value** |
-|---------------------|----------------|---------------|-------------------|
-| `credential_id` | Unique identifier of the credential. It SHALL NOT be a national civil identity number. | string | `erua_student_01K0V7...` |
-| `student_reference` | Pairwise or issuer-specific pseudonymous reference for the student. | string | `stu_8f2a91c4d3` |
-| `student_status` | Current student relationship asserted by the issuer. | string enum | `active` |
-| `home_institution_id` | Stable identifier of the home Higher Education Institution. | string or URI | `https://ror.org/04qmmjx98` |
-| `home_institution_name` | Human-readable name of the home institution. | string | `University of the Aegean` |
-| `affiliation_type` | Type of institutional relationship. | string enum | `student` |
-| `status_valid_from` | Date from which the asserted student status is valid. | date | `2026-09-01` |
-| `status_valid_until` | Date until which the asserted student status is valid. | date | `2027-08-31` |
-
-Permitted values for `student_status` SHOULD include:
-
-* `active`;
-* `enrolled`;
-* `exchange_student`;
-* `visiting_student`;
-* `doctoral_candidate`;
-* `temporarily_suspended`;
-* `completed_pending_expiry`; and
-* `inactive`.
-
-A credential with `student_status` equal to `inactive` SHALL NOT be accepted as proof of
-current student status unless a service policy explicitly supports former-student use.
-
-Permitted values for `affiliation_type` SHOULD include:
-
-* `student`;
-* `doctoral_candidate`;
-* `exchange_student`;
-* `visiting_student`; and
-* another value approved by the academic-governance profile.
+| **Data Identifier** | **Semantic Reference** | **Definition** | **Data type** | **Example value** |
+|---------------------|------------------------|----------------|---------------|-------------------|
+| `attestation_legal_category` | ARF Topic 12 / Rulebook legal category indication | Indicates the legal category of the attestation. | string | `non-qualified-EAA` |
+| `identifier` | Institutional student identifier | Unique student identifier, such as an institutional student number or equivalent. | string | `STU-2026-000123` |
+| `schacHomeOrganization` | SCHAC `schacHomeOrganization` | Home organisation or institution domain or identifier. | string | `aegean.gr` |
+| `firstName` | OIDC `given_name` where applicable | Student given name. | string | `Nikos` |
+| `familyName` | OIDC `family_name` where applicable | Student family name. | string | `Triantafyllou` |
+| `eduPersonPrincipalName` | eduPerson `eduPersonPrincipalName` | Principal name of the student, often expressed in `user@realm` format. | string | `ntriantafyllou@aegean.gr` |
+| `eduPersonPrimaryAffiliation` | eduPerson `eduPersonPrimaryAffiliation` | Primary affiliation of the subject with the educational organisation. | string | `student` |
 
 ### 2.3 Optional attributes
 
-| **Data Identifier** | **Definition** | **Data type** | **Example value** |
-|---------------------|----------------|---------------|-------------------|
-| `given_name` | Student's given name. SHOULD be omitted when a pseudonymous status proof is sufficient. | string | `Alexandra` |
-| `family_name` | Student's family name. SHOULD be omitted when a pseudonymous status proof is sufficient. | string | `Papadopoulou` |
-| `display_name` | Human-readable name for wallet display. | string | `Alexandra Papadopoulou` |
-| `institutional_email` | Institutional email address. | string | `alexandra@example.aegean.gr` |
-| `institutional_person_identifier` | Institution-controlled student identifier. Disclosure SHOULD be limited. | string | `aegean:student:20261234` |
-| `european_student_identifier` | European Student Identifier where available. | string | `urn:schac:personalUniqueCode:int:esi:example.edu:12345` |
-| `education_identifier` | Identifier corresponding to the ERUA Educational ID deployment. | string | `edu-id:aegean:8f2a...` |
-| `alliance_identifier` | Identifier corresponding to the ERUA Alliance ID deployment. | string | `erua-id:7a91...` |
-| `erua_affiliation` | Indicates current affiliation with ERUA. | boolean | `true` |
-| `alliance_name` | Name of the university alliance. | string | `European Reform University Alliance` |
-| `alliance_code` | Short alliance code. | string | `ERUA` |
-| `programme_name` | Name of the programme of study. | string | `MSc Information and Communication Systems` |
-| `programme_identifier` | Stable identifier of the programme. | string or URI | `urn:aegean:programme:ics-msc` |
-| `study_level` | Study-cycle or qualification-framework level. | string | `EQF7` |
-| `study_field` | Study field or classification code. | string | `061` |
-| `academic_year` | Academic year for which status is asserted. | string | `2026/2027` |
-| `semester` | Current semester or term, when needed. | string | `winter` |
-| `campus` | Campus or study location. | string | `Samos` |
-| `mobility_status` | Mobility or exchange relationship. | string enum | `erua_exchange` |
-| `host_institution_id` | Identifier of a host institution during mobility. | string or URI | `https://ror.org/012tb2g32` |
-| `student_card_number` | European or institutional student-card number where the deployment uses one. | string | `ESC-GR-2026-12345` |
-| `service_entitlements` | Explicit service eligibility values. | array of strings | `["student_discount","library_access"]` |
-| `assurance_level` | Assurance or verification level of the academic source and issuance process. | string | `institutionally_verified` |
-| `portrait` | Student portrait where specifically required for supervised visual identification. | binary or URI | `data:image/jpeg;base64,...` |
-
-The `portrait` attribute SHOULD NOT be present in the normal ERUA status profile. It MAY
-be included only under a documented policy where visual identification is necessary and
-where the issuer has a lawful and authoritative source.
+| **Data Identifier** | **Semantic Reference** | **Definition** | **Data type** | **Example value** |
+|---------------------|------------------------|----------------|---------------|-------------------|
+| `schacPersonalUniqueCode` | SCHAC `schacPersonalUniqueCode` | Unique code associated with the student. | string | `urn:schac:personalUniqueCode:int:esi:example.edu:123456` |
+| `schacPersonalUniqueID` | SCHAC `schacPersonalUniqueID` | One or more unique identifiers for the student. | array of strings | `["urn:schac:personalUniqueID:gr:student:123456"]` |
+| `displayName` | OIDC `name` or education profile display name | Display name formatted for user interfaces. | string | `Nikos Triantafyllou` |
+| `commonName` | Common name / CN | Alternate display or preferred name. | string | `Nikos Triantafyllou` |
+| `dateOfBirth` | ISO 8601 date / OIDC `birthdate` where applicable | Student date of birth. | date | `1990-04-12` |
+| `mail` | RFC 5322 mailbox | Email address. | string | `ntriantafyllou@aegean.gr` |
+| `eduPersonAffiliation` | eduPerson `eduPersonAffiliation` | One or more affiliations, such as `student`, `member`, or `affiliate`. | array of strings | `["student", "member"]` |
+| `eduPersonScopedAffiliation` | eduPerson `eduPersonScopedAffiliation` | One or more scoped affiliation values. | array of strings | `["student@aegean.gr"]` |
+| `eduPersonAssurance` | eduPerson `eduPersonAssurance` | One or more assurance values for the subject or attributes. | array of strings | `["https://refeds.org/assurance"]` |
 
 ### 2.4 Conditional attributes
 
-| **Data Identifier** | **Definition** | **Data type** | **Example value** |
-|---------------------|----------------|---------------|-------------------|
-| `erua_membership_basis` | Basis for ERUA affiliation. Mandatory when `erua_affiliation` is `true`. | string enum | `member_institution_student` |
-| `host_institution_name` | Human-readable host institution. Present when `host_institution_id` is present. | string | `University of Konstanz` |
-| `mobility_valid_from` | Start of mobility period. Mandatory when mobility status is asserted. | date | `2026-10-01` |
-| `mobility_valid_until` | End of mobility period. Mandatory when mobility status is asserted. | date | `2027-02-28` |
-| `programme_level` | Programme or qualification level used for tariff or service policy. Present only when required. | string | `master` |
-| `discount_eligibility` | Minimal verified discount eligibility result. Present only for a profile that embeds a specific entitlement. | boolean | `true` |
-| `cryptographically_bound_to` | Attestation type to which this credential is cryptographically bound. Present where formal binding to PID is required. | string | `urn:eu.europa.ec.eudi:pid:1` |
-
-Permitted values for `erua_membership_basis` SHOULD include:
-
-* `member_institution_student`;
-* `approved_exchange_participant`;
-* `joint_programme_student`;
-* `alliance_activity_participant`; and
-* another governance-approved value.
+| **Data Identifier** | **Semantic Reference** | **Definition** | **Data type** | **Example value** |
+|---------------------|------------------------|----------------|---------------|-------------------|
+| `dateOfBirth` | ISO 8601 date / OIDC `birthdate` where applicable | SHALL be included only where needed for holder matching, age-related eligibility, or another justified relying-party purpose. If included, it SHALL represent the subject's birth date and SHALL NOT be in the future. | date | `1990-04-12` |
+| `mail` | RFC 5322 mailbox | SHOULD be disclosed only where the transaction requires a contact email or account matching. | string | `ntriantafyllou@aegean.gr` |
+| `eduPersonScopedAffiliation` | eduPerson `eduPersonScopedAffiliation` | SHOULD be included where a relying party needs both the affiliation value and the organisational scope. | array of strings | `["student@aegean.gr"]` |
+| `eduPersonAssurance` | eduPerson `eduPersonAssurance` | SHOULD be included where a relying party needs assurance information to decide whether the credential is sufficient for a specific service. | array of strings | `["https://refeds.org/assurance"]` |
 
 ### 2.5 Mandatory metadata
 
-| **Data Identifier** | **Definition** | **Data type** | **Example value** |
-|---------------------|----------------|---------------|-------------------|
-| `category` | Legal category of the attestation. | string | `eaa:eu:non-qualified` |
-| `issuer` | Identifier of the issuing university or authorised academic Attestation Provider. | string or URI | `https://issuer.aegean.gr` |
-| `credential_type` | Encoding-independent credential type identifier. | string | `urn:aptitude.eu:seditx:erua-student-status:1` |
-| `issued_at` | Date and time of credential issuance. | date-time | `2026-09-02T08:30:00Z` |
-| `valid_from` | Start of credential cryptographic validity. | date-time | `2026-09-02T08:30:00Z` |
-| `valid_until` | End of credential cryptographic validity. | date-time | `2027-09-01T00:00:00Z` |
-| `schema_version` | Version of the credential schema. | string | `0.1` |
-| `status_reference` | Reference used for credential status or revocation checking. | URI or structured value | `https://status.aegean.gr/atl/2026/09#3812` |
-| `trust_anchor_reference` | Location from which issuer trust information can be obtained. | URI | `https://trust.erua-eui.eu/academic-issuers` |
-
-All identifiers and URLs above are illustrative and SHALL be replaced by governance-approved
-values.
+| **Data Identifier** | **Semantic Reference** | **Definition** | **Data type** | **Example value** |
+|---------------------|------------------------|----------------|---------------|-------------------|
+| `vct` | SD-JWT VC | Verifiable Credential Type identifying this attestation type. | string | `VerifiableStudentID` |
+| `iss` | SD-JWT VC / JWT | Identifier of the issuer of the credential. | string | `https://issuer.example-university.edu` |
+| `iat` | JWT | Time at which the credential was issued. | integer | `1772366400` |
+| `exp` | JWT | Expiration time of the credential. For this attestation it SHOULD reflect the end of the applicable student-status validity period, such as the academic year or enrolment period. | integer | `1798761600` |
+| `cnf` | SD-JWT VC / JOSE | Confirmation claim binding the credential to key material controlled by the Holder or Wallet Unit, where holder binding is used. | object | `{ "jwk": { ... } }` |
+| `status` | SD-JWT VC status mechanism, where used | Status information enabling revocation or suspension checks. | object | `{ "status_list": { ... } }` |
 
 ### 2.6 Optional metadata
 
-| **Data Identifier** | **Definition** | **Data type** | **Example value** |
-|---------------------|----------------|---------------|-------------------|
-| `credential_name` | Human-readable wallet display name. | string | `ERUA Student Status` |
-| `credential_description` | Human-readable explanation of the credential. | string | `Proof of current student status and ERUA affiliation` |
-| `issuer_name` | Human-readable issuer name. | string | `University of the Aegean` |
-| `issuer_logo_uri` | URI of the issuer logo. | URI | `https://issuer.aegean.gr/logo.png` |
-| `alliance_logo_uri` | URI of the alliance logo. | URI | `https://erua-eui.eu/logo.png` |
-| `privacy_notice` | Reference to privacy information. | URI | `https://issuer.aegean.gr/privacy/student-status` |
-| `issuer_policy` | Reference to issuance and verification policy. | URI | `https://issuer.aegean.gr/policy/student-status` |
-| `display_locale` | Preferred language for wallet display. | string | `en` |
-| `source_system_reference` | Pseudonymous reference to the authoritative SIS or ESC Router record. | string | `sis-ref:81af...` |
+| **Data Identifier** | **Semantic Reference** | **Definition** | **Data type** | **Example value** |
+|---------------------|------------------------|----------------|---------------|-------------------|
+| `nbf` | JWT | Time before which the credential MUST NOT be accepted. | integer | `1772366400` |
+| `jti` | JWT | Unique identifier of the credential instance. | string | `urn:uuid:4f6a8e9a-40c2-4d21-96f8-7b85cc3f6c20` |
+| `trust_anchor` | ARF Topic 12 | Location or identifier of the machine-readable trust anchor or trust framework entry used to verify issuer authorisation. | string | `https://trust.example.eu/education/institutions/example-university` |
+| `cryptographically_bound_to` | ARF Topic 12 / ARB_28 | Identifier of another attestation type to which this attestation is cryptographically bound, where such binding is used. | string | `urn:eudi:pid:1` |
 
 ### 2.7 Conditional metadata
 
-| **Data Identifier** | **Definition** | **Data type** | **Example value** |
-|---------------------|----------------|---------------|-------------------|
-| `status_list_index` | Entry index in an applicable Attestation Status List. Mandatory when list-based status is used. | integer | `3812` |
-| `status_list_uri` | URI of the applicable Attestation Status List. Mandatory when list-based status is used. | URI | `https://status.aegean.gr/atl/2026/09` |
-| `revocation_list_uri` | URI of the applicable Attestation Revocation List. Mandatory when a revocation-list mechanism is used. | URI | `https://status.aegean.gr/arl/2026` |
-| `esc_router_reference` | Reference to the ESC Router record or transaction. Present only in an ESC Router-based issuance profile. | string | `esc-router:txn:72f...` |
+| **Data Identifier** | **Semantic Reference** | **Definition** | **Data type** | **Example value** |
+|---------------------|------------------------|----------------|---------------|-------------------|
+| `status` | SD-JWT VC status mechanism, where used | SHOULD be present where the StudentID Attestation is medium- or long-lived and may need to be revoked, suspended, or updated before expiry. | object | `{ "status_list": { ... } }` |
+| `cryptographically_bound_to` | ARF Topic 12 / ARB_28 | SHOULD be present where the StudentID Attestation must be presented together with PID or another identity attestation for strong holder matching. | string | `urn:eudi:pid:1` |
+
+### 2.8 Code lists
+
+| **Field name** | **Allowed values** | **Meaning** | **Source / vocabulary** | **Notes / extensibility** |
+|----------------|--------------------|-------------|--------------------------|---------------------------|
+| `dateOfBirth` | ISO 8601 date values | Subject's date of birth. | ISO 8601 | Date-only format `YYYY-MM-DD` SHALL be used where possible. |
+| `mail` | RFC 5322-compliant mailbox strings | Email address. | RFC 5322 | Implementations SHOULD apply practical email validation appropriate for the issuing context. |
+| `schacHomeOrganization` | Issuer-defined organisation identifiers, commonly domain-style values | Identifies the home educational organisation. | SCHAC / issuer-defined controlled values | Values SHOULD be stable and consistently interpreted across issuers and relying parties. |
+| `eduPersonPrimaryAffiliation` | Issuer-defined controlled vocabulary; recommended values include `student` | Primary affiliation of the subject. | eduPerson / issuer-defined controlled values | For this attestation, the value SHOULD be `student` unless the issuer has a specific student-equivalent category. |
+| `eduPersonAffiliation` | Issuer-defined controlled vocabulary; examples include `student`, `member`, `affiliate` | One or more affiliations of the subject. | eduPerson / issuer-defined controlled values | Values SHOULD be consistent with `eduPersonPrimaryAffiliation`. |
+| `eduPersonScopedAffiliation` | Scoped affiliation strings, commonly `affiliation@scope` | Affiliation value scoped to an organisation or domain. | eduPerson / SCHAC context | Scope SHOULD be consistent with `schacHomeOrganization`. |
+| `eduPersonAssurance` | Assurance URIs or issuer-defined assurance values | Assurance information for the subject or attributes. | eduPerson / REFEDS or issuer-defined assurance framework | Additional values SHOULD only be used if documented by the issuer or trust framework. |
+| `attestation_legal_category` | `non-qualified-EAA`, `QEAA`, `PuB-EAA` | Indicates the legal category of the attestation. | ARF Topic 12 / Rulebook template | This Rulebook uses `non-qualified-EAA`. |
+
+### 2.9 Integrity rules
+
+| **Rule ID** | **Rule statement** | **Why it exists** | **Where enforced** | **Verifier / issuer behavior on failure** |
+|-------------|--------------------|-------------------|--------------------|-------------------------------------------|
+| `SID-IR-01` | `identifier`, `firstName`, `familyName`, `schacHomeOrganization`, `eduPersonPrincipalName`, and `eduPersonPrimaryAffiliation` SHALL be present. | Ensures that the credential contains the mandatory student identification, organisation, identity, and affiliation data. | Issuer business rules, schema validation, verifier business validation. | Issuer SHALL reject incomplete credential data. Verifier SHALL treat the attestation as invalid or insufficient if mandatory claims are missing. |
+| `SID-IR-02` | If `dateOfBirth` is included, it SHALL represent the subject's birth date and SHALL NOT be in the future. | Prevents invalid identity data and supports correct age-related or matching checks. | Issuer business rules and verifier business validation. | Issuer SHALL reject invalid dates. Verifier SHALL reject or ignore an invalid `dateOfBirth` claim depending on the transaction. |
+| `SID-IR-03` | If `eduPersonScopedAffiliation` values are included, they SHOULD be consistent with `schacHomeOrganization`, for example by using a matching scoping domain. | Ensures that scoped affiliation can be interpreted consistently. | Issuer business rules and verifier business validation. | Issuer SHOULD prevent inconsistent scoped affiliations. Verifier MAY reject or downgrade confidence in inconsistent values. |
+| `SID-IR-04` | If `eduPersonAffiliation` is present, it SHOULD include the value of `eduPersonPrimaryAffiliation`. | Ensures that the primary affiliation is consistent with the broader affiliation list. | Issuer business rules and verifier business validation. | Issuer SHOULD align the values. Verifier MAY treat inconsistent affiliation data as insufficient. |
+| `SID-IR-05` | If `schacPersonalUniqueID` is multi-valued, each entry SHOULD be unique within the array. | Prevents duplicate identifiers and ambiguity. | Issuer business rules and schema validation. | Issuer SHOULD remove duplicates. Verifier MAY ignore duplicate entries. |
+| `SID-IR-06` | Selective disclosure SHALL allow the Holder to reveal only the attributes required for the transaction. | Supports privacy and data minimisation. | Issuer credential construction and Wallet presentation logic. | Verifier SHALL request only necessary claims. Wallet SHOULD allow the Holder to review the disclosed claims. |
+| `SID-IR-07` | `eduPersonPrimaryAffiliation` SHOULD be `student` or an issuer-defined student-equivalent value for this attestation type. | Ensures that the attestation actually represents student status. | Issuer business rules and verifier business validation. | Verifier SHOULD reject the credential for student-status decisions if the affiliation does not indicate student status. |
 
 # 3 Attestation encoding
 
 ## 3.1 ISO/IEC 18013-5-compliant encoding
 
-Version 0.1 of this Rulebook does not mandate an ISO/IEC 18013-5 mdoc representation.
+This version of the Rulebook does not define an ISO/IEC 18013-5 mdoc encoding for the
+StudentID Attestation.
 
-The SEDIT-X campus and ERUA services include both online and proximity verification.
-SD-JWT VC is selected as the primary pilot encoding because it supports remote
-OpenID4VP/DC API-style interactions and selective disclosure across alliance services.
-
-A future deployment MAY define an mdoc encoding where offline or unsupervised proximity
-access is required. Such a profile SHALL define:
-
-* a unique mdoc document type;
-* a unique attribute namespace;
-* CDDL encodings;
-* reader authentication requirements;
-* offline status and trust-cache rules; and
-* equivalence with the semantic model in Chapter 2.
-
-Until that profile is approved, an issuer SHALL NOT advertise mdoc support for this
-attestation solely on the basis of this Rulebook.
+The StudentID Attestation defined in this Rulebook is specified for SD-JWT VC-based
+issuance and presentation. If a future version of this Rulebook defines an
+ISO/IEC 18013-5-compliant mdoc representation, that version SHALL define a unique
+document type, namespaces, attribute identifiers, CBOR encoding rules, and
+illustrative mdoc examples.
 
 ## 3.2 SD-JWT VC-based encoding
 
-### 3.2.1 Verifiable Credential Type
+The StudentID Attestation SHALL be issued as an SD-JWT VC.
 
-The proposed Verifiable Credential Type is:
+The Verifiable Credential Type (`vct`) for this attestation type is:
 
 ```text
-urn:aptitude.eu:seditx:erua-student-status:1
+VerifiableStudentID
 ```
 
-This is a pilot identifier and requires confirmation through APTITUDE and ERUA governance.
+The credential claims defined in this section SHALL follow SD-JWT VC and HAIP
+conventions where applicable. Claim names are either IANA-registered JWT claims,
+public names, or private names specific to this attestation type.
 
-### 3.2.2 Registered JWT claims
+For all claims, this Rulebook specifies whether an Attestation Provider MUST, MAY, or
+MUST NOT make the claim selectively disclosable.
+
+### 3.2.1 IANA-registered and standard JWT / SD-JWT VC claims
 
 | **Data Identifier** | **Attribute identifier** | **Encoding format** | **Reference/Notes** | **Disclosable** |
 |---------------------|--------------------------|---------------------|---------------------|-----------------|
-| `issuer` | `iss` | string | JWT issuer identifier | MUST NOT |
-| `issued_at` | `iat` | integer | NumericDate | MUST NOT |
-| `valid_until` | `exp` | integer | NumericDate | MUST NOT |
-| `valid_from` | `nbf` | integer | NumericDate | MUST NOT |
-| `credential_type` | `vct` | string | SD-JWT VC type | MUST NOT |
-| `holder_binding` | `cnf` | object | Holder-binding confirmation key | MUST NOT |
-| `status_reference` | `status` | object | Credential status metadata | MUST NOT |
-| `given_name` | `given_name` | string | OpenID Connect claim | MUST |
-| `family_name` | `family_name` | string | OpenID Connect claim | MUST |
-| `institutional_email` | `email` | string | OpenID Connect claim | MUST |
+| `iss` | `iss` | string | JWT issuer identifier. | MUST NOT |
+| `iat` | `iat` | integer | Issued-at timestamp. | MUST NOT |
+| `nbf` | `nbf` | integer | Not-before timestamp, where used. | MUST NOT |
+| `exp` | `exp` | integer | Expiration timestamp. SHOULD reflect the end of the applicable student-status validity period. | MUST NOT |
+| `jti` | `jti` | string | Unique credential instance identifier, where used. | MUST NOT |
+| `cnf` | `cnf` | object | Holder binding confirmation claim, where used. | MUST NOT |
+| `status` | `status` | object | Status or revocation information, where used. | MUST NOT |
+| `vct` | `vct` | string | SD-JWT VC type. Value SHALL be `VerifiableStudentID`. | MUST NOT |
 
-### 3.2.3 Private claims specific to this attestation
+### 3.2.2 Public or reusable claims
+
+| **Data Identifier** | **Attribute identifier** | **Encoding format** | **Reference/Notes** | **Disclosable** |
+|---------------------|--------------------------|---------------------|---------------------|-----------------|
+| `firstName` | `firstName` | string | Student given name. May be mapped to OIDC `given_name` in implementations that use OIDC naming conventions. | MUST |
+| `familyName` | `familyName` | string | Student family name. May be mapped to OIDC `family_name` in implementations that use OIDC naming conventions. | MUST |
+| `displayName` | `displayName` | string | Display name formatted for user interfaces. | MAY |
+| `commonName` | `commonName` | string | Alternate display or preferred name. | MAY |
+| `dateOfBirth` | `dateOfBirth` | string | Date of birth formatted as ISO 8601 date, where disclosed. | MAY |
+| `mail` | `mail` | string | Email address. | MAY |
+
+### 3.2.3 Private claims specific to the StudentID Attestation
 
 | **Data Identifier** | **Attribute identifier** | **Encoding format** | **Notes** | **Disclosable** |
 |---------------------|--------------------------|---------------------|-----------|-----------------|
-| `category` | `category` | string | EAA legal category | MUST NOT |
-| `credential_id` | `credential_id` | string | Credential identifier | MUST NOT |
-| `student_reference` | `student_reference` | string | Pseudonymous student reference | MUST |
-| `student_status` | `student_status` | string | Current student status | MUST |
-| `home_institution_id` | `home_institution_id` | string | Stable HEI identifier | MUST |
-| `home_institution_name` | `home_institution_name` | string | Human-readable HEI name | MUST |
-| `affiliation_type` | `affiliation_type` | string | Institutional relationship | MUST |
-| `status_valid_from` | `status_valid_from` | string | ISO date | MUST |
-| `status_valid_until` | `status_valid_until` | string | ISO date | MUST |
-| `display_name` | `display_name` | string | Wallet/service display value | MUST |
-| `institutional_person_identifier` | `institutional_person_identifier` | string | Institution-specific ID | MUST |
-| `european_student_identifier` | `european_student_identifier` | string | European Student Identifier | MUST |
-| `education_identifier` | `education_identifier` | string | ERUA Educational ID | MUST |
-| `alliance_identifier` | `alliance_identifier` | string | ERUA Alliance ID | MUST |
-| `erua_affiliation` | `erua_affiliation` | boolean | ERUA relationship | MUST |
-| `alliance_name` | `alliance_name` | string | Alliance name | MUST |
-| `alliance_code` | `alliance_code` | string | Alliance short code | MUST |
-| `programme_name` | `programme_name` | string | Programme name | MUST |
-| `programme_identifier` | `programme_identifier` | string | Programme identifier | MUST |
-| `study_level` | `study_level` | string | EQF/NQF or cycle | MUST |
-| `study_field` | `study_field` | string | Study-field code | MUST |
-| `academic_year` | `academic_year` | string | Academic year | MUST |
-| `semester` | `semester` | string | Term or semester | MUST |
-| `campus` | `campus` | string | Campus/location | MUST |
-| `mobility_status` | `mobility_status` | string | Mobility relationship | MUST |
-| `host_institution_id` | `host_institution_id` | string | Host HEI identifier | MUST |
-| `host_institution_name` | `host_institution_name` | string | Host HEI name | MUST |
-| `mobility_valid_from` | `mobility_valid_from` | string | ISO date | MUST |
-| `mobility_valid_until` | `mobility_valid_until` | string | ISO date | MUST |
-| `student_card_number` | `student_card_number` | string | Student-card identifier | MUST |
-| `service_entitlements` | `service_entitlements` | array of strings | Explicit entitlements | MUST |
-| `assurance_level` | `assurance_level` | string | Issuance/source assurance | MUST |
-| `portrait` | `portrait` | string | Protected image or URI | MUST |
-| `erua_membership_basis` | `erua_membership_basis` | string | Basis of ERUA affiliation | MUST |
-| `programme_level` | `programme_level` | string | Programme level | MUST |
-| `discount_eligibility` | `discount_eligibility` | boolean | Specific discount outcome | MUST |
-| `cryptographically_bound_to` | `cryptographically_bound_to` | string | PID type binding | MUST NOT |
-| `schema_version` | `schema_version` | string | Schema version | MUST NOT |
-| `trust_anchor_reference` | `trust_anchor_reference` | string | Trust lookup location | MUST NOT |
-| `privacy_notice` | `privacy_notice` | string | Privacy information | MAY |
-| `source_system_reference` | `source_system_reference` | string | Pseudonymous source reference | MUST NOT |
-| `esc_router_reference` | `esc_router_reference` | string | ESC Router reference | MUST NOT |
+| `attestation_legal_category` | `attestation_legal_category` | string | SHALL be `non-qualified-EAA`. | MUST NOT |
+| `identifier` | `identifier` | string | Unique student identifier, such as institutional student number or equivalent. | MUST |
+| `schacPersonalUniqueCode` | `schacPersonalUniqueCode` | string | Unique code associated with the student. | MAY |
+| `schacPersonalUniqueID` | `schacPersonalUniqueID` | array of strings | One or more unique identifiers for the student. | MAY |
+| `schacHomeOrganization` | `schacHomeOrganization` | string | Home organisation or institution domain or identifier. | MUST |
+| `eduPersonPrincipalName` | `eduPersonPrincipalName` | string | Principal name, often in `user@realm` format. | MAY |
+| `eduPersonPrimaryAffiliation` | `eduPersonPrimaryAffiliation` | string | Primary affiliation, expected to indicate student status. | MUST |
+| `eduPersonAffiliation` | `eduPersonAffiliation` | array of strings | One or more affiliations. | MAY |
+| `eduPersonScopedAffiliation` | `eduPersonScopedAffiliation` | array of strings | One or more scoped affiliation values. | MAY |
+| `eduPersonAssurance` | `eduPersonAssurance` | array of strings | One or more assurance values for the subject or attributes. | MAY |
+| `trust_anchor` | `trust_anchor` | string | Location or identifier of the trust anchor or trust framework entry used to verify issuer authorisation, where used. | MUST NOT |
+| `cryptographically_bound_to` | `cryptographically_bound_to` | string | Identifier of another attestation type to which this attestation is bound, where used. | MUST NOT |
 
-### 3.2.4 Illustrative JWT claim set
+### 3.2.4 Example JWT claim set
 
 ```json
 {
-  "iss": "https://issuer.aegean.gr",
-  "iat": 1788337800,
-  "nbf": 1788337800,
-  "exp": 1819756800,
-  "vct": "urn:aptitude.eu:seditx:erua-student-status:1",
-  "cnf": {
-    "jkt": "m4F0...wallet-key-thumbprint"
-  },
-  "status": {
-    "status_list": {
-      "idx": 3812,
-      "uri": "https://status.aegean.gr/atl/2026/09"
-    }
-  },
-  "category": "eaa:eu:non-qualified",
-  "credential_id": "erua_student_01K0V7M2P9",
-  "student_reference": "stu_8f2a91c4d3",
-  "student_status": "active",
-  "home_institution_id": "https://ror.org/04qmmjx98",
-  "home_institution_name": "University of the Aegean",
-  "affiliation_type": "student",
-  "status_valid_from": "2026-09-01",
-  "status_valid_until": "2027-08-31",
-  "european_student_identifier": "urn:schac:personalUniqueCode:int:esi:example.edu:12345",
-  "education_identifier": "edu-id:aegean:8f2a91c4d3",
-  "alliance_identifier": "erua-id:7a91e5f8",
-  "erua_affiliation": true,
-  "alliance_name": "European Reform University Alliance",
-  "alliance_code": "ERUA",
-  "erua_membership_basis": "member_institution_student",
-  "programme_name": "MSc Information and Communication Systems",
-  "programme_identifier": "urn:aegean:programme:ics-msc",
-  "study_level": "EQF7",
-  "academic_year": "2026/2027",
-  "campus": "Samos",
-  "service_entitlements": [
-    "student_discount",
-    "library_access",
-    "erua_event_registration"
+  "iss": "https://issuer.example-university.edu",
+  "iat": 1772366400,
+  "nbf": 1772366400,
+  "exp": 1798761600,
+  "jti": "urn:uuid:4f6a8e9a-40c2-4d21-96f8-7b85cc3f6c20",
+  "vct": "VerifiableStudentID",
+  "attestation_legal_category": "non-qualified-EAA",
+  "identifier": "STU-2026-000123",
+  "schacPersonalUniqueCode": "urn:schac:personalUniqueCode:int:esi:example.edu:123456",
+  "schacPersonalUniqueID": [
+    "urn:schac:personalUniqueID:gr:student:123456"
   ],
-  "assurance_level": "institutionally_verified",
-  "schema_version": "0.1",
-  "trust_anchor_reference": "https://trust.erua-eui.eu/academic-issuers",
-  "privacy_notice": "https://issuer.aegean.gr/privacy/student-status"
+  "schacHomeOrganization": "aegean.gr",
+  "firstName": "Nikos",
+  "familyName": "Triantafyllou",
+  "displayName": "Nikos Triantafyllou",
+  "commonName": "Nikos Triantafyllou",
+  "dateOfBirth": "1990-04-12",
+  "mail": "ntriantafyllou@aegean.gr",
+  "eduPersonPrincipalName": "ntriantafyllou@aegean.gr",
+  "eduPersonPrimaryAffiliation": "student",
+  "eduPersonAffiliation": [
+    "student",
+    "member"
+  ],
+  "eduPersonScopedAffiliation": [
+    "student@aegean.gr"
+  ],
+  "eduPersonAssurance": [
+    "https://refeds.org/assurance"
+  ],
+  "trust_anchor": "https://trust.example.eu/education/institutions/example-university",
+  "cnf": {
+    "jwk": {
+      "kty": "EC",
+      "crv": "P-256",
+      "x": "...",
+      "y": "..."
+    }
+  }
 }
 ```
 
-An actual compact SD-JWT serialisation SHALL be generated using the final issuer keys,
-salts, status infrastructure and selective-disclosure policy. This Rulebook does not
-provide a fabricated base64 token.
+### 3.2.5 Example issued SD-JWT
 
-### 3.2.5 Human-readable wallet representation
-
-A Wallet Unit SHOULD display at least:
+The following is a non-normative placeholder example. A production SD-JWT SHALL be
+generated by the issuer using the applicable signing algorithm, disclosure
+construction, holder binding, and SD-JWT VC rules.
 
 ```text
-ERUA Student Status
-Status: Active student
-Institution: University of the Aegean
-ERUA affiliation: Active
-Academic year: 2026/2027
-Valid until: 31 August 2027
-Issuer: University of the Aegean
+<issuer-signed-sd-jwt>~<disclosure-1>~<disclosure-2>~<disclosure-n>~<holder-binding-jwt>
 ```
 
-Programme, study level, student identifier and service entitlements SHOULD be displayed
-only where present and relevant.
+### 3.2.6 Example human-readable disclosed payload
+
+A verifier that requests only proof of student status for a discounted service may
+receive a presentation disclosing the following claims:
+
+```json
+{
+  "vct": "VerifiableStudentID",
+  "identifier": "STU-2026-000123",
+  "schacHomeOrganization": "aegean.gr",
+  "firstName": "Nikos",
+  "familyName": "Triantafyllou",
+  "eduPersonPrimaryAffiliation": "student",
+  "eduPersonScopedAffiliation": [
+    "student@aegean.gr"
+  ]
+}
+```
+
+A verifier that only needs to know whether the Holder has student status SHOULD request
+the minimum claims necessary for that decision and SHOULD NOT request `dateOfBirth`,
+`mail`, or unique identifiers unless required for the transaction.
+
+The issuer identity, credential type, expiry time, signature, holder binding proof, and
+trust anchor information are not treated as selectively disclosable student attributes
+and SHALL remain available to the verifier for technical validation.
 
 ## 3.3 W3C Verifiable Credentials Data Model-based encoding
 
-Version 0.1 of this Rulebook does not define a W3C VCDM representation.
+This version of the Rulebook does not define a W3C Verifiable Credentials Data Model
+encoding for the StudentID Attestation.
 
-ERUA's earlier pilots and EBSI-aligned implementations may use W3C VC structures, but
-this Rulebook selects SD-JWT VC as the target EUDI Wallet pilot encoding. A future
-version MAY add a formally mapped W3C VCDM profile if required.
+If a future version defines a W3C VCDM representation, that version SHALL define the
+credential context, type, credential subject structure, proof type, selective disclosure
+mechanism, and presentation requirements.
 
 ## 4 Attestation usage
 
-### 4.1 Issuance prerequisites
+The StudentID Attestation is intended for verifying student status and selected student
+identity or affiliation attributes.
 
-The issuer SHALL be a recognised Higher Education Institution or an authorised academic
-Attestation Provider acting on its behalf.
+Typical usage scenarios include:
 
-Before issuance, the issuer SHALL:
+* presentation by the student for campus services such as libraries, laboratories,
+  rooms, buildings, or academic platforms;
+* presentation for student discounts or eligibility checks, including ferry or other
+  transport discounts where student status is accepted;
+* presentation for mobility scenarios involving another educational organisation or
+  service provider;
+* online verification by a service provider using remote presentation protocols;
+* offline or low-connectivity verification where the verifier can validate the
+  credential signature, issuer, validity period, status where available, and disclosed
+  attributes without relying on a real-time issuer backend.
 
-1. authenticate the student through the institutional identity infrastructure;
-2. retrieve or verify current status from an authoritative Student Information System,
-   ESC Router or equivalent academic source;
-3. confirm the student's institutional affiliation and validity period;
-4. where ERUA affiliation is asserted, verify the applicable alliance-membership basis;
-5. determine the minimum attributes required for the selected credential profile;
-6. bind the credential to the Wallet Unit;
-7. present the credential purpose, issuer, data and validity to the User; and
-8. obtain User consent to receive and store the credential.
+A Relying Party receiving the attestation SHALL verify:
 
-An ESC Router-based issuance profile MAY follow:
+* the issuer signature;
+* the SD-JWT VC type (`vct`);
+* the issuer authorisation to issue StudentID Attestations;
+* the credential validity period;
+* the credential status, where a status mechanism is present;
+* holder binding, where used;
+* the integrity rules defined in Section 2.9;
+* that the disclosed student attributes are sufficient for the relying-party decision.
+
+The Relying Party SHOULD request and verify PID or another accepted identity credential
+where the transaction requires strong identity matching. For low-risk student-status
+checks, the Relying Party MAY rely on the StudentID Attestation alone, provided that the
+issuer, signature, validity, status, and holder binding checks are successful and this
+is consistent with the relying party's policy.
+
+The Relying Party SHALL apply data minimisation and SHALL request only the attributes
+required for the transaction. For example, a discount service may only need
+`eduPersonPrimaryAffiliation` and `schacHomeOrganization`, while an account-linking
+process may require `eduPersonPrincipalName` or `mail`.
+
+The attestation SHOULD be device-bound through holder binding where supported by the
+EUDI Wallet and the applicable SD-JWT VC profile. The attestation MAY be
+cryptographically bound to a PID or another accepted identity attestation where strong
+identity matching is required. Where this binding is used, the metadata attribute
+`cryptographically_bound_to` SHOULD contain:
 
 ```text
-Institutional IdP → Student Information System → ESC Router →
-Issuer Service → EUDI Wallet
+urn:eudi:pid:1
 ```
 
-A decentralised profile MAY issue directly from institutionally verified SIS data without
-using the ESC Router, subject to the approved governance model.
-
-### 4.2 Device and holder binding
-
-The credential **SHOULD be device-bound** to a key controlled by the Wallet Unit.
-
-The issuer SHALL ensure that the credential is delivered to the Wallet Unit used by the
-authenticated student and that issuance is protected against misdirection and replay.
-
-The credential MAY be cryptographically bound to PID using:
-
-```text
-cryptographically_bound_to = "urn:eu.europa.ec.eudi:pid:1"
-```
-
-PID binding SHOULD be used where a service requires high-assurance civil identity in
-addition to academic status. It SHOULD NOT be required for pseudonymous services where
-student status alone is sufficient.
-
-### 4.3 Presentation contexts
-
-The credential MAY be presented remotely or in proximity.
-
-Remote presentation MAY use OpenID4VP or the Digital Credentials API for:
-
-* online registration;
-* authentication to ERUA services;
-* course or event enrolment;
-* transport discount verification;
-* remote library or academic-service access; and
-* other web-based services.
-
-Proximity presentation MAY be used for:
-
-* Tap2Enter attendance;
-* event check-in;
-* campus and facility access;
-* cafeteria or free-meal verification;
-* library desk verification;
-* ferry or mobility discount verification; and
-* another face-to-face service.
-
-The Wallet Unit SHALL display the requested attributes and purpose and SHALL obtain User
-authentication and approval before disclosure.
-
-### 4.4 Typical disclosure profiles
-
-#### 4.4.1 Basic student-status proof
-
-A verifier SHOULD request only:
-
-* `student_status`;
-* `home_institution_id` or `home_institution_name`;
-* `status_valid_until`; and
-* credential validity and status metadata.
-
-#### 4.4.2 ERUA service access
-
-A verifier MAY additionally request:
-
-* `erua_affiliation`;
-* `alliance_code`;
-* `alliance_identifier` or a pairwise alternative; and
-* a required `service_entitlements` value.
-
-#### 4.4.3 Transport discount
-
-A ferry or transport verifier SHOULD request only:
-
-* `student_status` or `discount_eligibility`;
-* `home_institution_id`;
-* `status_valid_until`; and
-* `programme_level` only where required by the tariff rules.
-
-The SEDIT-X ferry profile identifies student status, issuing institution, validity period
-and programme/level only where needed as the appropriate disclosure subset.
-
-#### 4.4.4 Attendance or event registration
-
-A service MAY request:
-
-* `student_reference` or a service-specific pseudonym;
-* `erua_affiliation` where the event is alliance-restricted;
-* `home_institution_id`; and
-* the minimum display name only where the attendance record must identify the person.
-
-#### 4.4.5 Meal or cafeteria eligibility
-
-A service SHOULD request a verified eligibility result and a pseudonymous subject or
-service-specific identifier. It SHOULD avoid collecting programme, grades, full date of
-birth or civil identity document data.
-
-### 4.5 Relying Party obligations
-
-A Relying Party SHALL:
-
-1. verify the issuer signature and credential integrity;
-2. verify that the issuer is trusted and authorised to assert student status;
-3. verify credential validity and status;
-4. verify key binding, nonce, audience and presentation freshness as applicable;
-5. verify that `student_status` is acceptable for the requested service;
-6. check the status-validity interval;
-7. apply service-specific eligibility rules;
-8. request only attributes necessary for the service;
-9. avoid retaining the complete credential or unrelated attributes;
-10. return a clear decision such as granted, denied or manual review; and
-11. provide an alternative procedure where automated verification cannot complete.
-
-A typical result SHOULD contain only:
-
-```json
-{
-  "student_status_valid": true,
-  "erua_affiliation_valid": true,
-  "requested_entitlement_valid": true,
-  "decision": "granted",
-  "correlation_id": "erua-vfy-01K0..."
-}
-```
-
-### 4.6 Identity verification and PID
-
-A Relying Party SHALL NOT request PID by default merely because it verifies student status.
-
-PID MAY be requested when:
-
-* the service has a legal requirement to identify the individual;
-* the service grants a high-value, personal or non-transferable entitlement;
-* an examination or supervised academic process requires identity confirmation;
-* a mismatch or fraud indicator requires staff-assisted verification; or
-* the applicable service policy documents another proportionate need.
-
-Where PID is requested, the verifier SHALL request only the minimum identity attributes
-needed for the stated purpose.
-
-### 4.7 Service entitlements
-
-The `service_entitlements` attribute MAY simplify decisions for well-defined services.
-However:
-
-* it SHALL contain only explicitly issued entitlements;
-* it SHALL NOT be interpreted as a general access-control list;
-* the verifier SHALL still check validity and status;
-* sensitive information SHALL not be inferred from entitlement labels; and
-* frequently changing service state SHOULD remain in the service backend rather than
-  require constant credential re-issuance.
-
-### 4.8 Operational logging
-
-A verifier MAY record a minimal event containing:
-
-* service or event identifier;
-* timestamp;
-* pseudonymous transaction or student reference;
-* issuer or institution identifier;
-* requested eligibility outcome; and
-* decision.
-
-The log SHOULD NOT contain:
-
-* complete credential copies;
-* unnecessary PID attributes;
-* programme or study-level data unrelated to the decision;
-* portrait images; or
-* other academic records.
-
-### 4.9 Transactional data
-
-This credential is not a payment attestation and SHALL NOT carry payment transaction data.
-
-Where the credential is used to obtain a discount or free service, the payment, tariff or
-redemption transaction SHALL be processed separately. A verifier MAY record that a
-student-status eligibility check succeeded, but SHALL NOT use the credential as payment
-authorisation evidence.
-
-### 4.10 Failure and fallback
-
-The automated flow SHALL return denied or manual review when:
-
-* signature, trust, validity or status verification fails;
-* student status is inactive or outside its validity period;
-* ERUA affiliation is required but cannot be verified;
-* the requested entitlement is absent;
-* holder binding or presentation freshness fails;
-* the authoritative source reports that the status has changed; or
-* the service policy requires additional staff verification.
+No payment-specific transactional data is defined by this Rulebook. If the StudentID
+Attestation is used as part of a transaction that also involves payment,
+payment-related requirements SHALL be defined in a separate payment attestation,
+payment profile, or transaction-specific rulebook.
 
 ## 5 Trust anchors
 
-The credential is a non-qualified EAA issued by a participating Higher Education
-Institution or an authorised academic Attestation Provider.
+A Relying Party SHALL verify that the issuer of the StudentID Attestation is authorised
+to issue this attestation type.
 
-For the pilot, trust SHOULD be established through the APTITUDE trust framework and/or
-an ERUA academic issuer registry.
+For non-qualified EAA deployments, the Relying Party SHOULD obtain trust anchor
+information through one or more of the following mechanisms:
 
-The production trust model SHALL define:
+* a machine-readable trust list or trust registry used by the relevant education or
+  EUDI Wallet ecosystem;
+* an issuer metadata endpoint published by the educational organisation or authorised
+  academic identity provider;
+* a trust framework entry managed by APTITUDE WP2 or by another authorised governance
+  body;
+* a pilot trust list used for controlled interoperability testing;
+* a federation or sectoral trust framework used by research and education identity
+  providers, where applicable.
 
-1. which institutions are authorised to issue student status;
-2. whether ERUA itself may issue alliance affiliation or only provide technical infrastructure;
-3. whether a shared ERUA Issuer acts as technical provider, issuer of record or both;
-4. how delegated issuance is represented;
-5. the trusted-list service type for academic issuers;
-6. certificate and signing-key profiles;
-7. issuer scope by institution, credential type and alliance role;
-8. key rollover and compromise handling; and
-9. verifier behaviour when trust information is unavailable.
+Where the metadata attribute `trust_anchor` is present, it SHOULD identify the location
+or registry entry from which the Relying Party can obtain the issuer trust anchor or
+issuer authorisation information.
 
-A verifier SHALL establish both:
+The Relying Party SHALL use the trust anchor to verify that:
 
-* cryptographic trust in the issuer; and
-* semantic authorisation of that issuer to assert the relevant institution and student status.
+* the issuer signing key or certificate chains to a trusted authority or registered
+  trust anchor;
+* the issuer is authorised to issue the `VerifiableStudentID` attestation type;
+* the issuer metadata or trust framework entry has not expired or been revoked;
+* the issuer identity in the credential is consistent with the issuer identity in the
+  trust framework;
+* the issuer is an educational organisation or authorised academic identity provider for
+  the relevant student population.
 
-Where ERUA affiliation is asserted by a university, the trust framework SHALL establish
-that the university is an ERUA member and is authorised to issue that affiliation.
+Wallet Units MAY also use the same trust framework information during issuance to
+determine whether the provider is authorised to issue this attestation type.
 
 ## 6 Revocation
 
-### 6.1 Validity model
+The StudentID Attestation is typically medium- to long-lived and intended for repeated
+presentation, for example during an academic year or enrolment period.
 
-The credential SHALL have a bounded validity period aligned with the academic source.
+The credential expiration time (`exp`) SHOULD be aligned with the end of the applicable
+student-status validity period, such as the end of an academic year, enrolment period,
+mobility period, or other issuer-defined validity period.
 
-The issuer SHOULD set validity based on:
+Because student status can change before the planned expiry date, the issuer SHOULD
+support revocation or suspension where the attestation is valid for more than 24 hours.
 
-* enrolment or registration period;
-* academic year or semester;
-* mobility period;
-* expected SIS revalidation cycle; and
-* maximum risk acceptable for status changes.
+Revocation MAY be handled by one or more of the following mechanisms:
 
-A one-year validity period MAY be used where supported by regular status checking and
-prompt revocation. Shorter periods SHOULD be used for exchange or visiting-student status
-that ends on a defined date.
+* an attestation status list mechanism, where supported;
+* an attestation revocation list mechanism, where supported;
+* backend verification by the educational organisation or authorised academic identity
+  provider;
+* short validity with periodic re-issuance, where appropriate for the service model.
 
-### 6.2 Revocation and status updates
+If a status or revocation mechanism is included in the credential, the Relying Party
+SHALL check the status before accepting the attestation, unless offline operating rules
+explicitly allow deferred status checking.
 
-The credential SHALL be status-checkable.
-
-The issuer SHALL revoke, suspend, supersede or otherwise invalidate the credential when:
-
-* the student's status ends;
-* enrolment is cancelled;
-* a mobility or visiting period ends early;
-* the credential was issued using erroneous source data;
-* a replacement credential is issued under a one-active-credential policy;
-* the Wallet Unit or credential is reported compromised; or
-* fraud is detected.
-
-The issuer SHOULD support a **one active credential per profile and student** policy,
-where operationally feasible, so that re-issuance supersedes the previous credential.
-
-### 6.3 Status-list mechanism
-
-The target implementation SHOULD use the status-list mechanism selected by APTITUDE WP2
-and aligned with the applicable EUDI Wallet Technical Specification.
-
-The final production endpoint has not yet been defined.
-
-Illustrative value:
-
-```text
-https://status.aegean.gr/
-```
-
-This value SHALL NOT be treated as an operational endpoint.
+The issuer SHOULD revoke or suspend the attestation if the student is no longer
+enrolled, loses the relevant student status, the credential was issued incorrectly, the
+credential is reported compromised, or the underlying student identifier is no longer
+valid for presentation.
 
 ## 7 Compliance
 
-This Rulebook is designed to align with:
+This Rulebook is designed to align with the EUDI Wallet architectural approach for
+Electronic Attestations of Attributes and with the Attestation Rulebook structure
+defined in the ARF.
 
-* Regulation (EU) 2024/1183 establishing the European Digital Identity Framework;
-* the EUDI Wallet Architecture and Reference Framework;
-* ARF Annex 2 Topic 12 requirements;
-* SD-JWT VC and the APTITUDE-selected HAIP profile;
-* OpenID4VCI and OpenID4VP;
-* the SEDIT-X Student Status Credential use cases;
-* the ERUA-iD Educational ID and Alliance ID concepts;
-* the European Student Card VC pilot context;
-* GDPR principles of purpose limitation, data minimisation, storage limitation,
-  integrity and confidentiality; and
-* higher-education requirements for authoritative affiliation and status verification.
+The Rulebook supports the following compliance objectives:
 
-The Rulebook enforces these properties:
+* it defines the attestation purpose and scope;
+* it defines mandatory, optional, and conditional attributes in an encoding-independent manner;
+* it defines a legal category indication through `attestation_legal_category`;
+* it defines an SD-JWT VC `vct` value for the attestation type;
+* it defines issuer, validity, and status metadata needed for verification;
+* it defines code lists and integrity rules required for consistent interpretation;
+* it defines how trust anchors can be obtained and used;
+* it defines expiry and revocation expectations;
+* it supports selective disclosure and data minimisation.
 
-1. the attestation is a purpose-bound non-qualified EAA;
-2. the home institution remains authoritative for student status;
-3. ERUA affiliation is represented separately and disclosed only when needed;
-4. civil identity and academic achievement data are not unnecessarily duplicated;
-5. SD-JWT selective disclosure is used for service-specific proofs;
-6. the credential is bound to the Wallet Unit;
-7. presentation requires User authentication and approval;
-8. status and revocation checks are required;
-9. verifiers request and retain only minimum data;
-10. PID is not required by default; and
-11. staff-assisted fallback remains available.
-
-The following matters remain open and SHALL be resolved before final publication:
-
-* whether the final profile is unified or split into Educational ID and Alliance ID;
-* relationship to the final European Student Card VC data model;
-* final `vct` identifier;
-* approved HEI, programme and study-level code systems;
-* final ERUA governance and issuer-of-record model;
-* final PID-binding policy;
-* final trust-list service type and endpoint;
-* final status-list or revocation-list mechanism and endpoint;
-* mdoc support for offline campus proximity services;
-* service-entitlement vocabulary; and
-* cross-institutional data-retention and audit rules.
+This Rulebook does not define a qualified EAA or public-sector EAA profile. It also does
+not define ISO/IEC 18013-5 mdoc or W3C VCDM encodings in this version.
 
 ## 8 References
 
 | **Item Reference** | **Standard name/details** |
 |--------------------|---------------------------|
-| [European Digital Identity Regulation] | Regulation (EU) 2024/1183 of the European Parliament and of the Council of 11 April 2024 amending Regulation (EU) No 910/2014 as regards establishing the European Digital Identity Framework |
+| [European Digital Identity Regulation] | Regulation (EU) 2024/1183 |
 | [APTITUDE D4.1] | APTITUDE D4.1: UC Specifications and Scenarios, final version, 29 May 2026 |
-| [SEDIT-X] | APTITUDE WP4, Seamless Digital Traveller Experience use case materials |
-| [ERUA-iD] | ERUA digital identity and verifiable credential infrastructure materials developed by the University of the Aegean |
-| [ESC VC Pilot] | European Student Card Verifiable Credential pilot architecture and implementation materials |
+| [SEDIT-X] | APTITUDE WP4 SEDIT-X education and student-service materials |
 | [ARF] | European Digital Identity Wallet Architecture and Reference Framework |
 | [HAIP] | OpenID4VC High Assurance Interoperability Profile |
+| [OIDC] | OpenID Connect Core 1.0 |
 | [OpenID4VCI] | OpenID for Verifiable Credential Issuance |
 | [OpenID4VP] | OpenID for Verifiable Presentations |
-| [OIDC] | OpenID Connect Core 1.0 |
-| [RFC 2119] | Key words for use in RFCs to Indicate Requirement Levels |
-| [RFC 3339] | Date and Time on the Internet: Timestamps |
 | [SD-JWT VC] | SD-JWT-based Verifiable Credentials |
+| [SCHAC] | Schema for Academia attributes used in research and education identity contexts |
+| [eduPerson] | eduPerson schema attributes used in research and education identity contexts |
+| [RFC 2119] | Key words for use in RFCs to Indicate Requirement Levels |
+| [RFC 5322] | Internet Message Format |
 | [Topic 7] | ARF Annex 2, Topic 7 — Attestation revocation and revocation checking |
 | [Topic 10] | ARF Annex 2, Topic 10 — Issuing a PID or attestation to a Wallet Unit |
 | [Topic 12] | ARF Annex 2, Topic 12 — Attestation Rulebooks |
-| [ETSI TS 119 472-1] | Electronic Signatures and Trust Infrastructures; Electronic Attestation of Attributes; Part 1: Building blocks and general requirements |
+| [ETSI TS 119 472-1] | Electronic Attestation of Attributes; building blocks and general requirements |

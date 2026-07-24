@@ -1,4 +1,4 @@
-# Attestation Rulebook for attestations of type Ferry Loyalty Credential
+# Attestation Rulebook for attestations of type Ferry Loyalty Card
 
 * Author(s):
     * Nikos Triantafyllou, University of the Aegean, UAegean i4m Lab
@@ -14,41 +14,44 @@
 
 > **Draft status**
 >
-> This Rulebook is an implementation-oriented draft. The SEDIT-X Ferry Transport
-> working paper defines the Ferry Loyalty Credential at a high level as an optional
-> credential issued by a ferry company or loyalty programme and used during remote
+> This Rulebook is an implementation-oriented draft. The SEDIT-X Ferry Transport  
+> working paper defines the Ferry Loyalty Credential at a high level as an optional  
+> credential issued by a ferry company or loyalty programme and used during remote  
 > booking to prove eligibility for loyalty benefits, points, tier benefits or discounts.
->
-> The source material identifies the principal presentation subset as a loyalty identifier
-> or pseudonymous member reference, tier or benefit entitlement, and validity period.
-> It does not define a final credential type identifier, complete claim model, encoding,
-> controlled vocabularies, trust-list endpoint or status-list endpoint. Values marked as
-> **proposed** or **pilot profile** require confirmation through APTITUDE governance.
+
+
 
 ## 1 Introduction
 
 ### 1.1 Document scope and purpose
 
-This Rulebook defines the **Ferry Loyalty Credential**, a ferry-operator or loyalty-
-programme-issued Electronic Attestation of Attributes stored in a User's EUDI Wallet.
+This Rulebook defines the **Ferry Loyalty Card Attestation** for use in the European
+Digital Identity Wallet ecosystem, including the APTITUDE / SEDIT-X ferry pilot.
 
-The credential represents the User's membership in a ferry loyalty programme and,
-where applicable, one or more verified loyalty benefits.
+The Ferry Loyalty Card Attestation expresses the real-world fact that a natural person
+is a registered customer of a ferry operator and participates in that operator's
+loyalty or frequent traveller programme. It proves the existence and validity of a
+loyalty card issued by, or on behalf of, a ferry operator.
 
-It may be used during ferry booking to:
+The attestation is intended to be issued by an authentic source, such as a ferry
+operator or an authorised customer-management or ticketing system acting on behalf of
+the ferry operator. The Holder is the registered customer to whom the loyalty card
+applies. Relying Parties include ferry operators, authorised ticketing systems,
+customer-service systems, booking portals, port services, and other authorised partners
+that need to verify customer loyalty status or customer identity information for a
+legitimate service purpose.
 
-* identify the User as a loyalty-programme member;
-* prove a loyalty tier;
-* prove eligibility for a fare discount;
-* prove eligibility for priority or enhanced services;
-* associate a booking with the loyalty account;
-* accrue or redeem points, where supported; and
-* reduce repeated manual entry of loyalty account details.
+In practical terms, the attestation enables a customer to present loyalty-card
+information through an EUDI Wallet. It can support customer identification, service
+personalisation, loyalty benefits, journey-related discounts, and reduced reliance on
+physical loyalty cards or account lookups.
 
-The credential is optional. It SHALL be requested only where the User selects or expects
-a loyalty-related benefit.
+The attestation contains customer, loyalty-card, organisation, and credential metadata.
+Because it is intended for repeated use across multiple journeys, it is longer-lived
+than a boarding pass and SHALL support revocation or status checking where
+operationally required.
 
-The credential does not replace:
+The attestation does not replace:
 
 * PID, which provides civil identity;
 * a Passenger Ferry Boarding Pass, which proves the right to board a sailing;
@@ -56,520 +59,498 @@ The credential does not replace:
 * a Student Status Credential or other independent discount entitlement; or
 * the loyalty programme's back-end account and ledger.
 
-The credential SHOULD function primarily as portable proof of membership and
-entitlement. The loyalty programme back end remains authoritative for mutable balances,
-redemption history and account state unless the selected profile explicitly supports
-those attributes.
-
 ### 1.2 Document structure
 
 This Rulebook is structured as follows:
 
-* Chapter 2 defines attributes and metadata in an encoding-independent manner.
-* Chapter 3 defines the proposed SD-JWT VC encoding.
-* Chapter 4 specifies issuance, presentation and verifier obligations.
-* Chapter 5 defines trust-anchor requirements.
-* Chapter 6 specifies validity, suspension and revocation.
-* Chapter 7 describes compliance and privacy requirements.
+* Chapter 2 describes the attestation attributes and metadata in an encoding-independent manner.
+* Chapter 3 specifies how the attestation attributes and metadata are encoded using SD-JWT VC. ISO/IEC 18013-5 and W3C VCDM encodings are not defined in this version of the Rulebook.
+* Chapter 4 specifies attestation usage, including presentation and verification expectations.
+* Chapter 5 defines how trust anchors for attestation verification can be obtained.
+* Chapter 6 defines revocation and expiry mechanisms.
+* Chapter 7 provides compliance information.
 * Chapter 8 lists references.
 
 ### 1.3 Key words
 
 This document uses the capitalised key words **SHALL**, **SHOULD** and **MAY** as
-specified in [RFC 2119].
+specified in [RFC 2119], i.e., to indicate requirements, recommendations and options
+specified in this document.
+
+In addition, 'must' (non-capitalised) is used to indicate an external constraint, i.e.,
+a requirement that is not mandated by this document, but, for instance, by an external
+document. The word 'can' indicates a capability, whereas other words, such as 'will',
+and 'is' or 'are' are intended as statements of fact.
 
 ### 1.4 Terminology
 
-For this Rulebook:
+This document uses the terminology specified in Annex 1 of the ARF.
 
-* **Loyalty programme** means a ferry-operator or multi-operator programme that grants
-  benefits based on membership, tier, activity or another approved rule.
-* **Loyalty member reference** means a programme-specific or pairwise pseudonymous
-  identifier for the holder.
-* **Tier** means the programme level assigned to the member.
-* **Benefit entitlement** means a verified right to a discount, priority service, points
-  multiplier or another loyalty-programme benefit.
-* **Points balance** means the mutable number of loyalty points associated with the
-  member's account.
-* **Ferry operator** means the company providing the ferry service and acting as issuer,
-  verifier or both.
-* **Intermediary Service** means the EUDIW integration layer acting for the ferry operator.
+In addition, the following domain-specific terms are used:
+
+| Term | Meaning |
+|------|---------|
+| Ferry Loyalty Card Attestation | A Verifiable Credential representing a customer's membership in a ferry operator's loyalty or frequent traveller programme. |
+| Ferry operator | The organisation operating ferry services and managing, or authorising the management of, the loyalty programme. |
+| Authorised customer-management system | A system authorised by the ferry operator to create, manage, or issue loyalty-card records. |
+| Customer | The natural person to whom the loyalty card applies. |
+| Loyalty card | A customer identifier or membership record used by a ferry operator to recognise loyalty-programme participation. |
+| Loyalty programme | A ferry operator programme used to provide customer identification, service personalisation, benefits, or journey-related offers. |
 
 ## 2 Attestation attributes and metadata
 
 ### Chapter overview and requirements
 
-For the SEDIT-X pilot, the credential is defined as a **non-qualified EAA**.
+This chapter defines the attributes and metadata that a Ferry Loyalty Card Attestation
+may contain. The attributes are defined in an encoding-independent manner. Each
+attribute is classified as mandatory, optional, or conditional.
 
-```text
-eaa:eu:non-qualified
-```
+The Ferry Loyalty Card Attestation is a reusable, customer-specific attestation. It is
+not bound to a single journey. Its attribute set is designed to support customer
+identification, loyalty-card verification, and controlled disclosure of optional
+customer information.
 
-The credential SHALL contain only the information needed to prove loyalty membership
-and applicable benefits.
+### 2.1 Introduction
 
-### 2.1 Design principles
+The Ferry Loyalty Card Attestation is defined as a non-qualified Electronic Attestation
+of Attributes unless a future version of this Rulebook explicitly defines a qualified
+or public-sector legal category.
 
-1. **Pseudonymous membership:** the credential SHOULD use a programme-specific or
-   pairwise member reference rather than a civil identity identifier.
-2. **Minimum disclosure:** a verifier SHOULD request only the membership, tier or
-   benefit needed for the booking.
-3. **Separation from identity:** PID SHALL be requested separately only where required.
-4. **Separation from payment:** the credential SHALL NOT contain payment-instrument data.
-5. **Separation from ticketing:** the credential does not itself grant a right to travel.
-6. **Mutable data caution:** balances and redemption state SHOULD remain authoritative
-   in the loyalty back end unless a freshness mechanism is defined.
-7. **User control:** presentation SHALL require User approval.
-8. **No default request:** the credential SHALL NOT be requested where no loyalty benefit
-   is relevant to the transaction.
+The attribute `attestation_legal_category` SHALL be included and SHALL have the value
+`non-qualified-EAA`.
+
+The attestation model consists of the following logical groups:
+
+* customer information;
+* loyalty-card information;
+* organisation information;
+* credential metadata.
+
+The attestation is bound to a single registered customer and a single loyalty-card
+record issued by a specific ferry operator or authorised operator system. It MAY be
+presented repeatedly, subject to validity, expiry, and revocation rules.
 
 ### 2.2 Mandatory attributes
 
-| **Data Identifier** | **Definition** | **Data type** | **Example value** |
-|---------------------|----------------|---------------|-------------------|
-| `credential_id` | Unique identifier of the Ferry Loyalty Credential. | string | `flc_01JZ5L8M2A7P9Q4R6T3V` |
-| `member_reference` | Loyalty-programme identifier or pseudonymous member reference. | string | `member_f8a72c91` |
-| `programme_id` | Identifier of the loyalty programme. | string | `fast_ferries_rewards` |
-| `programme_name` | Human-readable programme name. | string | `Fast Ferries Rewards` |
-| `membership_status` | Current membership state. | string enum | `active` |
-| `valid_from` | Start date or time of validity. | date or date-time | `2026-01-01` |
-| `valid_until` | End date or time of validity. | date or date-time | `2027-12-31` |
-
-Permitted values for `membership_status` SHOULD include:
-
-* `active`;
-* `suspended`;
-* `closed`;
-* `expired`; and
-* `pending_review`.
+| **Data Identifier** | **Semantic Reference** | **Definition** | **Data type** | **Example value** |
+|---------------------|------------------------|----------------|---------------|-------------------|
+| `attestation_legal_category` | ARF Topic 12 / Rulebook legal category indication | Indicates the legal category of the attestation. | string | `non-qualified-EAA` |
+| `customer.first_name` | OIDC `given_name` where applicable | Customer given name. | string | `Nikos` |
+| `customer.last_name` | OIDC `family_name` where applicable | Customer family name. | string | `Triantafyllou` |
+| `loyalty_card.id` | N/A | Unique loyalty-card identifier issued by the ferry operator. | string | `LC-FAST-000123456` |
+| `loyalty_card.issue_date` | ISO 8601 date | Date on which the loyalty card was issued. | date | `2026-01-07` |
+| `organization.name` | N/A | Legal or operating name of the ferry operator. | string | `Fast Ferries S.A.` |
+| `organization.id` | N/A | Ferry operator identifier. | string | `GR-FAST-FERRIES` |
+| `organization.country` | ISO 3166-1 alpha-2 recommended | Country of registration or operation of the ferry operator. | string | `GR` |
+| `credential.type` | Rulebook-defined credential type | Type of credential represented by the attestation. | string | `FerryLoyaltyCardAttestation` |
+| `credential.issuer` | SD-JWT VC / issuer identifier | Issuer of the credential. | string | `https://issuer.example-ferry.gr` |
+| `credential.issuance_date` | ISO 8601 date | Date on which the credential was issued. | date | `2026-01-07` |
 
 ### 2.3 Optional attributes
 
-| **Data Identifier** | **Definition** | **Data type** | **Example value** |
-|---------------------|----------------|---------------|-------------------|
-| `tier` | Current loyalty tier. | string | `gold` |
-| `tier_valid_from` | Start date of the current tier. | date | `2026-04-01` |
-| `tier_valid_until` | End date of the current tier. | date | `2027-03-31` |
-| `benefit_entitlements` | Verified benefits associated with membership or tier. | array of strings | `["fare_discount","priority_boarding"]` |
-| `discount_percentage` | Discount directly granted by the programme. | integer | `10` |
-| `points_multiplier` | Multiplier applied to point accrual. | number | `1.5` |
-| `priority_boarding` | Indicates entitlement to priority boarding. | boolean | `true` |
-| `priority_support` | Indicates entitlement to priority customer support. | boolean | `true` |
-| `lounge_access` | Indicates access to an applicable ferry lounge or premium area. | boolean | `false` |
-| `free_change_entitlement` | Indicates eligibility for free or discounted booking changes. | boolean | `true` |
-| `free_baggage_entitlement` | Indicates an additional baggage entitlement where relevant. | boolean | `false` |
-| `partner_benefits` | Benefits recognised by partner organisations. | array of strings | `["hotel_partner_discount"]` |
-| `issuing_operator_id` | Identifier of the ferry operator responsible for the programme. | string | `fast-ferries-gr` |
-| `issuing_operator_name` | Human-readable ferry operator name. | string | `Fast Ferries` |
-| `account_created_at` | Date when loyalty membership was created. | date | `2023-06-15` |
-| `display_member_number` | Masked or display-friendly loyalty number. | string | `FFR-••••-4821` |
-| `programme_terms_uri` | URI of loyalty programme terms. | URI | `https://ferry.example/loyalty/terms` |
+| **Data Identifier** | **Semantic Reference** | **Definition** | **Data type** | **Example value** |
+|---------------------|------------------------|----------------|---------------|-------------------|
+| `customer.nationality` | ISO 3166-1 alpha-2 recommended | Nationality of the customer. | string | `GR` |
+| `customer.birth_date` | ISO 8601 date | Customer date of birth. | date | `1985-04-12` |
+| `customer.address` | N/A | Customer street address. | string | `1 Example Street` |
+| `customer.city` | N/A | City of residence. | string | `Athens` |
+| `customer.zip_code` | N/A | Postal code. | string | `10557` |
+| `customer.phone` | N/A | Fixed phone number. | string | `+302101234567` |
+| `customer.mobile` | N/A | Mobile phone number. | string | `+306901234567` |
+| `customer.email` | RFC 5322 | Customer email address. | string | `nikos@example.com` |
+| `credential.expiry_date` | ISO 8601 date | Date after which the credential SHALL NOT be accepted. | date | `2028-01-07` |
 
 ### 2.4 Conditional attributes
 
-| **Data Identifier** | **Definition** | **Data type** | **Example value** |
-|---------------------|----------------|---------------|-------------------|
-| `points_balance` | Current points balance. Present only where the profile defines freshness and ledger synchronisation. | integer | `1840` |
-| `points_balance_as_of` | Time at which the disclosed points balance was authoritative. Mandatory when `points_balance` is present. | date-time | `2026-07-23T08:45:00Z` |
-| `redeemable_points` | Points available for redemption. Conditional where redemption is supported through the credential flow. | integer | `1500` |
-| `benefit_scope` | Routes, operators, fare classes or services to which a benefit applies. Mandatory where a benefit is restricted. | array of strings | `["domestic_routes","economy_fare"]` |
-| `subject_binding_reference` | Reference used to bind the loyalty member to PID or another identity credential. Present where strong identity binding is required. | string | `pid-bind:2f81...` |
-| `cryptographically_bound_to` | Credential type to which formal binding is applied. | string | `urn:eu.europa.ec.eudi:pid:1` |
-
-`points_balance` SHOULD NOT be included in a long-lived credential unless:
-
-* the issuer can refresh or reissue it;
-* the timestamp is clearly visible;
-* the verifier checks freshness; and
-* the loyalty back end remains authoritative.
+| **Data Identifier** | **Semantic Reference** | **Definition** | **Data type** | **Example value** |
+|---------------------|------------------------|----------------|---------------|-------------------|
+| `credential.expiry_date` | ISO 8601 date | SHALL be present where the loyalty programme issues cards with a defined expiry date. MAY be omitted where the card remains valid until revoked. | date | `2028-01-07` |
+| `customer.birth_date` | ISO 8601 date | SHOULD be present only where age-related checks, age-based benefits, or customer disambiguation require it. | date | `1985-04-12` |
+| `customer.email` | RFC 5322 | SHOULD be present only where the customer has consented to share email contact information or where it is required for the specific service interaction. | string | `nikos@example.com` |
+| `customer.address`, `customer.city`, `customer.zip_code` | N/A | SHOULD be present only where residency, address-based service rules, billing, or customer-service processes require address information. | string | `Athens` |
+| `customer.phone`, `customer.mobile` | N/A | SHOULD be present only where phone contact information is required for the relevant customer interaction. | string | `+306901234567` |
 
 ### 2.5 Mandatory metadata
 
-| **Data Identifier** | **Definition** | **Data type** | **Example value** |
-|---------------------|----------------|---------------|-------------------|
-| `category` | Legal category of the attestation. | string | `eaa:eu:non-qualified` |
-| `issuer` | Identifier of the ferry operator or loyalty Attestation Provider. | string or URI | `https://loyalty.fastferries.example` |
-| `credential_type` | Encoding-independent credential type identifier. | string | `urn:aptitude.eu:seditx:ferry-loyalty-credential:1` |
-| `issued_at` | Date and time of issuance. | date-time | `2026-07-23T08:45:00Z` |
-| `schema_version` | Version of the credential schema. | string | `0.1` |
-| `status_reference` | Reference for status or revocation checking. | URI or structured value | `https://status.fastferries.example/loyalty/atl/42#812` |
-| `trust_anchor_reference` | Location of applicable trust information. | URI | `https://trust.aptitude.example/ferry-loyalty-issuers` |
+| **Data Identifier** | **Semantic Reference** | **Definition** | **Data type** | **Example value** |
+|---------------------|------------------------|----------------|---------------|-------------------|
+| `vct` | SD-JWT VC | Verifiable Credential Type identifying this attestation type. | string | `urn:eu.europa.ec.eudi:ferry_loyalty_card:1` |
+| `iss` | SD-JWT VC / JWT | Identifier of the issuer of the credential. | string | `https://issuer.example-ferry.gr` |
+| `iat` | JWT | Time at which the credential was issued. | integer | `1767787200` |
+| `cnf` | SD-JWT VC / JOSE | Confirmation claim binding the credential to key material controlled by the Holder or Wallet Unit, where holder binding is used. | object | `{ "jwk": { ... } }` |
+| `status` | SD-JWT VC status mechanism, where used | Status information enabling revocation or suspension checks. SHOULD be used for this reusable attestation type. | object | `{ "status_list": { ... } }` |
 
 ### 2.6 Optional metadata
 
-| **Data Identifier** | **Definition** | **Data type** | **Example value** |
-|---------------------|----------------|---------------|-------------------|
-| `credential_name` | Human-readable wallet name. | string | `Ferry Loyalty Credential` |
-| `credential_description` | Human-readable explanation. | string | `Fast Ferries Rewards membership and benefits` |
-| `issuer_name` | Human-readable issuer name. | string | `Fast Ferries` |
-| `issuer_logo_uri` | URI of issuer logo. | URI | `https://ferry.example/logo.png` |
-| `privacy_notice` | URI of the privacy notice. | URI | `https://ferry.example/loyalty/privacy` |
-| `issuer_policy` | URI of issuance and verification policy. | URI | `https://ferry.example/loyalty/policy` |
-| `display_locale` | Preferred display language. | string | `en` |
+| **Data Identifier** | **Semantic Reference** | **Definition** | **Data type** | **Example value** |
+|---------------------|------------------------|----------------|---------------|-------------------|
+| `nbf` | JWT | Time before which the credential MUST NOT be accepted. | integer | `1767787200` |
+| `exp` | JWT | Expiration time of the credential, where the credential has a technical expiry timestamp. SHOULD correspond to or not exceed `credential.expiry_date` where that attribute is present. | integer | `1830859200` |
+| `jti` | JWT | Unique identifier of the credential instance. | string | `urn:uuid:ec622e9e-23f8-4c1d-9985-5c5b088caa11` |
+| `trust_anchor` | ARF Topic 12 | Location or identifier of the machine-readable trust anchor or trust framework entry used to verify issuer authorisation. | string | `https://trust.example.eu/ferry/operators/fast-ferries` |
+| `cryptographically_bound_to` | ARF Topic 12 / ARB_28 | Identifier of another attestation type to which this attestation is cryptographically bound, where such binding is used. | string | `urn:eudi:pid:1` |
 
 ### 2.7 Conditional metadata
 
-| **Data Identifier** | **Definition** | **Data type** | **Example value** |
-|---------------------|----------------|---------------|-------------------|
-| `status_list_index` | Status-list entry index. | integer | `812` |
-| `status_list_uri` | Status-list URI. | URI | `https://status.fastferries.example/loyalty/atl/42` |
-| `revocation_list_uri` | Revocation-list URI where used. | URI | `https://status.fastferries.example/loyalty/arl/2026-07` |
+| **Data Identifier** | **Semantic Reference** | **Definition** | **Data type** | **Example value** |
+|---------------------|------------------------|----------------|---------------|-------------------|
+| `exp` | JWT | SHALL be present where the credential has a fixed validity period. SHOULD be present where `credential.expiry_date` is present. | integer | `1830859200` |
+| `status` | SD-JWT VC status mechanism, where used | SHALL be present where the issuer supports revocation or suspension. SHOULD be present for reusable loyalty-card attestations. | object | `{ "status_list": { ... } }` |
+| `cryptographically_bound_to` | ARF Topic 12 / ARB_28 | SHOULD be present where the loyalty card is required to be presented together with PID or another identity attestation for stronger customer identity matching. | string | `urn:eudi:pid:1` |
+
+### 2.8 Code lists
+
+| **Field name** | **Allowed values** | **Meaning** | **Source / vocabulary** | **Notes / extensibility** |
+|----------------|--------------------|-------------|-------------------------|---------------------------|
+| `customer.nationality` | ISO 3166-1 country codes | Identifies the nationality of the customer. | ISO 3166-1 | Alpha-2 representation is RECOMMENDED unless the ecosystem profile specifies otherwise. |
+| `organization.country` | ISO 3166-1 country codes | Identifies the country of registration or operation of the ferry operator. | ISO 3166-1 | Alpha-2 representation is RECOMMENDED. |
+| `loyalty_card.issue_date` | ISO 8601 date | Date on which the loyalty card was issued. | ISO 8601 | Date-only format SHOULD be used. |
+| `credential.issuance_date` | ISO 8601 date | Date on which the credential was issued. | ISO 8601 | Date-only format SHOULD be used. |
+| `credential.expiry_date` | ISO 8601 date | Date after which the credential SHALL NOT be accepted. | ISO 8601 | Date-only format SHOULD be used. |
+| `customer.birth_date` | ISO 8601 date | Customer date of birth. | ISO 8601 | Date-only format SHOULD be used. |
+| `customer.email` | Valid email address syntax | Customer email address. | RFC 5322 | Verifiers SHALL NOT request this attribute unless needed for the specific interaction. |
+| `attestation_legal_category` | `non-qualified-EAA`, `QEAA`, `PuB-EAA` | Indicates the legal category of the attestation. | ARF Topic 12 / Rulebook template | This Rulebook uses `non-qualified-EAA`. |
+
+### 2.9 Integrity rules
+
+| **Rule ID** | **Rule statement** | **Why it exists** | **Where enforced** | **Verifier / issuer behavior on failure** |
+|-------------|--------------------|-------------------|--------------------|-------------------------------------------|
+| LC-IR-01 | `loyalty_card.id` MUST be unique per issuer. | Enables unambiguous identification of the loyalty-card record. | Issuer business rules and verifier business validation. | Issuer SHALL prevent duplicate active card identifiers. Verifier MAY reject duplicated identifiers if detected. |
+| LC-IR-02 | If `credential.expiry_date` is present, it MUST be later than `credential.issuance_date`. | Prevents temporally invalid credentials. | Issuer business rules, schema validation, verifier business validation. | Issuer SHALL reject invalid validity periods. Verifier SHALL reject credentials with invalid validity periods. |
+| LC-IR-03 | Expired loyalty cards SHALL NOT be accepted. | Ensures that relying parties do not provide benefits or services based on expired membership. | Verifier freshness checks and business validation. | Verifier SHALL reject the attestation if the credential is expired. |
+| LC-IR-04 | The attestation SHALL refer to a single loyalty-card record and a single issuing organisation. | Prevents ambiguous membership claims. | Issuer business rules and verifier business validation. | Issuer SHALL reject ambiguous source data. Verifier SHALL reject the attestation if issuer or organisation data is inconsistent. |
+| LC-IR-05 | Optional contact and address attributes SHALL be requested and disclosed only where required for the specific service interaction. | Supports data minimisation and selective disclosure. | Wallet presentation policy, verifier request policy, and relying-party business rules. | Verifier SHALL NOT require unnecessary optional attributes. Wallet SHOULD allow the Holder to review and consent to disclosure. |
+| LC-IR-06 | Where identity matching is required, `customer.first_name` and `customer.last_name` SHOULD be compared with PID or another accepted identity source. | Ensures that the presenter is the customer to whom the loyalty card applies. | Relying Party business validation. | Verifier SHOULD reject the transaction where required identity matching fails. |
 
 # 3 Attestation encoding
 
 ## 3.1 ISO/IEC 18013-5-compliant encoding
 
-Version 0.1 does not define mdoc as the primary format.
+This version of the Rulebook does not define an ISO/IEC 18013-5 mdoc encoding for the
+Ferry Loyalty Card Attestation.
 
-A future profile MAY define mdoc where loyalty presentation at a physical port or ferry
-facility requires proximity and offline capability.
+The Ferry Loyalty Card Attestation defined in this Rulebook is specified for SD-JWT
+VC-based issuance and presentation. If a future version of this Rulebook defines an
+ISO/IEC 18013-5-compliant mdoc representation, that version SHALL define a unique
+document type, namespaces, attribute identifiers, CBOR encoding rules, and
+illustrative mdoc examples.
 
 ## 3.2 SD-JWT VC-based encoding
 
-### 3.2.1 Verifiable Credential Type
+The Ferry Loyalty Card Attestation SHALL be issued as an SD-JWT VC.
 
-The proposed Verifiable Credential Type is:
+The Verifiable Credential Type (`vct`) for this attestation type is:
 
 ```text
-urn:aptitude.eu:seditx:ferry-loyalty-credential:1
+urn:eu.europa.ec.eudi:ferry_loyalty_card:1
 ```
 
-### 3.2.2 Registered JWT claims
+The credential claims defined in this section SHALL follow SD-JWT VC and HAIP
+conventions where applicable. Claim names are either IANA-registered JWT claims,
+public names, or private names specific to this attestation type.
 
-| **Data Identifier** | **Claim** | **Format** | **Disclosable** |
-|---------------------|-----------|------------|-----------------|
-| `issuer` | `iss` | string | MUST NOT |
-| `issued_at` | `iat` | integer | MUST NOT |
-| `valid_from` | `nbf` | integer | MUST NOT |
-| `valid_until` | `exp` | integer | MUST NOT |
-| `credential_type` | `vct` | string | MUST NOT |
-| `holder_binding` | `cnf` | object | MUST NOT |
-| `status_reference` | `status` | object | MUST NOT |
+For all claims, this Rulebook specifies whether an Attestation Provider MUST, MAY, or
+MUST NOT make the claim selectively disclosable.
 
-### 3.2.3 Private claims
+### 3.2.1 IANA-registered and standard JWT / SD-JWT VC claims
 
-| **Data Identifier** | **Claim** | **Format** | **Disclosable** |
-|---------------------|-----------|------------|-----------------|
-| `category` | `category` | string | MUST NOT |
-| `credential_id` | `credential_id` | string | MUST NOT |
-| `member_reference` | `member_reference` | string | MUST |
-| `programme_id` | `programme_id` | string | MUST |
-| `programme_name` | `programme_name` | string | MUST |
-| `membership_status` | `membership_status` | string | MUST |
-| `tier` | `tier` | string | MUST |
-| `tier_valid_from` | `tier_valid_from` | string | MUST |
-| `tier_valid_until` | `tier_valid_until` | string | MUST |
-| `benefit_entitlements` | `benefit_entitlements` | array | MUST |
-| `discount_percentage` | `discount_percentage` | integer | MUST |
-| `points_multiplier` | `points_multiplier` | number | MUST |
-| `priority_boarding` | `priority_boarding` | boolean | MUST |
-| `priority_support` | `priority_support` | boolean | MUST |
-| `lounge_access` | `lounge_access` | boolean | MUST |
-| `free_change_entitlement` | `free_change_entitlement` | boolean | MUST |
-| `free_baggage_entitlement` | `free_baggage_entitlement` | boolean | MUST |
-| `partner_benefits` | `partner_benefits` | array | MUST |
-| `issuing_operator_id` | `issuing_operator_id` | string | MUST |
-| `issuing_operator_name` | `issuing_operator_name` | string | MUST |
-| `account_created_at` | `account_created_at` | string | MUST |
-| `display_member_number` | `display_member_number` | string | MUST |
-| `points_balance` | `points_balance` | integer | MUST |
-| `points_balance_as_of` | `points_balance_as_of` | string | MUST |
-| `redeemable_points` | `redeemable_points` | integer | MUST |
-| `benefit_scope` | `benefit_scope` | array | MUST |
-| `subject_binding_reference` | `subject_binding_reference` | string | MUST |
-| `cryptographically_bound_to` | `cryptographically_bound_to` | string | MUST NOT |
-| `schema_version` | `schema_version` | string | MUST NOT |
-| `trust_anchor_reference` | `trust_anchor_reference` | string | MUST NOT |
+| **Data Identifier** | **Attribute identifier** | **Encoding format** | **Reference/Notes** | **Disclosable** |
+|---------------------|--------------------------|---------------------|---------------------|-----------------|
+| `iss` | `iss` | string | JWT issuer identifier. | MUST NOT |
+| `iat` | `iat` | integer | Issued-at timestamp. | MUST NOT |
+| `nbf` | `nbf` | integer | Not-before timestamp, where used. | MUST NOT |
+| `exp` | `exp` | integer | Expiration timestamp, where used. SHOULD correspond to or not exceed `credential.expiry_date` where that attribute is present. | MUST NOT |
+| `jti` | `jti` | string | Unique credential instance identifier, where used. | MUST NOT |
+| `cnf` | `cnf` | object | Holder binding confirmation claim, where used. | MUST NOT |
+| `status` | `status` | object | Status or revocation information, where used. | MUST NOT |
+| `vct` | `vct` | string | SD-JWT VC type. Value SHALL be `urn:eu.europa.ec.eudi:ferry_loyalty_card:1`. | MUST NOT |
 
-Each benefit SHOULD be independently disclosable where technically possible.
+### 3.2.2 Public or reusable claims
 
-### 3.2.4 Illustrative claim set
+| **Data Identifier** | **Attribute identifier** | **Encoding format** | **Reference/Notes** | **Disclosable** |
+|---------------------|--------------------------|---------------------|---------------------|-----------------|
+| `customer.first_name` | `customer.first_name` | string | Customer given name. May be mapped to OIDC `given_name` in implementations that use OIDC naming conventions. | MUST |
+| `customer.last_name` | `customer.last_name` | string | Customer family name. May be mapped to OIDC `family_name` in implementations that use OIDC naming conventions. | MUST |
+
+### 3.2.3 Private claims specific to the Ferry Loyalty Card Attestation
+
+| **Data Identifier** | **Attribute identifier** | **Encoding format** | **Notes** | **Disclosable** |
+|---------------------|--------------------------|---------------------|-----------|-----------------|
+| `attestation_legal_category` | `attestation_legal_category` | string | SHALL be `non-qualified-EAA`. | MUST NOT |
+| `customer` | `customer` | object | Customer information object. | MUST NOT |
+| `customer.nationality` | `nationality` | string | Nationality of the customer, where disclosed. | MAY |
+| `customer.birth_date` | `birth_date` | string | Customer date of birth, formatted as ISO 8601 date. | MAY |
+| `customer.address` | `address` | string | Customer street address. | MAY |
+| `customer.city` | `city` | string | City of residence. | MAY |
+| `customer.zip_code` | `zip_code` | string | Postal code. | MAY |
+| `customer.phone` | `phone` | string | Fixed phone number. | MAY |
+| `customer.mobile` | `mobile` | string | Mobile phone number. | MAY |
+| `customer.email` | `email` | string | Customer email address. | MAY |
+| `loyalty_card` | `loyalty_card` | object | Loyalty-card information object. | MUST NOT |
+| `loyalty_card.id` | `id` | string | Unique loyalty-card identifier. | MUST |
+| `loyalty_card.issue_date` | `issue_date` | string | Date of issuance, formatted as ISO 8601 date. | MUST |
+| `organization` | `organization` | object | Issuing ferry operator information object. | MUST NOT |
+| `organization.name` | `name` | string | Ferry operator name. | MUST NOT |
+| `organization.id` | `id` | string | Ferry operator identifier. | MUST NOT |
+| `organization.country` | `country` | string | Country of registration or operation. | MUST NOT |
+| `credential` | `credential` | object | Credential metadata object defined by the attestation model. | MUST NOT |
+| `credential.type` | `type` | string | Credential type. | MUST NOT |
+| `credential.issuer` | `issuer` | string | Issuer of the credential. | MUST NOT |
+| `credential.issuance_date` | `issuance_date` | string | Issuance date, formatted as ISO 8601 date. | MUST NOT |
+| `credential.expiry_date` | `expiry_date` | string | Expiry date, where present. | MUST NOT |
+| `trust_anchor` | `trust_anchor` | string | Location or identifier of the trust anchor or trust framework entry used to verify issuer authorisation, where used. | MUST NOT |
+| `cryptographically_bound_to` | `cryptographically_bound_to` | string | Identifier of another attestation type to which this attestation is bound, where used. | MUST NOT |
+
+### 3.2.4 Example JWT claim set
 
 ```json
 {
-  "iss": "https://loyalty.fastferries.example",
-  "iat": 1784796300,
-  "nbf": 1767225600,
-  "exp": 1830211199,
-  "vct": "urn:aptitude.eu:seditx:ferry-loyalty-credential:1",
+  "iss": "https://issuer.example-ferry.gr",
+  "iat": 1767787200,
+  "nbf": 1767787200,
+  "exp": 1830859200,
+  "jti": "urn:uuid:ec622e9e-23f8-4c1d-9985-5c5b088caa11",
+  "vct": "urn:eu.europa.ec.eudi:ferry_loyalty_card:1",
+  "attestation_legal_category": "non-qualified-EAA",
+  "customer": {
+    "first_name": "Nikos",
+    "last_name": "Triantafyllou",
+    "nationality": "GR",
+    "birth_date": "1985-04-12",
+    "city": "Athens",
+    "email": "nikos@example.com",
+    "mobile": "+306901234567"
+  },
+  "loyalty_card": {
+    "id": "LC-FAST-000123456",
+    "issue_date": "2026-01-07"
+  },
+  "organization": {
+    "name": "Fast Ferries S.A.",
+    "id": "GR-FAST-FERRIES",
+    "country": "GR"
+  },
+  "credential": {
+    "type": "FerryLoyaltyCardAttestation",
+    "issuer": "https://issuer.example-ferry.gr",
+    "issuance_date": "2026-01-07",
+    "expiry_date": "2028-01-07"
+  },
+  "trust_anchor": "https://trust.example.eu/ferry/operators/fast-ferries",
   "cnf": {
-    "jkt": "wallet-key-thumbprint"
+    "jwk": {
+      "kty": "EC",
+      "crv": "P-256",
+      "x": "...",
+      "y": "..."
+    }
   },
   "status": {
     "status_list": {
-      "idx": 812,
-      "uri": "https://status.fastferries.example/loyalty/atl/42"
+      "idx": 12345,
+      "uri": "https://issuer.example-ferry.gr/status/loyalty-card-status-list.jwt"
     }
-  },
-  "category": "eaa:eu:non-qualified",
-  "credential_id": "flc_01JZ5L8M2A7P9Q4R6T3V",
-  "member_reference": "member_f8a72c91",
-  "programme_id": "fast_ferries_rewards",
-  "programme_name": "Fast Ferries Rewards",
-  "membership_status": "active",
-  "tier": "gold",
-  "benefit_entitlements": [
-    "fare_discount",
-    "priority_boarding",
-    "priority_support"
-  ],
-  "discount_percentage": 10,
-  "priority_boarding": true,
-  "priority_support": true,
-  "issuing_operator_id": "fast-ferries-gr",
-  "issuing_operator_name": "Fast Ferries",
-  "valid_from": "2026-01-01",
-  "valid_until": "2027-12-31",
-  "schema_version": "0.1",
-  "trust_anchor_reference": "https://trust.aptitude.example/ferry-loyalty-issuers"
+  }
 }
 ```
 
-## 3.3 W3C Verifiable Credentials Data Model-based encoding
+### 3.2.5 Example issued SD-JWT
 
-Version 0.1 does not define a W3C VCDM representation.
-
-## 4 Attestation usage
-
-### 4.1 Issuance prerequisites
-
-The issuer SHALL issue the credential only after:
-
-1. the loyalty account exists;
-2. the User has authenticated to the loyalty programme;
-3. the member reference has been established;
-4. the current membership status has been checked;
-5. any tier or benefit claims have been calculated;
-6. the validity period has been determined; and
-7. the User has consented to receive the credential.
-
-The credential SHALL be issued through OpenID4VCI or another APTITUDE-approved
-issuance flow.
-
-### 4.2 Device and holder binding
-
-The credential **SHOULD be device-bound**.
-
-Strong PID binding is not mandatory for every loyalty use case. It MAY be required where:
-
-* the account is strictly personal;
-* high-value benefits are involved;
-* account transfer or fraud risk is significant; or
-* the fare policy requires identity matching.
-
-### 4.3 Presentation during booking
-
-A normal ferry booking flow SHOULD request only the subset needed for the selected
-benefit.
-
-Examples:
-
-#### Membership recognition
+The following is a non-normative placeholder example. A production SD-JWT SHALL be
+generated by the issuer using the applicable signing algorithm, disclosure
+construction, holder binding, and SD-JWT VC rules.
 
 ```text
-member_reference
-programme_id
-membership_status
-valid_until
+<issuer-signed-sd-jwt>~<disclosure-1>~<disclosure-2>~<disclosure-n>~<holder-binding-jwt>
 ```
 
-#### Tier-based discount
+### 3.2.6 Example human-readable disclosed payload
 
-```text
-programme_id
-membership_status
-tier
-discount_percentage
-valid_until
-```
-
-#### Priority boarding
-
-```text
-programme_id
-membership_status
-priority_boarding
-valid_until
-```
-
-The booking portal SHALL NOT request points balance, account-creation date or unrelated
-benefits when they are not required.
-
-### 4.4 Relying Party obligations
-
-The ferry portal or Intermediary Service SHALL:
-
-1. verify signature and integrity;
-2. verify issuer trust and programme authority;
-3. verify validity and status;
-4. verify membership status;
-5. confirm that the disclosed benefit applies to the selected operator, route, fare or date;
-6. check freshness where mutable claims are used;
-7. apply the benefit according to current tariff rules;
-8. return a structured verification result;
-9. avoid retaining the full credential; and
-10. prevent duplicate or unauthorised redemption where relevant.
-
-A typical result SHOULD be:
+A verifier that needs only to confirm loyalty-programme participation may receive a
+presentation disclosing the following claims:
 
 ```json
 {
-  "credential_valid": true,
-  "programme_id": "fast_ferries_rewards",
-  "membership_valid": true,
-  "tier": "gold",
-  "benefit": "fare_discount",
-  "discount_percentage": 10,
-  "decision": "eligible",
-  "correlation_id": "loy_01JZ..."
+  "vct": "urn:eu.europa.ec.eudi:ferry_loyalty_card:1",
+  "customer": {
+    "first_name": "Nikos",
+    "last_name": "Triantafyllou"
+  },
+  "loyalty_card": {
+    "id": "LC-FAST-000123456",
+    "issue_date": "2026-01-07"
+  },
+  "organization": {
+    "name": "Fast Ferries S.A.",
+    "id": "GR-FAST-FERRIES",
+    "country": "GR"
+  }
 }
 ```
 
-### 4.5 Points accrual and redemption
+A verifier that needs contact details for a customer-service interaction MAY request
+additional selectively disclosable claims such as `customer.email` or
+`customer.mobile`, provided those claims are necessary for the interaction and the
+Holder consents to disclosure.
 
-Points accrual and redemption are not automatically implemented by credential
-presentation.
+The issuer identity, credential type, expiry time, signature, holder binding proof,
+status information, and trust anchor information are not treated as selectively
+disclosable customer attributes and SHALL remain available to the verifier for
+technical validation.
 
-The loyalty back end remains authoritative.
+## 3.3 W3C Verifiable Credentials Data Model-based encoding
 
-Where a presentation triggers accrual or redemption:
+This version of the Rulebook does not define a W3C Verifiable Credentials Data Model
+encoding for the Ferry Loyalty Card Attestation.
 
-* the verifier SHALL authenticate to the loyalty system;
-* a transaction-specific reference SHALL be used;
-* replay and duplicate redemption SHALL be prevented;
-* the User SHALL be shown the effect of the transaction;
-* points changes SHALL be recorded in the loyalty ledger; and
-* the credential SHOULD be refreshed or reissued where it carries mutable balance data.
+If a future version defines a W3C VCDM representation, that version SHALL define the
+credential context, type, credential subject structure, proof type, selective
+disclosure mechanism, and presentation requirements.
 
-### 4.6 Data minimisation and privacy
+## 4 Attestation usage
 
-The verifier SHOULD retain only:
+The Ferry Loyalty Card Attestation is intended for verifying a customer's
+loyalty-programme membership and, where necessary, selected customer information.
 
-* programme identifier;
-* benefit applied;
-* tariff basis;
-* transaction reference;
-* timestamp; and
-* verification outcome.
+Typical usage scenarios include:
 
-It SHOULD NOT retain:
+* presentation by the customer during online ferry booking;
+* presentation at a ticket office or customer-service point;
+* verification of loyalty-card membership for customer benefits or discounts;
+* customer identification for service personalisation;
+* controlled disclosure of optional contact or residency information where required
+  for a specific service interaction;
+* repeated presentation across multiple journeys, subject to validity and revocation
+  checks.
 
-* the complete credential;
-* unrelated benefits;
-* full loyalty history;
-* unnecessary member identifiers;
-* points balance where not needed; or
-* PID attributes unless required.
+A Relying Party receiving the attestation SHALL verify:
 
-### 4.7 Failure and fallback
+* the issuer signature;
+* the SD-JWT VC type (`vct`);
+* the issuer authorisation to issue Ferry Loyalty Card Attestations;
+* the credential validity period, where defined;
+* the credential status, where a status mechanism is present;
+* holder binding, where used;
+* the integrity rules defined in Section 2.9;
+* that the loyalty-card and organisation details match the service context.
 
-The verifier SHALL return `not_eligible` or `manual_review` when:
+The Relying Party SHOULD request and verify PID or another accepted identity
+credential when the service requires stronger customer identity matching. In such
+cases, the Relying Party SHOULD compare the relevant identity attributes, such as
+customer name, with the Ferry Loyalty Card Attestation. The Relying Party SHALL apply
+data minimisation and SHALL request only the attributes required for the specific
+loyalty or customer-service decision.
 
-* signature, trust, validity or status verification fails;
-* membership is inactive;
-* the benefit does not apply;
-* a mutable claim is stale;
-* the account has been suspended;
-* a redemption is duplicated; or
-* the loyalty service is unavailable.
+The attestation SHOULD be device-bound through holder binding where supported by the
+EUDI Wallet and the applicable SD-JWT VC profile. The attestation MAY be
+cryptographically bound to a PID or another accepted identity attestation where the
+relying-party process requires stronger customer identity matching. Where this binding
+is used, the metadata attribute `cryptographically_bound_to` SHOULD contain:
 
-Failure of wallet verification SHALL NOT affect the User's underlying right to purchase
-a standard fare without loyalty benefits.
+```text
+urn:eudi:pid:1
+```
+
+No payment-specific transactional data is defined by this Rulebook. If the Ferry
+Loyalty Card Attestation is used as part of a transaction that also involves payment
+or discounts, payment-related requirements SHALL be defined in a separate payment
+attestation, payment profile, discount rulebook, or transaction-specific rulebook.
+
+Failure of wallet verification SHALL NOT affect the User's underlying right to
+purchase a standard fare without loyalty benefits.
 
 ## 5 Trust anchors
 
-The Ferry Loyalty Credential may be issued by:
+A Relying Party SHALL verify that the issuer of the Ferry Loyalty Card Attestation is
+authorised to issue this attestation type.
 
-* a ferry operator;
-* a ferry loyalty programme operator;
-* a consortium of ferry operators;
-* an authorised travel programme administrator; or
-* an Attestation Provider acting for one of these entities.
+For non-qualified EAA deployments, the Relying Party SHOULD obtain trust anchor
+information through one or more of the following mechanisms:
 
-The trust framework SHALL allow the verifier to determine:
+* a machine-readable trust list or trust registry used by the relevant ecosystem;
+* an issuer metadata endpoint published by the ferry operator or authorised
+  customer-management system;
+* a trust framework entry managed by  APTITUDE ecosystem or by another
+  authorised governance body;
+* a pilot trust list used for controlled interoperability testing.
 
-1. the issuer's legal or contractual authority;
-2. the loyalty programme operated by the issuer;
-3. the ferry operators that recognise the credential;
-4. the benefits the issuer may attest;
-5. the issuer's signing certificates or trust anchors; and
-6. whether the issuer remains authorised.
+Where the metadata attribute `trust_anchor` is present, it SHOULD identify the
+location or registry entry from which the Relying Party can obtain the issuer trust
+anchor or issuer authorisation information.
 
-For the APTITUDE pilot, trust SHOULD be obtained through the applicable WP2 trusted
-issuer framework.
+The Relying Party SHALL use the trust anchor to verify that:
+
+* the issuer signing key or certificate chains to a trusted authority or registered
+  trust anchor;
+* the issuer is authorised to issue the `urn:eu.europa.ec.eudi:ferry_loyalty_card:1`
+  attestation type;
+* the issuer metadata or trust framework entry has not expired or been revoked;
+* the issuer identity in the credential is consistent with the issuer identity in the
+  trust framework;
+* the organisation information disclosed in the credential is consistent with the
+  issuer's authorisation scope.
+
+Wallet Units MAY also use the same trust framework information during issuance to
+determine whether the provider is authorised to issue this attestation type.
+
+For the APTITUDE pilot, trust SHOULD also be obtainable through the applicable WP2
+trusted issuer framework.
 
 ## 6 Revocation
 
-### 6.1 Validity model
+The Ferry Loyalty Card Attestation is intended for repeated use and is typically
+longer-lived than a boarding pass.
 
-The credential MAY be medium-lived.
+The credential SHALL be considered invalid when:
 
-Tier and benefit validity MAY be shorter than membership validity.
+* the `credential.expiry_date` has been reached, where present;
+* the technical expiry timestamp `exp` has been reached, where present;
+* the credential has been revoked or suspended by the issuer;
+* the underlying loyalty-card record has been cancelled, replaced, closed, or
+  otherwise invalidated.
 
-The issuer SHOULD avoid embedding mutable values for longer than their reliable
-freshness period.
+Revocation SHOULD be supported for this attestation type because loyalty-card status
+may change before the declared expiry date.
 
-### 6.2 Revocation and suspension
+Revocation MAY be handled by one or more of the following mechanisms:
 
-The credential SHALL be revocable or suspendable when:
+* an attestation status list mechanism, where supported;
+* an attestation revocation list mechanism, where supported;
+* backend verification by the ferry operator or authorised customer-management system;
+* short or medium validity periods combined with re-issuance, where appropriate for
+  the operational model.
 
-* the account is closed;
-* membership is suspended;
-* fraud or account takeover is detected;
-* the credential is reported compromised;
-* a replacement credential is issued;
-* the issuer is no longer authorised;
-* the programme ends; or
-* the credential was issued in error.
+If a status or revocation mechanism is included in the credential, the Relying Party
+SHALL check the status before accepting the attestation, unless offline operating
+rules explicitly allow deferred status checking.
 
-### 6.3 Status-list mechanism
-
-The final APTITUDE status-list mechanism and endpoint remain to be defined.
-
-Illustrative value:
-
-```text
-https://status.fastferries.example/loyalty/
-```
-
-This is not an operational endpoint.
+If a loyalty card is cancelled, replaced, or suspended, the issuer SHOULD revoke or
+suspend the attestation or ensure that backend verification detects the invalid state.
 
 ## 7 Compliance
 
-This Rulebook is designed to align with:
+This Rulebook is designed to align with the EUDI Wallet architectural approach for
+Electronic Attestations of Attributes and with the Attestation Rulebook structure
+defined in the ARF.
 
-* Regulation (EU) 2024/1183;
-* the EUDI Wallet Architecture and Reference Framework;
-* ARF Annex 2 Topic 12;
-* OpenID4VCI;
-* OpenID4VP;
-* SD-JWT VC and HAIP;
-* GDPR principles of purpose limitation, data minimisation and storage limitation; and
-* the SEDIT-X Ferry Transport working paper.
+ 
 
-The Rulebook enforces:
+The Rulebook supports the following compliance objectives:
 
-1. optional, context-based presentation;
-2. pseudonymous member references;
-3. selective disclosure of tier and benefits;
-4. separation from PID, payment and boarding credentials;
-5. back-end authority for mutable loyalty state;
-6. status and revocation;
-7. minimal verifier retention; and
-8. fallback to normal fare purchase.
+* it defines the attestation purpose and scope;
+* it defines mandatory, optional, and conditional attributes in an encoding-independent manner;
+* it defines a legal category indication through `attestation_legal_category`;
+* it defines an SD-JWT VC `vct` value for the attestation type;
+* it defines issuer, validity, and status metadata needed for verification;
+* it defines code lists and integrity rules required for consistent interpretation;
+* it defines how trust anchors can be obtained and used;
+* it defines expiry and revocation expectations;
+* it supports selective disclosure and data minimisation;
+* it recognises the reusable nature of the loyalty-card attestation and therefore
+  recommends status or revocation support.
 
-Open matters include:
-
-* final credential type identifier;
-* final loyalty benefit vocabulary;
-* operator and programme identifiers;
-* support for multi-operator programmes;
-* points-balance freshness;
-* redemption transaction binding;
-* whether mdoc is required;
-* final trust-list endpoint;
-* final status-list endpoint; and
-* cross-programme interoperability.
+This Rulebook does not define a qualified EAA or public-sector EAA profile. It also
+does not define ISO/IEC 18013-5 mdoc or W3C VCDM encodings in this version.
 
 ## 8 References
 
@@ -583,7 +564,9 @@ Open matters include:
 | [OpenID4VP] | OpenID for Verifiable Presentations |
 | [HAIP] | OpenID4VC High Assurance Interoperability Profile |
 | [SD-JWT VC] | SD-JWT-based Verifiable Credentials |
+| [OIDC] | OpenID Connect Core 1.0 |
 | [RFC 2119] | Key words for use in RFCs to Indicate Requirement Levels |
+| [RFC 5322] | Internet Message Format |
 | [Topic 7] | ARF Annex 2, Topic 7 — Attestation revocation and revocation checking |
 | [Topic 10] | ARF Annex 2, Topic 10 — Issuing a PID or attestation to a Wallet Unit |
 | [Topic 12] | ARF Annex 2, Topic 12 — Attestation Rulebooks |
