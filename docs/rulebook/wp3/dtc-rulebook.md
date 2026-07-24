@@ -73,7 +73,7 @@ This section defines the functional and semantic scope of the data composing the
 
 The objective is to preserve a single interoperable DTC representation that is:
 
-* aligned with ICAO DTC Type 2 and eMRTD LDS semantics,
+* aligned with ICAO DTC Type 2 philosophy and eMRTD LDS semantics and data model,
 * compatible with EUDI Wallet proximity presentation,
 * suitable for both on-site border-control use cases and remote wallet-driven presentations,
 * capable of preserving the cryptographic binding between the virtual credential and the Wallet Secure Component (WSCD).
