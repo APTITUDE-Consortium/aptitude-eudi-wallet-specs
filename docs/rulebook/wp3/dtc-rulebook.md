@@ -183,7 +183,7 @@ The objective is to preserve a single interoperable DTC representation that is:
 | ``issuing_subdivision`` | according to [ISO/IEC 23220-2.2] | TN  |
 | ``administrative_number`` | according to [ISO/IEC 23220-2.2] | 9876543210 |
 | ``travel_document_type`` | according to [ISO/IEC 23220-2.2] | PP |
-| ``travel_document_number`` | according to [ISO/IEC 23220-2.2] | I13235678 |
+| ``travel_document_number`` | according to [ISO/IEC 23220-4] | I13235678 |
 | ``travel_document_mrz`` | according to [ISO/IEC 23220-2.2] | P<ITA<<HARDT<<GIOVANNI<<<<<<<<<<<<<<<< |
 
 ## 3 Attestation Encoding
