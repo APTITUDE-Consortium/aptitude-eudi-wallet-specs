@@ -170,9 +170,9 @@ The objective is to preserve a single interoperable DTC representation that is:
 
 | **Identifier** | **Description** | **Example** |
 | --- | --- | --- |
-| ``issue_date`` | according to [ISO/IEC 23220-2.2] | 20-04-2023 |
-| ``expiry_date`` | according to [ISO/IEC 23220-2.2] | 20-04-2033 |
-| ``issuing_authority`` | according to [ISO/IEC 23220-2.2] | Ministero dell'Interno |
+| ``issue_date`` | date of issuance of the DTC according to [ISO/IEC 23220-2.2] | 20-04-2023 |
+| ``expiry_date`` | date of expiry of the DTC according to [ISO/IEC 23220-2.2] | 20-04-2033 |
+| ``issuing_authority`` | issuing authority of the DTC according to [ISO/IEC 23220-2.2] | Ministero dell'Interno |
 | ``version`` | according to [ISO/IEC 23220-4] | 1.0 |
 | ``sod`` | Security object data of related eMRTD according to [ISO/IEC 23220-4] | ... |
 
