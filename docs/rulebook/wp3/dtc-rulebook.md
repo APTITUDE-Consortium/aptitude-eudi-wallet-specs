@@ -387,7 +387,7 @@ The request may include ``age_over_18`` where required for age-based verificatio
 
 2. Proximity presentation of a token and 1:1 matching: The user presents a token, containing a decryption key, allowing the gates to decrypt the pre-loaded DTC-VC for a specific flight. 1:1 biometric matching between the passenger and the photo contained in the pre-loaded DTC.
 
-3. DTC‑VC presentation: The user presents his DTC-VC stored in his wallet (or taps his passport against the gates) which allows the gates to retrieve the DTC-VC from a gallery of DTC-VC pre-loaded on the gates. A biometric matching is then carried out in 1:1.
+3. Presentation of the DTC VC, retrieval of the pre-loaded DTC VC and 1:1 matching: The traveller presents the DTC-VC stored in their wallet (or taps their passport at the gate). The information presented enables the gate to identify and retrieve the corresponding DTC-VC, previously pre-loaded in the gate system together with its associated pre-clearance status. The gate then performs a matching between the DTC-VC presented by the traveller and the pre-loaded DTC-VC to authenticate the traveller and confirm the correct record has been retrieved. Once this matching has been successfully completed, a 1:1 biometric verification is performed between the traveller and the corresponding pre-loaded DTC-VC.
 
 4. Matching 1:n then presentation of the DTC-VC: The user approaches the gates, and proceeds to a 1:n matching to retrieve the DTC-VC preloaded in the gates. He then presents his DTC-VC stored in his EUDI Wallet (or types his passport), in order to establish the cryptographic link to authenticate the passenger and his DTC.
 
