@@ -272,7 +272,7 @@ The specific PhotoID data elements of APTITUDE DTC SHALL be as defined in Table 
 | ``administrative_number`` | ``administrative_number`` | O |
 | ``resident_street`` | ``resident_street`` | O |
 | ``resident_house_number`` | ``resident_house_number`` | O |
-| ``travel_document_type`` | ``travel_document_type`` | O |
+| ``travel_document_type`` | ``travel_document_type`` | M <br><br>As per ISO/IEC 23220-4 it shall be present as dg1 data element is present |
 | ``travel_document_number`` | ``travel_document_number`` | O |
 | ``resident_state`` | ``resident_state`` | O |
 | ``travel_document_mrz`` | ``travel_document_mrz`` | O |
