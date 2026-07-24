@@ -118,7 +118,7 @@ The objective is to preserve a single interoperable DTC representation that is:
 | ``birth_date`` | according to [ISO/IEC 23220-2.2] | 01-01-1980 |
 | ``portrait`` | according to [ISO/IEC 23220-2.2] | ... |
 | ``age_over_18`` | according to [ISO/IEC 23220-2.2] | T  |
-| ``document_number`` | number of the DTC-VC according to [ISO/IEC 23220-2.2] | YA1234567 |
+| ``document_number`` | identifier of the DTC-VC according to [ISO/IEC 23220-2.2] | YA1234567 |
 | ``person_id`` | according to [ISO/IEC 23220-4] | 1234567890 |
 | ``dg1`` | according to [ISO/IEC 23220-4] | P<ITA<<HARDT<<GIOVANNI<<<<<<<<<<<<<<<< |
 | ``dg2`` | according to [ISO/IEC 23220-4] | ... |
