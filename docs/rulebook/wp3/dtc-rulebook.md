@@ -320,7 +320,7 @@ The following table maps selected PhotoID data elements to the corresponding ICA
 | | sod | EF.SOD |
 | birth_date | | EF.DG1 |
 | age_over_18 | | EF.DG1 |
-| age_over_18 | | EF.DG2 |
+| portrait | | EF.DG2 |
 
 ## 4 Attestation Usage
 
