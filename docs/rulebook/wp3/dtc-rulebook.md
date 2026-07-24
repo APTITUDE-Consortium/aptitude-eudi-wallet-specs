@@ -40,7 +40,7 @@ Within the APTITUDE context, the target model is the ICAO DTC Type 2, bound to a
 This rulebook specifies:
 
 * The attributes and metadata that comprise a DTC attestation
-* The encoding formats that SHALL be supported for DTC attestations.
+* The encoding formats to be supported for DTC attestations.
 * The issuance, presentation and verification requirements for DTC attestations within the EUDI Wallet framework.
 * The trust anchor mechanisms, revocation procedures and compliance requirements that apply to DTC attestations.
 
