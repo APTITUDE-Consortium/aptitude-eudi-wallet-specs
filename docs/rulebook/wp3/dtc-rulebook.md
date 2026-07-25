@@ -422,7 +422,7 @@ Where deemed necessary by the border control authority, the field ``dg14`` obtai
 
 APTITUDE DTC
 
-* General PhotoID data elements: ``family_name``, ``given_name``, ``birth_date``, ``issue_date``, ``expiry_date``, ``issuing_authority``, ``document_number``, ``portrait``
+* General PhotoID data elements: ``family_name``, ``family_name_latin1 ``, ``given_name``, ``given_name_latin1``, ``birth_date``, ``issue_date``, ``expiry_date``, ``issuing_authority``, ``document_number``, ``portrait``
 * Special PhotoID data elements: ``travel_document_mrz``
 * ICAO PhotoID data elements: ``version``, ``dg1``, ``dg2``, ``dg14``, ``sod``.
 
