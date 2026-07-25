@@ -463,15 +463,22 @@ APTITUDE DTC (see pre-registration use cases 4.1 or 4.2)
 
 ## 5 Trust Anchors
 
-The APTITUDE DTC is derived from data contained in the LDS data groups of the corresponding physical eMRTD and is signed by the national issuing authority. The issuing authority SHALL sign the issuer signed data, i.e. the Mobile Security Object (MSO), using a DTC signer key and certificate under the respective CSCA root certificate, compliant with clause 2.2 in [ICAO-DTC-VC-TR].
+The APTITUDE DTC is derived from data contained in the LDS data groups of the corresponding physical eMRTD and is signed by the national issuing authority. The issuing authority SHALL sign the issuer signed data, i.e. the Mobile Security Object (MSO), using a DTC signer key and certificate under the respective CSCA root certificate.
+The document signer key and certificate SHALL comply with clause 2.2 in [ICAO-DTC-VC-TR] and SHALL meet the following conditions:
 
-*Note:* According to [ICAO-DTC-VC-TR], the DTC signer certificate includes a dedicated OID in the extendedKeyUsage extension, i.e. ``2.23.136.1.1.12.1``.
+* The DTC signer certificate SHALL include the following OID in the extendedKeyUsage extension : xxxxx;
+* The DTC signer certificate SHALL not include the DocumentType extension as defined in ICAO doc 9303 part 12. Instead, the following extension SHALL be used: xxxxx
+
+The following key usage period and certificate/public key validity period SHALL be used for the DTC signer:
+
+* Private key usage period : between xx days and 3 months;
+* certificate/public key validity period : xxx;
 
 It is recommended to make the CSCA root certificates of the EU Member States available to Relying Parties in the EUDI Wallet ecosytem by a respective EU Trust List, i.e. APTITUDE DTC TL. In addition, it is recommended to make the content of the APTITUDE DTC TL available to Relying Parties outside of the EUDI Wallet ecosystem by a VICAL according to [ISO/IEC 18013-5].
 
 CSCA root certificates MAY also be obtained from the ICAO PKD by any Relying Party.
 
-For the purpose of interoperability tests and pilotig, issung authority are requested to provide a certificates of a test CSCA, that is technically equivalent to the CSCA.
+For the purpose of interoperability tests and piloting, issung authorities are requested to provide a certificates of a test CSCA, that is technically equivalent to the CSCA.
 
 ## 6 Revocation
 
