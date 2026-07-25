@@ -486,11 +486,34 @@ If an APTITUDE DTC is marked revoked, a Relying Party SHALL reject the APTITUDE 
 
 Revocation of the linked eMRTD and LDS data given in the ICAO PhotoID data elements remains unchanged and is governed by the applicable ICAO, eMRTD and national procedures.
 
-## 7 Compliance
+## 7 Compliance with ICAO specifications
 
-If compliance to ICAO DTC-VC Type 1 is required, a reader may after successfully processing the device response and the verification procedure encapsulate the data in the structure given in clause 7.1. The reader SHALL use the option eMRTD bound for DTC-VC encoding. The ICAO based encoding for DTC-VC is defined in [ICAO-DTC-VC-TR] and encoding for DTC-PC is defined in [ICAO-DTC-PC-TR]. The reader SHALL use the option eMRTD bound for DTC-VC encoding.
+After successfully processing the device response and the verification procedure, a reader MAY recontruct from the content of the APTITUDE DTC Attestation an ICAO compliant DTC-VC as defined in [ICAO-DTC-VC-TR], supporting the following Type of ICAO DTC:
 
-*Note:* Option eMRTD bound does not include elements dtcTBS, dtcSignerInfo, DTCSecurityInfo and DTCOtherInfo.  
+* ICAO DTC Type 1, also named eMRTD bound DTC;
+* eMRTD bound extended DTC;
+
+**ICAO DTC Type 1, also named eMRTD bound DTC**
+In this case the reader SHALL bundle the ``dg1``, ``dg2``, ``sod``, and if present ``dg3``, ``dg4``, ``dg5``, ``dg6``, ``dg7``, ``dg8``, ``dg9``, ``dg10``, ``dg11``, ``dg12``, ``dg13``, ``dg14``, ``dg15``, ``dg16`` within the structure ``DTCData`` to build the structure ``DTCContentInfo``.
+
+*Note:* In this case, the structure ``DTCData`` does not contain stuctures ``dtcTBS``, ``dtcSignerInfo``, ``DTCSecurityInfo`` and ``DTCOtherInfo``. 
+
+**eMRTD bound extended DTC**
+In this case the reader SHALL bundle the ``dg1``, ``dg2``, ``sod``, and if present ``dg3``, ``dg4``, ``dg5``, ``dg6``, ``dg7``, ``dg8``, ``dg9``, ``dg10``, ``dg11``, ``dg12``, ``dg13``, ``dg14``, ``dg15``, ``dg16`` within the structure ``DTCData``. Subsequently, the reader SHALL bundle the structures ``dtcTBS``, ``DTCOtherInfo`` and ``dtcSignerInfo`` found within the APTITUDE DTC Attestation together with ``DTCData`` in the structure ``DTCData``.
+Conversly, during issuance of the APTITUDE DTC, the issuing authority SHALL compute the following structures in accordance with [ICAO-DTC-VC-TR] and store them within the APTITUDE DTC Attestation:
+
+* ```dtcTBS``
+* ``DTCOtherInfo``
+* ``dtcSignerInfo``
+
+
+*Note:* In this case, the structure ``DTCData`` does not contain the stucture ```DTCSecurityInfo``. 
+
+The binding between the DTC-VC and the EUDI Wallet enabled by the Rulebook is not compliant with the mechanisms currently defined by ICAO for the binding between the DTC-VC and DTC-PC. Therefore, the following features allowed by the Rulebook are currently not compliant with ICAO specifications:
+
+* binding between the DTC-PC (EUDI Wallet) and the DTC-VC;
+* security mechanisms implemented by the DTC-PC (EUDI Wallet);
+
 
 ### 7.1 ICAO based encoding
 
