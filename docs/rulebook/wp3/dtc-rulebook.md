@@ -345,7 +345,7 @@ This use case is without prejudice to applicable Advance Passenger Information (
 
 APTITUDE DTC:
 
-* General PhotoID data elements: ``family_name``, ``given_name``, ``birth_date``, ``issue_date``, ``expiry_date``, ``issuing_authority``, ``document_number``
+* General PhotoID data elements: ``family_name``, ``family_name_latin1``, ``given_name``, ``given_name_latin1``, ``birth_date``, ``issue_date``, ``expiry_date``, ``issuing_authority``, ``document_number``
 * Special PhotoID data elements: ``travel_document_mrz``
 * ICAO PhotoID data elements: ``version``, ``dg1``, ``dg2``, ``dg14``, ``sod``, and ``dg15`` where available and required by the Border Authority.
 
