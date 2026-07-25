@@ -6,6 +6,7 @@ Author(s):
 * Corrado Guidobaldi, IPZS, Italy
 * Zahra Ebadi Ansaroudi, FBK, Italy
 * Anthony Carmoy, ANTS, France
+* Alban Feraud, IN Groupe, France
 * Antonio Maio, INCM, Portugal
 * Arjan Geluk, ..., ...
   
