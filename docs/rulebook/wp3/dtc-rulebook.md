@@ -136,7 +136,8 @@ The objective is to preserve a single interoperable DTC representation that is:
 | ``portrait_capture_date`` | according to [ISO/IEC 23220-4] | 20-04-2023 |
 | ``birthplace`` | according to [ISO/IEC 23220-4] | Italy, Trento |
 | ``name_at_birth`` | according to [ISO/IEC 23220-4] | Nick |
-| ``resident_address`` | according to [ISO/IEC 23220-4] | Roma, 45 |
+| ``resident_address`` | according to [ISO/IEC 23220-4] and further clarified in [ISO/IEC 23220-2.2] | Roma, 45 |
+| ``resident_address_latin1`` | according to [ISO/IEC 23220-4] and further clarified in [ISO/IEC 23220-2.2] | Roma, 45 |
 | ``resident_city`` | according to [ISO/IEC 23220-4] | Trento |
 | ``resident_postal_code`` | according to [ISO/IEC 23220-4] | 38122 |
 | ``resident_country`` | according to [ISO/IEC 23220-4] | IT |
@@ -246,6 +247,7 @@ The general PhotoID data elements of APTITUDE DTC SHALL be as defined in Table 1
 | ``birthplace`` | ``birthplace`` | O  |
 | ``name_at_birth`` | ``name_at_birth`` | O  |
 | ``resident_address`` | ``resident_address`` | O  |
+| ``resident_address_latin1`` | ``resident_address_latin1`` | O  |
 | ``resident_city`` | ``resident_city`` | O  |
 | ``resident_postal_code`` | ``resident_postal_code`` | O  |
 | ``resident_country`` | ``resident_country`` | O  |
@@ -638,6 +640,7 @@ The first table below aims at showing for each attribute of the APTITUDE DTC whe
 | ``birthplace`` | | X | |
 | ``name_at_birth`` | | | X |
 | ``resident_address`` | | X | |
+| ``resident_address_latin1`` | | X | |
 | ``resident_city`` | | X | |
 | ``resident_postal_code`` | | X | |
 | ``resident_country`` | | X | |
@@ -707,14 +710,15 @@ The second table below defines the rules applicable to each of these attributes 
 | ``birthplace`` |If the eMRTD contains a DG11, this field SHALL contain the value present in the DE “place of birth” (if this DE is present).<br><br>Otherwise, this field SHALL be provided by the DTC issuing authority.|
 | ``name_at_birth`` |This field is not present in the eMRTD LDS.<br><br>This field SHALL be provided by the DTC issuing authority.|
 | ``resident_address`` |If the eMRTD contains a DG11, this field SHALL contain the value present in the DE “Permanent address” (if this DE is present).<br><br>Otherwise, this field SHALL be provided by the DTC issuing authority.|
+| ``resident_address_latin1`` |If the eMRTD contains a DG11, this field SHALL contain the value present in the DE “Permanent address” (if this DE is present and if expressed using latin alphabet).<br><br>Otherwise, this field SHALL be provided by the DTC issuing authority.|
 | ``resident_city`` |If the eMRTD contains a DG11, this field SHALL contain the resident city present in the DE “Permanent address” (if this DE is present).<br><br>Otherwise, this field SHALL be provided by the DTC issuing authority.|
 | ``resident_postal_code`` |If the eMRTD contains a DG11, this field SHALL contain the postal code present in the DE “Permanent address” (if this DE is present).<br><br>Otherwise, this field SHALL be provided by the DTC issuing authority.|
 | ``resident_country`` |If the eMRTD contains a DG11, this field SHALL contain the country present in the DE “Permanent address” (if this DE is present).<br><br>Otherwise, this field SHALL be provided by the DTC issuing authority.|
-| ``resident_city_latin1`` |This field may not be present in the eMRTD.<br><br>If a DG11 is present in the eMRTD, this field SHALL contain the city present in the DE “Permanent address” (if this DE is present and if expressed using latin alphabet).<br><br>Otherwise, this field SHALL be provided by the DTC issuing authority.|
+| ``resident_city_latin1`` |This field MAY not be present in the eMRTD.<br><br>If a DG11 is present in the eMRTD, this field SHALL contain the city present in the DE “Permanent address” (if this DE is present and if expressed using latin alphabet).<br><br>Otherwise, this field SHALL be provided by the DTC issuing authority.|
 | ``sex`` |This field SHALL contain the DE “sex” as found in DG1 of the eMRTD converted as follows 'M' => '1', 'F' =>'2', '<' or 'X' =>'0'|
 | ``nationality`` |This field SHALL contain the DE “Nationality” as found in DG1 of the eMRTD.<br><br>This field SHALL be encoded as three letter code alpha-3 code)defined in ISO 3166-1.|
-| ``family_name_latin1`` |This field may not be present in the eMRTD.<br><br>If a DG11 is present in the eMRTD, this field SHALL contain the family name present in the DE “Name of holder (in full)” (if this DE is present and if expressed using latin alphabet).<br><br>Otherwise, this field SHALL be provided by the DTC issuing authority.|
-| ``given_name_latin1`` |This field may not be present in the eMRTD.<br><br>If a DG11 is present in the eMRTD, this field SHALL contain the given name present in the DE “Name of holder (in full)” (if this DE is present and if expressed using latin alphabet).<br><br>Otherwise, this field SHALL be provided by the DTC issuing authority.|
+| ``family_name_latin1`` |This field MAY not be present in the eMRTD.<br><br>If a DG11 is present in the eMRTD, this field SHALL contain the family name present in the DE “Name of holder (in full)” (if this DE is present and if expressed using latin alphabet).<br><br>Otherwise, this field SHALL be provided by the DTC issuing authority.|
+| ``given_name_latin1`` |This field MAY not be present in the eMRTD.<br><br>If a DG11 is present in the eMRTD, this field SHALL contain the given name present in the DE “Name of holder (in full)” (if this DE is present and if expressed using latin alphabet).<br><br>Otherwise, this field SHALL be provided by the DTC issuing authority.|
 | ``birth_country`` |If a DG11 is present in the eMRTD this field SHALL contain the birth country present in the DE “Place of birth” (if this DE is present).<br><br>Otherwise, this field SHALL be provided by the DTC issuing authority.|
 |``birth_state``|If a DG11 is present in the eMRTD this field SHALL contain the birth state present in the DE “Place of birth” (if this DE is present).<br><br>Otherwise, this field SHALL be provided by the DTC issuing authority.|
 | ``birth_city`` |If a DG11 is present in the eMRTD this field SHALL contain the birth city present in the DE “Place of birth” (if this DE is present).<br><br>Otherwise, this field SHALL be provided by the DTC issuing authority.|
