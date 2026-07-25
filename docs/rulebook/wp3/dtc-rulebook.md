@@ -399,7 +399,7 @@ The request may include ``age_over_18`` where required for age-based verificatio
 
 APTITUDE DTC
 
-* General PhotoID data elements: ``family_name``, ``given_name``, ``birth_date``, ``issue_date``, ``expiry_date``, ``issuing_authority``, ``age_over_18``, ``portrait``
+* General PhotoID data elements: ``family_name``, ``family_name_latin1``, ``given_name``, ``given_name_latin1``, ``birth_date``, ``issue_date``, ``expiry_date``, ``issuing_authority``, ``age_over_18``, ``portrait``
 * Special PhotoID data elements: ``person_id``
 * ICAO PhotoID data elements: ``version``, ``dg1``, ``dg2``, ``dg14``, ``sod``, and ``dg15`` where available and required for Active Authentication.
 
