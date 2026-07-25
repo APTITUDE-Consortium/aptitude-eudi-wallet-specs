@@ -106,7 +106,7 @@ The objective is to preserve a single interoperable DTC representation that is:
 | Index | Requirement specification |
 | --- | --- |
 | DTC_DM_01 | The APTITUDE DTC SHALL contain DG1, DG2, DG14, SOD  as derived from the physical eMRTD passport and MAY contain other data groups allowed by ICAO DTC-VC specifications, as long as they are also present in the corresponding physical eMRTD. |
-| DTC_DM_02 | APTITUDE DTC MAY contain additional attributes beyond the derived eMRTD dataset |
+| DTC_DM_02 | APTITUDE DTC MAY contain additional attributes beyond those found in the eMRTD dataset |
 | DTC_DM_03 | The APTITUDE DTC data model SHALL support Selective Disclosure, allowing the traveller to share only the strictly necessary attributes (e.g., only DG2 for biometric match) with Relying Parties. |
 
 ### 2.2 Mandatory attributes
