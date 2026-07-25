@@ -387,13 +387,13 @@ The request may include ``age_over_18`` where required for age-based verificatio
 
 **Modalities (as defined in D3.2 Chapter 10.3 Functional Flow):**
 
-1. Proximity presentation of the DTC‑VC and 1:1 matching: The user presents its DTC-VC from the EUDI Wallet, with device engagement, allowing gates to retrieve the DTC-VC from the wallet with biometric verification in 1:1 between the passenger and the photo contained in his DTC-VC.
+1. Proximity presentation of the APTITUDE DTC and 1:1 matching: The user presents its APTITUDE DTC from the EUDI Wallet, with device engagement, allowing gates to retrieve the APTITUDE DTC from the wallet with biometric verification in 1:1 between the passenger and the photo contained in his APTITUDE DTC.
 
-2. Proximity presentation of a token and 1:1 matching: The user presents a token, containing a decryption key, allowing the gates to decrypt the pre-loaded DTC-VC for a specific flight. 1:1 biometric matching between the passenger and the photo contained in the pre-loaded DTC.
+2. Proximity presentation of a token and 1:1 matching: The user presents a token, containing a decryption key, allowing the gates to decrypt the pre-loaded APTITUDE DTC for a specific flight. 1:1 biometric matching between the passenger and the photo contained in the pre-loaded APTITUDE DTC.
 
-3. DTC‑VC presentation: The user presents his DTC-VC stored in his wallet (or taps his passport against the gates) which allows the gates to retrieve the DTC-VC from a gallery of DTC-VC pre-loaded on the gates. A biometric matching is then carried out in 1:1.
+3. APTITUDE DTC presentation: The user presents his APTITUDE DTC stored in his wallet (or taps his passport against the gates) which allows the gates to retrieve the APTITUDE DTC from a gallery of APTITUDE DTC pre-loaded on the gates. A biometric matching is then carried out in 1:1.
 
-4. Matching 1:n then presentation of the DTC-VC: The user approaches the gates, and proceeds to a 1:n matching to retrieve the DTC-VC preloaded in the gates. He then presents his DTC-VC stored in his EUDI Wallet (or types his passport), in order to establish the cryptographic link to authenticate the passenger and his DTC.
+4. Matching 1:n then presentation of the APTITUDE DTC: The user approaches the gates, and proceeds to a 1:n matching to retrieve the APTITUDE DTC preloaded in the gates. He then presents his APTITUDE DTC stored in his EUDI Wallet (or tap his passport), in order to establish the cryptographic link to authenticate the passenger and his APTITUDE DTC.
 
 **Requested attributes:**
 
@@ -407,7 +407,8 @@ Priority attributes for on‑site verification and biometric matching are ``dg2`
 
 [//]: # (Chosen attributes reflect rulebook §2 priorities and D3.1 emphasis on DG2/SOD for biometric anchoring.)
 
-**Post‑processing:** the proximity reader / e‑gate performs device engagement, retrieves the DTC, validates SOD / passive authentication (signature verification and PKI chain to CSCA/PKD), checks revocation/status and carries out biometric 1:1 matching of the live capture to dg2. The gate/backend then forwards verification results and any required DGs (dg1/dg2/sod and selected metadata) to backend systems for database checks (EES, SIS, SLTD) and final decision. The pilot MUST state whether translation to ASN.1 DTCContentInfo is required for legacy inspection systems; D3.1 signals this requirement as a possible necessity but does not fix the mapping responsibilities. The reader, eGate or officer interface presents the applicable operational outcome according to the Member State border-control process.
+**Post‑processing:** the proximity reader / e‑gate performs device engagement, retrieves the APTITUDE DTC, validates SOD / passive authentication (signature verification and PKI chain to CSCA/PKD), checks revocation/status and carries out biometric 1:1 matching of the live capture to dg2. The gate/backend then forwards verification results and any required DGs (dg1/dg2/sod and selected metadata) to backend systems for database checks (EES, SIS, SLTD) and final decision. The pilot MUST state whether translation to ASN.1 DTCContentInfo is required for legacy inspection systems; D3.1 signals this requirement as a possible necessity but does not fix the mapping responsibilities. The reader, eGate or officer interface presents the applicable operational outcome according to the Member State border-control process.
+Where deemed necessary by the border control authority, the field ``dg14`` obtained from the ICAO PhotoID data elements MAY be used by the reader to verify the cryptographic binding between the APTITUDE DTC being presented and the eMRTD owned by the traveller.
 
 ### 4.4 Cross‑jurisdiction proximity presentation (EU traveller arriving outside Schengen — optional)
 
