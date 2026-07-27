@@ -17,6 +17,7 @@ Author(s):
 | 0.4 | 12-06-2026 | Synchronization with PhotoID specification in [ISO/IEC 23220-4] |
 | 0.5 | 01-07-2026 | Align clause 2 and 3 with rulebook template, bibliography added, trust model and revocation added |
 | 0.6 | 08-07-2026 | Use cases added in clause 4, editorial changes |
+| 0.7 | 23-07-2026 | Addition of modalities in clause 4.3, editorial changes |
 
 Feedback:
 
@@ -35,12 +36,16 @@ This Attestation Rulebook defines the Digital Travel Credential (DTC) as an elec
 
 The primary objective of the DTC is to facilitate secure and privacy-preserving identity verification and travel document validation at border crossing points and during travel. The DTC is designed to complement existing physical travel documents (e.g. passports, visas) by providing a digital equivalent that supports selective disclosure, offline and online presentation and strong cryptographic verification.
 
-Within the APTITUDE context, the target model is the ICAO DTC Type 2, bound to a physical eMRTD and derived using mechanisms aligned with European regulations and ICAO guidelines. Type 2 is therefore considered the primary and preferred implementation model. However, the framework may also support ICAO DTC Type 1 where it is based on an LDS (Logical Data Structure) signed by the official passport authority. In such cases, the DTC is encapsulated within an attestation stored in the EUDI Wallet, ensuring that it remains cryptographically linked to a physical component and provides sufficient assurance for border control use cases.
+Within the APTITUDE context, the target model is the ICAO DTC Type 2, comprising a DTC-VC bound to (1) a physical eMRTD and (2) a DTC-PC which is an EUDI Wallet, and derived using mechanisms aligned with European regulations and ICAO guidelines. A DTC of Type 2 is therefore considered the primary and preferred implementation model. However, in the light of the features, interfaces and specifications of the EUDI Wallet, the mechanisms for binding the DTC-VC to the DTC-PC (i.e. the EUDI Wallet) differ from those envisionned by ICAO. It will therefore results in (1) differences in the content of the DTC-VC, as the methods and information for binding the DTC-VC to DTC-PC are different, and (2) the trust model, in order to leverage the one considered for the EUDI Wallet.
+
+This attestation Rulebook specified herewith aims at supporting the implementation of DTC bound to an EUDI Wallet and a physical eMRTD, aligned with the philosophy of DTC Type 2 as defined by ICAO. This attestation Rulebook assumes the eMRTD is an eMRTD issued by an EU Member State or a Schengen Associated Country, and thus supports the Chip Authentication mechanism and contains a DG14.
+
+This attestation Rulebook specified herewidth aims at supporting implementation of DTC bound to an EUDI Wallet and a physical eMRTD, aligned with the philosophy of DTC Type 2 as defined by ICAO. This attestation Rulebook assumes the eMRTD is an eMRTD issued by an EU Member State or a Schengen Associated Country, and thus supporting the Chip Authentication mechanism and containing a DG14.
 
 This rulebook specifies:
 
 * The attributes and metadata that comprise a DTC attestation
-* The encoding formats that SHALL be supported for DTC attestations.
+* The encoding formats to be supported for DTC attestations.
 * The issuance, presentation and verification requirements for DTC attestations within the EUDI Wallet framework.
 * The trust anchor mechanisms, revocation procedures and compliance requirements that apply to DTC attestations.
 
@@ -178,7 +183,7 @@ The objective is to preserve a single interoperable DTC representation that is:
 | --- | --- | --- |
 | ``issuing_subdivision`` | according to [ISO/IEC 23220-2.2] | TN  |
 | ``administrative_number`` | according to [ISO/IEC 23220-2.2] | 9876543210 |
-| ``travel_document_type`` | according to [ISO/IEC 23220-2.2] | Passport |
+| ``travel_document_type`` | according to [ISO/IEC 23220-2.2] | PP |
 | ``travel_document_number`` | according to [ISO/IEC 23220-2.2] | I13235678 |
 | ``travel_document_mrz`` | according to [ISO/IEC 23220-2.2] | P<ITA<<HARDT<<GIOVANNI<<<<<<<<<<<<<<<< |
 
@@ -319,7 +324,7 @@ The following table maps selected PhotoID data elements to the corresponding ICA
 | | sod | EF.SOD |
 | birth_date | | EF.DG1 |
 | age_over_18 | | EF.DG1 |
-| age_over_18 | | EF.DG2 |
+| portrait | | EF.DG2 |
 
 ## 4 Attestation Usage
 
@@ -387,7 +392,7 @@ The request may include ``age_over_18`` where required for age-based verificatio
 
 2. Proximity presentation of a token and 1:1 matching: The user presents a token, containing a decryption key, allowing the gates to decrypt the pre-loaded DTC-VC for a specific flight. 1:1 biometric matching between the passenger and the photo contained in the pre-loaded DTC.
 
-3. DTC‑VC presentation: The user presents his DTC-VC stored in his wallet (or taps his passport against the gates) which allows the gates to retrieve the DTC-VC from a gallery of DTC-VC pre-loaded on the gates. A biometric matching is then carried out in 1:1.
+3. Proximity presentation of the DTC‑VC, retrieval of the pre-loaded DTC‑VC and 1:1 matching: The traveller presents the DTC-VC stored in their wallet (or taps their passport at the gate). The information presented enables the gate to identify and retrieve the corresponding DTC-VC, previously pre-loaded in the gate system together with its associated pre-clearance status. The gate then performs a matching between the DTC-VC presented by the traveller and the pre-loaded DTC-VC to authenticate the traveller and confirm the correct record has been retrieved. Once this matching has been successfully completed, a 1:1 biometric verification is performed between the traveller and the portrait contained in the corresponding pre-loaded DTC-VC.
 
 4. Matching 1:n then presentation of the DTC-VC: The user approaches the gates, and proceeds to a 1:n matching to retrieve the DTC-VC preloaded in the gates. He then presents his DTC-VC stored in his EUDI Wallet (or types his passport), in order to establish the cryptographic link to authenticate the passenger and his DTC.
 
@@ -588,4 +593,5 @@ dtcOtherInfos [23] EXPLICIT DTCOtherInfos OPTIONAL,
  | [ICAO-DTC-VC-TR] | ICAO Technical Report, Digital Travel Credentials (DTC) - Virtual Component Data Structure and PKI Mechanisms, Version 1.2, October 2020 |
  | [ICAO-DTC-PC-TR] | ICAO Technical Report, Digital Travel Credentials (DTC) - Physical Component and Protocols, Version 1.1, October 2022 |
  | [APTITUDE-D3.1] | APTITUDE, D3.1: Stock‑Taking, Analysis and Specifications — pilot use cases and advance submission, 27‑02‑2026. |
+ | [APTITUDE-D3.2] | APTITUDE, D3.2: Work in progress on Technical and functional specifications for DTC experimentations. |
  | [EU-API-2025-12] | Regulation (EU) 2025/12 of the European Parliament and of the Council of 19 December 2024 on the collection and transfer of  advance passenger information for enhancing and facilitating external border checks, amending Regulations (EU) 2018/1726 and (EU) 2019/817, and repealing Council Directive 2004/82/EC. |
