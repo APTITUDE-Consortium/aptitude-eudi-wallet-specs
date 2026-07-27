@@ -131,7 +131,7 @@ The objective is to preserve a single interoperable DTC representation that is:
 | --- | --- | --- |
 | ``family_name_viz`` | according to [ISO/IEC 23220-4] | HARDT |
 | ``given_name_viz`` | according to [ISO/IEC 23220-4] | GIOVANNI |
-| ``enrolment_portrait_image`` | according to [ISO/IEC 23220-4] <br><br> portrait image captured during enrolment of the PhotoID holder| ...  |
+| ``enrolment_portrait_image`` | according to [ISO/IEC 23220-4] <br><br> portrait image captured during enrolment of the APTITUDE DTC/PhotoID holder that can be different to image in ``portrait``| ...  |
 | ``age_in_years`` | according to [ISO/IEC 23220-4] | 28  |
 | ``age_birth_year`` | according to [ISO/IEC 23220-4] | 1998  |
 | ``portrait_capture_date`` | according to [ISO/IEC 23220-4] | 20-04-2023 |
@@ -153,7 +153,6 @@ The objective is to preserve a single interoperable DTC representation that is:
 | ``resident_street`` | according to [ISO/IEC 23220-4] | Roma |
 | ``resident_house_number`` | according to [ISO/IEC 23220-4] | 45 |
 | ``resident_state`` | according to [ISO/IEC 23220-4] | IT |
-| ``enrolment_portrait_image`` | according to [ISO/IEC 23220-4]; portrait image captured at time of issuance of APTITUDE-DTC that can be different to image in ``portrait``  | ... |
 | ``dg3`` | according to [ISO/IEC 23220-4] | ... |
 | ``dg4`` | according to [ISO/IEC 23220-4] | ... |
 | ``dg5`` | according to [ISO/IEC 23220-4] | ... |
@@ -723,7 +722,7 @@ The second table below defines the rules applicable to each of these attributes 
 | ``resident_country`` |If the eMRTD contains a DG11, this field SHALL contain the country present in the DE “Permanent address” (if this DE is present).<br><br>Otherwise, this field SHALL be provided by the DTC issuing authority.|
 | ``resident_city_latin1`` |This field MAY not be present in the eMRTD.<br><br>If a DG11 is present in the eMRTD, this field SHALL contain the city present in the DE “Permanent address” (if this DE is present and if expressed using latin alphabet).<br><br>Otherwise, this field SHALL be provided by the DTC issuing authority.|
 | ``sex`` |This field SHALL contain the DE “sex” as found in DG1 of the eMRTD converted as follows 'M' => '1', 'F' =>'2', '<' or 'X' =>'0'|
-| ``nationality`` |This field SHALL contain the DE “Nationality” as found in DG1 of the eMRTD.<br><br>This field SHALL be encoded as three letter code alpha-3 code)defined in ISO 3166-1.|
+| ``nationality`` |This field SHALL contain the DE “Nationality” as found in DG1 of the eMRTD.<br><br>This field SHALL be encoded as three letter code alpha-3 code defined in ISO 3166-1.|
 | ``family_name_latin1`` |This field MAY not be present in the eMRTD.<br><br>If a DG11 is present in the eMRTD, this field SHALL contain the family name present in the DE “Name of holder (in full)” (if this DE is present and if expressed using latin alphabet).<br><br>Otherwise, this field SHALL be provided by the DTC issuing authority.|
 | ``given_name_latin1`` |This field MAY not be present in the eMRTD.<br><br>If a DG11 is present in the eMRTD, this field SHALL contain the given name present in the DE “Name of holder (in full)” (if this DE is present and if expressed using latin alphabet).<br><br>Otherwise, this field SHALL be provided by the DTC issuing authority.|
 | ``birth_country`` |If a DG11 is present in the eMRTD this field SHALL contain the birth country present in the DE “Place of birth” (if this DE is present).<br><br>Otherwise, this field SHALL be provided by the DTC issuing authority.|
