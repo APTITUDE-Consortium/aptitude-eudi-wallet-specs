@@ -99,6 +99,7 @@ markdown_extensions:
   - footnotes
   - sane_lists
   - tables
+  - md_in_html
   - def_list
   - admonition
   - pymdownx.details
