@@ -50,6 +50,11 @@ theme:
     code: Roboto Mono
   logo: img/logo.png
 
+extra:
+  version:
+    provider: mike
+    alias: true
+
 extra_css:
   - media/extra.css
 
