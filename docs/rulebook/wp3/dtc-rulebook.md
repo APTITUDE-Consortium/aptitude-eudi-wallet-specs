@@ -18,6 +18,7 @@ Author(s):
 | 0.4 | 12-06-2026 | Synchronization with PhotoID specification in [ISO/IEC 23220-4] |
 | 0.5 | 01-07-2026 | Align clause 2 and 3 with rulebook template, bibliography added, trust model and revocation added |
 | 0.6 | 08-07-2026 | Use cases added in clause 4, editorial changes |
+| 0.7 | 23-07-2026 | Addition of modalities in clause 4.3, editorial changes |
 
 Feedback:
 
@@ -325,7 +326,7 @@ The following table maps selected PhotoID data elements to the corresponding ICA
 | | sod | EF.SOD |
 | birth_date | | EF.DG1 |
 | age_over_18 | | EF.DG1 |
-| age_over_18 | | EF.DG2 |
+| portrait | | EF.DG2 |
 
 ## 4 Attestation Usage
 
@@ -393,7 +394,7 @@ The request may include ``age_over_18`` where required for age-based verificatio
 
 2. Proximity presentation of a token and 1:1 matching: The user presents a token, containing a decryption key, allowing the gates to decrypt the pre-loaded APTITUDE DTC for a specific flight. 1:1 biometric matching between the passenger and the photo contained in the pre-loaded APTITUDE DTC.
 
-3. APTITUDE DTC presentation: The user presents his APTITUDE DTC stored in his wallet (or taps his passport against the gates) which allows the gates to retrieve the APTITUDE DTC from a gallery of APTITUDE DTC pre-loaded on the gates. A biometric matching is then carried out in 1:1.
+3. Proximity presentation of the DTC‑VC, retrieval of the pre-loaded DTC‑VC and 1:1 matching: The traveller presents the DTC-VC stored in their wallet (or taps their passport at the gate). The information presented enables the gate to identify and retrieve the corresponding DTC-VC, previously pre-loaded in the gate system together with its associated pre-clearance status. The gate then performs a matching between the DTC-VC presented by the traveller and the pre-loaded DTC-VC to authenticate the traveller and confirm the correct record has been retrieved. Once this matching has been successfully completed, a 1:1 biometric verification is performed between the traveller and the portrait contained in the corresponding pre-loaded DTC-VC.
 
 4. Matching 1:n then presentation of the APTITUDE DTC: The user approaches the gates, and proceeds to a 1:n matching to retrieve the APTITUDE DTC preloaded in the gates. He then presents his APTITUDE DTC stored in his EUDI Wallet (or tap his passport), in order to establish the cryptographic link to authenticate the passenger and his APTITUDE DTC.
 
@@ -769,4 +770,5 @@ The second table below defines the rules applicable to each of these attributes 
  | [ICAO-DTC-VC-TR] | ICAO Technical Report, Digital Travel Credentials (DTC) - Virtual Component Data Structure and PKI Mechanisms, Version 1.2, October 2020 |
  | [ICAO-DTC-PC-TR] | ICAO Technical Report, Digital Travel Credentials (DTC) - Physical Component and Protocols, Version 1.1, October 2022 |
  | [APTITUDE-D3.1] | APTITUDE, D3.1: Stock‑Taking, Analysis and Specifications — pilot use cases and advance submission, 27‑02‑2026. |
+ | [APTITUDE-D3.2] | APTITUDE, D3.2: Work in progress on Technical and functional specifications for DTC experimentations. |
  | [EU-API-2025-12] | Regulation (EU) 2025/12 of the European Parliament and of the Council of 19 December 2024 on the collection and transfer of  advance passenger information for enhancing and facilitating external border checks, amending Regulations (EU) 2018/1726 and (EU) 2019/817, and repealing Council Directive 2004/82/EC. |
