@@ -328,6 +328,8 @@ The following table maps selected PhotoID data elements to the corresponding ICA
 | age_over_18 | | EF.DG1 |
 | portrait | | EF.DG2 |
 
+More details regarding the mapping of the content of the PhotoID with the eMRTD content are  provided in clause 8.
+
 ## 4 Attestation Usage
 
 This section briefly describes how attestations of type *APTITUDE DTC* are intended to be used. All requested attributes are examples and the request may include other data elements as given in the use cases.
