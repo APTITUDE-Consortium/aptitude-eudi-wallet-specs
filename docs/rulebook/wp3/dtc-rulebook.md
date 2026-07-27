@@ -77,7 +77,7 @@ The objective is to preserve a single interoperable DTC representation that is:
 * aligned with ICAO DTC Type 2 philosophy and eMRTD LDS semantics and data model,
 * compatible with EUDI Wallet proximity presentation,
 * suitable for both on-site border-control use cases and remote wallet-driven presentations,
-* capable of preserving the cryptographic binding between the virtual credential and the Wallet Secure Component (WSCD).
+* capable of preserving the cryptographic binding between the virtual credential and the Wallet Secure Component Application (WSCA).
 
 #### Table 1 — Requirements on data model
 
@@ -99,7 +99,7 @@ The objective is to preserve a single interoperable DTC representation that is:
 | --- | --- |
 | DTC_IS_01 | APTITUDE DTC SHALL be issued exclusively by the National Passport Issuing Authority of the Member State that issued the corresponding physical eMRTD. |
 | DTC_IS_02 | APTITUDE DTC SHALL be both issued (1) alongside the issuance of new eMRTDs, or (2) for already issued eMRTDs, except where the national authentic sources or issuing authorities require a restriction. |
-| DTC_IS_03 | The issuance process SHALL result in an ICAO DTC Type 2 (eMRTD-PC bound), where the virtual component is cryptographically linked to the WSCD being the physical component within the EUDI Wallet. |
+| DTC_IS_03 | The issuance process SHALL result in an ICAO DTC Type 2 (eMRTD-PC bound), where the virtual component is cryptographically linked to the WSCA being the physical component within the EUDI Wallet. |
 | DTC_IS_04 | The system SHALL support the complete lifecycle management of the DTC, including secure revocation and update mechanisms managed by the issuing authority. |
 
 #### Table 3 — Requirements on data elements
@@ -468,7 +468,6 @@ The APTITUDE DTC is derived from data contained in the LDS data groups of the co
 The document signer key and certificate SHALL comply with clause 2.2 in [ICAO-DTC-VC-TR] and SHALL meet the following conditions:
 
 * The DTC signer certificate SHALL include the following OID in the extendedKeyUsage extension : xxxxx;
-* The DTC signer certificate SHALL not include the DocumentType extension as defined in ICAO doc 9303 part 12. Instead, the following extension SHALL be used: xxxxx
 
 The following key usage period and certificate/public key validity period SHALL be used for the DTC signer:
 
