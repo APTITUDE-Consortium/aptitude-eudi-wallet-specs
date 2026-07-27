@@ -425,7 +425,7 @@ Where deemed necessary by the border control authority, the field ``dg14`` obtai
 
 APTITUDE DTC
 
-* General PhotoID data elements: ``family_name``, ``family_name_latin1 ``, ``given_name``, ``given_name_latin1``, ``birth_date``, ``issue_date``, ``expiry_date``, ``issuing_authority``, ``document_number``, ``portrait``
+* General PhotoID data elements: ``family_name``, ``family_name_latin1``, ``given_name``, ``given_name_latin1``, ``birth_date``, ``issue_date``, ``expiry_date``, ``issuing_authority``, ``document_number``, ``portrait``
 * Special PhotoID data elements: ``travel_document_mrz``
 * ICAO PhotoID data elements: ``version``, ``dg1``, ``dg2``, ``dg14``, ``sod``.
 
@@ -516,14 +516,12 @@ Conversly, during issuance of the APTITUDE DTC, the issuing authority SHALL comp
 * ``DTCOtherInfo``
 * ``dtcSignerInfo``
 
-
 *Note:* In this case, the structure ``DTCData`` does not contain the stucture ```DTCSecurityInfo``. 
 
 The binding between the DTC-VC and the EUDI Wallet enabled by the Rulebook is not compliant with the mechanisms currently defined by ICAO for the binding between the DTC-VC and DTC-PC. Therefore, the following features allowed by the Rulebook are currently not compliant with ICAO specifications:
 
 * binding between the DTC-PC (EUDI Wallet) and the DTC-VC;
 * security mechanisms implemented by the DTC-PC (EUDI Wallet);
-
 
 ### 7.1 ICAO based encoding
 
