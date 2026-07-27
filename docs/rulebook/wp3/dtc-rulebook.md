@@ -57,7 +57,8 @@ This rulebook specifies:
 * Chapter 4, which specifies attestation usage.
 * Chapter 5, which specifies trust anchors.
 * Chapter 6, which specifies revocation.
-* Chapter 7, which specifies compliance.
+* Chapter 7, which specifies compliance with ICAO specification.
+* Chapter 8, which discusses consideration of issuance of APTITUDE DTC.
 
 ### 1.3 Key words
 
@@ -613,7 +614,7 @@ dtcOtherInfos [23] EXPLICIT DTCOtherInfos OPTIONAL,
 }
 ```
 
-## 8 Consideration for issuance of DTC-VC credentials
+## 8 Consideration for issuance of APTITUDE DTC credentials
 
 APTITUDE DTC is bound to an existing eMRTD, either issued before the APTITUDE DTC (preexisting eMRTD) or issued simultaneously.
 Many of the attributes contained in the APTITUDE DTC are or may be also present in the underlying eMRTD. Therefore it is of the utmost importance to ensure their consistency with the eMRTD content to (1) avoid creation of flawed APTITUDE DTC and (2) avoid errors when the APTITUDE DTC is processed by a relying party. Where the issuing authority reads out the eMRTD and reuses its content for APTITUDE DTC issuance, consistency is directly ensured. Alternatively, issuing authority may also issue an APTITUDE DTC with attributes obtained from its own registers, provided consistency with eMRTD content is guaranteed.
