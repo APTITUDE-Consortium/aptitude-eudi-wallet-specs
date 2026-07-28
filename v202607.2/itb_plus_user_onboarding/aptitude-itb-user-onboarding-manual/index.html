@@ -1,0 +1,1826 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="APTITUDE Technical Specification">
+      
+      
+        <meta name="author" content="APTITUDE Consortium">
+      
+      
+        <link rel="canonical" href="https://aptitude-consortium.github.io/aptitude-eudi-wallet-specs/v202607.2/itb_plus_user_onboarding/aptitude-itb-user-onboarding-manual/">
+      
+      
+        <link rel="prev" href="../">
+      
+      
+        <link rel="next" href="../report-submission/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+    
+    
+      
+        <title>ITB+ User Onboarding Guide - APTITUDE Technical Specification</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.ec1eaa64.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../media/extra.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#aptitude-itb-user-onboarding-manual" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+      <div data-md-color-scheme="default" data-md-component="outdated" hidden>
+        
+      </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="APTITUDE Technical Specification" class="md-header__button md-logo" aria-label="APTITUDE Technical Specification" data-md-component="logo">
+      
+  <img src="../../img/logo.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            APTITUDE Technical Specification
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              ITB+ User Onboarding Guide
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/APTITUDE-Consortium/aptitude-eudi-wallet-specs" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    APTITUDE-Consortium/aptitude-eudi-wallet-specs
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+    
+      
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../rulebook/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Attestation Rulebooks
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../rulebook/trust-framework/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Trust Specifications
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../horizontal-RFCs/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  RFCs
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Testing and Conformance
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../schema/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Schemas
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../standards/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Standards
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../glossary/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Glossary
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+  
+
+<nav class="md-nav md-nav--primary md-nav--lifted md-nav--integrated" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="APTITUDE Technical Specification" class="md-nav__button md-logo" aria-label="APTITUDE Technical Specification" data-md-component="logo">
+      
+  <img src="../../img/logo.png" alt="logo">
+
+    </a>
+    APTITUDE Technical Specification
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/APTITUDE-Consortium/aptitude-eudi-wallet-specs" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    APTITUDE-Consortium/aptitude-eudi-wallet-specs
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../rulebook/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Attestation Rulebooks
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_2" id="__nav_2_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Attestation Rulebooks
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../rulebook/wp5/mVRC-rulebook/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    mVRC
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../rulebook/wp3/dtc-rulebook/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DTC
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Trust Specifications
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Trust Specifications
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../rulebook/trust-framework/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Trust Framework
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../horizontal-RFCs/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    RFCs
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_4" id="__nav_4_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    RFCs
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../horizontal-RFCs/RFC001/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    RFC-01 Credential Issuance Profile
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../horizontal-RFCs/RFC002/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    RFC-02 Presentation Profile
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../horizontal-RFCs/RFC004/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    RFC-04 Revocation Profile
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" checked>
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Testing and Conformance
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_5" id="__nav_5_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Testing and Conformance
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ITB+ User Onboarding Guide
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ITB+ User Onboarding Guide
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#table-of-contents" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Table of contents
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1-purpose-and-scope-of-this-document" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Purpose and scope of this document
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-conformance-testing-and-interoperability-testing" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Conformance testing and interoperability testing
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. Conformance testing and interoperability testing">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21-what-is-itb" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.1 What is ITB+?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22-what-is-conformance-testing" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2 What is conformance testing?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#23-what-are-aptitude-rfcs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.3 What are APTITUDE RFCs?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#24-how-aptitude-rfcs-are-defined-through-work-packages-and-pilot-use-cases" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.4 How APTITUDE RFCs are defined through Work Packages and Pilot Use Cases
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#25-from-rfcs-to-testable-implementations" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.5 From RFCs to testable implementations
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#26-from-itb-conformance-testing-to-playground-interoperability-testing" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.6 From ITB+ conformance testing to Playground interoperability testing
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-onboarding-and-using-itb" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Onboarding and using ITB+
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. Onboarding and using ITB+">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31-requesting-onboarding" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.1 Requesting onboarding
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#32-accessing-aptitude-itb" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.2 Accessing APTITUDE ITB+
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#33-executing-the-aptitude-test-suite" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.3 Executing the APTITUDE test suite
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#34-accessing-debug-logs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.4 Accessing debug logs
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#35-downloading-a-report" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.5 Downloading a report
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-submitting-a-conformance-report-to-wp2t22" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Submitting a conformance report to WP2/T2.2
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../report-submission/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Reporting Conformance Results
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../schema/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Schemas
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Schemas
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../standards/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Standards
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Glossary
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Glossary
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../glossary/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Glossary
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../glossary-definitions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Definitions
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+                
+
+
+
+  
+
+
+  <nav class="md-path" aria-label="Navigation" >
+    <ol class="md-path__list">
+      
+        
+  
+  
+    <li class="md-path__item">
+      <a href="../.." class="md-path__link">
+        
+  <span class="md-ellipsis">
+    Home
+  </span>
+
+      </a>
+    </li>
+  
+
+      
+      
+        
+  
+  
+    
+    
+      <li class="md-path__item">
+        <a href="../" class="md-path__link">
+          
+  <span class="md-ellipsis">
+    Testing and Conformance
+  </span>
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ol>
+  </nav>
+
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+    <a href="https://github.com/APTITUDE-Consortium/aptitude-eudi-wallet-specs/edit/main/docs/itb_plus_user_onboarding/aptitude-itb-user-onboarding-manual.md" title="Edit this page" class="md-content__button md-icon" rel="edit">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10 20H6V4h7v5h5v3.1l2-2V8l-6-6H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h4zm10.2-7c.1 0 .3.1.4.2l1.3 1.3c.2.2.2.6 0 .8l-1 1-2.1-2.1 1-1c.1-.1.2-.2.4-.2m0 3.9L14.1 23H12v-2.1l6.1-6.1z"/></svg>
+    </a>
+  
+  
+    
+      
+    
+    <a href="https://github.com/APTITUDE-Consortium/aptitude-eudi-wallet-specs/raw/main/docs/itb_plus_user_onboarding/aptitude-itb-user-onboarding-manual.md" title="View source of this page" class="md-content__button md-icon">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 18c.56 0 1 .44 1 1s-.44 1-1 1-1-.44-1-1 .44-1 1-1m0-3c-2.73 0-5.06 1.66-6 4 .94 2.34 3.27 4 6 4s5.06-1.66 6-4c-.94-2.34-3.27-4-6-4m0 6.5a2.5 2.5 0 0 1-2.5-2.5 2.5 2.5 0 0 1 2.5-2.5 2.5 2.5 0 0 1 2.5 2.5 2.5 2.5 0 0 1-2.5 2.5M9.27 20H6V4h7v5h5v4.07c.7.08 1.36.25 2 .49V8l-6-6H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h4.5a8.2 8.2 0 0 1-1.23-2"/></svg>
+    </a>
+  
+
+
+<h1 id="aptitude-itb-user-onboarding-manual">APTITUDE ITB+ User Onboarding Manual<a class="headerlink" href="#aptitude-itb-user-onboarding-manual" title="Permanent link">&para;</a></h1>
+<p><strong>APTITUDE WP2 — T2.2: Interoperability test-bed</strong><br />
+<strong>University of the Aegean — UAegean i4m Lab</strong><br />
+<strong>Version 1.0 | June 2026</strong></p>
+<p>Authors: Nikos Triantafyllou &amp; Petros Kavassalis, UAegean i4m Lab<br />
+Reviewers: Luca Vallone, IPZS.IT; Giancarlo Degani, INFOCERT</p>
+<hr />
+<h2 id="table-of-contents">Table of contents<a class="headerlink" href="#table-of-contents" title="Permanent link">&para;</a></h2>
+<ul>
+<li><a href="#1-purpose-and-scope-of-this-document">1. Purpose and scope of this document</a></li>
+<li><a href="#2-conformance-testing-and-interoperability-testing">2. Conformance testing and interoperability testing</a></li>
+<li><a href="#21-what-is-itb">2.1 What is ITB+?</a></li>
+<li><a href="#22-what-is-conformance-testing">2.2 What is conformance testing?</a></li>
+<li><a href="#23-what-are-aptitude-rfcs">2.3 What are APTITUDE RFCs?</a></li>
+<li><a href="#24-how-aptitude-rfcs-are-defined-through-work-packages-and-pilot-use-cases">2.4 How APTITUDE RFCs are defined through Work Packages and Pilot Use Cases</a></li>
+<li><a href="#25-from-rfcs-to-testable-implementations">2.5 From RFCs to testable implementations</a></li>
+<li><a href="#26-from-itb-conformance-testing-to-playground-interoperability-testing">2.6 From ITB+ conformance testing to Playground interoperability testing</a></li>
+<li><a href="#3-onboarding-and-using-itb">3. Onboarding and using ITB+</a></li>
+<li><a href="#31-requesting-onboarding">3.1 Requesting onboarding</a></li>
+<li><a href="#32-accessing-aptitude-itb">3.2 Accessing APTITUDE ITB+</a></li>
+<li><a href="#33-executing-the-aptitude-test-suite">3.3 Executing the APTITUDE test suite</a></li>
+<li><a href="#34-accessing-debug-logs">3.4 Accessing debug logs</a></li>
+<li><a href="#35-downloading-a-report">3.5 Downloading a report</a></li>
+</ul>
+<hr />
+<h2 id="1-purpose-and-scope-of-this-document">1. Purpose and scope of this document<a class="headerlink" href="#1-purpose-and-scope-of-this-document" title="Permanent link">&para;</a></h2>
+<p>The purpose of this document is to provide onboarding instructions for APTITUDE participants that wish to use ITB+ for conformance testing and interoperability-readiness assessment.</p>
+<p>The manual explains how an organisation can request access to APTITUDE ITB+, log in to the platform, execute the available APTITUDE test suites, access debug logs, download conformance reports, and submit successful results to the APTITUDE project team.</p>
+<p>The manual is intended for organisations testing one or more of the following software solutions or components:</p>
+<ul>
+<li>Wallet Unit</li>
+<li>Issuer</li>
+<li>Verifier</li>
+</ul>
+<p>The tests are executed against the relevant <a href="https://github.com/APTITUDE-Consortium/aptitude-eudi-wallet-specs/tree/main/docs">APTITUDE RFCs</a> and profiles supported by the participant's implementation.</p>
+<hr />
+<h2 id="2-conformance-testing-and-interoperability-testing">2. Conformance testing and interoperability testing<a class="headerlink" href="#2-conformance-testing-and-interoperability-testing" title="Permanent link">&para;</a></h2>
+<h3 id="21-what-is-itb">2.1 What is ITB+?<a class="headerlink" href="#21-what-is-itb" title="Permanent link">&para;</a></h3>
+<p>ITB+ is a platform for conformance self-validation testing against semantic and technical specifications. It is based on, and extends, the European Commission's DIGIT Interoperability Testbed, adding support for wallet ecosystems, profile-based testing, reference implementations, domain-specific test suites, and detailed evidence-based reporting.</p>
+<p>ITB+ has been developed as community-oriented testing infrastructure, with the University of the Aegean / UAegean i4m Lab playing a key technical and coordination role in its adaptation, extension, and operation for wallet-related conformance and interoperability testing. In this role, UAegean i4m Lab supports the integration of test suites, reference implementations, and participant onboarding processes, while ITB+ itself remains positioned as neutral, reusable, and extensible community infrastructure.</p>
+<p>In the context of APTITUDE, ITB+ provides a shared testing environment where participating organisations can test implementations such as Wallet Units, Issuers, and Verifiers against selected APTITUDE RFCs and profiles. The platform allows participants to execute predefined test cases, inspect debug logs, and download conformance reports that document the observed behaviour of their implementation during test execution.</p>
+<p>ITB+ operates by exchanging messages with the System Under Test. Depending on the selected test case, the tested system may be required to process a credential offer, respond to a presentation request, generate a credential issuance flow, or expose a verifier request. ITB+ validates the execution steps against the relevant profile and records the results.</p>
+<p>The platform is designed to support different levels of testing, including protocol conformance testing, reference implementation testing, and domain-specific profile testing. This makes it useful not only for checking whether an implementation follows a technical protocol, but also for assessing whether it behaves correctly in a specific ecosystem or application context.</p>
+<p>For APTITUDE participants, ITB+ should be understood as a practical onboarding, testing, and reporting environment that helps organisations identify implementation issues early, improve interoperability readiness, and collect evidence before wider pilot, plug-test, or deployment activities.</p>
+<h3 id="22-what-is-conformance-testing">2.2 What is conformance testing?<a class="headerlink" href="#22-what-is-conformance-testing" title="Permanent link">&para;</a></h3>
+<p>Conformance testing is the process of evaluating whether a System Under Test (SUT) satisfies the requirements of a selected specification, profile, or test suite. In practical terms, conformance testing checks whether an implementation behaves as expected when it executes a defined technical flow.</p>
+<p>For wallet ecosystems, this may include checking whether a Wallet Unit correctly handles a credential offer or presentation request, whether an Issuer generates the expected credential issuance flow, or whether a Verifier creates a valid presentation request and processes the wallet response correctly.</p>
+<p>A conformance test suite is composed of executable test cases. Each test case represents a specific scenario and includes a set of expected behaviours or assertions. During execution, ITB+ observes the interaction between the platform, the reference implementation where applicable, and the System Under Test. The result of the test is recorded as evidence and may be reported as successful, failed, or inconclusive, depending on the outcome.</p>
+<p>In ITB+, conformance testing can cover three complementary levels:</p>
+<h4 id="a-protocol-conformance-testing">A) Protocol conformance testing<a class="headerlink" href="#a-protocol-conformance-testing" title="Permanent link">&para;</a></h4>
+<p>This verifies whether the implementation follows the selected protocol APTITUDE profile. For example, it may check request and response formats, required parameters, security mechanisms, metadata, credential formats, and the correct sequencing of OpenID4VCI, OpenID4VP, HAIP, SD-JWT VC, mdoc, or other profiled interactions, such as WUA structural, protocol, and lifecycle checks.</p>
+<h4 id="b-reference-implementation-testing">B) Reference implementation testing<a class="headerlink" href="#b-reference-implementation-testing" title="Permanent link">&para;</a></h4>
+<p>This verifies whether the System Under Test can interoperate with a controlled counterpart that implements the expected behaviour of a specific profile. For example, a Wallet Unit may be tested against a reference Issuer or reference Verifier integrated into ITB+.</p>
+<h4 id="c-domain-specific-profile-testing">C) Domain-specific profile testing<a class="headerlink" href="#c-domain-specific-profile-testing" title="Permanent link">&para;</a></h4>
+<p>This verifies whether the implementation satisfies additional constraints required by a specific pilot, domain, or use case. These constraints may include required claims, credential types, trust assumptions, transaction binding, consent handling, signing flows, ticketing flows, or other business-level requirements.</p>
+<p>Conformance testing does not automatically prove full legal, regulatory, or production readiness. It also does not guarantee interoperability with every possible implementation in every possible environment. Instead, it provides evidence that a specific implementation has passed a specific test suite for a declared profile, role, and version.</p>
+<p>For this reason, ITB+ conformance testing should be seen as an important step toward interoperability readiness. It helps participants identify deviations early, improve their implementations, and prepare for later interoperability events, plug tests, pilot validation, or formal assessment processes.</p>
+<h3 id="23-what-are-aptitude-rfcs">2.3 What are APTITUDE RFCs?<a class="headerlink" href="#23-what-are-aptitude-rfcs" title="Permanent link">&para;</a></h3>
+<p><a href="https://github.com/APTITUDE-Consortium/aptitude-eudi-wallet-specs/tree/main/docs">APTITUDE RFCs</a> are part of a three-layer documentation structure. Attestation Rulebooks provide the human-readable, domain-level requirements for each credential type. Attestation Schemas provide the machine-readable encoding of those requirements. RFCs translate the technical requirements into testable protocol behaviour. ITB+ test suites are derived from the RFC layer, but rely on Attestation Schemas for credential structure validation.</p>
+<p>APTITUDE RFCs should be understood as <strong>opinionated, implementation-oriented profiles of existing standards and specifications</strong>. Rather than redefining the EUDI Wallet architecture, the RFCs select and instantiate the relevant parts of the existing stack, including ARF-aligned requirements, OpenID4VCI, OpenID4VP, HAIP, SD-JWT VC, mdoc, and relevant ETSI profiles, in a way that supports concrete piloting and interoperability testing.</p>
+<p>The purpose of the RFCs is to establish a common technical understanding across APTITUDE participants. In practice, this means that the RFCs help to:</p>
+<ul>
+<li>reduce ambiguity in the interpretation of the underlying standards;</li>
+<li>select the options that are relevant for the APTITUDE use cases;</li>
+<li>reduce the implementation scope where full standard coverage is not required for a pilot;</li>
+<li>define common protocol, trust, credential, and presentation expectations;</li>
+<li>translate pilot and rulebook requirements into testable technical behaviour; and</li>
+<li>provide the basis for ITB+ test suites and test cases.</li>
+</ul>
+<p>The first APTITUDE RFCs are organised as horizontal RFCs. These define baseline, cross-pilot requirements for common wallet-facing functions such as credential issuance and presentation. Additional vertical RFCs may be added when specific work packages or pilot use cases introduce domain-specific requirements.</p>
+<p>The APTITUDE RFCs are maintained publicly in the <a href="https://github.com/APTITUDE-Consortium/aptitude-eudi-wallet-specs/tree/main/docs">APTITUDE GitHub repository</a>, under the project's technical specification documentation.</p>
+<h3 id="24-how-aptitude-rfcs-are-defined-through-work-packages-and-pilot-use-cases">2.4 How APTITUDE RFCs are defined through Work Packages and Pilot Use Cases<a class="headerlink" href="#24-how-aptitude-rfcs-are-defined-through-work-packages-and-pilot-use-cases" title="Permanent link">&para;</a></h3>
+<p>APTITUDE RFCs are not written in isolation. They are derived from the needs of the APTITUDE pilot work packages and are used to translate pilot requirements into a common technical basis for implementation and testing.</p>
+<p>The process can be understood as a chain from pilot needs to executable testing:</p>
+<ol>
+<li>
+<p><strong>Pilot use-case requirements</strong><br />
+   The piloting work packages define the use cases they need to implement. These may involve travel, ticketing, check-in, payment, mobile vehicle registration certificates, business flows, or other wallet-enabled scenarios.</p>
+</li>
+<li>
+<p><strong>Functional and rulebook requirements</strong><br />
+   The use-case requirements are analysed and expressed as functional, operational, and trust-related requirements. Where needed, this includes attestation rulebooks, trust framework requirements, credential requirements, presentation requirements, and domain-specific constraints.</p>
+</li>
+<li>
+<p><strong>WP2 technical analysis</strong><br />
+   WP2 analyses these requirements and maps them to the relevant EUDI Wallet standards, ARF-aligned assumptions, ETSI profiles, and protocol options. This step identifies what needs to be common across pilots and what is specific to a given domain or work package.</p>
+</li>
+<li>
+<p><strong>RFC definition</strong><br />
+   The mapped requirements are formalised as APTITUDE RFCs. Horizontal RFCs define the baseline shared across pilots, while vertical RFCs capture additional domain-specific or use-case-specific requirements.</p>
+</li>
+</ol>
+<h3 id="25-from-rfcs-to-testable-implementations">2.5 From RFCs to testable implementations<a class="headerlink" href="#25-from-rfcs-to-testable-implementations" title="Permanent link">&para;</a></h3>
+<ol>
+<li>
+<p><strong>Implementation by technology providers</strong><br />
+   Once the use cases and RFCs are defined, the relevant Technology Providers implement the required software components. These may include Wallet Units, Issuers, Verifiers, relying party services, trust infrastructure components, or domain-specific service components. In some cases, the technology provider is also the use-case owner.</p>
+</li>
+<li>
+<p><strong>ITB+ conformance testing</strong><br />
+   The implemented software components are then tested through ITB+ against the relevant RFCs and profiles. The goal is to verify that the components implement the agreed technical behaviour and can participate in the APTITUDE pilot flows in a repeatable and evidence-based way.</p>
+</li>
+</ol>
+<p>This process ensures that pilot requirements are progressively transformed into technical requirements, technical requirements into RFCs, and RFCs into executable ITB+ test suites.</p>
+<p><img alt="APTITUDE ITB+ ecosystem overview" src="../aptitude_itb_ecosystem_overview.png" /></p>
+<h3 id="26-from-itb-conformance-testing-to-playground-interoperability-testing">2.6 From ITB+ conformance testing to Playground interoperability testing<a class="headerlink" href="#26-from-itb-conformance-testing-to-playground-interoperability-testing" title="Permanent link">&para;</a></h3>
+<p>Once pilot use cases have been defined and the relevant RFCs have been produced, the <strong>use cases are implemented by the participating technology providers and use-case owners</strong>. These implementations are <strong>concrete software components</strong>, such as <strong>Wallet Units</strong>, <strong>Issuers</strong>, <strong>Verifiers</strong>, relying party services, or domain-specific pilot applications.</p>
+<p><strong>ITB+ focuses on the conformance and interoperability readiness of these software components</strong>: Wallet Units, Issuers, and Verifiers. It checks whether a component behaves according to the selected APTITUDE RFC, profile, role, and version. The purpose is to provide an evidence-based result showing that the component passed a specific test suite under controlled and repeatable conditions.</p>
+<p>This makes ITB+ an important preparation step before broader interoperability testing. By first running conformance tests in ITB+, participants can identify implementation issues early, align their behaviour with the agreed APTITUDE RFCs, and reduce the risk of failures when interacting with other real-world implementations.</p>
+<p>After ITB+ conformance testing, participants may proceed to interoperability testing in the <a href="https://playground.france-identite.gouv.fr/">Playground environment</a>. In this next stage, implementations are tested against other deployed wallets, issuers, verifiers, and relying party interfaces. This complements ITB+ testing by exercising real interactions across independently developed components.</p>
+<p>In the APTITUDE testing approach, the two stages should be seen as complementary:</p>
+<ul>
+<li><strong>ITB+ conformance testing</strong> verifies behaviour against a declared RFC, profile, test suite, and reference implementation where applicable.</li>
+<li><strong>Playground interoperability testing</strong> verifies practical interaction with other deployed implementations in a shared testing environment.</li>
+</ul>
+<p>A successful ITB+ report therefore does not replace interoperability testing. Instead, it provides a technical readiness baseline that helps participants enter playground testing with greater confidence and clearer evidence about their implementation.</p>
+<hr />
+<h2 id="3-onboarding-and-using-itb">3. Onboarding and using ITB+<a class="headerlink" href="#3-onboarding-and-using-itb" title="Permanent link">&para;</a></h2>
+<h3 id="31-requesting-onboarding">3.1 Requesting onboarding<a class="headerlink" href="#31-requesting-onboarding" title="Permanent link">&para;</a></h3>
+<p>To request onboarding to APTITUDE ITB+, please contact the ITB+ maintainers or the WP2 leads.</p>
+<p>Requests may be submitted through one of the following channels:</p>
+<ol>
+<li>Email to the ITB+ maintainers: <code>triantafyllou.ni@aegean.gr</code></li>
+<li>Email to the WP2 leads</li>
+<li>APTITUDE Slack support channel: <code>#itb-support</code></li>
+</ol>
+<p>When submitting the request, please include the following information:</p>
+<table>
+<thead>
+<tr>
+<th>Information</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Organisation name</td>
+<td>The legal or project name of the participating organisation.</td>
+</tr>
+<tr>
+<td>Technical contacts</td>
+<td>Names and email addresses of the people who will execute or support the tests.</td>
+</tr>
+<tr>
+<td>Component role(s)</td>
+<td>Issuer, Verifier, Wallet Unit, or a combination of these.</td>
+</tr>
+<tr>
+<td>Targeted profiles / RFCs</td>
+<td>The APTITUDE RFCs or profiles supported by the implementation.</td>
+</tr>
+<tr>
+<td>Preferred communication channel</td>
+<td>Email or Slack contact for follow-up.</td>
+</tr>
+</tbody>
+</table>
+<p>After the request has been reviewed, an organisation account will be created and the relevant credentials will be shared with the nominated technical contacts.</p>
+<h3 id="32-accessing-aptitude-itb">3.2 Accessing APTITUDE ITB+<a class="headerlink" href="#32-accessing-aptitude-itb" title="Permanent link">&para;</a></h3>
+<p>To access APTITUDE ITB+, open the following URL in your browser:</p>
+<p><a href="https://aptitude-itb.infocert-labs.eu/itb/">https://aptitude-itb.infocert-labs.eu/itb/</a></p>
+<p>Log in using the credentials provided during onboarding.</p>
+<p>After logging in, navigate to <strong>My Conformance Statements</strong> by selecting the ribbon icon from the left-hand navigation menu.</p>
+<p><img alt="My Conformance Statements page" src="../itb-my-conformance-statements.png" /></p>
+<h3 id="33-executing-the-aptitude-test-suite">3.3 Executing the APTITUDE test suite<a class="headerlink" href="#33-executing-the-aptitude-test-suite" title="Permanent link">&para;</a></h3>
+<p>From the My Conformance Statements page, select the <strong>APTITUDE Conformance Test Suite</strong>. The available test cases are displayed under the selected test suite.</p>
+<p>To execute a test case:</p>
+<ol>
+<li>Select the relevant test case.</li>
+<li>Click the play button next to the test case.</li>
+<li>Review the test execution page.</li>
+<li>Click <strong>Start</strong> to begin the test execution.</li>
+</ol>
+<p>Depending on the type of component being tested, ITB+ will present a different interaction flow.</p>
+<p><img alt="APTITUDE test suite list" src="../itb-test-suite-list.png" /></p>
+<p>After selecting the test case, click the <strong>Start</strong> button.</p>
+<p><img alt="Test execution start page" src="../itb-test-execution-start.png" /></p>
+<h4 id="wallet-unit-testing">Wallet Unit testing<a class="headerlink" href="#wallet-unit-testing" title="Permanent link">&para;</a></h4>
+<p>For Wallet Unit testing, ITB+ presents a QR code and a URI containing either:</p>
+<ul>
+<li>a credential offer, for issuance tests; or</li>
+<li>a presentation request, for verification or presentation tests.</li>
+</ul>
+<p>The Wallet Unit should scan the QR code or open the URI and complete the requested interaction.</p>
+<p><img alt="Scan QR code dialog" src="../itb-scan-qr-dialog.png" /></p>
+<p><img alt="VP request QR code" src="../itb-vp-request-qr-code.png" /></p>
+<p><img alt="VP request URI dialog" src="../itb-vp-request-uri.png" /></p>
+<h4 id="issuer-and-verifier-testing">Issuer and Verifier testing<a class="headerlink" href="#issuer-and-verifier-testing" title="Permanent link">&para;</a></h4>
+<p>For Issuer and Verifier testing, ITB+ may present an input field where the participant provides a credential-offer URI, presentation request URI, or service endpoint generated by their own implementation, depending on the selected test case.</p>
+<p>After the required information has been provided and the prompt is closed, ITB+ will continue the test execution and evaluate the interaction against the selected APTITUDE test case.</p>
+<p><img alt="Provide input dialog" src="../itb-provide-input-dialog.png" /></p>
+<p>In all cases, after closing the prompts and interacting with them as required, ITB+ initiates the test execution.</p>
+<h3 id="34-accessing-debug-logs">3.4 Accessing debug logs<a class="headerlink" href="#34-accessing-debug-logs" title="Permanent link">&para;</a></h3>
+<p>During test execution, debug logs can be accessed by clicking the <strong>View Logs</strong> button.</p>
+<p>The logs provide technical details about the messages exchanged during the test execution and can be used to identify the reason for a failed or incomplete test.</p>
+<p>The same debug information is also included in the generated test report, allowing participants and reviewers to inspect the execution after the test has completed.</p>
+<h3 id="35-downloading-a-report">3.5 Downloading a report<a class="headerlink" href="#35-downloading-a-report" title="Permanent link">&para;</a></h3>
+<p>Once a test has completed, a conformance report can be downloaded by clicking the <strong>Download Report</strong> button from the test execution page.</p>
+<p>The report contains the result of the executed test case, including the execution status, validation steps, and debug logs.</p>
+<p>To download a report covering all tests executed by your organisation, navigate back to the APTITUDE Conformance Test Suite view and click <strong>Download Report</strong> from the conformance statement page.</p>
+<p><img alt="Download report button" src="../itb-download-report.png" /></p>
+<p><img alt="Conformance statement details" src="../itb-conformance-statement-details.png" /></p>
+<hr />
+<h2 id="4-submitting-a-conformance-report-to-wp2t22">4. Submitting a conformance report to WP2/T2.2<a class="headerlink" href="#4-submitting-a-conformance-report-to-wp2t22" title="Permanent link">&para;</a></h2>
+<p>The report submission process has been moved to a dedicated page:</p>
+<ul>
+<li><a href="../report-submission/">Reporting Conformance Results</a></li>
+</ul>
+
+
+
+
+
+
+
+  
+    
+  
+  
+
+
+  <aside class="md-source-file">
+    
+      
+  <span class="md-source-file__fact">
+    <span class="md-icon" title="Last update">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
+    </span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-datetime" title="July 2, 2026 09:36:36 UTC">July 2, 2026 09:36:36</span>
+  </span>
+
+    
+    
+    
+    
+  </aside>
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+    <div class="md-footer-meta md-typeset">
+        <div class="md-footer-meta__inner md-grid">
+            <div class="md-copyright">
+                <div>
+                    Made with
+                    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+                        Material for MkDocs
+                    </a>
+                </div>
+            </div>
+            <div class="md-footer-cofunded">
+                <img src="../../img/eu-cofunded.png" alt="Co-funded by the European Union">
+            </div>
+        </div>
+    </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+      <div class="md-progress" data-md-component="progress" role="progressbar"></div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["content.action.edit", "content.action.view", "content.code.annotate", "content.code.copy", "navigation.footer", "navigation.indexes", "navigation.instant", "navigation.instant.progress", "navigation.path", "navigation.tabs", "navigation.tabs.sticky", "navigation.top", "navigation.tracking", "search.highlight", "search.suggest", "toc.follow", "toc.integrate"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"alias": true, "provider": "mike"}}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+        <script src="../../media/mermaid.min.js"></script>
+      
+        <script src="../../media/mermaid-init.js"></script>
+      
+        <script src="../../media/mathjax-init.js"></script>
+      
+        <script src="../../media/mathjax-tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>
