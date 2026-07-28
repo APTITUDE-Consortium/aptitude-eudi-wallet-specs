@@ -41,8 +41,6 @@ Within the APTITUDE context, the target model is the ICAO DTC Type 2, comprising
 
 This attestation Rulebook specified herewith aims at supporting the implementation of DTC bound to an EUDI Wallet and a physical eMRTD, aligned with the philosophy of DTC Type 2 as defined by ICAO. This attestation Rulebook assumes the eMRTD is an eMRTD issued by an EU Member State or a Schengen Associated Country, and thus supports the Chip Authentication mechanism and contains a DG14.
 
-This attestation Rulebook specified herewidth aims at supporting implementation of DTC bound to an EUDI Wallet and a physical eMRTD, aligned with the philosophy of DTC Type 2 as defined by ICAO. This attestation Rulebook assumes the eMRTD is an eMRTD issued by an EU Member State or a Schengen Associated Country, and thus supporting the Chip Authentication mechanism and containing a DG14.
-
 This rulebook specifies:
 
 * The attributes and metadata that comprise an APTITUDE DTC attestation
