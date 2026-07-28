@@ -19,6 +19,10 @@ concurrency:
 jobs:
   release:
     runs-on: ubuntu-latest
+    # Gated behind the "release" environment's required reviewers (wp2-leads):
+    # anyone with write access can trigger this workflow, but the job waits
+    # for approval from a wp2-leads member before it actually runs.
+    environment: release
     steps:
       - name: Checkout
         uses: actions/checkout@v7
