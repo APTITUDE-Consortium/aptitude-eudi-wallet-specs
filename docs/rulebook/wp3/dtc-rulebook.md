@@ -79,7 +79,7 @@ The objective is to preserve a single interoperable DTC representation that is:
 * aligned with ICAO DTC Type 2 concept and eMRTD LDS semantics and data model,
 * compatible with EUDI Wallet proximity presentation,
 * suitable for both on-site border-control use cases and remote wallet-driven presentations,
-* capable of preserving the cryptographic binding between the virtual credential and the Wallet Secure Component Application (WSCA).
+* capable of preserving the cryptographic binding between the virtual credential and the Wallet Secure Component Device (WSCD).
 
 #### Table 1 — Requirements on data model
 
