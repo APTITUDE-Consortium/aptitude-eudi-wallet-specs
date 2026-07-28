@@ -6,6 +6,7 @@
 .idea/
 *.swp
 *.swo
+.claude/
 
 # Python caches/environments
 __pycache__/
