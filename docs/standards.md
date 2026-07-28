@@ -61,6 +61,7 @@ applies to: Wallet Provider, Credential Issuer, Relying Party, or Other. A
 deliverable may apply to several roles.
 
 ## Identification of standards&TS
+Note: Titles are shortened and  omit the shared series prefix carried by every entry from the same body (e.g. the ETSI "…(ESI);" lead-in, and the ISO/IEC 18013 and 23220 family headers). Only the distinctive part is shown; the full official title is at the linked source in *Deliverable*.
 
 Note: Titles are shortened and  omit the shared series prefix carried by every entry from the same body (e.g. the ETSI "…(ESI);" lead-in, and the ISO/IEC 18013 and 23220 family headers). Only the distinctive part is shown; the full official title is at the linked source in *Deliverable*.
 
@@ -96,7 +97,7 @@ Note: Titles are shortened and  omit the shared series prefix carried by every e
 |[ETSI EN 319 142-1](https://www.etsi.org/deliver/etsi_en/319100_319199/31914201/01.02.01_60/en_31914201v010201p.pdf)|PAdES digital signatures; Part 1: Building blocks and PAdES baseline signatures|EN|1.2.1|Published||Applicable for electronic signature|—||
 |[ETSI EN 319 142-2](https://www.etsi.org/deliver/etsi_en/319100_319199/31914202/01.02.01_60/en_31914202v010201p.pdf)| PAdES digital signatures; Part 2: Additional PAdES signatures profiles|EN|1.2.1|Published||Applicable for electronic signature|—||
 |[ETSI TS 119 472-1](https://www.etsi.org/deliver/etsi_ts/119400_119499/11947201/01.01.01_60/ts_11947201v010101p.pdf)| Profiles for Electronic Attestation of Attributes; Part 1: General requirements|TS|1.1.1|Published||Applicable for all credential formats supported in the wallet|issuance-process, issuance-protocol, format, trust-model, validation|Issuer, Wallet, RP|
-|[ETSI TS 119 472-2](https://www.etsi.org/deliver/etsi_ts/119400_119499/11947202/01.01.01_60/ts_11947202v010101p.pdf)| Profiles for Electronic Attestation of Attributes; Part 2: Profiles for EAA/PID Presentations to Relying Party|TS|1.1.1|Published||Applicable for the credential presentation process into the wallet|presentation-protocol|RP, Wallet|
+|[ETSI TS 119 472-2](https://www.etsi.org/deliver/etsi_ts/119400_119499/11947202/01.01.01_60/ts_11947202v010101p.pdf)| Profiles for Electronic Attestation of Attributes; Part 2: Profiles for EAA/PID Presentations to Relying Party|TS|1.2.1|Published||Applicable for the credential presentation process into the wallet|presentation-protocol|RP, Wallet|
 |[ETSI TS 119 472-3](https://www.etsi.org/deliver/etsi_ts/119400_119499/11947203/01.01.01_60/ts_11947203v010101p.pdf)| Profiles for Electronic Attestation of Attributes; Part 3: Profiles for issuance of EAA or PID|TS|1.1.1|Published||Applicable for the credential issuance process into the wallet|issuance-process, issuance-protocol|Issuer, Wallet|
 |CEN TS 18098|Guidelines for the onboarding of user personal identification data within European Digital Identity Wallets|TS||Under publication|||issuance-process, issuance-protocol||
 |CEN TS 18297|EUDI Wallet Held Attributes Access Control, operation and management|TS||Draft|||—||
@@ -104,7 +105,7 @@ Note: Titles are shortened and  omit the shared series prefix carried by every e
 |[OpenID4VP](https://openid.net/specs/openid-4-verifiable-presentations-1_0.html)|OpenID for Verifiable Presentations 1.0||1.0|Published|||presentation-protocol, format, trust-model||
 |OpenID|[Conformance tests for OID4VC](https://openid.net/certification/conformance-testing-for-openid-for-verifiable-presentations/)|||Published|||issuance-process, issuance-protocol, presentation-protocol, format, trust-model||
 |[OpenID Oauth 2.0](https://openid.net/specs/oauth-v2-multiple-response-types-1_0.html)|OAuth 2.0 Multiple Response Type Encoding Practices||1.0|Published||Response encoding|issuance-protocol, presentation-protocol||
-|[OpenID HAIP](https://openid.net/specs/openid4vc-high-assurance-interoperability-profile-1_0-05.html)|OpenID4VC High Assurance Interoperability Profile 1.0 - draft 05||24 December 2025 - v1.0|Published|||issuance-process, issuance-protocol, presentation-protocol, format, trust-model||
+|[OpenID HAIP](https://openid.net/specs/openid4vc-high-assurance-interoperability-profile-1_0-05.html)|OpenID4VC High Assurance Interoperability Profile||1.0|Published|||issuance-process, issuance-protocol, presentation-protocol, format, trust-model||
 |OpenID|[OpenID Connect Core 1.0 incorporating errata set 2](https://openid.net/specs/openid-connect-core-1_0.html)|||Published|||—||
 |OpenID|[OpenID Connect Relying Party Metadata Choices 1.0 - draft 04](https://openid.net/specs/openid-connect-rp-metadata-choices-1_0.html)||v1.0 draft04|Draft||This document defines an alternative trust model to the one underpinned by the trusted lists as defined in ETSI/TS 119 612. This alternative trust model may be relevant for some types of use cases, in particular those requiring scalability|presentation-protocol||
 |OpenID|[OpenID Federation 1.0 - draft 47](https://openid.net/specs/openid-federation-1_0.html)||v1.0 draft47|Draft||This document defines an alternative trust model to the one underpinned by the trusted lists as defined in ETSI/TS 119 612. This alternative trust model may be relevant for some types of use cases, in particular those requiring scalability|trust-model||
@@ -127,21 +128,31 @@ Note: Titles are shortened and  omit the shared series prefix carried by every e
 |[FIDO CTAP](https://fidoalliance.org/specs/fido-v2.2-ps-20250714/fido-client-to-authenticator-protocol-v2.2-ps-20250714.html)|Client to Authenticator Protocol (CTAP)||v2.2 July 14, 2025|Published||Useful when implementing<br>pseudonymisation with an external token<br>containing a public key|issuance-process, issuance-protocol, presentation-protocol||
 |[FIDO CXP](https://fidoalliance.org/specs/cx/cxf-v1.0-ps-20250814.html)|FIDO Credential Exchange Format (CXF)||August 14, 2025|Published|||—||
 |[FIDO CEP](https://fidoalliance.org/specs/cx/cxp-v1.0-wd-20241003.html)|Credential Exchange Protocol||October 03, 2024|Draft|||—||
+|[IETF RFC 1950](https://datatracker.ietf.org/doc/html/rfc1950)|ZLIB Compressed Data Format Specification version 3.3|RFC||Published||Compression of the Status List Token `lst` claim|validation, other||
+|[IETF RFC 1951](https://datatracker.ietf.org/doc/html/rfc1951)|DEFLATE Compressed Data Format Specification version 1.3|RFC||Published||Compression of the Status List Token `lst` claim|validation, other||
+|[IETF RFC 2119](https://datatracker.ietf.org/doc/html/rfc2119)|Key words for use in RFCs to Indicate Requirement Levels|RFC||Published||Normative language of the APTITUDE RFC series (BCP 14, with RFC 8174)|other||
 |[IETF RFC 5280](https://datatracker.ietf.org/doc/html/rfc5280)|Internet X.509 Public Key Infrastructure Certificate and Certificate Revocation List (CRL) Profile|RFC||Published|||trust-model, validation, other||
+|[IETF RFC 5755](https://datatracker.ietf.org/doc/html/rfc5755)|An Internet Attribute Certificate Profile for Authorization|RFC||Published||Underlying profile for the X509-AC EAA format identifier `x509_attr`|format||
 |[IETF RFC 6749](https://datatracker.ietf.org/doc/html/rfc6749)|The OAuth 2.0 Authorization Framework|RFC||Published|||issuance-protocol, presentation-protocol||
 |[IETF RFC 6960](https://datatracker.ietf.org/doc/html/rfc6960)|X.509 Internet Public Key Infrastructure Online Certificate Status Protocol - OCSP|RFC||Published|||trust-model, validation, other||
 |[IETF RFC 7515](https://www.rfc-editor.org/rfc/rfc7515)|JSON Web Signature (JWS)|RFC||Published|||—||
 |[IETF RFC 7516](https://datatracker.ietf.org/doc/rfc7516/)|JSON Web Encryption (JWE)|RFC||Published|||—||
 |[IETF RFC 7518](https://datatracker.ietf.org/doc/rfc7518/)|JSON Web Algorithms (JWA)|RFC||Published|||—||
 |[IETF RFC 7519](https://datatracker.ietf.org/doc/html/rfc7519)|JSON Web Token (JWT)|RFC||Published|||format||
+|[IETF RFC 7636](https://datatracker.ietf.org/doc/html/rfc7636)|Proof Key for Code Exchange by OAuth Public Clients (PKCE)|RFC||Published||Required with `S256` for the Authorisation Code Flow in issuance|issuance-protocol||
 |[IETF RFC 8152](https://datatracker.ietf.org/doc/html/rfc8152)|CBOR Object Signing and Encryption (COSE)|RFC||Published|||format||
+|[IETF RFC 8174](https://datatracker.ietf.org/doc/html/rfc8174)|Ambiguity of Uppercase vs Lowercase in RFC 2119 Key Words|RFC||Published||Normative language of the APTITUDE RFC series (BCP 14, with RFC 2119)|other||
 |[IETF RFC 8259](https://datatracker.ietf.org/doc/rfc8259/)|The JavaScript Object Notation (JSON) Data Interchange Format|RFC||Published|||—||
 |[IETF RFC 8392](https://datatracker.ietf.org/doc/html/rfc8392)|CBOR Web Token (CWT)|RFC||Published|||—||
+|[IETF RFC 8446](https://datatracker.ietf.org/doc/html/rfc8446)|The Transport Layer Security (TLS) Protocol Version 1.3|RFC||Published||Transport protection of issuance, presentation and status endpoints|issuance-protocol, presentation-protocol, validation||
 |[IETF RFC 8610](https://www.rfc-editor.org/rfc/rfc8610.html)|Concise Data Definition Language (CDDL)|RFC||Published|||—||
 |[IETF RFC 8943](https://www.rfc-editor.org/rfc/rfc8943)|Concise Binary Object Representation (CBOR) Tags for Date|RFC||Published|||—||
 |[IETF RFC 8949](https://datatracker.ietf.org/doc/html/rfc8949)|Concise Binary Object Representation (CBOR)|RFC||Published|||format||
 |[IETF RFC 9052](https://www.rfc-editor.org/rfc/rfc9052)|CBOR Object Signing and Encryption (COSE): Structures and Process|RFC||Published|||—||
+|[IETF RFC 9101](https://datatracker.ietf.org/doc/html/rfc9101)|The OAuth 2.0 Authorization Framework: JWT-Secured Authorization Request (JAR)|RFC||Published||Signed Request Object used in presentation requests|presentation-protocol||
+|[IETF RFC 9126](https://datatracker.ietf.org/doc/html/rfc9126)|OAuth 2.0 Pushed Authorization Requests (PAR)|RFC||Published||Required for the Authorisation Code Flow in issuance|issuance-protocol||
 |[IETF RFC 9162](https://datatracker.ietf.org/doc/html/rfc9162)|Certificate Transparency Version 2.0|RFC||Published|||trust-model||
+|[IETF RFC 9449](https://datatracker.ietf.org/doc/html/rfc9449)|OAuth 2.0 Demonstrating Proof of Possession (DPoP)|RFC||Published||Sender-constrained access tokens in issuance|issuance-protocol||
 |[IETF RFC 9562](https://www.ietf.org/rfc/rfc9562.pdf)|Universally Unique IDentifiers (UUIDs)|RFC||Published|||—||
 |[IETF RFC 9682](https://www.rfc-editor.org/rfc/rfc9682.pdf)|Updates to the Concise Data Definition Language (CDDL) Grammar|RFC||Published|||—||
 |[IETF RFC 9901](https://datatracker.ietf.org/doc/rfc9901)|Selective Disclosure for JSON Web Tokens|RFC||Published|||format||
@@ -162,6 +173,7 @@ Note: Titles are shortened and  omit the shared series prefix carried by every e
 |ISO/IEC 23635|Blockchain and distributed ledger technologies — Guidelines for governance|TS|2022|Published||DLT/Blockchain trust model is not considered for the moment for APTITUDE|—||
 |ISO/IEC 23257|Blockchain and distributed ledger technologies — Reference architecture|IS|2022|Published||DLT/Blockchain trust model is not considered for the moment for APTITUDE|—||
 |ISO 15000-3|Electronic business eXtensible Markup Language (ebXML) Part 3: Registry and repository|IS|2023|Published|||—||
+|[ITU-T X.690](https://www.itu.int/rec/T-REC-X.690)|Information technology — ASN.1 encoding rules: Specification of Basic (BER), Canonical (CER) and Distinguished (DER) Encoding Rules; published jointly as ISO/IEC 8825-1|Rec.|02/2021|Published||DER encoding of CRLs, OCSP requests and OCSP responses|validation, other||
 |[CSC API](https://cloudsignatureconsortium.org/resources/csc-api-v2-2/)|CSC API version 2.2.0.0 - Architectures and protocols for remote signature applications||2.2.0.0|Published||Applicable for electronic signature|—||
 |[CSC Data model](https://cloudsignatureconsortium.org/wp-content/uploads/2025/10/csc-dm.pdf)|CSC API Data Model for remote signature applications, V 1.0.0 ([additional](https://cloudsignatureconsortium.org/resources/download-api-specifications/))||1.0.0|Published||Applicable for electronic signature|—||
 |[CSC Data model bindings](https://cloudsignatureconsortium.org/wp-content/uploads/2025/10/data-model-bindings.pdf)|CSC Data Model Bindings – version 1.0.0 ([additional](https://cloudsignatureconsortium.org/resources/download-api-specifications/))||1.0.0|Published||Applicable for electronic signature|—||
