@@ -197,7 +197,7 @@ The objects ``docType`` and ``namespace`` are used to encapsulate the document t
 
 The document type for the **APTITUDE DTC** SHALL be as specified in clause C.2.1 of [ISO/IEC 23220-4].
 
-*Note:* The document type is ``org.iso.23220.photoid.1``.
+*Note:* The document type is ``org.iso.23220.photoID.1``.
 
 The namespace of APTITUDE DTC for **general PhotoID data elements** defined in clause 3.1.2 SHALL be as specified in clause C.2.1 of [ISO/IEC 23220-4] and 6.3.1.1 of [ISO/IEC 23220-2.2].
 
@@ -205,7 +205,7 @@ The namespace of APTITUDE DTC for **general PhotoID data elements** defined in c
 
 The namespace for **specific PhotoID data elements** defined in clause 3.1.3 SHALL be as specified in clause C.2.1 of [ISO/IEC 23220-4].
 
-*Note:* The namespace identifier is ``org.iso.23220.photoid.1``.
+*Note:* The namespace identifier is ``org.iso.23220.photoID.1``.
 
 The namespace for **ICAO PhotoID data elements** defined in clause 3.1.4 SHALL be as specified in clause C.2.1 of [ISO/IEC 23220-4].
 
