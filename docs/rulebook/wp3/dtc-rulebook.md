@@ -59,7 +59,7 @@ This rulebook specifies:
 * Chapter 5, which specifies trust anchors.
 * Chapter 6, which specifies revocation.
 * Chapter 7, which specifies compliance with ICAO specification.
-* Chapter 8, which discusses consideration of issuance of APTITUDE DTC.
+* Chapter 8, which discusses consideration for the issuance of the APTITUDE DTC.
 
 ### 1.3 Key words
 
