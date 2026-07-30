@@ -617,7 +617,7 @@ dtcOtherInfos [23] EXPLICIT DTCOtherInfos OPTIONAL,
 
 ## 8 Consideration for issuance of APTITUDE DTC credentials
 
-APTITUDE DTC is bound to an existing eMRTD, either issued before the APTITUDE DTC (preexisting eMRTD) or issued simultaneously.
+APTITUDE DTC is bound to an existing eMRTD, either issued before the APTITUDE DTC (pre-existing eMRTD) or issued simultaneously.
 Many of the attributes contained in the APTITUDE DTC are or may be also present in the underlying eMRTD. Therefore it is of the utmost importance to ensure their consistency with the eMRTD content to (1) avoid creation of flawed APTITUDE DTC and (2) avoid errors when the APTITUDE DTC is processed by a relying party. Where the issuing authority reads out the eMRTD and reuses its content for APTITUDE DTC issuance, consistency is directly ensured. Alternatively, issuing authority may also issue an APTITUDE DTC with attributes obtained from its own registers, provided consistency with eMRTD content is guaranteed.
 Other attributes contained in the APTITUDE DTC are not present in eMRTD, and therefore have to be provided by the issuing authority at DTC issuance. These attributes are either attributes related to the holder which are absent from eMRTD LDS, or relating to the APTITUDE DTC credential.
 The first table below aims at showing for each attribute of the APTITUDE DTC whether:
