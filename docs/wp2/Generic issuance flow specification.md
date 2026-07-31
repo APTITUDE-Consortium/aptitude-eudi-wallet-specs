@@ -116,7 +116,7 @@ href="https://openid.net/specs/openid4vc-high-assurance-interoperability-profile
 href="https://www.etsi.org/deliver/etsi_ts/119400_119499/11947203/01.01.01_60/ts_11947203v010101p.pdf">ETSI
 TS 119 472-3 ver1.1.1</a>,
 <a
-href="https://www.rfc-editor.org/rfc/rfc9449.html">RFC4994</a>,
+href="https://www.rfc-editor.org/rfc/rfc9449.html">RFC9449</a>,
 <a
 href="https://datatracker.ietf.org/doc/html/draft-ietf-oauth-attestation-based-client-auth-10">IETF OAuth 2.0 Attestation-Based Client Authentication Draft 10</a></p>
 <p>ISO18013-5, <a
