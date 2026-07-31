@@ -8,6 +8,8 @@
 *.swo
 .claude/
 
+./claude/
+
 # Python caches/environments
 __pycache__/
 *.py[cod]
