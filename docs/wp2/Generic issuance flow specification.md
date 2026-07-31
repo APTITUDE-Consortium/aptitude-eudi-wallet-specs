@@ -1,11 +1,12 @@
 # Generic issuance flow specification
 
-Version 0.1 (draft)
+Version 0.2 (draft)
+Date 31-07-2026
 
 ## Authors
 
 1. Aleksandar Simsic, ICTU
-2. ....
+2. Nikos Triantafyllou, University of the Aegean
 3. ....
 
 ## Reviewers
@@ -24,7 +25,7 @@ Version 0.1 (draft)
      * 3.1.1 OID4VCI requirements
      * 3.1.2 HAIP requirements
      * 3.1.3 ETSI 119 472-3 requirements
-     * 3.1.4 Additional trust framework validation requirements
+     * 3.1.4 Additional Aptitude requirements
    * 3.2 Detailed technical flow description (sequence diagram)
      * 3.2.1 Steps mapping overview
 
@@ -40,8 +41,7 @@ It does not define new requirements — those are in the RFCs. In case of confli
 
 ## 2\. Aptitude landscape overview
 
-Following diagram uses EUDI Wallet ecosystem roles diagram from [ARF 2.9](https://eudi.dev/2.9.0/architecture-and-reference-framework-main/#3-roles-within-the-eudi-wallet-ecosystem) as base and presents adaptations relevant for issuance process within
-the Aptitude LSP.
+Following diagram uses EUDI Wallet ecosystem roles diagram from [ARF 2.9](https://eudi.dev/2.9.0/architecture-and-reference-framework-main/#3-roles-within-the-eudi-wallet-ecosystem) as base and presents adaptations relevant for issuance process within the Aptitude LSP.
 
 ![Aptitude roles and interactions overview - issuance flow](Aptitude_roles_and_interactions_overview-issuance_flow.png)
 
@@ -114,7 +114,11 @@ href="https://openid.net/specs/openid-4-verifiable-credential-issuance-1_0.html"
 href="https://openid.net/specs/openid4vc-high-assurance-interoperability-profile-1_0-final.html">HAIP ver1.0</a>,
 <a
 href="https://www.etsi.org/deliver/etsi_ts/119400_119499/11947203/01.01.01_60/ts_11947203v010101p.pdf">ETSI
-TS 119 472-3 ver1.1.1</a></p>
+TS 119 472-3 ver1.1.1</a>,
+<a
+href="https://www.rfc-editor.org/rfc/rfc9449.html">RFC4994</a>,
+<a
+href="https://datatracker.ietf.org/doc/html/draft-ietf-oauth-attestation-based-client-auth-10">IETF OAuth 2.0 Attestation-Based Client Authentication Draft 10</a></p>
 <p>ISO18013-5, <a
 href="https://datatracker.ietf.org/doc/draft-ietf-oauth-sd-jwt-vc/17/">SD-JWT
 VC Draft 17</a>, <a
@@ -143,10 +147,8 @@ TS 119 612 ver2.4.1</a></td>
 <tr>
 <td>R4</td>
 <td><a
-href="https://github.com/eu-digital-identity-wallet/eudi-doc-standards-and-technical-specifications/blob/main/docs/technical-specifications/ts3-wallet-unit-attestation.md#222-transport-of-key-attestation-ka">TS3</a>
-(transport of KA)</td>
-<td>Optional - including nonce in KA for the <em>attestation</em> type
-of proof types</td>
+href="https://github.com/eu-digital-identity-wallet/eudi-doc-standards-and-technical-specifications/blob/main/docs/technical-specifications/ts3-wallet-unit-attestation.md#222-transport-of-key-attestation-ka">TS3</a></td>
+<td>Signing WIA and KA</td>
 </tr>
 </tbody>
 </table>
@@ -186,12 +188,12 @@ the requirements impacting issuance flow are listed.
 
 |**Requirement**|**Scope decision**|
 |-|-|
-|Authorization code flow must be supported|In scope|
-|Must use PKCE with s256 as the code challenge method ([RFC7636](https://www.rfc-editor.org/rfc/rfc7636.txt))|In scope|
-|Must use Pushed Authorization Request – PAR ([RFC9126](https://www.rfc-editor.org/rfc/rfc9126.txt))|In scope|
-|Must support DPOP including DPOP-Nonce HTTP header ([RFC9449](https://www.rfc-editor.org/rfc/rfc9449.txt))|In scope|
-|Must support wallet attestation as OAuth client authentication|In scope|
-|Must support attestation proof type including nonce within KA|In scope|
+|Authorization code flow shall be supported|In scope|
+|Shall use PKCE with s256 as the code challenge method ([RFC7636](https://www.rfc-editor.org/rfc/rfc7636.txt))|In scope|
+|Shall use Pushed Authorization Request – PAR ([RFC9126](https://www.rfc-editor.org/rfc/rfc9126.txt))|In scope|
+|Shall support DPOP including DPOP-Nonce HTTP header ([RFC9449](https://www.rfc-editor.org/rfc/rfc9449.txt))|In scope|
+|Shall support wallet attestation as OAuth client authentication|In scope|
+|Shall support attestation proof type including nonce within KA|In scope|
 
 #### 3.1.3 ETSI 119 472-3 requirements
 
@@ -199,23 +201,28 @@ ETSI profile is delivered on top of HAIP profile to clarify all the
 specifics for the EUDI wallet implementation. It includes clarifications
 on how different trust and policy checks should take place, something
 that is also referenced later within the generic technical flow
-(sequence diagram). Follow table includes therefore requirements
+(sequence diagram). Follow up table includes therefore requirements
 impacting issuance flow and designed validation checks.
 
 |**Requirement**|**Scope decision**|
 |-|-|
-|Support access and registration certificate of (Pub-)EAA provider|In scope|
-|Supports inclusion of embedded disclosure policy|In scope|
-|Wallet must include WIA to the push authorization and token endpoint|In scope|
-|Wallet must include WUA to the credential endpoint|In scope|
-|Holder must prove possession of private key associated to the public key in WUA|In scope|
-|Proofing that the same WSCA/WSCD possesses the private keys associated to the public keys in the WUA and one used for the attestation binding|In scope|
-|Issuer metadata must be signed as per [OID4VCI instructions](https://openid.net/specs/openid-4-verifiable-credential-issuance-1_0.html#name-signed-metadata)|In scope|
+|Issuer and wallet unit shall support access and registration certificate of (Pub-)EAA provider|In scope|
+|Issuer may support inclusion of embedded disclosure policy and wallet unit shall process it|In scope|
+|Wallet unit shall include WIA to the push authorization and token endpoint|In scope|
+|Wallet unit shall include KA to the credential endpoint|In scope|
+|Holder shall prove the possession of private key associated to the public key in KA|In scope|
+|Proofing that the same WSCA/WSCD possesses the private keys associated to the public keys in the WIA and one used for the attestation binding|In scope|
+|Issuer metadata shall be signed as per [OID4VCI instructions](https://openid.net/specs/openid-4-verifiable-credential-issuance-1_0.html#name-signed-metadata)|In scope|
 |Issuer metadata may include provision of EAA reuse policy|Not in the scope|
 
-#### 3.1.4 Additional trust framework validation requirements
+#### 3.1.4 Additional Aptitude requirements
 
-<TODO>
+In some cases to simplify implementation for the partners there are number of additional requirements added on the top of all formal standards and specifications
+
+|**Requirement**|**Scope decision**|
+|-|-|
+|Issuer and wallet unit shall use so called "combined mode" using only DPoP proof, as per [IETF oAuth attestation based client authentication DPoP Combined Mode](https://datatracker.ietf.org/doc/html/draft-ietf-oauth-attestation-based-client-auth-10#name-dpop-combined-mode) |In scope|
+|Wallet unit shall use short-lived (TTL less then 24h) KA's|In scope|
 
 ### 3.2 Detailed technical flow description (sequence diagram)
 
