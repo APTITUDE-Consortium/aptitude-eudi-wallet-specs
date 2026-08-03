@@ -1,0 +1,2943 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="APTITUDE Technical Specification">
+      
+      
+        <meta name="author" content="APTITUDE Consortium">
+      
+      
+        <link rel="canonical" href="https://aptitude-consortium.github.io/aptitude-eudi-wallet-specs/v202608.2/rulebook/wp3/dtc-rulebook/">
+      
+      
+        <link rel="prev" href="../../wp5/mVRC-rulebook/">
+      
+      
+        <link rel="next" href="../../trust-framework/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+    
+    
+      
+        <title>DTC - APTITUDE Technical Specification</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.ec1eaa64.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../../media/extra.css">
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#attestation-rulebook-for-attestations-of-type-aptitude-dtc" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+      <div data-md-color-scheme="default" data-md-component="outdated" hidden>
+        
+      </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../.." title="APTITUDE Technical Specification" class="md-header__button md-logo" aria-label="APTITUDE Technical Specification" data-md-component="logo">
+      
+  <img src="../../../img/logo.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            APTITUDE Technical Specification
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              DTC
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/APTITUDE-Consortium/aptitude-eudi-wallet-specs" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    APTITUDE-Consortium/aptitude-eudi-wallet-specs
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+    
+      
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../../" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Attestation Rulebooks
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../trust-framework/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Trust Specifications
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../horizontal-RFCs/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  RFCs
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../itb_plus_user_onboarding/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Testing and Conformance
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../schema/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Schemas
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../standards/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Standards
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../glossary/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Glossary
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+  
+
+<nav class="md-nav md-nav--primary md-nav--lifted md-nav--integrated" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="APTITUDE Technical Specification" class="md-nav__button md-logo" aria-label="APTITUDE Technical Specification" data-md-component="logo">
+      
+  <img src="../../../img/logo.png" alt="logo">
+
+    </a>
+    APTITUDE Technical Specification
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/APTITUDE-Consortium/aptitude-eudi-wallet-specs" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    APTITUDE-Consortium/aptitude-eudi-wallet-specs
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Attestation Rulebooks
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_2" id="__nav_2_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Attestation Rulebooks
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../wp5/mVRC-rulebook/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    mVRC
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DTC
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DTC
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-introduction" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1 Introduction
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1 Introduction">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#11-document-scope-and-purpose" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.1 Document scope and purpose
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#12-document-structure" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.2 Document structure
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#13-key-words" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.3 Key words
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#14-terminology" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.4 Terminology
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-attestation-attributes-and-metadata" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2 Attestation attributes and metadata
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2 Attestation attributes and metadata">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21-introduction" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.1 Introduction
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22-mandatory-attributes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2 Mandatory attributes
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#23-optional-and-conditional-attributes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.3 Optional and conditional attributes
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#24-mandatory-metadata" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.4 Mandatory metadata
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#25-optional-metadata" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.5 Optional metadata
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-attestation-encoding" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3 Attestation Encoding
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3 Attestation Encoding">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31-isoiec-18013-5-compliant-encoding" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.1 ISO/IEC 18013-5-compliant encoding
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-attestation-usage" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4 Attestation Usage
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4 Attestation Usage">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#41-airline-mediated-remote-preclearance-airline-registers-passenger-with-border-control" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.1 Airline-mediated remote pre‑clearance (airline registers passenger with Border Control)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#42-traveller-direct-preregistration-traveller-member-state-pretravel-system" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.2 Traveller direct pre‑registration (traveller → Member State pre‑travel system)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#43-proximity-presentation-at-border-control-onsite-verification-egate-or-officer-kiosk" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.3 Proximity presentation at border control (on‑site verification / e‑gate or officer kiosk)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#44-crossjurisdiction-proximity-presentation-eu-traveller-arriving-outside-schengen-optional" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.4 Cross‑jurisdiction proximity presentation (EU traveller arriving outside Schengen — optional)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#45-booklet-based-proximity-presentation-to-legacy-egate-fallback" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.5 Booklet-based proximity presentation to legacy eGate (“fallback”)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-trust-anchors" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5 Trust Anchors
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-revocation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6 Revocation
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6 Revocation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#61-reasons-for-revocation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.1 Reasons for revocation
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#62-aptitude-dtc-revocation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.2 APTITUDE DTC revocation
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#63-linked-emrtd-revocation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.3 Linked eMRTD revocation
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-compliance" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7 Compliance
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="7 Compliance">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#71-icao-based-encoding" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.1 ICAO based encoding
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8-references" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8 References
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Trust Specifications
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Trust Specifications
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../trust-framework/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Trust Framework
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../../horizontal-RFCs/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    RFCs
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_4" id="__nav_4_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    RFCs
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../horizontal-RFCs/RFC001/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    RFC-01 Credential Issuance Profile
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../horizontal-RFCs/RFC002/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    RFC-02 Presentation Profile
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../horizontal-RFCs/RFC004/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    RFC-04 Revocation Profile
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../../itb_plus_user_onboarding/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Testing and Conformance
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_5" id="__nav_5_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Testing and Conformance
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../itb_plus_user_onboarding/aptitude-itb-user-onboarding-manual/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ITB+ User Onboarding Guide
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../itb_plus_user_onboarding/report-submission/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Reporting Conformance Results
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../../schema/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Schemas
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Schemas
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../standards/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Standards
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Glossary
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Glossary
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../glossary/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Glossary
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../glossary-definitions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Definitions
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+                
+
+
+
+  
+
+
+  <nav class="md-path" aria-label="Navigation" >
+    <ol class="md-path__list">
+      
+        
+  
+  
+    <li class="md-path__item">
+      <a href="../../.." class="md-path__link">
+        
+  <span class="md-ellipsis">
+    Home
+  </span>
+
+      </a>
+    </li>
+  
+
+      
+      
+        
+  
+  
+    
+    
+      <li class="md-path__item">
+        <a href="../../" class="md-path__link">
+          
+  <span class="md-ellipsis">
+    Attestation Rulebooks
+  </span>
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ol>
+  </nav>
+
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+    <a href="https://github.com/APTITUDE-Consortium/aptitude-eudi-wallet-specs/edit/main/docs/rulebook/wp3/dtc-rulebook.md" title="Edit this page" class="md-content__button md-icon" rel="edit">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10 20H6V4h7v5h5v3.1l2-2V8l-6-6H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h4zm10.2-7c.1 0 .3.1.4.2l1.3 1.3c.2.2.2.6 0 .8l-1 1-2.1-2.1 1-1c.1-.1.2-.2.4-.2m0 3.9L14.1 23H12v-2.1l6.1-6.1z"/></svg>
+    </a>
+  
+  
+    
+      
+    
+    <a href="https://github.com/APTITUDE-Consortium/aptitude-eudi-wallet-specs/raw/main/docs/rulebook/wp3/dtc-rulebook.md" title="View source of this page" class="md-content__button md-icon">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 18c.56 0 1 .44 1 1s-.44 1-1 1-1-.44-1-1 .44-1 1-1m0-3c-2.73 0-5.06 1.66-6 4 .94 2.34 3.27 4 6 4s5.06-1.66 6-4c-.94-2.34-3.27-4-6-4m0 6.5a2.5 2.5 0 0 1-2.5-2.5 2.5 2.5 0 0 1 2.5-2.5 2.5 2.5 0 0 1 2.5 2.5 2.5 2.5 0 0 1-2.5 2.5M9.27 20H6V4h7v5h5v4.07c.7.08 1.36.25 2 .49V8l-6-6H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h4.5a8.2 8.2 0 0 1-1.23-2"/></svg>
+    </a>
+  
+
+
+<h1 id="attestation-rulebook-for-attestations-of-type-aptitude-dtc">Attestation Rulebook for attestations of type  <em>APTITUDE DTC</em><a class="headerlink" href="#attestation-rulebook-for-attestations-of-type-aptitude-dtc" title="Permanent link">&para;</a></h1>
+<p>Author(s):</p>
+<ul>
+<li>Matthias Schwan, bdr, Germany</li>
+<li>Corrado Guidobaldi, IPZS, Italy</li>
+<li>Zahra Ebadi Ansaroudi, FBK, Italy</li>
+<li>Anthony Carmoy, ANTS, France</li>
+<li>Antonio Maio, INCM, Portugal</li>
+<li>Arjan Geluk, ..., ...</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>Version</th>
+<th>Date</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0.1</td>
+<td>11-02-2026</td>
+<td>First draft version - Filled par 1.1</td>
+</tr>
+<tr>
+<td>0.2</td>
+<td>27-05-2026</td>
+<td>Updated based on design assumptions from D3.1</td>
+</tr>
+<tr>
+<td>0.3</td>
+<td>29-05-2026</td>
+<td>Addition of schema and mapping</td>
+</tr>
+<tr>
+<td>0.4</td>
+<td>12-06-2026</td>
+<td>Synchronization with PhotoID specification in [ISO/IEC 23220-4]</td>
+</tr>
+<tr>
+<td>0.5</td>
+<td>01-07-2026</td>
+<td>Align clause 2 and 3 with rulebook template, bibliography added, trust model and revocation added</td>
+</tr>
+<tr>
+<td>0.6</td>
+<td>08-07-2026</td>
+<td>Use cases added in clause 4, editorial changes</td>
+</tr>
+<tr>
+<td>0.7</td>
+<td>23-07-2026</td>
+<td>Addition of modalities in clause 4.3, editorial changes</td>
+</tr>
+</tbody>
+</table>
+<p>Feedback:</p>
+<ul>
+<li><a href="&#109;&#97;&#105;&#108;&#116;&#111;&#58;&#109;&#97;&#116;&#116;&#104;&#105;&#97;&#115;&#46;&#115;&#99;&#104;&#119;&#97;&#110;&#64;&#98;&#100;&#114;&#46;&#100;&#101;">&#109;&#97;&#116;&#116;&#104;&#105;&#97;&#115;&#46;&#115;&#99;&#104;&#119;&#97;&#110;&#64;&#98;&#100;&#114;&#46;&#100;&#101;</a></li>
+<li><a href="&#109;&#97;&#105;&#108;&#116;&#111;&#58;&#99;&#46;&#103;&#117;&#105;&#100;&#111;&#98;&#97;&#108;&#100;&#105;&#64;&#105;&#112;&#122;&#115;&#46;&#105;&#116;">&#99;&#46;&#103;&#117;&#105;&#100;&#111;&#98;&#97;&#108;&#100;&#105;&#64;&#105;&#112;&#122;&#115;&#46;&#105;&#116;</a></li>
+<li><a href="&#109;&#97;&#105;&#108;&#116;&#111;&#58;&#122;&#101;&#98;&#97;&#100;&#105;&#97;&#110;&#115;&#97;&#114;&#111;&#117;&#100;&#105;&#64;&#102;&#98;&#107;&#46;&#101;&#117;">&#122;&#101;&#98;&#97;&#100;&#105;&#97;&#110;&#115;&#97;&#114;&#111;&#117;&#100;&#105;&#64;&#102;&#98;&#107;&#46;&#101;&#117;</a></li>
+<li><a href="&#109;&#97;&#105;&#108;&#116;&#111;&#58;&#97;&#110;&#116;&#104;&#111;&#110;&#121;&#46;&#99;&#97;&#114;&#109;&#111;&#121;&#64;&#105;&#110;&#116;&#101;&#114;&#105;&#101;&#117;&#114;&#46;&#103;&#111;&#117;&#118;&#46;&#102;&#114;">&#97;&#110;&#116;&#104;&#111;&#110;&#121;&#46;&#99;&#97;&#114;&#109;&#111;&#121;&#64;&#105;&#110;&#116;&#101;&#114;&#105;&#101;&#117;&#114;&#46;&#103;&#111;&#117;&#118;&#46;&#102;&#114;</a></li>
+<li><a href="&#109;&#97;&#105;&#108;&#116;&#111;&#58;&#97;&#110;&#116;&#111;&#110;&#105;&#111;&#46;&#109;&#97;&#105;&#111;&#64;&#105;&#110;&#99;&#109;&#46;&#112;&#116;">&#97;&#110;&#116;&#111;&#110;&#105;&#111;&#46;&#109;&#97;&#105;&#111;&#64;&#105;&#110;&#99;&#109;&#46;&#112;&#116;</a></li>
+<li><a href="&#109;&#97;&#105;&#108;&#116;&#111;&#58;&#97;&#114;&#106;&#97;&#110;&#46;&#103;&#101;&#108;&#117;&#107;&#64;&#97;&#52;&#97;&#100;&#118;&#105;&#115;&#111;&#114;&#121;&#46;&#99;&#111;&#109;">&#97;&#114;&#106;&#97;&#110;&#46;&#103;&#101;&#108;&#117;&#107;&#64;&#97;&#52;&#97;&#100;&#118;&#105;&#115;&#111;&#114;&#121;&#46;&#99;&#111;&#109;</a></li>
+</ul>
+<h2 id="1-introduction">1 Introduction<a class="headerlink" href="#1-introduction" title="Permanent link">&para;</a></h2>
+<h3 id="11-document-scope-and-purpose">1.1 Document scope and purpose<a class="headerlink" href="#11-document-scope-and-purpose" title="Permanent link">&para;</a></h3>
+<p>This Attestation Rulebook defines the Digital Travel Credential (DTC) as an electronic attestation of attributes for the EUDI Wallet ecosystem. The DTC enables travellers to store and present identity data in their Wallet Unit for border control and travel-related use cases.</p>
+<p>The primary objective of the DTC is to facilitate secure and privacy-preserving identity verification and travel document validation at border crossing points and during travel. The DTC is designed to complement existing physical travel documents (e.g. passports, visas) by providing a digital equivalent that supports selective disclosure, offline and online presentation and strong cryptographic verification.</p>
+<p>Within the APTITUDE context, the target model is the ICAO DTC Type 2, comprising a DTC-VC bound to (1) a physical eMRTD and (2) a DTC-PC which is an EUDI Wallet, and derived using mechanisms aligned with European regulations and ICAO guidelines. A DTC of Type 2 is therefore considered the primary and preferred implementation model. However, in the light of the features, interfaces and specifications of the EUDI Wallet, the mechanisms for binding the DTC-VC to the DTC-PC (i.e. the EUDI Wallet) differ from those envisionned by ICAO. It will therefore results in (1) differences in the content of the DTC-VC, as the methods and information for binding the DTC-VC to DTC-PC are different, and (2) the trust model, in order to leverage the one considered for the EUDI Wallet.</p>
+<p>This attestation Rulebook specified herewith aims at supporting the implementation of DTC bound to an EUDI Wallet and a physical eMRTD, aligned with the philosophy of DTC Type 2 as defined by ICAO. This attestation Rulebook assumes the eMRTD is an eMRTD issued by an EU Member State or a Schengen Associated Country, and thus supports the Chip Authentication mechanism and contains a DG14.</p>
+<p>This attestation Rulebook specified herewidth aims at supporting implementation of DTC bound to an EUDI Wallet and a physical eMRTD, aligned with the philosophy of DTC Type 2 as defined by ICAO. This attestation Rulebook assumes the eMRTD is an eMRTD issued by an EU Member State or a Schengen Associated Country, and thus supporting the Chip Authentication mechanism and containing a DG14.</p>
+<p>This rulebook specifies:</p>
+<ul>
+<li>The attributes and metadata that comprise a DTC attestation</li>
+<li>The encoding formats to be supported for DTC attestations.</li>
+<li>The issuance, presentation and verification requirements for DTC attestations within the EUDI Wallet framework.</li>
+<li>The trust anchor mechanisms, revocation procedures and compliance requirements that apply to DTC attestations.</li>
+</ul>
+<h3 id="12-document-structure">1.2 Document structure<a class="headerlink" href="#12-document-structure" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Chapter 2, which describes the requirements on the APTITUDE DTC.</li>
+<li>Chapter 3, which specifies how the attestation attributes and metadata are encoded in case the attestation complies with ISO/IEC 18013-5. Each encoding SHALL be specified in a separate section, or even in a separate chapter.</li>
+<li>Chapter 4, which specifies attestation usage.</li>
+<li>Chapter 5, which specifies trust anchors.</li>
+<li>Chapter 6, which specifies revocation.</li>
+<li>Chapter 7, which specifies compliance.</li>
+</ul>
+<h3 id="13-key-words">1.3 Key words<a class="headerlink" href="#13-key-words" title="Permanent link">&para;</a></h3>
+<p>This document uses the capitalised keywords 'SHALL', 'SHOULD' and 'MAY' as specified in [RFC 2119], i.e. to indicate requirements, recommendations and options specified in this document.</p>
+<h3 id="14-terminology">1.4 Terminology<a class="headerlink" href="#14-terminology" title="Permanent link">&para;</a></h3>
+<p>Terminology and definitions within APTITUDE project are listed in <a href="../../../glossary/">APTITUDE Glossary</a></p>
+<h2 id="2-attestation-attributes-and-metadata">2 Attestation attributes and metadata<a class="headerlink" href="#2-attestation-attributes-and-metadata" title="Permanent link">&para;</a></h2>
+<h3 id="21-introduction">2.1 Introduction<a class="headerlink" href="#21-introduction" title="Permanent link">&para;</a></h3>
+<p>This section defines the functional and semantic scope of the data composing the APTITUDE Digital Travel Credential (DTC), based on the evidence collected during the stock‑taking phase. The cross‑border value of a DTC critically depends on preserving full alignment with the ICAO data model while at the same time allowing extensions required for integration within the EUDI Wallet ecosystem and the eIDAS 2.0 framework. Minimization of impact on existing border‑control infrastructure would be valuable for DTC deployment. As a result, the ICAO LDS data model (DG1, DG2, DG14, SOD) constitutes the mandatory baseline.</p>
+<p>The objective is to preserve a single interoperable DTC representation that is:</p>
+<ul>
+<li>aligned with ICAO DTC Type 2 and eMRTD LDS semantics,</li>
+<li>compatible with EUDI Wallet proximity presentation,</li>
+<li>suitable for both on-site border-control use cases and remote wallet-driven presentations,</li>
+<li>capable of preserving the cryptographic binding between the virtual credential and the Wallet Secure Component (WSCD).</li>
+</ul>
+<h4 id="table-1-requirements-on-data-model">Table 1 — Requirements on data model<a class="headerlink" href="#table-1-requirements-on-data-model" title="Permanent link">&para;</a></h4>
+<table>
+<thead>
+<tr>
+<th>Index</th>
+<th>Requirement specification</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>DTC_AE_01</td>
+<td>APTITUDE DTC SHALL use ISO/IEC 23220-4 PhotoID as the sole credential format.</td>
+</tr>
+<tr>
+<td>DTC_AE_02</td>
+<td>APTITUDE DTC SHALL use ISO/IEC 18013-5 mdoc-cbor encoding for the PhotoID credential.</td>
+</tr>
+<tr>
+<td>DTC_AE_03</td>
+<td>APTITUDE DTC SHALL support NFC engagement for proximity presentation and BLE data retrieval for Android and iOS.</td>
+</tr>
+<tr>
+<td>DTC_AE_04</td>
+<td>APTITUDE DTC SHALL preserve ICAO LDS semantics, including e.g. EF.DG1, EF.DG2, EF.DG14, EF.SOD.</td>
+</tr>
+<tr>
+<td>DTC_AE_05</td>
+<td>APTITUDE DTC SHALL preserve the ISO/IEC 23220-4 PhotoID profile.</td>
+</tr>
+<tr>
+<td>DTC_AE_06</td>
+<td>APTITUDE DTC SHALL adopt open, standard-based encoding to maximize interoperability and avoid vendor lock-in.</td>
+</tr>
+<tr>
+<td>DTC_AE_07</td>
+<td>APTITUDE DTC SHALL support a trust architecture that enables verification via ICAO CSCA/DS and EUDI Wallet/eIDAS trust anchors.</td>
+</tr>
+<tr>
+<td>DTC_AE_08</td>
+<td>APTITUDE DTC SHALL preserve the cryptographic binding between the virtual credential and the Wallet Secure Component across issuance, storage, presentation, and verification.</td>
+</tr>
+<tr>
+<td>DTC_AE_09</td>
+<td>APTITUDE DTC SHALL support selective disclosure and minimisation as a layer on top of the single PhotoID credential format, not by introducing a second credential format.</td>
+</tr>
+</tbody>
+</table>
+<h4 id="table-2-requirements-on-issuing">Table 2 — Requirements on issuing<a class="headerlink" href="#table-2-requirements-on-issuing" title="Permanent link">&para;</a></h4>
+<table>
+<thead>
+<tr>
+<th>Index</th>
+<th>Requirement specification</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>DTC_IS_01</td>
+<td>APTITUDE DTC SHALL be issued exclusively by the National Passport Issuing Authority of the Member State that issued the corresponding physical eMRTD.</td>
+</tr>
+<tr>
+<td>DTC_IS_02</td>
+<td>APTITUDE DTC SHALL be derived both from newly issued and already issued eMRTDs, except where the national authentic sources require a restriction.</td>
+</tr>
+<tr>
+<td>DTC_IS_03</td>
+<td>The issuance process SHALL result in an ICAO DTC Type 2 (eMRTD-PC bound), where the virtual component is cryptographically linked to the WSCD being the physical component within the EUDI Wallet.</td>
+</tr>
+<tr>
+<td>DTC_IS_04</td>
+<td>The system SHALL support the complete lifecycle management of the DTC, including secure revocation and update mechanisms managed by the issuing authority.</td>
+</tr>
+</tbody>
+</table>
+<h4 id="table-3-requirements-on-data-elements">Table 3 — Requirements on data elements<a class="headerlink" href="#table-3-requirements-on-data-elements" title="Permanent link">&para;</a></h4>
+<table>
+<thead>
+<tr>
+<th>Index</th>
+<th>Requirement specification</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>DTC_DM_01</td>
+<td>The APTITUDE DTC SHALL contain DG1, DG2, DG14, SOD  as derived from the physical eMRTD passport and MAY contain other data groups allowed by ICAO DTC-VC specifications, as long as they are also present in the corresponding physical eMRTD.</td>
+</tr>
+<tr>
+<td>DTC_DM_02</td>
+<td>APTITUDE DTC MAY contain additional attributes beyond the derived eMRTD dataset</td>
+</tr>
+<tr>
+<td>DTC_DM_03</td>
+<td>The data model SHALL support Selective Disclosure, allowing the traveller to share only the strictly necessary attributes (e.g., only DG2 for biometric match) with Relying Parties.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="22-mandatory-attributes">2.2 Mandatory attributes<a class="headerlink" href="#22-mandatory-attributes" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th><strong>Identifier</strong></th>
+<th><strong>Description</strong></th>
+<th><strong>Example</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>family_name</code></td>
+<td>according to [ISO/IEC 23220-2.2]</td>
+<td>Hardt</td>
+</tr>
+<tr>
+<td><code>given_name</code></td>
+<td>according to [ISO/IEC 23220-2.2]</td>
+<td>Giovanni</td>
+</tr>
+<tr>
+<td><code>birth_date</code></td>
+<td>according to [ISO/IEC 23220-2.2]</td>
+<td>01-01-1980</td>
+</tr>
+<tr>
+<td><code>portrait</code></td>
+<td>according to [ISO/IEC 23220-2.2]</td>
+<td>...</td>
+</tr>
+<tr>
+<td><code>age_over_18</code></td>
+<td>according to [ISO/IEC 23220-2.2]</td>
+<td>T</td>
+</tr>
+<tr>
+<td><code>document_number</code></td>
+<td>according to [ISO/IEC 23220-2.2]</td>
+<td>YA1234567</td>
+</tr>
+<tr>
+<td><code>person_id</code></td>
+<td>according to [ISO/IEC 23220-4]</td>
+<td>1234567890</td>
+</tr>
+<tr>
+<td><code>dg1</code></td>
+<td>according to [ISO/IEC 23220-4]</td>
+<td>P&lt;ITA&lt;&lt;HARDT&lt;&lt;GIOVANNI&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;</td>
+</tr>
+<tr>
+<td><code>dg2</code></td>
+<td>according to [ISO/IEC 23220-4]</td>
+<td>...</td>
+</tr>
+<tr>
+<td><code>dg14</code></td>
+<td>according to [ISO/IEC 23220-4]</td>
+<td>...</td>
+</tr>
+</tbody>
+</table>
+<h3 id="23-optional-and-conditional-attributes">2.3 Optional and conditional attributes<a class="headerlink" href="#23-optional-and-conditional-attributes" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th><strong>Identifier</strong></th>
+<th><strong>Description</strong></th>
+<th><strong>Example</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>family_name_viz</code></td>
+<td>according to [ISO/IEC 23220-4]</td>
+<td>HARDT</td>
+</tr>
+<tr>
+<td><code>given_name_viz</code></td>
+<td>according to [ISO/IEC 23220-4]</td>
+<td>GIOVANNI</td>
+</tr>
+<tr>
+<td><code>enrolment_portrait_image</code></td>
+<td>according to [ISO/IEC 23220-4] <br><br> portrait image captured during enrolment of the PhotoID holder</td>
+<td>...</td>
+</tr>
+<tr>
+<td><code>age_in_years</code></td>
+<td>according to [ISO/IEC 23220-4]</td>
+<td>28</td>
+</tr>
+<tr>
+<td><code>age_birth_year</code></td>
+<td>according to [ISO/IEC 23220-4]</td>
+<td>1998</td>
+</tr>
+<tr>
+<td><code>portrait_capture_date</code></td>
+<td>according to [ISO/IEC 23220-4]</td>
+<td>20-04-2023</td>
+</tr>
+<tr>
+<td><code>birthplace</code></td>
+<td>according to [ISO/IEC 23220-4]</td>
+<td>Italy, Trento</td>
+</tr>
+<tr>
+<td><code>name_at_birth</code></td>
+<td>according to [ISO/IEC 23220-4]</td>
+<td>Nick</td>
+</tr>
+<tr>
+<td><code>resident_address</code></td>
+<td>according to [ISO/IEC 23220-4]</td>
+<td>Roma, 45</td>
+</tr>
+<tr>
+<td><code>resident_city</code></td>
+<td>according to [ISO/IEC 23220-4]</td>
+<td>Trento</td>
+</tr>
+<tr>
+<td><code>resident_postal_code</code></td>
+<td>according to [ISO/IEC 23220-4]</td>
+<td>38122</td>
+</tr>
+<tr>
+<td><code>resident_country</code></td>
+<td>according to [ISO/IEC 23220-4]</td>
+<td>IT</td>
+</tr>
+<tr>
+<td><code>resident_city_latin1</code></td>
+<td>according to [ISO/IEC 23220-4]</td>
+<td>...</td>
+</tr>
+<tr>
+<td><code>sex</code></td>
+<td>according to [ISO/IEC 23220-4]</td>
+<td>M</td>
+</tr>
+<tr>
+<td><code>nationality</code></td>
+<td>according to [ISO/IEC 23220-4]</td>
+<td>IT</td>
+</tr>
+<tr>
+<td><code>family_name_latin1</code></td>
+<td>according to [ISO/IEC 23220-4]</td>
+<td>...</td>
+</tr>
+<tr>
+<td><code>given_name_latin1</code></td>
+<td>according to [ISO/IEC 23220-4]</td>
+<td>...</td>
+</tr>
+<tr>
+<td><code>birth_country</code></td>
+<td>according to [ISO/IEC 23220-4]</td>
+<td>IT</td>
+</tr>
+<tr>
+<td><code>birth_state</code></td>
+<td>according to [ISO/IEC 23220-4]</td>
+<td>Trento</td>
+</tr>
+<tr>
+<td><code>birth_city</code></td>
+<td>according to [ISO/IEC 23220-4]</td>
+<td>Trento</td>
+</tr>
+<tr>
+<td><code>resident_street</code></td>
+<td>according to [ISO/IEC 23220-4]</td>
+<td>Roma</td>
+</tr>
+<tr>
+<td><code>resident_house_number</code></td>
+<td>according to [ISO/IEC 23220-4]</td>
+<td>45</td>
+</tr>
+<tr>
+<td><code>resident_state</code></td>
+<td>according to [ISO/IEC 23220-4]</td>
+<td>IT</td>
+</tr>
+<tr>
+<td><code>enrolment_portrait_image</code></td>
+<td>according to [ISO/IEC 23220-4]; portrait image captured at time of issuance of APTITUDE-DTC that can be different to image in <code>portrait</code></td>
+<td>...</td>
+</tr>
+<tr>
+<td><code>dg3</code></td>
+<td>according to [ISO/IEC 23220-4]</td>
+<td>...</td>
+</tr>
+<tr>
+<td><code>dg4</code></td>
+<td>according to [ISO/IEC 23220-4]</td>
+<td>...</td>
+</tr>
+<tr>
+<td><code>dg5</code></td>
+<td>according to [ISO/IEC 23220-4]</td>
+<td>...</td>
+</tr>
+<tr>
+<td><code>dg6</code></td>
+<td>according to [ISO/IEC 23220-4]</td>
+<td>...</td>
+</tr>
+<tr>
+<td><code>dg7</code></td>
+<td>according to [ISO/IEC 23220-4]</td>
+<td>...</td>
+</tr>
+<tr>
+<td><code>dg8</code></td>
+<td>according to [ISO/IEC 23220-4]</td>
+<td>...</td>
+</tr>
+<tr>
+<td><code>dg9</code></td>
+<td>according to [ISO/IEC 23220-4]</td>
+<td>...</td>
+</tr>
+<tr>
+<td><code>dg10</code></td>
+<td>according to [ISO/IEC 23220-4]</td>
+<td>...</td>
+</tr>
+<tr>
+<td><code>dg11</code></td>
+<td>according to [ISO/IEC 23220-4]</td>
+<td>...</td>
+</tr>
+<tr>
+<td><code>dg12</code></td>
+<td>according to [ISO/IEC 23220-4]</td>
+<td>...</td>
+</tr>
+<tr>
+<td><code>dg13</code></td>
+<td>according to [ISO/IEC 23220-4]</td>
+<td>...</td>
+</tr>
+<tr>
+<td><code>dg15</code></td>
+<td>according to [ISO/IEC 23220-4] <br><br><em>Condition:</em> mandatory if available in the corresponding physical eMRTD</td>
+<td>...</td>
+</tr>
+<tr>
+<td><code>dg16</code></td>
+<td>according to [ISO/IEC 23220-4]</td>
+<td>...</td>
+</tr>
+</tbody>
+</table>
+<h3 id="24-mandatory-metadata">2.4 Mandatory metadata<a class="headerlink" href="#24-mandatory-metadata" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th><strong>Identifier</strong></th>
+<th><strong>Description</strong></th>
+<th><strong>Example</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>issue_date</code></td>
+<td>according to [ISO/IEC 23220-2.2]</td>
+<td>20-04-2023</td>
+</tr>
+<tr>
+<td><code>expiry_date</code></td>
+<td>according to [ISO/IEC 23220-2.2]</td>
+<td>20-04-2033</td>
+</tr>
+<tr>
+<td><code>issuing_authority</code></td>
+<td>according to [ISO/IEC 23220-2.2]</td>
+<td>Ministero dell'Interno</td>
+</tr>
+<tr>
+<td><code>version</code></td>
+<td>according to [ISO/IEC 23220-4]</td>
+<td>1.0</td>
+</tr>
+<tr>
+<td><code>sod</code></td>
+<td>Security object data of related eMRTD according to [ISO/IEC 23220-4]</td>
+<td>...</td>
+</tr>
+</tbody>
+</table>
+<h3 id="25-optional-metadata">2.5 Optional metadata<a class="headerlink" href="#25-optional-metadata" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th><strong>Identifier</strong></th>
+<th><strong>Description</strong></th>
+<th><strong>Example</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>issuing_subdivision</code></td>
+<td>according to [ISO/IEC 23220-2.2]</td>
+<td>TN</td>
+</tr>
+<tr>
+<td><code>administrative_number</code></td>
+<td>according to [ISO/IEC 23220-2.2]</td>
+<td>9876543210</td>
+</tr>
+<tr>
+<td><code>travel_document_type</code></td>
+<td>according to [ISO/IEC 23220-2.2]</td>
+<td>PP</td>
+</tr>
+<tr>
+<td><code>travel_document_number</code></td>
+<td>according to [ISO/IEC 23220-2.2]</td>
+<td>I13235678</td>
+</tr>
+<tr>
+<td><code>travel_document_mrz</code></td>
+<td>according to [ISO/IEC 23220-2.2]</td>
+<td>P&lt;ITA&lt;&lt;HARDT&lt;&lt;GIOVANNI&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;</td>
+</tr>
+</tbody>
+</table>
+<h2 id="3-attestation-encoding">3 Attestation Encoding<a class="headerlink" href="#3-attestation-encoding" title="Permanent link">&para;</a></h2>
+<h3 id="31-isoiec-18013-5-compliant-encoding">3.1 ISO/IEC 18013-5-compliant encoding<a class="headerlink" href="#31-isoiec-18013-5-compliant-encoding" title="Permanent link">&para;</a></h3>
+<h4 id="311-aptitude-dtc-document-type-and-namespaces">3.1.1 APTITUDE DTC document type and namespaces<a class="headerlink" href="#311-aptitude-dtc-document-type-and-namespaces" title="Permanent link">&para;</a></h4>
+<p>The objects <code>docType</code> and <code>namespace</code> are used to encapsulate the document type and the space in which the data elements are defined.</p>
+<p>The document type for the <strong>APTITUDE DTC</strong> SHALL be as specified in clause C.2.1 of [ISO/IEC 23220-4].</p>
+<p><em>Note:</em> The document type is <code>org.iso.23220.photoid.1</code>.</p>
+<p>The namespace of APTITUDE DTC for <strong>general PhotoID data elements</strong> defined in clause 3.1.2 SHALL be as specified in clause C.2.1 of [ISO/IEC 23220-4] and 6.3.1.1 of [ISO/IEC 23220-2.2].</p>
+<p><em>Note:</em> The namespace identifier is <code>org.iso.23220.1</code>.</p>
+<p>The namespace for <strong>specific PhotoID data elements</strong> defined in clause 3.1.3 SHALL be as specified in clause C.2.1 of [ISO/IEC 23220-4].</p>
+<p><em>Note:</em> The namespace identifier is <code>org.iso.23220.photoid.1</code>.</p>
+<p>The namespace for <strong>ICAO PhotoID data elements</strong> defined in clause 3.1.4 SHALL be as specified in clause C.2.1 of [ISO/IEC 23220-4].</p>
+<p><em>Note:</em> The namespace identifier is <code>org.iso.23220.datagroups.1</code>.</p>
+<p>Member States MAY add additional namespaces under their responsibility. The namespace for <strong>Member State specific data elements</strong> SHALL be as specified in clause C.1.2 of [ISO/IEC 23220-4].</p>
+<p><em>Note:</em> The domestic namespace of the European Union is <code>org.iso.23220.photoid.EU.1</code> with number 1 indicating the version of this namespace and excluding the version number of photoid namespace.</p>
+<p>The next section defines general and specific data elements of the PhotoID.
+These elements are given in tables of three columns:</p>
+<ul>
+<li>The "Identifier" column is the reference of the data element specified in clause 2.</li>
+<li>The “data element identifier according to [ISO/IEC 23220-4]” column gives the mapping of the data element to the data element identifier specified in [ISO/IEC 23220-4].</li>
+<li>The "Presence" column indicates whether the presence of the element on an APTITUDE DTC is mandatory (M), optional (O) or conditional (C). A mandatory data element SHALL be present in an APTITUDE DTC whereas an optional data element MAY be present. If a data element is conditional the respective condition is given in the specification. If the condition is met the data element SHALL be present.</li>
+</ul>
+<h4 id="312-general-photoid-data-elements">3.1.2 General PhotoID data elements<a class="headerlink" href="#312-general-photoid-data-elements" title="Permanent link">&para;</a></h4>
+<p>The general PhotoID data elements of APTITUDE DTC SHALL be as defined in Table 1 and belong to the namespace given in 3.1.1. The data element definitions given in clause C.2.1 and Table C.1 in [ISO/IEC 23220-4] apply if not stated otherwise.</p>
+<h5 id="table-1-general-photoid-data-elements">Table 1 — general PhotoID data elements<a class="headerlink" href="#table-1-general-photoid-data-elements" title="Permanent link">&para;</a></h5>
+<table>
+<thead>
+<tr>
+<th><strong>Identifier</strong></th>
+<th><strong>data element identifier</strong><br> <strong>according to [ISO/IEC 23220-4]</strong></th>
+<th><strong>Presence in</strong><br> <strong>APTITUDE DTC</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>family_name</code></td>
+<td><code>family_name</code></td>
+<td>M</td>
+</tr>
+<tr>
+<td><code>given_name</code></td>
+<td><code>given_name</code></td>
+<td>M</td>
+</tr>
+<tr>
+<td><code>family_name_viz</code></td>
+<td><code>family_name_viz</code></td>
+<td>O</td>
+</tr>
+<tr>
+<td><code>given_name_viz</code></td>
+<td><code>given_name_viz</code></td>
+<td>O</td>
+</tr>
+<tr>
+<td><code>birth_date</code></td>
+<td><code>birth_date</code></td>
+<td>M</td>
+</tr>
+<tr>
+<td><code>portrait</code></td>
+<td><code>portrait</code></td>
+<td>M</td>
+</tr>
+<tr>
+<td><code>enrolment_portrait_image</code></td>
+<td><code>enrolment_portrait_image</code></td>
+<td>O</td>
+</tr>
+<tr>
+<td><code>issue_date</code></td>
+<td><code>issue_date</code></td>
+<td>M</td>
+</tr>
+<tr>
+<td><code>expiry_date</code></td>
+<td><code>expiry_date</code></td>
+<td>M</td>
+</tr>
+<tr>
+<td><code>issuing_authority</code></td>
+<td><code>issuing_authority</code></td>
+<td>M</td>
+</tr>
+<tr>
+<td><code>age_over_18</code></td>
+<td><code>age_over_18</code></td>
+<td>M</td>
+</tr>
+<tr>
+<td><code>age_in_years</code></td>
+<td><code>age_in_years</code></td>
+<td>O</td>
+</tr>
+<tr>
+<td><code>age_birth_year</code></td>
+<td><code>age_birth_year</code></td>
+<td>O</td>
+</tr>
+<tr>
+<td><code>portrait_capture_date</code></td>
+<td><code>portrait_capture_date</code></td>
+<td>O</td>
+</tr>
+<tr>
+<td><code>birthplace</code></td>
+<td><code>birthplace</code></td>
+<td>O</td>
+</tr>
+<tr>
+<td><code>name_at_birth</code></td>
+<td><code>name_at_birth</code></td>
+<td>O</td>
+</tr>
+<tr>
+<td><code>resident_address</code></td>
+<td><code>resident_address</code></td>
+<td>O</td>
+</tr>
+<tr>
+<td><code>resident_city</code></td>
+<td><code>resident_city</code></td>
+<td>O</td>
+</tr>
+<tr>
+<td><code>resident_postal_code</code></td>
+<td><code>resident_postal_code</code></td>
+<td>O</td>
+</tr>
+<tr>
+<td><code>resident_country</code></td>
+<td><code>resident_country</code></td>
+<td>O</td>
+</tr>
+<tr>
+<td><code>resident_city_latin1</code></td>
+<td><code>resident_city_latin1</code></td>
+<td>O</td>
+</tr>
+<tr>
+<td><code>sex</code></td>
+<td><code>sex</code></td>
+<td>O</td>
+</tr>
+<tr>
+<td><code>nationality</code></td>
+<td><code>nationality</code></td>
+<td>O</td>
+</tr>
+<tr>
+<td><code>document_number</code></td>
+<td><code>document_number</code></td>
+<td>M</td>
+</tr>
+<tr>
+<td><code>issuing_subdivision</code></td>
+<td><code>issuing_subdivision</code></td>
+<td>O</td>
+</tr>
+<tr>
+<td><code>family_name_latin1</code></td>
+<td><code>family_name_latin1</code></td>
+<td>O</td>
+</tr>
+<tr>
+<td><code>given_name_latin1</code></td>
+<td><code>given_name_latin1</code></td>
+<td>O</td>
+</tr>
+</tbody>
+</table>
+<h4 id="313-specific-photoid-data-elements">3.1.3 Specific PhotoID data elements<a class="headerlink" href="#313-specific-photoid-data-elements" title="Permanent link">&para;</a></h4>
+<p>The specific PhotoID data elements of APTITUDE DTC SHALL be as defined in Table 2 and belong to the namespace given in 3.1.1. The data element definitions given in clause C.2.1 and Table C.2 in [ISO/IEC 23220-4] apply if not stated otherwise.</p>
+<h5 id="table-2-specific-photoid-data-elements">Table 2 — specific PhotoID data elements<a class="headerlink" href="#table-2-specific-photoid-data-elements" title="Permanent link">&para;</a></h5>
+<table>
+<thead>
+<tr>
+<th><strong>Identifier</strong></th>
+<th><strong>data element identifier</strong><br> <strong>according to [ISO/IEC 23220-4]</strong></th>
+<th><strong>Presence in</strong><br> <strong>APTITUDE DTC</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>person_id</code></td>
+<td><code>person_id</code></td>
+<td>M</td>
+</tr>
+<tr>
+<td><code>birth_country</code></td>
+<td><code>birth_country</code></td>
+<td>O</td>
+</tr>
+<tr>
+<td><code>birth_state</code></td>
+<td><code>birth_state</code></td>
+<td>O</td>
+</tr>
+<tr>
+<td><code>birth_city</code></td>
+<td><code>birth_city</code></td>
+<td>O</td>
+</tr>
+<tr>
+<td><code>administrative_number</code></td>
+<td><code>administrative_number</code></td>
+<td>O</td>
+</tr>
+<tr>
+<td><code>resident_street</code></td>
+<td><code>resident_street</code></td>
+<td>O</td>
+</tr>
+<tr>
+<td><code>resident_house_number</code></td>
+<td><code>resident_house_number</code></td>
+<td>O</td>
+</tr>
+<tr>
+<td><code>travel_document_type</code></td>
+<td><code>travel_document_type</code></td>
+<td>O</td>
+</tr>
+<tr>
+<td><code>travel_document_number</code></td>
+<td><code>travel_document_number</code></td>
+<td>O</td>
+</tr>
+<tr>
+<td><code>resident_state</code></td>
+<td><code>resident_state</code></td>
+<td>O</td>
+</tr>
+<tr>
+<td><code>travel_document_mrz</code></td>
+<td><code>travel_document_mrz</code></td>
+<td>O</td>
+</tr>
+<tr>
+<td><code>family_name_viz</code></td>
+<td><code>family_name_viz</code></td>
+<td>HARDT</td>
+</tr>
+<tr>
+<td><code>given_name_viz</code></td>
+<td><code>given_name_viz</code></td>
+<td>GIOVANNI</td>
+</tr>
+<tr>
+<td><code>enrolment_portrait_image</code></td>
+<td><code>enrolment_portrait_image</code></td>
+<td>O</td>
+</tr>
+</tbody>
+</table>
+<h4 id="314-icao-photoid-data-elements">3.1.4 ICAO PhotoID data elements<a class="headerlink" href="#314-icao-photoid-data-elements" title="Permanent link">&para;</a></h4>
+<p>The ICAO PhotoID data elements of APTITUDE DTC SHALL be as defined in Table 3 and belong to the namespace given in 3.1.1. The data element definitions given in clause C.2.1 and Table C.3 in [ISO/IEC 23220-4] apply if not stated otherwise.</p>
+<h5 id="table-3-icao-photoid-data-elements">Table 3 — ICAO PhotoID data elements<a class="headerlink" href="#table-3-icao-photoid-data-elements" title="Permanent link">&para;</a></h5>
+<table>
+<thead>
+<tr>
+<th><strong>Identifier</strong></th>
+<th><strong>data element identifier</strong><br> <strong>according to [ISO/IEC 23220-4]</strong></th>
+<th><strong>Presence in</strong><br> <strong>APTITUDE DTC</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>version</code></td>
+<td><code>version</code></td>
+<td>M</td>
+</tr>
+<tr>
+<td><code>dg1</code></td>
+<td><code>dg1</code></td>
+<td>M</td>
+</tr>
+<tr>
+<td><code>dg2</code></td>
+<td><code>dg2</code></td>
+<td>M</td>
+</tr>
+<tr>
+<td><code>dg3</code></td>
+<td><code>dg3</code></td>
+<td>Not present</td>
+</tr>
+<tr>
+<td><code>dg4</code></td>
+<td><code>dg4</code></td>
+<td>Not present</td>
+</tr>
+<tr>
+<td><code>dg5</code></td>
+<td><code>dg5</code></td>
+<td>O</td>
+</tr>
+<tr>
+<td><code>dg6</code></td>
+<td><code>dg6</code></td>
+<td>O</td>
+</tr>
+<tr>
+<td><code>dg7</code></td>
+<td><code>dg7</code></td>
+<td>O</td>
+</tr>
+<tr>
+<td><code>dg8</code></td>
+<td><code>dg8</code></td>
+<td>O</td>
+</tr>
+<tr>
+<td><code>dg9</code></td>
+<td><code>dg9</code></td>
+<td>O</td>
+</tr>
+<tr>
+<td><code>dg10</code></td>
+<td><code>dg10</code></td>
+<td>O</td>
+</tr>
+<tr>
+<td><code>dg11</code></td>
+<td><code>dg11</code></td>
+<td>O</td>
+</tr>
+<tr>
+<td><code>dg12</code></td>
+<td><code>dg12</code></td>
+<td>O</td>
+</tr>
+<tr>
+<td><code>dg13</code></td>
+<td><code>dg13</code></td>
+<td>O</td>
+</tr>
+<tr>
+<td><code>dg14</code></td>
+<td>no further information<br><br> <em>Note:</em> DG14 is mandatory in EU eMRTDs</td>
+<td>M</td>
+</tr>
+<tr>
+<td><code>dg15</code></td>
+<td>no further information<br><br> <em>Condition:</em> mandatory if available in eMRTD</td>
+<td>C</td>
+</tr>
+<tr>
+<td><code>dg16</code></td>
+<td><code>dg16</code></td>
+<td>O</td>
+</tr>
+<tr>
+<td><code>sod</code></td>
+<td><code>sod</code></td>
+<td>M</td>
+</tr>
+</tbody>
+</table>
+<h4 id="315-additional-document-encryption">3.1.5 Additional document encryption<a class="headerlink" href="#315-additional-document-encryption" title="Permanent link">&para;</a></h4>
+<p>If a Relying Party requires document encryption in addition to the session encryption layer, it SHALL encode the document request according to [ISO/IEC 18013-5.2]. The EUDI Wallet SHALL encrypt the requested data elements according to [ISO/IEC 18013-5.2].  </p>
+<h4 id="316-mapping-from-photoid-to-icao-based-encoding">3.1.6 Mapping from PhotoID to ICAO-based encoding<a class="headerlink" href="#316-mapping-from-photoid-to-icao-based-encoding" title="Permanent link">&para;</a></h4>
+<p>The following table maps selected PhotoID data elements to the corresponding ICAO eMRTD LDS data, either as carried ICAO data groups or as values obtained or computed from those data groups.</p>
+<table>
+<thead>
+<tr>
+<th>org.iso.23220.1</th>
+<th>org.iso.23220.datagroups.1</th>
+<th>eMRTD</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td></td>
+<td>dg1</td>
+<td>EF.DG1</td>
+</tr>
+<tr>
+<td></td>
+<td>dg2</td>
+<td>EF.DG2</td>
+</tr>
+<tr>
+<td></td>
+<td>dg14</td>
+<td>EF.DG14</td>
+</tr>
+<tr>
+<td></td>
+<td>sod</td>
+<td>EF.SOD</td>
+</tr>
+<tr>
+<td>birth_date</td>
+<td></td>
+<td>EF.DG1</td>
+</tr>
+<tr>
+<td>age_over_18</td>
+<td></td>
+<td>EF.DG1</td>
+</tr>
+<tr>
+<td>portrait</td>
+<td></td>
+<td>EF.DG2</td>
+</tr>
+</tbody>
+</table>
+<h2 id="4-attestation-usage">4 Attestation Usage<a class="headerlink" href="#4-attestation-usage" title="Permanent link">&para;</a></h2>
+<p>This section briefly describes how attestations of type <em>APTITUDE DTC</em> are intended to be used. All requested attributes are examples and the request may include other data elements as given in the use cases.</p>
+<h3 id="41-airline-mediated-remote-preclearance-airline-registers-passenger-with-border-control">4.1 Airline-mediated remote pre‑clearance (airline registers passenger with Border Control)<a class="headerlink" href="#41-airline-mediated-remote-preclearance-airline-registers-passenger-with-border-control" title="Permanent link">&para;</a></h3>
+<p><strong>Context:</strong> Passenger who booked an international flight checks in remotely (app or website) and the airline must register the passenger with the Member State Border Authority for pre‑clearance (advance checks / pre‑assessment), see [APTITUDE-D3.1].</p>
+<p>This use case is without prejudice to applicable Advance Passenger Information (API) obligations, including [EU-API-2025-12] where applicable. APTITUDE DTC data MAY support or complement the carrier’s API submission, subject to Member State implementation.</p>
+<p><strong>Flow:</strong> remote (airline backend → Border Authority submission endpoint / Traveller Router).</p>
+<p><strong>Requested attributes:</strong></p>
+<p>APTITUDE DTC:</p>
+<ul>
+<li>General PhotoID data elements: <code>family_name</code>, <code>given_name</code>, <code>birth_date</code>, <code>issue_date</code>, <code>expiry_date</code>, <code>issuing_authority</code>, <code>document_number</code></li>
+<li>Special PhotoID data elements: <code>travel_document_mrz</code></li>
+<li>ICAO PhotoID data elements: <code>version</code>, <code>dg1</code>, <code>dg2</code>, <code>dg14</code>, <code>sod</code>, and <code>dg15</code> where available and required by the Border Authority.</li>
+</ul>
+<p><strong>Post‑processing:</strong> the airline backend (or its designated submission service) MUST verify holder proof/possession assertions from the wallet (if applicable), validate the DTC signature and certificate chain and check revocation/status using the applicable trust anchors (CSCA/DS and/or EU trust lists). The airline then packages the verified data for server‑to‑server submission to the Border Authority (mapping of DTC elements to the receiving envelope is a Member State decision; legacy readers may require extraction/encapsulation into ICAO DTCContentInfo/ASN.1). The Border Authority performs full verification (passive authentication: SOD/DG hash checks, PKI chain, revocation/status) and ingests the required ICAO PhotoID data elements for registration and risk checks. Where supported by the Member State implementation, the verification outcome MAY be returned to the traveller through the carrier or designated submission channel.</p>
+<h3 id="42-traveller-direct-preregistration-traveller-member-state-pretravel-system">4.2 Traveller direct pre‑registration (traveller → Member State pre‑travel system)<a class="headerlink" href="#42-traveller-direct-preregistration-traveller-member-state-pretravel-system" title="Permanent link">&para;</a></h3>
+<p><strong>Context:</strong> EU national uses their EUDIW or the EU Digital Travel Application to submit their DTC directly to a Member State’s pre‑travel system for advance checks within a 36‑hour window.</p>
+<p><strong>Flow:</strong> remote (wallet → Traveller Router or direct submission endpoint → Border backend). The exact presentation protocol (OpenID4VP, mdoc, Traveller Router) is not mandated in D3.1 and must be chosen by implementers.</p>
+<p><strong>Requested attributes:</strong></p>
+<p>APTITUDE DTC:</p>
+<ul>
+<li>General PhotoID data elements: <code>family_name</code>, <code>given_name</code>, <code>birth_date</code>, <code>issue_date</code>, <code>expiry_date</code>, <code>issuing_authority</code>, <code>document_number</code>, <code>age_over_18</code>, <code>portrait</code></li>
+<li>Special PhotoID data elements: <code>travel_document_mrz</code></li>
+<li>ICAO PhotoID data elements: <code>version</code>, <code>dg1</code>, <code>dg2</code>, <code>dg14</code>, <code>sod</code>.</li>
+</ul>
+<p>The request may include <code>age_over_18</code> where required for age-based verification or <code>portrait</code> if required by the Member State for biometric pre‑matching.</p>
+<p><strong>Post-processing:</strong> the receiving Border backend validates the wallet presentation, including any proof of possession, verifies the DTC signature and applicable trust chain, and checks revocation/status. Verification outcome drives pre-assessment workflows (EES/ETIAS/API/SIS/SLTD queries). If selective disclosure was used, the backend MUST verify the integrity and authenticity of the disclosed PhotoID data elements using the cryptographic mechanism of the selected data format. Where ICAO PhotoID data elements are disclosed, the backend SHALL additionally perform ICAO passive authentication by validating the SOD, checking the disclosed DG hashes, and verifying the applicable ICAO trust chain. Where supported by the Member State implementation, the backend MAY return a status or operational instruction to the traveller, such as confirmation of successful pre-registration, required corrective action, or guidance on the applicable border-control process.</p>
+<h3 id="43-proximity-presentation-at-border-control-onsite-verification-egate-or-officer-kiosk">4.3 Proximity presentation at border control (on‑site verification / e‑gate or officer kiosk)<a class="headerlink" href="#43-proximity-presentation-at-border-control-onsite-verification-egate-or-officer-kiosk" title="Permanent link">&para;</a></h3>
+<p><strong>Context:</strong> Traveller presents their DTC from the EUDIW at the border control point (e‑gate, kiosk or officer reader) for immediate verification and biometric match. (D3.1 describes proximity presentation requirements and the need to reconcile ISO/IEC 18013‑5 and ICAO NFC/APDU approaches.)</p>
+<p><strong>Flow:</strong> proximity (device engagement / NFC or mdoc proximity per chosen implementation). D3.1 notes both ISO/IEC 18013‑5 (EUDIW proximity) and ISO/IEC 14443/APDU (ICAO backwards compatibility) and does not mandate one universal mode — the pilot must specify which mode(s) will be tested.</p>
+<p><strong>Modalities (as defined in D3.2 Chapter 10.3 Functional Flow):</strong></p>
+<ol>
+<li>
+<p>Proximity presentation of the DTC‑VC and 1:1 matching: The user presents its DTC-VC from the EUDI Wallet, with device engagement, allowing gates to retrieve the DTC-VC from the wallet with biometric verification in 1:1 between the passenger and the photo contained in his DTC-VC.</p>
+</li>
+<li>
+<p>Proximity presentation of a token and 1:1 matching: The user presents a token, containing a decryption key, allowing the gates to decrypt the pre-loaded DTC-VC for a specific flight. 1:1 biometric matching between the passenger and the photo contained in the pre-loaded DTC.</p>
+</li>
+<li>
+<p>Proximity presentation of the DTC‑VC, retrieval of the pre-loaded DTC‑VC and 1:1 matching: The traveller presents the DTC-VC stored in their wallet (or taps their passport at the gate). The information presented enables the gate to identify and retrieve the corresponding DTC-VC, previously pre-loaded in the gate system together with its associated pre-clearance status. The gate then performs a matching between the DTC-VC presented by the traveller and the pre-loaded DTC-VC to authenticate the traveller and confirm the correct record has been retrieved. Once this matching has been successfully completed, a 1:1 biometric verification is performed between the traveller and the portrait contained in the corresponding pre-loaded DTC-VC.</p>
+</li>
+<li>
+<p>Matching 1:n then presentation of the DTC-VC: The user approaches the gates, and proceeds to a 1:n matching to retrieve the DTC-VC preloaded in the gates. He then presents his DTC-VC stored in his EUDI Wallet (or types his passport), in order to establish the cryptographic link to authenticate the passenger and his DTC.</p>
+</li>
+</ol>
+<p><strong>Requested attributes:</strong></p>
+<p>APTITUDE DTC</p>
+<ul>
+<li>General PhotoID data elements: <code>family_name</code>, <code>given_name</code>, <code>birth_date</code>, <code>issue_date</code>, <code>expiry_date</code>, <code>issuing_authority</code>, <code>age_over_18</code>, <code>portrait</code></li>
+<li>Special PhotoID data elements: <code>person_id</code></li>
+<li>ICAO PhotoID data elements: <code>version</code>, <code>dg1</code>, <code>dg2</code>, <code>dg14</code>, <code>sod</code>, and <code>dg15</code> where available and required for Active Authentication.</li>
+</ul>
+<p>Priority attributes for on‑site verification and biometric matching are <code>dg2</code> (portrait), <code>dg1</code> (biographic / MRZ), <code>sod</code>, <code>dg14</code> if the Member State uses it for inspection. Attributes <code>version</code>, <code>person_id</code>, <code>expiry_date</code>, <code>issuing_authority</code>, <code>age_over_18</code> and <code>portrait</code> are optional depending on the check (age verification, biometric fallback).</p>
+<p><strong>Post‑processing:</strong> the proximity reader / e‑gate performs device engagement, retrieves the DTC, validates SOD / passive authentication (signature verification and PKI chain to CSCA/PKD), checks revocation/status and carries out biometric 1:1 matching of the live capture to dg2. The gate/backend then forwards verification results and any required DGs (dg1/dg2/sod and selected metadata) to backend systems for database checks (EES, SIS, SLTD) and final decision. The pilot MUST state whether translation to ASN.1 DTCContentInfo is required for legacy inspection systems; D3.1 signals this requirement as a possible necessity but does not fix the mapping responsibilities. The reader, eGate or officer interface presents the applicable operational outcome according to the Member State border-control process.</p>
+<h3 id="44-crossjurisdiction-proximity-presentation-eu-traveller-arriving-outside-schengen-optional">4.4 Cross‑jurisdiction proximity presentation (EU traveller arriving outside Schengen — optional)<a class="headerlink" href="#44-crossjurisdiction-proximity-presentation-eu-traveller-arriving-outside-schengen-optional" title="Permanent link">&para;</a></h3>
+<p><strong>Context:</strong> EU national with an EUDIW‑stored DTC presents the credential in proximity to a non‑EU local border authority to test cross‑jurisdiction interoperability.</p>
+<p><strong>Flow:</strong> proximity (wallet → non‑EU verifier). The destination’s native inspection interface determines the mode (NFC/APDU, mdoc, or other). D3.1 notes that non‑EU systems may expect ICAO ASN.1 structures and PKI anchors.</p>
+<p><strong>Requested attributes:</strong></p>
+<p>APTITUDE DTC</p>
+<ul>
+<li>General PhotoID data elements: <code>family_name</code>, <code>given_name</code>, <code>birth_date</code>, <code>issue_date</code>, <code>expiry_date</code>, <code>issuing_authority</code>, <code>document_number</code>, <code>portrait</code></li>
+<li>Special PhotoID data elements: <code>travel_document_mrz</code></li>
+<li>ICAO PhotoID data elements: <code>version</code>, <code>dg1</code>, <code>dg2</code>, <code>dg14</code>, <code>sod</code>.</li>
+</ul>
+<p><strong>Post‑processing:</strong> the non‑EU verifier validates the credential using ICAO PKI (CSCA/DS via PKD) and its local acceptance policy. If the receiving system requires ICAO ASN.1 DTCContentInfo, an intermediate gateway or the wallet/traveller router may need to extract the disclosed ICAO PhotoID data elements and encapsulate them accordingly; D3.1 documents that such translation and trust alignment are common cross‑jurisdiction issues but does not prescribe which actor must perform the translation. If the verifier cannot validate under available trust anchors, the fallback/acceptance policy is a matter for the receiving authority. Where supported by the receiving authority, the verifier MAY return an operational outcome to the traveller according to the applicable local border-control process.</p>
+<h3 id="45-booklet-based-proximity-presentation-to-legacy-egate-fallback">4.5 Booklet-based proximity presentation to legacy eGate (“fallback”)<a class="headerlink" href="#45-booklet-based-proximity-presentation-to-legacy-egate-fallback" title="Permanent link">&para;</a></h3>
+<p><strong>Context:</strong> Use cases 4.1 or 4.2 have succeeded such that traveller has been successfully registered. Traveller approaches legacy eGate in order to cross the border, with booklet passport.</p>
+<p><strong>Flow:</strong></p>
+<p>Option 1: MRZ Scan (traditional)</p>
+<ul>
+<li>Scan the Machine Readable Zone (MRZ) on the travel document.</li>
+<li>Open the chip.</li>
+<li>Link the document to the pre-registration data by matching dg1, for example.</li>
+<li>Perform biometric verification.</li>
+<li>Active/Chip Authentication</li>
+</ul>
+<p>Option 2: Tap&amp;go</p>
+<ul>
+<li>Biometric identification.</li>
+<li>Link person to the pre-registration data</li>
+<li>Open the chip using the document-supported access mechanism, then link the result to the pre-registration data, for example by matching <code>dg1</code> or the corresponding <code>document_number</code>.</li>
+<li>Active/Chip Authentication</li>
+</ul>
+<p><strong>Requested attributes:</strong></p>
+<p>APTITUDE DTC (see pre-registration use cases 4.1 or 4.2)</p>
+<ul>
+<li>ICAO PhotoID data elements: <code>version</code>, <code>dg1</code>, <code>dg2</code>, <code>dg14</code>, <code>sod</code>, and <code>dg15</code> where available and required by the inspection system.</li>
+</ul>
+<p><strong>Post-processing:</strong> the legacy eGate or officer interface performs the applicable chip, document and biometric checks, links the live passport read to the pre-registration data, and presents the applicable operational outcome according to the Member State border-control process.</p>
+<h2 id="5-trust-anchors">5 Trust Anchors<a class="headerlink" href="#5-trust-anchors" title="Permanent link">&para;</a></h2>
+<p>The APTITUDE DTC is derived from data contained in the LDS data groups of the corresponding physical eMRTD and is signed by the national issuing authority. The issuing authority SHALL sign the issuer signed data, i.e. the Mobile Security Object (MSO), using a DTC signer key and certificate under the respective CSCA root certificate, compliant with clause 2.2 in [ICAO-DTC-VC-TR].</p>
+<p><em>Note:</em> According to [ICAO-DTC-VC-TR], the DTC signer certificate includes a dedicated OID in the extendedKeyUsage extension, i.e. <code>2.23.136.1.1.12.1</code>.</p>
+<p>It is recommended to make the CSCA root certificates of the EU Member States available to Relying Parties in the EUDI Wallet ecosytem by a respective EU Trust List, i.e. APTITUDE DTC TL. In addition, it is recommended to make the content of the APTITUDE DTC TL available to Relying Parties outside of the EUDI Wallet ecosystem by a VICAL according to [ISO/IEC 18013-5].</p>
+<p>CSCA root certificates MAY also be obtained from the ICAO PKD by any Relying Party.</p>
+<p>For the purpose of interoperability tests and pilotig, issung authority are requested to provide a certificates of a test CSCA, that is technically equivalent to the CSCA.</p>
+<h2 id="6-revocation">6 Revocation<a class="headerlink" href="#6-revocation" title="Permanent link">&para;</a></h2>
+<h3 id="61-reasons-for-revocation">6.1 Reasons for revocation<a class="headerlink" href="#61-reasons-for-revocation" title="Permanent link">&para;</a></h3>
+<p>Reasons for revocation or invalidation may include, but are not limited to, device loss or compromise of the Wallet Unit, revocation or replacement of the corresponding physical eMRTD, compromise of the APTITUDE DTC issuer certificate or issuer trust chain, incorrect or fraudulently issued APTITUDE DTC data, or invalidation of the applicable ICAO certificate chain.</p>
+<h3 id="62-aptitude-dtc-revocation">6.2 APTITUDE DTC revocation<a class="headerlink" href="#62-aptitude-dtc-revocation" title="Permanent link">&para;</a></h3>
+<p>Revocation of the APTITUDE DTC, i.e. the mdoc, SHALL be implemented according to [ISO/IEC 18013-5.2], i.e. MSO revocation information. The issuing authority SHALL provide the respective status list.</p>
+<p>If an APTITUDE DTC is marked revoked, a Relying Party SHALL reject the APTITUDE DTC and all received data elements of the various namespaces.</p>
+<h3 id="63-linked-emrtd-revocation">6.3 Linked eMRTD revocation<a class="headerlink" href="#63-linked-emrtd-revocation" title="Permanent link">&para;</a></h3>
+<p>Revocation of the linked eMRTD and LDS data given in the ICAO PhotoID data elements remains unchanged and is governed by the applicable ICAO, eMRTD and national procedures.</p>
+<h2 id="7-compliance">7 Compliance<a class="headerlink" href="#7-compliance" title="Permanent link">&para;</a></h2>
+<p>If compliance to ICAO DTC-VC Type 1 is required, a reader may after succsessful processing the device response and the verification procedure encapsulate the data in the structure given in clause 7.1. The reader SHALL use the option eMRTD bound for DTC-VC encoding. The ICAO based encoding for DTC-VC is defined in [ICAO-DTC-VC-TR] and encoding for DTC-PC is defined in [ICAO-DTC-PC-TR]. The reader SHALL use the option eMRTD bound for DTC-VC encoding.</p>
+<p><em>Note:</em> Option eMRTD bound does not include elements dtcTBS, dtcSignerInfo, DTCSecurityInfo and DTCOtherInfo.  </p>
+<h3 id="71-icao-based-encoding">7.1 ICAO based encoding<a class="headerlink" href="#71-icao-based-encoding" title="Permanent link">&para;</a></h3>
+<p>The ICAO based encoding for DTC-VC is defined in [ICAO-DTC-VC-TR] and encoding for DTC-PC is defined in [ICAO-DTC-PC-TR]. The ASN.1 definition below reproduces the generic ICAO DTC-VC encoding. For APTITUDE DTC, only the eMRTD-bound encoding is applicable. The eMRTD-PC-bound encoding is retained for comparison with the ICAO Type 2 model, while the PC-bound encoding is outside the scope of the current profile.</p>
+<div class="highlight"><pre><span></span><code>DTCContentInfo ::= SEQUENCE {
+version Version,
+dtcData DTCData,
+dtcTBS [0] EXPLICIT DTCTBSValues OPTIONAL,
+-- MUST be present if DTC is eMRTD-PC Bound or PC
+-- Bound. This field MUST NOT be present if DTC is
+-- eMRTD Bound.
+dtcSignerInfo [1] EXPLICIT DTCSignerInfo OPTIONAL
+-- MUST be present if DTC is eMRTD-PC Bound or PC
+-- Bound. This field MUST NOT be present if DTC is
+-- eMRTD Bound.
+}
+DTCTBSValues ::= SEQUENCE SIZE (3..ub-DTCData) OF DTCTBSValue
+Version ::= INTEGER { v1(1) }
+ub-DTCData INTEGER ::= 31
+DTCData ::= SEQUENCE {
+dtcSOD [0] IMPLICIT OCTET STRING OPTIONAL,
+-- Contains the encoding of SOD defined
+-- in [Doc 9303]-10.
+-- MUST be present if DTC is eMRTD Bound or
+-- eMRTD-PC Bound. This field MUST NOT be present
+dtcDG1 [1] IMPLICIT OCTET STRING,
+-- Contains the encoding of Data Group 1 defined
+-- in [Doc 9303]-10.
+dtcDG2 [2] IMPLICIT OCTET STRING,
+-- Contains the encoding of Data Group 2 defined
+-- in [Doc 9303]-10.
+dtcDG3 [3] IMPLICIT OCTET STRING OPTIONAL,
+-- Contains the encoding of Data Group 3 defined
+-- in [Doc 9303]-10.
+dtcDG4 [4] IMPLICIT OCTET STRING OPTIONAL,
+-- Contains the encoding of Data Group 4 defined
+-- in [Doc 9303]-10.
+dtcDG5 [5] IMPLICIT OCTET STRING OPTIONAL,
+-- Contains the encoding of Data Group 5 defined
+-- in [Doc 9303]-10.
+dtcDG6 [6] IMPLICIT OCTET STRING OPTIONAL,
+-- Contains the encoding of Data Group 6 defined
+-- in [Doc 9303]-10.
+dtcDG7 [7] IMPLICIT OCTET STRING OPTIONAL,
+-- Contains the encoding of Data Group 7 defined
+-- in [Doc 9303]-10.
+dtcDG8 [8] IMPLICIT OCTET STRING OPTIONAL,
+-- Contains the encoding of Data Group 8 defined
+-- in [Doc 9303]-10.
+dtcDG9 [9] IMPLICIT OCTET STRING OPTIONAL,
+-- Contains the encoding of Data Group 9 defined
+-- in [Doc 9303]-10.
+dtcDG10 [10] IMPLICIT OCTET STRING OPTIONAL,
+-- Contains the encoding of Data Group 10 defined
+-- in [Doc 9303]-10.
+dtcDG11 [11] IMPLICIT OCTET STRING OPTIONAL,
+-- Contains the encoding of Data Group 11 defined
+-- in [Doc 9303]-10.
+dtcDG12 [12] IMPLICIT OCTET STRING OPTIONAL,
+-- Contains the encoding of Data Group 12 defined
+-- in [Doc 9303]-10.
+dtcDG13 [13] IMPLICIT OCTET STRING OPTIONAL,
+-- Contains the encoding of Data Group 13 defined
+-- in [Doc 9303]-10.
+dtcDG14 [14] IMPLICIT OCTET STRING OPTIONAL,
+-- Contains the encoding of Data Group 14 defined
+-- in [Doc 9303]-10.
+dtcDG15 [15] IMPLICIT OCTET STRING OPTIONAL,
+-- Contains the encoding of Data Group 15 defined
+-- in [Doc 9303]-10.
+dtcDG16 [16] IMPLICIT OCTET STRING OPTIONAL,
+-- Contains the encoding of Data Group 16 defined
+-- in [Doc 9303]-10.
+...,
+dtcSecurityInfo [22] EXPLICIT DTCSecurityInfo OPTIONAL,
+-- MUST be present if DTC is eMRTD-PC Bound or PC
+-- Bound. This field MUST NOT be present if DTC
+-- is eMRTD Bound.
+dtcOtherInfos [23] EXPLICIT DTCOtherInfos OPTIONAL,
+-- The dtcOtherInfos is for internal State use.
+-- MAY be present if DTC is eMRTD-PC Bound or PC
+-- Bound. This field MUST NOT be present if DTC
+-- is eMRTD Bound as it is not part of signed
+-- data.
+}
+</code></pre></div>
+<h2 id="8-references">8 References<a class="headerlink" href="#8-references" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th><strong>Item Reference</strong></th>
+<th><strong>Standard name/details</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>[ISO/IEC 18013-5]</td>
+<td>ISO/IEC 18013-5, Personal identification --- ISO-compliant driving licence - Part 5: Mobile driving licence (mDL) application, First edition, 2021-09</td>
+</tr>
+<tr>
+<td>[ISO/IEC 18013-5.2]</td>
+<td>ISO/IEC 18013-5, Personal identification --- ISO-compliant driving licence - Part 5: Mobile driving licence (mDL) application, second edition, 2026-xx (Status DIS)</td>
+</tr>
+<tr>
+<td>[ISO/IEC 23220-4]</td>
+<td>ISO/IEC TS 23220-4: Cards and Security Devices for Personal Identification – Building Blocks for Identity Management via Mobile Devices –Part 4: Protocols and services for the operational phase, First edition, 2026-04</td>
+</tr>
+<tr>
+<td>[ISO/IEC 23220-2.2]</td>
+<td>ISO/IEC TS 23220-2: Cards and Security Devices for Personal Identification – Building Blocks for Identity Management via Mobile Devices –Part 2: Data objects and encoding rules for generic eID systems, Second edition, 2026-04</td>
+</tr>
+<tr>
+<td>[RFC 2119]</td>
+<td>RFC 2119 - Key words for use in RFCs to Indicate Requirement Levels, S. Bradner, March 1997</td>
+</tr>
+<tr>
+<td>[ICAO-DTC-VC-TR]</td>
+<td>ICAO Technical Report, Digital Travel Credentials (DTC) - Virtual Component Data Structure and PKI Mechanisms, Version 1.2, October 2020</td>
+</tr>
+<tr>
+<td>[ICAO-DTC-PC-TR]</td>
+<td>ICAO Technical Report, Digital Travel Credentials (DTC) - Physical Component and Protocols, Version 1.1, October 2022</td>
+</tr>
+<tr>
+<td>[APTITUDE-D3.1]</td>
+<td>APTITUDE, D3.1: Stock‑Taking, Analysis and Specifications — pilot use cases and advance submission, 27‑02‑2026.</td>
+</tr>
+<tr>
+<td>[APTITUDE-D3.2]</td>
+<td>APTITUDE, D3.2: Work in progress on Technical and functional specifications for DTC experimentations.</td>
+</tr>
+<tr>
+<td>[EU-API-2025-12]</td>
+<td>Regulation (EU) 2025/12 of the European Parliament and of the Council of 19 December 2024 on the collection and transfer of  advance passenger information for enhancing and facilitating external border checks, amending Regulations (EU) 2018/1726 and (EU) 2019/817, and repealing Council Directive 2004/82/EC.</td>
+</tr>
+</tbody>
+</table>
+
+
+
+
+
+
+
+  
+    
+  
+  
+
+
+  <aside class="md-source-file">
+    
+      
+  <span class="md-source-file__fact">
+    <span class="md-icon" title="Last update">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
+    </span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-datetime" title="July 24, 2026 14:48:14 UTC">July 24, 2026 14:48:14</span>
+  </span>
+
+    
+    
+    
+    
+  </aside>
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+    <div class="md-footer-meta md-typeset">
+        <div class="md-footer-meta__inner md-grid">
+            <div class="md-copyright">
+                <div>
+                    Made with
+                    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+                        Material for MkDocs
+                    </a>
+                </div>
+            </div>
+            <div class="md-footer-cofunded">
+                <img src="../../../img/eu-cofunded.png" alt="Co-funded by the European Union">
+            </div>
+        </div>
+    </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+      <div class="md-progress" data-md-component="progress" role="progressbar"></div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["content.action.edit", "content.action.view", "content.code.annotate", "content.code.copy", "navigation.footer", "navigation.indexes", "navigation.instant", "navigation.instant.progress", "navigation.path", "navigation.tabs", "navigation.tabs.sticky", "navigation.top", "navigation.tracking", "search.highlight", "search.suggest", "toc.follow", "toc.integrate"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"alias": true, "provider": "mike"}}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+        <script src="../../../media/mermaid.min.js"></script>
+      
+        <script src="../../../media/mermaid-init.js"></script>
+      
+        <script src="../../../media/mathjax-init.js"></script>
+      
+        <script src="../../../media/mathjax-tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>
