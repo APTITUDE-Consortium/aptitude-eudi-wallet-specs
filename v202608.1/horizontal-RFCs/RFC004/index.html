@@ -1,0 +1,2442 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="APTITUDE Technical Specification">
+      
+      
+        <meta name="author" content="APTITUDE Consortium">
+      
+      
+        <link rel="canonical" href="https://aptitude-consortium.github.io/aptitude-eudi-wallet-specs/v202608.1/horizontal-RFCs/RFC004/">
+      
+      
+        <link rel="prev" href="../RFC002/">
+      
+      
+        <link rel="next" href="../../itb_plus_user_onboarding/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+    
+    
+      
+        <title>RFC-04 Revocation Profile - APTITUDE Technical Specification</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.ec1eaa64.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../media/extra.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#aptitude-rfc-04-trust-revocation" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+      <div data-md-color-scheme="default" data-md-component="outdated" hidden>
+        
+      </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="APTITUDE Technical Specification" class="md-header__button md-logo" aria-label="APTITUDE Technical Specification" data-md-component="logo">
+      
+  <img src="../../img/logo.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            APTITUDE Technical Specification
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              RFC-04 Revocation Profile
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/APTITUDE-Consortium/aptitude-eudi-wallet-specs" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    APTITUDE-Consortium/aptitude-eudi-wallet-specs
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+    
+      
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../rulebook/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Attestation Rulebooks
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../rulebook/trust-framework/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Trust Specifications
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../" class="md-tabs__link">
+          
+  
+  
+    
+  
+  RFCs
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../itb_plus_user_onboarding/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Testing and Conformance
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../schema/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Schemas
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../standards/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Standards
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../glossary/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Glossary
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+  
+
+<nav class="md-nav md-nav--primary md-nav--lifted md-nav--integrated" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="APTITUDE Technical Specification" class="md-nav__button md-logo" aria-label="APTITUDE Technical Specification" data-md-component="logo">
+      
+  <img src="../../img/logo.png" alt="logo">
+
+    </a>
+    APTITUDE Technical Specification
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/APTITUDE-Consortium/aptitude-eudi-wallet-specs" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    APTITUDE-Consortium/aptitude-eudi-wallet-specs
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../rulebook/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Attestation Rulebooks
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_2" id="__nav_2_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Attestation Rulebooks
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../rulebook/wp5/mVRC-rulebook/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    mVRC
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../rulebook/wp3/dtc-rulebook/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DTC
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Trust Specifications
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Trust Specifications
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../rulebook/trust-framework/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Trust Framework
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" checked>
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    RFCs
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_4" id="__nav_4_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    RFCs
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../RFC001/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    RFC-01 Credential Issuance Profile
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../RFC002/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    RFC-02 Presentation Profile
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    RFC-04 Revocation Profile
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    RFC-04 Revocation Profile
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#authors" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Authors
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#reviewers" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Reviewers
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1-introduction" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Introduction
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-scope" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Scope
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-normative-language" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Normative Language
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-roles-and-components" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Roles and Components
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4. Roles and Components">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#41-wallet-relying-party" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.1 Wallet Relying Party
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#42-wallet-unit" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.2 Wallet Unit
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#43-provider-of-wrpac" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.3 Provider of WRPAC
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#44-provider-of-wrprc" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.4 Provider of WRPRC
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-high-level-flows" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. High-Level Flows
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-normative-requirements" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Normative Requirements
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6. Normative Requirements">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#61-wallet-requirements" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.1 Wallet Requirements
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#62-provider-of-wrpac-requirements" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.2 Provider of WRPAC Requirements
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#63-provider-of-wrprc-requirements" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.3 Provider of WRPRC Requirements
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-interface-definitions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. Interface Definitions
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="7. Interface Definitions">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#71-crl-endpoint" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.1 CRL Endpoint
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#72-ocsp-endpoint" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.2 OCSP Endpoint
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#73-tsl-endpoint" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.3 TSL Endpoint
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8-privacy-and-security-considerations" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. Privacy and Security Considerations
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="8. Privacy and Security Considerations">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#81-privacy-considerations" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.1 Privacy Considerations
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#82-security-considerations" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.2 Security Considerations
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#9-conformance" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9. Conformance
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#10-wallet-under-test-conformance-catalogue-and-deployed-test-matrix" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10. Wallet-Under-Test Conformance Catalogue and Deployed Test Matrix
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="10. Wallet-Under-Test Conformance Catalogue and Deployed Test Matrix">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#101-conformance-check-catalogue" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.1 Conformance Check Catalogue
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#102-deployed-test-case-matrix" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.2 Deployed Test Case Matrix
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../itb_plus_user_onboarding/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Testing and Conformance
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_5" id="__nav_5_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Testing and Conformance
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../itb_plus_user_onboarding/aptitude-itb-user-onboarding-manual/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ITB+ User Onboarding Guide
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../itb_plus_user_onboarding/report-submission/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Reporting Conformance Results
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../schema/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Schemas
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Schemas
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../standards/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Standards
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Glossary
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Glossary
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../glossary/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Glossary
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../glossary-definitions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Definitions
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+                
+
+
+
+  
+
+
+  <nav class="md-path" aria-label="Navigation" >
+    <ol class="md-path__list">
+      
+        
+  
+  
+    <li class="md-path__item">
+      <a href="../.." class="md-path__link">
+        
+  <span class="md-ellipsis">
+    Home
+  </span>
+
+      </a>
+    </li>
+  
+
+      
+      
+        
+  
+  
+    
+    
+      <li class="md-path__item">
+        <a href="../" class="md-path__link">
+          
+  <span class="md-ellipsis">
+    RFCs
+  </span>
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ol>
+  </nav>
+
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+    <a href="https://github.com/APTITUDE-Consortium/aptitude-eudi-wallet-specs/edit/main/docs/horizontal-RFCs/RFC004.md" title="Edit this page" class="md-content__button md-icon" rel="edit">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10 20H6V4h7v5h5v3.1l2-2V8l-6-6H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h4zm10.2-7c.1 0 .3.1.4.2l1.3 1.3c.2.2.2.6 0 .8l-1 1-2.1-2.1 1-1c.1-.1.2-.2.4-.2m0 3.9L14.1 23H12v-2.1l6.1-6.1z"/></svg>
+    </a>
+  
+  
+    
+      
+    
+    <a href="https://github.com/APTITUDE-Consortium/aptitude-eudi-wallet-specs/raw/main/docs/horizontal-RFCs/RFC004.md" title="View source of this page" class="md-content__button md-icon">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 18c.56 0 1 .44 1 1s-.44 1-1 1-1-.44-1-1 .44-1 1-1m0-3c-2.73 0-5.06 1.66-6 4 .94 2.34 3.27 4 6 4s5.06-1.66 6-4c-.94-2.34-3.27-4-6-4m0 6.5a2.5 2.5 0 0 1-2.5-2.5 2.5 2.5 0 0 1 2.5-2.5 2.5 2.5 0 0 1 2.5 2.5 2.5 2.5 0 0 1-2.5 2.5M9.27 20H6V4h7v5h5v4.07c.7.08 1.36.25 2 .49V8l-6-6H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h4.5a8.2 8.2 0 0 1-1.23-2"/></svg>
+    </a>
+  
+
+
+<h1 id="aptitude-rfc-04-trust-revocation"><strong>APTITUDE RFC-04 Trust Revocation</strong><a class="headerlink" href="#aptitude-rfc-04-trust-revocation" title="Permanent link">&para;</a></h1>
+<p><strong>Status:</strong> Draft
+<strong>Type:</strong> Cross-pilot baseline RFC
+<strong>Scope:</strong> Certificate Status Establishment
+<strong>Target protocols:</strong> OCSP, CRL, Status List Token
+<strong>Related profiles:</strong> <a href="https://aptitude-consortium.github.io/wp2-trust-specifications/latest/">APTITUDE Trust Specifications</a>
+<strong>Companion RFC:</strong> RFC-03 Trust Establishment</p>
+<h2 id="authors"><strong>Authors</strong><a class="headerlink" href="#authors" title="Permanent link">&para;</a></h2>
+<p>Andrea Moro (Fondazione Bruno Kessler)</p>
+<h2 id="reviewers"><strong>Reviewers</strong><a class="headerlink" href="#reviewers" title="Permanent link">&para;</a></h2>
+<hr />
+<h2 id="1-introduction"><strong>1. Introduction</strong><a class="headerlink" href="#1-introduction" title="Permanent link">&para;</a></h2>
+<p>This document defines the <strong>APTITUDE Presentation Profile</strong> for interoperable credential verification across APTITUDE pilots.</p>
+<p>It specifies a baseline, cross-pilot profile for the validation of trust artifacts aligned with the <a href="https://aptitude-consortium.github.io/wp2-trust-specifications/latest/">APTITUDE Trust Specifications</a>, the <a href="https://aptitude-consortium.github.io/wp2-trust-specifications/latest/deliverable-2.1-trust/#references_3">references</a> therein, and the ARF.</p>
+<p>The purpose of this RFC is to establish a stable starting point for interoperability across APTITUDE pilots by defining:</p>
+<ul>
+<li>impacted roles and components;</li>
+<li>normative requirements for entities involved in the validation of WRPAC and WRPRC certificates;</li>
+<li>interface definitions for the relevant protocols (OCSP, CRL, Status List Token);</li>
+<li>a conformance check catalogue that maps the normative requirements into verifiable checks;</li>
+<li>a test case matrix that maps the conformance checks into executable test cases for the <strong>ITB+ conformance test cases</strong>.</li>
+</ul>
+<p>This RFC is intended to support interoperability first. Pilot-specific or sector-specific extensions may be added later, but they should not weaken the baseline requirements defined here.</p>
+<hr />
+<h2 id="2-scope"><strong>2. Scope</strong><a class="headerlink" href="#2-scope" title="Permanent link">&para;</a></h2>
+<p>This RFC profiles presentation under three normative tracks:</p>
+<ul>
+<li><strong>OCSP track</strong> -- profiled under the validation of WRPAC status defined by ETSI 119 411-8 and RFC 6960;</li>
+<li><strong>CRL track</strong> -- profiled under the validation of WRPAC status defined by ETSI 119 411-8 and RFC 5280;</li>
+<li><strong>TSL track</strong> -- profiled under the validation of WRPAC status defined by ETSI 119 475 and Token Status List <a href="https://datatracker.ietf.org/doc/draft-ietf-oauth-status-list/">IETF draft</a>.</li>
+</ul>
+<p>This RFC includes baseline requirements for:</p>
+<ul>
+<li>generation of OCSP Requests;</li>
+<li>generation of OCSP Response and their verification;</li>
+<li>CRL parsing and verification;</li>
+<li>Status List Token parsing and verification.</li>
+</ul>
+<p>This RFC does <strong>not</strong> define:</p>
+<ul>
+<li>sector-specific certificate semantics (already defined in <a href="https://aptitude-consortium.github.io/wp2-trust-specifications/latest/deliverable-2.1-trust/#wallet-relying-party-access-certificate">WRPAC profile</a> and <a href="https://aptitude-consortium.github.io/wp2-trust-specifications/latest/deliverable-2.1-trust/#wallet-relying-party-registration-certificate">WRPRC profile</a>);</li>
+<li>the lifecycle of the entities and related Trust Artifacts (already defined in <a href="https://aptitude-consortium.github.io/wp2-trust-specifications/pr-46/pr-workspace/trust-management-process/">Trust Management</a>);</li>
+<li>revocation artifacts and semantics (already defined in <a href="https://aptitude-consortium.github.io/wp2-trust-specifications/latest/deliverable-2.1-trust/#revocation-mechanisms">Revocation Menchanisms</a>);</li>
+<li>pilot-specific UI requirements;</li>
+<li>detailed test assertions; (these are derived into the <em>ITB+</em> test suite from the requirements matrix in this document).</li>
+</ul>
+<hr />
+<h2 id="3-normative-language"><strong>3. Normative Language</strong><a class="headerlink" href="#3-normative-language" title="Permanent link">&para;</a></h2>
+<p>The key words <strong>SHALL</strong>, <strong>SHALL NOT</strong>, <strong>SHOULD</strong>, <strong>SHOULD NOT</strong>, <strong>MAY</strong>, and <strong>OPTIONAL</strong> in this document are to be interpreted as described in RFC 2119 and RFC 8174.</p>
+<hr />
+<h2 id="4-roles-and-components"><strong>4. Roles and Components</strong><a class="headerlink" href="#4-roles-and-components" title="Permanent link">&para;</a></h2>
+<h3 id="41-wallet-relying-party"><strong>4.1 Wallet Relying Party</strong><a class="headerlink" href="#41-wallet-relying-party" title="Permanent link">&para;</a></h3>
+<p>The <strong><a class="mkdocs-ezglossary-link"
+    id="d8929e463c751001b40209ae6c167537"
+    title="A relying party that intends to rely upon Wallet Units for the provision of public or private services by means of digital interaction. [ARF]"
+    data-tooltip="A relying party that intends to rely upon Wallet Units for the provision of public or private services by means of digital interaction. [ARF]"
+    name="roles:Wallet-Relying Party (WRP)"
+    href="../../glossary-definitions/#7355e42b188b5fd04aec331fbd8f0b2e">Wallet Relying Party</a></strong>, as defined in the APTITUDE glossary and aligned with the ARF notions of Relying Party, Attestation Provider and PID Provider. In this RFC, it is the entity to whom the WRPAC and WRPRC refers.  </p>
+<h3 id="42-wallet-unit"><strong>4.2 Wallet Unit</strong><a class="headerlink" href="#42-wallet-unit" title="Permanent link">&para;</a></h3>
+<p>The <strong>Wallet Unit</strong> is the <a class="mkdocs-ezglossary-link"
+    id="3cec37c27de7cf8492ffb596284e5921"
+    title="A unique configuration of a Wallet Solution that includes Wallet instances, Wallet Secure Cryptographic Applications and Wallet Secure Cryptographic Devices provided by a Wallet Provider to an individual Wallet User. [ARF]"
+    data-tooltip="A unique configuration of a Wallet Solution that includes Wallet instances, Wallet Secure Cryptographic Applications and Wallet Secure Cryptographic Devices provided by a Wallet Provider to an individual Wallet User. [ARF]"
+    name="components:Wallet Unit"
+    href="../../glossary-definitions/#19efe3de871ea7c8dc94e428e66b8cd5">Wallet Unit</a> as defined in the ARF and APTITUDE glossary, including one or more <a class="mkdocs-ezglossary-link"
+    id="29e5c628510969348c54614e121544e2"
+    title="The application installed and configured on a User's device or environment, which is part of a Wallet Unit, and that the User uses to interact with the Wallet Unit. [ARF]"
+    data-tooltip="The application installed and configured on a User's device or environment, which is part of a Wallet Unit, and that the User uses to interact with the Wallet Unit. [ARF]"
+    name="components:Wallet Instance"
+    href="../../glossary-definitions/#a886c8bc8feb4b7b239b07e272228cd9">Wallet Instances</a> on the Holder’s device or environment. In this RFC, the term <strong>Wallet</strong> refers to the Wallet Unit (and its Wallet Instances) when the distinction is not material, acting on behalf of the <a class="mkdocs-ezglossary-link"
+    id="5b3fa14de114b8f2ddcac13833b9b635"
+    title="A natural or legal person, or a natural person representing another natural person or a legal person, that uses trust services or electronic identification means provided in accordance with the [European Digital Identity Regulation]. [ARF]"
+    data-tooltip="A natural or legal person, or a natural person representing another natural person or a legal person, that uses trust services or electronic identification means provided in accordance with the [European Digital Identity Regulation]. [ARF]"
+    name="roles:User"
+    href="../../glossary-definitions/#7db9d61b526a435034b8a82bac8c1422">Holder</a> to verify the status of the WRPAC and WRPRC received when transacting with a WRP.</p>
+<h3 id="43-provider-of-wrpac"><strong>4.3 Provider of WRPAC</strong><a class="headerlink" href="#43-provider-of-wrpac" title="Permanent link">&para;</a></h3>
+<p>The <strong><a class="mkdocs-ezglossary-link"
+    id="1ffe904802092834f6da22b40f15d2c7"
+    title="A natural or legal person mandated by a Member State to issue Relying Party access certificates to (Wallet-) Relying Parties registered in that Member State. [ARF]"
+    data-tooltip="A natural or legal person mandated by a Member State to issue Relying Party access certificates to (Wallet-) Relying Parties registered in that Member State. [ARF]"
+    name="roles:Provider of Wallet Relying Party Access Certificate (Provider of WRPAC)"
+    href="../../glossary-definitions/#d2e4b3e1ba7c90c9e57c1e8371f96033">Provider of WRPAC</a></strong>, as defined in the APTITUDE glossary and aligned with the ARF notion of Provider of WRPAC, is the entity issuing WRPAC and the related status Services (CRL endpoint and/or OCSP responder).</p>
+<h3 id="44-provider-of-wrprc"><strong>4.4 Provider of WRPRC</strong><a class="headerlink" href="#44-provider-of-wrprc" title="Permanent link">&para;</a></h3>
+<p>The <strong><a class="mkdocs-ezglossary-link"
+    id="21f533c5265d4ba59eba879861283c5c"
+    title="A natural or legal person mandated by a Member State to issue (wallet-relying party) registration certificates to (wallet-)relying parties registered in that Member State. [ARF]"
+    data-tooltip="A natural or legal person mandated by a Member State to issue (wallet-relying party) registration certificates to (wallet-)relying parties registered in that Member State. [ARF]"
+    name="roles:Provider of Wallet Relying Party Registration Certificate (Provider of WRPRC)"
+    href="../../glossary-definitions/#51c68482c1c963c71b87a3ef20517a86">Provider of WRPRC</a></strong>, as defined in the APTITUDE glossary and aligned with the ARF notion of Provider of WRPRC, is the entity issuing WRPRC and the related status Services (Status List Token endpoint).</p>
+<hr />
+<h2 id="5-high-level-flows"><strong>5. High-Level Flows</strong><a class="headerlink" href="#5-high-level-flows" title="Permanent link">&para;</a></h2>
+<p>The high-level flows for validation of WRPAC can be found in <a href="https://aptitude-consortium.github.io/wp2-trust-specifications/latest/deliverable-2.1-trust/#revocation-checking">Revocation Checking</a>.</p>
+<hr />
+<h2 id="6-normative-requirements"><strong>6. Normative Requirements</strong><a class="headerlink" href="#6-normative-requirements" title="Permanent link">&para;</a></h2>
+<p>This section defines the baseline normative requirements for APTITUDE implementations of the issuance profile.</p>
+<p>Unless otherwise stated, the requirements in this section apply to issuance interactions only.</p>
+<h3 id="61-wallet-requirements"><strong>6.1 Wallet Requirements</strong><a class="headerlink" href="#61-wallet-requirements" title="Permanent link">&para;</a></h3>
+<p>A Wallet conforming to this RFC SHALL:</p>
+<ul>
+<li>Support RFC 5280 for CRL parsing and validation;</li>
+<li>Support Token Status List for Staus List Token Parsing and validation;</li>
+</ul>
+<p>A Wallet conforming to this RFC SHOULD:</p>
+<ul>
+<li>Support RFC 6960 for OCSP request generation as defined in <a href="https://aptitude-consortium.github.io/wp2-trust-specifications/latest/deliverable-2.1-trust/#online-certificate-status-protocol-request-format">OCSP request</a>;</li>
+<li>Support RFC 6960 for OCSP response parsing and validation.</li>
+</ul>
+<h3 id="62-provider-of-wrpac-requirements"><strong>6.2 Provider of WRPAC Requirements</strong><a class="headerlink" href="#62-provider-of-wrpac-requirements" title="Permanent link">&para;</a></h3>
+<p>A WRPAC Provider conforming to this RFC SHALL:</p>
+<ul>
+<li>expose at least a CRL endpoint as described in section <a href="#71-crl-endpoint">CRL Endpoint</a>;</li>
+<li>generate the CRL listing all revoked WRPAC with the semantics defined in <a href="https://aptitude-consortium.github.io/wp2-trust-specifications/latest/deliverable-2.1-trust/#certificate-revocation-lists">CRL</a>.</li>
+</ul>
+<p>A WRPAC Provider conforming to this RFC MAY:</p>
+<ul>
+<li>expose the OCSP endpoint as described in section <a href="#72-ocsp-endpoint">OCSP Endpoint</a> with OCSP responses conforming to <a href="https://aptitude-consortium.github.io/wp2-trust-specifications/latest/deliverable-2.1-trust/#online-certificate-status-protocol-response-format">OCSP response</a>.</li>
+</ul>
+<h3 id="63-provider-of-wrprc-requirements"><strong>6.3 Provider of WRPRC Requirements</strong><a class="headerlink" href="#63-provider-of-wrprc-requirements" title="Permanent link">&para;</a></h3>
+<p>A WRPRC Provider conforming to this RFC SHALL:</p>
+<ul>
+<li>expose a Status List Token endpoint as described in section <a href="#73-tsl-endpoint">SLT Endpoint</a>;</li>
+<li>generate the status List, listing the status of all issued WRPRC, and embedding it into a Status List Token as defined in <a href="https://aptitude-consortium.github.io/wp2-trust-specifications/latest/deliverable-2.1-trust/#token-status-list">TSL</a>.</li>
+</ul>
+<hr />
+<h2 id="7-interface-definitions"><strong>7. Interface Definitions</strong><a class="headerlink" href="#7-interface-definitions" title="Permanent link">&para;</a></h2>
+<p>This section defines the logical interfaces for conformance testing. The following interfaces are added on top of these added in RFC001, RFC002.</p>
+<h3 id="71-crl-endpoint"><strong>7.1 CRL Endpoint</strong><a class="headerlink" href="#71-crl-endpoint" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Direction</strong>: Wallet to Provider of WRPAC's CRL endpoint.</li>
+<li><strong>Method</strong>: <code>GET</code></li>
+</ul>
+<h4 id="request"><strong>Request</strong><a class="headerlink" href="#request" title="Permanent link">&para;</a></h4>
+<p>The Wallet SHALL construct an HTTP <code>GET</code> request to retrieve the CRL associated with the certificate.</p>
+<ul>
+<li>
+<p><strong>URI Construction</strong>:</p>
+</li>
+<li>
+<p>The request URI is extracted directly from the <code>cRLDistributionPoints</code> extension of the certificate.</p>
+</li>
+<li>
+<p>No additional query parameters are required unless explicitly specified by the URI in the CDP extension.</p>
+</li>
+<li>
+<p><strong>Headers</strong>:</p>
+</li>
+<li>
+<p><code>Host</code>: SHALL contain the hostname from the CLR URI.</p>
+</li>
+<li><code>Accept</code>: SHALL contain the value <code>application/pkix-crl</code>.</li>
+</ul>
+<h4 id="response"><strong>Response</strong><a class="headerlink" href="#response" title="Permanent link">&para;</a></h4>
+<p>The Provider's CRL endpoint SHALL respond with the appropriate HTTP status codes and the correctly formatted CRL file if the request is successful.</p>
+<ul>
+<li>
+<p><strong>Status Codes</strong>:</p>
+</li>
+<li>
+<p><code>200 OK</code>: The request was successful, and the CRL is included in the response body.</p>
+</li>
+<li>
+<p><code>4xx</code> / <code>5xx</code>: Standard HTTP error codes (e.g., <code>404 Not Found</code>, <code>500 Internal Server Error</code>) SHALL be used only if the server cannot process the HTTP request at the transport level.</p>
+</li>
+<li>
+<p><strong>Headers</strong>:</p>
+</li>
+<li>
+<p><code>Content-Type</code>: SHALL be set to <code>application/pkix-crl</code> for successful responses containing the CRL.</p>
+</li>
+<li>
+<p><code>Content-Length</code>: SHOULD be included to indicate the size of the CRL file in bytes.</p>
+</li>
+<li>
+<p><strong>Body</strong>:</p>
+</li>
+<li>
+<p>The response body SHALL contain the CRL in ASN.1 DER format as specified in RFC 5270.</p>
+</li>
+</ul>
+<h3 id="72-ocsp-endpoint"><strong>7.2 OCSP Endpoint</strong><a class="headerlink" href="#72-ocsp-endpoint" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Direction</strong>: Wallet to Provider of WRPAC's OCSP endpoint.</li>
+<li><strong>Method</strong>: <code>POST</code></li>
+</ul>
+<p>[OPTIONAL] If the DER encoding of the request is less than 255 bytes, the Wallet MAY use the <code>GET</code> method as defined in RFC 6960, by encoding the OCSP request in the URL. In this case, the interface is defined as follows:</p>
+<ul>
+<li><strong>Direction</strong>: Wallet to Provider of WRPAC</li>
+<li><strong>Method</strong>: <code>GET</code></li>
+</ul>
+<h4 id="request_1"><strong>Request</strong><a class="headerlink" href="#request_1" title="Permanent link">&para;</a></h4>
+<p>As detailed in <a href="https://aptitude-consortium.github.io/wp2-trust-specifications/latest/deliverable-2.1-trust/#online-certificate-status-protocol-request-format">OCSP request</a>, the OCSP request is a DER encoded <code>OCSPRequest</code> structure, with the following parameters:</p>
+<ul>
+<li><code>version</code>;</li>
+<li>
+<p><code>requestList</code> with a list of <code>Request</code> structures, each containing:</p>
+</li>
+<li>
+<p><code>reqCert</code> with the <code>CertID</code> of the certificate to be checked;</p>
+</li>
+<li>
+<p><code>requestExtensions</code> with the <code>id-pkix-ocsp-nonce</code> extension containing a fresh nonce value.</p>
+</li>
+</ul>
+<p>The Wallet SHALL construct an HTTP <code>POST</code> request to the URI extracted from the Authority Information Access extension of the certificate, specifically the <code>accessLocation</code> associated with the <code>id-ad-ocsp</code> access method.</p>
+<ul>
+<li><strong>POST Headers</strong>: The request SHALL include a <code>Content-Type</code> header set to <code>application/ocsp-request</code> and an <code>Accept</code> header set to <code>application/ocsp-response</code>.</li>
+<li><strong>POST Body</strong>: The body of the <code>POST</code> request SHALL contain the binary DER-encoded <code>OCSPRequest</code> structure.</li>
+<li><strong>GET Construction (Optional)</strong>: If utilizing the optional <code>GET</code> method, the request URI SHALL be constructed by appending a URL-encoded Base64 representation of the DER-encoded <code>OCSPRequest</code> to the base OCSP URI (e.g., {OCSP_URI}/{base64_encoded_request}). The GET request SHALL include an <code>Accept</code> header set to <code>application/ocsp-response</code> and has no message body.</li>
+</ul>
+<h4 id="response_1"><strong>Response</strong><a class="headerlink" href="#response_1" title="Permanent link">&para;</a></h4>
+<p>As detailed in <a href="https://aptitude-consortium.github.io/wp2-trust-specifications/latest/deliverable-2.1-trust/#online-certificate-status-protocol-response-format">OCSP response</a>, the OCSP response is a DER encoded <code>OCSPResponse</code> structure, with the following parameters:</p>
+<ul>
+<li><code>responseStatus</code> with the status of the response;</li>
+<li>
+<p><code>responseBytes</code> with the <code>responseType</code> and the <code>response</code> containing the DER encoded <code>BasicOCSPResponse</code> structure, which includes:</p>
+</li>
+<li>
+<p><code>tbsResponseData</code> with the list of <code>SingleResponse</code> structures, each containing:</p>
+<ul>
+<li><code>certID</code> matching the request;</li>
+<li><code>certStatus</code> with the status of the certificate (<code>good</code>, <code>revoked</code>, or <code>unknown</code>);</li>
+<li><code>thisUpdate</code> and optionally <code>nextUpdate</code> for temporal validity checks.</li>
+</ul>
+</li>
+<li>
+<p><code>signatureAlgorithm</code> and <code>signatureValue</code> for cryptographic validation;</p>
+</li>
+<li><code>responseExtensions</code> with the <code>id-pkix-ocsp-nonce</code> extension containing the same nonce value as in the request.</li>
+</ul>
+<p>If the request is successful, the Provider's OCSP endpoint SHALL respond with the appropriate HTTP status codes and the correctly formatted OCSP response:</p>
+<ul>
+<li>
+<p><strong>Status Codes</strong>:</p>
+</li>
+<li>
+<p><code>200 OK</code>: The request was successfully received and processed. Note that a 200 OK HTTP status SHALL be returned even if the internal OCSP <code>responseStatus</code> indicates an error (e.g., <code>malformedRequest</code>, <code>internalError</code>, <code>tryLater</code>), provided the HTTP transport layer itself succeeded.</p>
+</li>
+<li>
+<p><code>4xx</code> / <code>5xx</code>: Standard HTTP error codes (e.g., <code>404 Not Found</code>, <code>500 Internal Server Error</code>) SHALL be used only if the server cannot process the HTTP request at the transport level.</p>
+</li>
+<li>
+<p><strong>Headers</strong>:</p>
+</li>
+<li>
+<p><code>Content-Type</code>: SHALL be set to <code>application/ocsp-response</code>.</p>
+</li>
+<li><code>Content-Length</code>: SHALL accurately reflect the size of the DER-encoded OCSP response in bytes.</li>
+<li>
+<p><code>Cache-Control</code> / <code>Expires</code>: MAY be included to govern HTTP caching behaviors, in case it SHALL align with the <code>nextUpdate</code> field provided in the internal payload.</p>
+</li>
+<li>
+<p><strong>Body Format</strong>:</p>
+</li>
+<li>
+<p>The HTTP response body SHALL contain the binary DER-encoded <code>OCSPResponse</code> structure.</p>
+</li>
+</ul>
+<h3 id="73-tsl-endpoint"><strong>7.3 TSL Endpoint</strong><a class="headerlink" href="#73-tsl-endpoint" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Direction</strong>: Wallet to Provider of WRPRC  </li>
+<li><strong>Method</strong>: <code>GET</code></li>
+</ul>
+<h4 id="request_2"><strong>Request</strong><a class="headerlink" href="#request_2" title="Permanent link">&para;</a></h4>
+<p>The Wallet SHALL construct an HTTP <code>GET</code> request to retrieve the Token Status List JWT.</p>
+<ul>
+<li>
+<p><strong>URI Construction</strong>:</p>
+</li>
+<li>
+<p>The request URI SHALL be extracted from the <code>uri</code> value of the <code>status_list</code> claim found within the token or credential being verified.</p>
+</li>
+<li>
+<p><strong>Headers</strong>:</p>
+</li>
+<li>
+<p><code>Host</code>: SHALL contain the hostname extracted from the Status List URI.</p>
+</li>
+<li><code>Accept</code>: SHOULD include <code>application/statuslist+jwt</code> to explicitly indicate the Wallet's capability and expectation to receive a Status List JWT.</li>
+</ul>
+<h4 id="response_2"><strong>Response</strong><a class="headerlink" href="#response_2" title="Permanent link">&para;</a></h4>
+<p>The Provider's Status List endpoint SHALL respond with the appropriate HTTP status codes and the correctly formatted Token Status List JWT.</p>
+<ul>
+<li>
+<p><strong>Status Codes</strong>:</p>
+</li>
+<li>
+<p><code>200 OK</code>: The request was successful, and the Status List JWT is included in the response body.</p>
+</li>
+<li>
+<p><code>4xx</code> / <code>5xx</code>: Standard HTTP error codes (e.g., <code>404 Not Found</code>, <code>500 Internal Server Error</code>) SHALL be used only if the server cannot process the HTTP request at the transport level.</p>
+</li>
+<li>
+<p><strong>Headers</strong>:</p>
+</li>
+<li>
+<p><code>Content-Type</code>: SHALL be set to <code>application/statuslist+jwt</code>.</p>
+</li>
+<li>
+<p><strong>Body</strong>:</p>
+</li>
+<li>
+<p>The response body SHALL consist of a Token Status List JWT.</p>
+</li>
+<li>The payload of this JWT contains claims as defined in <a href="https://aptitude-consortium.github.io/wp2-trust-specifications/latest/deliverable-2.1-trust/#status-list-token">Status List Token</a>.</li>
+</ul>
+<hr />
+<h2 id="8-privacy-and-security-considerations"><strong>8. Privacy and Security Considerations</strong><a class="headerlink" href="#8-privacy-and-security-considerations" title="Permanent link">&para;</a></h2>
+<h3 id="81-privacy-considerations"><strong>8.1 Privacy Considerations</strong><a class="headerlink" href="#81-privacy-considerations" title="Permanent link">&para;</a></h3>
+<p>While the WRPAC and WRPRC certificates identify organizational entities (Attestation/PID Providers and Relying Parties) and do not contain Personally Identifiable Information (PII), however, the act of validating these certificates has significant privacy implications for the end-user operating the Wallet.</p>
+<ul>
+<li>When a Wallet executes a live OCSP request for a specific Relying Party's certificate, the serial number of that certificate is transmitted over the network. A network observer can correlate the OCSP request with the Relying Party, revealing the user's interactions.</li>
+<li>To obscure the specific endpoints being queried and the parameters of the request, Wallets SHOULD mandate the use of HTTPS (TLS) for all CRL, OCSP, and TSL network queries, despite the payloads already being cryptographically signed.</li>
+<li>Implementers concerned with high-privacy environments SHOULD favor the use of Status List Tokens (TSL) or cached CRLs over real-time OCSP queries. By downloading a batched list of statuses, the Wallet obfuscates the specific credential or entity it is actively verifying, blending the user's specific query into a larger cryptographic dataset.</li>
+</ul>
+<h3 id="82-security-considerations"><strong>8.2 Security Considerations</strong><a class="headerlink" href="#82-security-considerations" title="Permanent link">&para;</a></h3>
+<p>Implementations of this specification SHALL account for multiple attack vectors against the PKI and revocation infrastructure. The following considerations establish the baseline security posture for Wallets and Providers of certificates.</p>
+<h4 id="811-cryptographic-integrity-and-trust-anchors"><strong>8.1.1 Cryptographic Integrity and Trust Anchors</strong><a class="headerlink" href="#811-cryptographic-integrity-and-trust-anchors" title="Permanent link">&para;</a></h4>
+<p>Implementations SHALL NOT rely on deprecated cryptographic algorithms (e.g., SHA-1, RSA-1024) for the signature generation or validation of CRLs, OCSP responses, or Status List Tokens (SLTs).</p>
+<p>Wallets SHALL thoroughly validate the certification path of the OCSP responder, CRL issuer, or TSL issuer up to a trusted root, verifying that the signer is explicitly authorized to issue revocation data for the target certificate (e.g., checking the <code>cRLSign</code> bit or <code>id-kp-OCSPSigning</code> Extended Key Usage).</p>
+<h4 id="812-freshness-and-replay-attacks"><strong>8.1.2 Freshness and Replay Attacks</strong><a class="headerlink" href="#812-freshness-and-replay-attacks" title="Permanent link">&para;</a></h4>
+<p>To prevent attackers from capturing a valid <code>good</code> OCSP response and replaying it after a certificate has been revoked, Wallets SHALL include the <code>id-pkix-ocsp-nonce</code> in requests and strictly enforce its matching presence in the response.</p>
+<p>Wallets SHALL strictly validate the <code>thisUpdate</code>, <code>nextUpdate</code>, <code>iat</code>, and <code>exp</code> fields across all tracks. Systems SHOULD account for minor acceptable clock skew between the Provider and the Wallet, but SHALL reject responses where temporal validity has unambiguously expired, as these may indicate a downgrade or replay attack.</p>
+<h4 id="813-denial-of-service-dos"><strong>8.1.3 Denial of Service (DoS)</strong><a class="headerlink" href="#813-denial-of-service-dos" title="Permanent link">&para;</a></h4>
+<p>Providers or WRPAC and WRPRC SHALL ensure high availability of CRL, OCSP, and TSL endpoints. Wallets SHALL define a clear policy on how to behave if the revocation endpoint is unreachable (i.e., whether to trust the entity, or abort the transaction).</p>
+<h4 id="814-transport-security"><strong>8.1.4 Transport Security</strong><a class="headerlink" href="#814-transport-security" title="Permanent link">&para;</a></h4>
+<p>While the integrity of CRLs, OCSP responses, and TSLs is guaranteed by their digital signatures rather than the transport layer, the use of plain HTTP exposes the connection to manipulation. Attackers could intercept requests and return TCP RST packets or spoof 404 Not Found or 500 Internal Server Error responses, forcing the Wallet into a fail-open or fail-closed state without ever evaluating the cryptographic payload.</p>
+<hr />
+<h2 id="9-conformance"><strong>9. Conformance</strong><a class="headerlink" href="#9-conformance" title="Permanent link">&para;</a></h2>
+<p>An implementation <strong>conforms to this specification as a Wallet</strong> if it:</p>
+<ol>
+<li>implements the requirements defined in <a href="#61-wallet-requirements">Section 6.1</a>;</li>
+<li>supports the interfaces defined in <a href="#7-interface-definitions">Section 7</a> for all the relevant tracks (CRL, OCSP, TSL);</li>
+<li>successfully passes all the conformance checks defined in the <a href="#101-conformance-check-catalogue">Conformance Check Catalogue</a> for the relevant tracks.</li>
+</ol>
+<p>An implementation <strong>conforms to this specification as a Provider of WRPAC</strong> if it:</p>
+<ol>
+<li>implements the requirements defined in <a href="#62-provider-of-wrpac-requirements">Section 6.2</a>;</li>
+<li>supports the interfaces defined in <a href="#7-interface-definitions">Section 7</a> for the CRL and OCSP tracks;</li>
+</ol>
+<p>An implementation <strong>conforms to this specification as a Provider of WRPRC</strong> if it:</p>
+<ol>
+<li>implements the requirements defined in <a href="#63-provider-of-wrprc-requirements">Section 6.3</a>;</li>
+<li>supports the interfaces defined in <a href="#7-interface-definitions">Section 7</a> for the TSL track;</li>
+</ol>
+<hr />
+<h2 id="10-wallet-under-test-conformance-catalogue-and-deployed-test-matrix"><strong>10. Wallet-Under-Test Conformance Catalogue and Deployed Test Matrix</strong><a class="headerlink" href="#10-wallet-under-test-conformance-catalogue-and-deployed-test-matrix" title="Permanent link">&para;</a></h2>
+<h3 id="101-conformance-check-catalogue"><strong>10.1 Conformance Check Catalogue</strong><a class="headerlink" href="#101-conformance-check-catalogue" title="Permanent link">&para;</a></h3>
+<p>This catalogue defines the baseline conformance checks that support RFC interoperability claims under <a href="#9-conformance">Section 9</a>. These checks map directly to the normative requirements defined in Sections <a href="#6-normative-requirements">6</a> and <a href="#7-interface-definitions">7</a>.</p>
+<h4 id="1011-baseline-conformance-checks"><strong>10.1.1 Baseline conformance checks</strong><a class="headerlink" href="#1011-baseline-conformance-checks" title="Permanent link">&para;</a></h4>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Check ID</th>
+<th style="text-align: left;">Conformance Check</th>
+<th style="text-align: left;">What Is Verified At Runtime</th>
+<th style="text-align: left;">Reference</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>CHK-CRL-01</strong></td>
+<td style="text-align: left;">CRL URI Extraction &amp; Method</td>
+<td style="text-align: left;">The Wallet extracts the URI from the <code>cRLDistributionPoints</code> extension and executes an HTTP <code>GET</code> request.</td>
+<td style="text-align: left;"><a href="#71-crl-endpoint">Sec 7.1</a> &amp; <a href="https://datatracker.ietf.org/doc/html/rfc5280">RFC 5280</a></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>CHK-CRL-02</strong></td>
+<td style="text-align: left;">CRL Request Headers</td>
+<td style="text-align: left;">The Wallet request contains the <code>Host</code> header and an <code>Accept</code> header strictly set to <code>application/pkix-crl</code>.</td>
+<td style="text-align: left;"><a href="#71-crl-endpoint">Sec 7.1</a> &amp; <a href="https://datatracker.ietf.org/doc/html/rfc5280">RFC 5280</a></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>CHK-CRL-03</strong></td>
+<td style="text-align: left;">CRL Response Envelope</td>
+<td style="text-align: left;">The Provider returns a <code>200 OK</code> status code with a <code>Content-Type</code> header set to <code>application/pkix-crl</code>.</td>
+<td style="text-align: left;"><a href="#71-crl-endpoint">Sec 7.1</a> &amp; <a href="https://datatracker.ietf.org/doc/html/rfc5280">RFC 5280</a></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>CHK-CRL-04</strong></td>
+<td style="text-align: left;">CRL Body Format</td>
+<td style="text-align: left;">The response body strictly contains an ASN.1 DER formatted CRL.</td>
+<td style="text-align: left;"><a href="#71-crl-endpoint">Sec 7.1</a> &amp; <a href="https://datatracker.ietf.org/doc/html/rfc5280">RFC 5280</a></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>CHK-CRL-05</strong></td>
+<td style="text-align: left;">CRL Parsing &amp; Validation</td>
+<td style="text-align: left;">The Wallet successfully parses and validates the CRL according to RFC 5280.</td>
+<td style="text-align: left;"><a href="https://datatracker.ietf.org/doc/html/rfc5280">RFC 5280</a> &amp; <a href="https://aptitude-consortium.github.io/wp2-trust-specifications/latest/deliverable-2.1-trust/#crl-validation">APTITUDE Trust Specifications</a></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>CHK-OCSP-01</strong></td>
+<td style="text-align: left;">OCSP URI Extraction &amp; Method</td>
+<td style="text-align: left;">The Wallet extracts the URI from the AIA <code>id-ad-ocsp</code> extension and executes an HTTP <code>POST</code> request.</td>
+<td style="text-align: left;"><a href="#72-ocsp-endpoint">Sec 7.2</a> &amp; <a href="https://datatracker.ietf.org/doc/html/rfc6960">RFC 6960</a></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>CHK-OCSP-02</strong></td>
+<td style="text-align: left;">OCSP Request Headers &amp; Body</td>
+<td style="text-align: left;">The Wallet <code>POST</code> request includes <code>Content-Type: application/ocsp-request</code>, <code>Accept: application/ocsp-response</code>, and a DER-encoded <code>OCSPRequest</code> body.</td>
+<td style="text-align: left;"><a href="#72-ocsp-endpoint">Sec 7.2</a> &amp; <a href="https://datatracker.ietf.org/doc/html/rfc6960">RFC 6960</a></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>CHK-OCSP-03</strong></td>
+<td style="text-align: left;">[OPTIONAL] OCSP Request (GET Variant)</td>
+<td style="text-align: left;">If the DER request is <span class="arithmatex">\(&lt; 255\)</span> bytes and <code>GET</code> is used, the Wallet appends a Base64-encoded <code>OCSPRequest</code> to the URI and omits the body.</td>
+<td style="text-align: left;"><a href="#72-ocsp-endpoint">Sec 7.2</a> &amp; <a href="https://datatracker.ietf.org/doc/html/rfc6960">RFC 6960</a></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>CHK-OCSP-04</strong></td>
+<td style="text-align: left;">OCSP Response Envelope</td>
+<td style="text-align: left;">The Provider returns a <code>200 OK</code> status code (even for internal OCSP errors) with <code>Content-Type: application/ocsp-response</code>.</td>
+<td style="text-align: left;"><a href="#72-ocsp-endpoint">Sec 7.2</a> &amp; <a href="https://datatracker.ietf.org/doc/html/rfc6960">RFC 6960</a></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>CHK-OCSP-05</strong></td>
+<td style="text-align: left;">OCSP Body Format &amp; Parsing</td>
+<td style="text-align: left;">The Provider returns a binary DER-encoded <code>OCSPResponse</code>, and the Wallet supports parsing/validation.</td>
+<td style="text-align: left;"><a href="#72-ocsp-endpoint">Sec 7.2</a>, <a href="https://datatracker.ietf.org/doc/html/rfc6960">RFC 6960</a> &amp; <a href="https://aptitude-consortium.github.io/wp2-trust-specifications/latest/deliverable-2.1-trust/#ocsp-response-validation">APTITUDE Trust Specifications</a></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>CHK-TSL-01</strong></td>
+<td style="text-align: left;">TSL URI Extraction &amp; Method</td>
+<td style="text-align: left;">The Wallet extracts the URI from the <code>uri</code> value of the <code>status_list</code> claim and executes an HTTP <code>GET</code> request.</td>
+<td style="text-align: left;"><a href="#73-tsl-endpoint">Sec 7.3</a> &amp; <a href="https://datatracker.ietf.org/doc/draft-ietf-oauth-status-list/">TSL Draft</a></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>CHK-TSL-02</strong></td>
+<td style="text-align: left;">TSL Request Headers</td>
+<td style="text-align: left;">The Wallet request includes the <code>Host</code> header and SHOULD include <code>Accept: application/statuslist+jwt</code>.</td>
+<td style="text-align: left;"><a href="#73-tsl-endpoint">Sec 7.3</a> &amp; <a href="https://datatracker.ietf.org/doc/draft-ietf-oauth-status-list/">TSL Draft</a></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>CHK-TSL-03</strong></td>
+<td style="text-align: left;">TSL Response Envelope</td>
+<td style="text-align: left;">The Provider returns a <code>200 OK</code> status code with <code>Content-Type: application/statuslist+jwt</code>.</td>
+<td style="text-align: left;"><a href="#73-tsl-endpoint">Sec 7.3</a> &amp; <a href="https://datatracker.ietf.org/doc/draft-ietf-oauth-status-list/">TSL Draft</a></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>CHK-TSL-04</strong></td>
+<td style="text-align: left;">TSL Body Format</td>
+<td style="text-align: left;">The response body strictly contains a Token Status List JWT.</td>
+<td style="text-align: left;"><a href="#73-tsl-endpoint">Sec 7.3</a> &amp; <a href="https://datatracker.ietf.org/doc/draft-ietf-oauth-status-list/">TSL Draft</a></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>CHK-TSL-05</strong></td>
+<td style="text-align: left;">TSL Validation</td>
+<td style="text-align: left;">The Wallet successfully parses and validates the Status List Token.</td>
+<td style="text-align: left;"><a href="https://datatracker.ietf.org/doc/draft-ietf-oauth-status-list/">TSL Draft</a></td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h3 id="102-deployed-test-case-matrix"><strong>10.2 Deployed Test Case Matrix</strong><a class="headerlink" href="#102-deployed-test-case-matrix" title="Permanent link">&para;</a></h3>
+<p>The test matrix codes are generated by the three tracks defined in this RFC (CRL, OCSP, TSL), the test case ID is defined as follows:</p>
+<ul>
+<li>An initial code describing the track (<code>CRL</code>, <code>OCSP</code>, <code>TSL</code>).</li>
+<li>A second code for the type of checks (<code>REQ</code> for request schema, <code>RES</code> for response schema, <code>VAL</code> for validation checks).</li>
+<li>An increasing natural number.</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Test Case ID</th>
+<th style="text-align: left;">Deployed Scenario</th>
+<th style="text-align: left;">Request Profile / Variant</th>
+<th style="text-align: left;">Checks Covered</th>
+<th style="text-align: left;">Expected Outcome</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>CRL-REQ-01</strong></td>
+<td style="text-align: left;">Standard CRL Retrieval</td>
+<td style="text-align: left;">HTTP GET via CDP</td>
+<td style="text-align: left;">Wallet sends GET request with valid <code>Host</code> and <code>Accept: application/pkix-crl</code> headers.</td>
+<td style="text-align: left;">Response returns <code>application/pkix-crl</code> and file is valid ASN.1 DER.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>CRL-RES-01</strong></td>
+<td style="text-align: left;">Valid CRL Response</td>
+<td style="text-align: left;">Provider Successful Serve</td>
+<td style="text-align: left;">Provider returns <code>200 OK</code>, valid <code>Content-Type</code>, and binary DER CRL file.</td>
+<td style="text-align: left;">Successful download of the CRL payload.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>CRL-VAL-01</strong></td>
+<td style="text-align: left;">Freshness Verification</td>
+<td style="text-align: left;">Temporal Check</td>
+<td style="text-align: left;">Comparison of <code>current_time</code> against <code>thisUpdate</code> and <code>nextUpdate</code> fields.</td>
+<td style="text-align: left;">CRL is accepted if <code>thisUpdate</code> ≤ <code>current_time</code> &lt; <code>nextUpdate</code>; otherwise, attempt refresh.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>CRL-VAL-02</strong></td>
+<td style="text-align: left;">Issuer Identification</td>
+<td style="text-align: left;">Direct CRL Matching</td>
+<td style="text-align: left;">Comparison of CRL issuer field with the certificate's issuer field (when DP <code>cRLIssuer</code> is omitted).</td>
+<td style="text-align: left;">Binary match between Name structures; proceed if identical, otherwise reject CRL.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>CRL-VAL-03</strong></td>
+<td style="text-align: left;">Indirect CRL Binding</td>
+<td style="text-align: left;"><code>cRLIssuer</code> Present</td>
+<td style="text-align: left;">Match CRL issuer field with <code>cRLIssuer</code> in DP; verify <code>indirectCRL</code> boolean in IDP is <code>TRUE</code>.</td>
+<td style="text-align: left;">Match successful; CRL is used as an authoritative source for non-issuer revocations.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>CRL-VAL-04</strong></td>
+<td style="text-align: left;">IDP Scope: Distribution</td>
+<td style="text-align: left;">Partitioned CRL</td>
+<td style="text-align: left;">Match <code>distributionPoint</code> name in CRL IDP extension with the name in the certificate's DP.</td>
+<td style="text-align: left;">Exact string match on the URI or <code>Distinguished Name</code>; CRL accepted for that scope.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>CRL-VAL-05</strong></td>
+<td style="text-align: left;">IDP Scope: Cert Type</td>
+<td style="text-align: left;">EE vs. CA Scope</td>
+<td style="text-align: left;">Verify <code>onlyContainsUserCerts</code> or <code>onlyContainsCACerts</code> against certificate <code>basicConstraints</code>.</td>
+<td style="text-align: left;">Rejection of the CRL if an EE cert is checked against a CA-only CRL (and vice-versa).</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>CRL-VAL-06</strong></td>
+<td style="text-align: left;">Path Integrity</td>
+<td style="text-align: left;">Signer Authorization</td>
+<td style="text-align: left;">Validation of the CRL issuer's certification path to the same trust anchor as the target certificate.</td>
+<td style="text-align: left;">Successful path validation; verification that the CRL signer's certificate has the <code>cRLSign</code> bit set.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>CRL-VAL-07</strong></td>
+<td style="text-align: left;">Signature Verification</td>
+<td style="text-align: left;">Cryptographic Check</td>
+<td style="text-align: left;">Validation of the digital signature on the complete CRL using the validated public key of the CRL issuer.</td>
+<td style="text-align: left;">Signature is cryptographically valid; CRL data is considered authentic.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>CRL-VAL-08</strong></td>
+<td style="text-align: left;">Status Resolution</td>
+<td style="text-align: left;">Revocation Search</td>
+<td style="text-align: left;">Search for the certificate's serial number within the <code>revokedCertificates</code> list.</td>
+<td style="text-align: left;">If found, <code>cert_status</code> matches the reason code; if not found, status is <code>VALID</code>.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>OCSP-REQ-01</strong></td>
+<td style="text-align: left;">Standard OCSP Status Request</td>
+<td style="text-align: left;">HTTP POST</td>
+<td style="text-align: left;">Wallet sends POST to AIA URI with valid OCSP MIME types and DER body.</td>
+<td style="text-align: left;"><code>200 OK</code> with a valid binary <code>OCSPResponse</code> payload.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>OCSP-REQ-02</strong></td>
+<td style="text-align: left;">Short OCSP Status Request</td>
+<td style="text-align: left;">HTTP GET (Optional)</td>
+<td style="text-align: left;">Wallet successfully encodes &lt; 255 byte request as Base64 in URL parameter.</td>
+<td style="text-align: left;"><code>200 OK</code> and successful HTTP caching where applicable.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>OCSP-RES-01</strong></td>
+<td style="text-align: left;">Valid OCSP Response</td>
+<td style="text-align: left;">Provider Successful Serve</td>
+<td style="text-align: left;">Provider returns <code>200 OK</code> (transport level success), valid MIME type, and DER response.</td>
+<td style="text-align: left;">Successful download of the OCSP payload.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>OCSP-VAL-01</strong></td>
+<td style="text-align: left;">Response Type Check</td>
+<td style="text-align: left;">Basic Response Type</td>
+<td style="text-align: left;">Verification that <code>responseType</code> OID matches <code>id-pkix-ocsp-basic</code> (<code>{1 3 6 1 5 5 7 48 1 1}</code>).</td>
+<td style="text-align: left;">Reject if the response is not the basic type; OCSP clients SHALL support this type.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>OCSP-VAL-02</strong></td>
+<td style="text-align: left;">Cryptographic Integrity</td>
+<td style="text-align: left;">Digital Signature</td>
+<td style="text-align: left;">Verification of the signature value across the hash of the DER encoded <code>ResponseData</code>.</td>
+<td style="text-align: left;">Signature SHALL be valid; reject response if cryptographic check fails.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>OCSP-VAL-03</strong></td>
+<td style="text-align: left;">Responder Authorization</td>
+<td style="text-align: left;">CA Signature</td>
+<td style="text-align: left;">Check if the response is signed by the CA that issued the certificate in question.</td>
+<td style="text-align: left;">Proceed to status evaluation if the CA signature is verified.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>OCSP-VAL-04</strong></td>
+<td style="text-align: left;">Responder Authorization</td>
+<td style="text-align: left;">Authorized Responder</td>
+<td style="text-align: left;">Verification of <code>id-kp-OCSPSigning</code> (OID <code>{1.3.6.1.5.5.7.3.9}</code>) in the Extended Key Usage extension of a responder certificate issued directly by the CA.</td>
+<td style="text-align: left;">Proceed if Extended Key Usage is present and the signer matches the intended recipient.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>OCSP-VAL-05</strong></td>
+<td style="text-align: left;"><code>CertID</code> Correlation</td>
+<td style="text-align: left;">Request-Response Binding</td>
+<td style="text-align: left;">Match the <code>CertID</code> (<code>hashAlgorithm</code>, <code>hashes</code>, <code>serialNumber</code>) in the response to the original request.</td>
+<td style="text-align: left;">Reject if the response does not correspond to the requested certificate.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>OCSP-VAL-06</strong></td>
+<td style="text-align: left;">Temporal Validity</td>
+<td style="text-align: left;">Freshness Check</td>
+<td style="text-align: left;">Comparison of <code>thisUpdate</code> against local system time to ensure it is "sufficiently recent".</td>
+<td style="text-align: left;">Reject if <code>thisUpdate</code> is in the future or considered stale by local policy.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>OCSP-VAL-07</strong></td>
+<td style="text-align: left;">Temporal Validity</td>
+<td style="text-align: left;"><code>nextUpdate</code> Check</td>
+<td style="text-align: left;">Verification that current time is less than <code>nextUpdate</code> (if provided).</td>
+<td style="text-align: left;">Reject as unreliable if system time is past <code>nextUpdate</code>.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>OCSP-VAL-08</strong></td>
+<td style="text-align: left;">Status Resolution</td>
+<td style="text-align: left;">Final Status Mapping</td>
+<td style="text-align: left;">Retrieval of <code>certStatus</code>: <code>good</code>, <code>revoked</code> (with reason/time), or <code>unknown</code>.</td>
+<td style="text-align: left;">Target certificate is accepted only if status is <code>good</code>.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>OCSP-EXT-01</strong></td>
+<td style="text-align: left;">Replay Protection</td>
+<td style="text-align: left;">Nonce Validation</td>
+<td style="text-align: left;">Verification that the <code>nonce</code> in the response matches the <code>nonce</code> sent in the <code>requestExtensions</code>.</td>
+<td style="text-align: left;">Reject response if nonces do not match, preventing replay attacks.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>TSL-REQ-01</strong></td>
+<td style="text-align: left;">Standard TSL Retrieval</td>
+<td style="text-align: left;">HTTP GET via <code>status_list</code></td>
+<td style="text-align: left;">Wallet extracts URI correctly and sends GET request with required <code>Host</code> header.</td>
+<td style="text-align: left;">Status Provider returns 2xx and the raw Status List Token.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>TSL-RES-01</strong></td>
+<td style="text-align: left;">Valid TSL Response</td>
+<td style="text-align: left;">Provider Successful Serve</td>
+<td style="text-align: left;">Provider returns <code>200 OK</code>, <code>Content-Type: application/statuslist+jwt</code>, and JWT payload.</td>
+<td style="text-align: left;">Successful resolution of the SLT from the endpoint.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>TSL-VAL-01</strong></td>
+<td style="text-align: left;">Referenced Token Pre-check</td>
+<td style="text-align: left;">Referenced Token Validation</td>
+<td style="text-align: left;">Verification of signature, attributes, and <code>exp</code> claim of the token before checking status.</td>
+<td style="text-align: left;">Proceed to SLT fetching only if Referenced Token is valid; otherwise reject.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>TSL-VAL-02</strong></td>
+<td style="text-align: left;">Status Claim Syntax</td>
+<td style="text-align: left;">JOSE/COSE Reference</td>
+<td style="text-align: left;">Check for existence of <code>status</code> and <code>status_list</code> claims in the Referenced Token; validate <code>idx</code> and <code>uri</code> syntax.</td>
+<td style="text-align: left;">Validation succeeds if structure adheres to JOSE/COSE rules.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>TSL-VAL-03</strong></td>
+<td style="text-align: left;">SLT Integrity</td>
+<td style="text-align: left;">Cryptographic Validation</td>
+<td style="text-align: left;">Signature verification of the SLT (JWT or CWT format) using validated keys.</td>
+<td style="text-align: left;">Reject SLT if signature is invalid or undetermined.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>TSL-VAL-04</strong></td>
+<td style="text-align: left;">Subject Binding</td>
+<td style="text-align: left;">URI Consistency</td>
+<td style="text-align: left;"><code>sub</code> (JWT) or <code>2</code> (CWT) claim in SLT SHALL exactly match the <code>uri</code> claim in the Referenced Token.</td>
+<td style="text-align: left;">Reject SLT if identifiers are not equal.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>TSL-VAL-05</strong></td>
+<td style="text-align: left;">Temporal Validity</td>
+<td style="text-align: left;">Expiration &amp; Freshness</td>
+<td style="text-align: left;">Verification of <code>iat</code>, <code>exp</code>, and <code>ttl</code> claims; comparison against <code>current_time</code>.</td>
+<td style="text-align: left;">Reject SLT if current time is past exp.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>TSL-VAL-06</strong></td>
+<td style="text-align: left;">Parsing &amp; Decompression</td>
+<td style="text-align: left;">SLT Content Extraction</td>
+<td style="text-align: left;">Decompression of the <code>lst</code> claim using DEFLATE/ZLIB.</td>
+<td style="text-align: left;">Successful recovery of the uncompressed bit array.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>TSL-VAL-07</strong></td>
+<td style="text-align: left;">Index Boundary Check</td>
+<td style="text-align: left;">Bit Array Access</td>
+<td style="text-align: left;">Verification that the <code>idx</code> from the Referenced Token is within the bounds of the decompressed bit array.</td>
+<td style="text-align: left;">Reject Referenced Token if index is out of bounds.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>TSL-VAL-08</strong></td>
+<td style="text-align: left;">Status Resolution</td>
+<td style="text-align: left;">Status Type Evaluation</td>
+<td style="text-align: left;">Retrieval of bits at <code>idx</code> and mapping to Status Type (e.g., <code>0x00</code>=<code>VALID</code>, <code>0x01</code>=<code>REVOKED</code>).</td>
+<td style="text-align: left;">Final decision made based on the bit value at the specific index.</td>
+</tr>
+</tbody>
+</table>
+
+
+
+
+
+
+
+  
+    
+  
+  
+
+
+  <aside class="md-source-file">
+    
+      
+  <span class="md-source-file__fact">
+    <span class="md-icon" title="Last update">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
+    </span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-datetime" title="July 23, 2026 08:32:25 UTC">July 23, 2026 08:32:25</span>
+  </span>
+
+    
+    
+    
+    
+  </aside>
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+    <div class="md-footer-meta md-typeset">
+        <div class="md-footer-meta__inner md-grid">
+            <div class="md-copyright">
+                <div>
+                    Made with
+                    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+                        Material for MkDocs
+                    </a>
+                </div>
+            </div>
+            <div class="md-footer-cofunded">
+                <img src="../../img/eu-cofunded.png" alt="Co-funded by the European Union">
+            </div>
+        </div>
+    </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+      <div class="md-progress" data-md-component="progress" role="progressbar"></div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["content.action.edit", "content.action.view", "content.code.annotate", "content.code.copy", "navigation.footer", "navigation.indexes", "navigation.instant", "navigation.instant.progress", "navigation.path", "navigation.tabs", "navigation.tabs.sticky", "navigation.top", "navigation.tracking", "search.highlight", "search.suggest", "toc.follow", "toc.integrate"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"alias": true, "provider": "mike"}}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+        <script src="../../media/mermaid.min.js"></script>
+      
+        <script src="../../media/mermaid-init.js"></script>
+      
+        <script src="../../media/mathjax-init.js"></script>
+      
+        <script src="../../media/mathjax-tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>
