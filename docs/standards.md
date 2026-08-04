@@ -129,6 +129,7 @@ Note: Titles are shortened and  omit the shared series prefix carried by every e
 |[IETF RFC 1950](https://datatracker.ietf.org/doc/html/rfc1950)|ZLIB Compressed Data Format Specification version 3.3||Published||Compression of the Status List Token `lst` claim|validation, other||
 |[IETF RFC 1951](https://datatracker.ietf.org/doc/html/rfc1951)|DEFLATE Compressed Data Format Specification version 1.3||Published||Compression of the Status List Token `lst` claim|validation, other||
 |[IETF RFC 2119](https://datatracker.ietf.org/doc/html/rfc2119)|Key words for use in RFCs to Indicate Requirement Levels||Published||Normative language of the APTITUDE RFC series (BCP 14, with RFC 8174)|other||
+|[IETF RFC 3339](https://datatracker.ietf.org/doc/html/rfc3339)|Date and Time on the Internet: Timestamps||Published||Encoding of date and time attributes in attestations|format||
 |[IETF RFC 5280](https://datatracker.ietf.org/doc/html/rfc5280)|Internet X.509 Public Key Infrastructure Certificate and Certificate Revocation List (CRL) Profile||Published|||trust-model, validation, other||
 |[IETF RFC 5755](https://datatracker.ietf.org/doc/html/rfc5755)|An Internet Attribute Certificate Profile for Authorization||Published||Underlying profile for the X509-AC EAA format identifier `x509_attr`|format||
 |[IETF RFC 6749](https://datatracker.ietf.org/doc/html/rfc6749)|The OAuth 2.0 Authorization Framework||Published|||issuance-protocol, presentation-protocol||
@@ -168,8 +169,10 @@ Note: Titles are shortened and  omit the shared series prefix carried by every e
 |ISO/IEC 23220-5|Part 5: Trust models and confidence level assessment||Draft|||trust-model||
 |ISO/IEC 23220-7|Part 7: Registration Authority Procedures for Mobile Document||Draft|||format||
 |ISO/IEC 7367-2|Personal identification — mdoc schemas Part 2: Mobile vehicle certificate||Draft (DTS)|||format||
+|ISO/IEC 7367-3|Personal identification — mdoc schemas Part 3: Mobile technical report||Draft (NWIP)|||format||
 |ISO/IEC 23635|Blockchain and distributed ledger technologies — Guidelines for governance|2022|Published||DLT/Blockchain trust model is not considered for the moment for APTITUDE|—||
 |ISO/IEC 23257|Blockchain and distributed ledger technologies — Reference architecture|2022|Published||DLT/Blockchain trust model is not considered for the moment for APTITUDE|—||
+|[IANA JWT Claims Registry](https://www.iana.org/assignments/jwt/jwt.xhtml)|JSON Web Token (JWT) Claims Registry|n/a|Continuously maintained||Registry of registered JWT claim names used in attestation metadata|format, other||
 |ISO 15000-3|Electronic business eXtensible Markup Language (ebXML) Part 3: Registry and repository|2023|Published|||—||
 |[ITU-T X.690](https://www.itu.int/rec/T-REC-X.690)|Information technology — ASN.1 encoding rules: Specification of Basic (BER), Canonical (CER) and Distinguished (DER) Encoding Rules; published jointly as ISO/IEC 8825-1|02/2021|Published||DER encoding of CRLs, OCSP requests and OCSP responses|validation, other||
 |[CSC API](https://cloudsignatureconsortium.org/resources/csc-api-v2-2/)|CSC API version 2.2.0.0 - Architectures and protocols for remote signature applications|2.2.0.0|Published||Applicable for electronic signature|—||
