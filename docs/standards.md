@@ -100,6 +100,7 @@ Note: Titles are shortened and  omit the shared series prefix carried by every e
 |CEN TS 18297|EUDI Wallet Held Attributes Access Control, operation and management||Draft|||—||
 |[OpenID4VCI](https://openid.net/specs/openid-4-verifiable-credential-issuance-1_0.html)|OpenID for Verifiable Credential Issuance 1.0|1.0|Published|||issuance-process, issuance-protocol, format, trust-model||
 |[OpenID4VP](https://openid.net/specs/openid-4-verifiable-presentations-1_0.html)|OpenID for Verifiable Presentations 1.0|1.0|Published|||presentation-protocol, format, trust-model||
+|[DCQL](https://openid.net/specs/openid-4-verifiable-presentations-1_0.html#name-digital-credentials-query-l)|Digital Credentials Query Language; defined within OpenID for Verifiable Presentations 1.0, clause 6|1.0|Published||Query language used by Relying Parties to request attestations|presentation-protocol, format||
 |OpenID|[Conformance tests for OID4VC](https://openid.net/certification/conformance-testing-for-openid-for-verifiable-presentations/)||Published|||issuance-process, issuance-protocol, presentation-protocol, format, trust-model||
 |[OpenID Oauth 2.0](https://openid.net/specs/oauth-v2-multiple-response-types-1_0.html)|OAuth 2.0 Multiple Response Type Encoding Practices|1.0|Published||Response encoding|issuance-protocol, presentation-protocol||
 |[OpenID HAIP](https://openid.net/specs/openid4vc-high-assurance-interoperability-profile-1_0-05.html)|OpenID4VC High Assurance Interoperability Profile|1.0|Published|||issuance-process, issuance-protocol, presentation-protocol, format, trust-model||
@@ -148,6 +149,8 @@ Note: Titles are shortened and  omit the shared series prefix carried by every e
 |[IETF RFC 8949](https://datatracker.ietf.org/doc/html/rfc8949)|Concise Binary Object Representation (CBOR)||Published|||format||
 |[IETF RFC 9052](https://www.rfc-editor.org/rfc/rfc9052)|CBOR Object Signing and Encryption (COSE): Structures and Process||Published|||—||
 |[IETF RFC 9101](https://datatracker.ietf.org/doc/html/rfc9101)|The OAuth 2.0 Authorization Framework: JWT-Secured Authorization Request (JAR)||Published||Signed Request Object used in presentation requests|presentation-protocol||
+|[IETF RFC 9110](https://datatracker.ietf.org/doc/html/rfc9110)|HTTP Semantics||Published||Methods, header fields and status codes of the trust evaluation and status endpoints|validation, trust-model, other||
+|[IETF RFC 9111](https://datatracker.ietf.org/doc/html/rfc9111)|HTTP Caching||Published||`Cache-Control` and `Expires` behaviour of the Register and status endpoints; obsoletes RFC 7234|validation, trust-model, other||
 |[IETF RFC 9126](https://datatracker.ietf.org/doc/html/rfc9126)|OAuth 2.0 Pushed Authorization Requests (PAR)||Published||Required for the Authorisation Code Flow in issuance|issuance-protocol||
 |[IETF RFC 9162](https://datatracker.ietf.org/doc/html/rfc9162)|Certificate Transparency Version 2.0||Published|||trust-model||
 |[IETF RFC 9449](https://datatracker.ietf.org/doc/html/rfc9449)|OAuth 2.0 Demonstrating Proof of Possession (DPoP)||Published||Sender-constrained access tokens in issuance|issuance-protocol||
