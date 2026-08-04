@@ -99,9 +99,6 @@ components:Public Key Infrastructure (PKI)
 components:Register
 : An electronic register used by a Member State to make information on WRP registered in that Member State publicly available as set out in Article 5b(5) of Regulation (EU) No 910/2014. [CIR 2024/2980]
 
-components:Relying Application
-: User-facing application, service, or workflow in which credential verification is performed.
-
 components:Relying Party Instance
 : A software and/or hardware module with the capability to interact with a Wallet Unit and to perform Relying Party authentication, that is controlled by a Relying Party. [ARF]
 
