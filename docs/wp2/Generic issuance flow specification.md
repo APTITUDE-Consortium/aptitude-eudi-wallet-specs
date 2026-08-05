@@ -87,10 +87,10 @@ href="https://github.com/eu-digital-identity-wallet/eudi-doc-standards-and-techn
 <tr>
 <td>O2</td>
 <td><a
-href="https://www.etsi.org/deliver/etsi\\\_ts/119400\\\_119499/11941108/01.01.01\\\_60/ts\\\_11941108v010101p.pdf">ETSI
-TS 119 411-8</a>, <a
-href="https://www.etsi.org/deliver/etsi\\\_ts/119400\\\_119499/119475/01.02.01\\\_60/ts\\\_119475v010201p.pdf">ETSI
-TS 119 475</a></td>
+href="https://www.etsi.org/deliver/etsi_ts/119400_119499/11941108/01.01.01_60/ts_11941108v010101p.pdf">ETSI
+TS 119 411-8 ver1.1.1</a>, <a
+href="https://www.etsi.org/deliver/etsi_ts/119400_119499/119475/01.02.01_60/ts_119475v010201p.pdf">ETSI
+TS 119 475 ver1.2.1</a></td>
 <td>Distribution of WRPASs \\\&amp; WRPRCs</td>
 </tr>
 <tr>
@@ -109,35 +109,35 @@ href="https://github.com/eu-digital-identity-wallet/eudi-doc-standards-and-techn
 <tr>
 <td>R1</td>
 <td><p><a
-href="https://openid.net/specs/openid-4-verifiable-credential-issuance-1\\\_0.html">OID4VCI</a>,
+href="https://openid.net/specs/openid-4-verifiable-credential-issuance-1_0.html">OID4VCI ver1.0</a>,
 <a
-href="https://openid.net/specs/openid4vc-high-assurance-interoperability-profile-1\\\_0.html">HAIP</a>,
+href="https://openid.net/specs/openid4vc-high-assurance-interoperability-profile-1_0-final.html">HAIP ver1.0</a>,
 <a
-href="https://www.etsi.org/deliver/etsi\\\_ts/119400\\\_119499/11947203/01.01.01\\\_60/ts\\\_11947203v010101p.pdf">ETSI
-TS 119 472-3</a></p>
+href="https://www.etsi.org/deliver/etsi_ts/119400_119499/11947203/01.01.01_60/ts_11947203v010101p.pdf">ETSI
+TS 119 472-3 ver1.1.1</a></p>
 <p>ISO18013-5, <a
-href="https://datatracker.ietf.org/doc/draft-ietf-oauth-sd-jwt-vc/15">SD-JWT
-VC</a>, <a
-href="https://www.etsi.org/deliver/etsi\\\_ts/119400\\\_119499/11947201/01.01.01\\\_60/ts\\\_11947201v010101p.pdf">ETSI
-TS 119 472-1</a></p></td>
+href="https://datatracker.ietf.org/doc/draft-ietf-oauth-sd-jwt-vc/17/">SD-JWT
+VC Draft 17</a>, <a
+href="https://www.etsi.org/deliver/etsi_ts/119400_119499/11947201/01.01.01_60/ts_11947201v010101p.pdf">ETSI
+TS 119 472-1 ver1.1.1</a></p></td>
 <td>VCI and supporting standards</td>
 </tr>
 <tr>
 <td>R2</td>
 <td><a
-href="https://www.etsi.org/deliver/etsi\\\_ts/119600\\\_119699/119602/01.01.01\\\_60/ts\\\_119602v010101p.pdf">ETSI
-TS 119 602</a>, <a
-href="https://www.etsi.org/deliver/etsi\\\_ts/119600\\\_119699/119612/02.04.01\\\_60/ts\\\_119612v020401p.pdf">ETSI
-TS 119 612</a></td>
+href="https://www.etsi.org/deliver/etsi_ts/119600_119699/119602/01.01.01_60/ts_119602v010101p.pdf">ETSI
+TS 119 602 ver1.1.1</a>, <a
+href="https://www.etsi.org/deliver/etsi_ts/119600_119699/119612/02.04.01_60/ts_119612v020401p.pdf">ETSI
+TS 119 612 ver2.4.1</a></td>
 <td>Fetching QEAA or PubEAA TL (what do we do with EAA TL?)</td>
 </tr>
 <tr>
 <td>R3</td>
 <td><a
-href="https://www.etsi.org/deliver/etsi\\\_ts/119600\\\_119699/119602/01.01.01\\\_60/ts\\\_119602v010101p.pdf">ETSI
-TS 119 602</a>, <a
-href="https://www.etsi.org/deliver/etsi\\\_ts/119600\\\_119699/119612/02.04.01\\\_60/ts\\\_119612v020401p.pdf">ETSI
-TS 119 612</a></td>
+href="https://www.etsi.org/deliver/etsi_ts/119600_119699/119602/01.01.01_60/ts_119602v010101p.pdf">ETSI
+TS 119 602 ver1.1.1</a>, <a
+href="https://www.etsi.org/deliver/etsi_ts/119600_119699/119612/02.04.01_60/ts_119612v020401p.pdf">ETSI
+TS 119 612 ver2.4.1</a></td>
 <td>Fetching Wallet Providers TL</td>
 </tr>
 <tr>
@@ -250,7 +250,7 @@ E2E issuance flow is presented through sequence diagram (SD) and after that each
 <td>1a Select Issuer</td>
 <td>N.A.</td>
 <td><a
-href="https://openid.net/specs/openid-4-verifiable-credential-issuance-1\\\_0.html#appendix-H.6">OIDVCI
+href="https://openid.net/specs/openid-4-verifiable-credential-issuance-1_0.html#appendix-H.6">OIDVCI
 – H6</a></td>
 <td></td>
 </tr>
