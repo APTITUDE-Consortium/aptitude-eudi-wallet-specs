@@ -54,6 +54,7 @@ Here we are only clarifying which roles and/or interfaces are out of the scope o
 | Authentic Source → Issuer | How the Issuer retrieves data from the national authentic source | Assumed to be resolved at national level by each partner acting as Issuer |
 | QTSP → Attribute Catalogue | Citizen-initiated flow where a QTSP validates and issues a VC from scratch | No WP in APTITUDE covers this scenario |
 | Wallet → APTITUDE Register (runtime) | Runtime lookup from Wallet to APTITUDE Register | Redundant: WRPRC is provisioned at onboarding time (design-time); registration certificate is becoming mandatory per 2025/848 IA |
+| Issuer → Wallet Provider | Issuer check run time or periodically revocation of WIA and/or KA | Clarification pending with Aptitude WP2 trustgroup team  |
 
 ### 2.1 Relation between different standards and interfaces
 
@@ -147,8 +148,14 @@ TS 119 612 ver2.4.1</a></td>
 <tr>
 <td>R4</td>
 <td><a
-href="https://github.com/eu-digital-identity-wallet/eudi-doc-standards-and-technical-specifications/blob/main/docs/technical-specifications/ts3-wallet-unit-attestation.md#222-transport-of-key-attestation-ka">TS3</a></td>
+href="https://github.com/eu-digital-identity-wallet/eudi-doc-standards-and-technical-specifications/blob/main/docs/technical-specifications/ts3-wallet-unit-attestation.md#222-transport-of-key-attestation-ka">TS3 ver1.5.2</a></td>
 <td>Signing WIA and KA</td>
+</tr>
+<tr>
+<td>R5/O5</td>
+<td><a
+href="https://github.com/eu-digital-identity-wallet/eudi-doc-standards-and-technical-specifications/blob/main/docs/technical-specifications/ts3-wallet-unit-attestation.md#243-pid-provider-and-attestation-provider-responsibilities">TS3 ver1.5.2</a></td>
+<td>Run time/operational schedule  status/key storage status check on WIA/KA?</td>
 </tr>
 </tbody>
 </table>
