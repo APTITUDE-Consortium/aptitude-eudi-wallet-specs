@@ -504,23 +504,10 @@ Revocation of the linked eMRTD and LDS data given in the ICAO PhotoID data eleme
 
 After successfully processing the device response and the verification procedure, a reader MAY recontruct from the content of the APTITUDE DTC Attestation an ICAO compliant DTC-VC as defined in [ICAO-DTC-VC-TR], supporting the following Type of ICAO DTC:
 
-* ICAO DTC Type 1, also named eMRTD bound DTC;
-* eMRTD bound extended DTC;
-
 **ICAO DTC Type 1, also named eMRTD bound DTC**
 In this case the reader SHALL bundle the ``dg1``, ``dg2``, ``sod``, and if present ``dg3``, ``dg4``, ``dg5``, ``dg6``, ``dg7``, ``dg8``, ``dg9``, ``dg10``, ``dg11``, ``dg12``, ``dg13``, ``dg14``, ``dg15``, ``dg16`` within the structure ``DTCData`` to build the structure ``DTCContentInfo``.
 
 *Note:* In this case, the structure ``DTCContentInfo`` does not contain stuctures ``DTCTBS``, ``DTCSignerInfo``, ``DTCSecurityInfo`` and ``DTCOtherInfo``.
-
-**eMRTD bound extended DTC**
-In this case the reader SHALL bundle the ``dg1``, ``dg2``, ``sod``, and if present ``dg3``, ``dg4``, ``dg5``, ``dg6``, ``dg7``, ``dg8``, ``dg9``, ``dg10``, ``dg11``, ``dg12``, ``dg13``, ``dg14``, ``dg15``, ``dg16`` to get the structure ``DTCData``. Subsequently, the reader SHALL (1) append the stucture ``DTCOtherInfo`` found within the APTITUDE DTC Attestation in the structure ``DTCData`` and (2) bundle the structures ``DTCTBS`` and ``DTCSignerInfo`` found within the APTITUDE DTC Attestation together with ``DTCData`` to build the structure ``DTCContentInfo``.
-Conversly, during issuance of the APTITUDE DTC, the issuing authority SHALL compute the following structures in accordance with [ICAO-DTC-VC-TR] and store them within the APTITUDE DTC Attestation:
-
-* ``DTCTBS``
-* ``DTCOtherInfo``
-* ``DTCSignerInfo``
-
-*Note:* In this case, the structure ``DTCData`` does not contain the stucture ``DTCSecurityInfo``.
 
 The binding between the DTC-VC and the EUDI Wallet enabled by the Rulebook is not compliant with the mechanisms currently defined by ICAO for the binding between the DTC-VC and DTC-PC. Therefore, the following features allowed by the Rulebook are currently not compliant with ICAO specifications:
 
