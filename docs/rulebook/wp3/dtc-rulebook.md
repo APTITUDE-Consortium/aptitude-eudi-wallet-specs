@@ -509,7 +509,7 @@ In this case the reader SHALL bundle the ``dg1``, ``dg2``, ``sod``, and if prese
 
 *Note:* In this case, the structure ``DTCContentInfo`` does not contain stuctures ``DTCTBS``, ``DTCSignerInfo``, ``DTCSecurityInfo`` and ``DTCOtherInfo``.
 
-The binding between the DTC-VC and the EUDI Wallet enabled by the Rulebook is not compliant with the mechanisms currently defined by ICAO for the binding between the DTC-VC and DTC-PC. Therefore, the following features allowed by the Rulebook are currently not compliant with ICAO specifications:
+The Rulebook defines a binding approach between the DTC-VC and the EUDI Wallet that differs from the current ICAO DTC-PC binding model. This approach is characterized by:
 
 * binding between the DTC-PC (EUDI Wallet) and the DTC-VC;
 * security mechanisms implemented by the DTC-PC (EUDI Wallet);
