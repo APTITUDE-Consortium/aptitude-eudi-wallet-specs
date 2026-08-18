@@ -25,7 +25,8 @@ Date 18-08-2026
      * 3.1.1 OID4VCI requirements
      * 3.1.2 HAIP requirements
      * 3.1.3 ETSI 119 472-3 requirements
-     * 3.1.4 Additional Aptitude requirements
+     * 3.1.4 TS3 requirements
+     * 3.1.5 Additional Aptitude requirements
    * 3.2 Detailed technical flow description (sequence diagram)
      * 3.2.1 Steps mapping overview
 
@@ -236,13 +237,23 @@ impacting issuance flow and designed validation checks.
 |Issuer and wallet unit shall support access and registration certificate of (Pub-)EAA provider|In scope|
 |Issuer may support inclusion of embedded disclosure policy and wallet unit shall process it|In scope|
 |Wallet unit shall include WIA to the push authorization and token endpoint|In scope|
-|Wallet unit shall include KA to the credential endpoint when issuing device bout attestation|In scope|
+|Wallet unit shall include KA to the credential endpoint when issuing device bound attestation|In scope|
 |Holder shall prove the possession of private key associated to the public key in KA|In scope|
 |Proofing that the same WSCA/WSCD possesses the private keys associated to the public keys in the WIA and one used for the attestation binding|In scope|
 |Issuer metadata shall be signed as per [OID4VCI instructions](https://openid.net/specs/openid-4-verifiable-credential-issuance-1_0.html#name-signed-metadata)|In scope|
 |Issuer metadata may include provision of EAA reuse policy|Not in the scope|
 
-#### 3.1.4 Additional Aptitude requirements
+#### 3.1.4 TS3 requirements
+
+Latest [IA 2026/1731](https://eur-lex.europa.eu/legal-content/EN/TXT/HTML/?uri=OJ:L_202601731) with Annex Ib and according ARF TS03 specifications introduce following requirements relevant for the wallet providers and issuers during the issuance process.
+
+|**Requirement**|**Scope decision**|
+|-|-|
+|Issuer shall check run time WIA revocation status during the issuance process|In scope|
+|Issuer shall check run time KA revocation status during the issuance process of the device bound attestation|In scope|
+|Attestation provider issuing revocable attestation may set periodical revocation WIA and KA checks. Checks support decision to revoke an attestation in the case that the wallet provider revoked the wallet unit or the issued key|In scope|
+
+#### 3.1.5 Additional Aptitude requirements
 
 In some cases to simplify implementation for the partners there are number of additional requirements added on the top of all formal standards and specifications
 
@@ -252,10 +263,9 @@ In some cases to simplify implementation for the partners there are number of ad
 |Issuer authorization and resource servers shall mandate using of fresh nonce value within the DPoP |In scope|
 |Issuer shall offer Nonce Endpoint  |In scope|
 |Issuer shall require a presence of WIA and DPoP header on token endpoint for pre-authorized code flow  |In scope|
-|The issuer shall check the status of the KA before issuance of the credential|In scope|
 |Wallet shall send WIA at the PAR and Token endpoints for Authorization Code Flow, prove possession of the WIA `cnf` key, and Issuers shall validate the WIA signature, expiry, and proof of possession as profiled in [RFC-01](https://github.com/APTITUDE-Consortium/aptitude-eudi-wallet-specs/blob/main/docs/horizontal-RFCs/RFC001.md#73-authorisation-endpoint-and-par)|In scope|
 |Wallet shall send KA at the Credential Endpoint using the selected proof method, and Issuers shall validate the KA and bind issued credentials to the attested keys as profiled in [RFC-01](https://github.com/APTITUDE-Consortium/aptitude-eudi-wallet-specs/blob/main/docs/horizontal-RFCs/RFC001.md#75-credential-endpoint)|In scope|
-|Trust anchors for (Q)EAA Providers shall be present in a dedicated LoTE|In scope|
+|Trust anchors for EAA Providers shall be present in a dedicated LoTE|In scope|
 |Authentic Source integration|Not in scope|
 |Common Credential Catalogue discovery|Not in scope|
 
