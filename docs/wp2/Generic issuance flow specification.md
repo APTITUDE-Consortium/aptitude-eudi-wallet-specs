@@ -331,7 +331,7 @@ href="https://github.com/APTITUDE-Consortium/aptitude-eudi-wallet-specs/blob/mai
 <td></td>
 </tr>
 <tr>
-<td>2</td>
+<td>2.1</td>
 <td>Get Issuer metadata</td>
 <td><p><a
 href="https://github.com/APTITUDE-Consortium/aptitude-eudi-wallet-specs/blob/main/docs/horizontal-RFCs/RFC001.md#611-configuration-and-discovery">RFC-01
@@ -361,7 +361,7 @@ href="https://aptitude-consortium.github.io/wp2-trust-specifications/latest/sect
 <td></td>
 </tr>
 <tr>
-<td>V2.3, V4a.2</td>
+<td>V2.3, V2.5, V4a.2, V5.3, V6.4</td>
 <td>Get LoTE</td>
 <td><p><a
 href="https://github.com/APTITUDE-Consortium/aptitude-eudi-wallet-specs/blob/rfc003-trust/docs/horizontal-RFCs/RFC003.md#71-lote-endpoint">RFC003
@@ -372,16 +372,6 @@ href="https://aptitude-consortium.github.io/wp2-trust-specifications/latest/sect
 </tr>
 <tr>
 <td>V2.4</td>
-<td>Get QEAA/Pub-EAA/EAA Provider LoTE</td>
-<td><p><a
-href="https://github.com/APTITUDE-Consortium/aptitude-eudi-wallet-specs/blob/rfc003-trust/docs/horizontal-RFCs/RFC003.md#71-lote-endpoint">RFC003
-LoTE Endpoint</a></p>
-<p><a
-href="https://aptitude-consortium.github.io/wp2-trust-specifications/latest/sections/trust-evaluation-process/#list-of-trusted-entities-validation-process">LoTE Validation Process</a></p></td>
-<td></td>
-</tr>
-<tr>
-<td>V2.5</td>
 <td>Validate WRPRC</td>
 <td><a
 href="https://github.com/APTITUDE-Consortium/wp2-trust-specifications/blob/main/docs/topics/registration-certificate.md">Aptitude
@@ -389,7 +379,7 @@ WRPRC</a></td>
 <td></td>
 </tr>
 <tr>
-<td>V2.6</td>
+<td>2.2</td>
 <td>Process Embedded Policy</td>
 <td><a
 href="https://github.com/APTITUDE-Consortium/wp2-trust-specifications/blob/main/docs/topics/embedded-disclosure-policy.md">Aptitude
@@ -397,27 +387,25 @@ embedded disclosure policies</a></td>
 <td></td>
 </tr>
 <tr>
+<td>2.3</td>
+<td>Get Authorization Server metadata</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
 <td>3</td>
-<td>Nonce Request</td>
-<td><a
-href="https://github.com/APTITUDE-Consortium/aptitude-eudi-wallet-specs/blob/main/docs/horizontal-RFCs/RFC001.md#86-nonce-endpoint">RFC-01
-8.6</a></td>
-<td></td>
-</tr>
-<tr>
-<td>3.1</td>
-<td>KA request</td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td>3.2</td>
 <td>WIA request</td>
 <td></td>
 <td></td>
 </tr>
 <tr>
-<td>4.a.2</td>
+<td>3.1, 4a.2, 4b.2, 6.2</td>
+<td>Create DPoP</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>4a.1, 4a.3</td>
 <td>PAR request</td>
 <td><p><a
 href="https://github.com/APTITUDE-Consortium/aptitude-eudi-wallet-specs/blob/main/docs/horizontal-RFCs/RFC001.md#613-pushed-authorisation-request-par">RFC-01
@@ -428,13 +416,13 @@ href="https://github.com/APTITUDE-Consortium/aptitude-eudi-wallet-specs/blob/mai
 <td></td>
 </tr>
 <tr>
-<td>4.a.3</td>
+<td>4a.4</td>
 <td>Authorization request</td>
 <td></td>
 <td></td>
 </tr>
 <tr>
-<td>V4a.1, V5.1</td>
+<td>V4a.1, V5.2</td>
 <td>Validate WIA</td>
 <td>
   <p>TODO: Sign/Seal Validation link</p>
@@ -442,23 +430,19 @@ href="https://github.com/APTITUDE-Consortium/aptitude-eudi-wallet-specs/blob/mai
 <td></td>
 </tr>
 <tr>
-<td>V4a.3</td>
-<td>Get Wallet Providers LoTE</td>
-<td><p><a
-href="https://github.com/APTITUDE-Consortium/aptitude-eudi-wallet-specs/blob/rfc003-trust/docs/horizontal-RFCs/RFC003.md#71-lote-endpoint">RFC003
-LoTE Endpoint</a></p>
-<p><a
-href="https://aptitude-consortium.github.io/wp2-trust-specifications/latest/sections/trust-evaluation-process/#list-of-trusted-entities-validation-process">LoTE Validation Process</a></p></td>
+<td>V4a.3, V5.4, V6.1</td>
+<td>Validate DPoP</td>
+<td></td>
 <td></td>
 </tr>
 <tr>
-<td>4.a.6</td>
+<td>4a.7</td>
 <td>Authorization response</td>
 <td></td>
 <td></td>
 </tr>
 <tr>
-<td>5.1</td>
+<td>4b.1, 5</td>
 <td>Token request</td>
 <td><p><a
 href="https://github.com/APTITUDE-Consortium/aptitude-eudi-wallet-specs/blob/main/docs/horizontal-RFCs/RFC001.md#615-token-request">RFC-01
@@ -469,7 +453,21 @@ href="https://github.com/APTITUDE-Consortium/aptitude-eudi-wallet-specs/blob/mai
 <td></td>
 </tr>
 <tr>
+<td>6</td>
+<td>Nonce Request</td>
+<td><a
+href="https://github.com/APTITUDE-Consortium/aptitude-eudi-wallet-specs/blob/main/docs/horizontal-RFCs/RFC001.md#86-nonce-endpoint">RFC-01
+8.6</a></td>
+<td></td>
+</tr>
+<tr>
 <td>6.1</td>
+<td>KA request</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>6.3</td>
 <td>Credential Request</td>
 <td><p><a
 href="https://github.com/APTITUDE-Consortium/aptitude-eudi-wallet-specs/blob/main/docs/horizontal-RFCs/RFC001.md#616-credential-request">RFC-01
@@ -483,13 +481,13 @@ href="https://github.com/APTITUDE-Consortium/aptitude-eudi-wallet-specs/blob/mai
 <td></td>
 </tr>
 <tr>
-<td>V6.1</td>
-<td>Verify Key Proof</td>
+<td>V6.2</td>
+<td>Validate KA</td>
 <td></td>
 <td></td>
 </tr>
 <tr>
-<td>6.2</td>
+<td>6.5</td>
 <td>Deferred credential</td>
 <td><p><a
 href="https://github.com/APTITUDE-Consortium/aptitude-eudi-wallet-specs/blob/main/docs/horizontal-RFCs/RFC001.md#63-deferred-credential-request">RFC-01
