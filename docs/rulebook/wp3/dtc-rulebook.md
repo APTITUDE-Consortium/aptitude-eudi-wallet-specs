@@ -375,7 +375,7 @@ APTITUDE DTC:
 
 [//]: # (See D3.1 §§1.2 and 3.2 for traveller‑initiated advance submission.)
 
-**Flow:** remote (wallet → Traveller Router or direct submission endpoint → Border backend). The remote presentation protocol complies with the regulation's Implementing Acts (i.e. OpenID4VP and iso18013-7). 
+**Flow:** remote (wallet → Traveller Router or direct submission endpoint → Border backend). The remote presentation protocol complies with the regulation's Implementing Acts (i.e. OpenID4VP and iso18013-7).
 
 **Requested attributes:**
 
@@ -397,7 +397,7 @@ The request may include ``age_over_18`` where required for age-based verificatio
 
 **Context:** Traveller presents their APTITUDE DTC from the EUDIW at the border control point (e‑gate, kiosk or officer reader) for immediate verification and biometric match. (D3.1 describes proximity presentation requirements and the need to reconcile ISO/IEC 18013‑5 and ICAO NFC/APDU approaches.)
 
-**Flow:** proximity (EUDIW proximity presentation according to ISO/IEC 18013‑5). 
+**Flow:** proximity (EUDIW proximity presentation according to ISO/IEC 18013‑5).
 
 **Modalities (as defined in D3.2 Chapter 10.3 Functional Flow):**
 
@@ -485,7 +485,7 @@ The following key usage period and certificate/public key validity period SHALL 
 * Private key usage period : between xx days and 3 months;
 * certificate/public key validity period : xxx;
 
-It is recommended to make the CSCA root certificates of the EU Member States available to Relying Parties in the EUDI Wallet ecosytem by a respective EU Trust List, i.e. APTITUDE DTC TL. 
+It is recommended to make the CSCA root certificates of the EU Member States available to Relying Parties in the EUDI Wallet ecosytem by a respective EU Trust List, i.e. APTITUDE DTC TL.
 
 CSCA root certificates MAY also be obtained from the ICAO PKD by any Relying Party.
 
