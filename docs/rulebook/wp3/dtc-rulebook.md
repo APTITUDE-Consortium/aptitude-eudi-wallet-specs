@@ -395,7 +395,7 @@ The request may include ``age_over_18`` where required for age-based verificatio
 
 ### 4.3 Proximity presentation at border control (on‑site verification / e‑gate or officer kiosk)
 
-**Context:** Traveller presents their APTITUDE DTC from the EUDIW at the border control point (e‑gate, kiosk or officer reader) for immediate verification and biometric match. (D3.1 describes proximity presentation requirements and the need to reconcile ISO/IEC 18013‑5 and ICAO NFC/APDU approaches.)
+**Context:** Traveller presents their APTITUDE DTC from the EUDIW at the border control point (e‑gate, kiosk or officer reader) for immediate verification and biometric match.
 
 **Flow:** proximity (EUDIW proximity presentation according to ISO/IEC 18013‑5).
 
