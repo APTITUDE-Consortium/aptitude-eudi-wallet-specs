@@ -367,7 +367,7 @@ APTITUDE DTC:
 
 [//]: # (See D3.1 §§1.2 and 3.2 for traveller‑initiated advance submission.)
 
-**Flow:** remote (wallet → Traveller Router or direct submission endpoint → Border backend). The exact presentation protocol (OpenID4VP, mdoc, Traveller Router) is not mandated in D3.1 and must be chosen by implementers.
+**Flow:** remote (wallet → Traveller Router or direct submission endpoint → Border backend). The remote presentation protocol complies with the regulation's Implementing Acts (i.e. OpenID4VP and iso18013-7). 
 
 **Requested attributes:**
 
