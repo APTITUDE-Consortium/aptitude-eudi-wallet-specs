@@ -189,6 +189,14 @@ The objective is to preserve a single interoperable DTC representation that is:
 | ``travel_document_number`` | according to [ISO/IEC 23220-4] | I13235678 |
 | ``travel_document_mrz`` | according to [ISO/IEC 23220-4] | P<ITA<<HARDT<<GIOVANNI<<<<<<<<<<<<<<<< |
 
+### Future Work
+
+In the future, after completion of APTITUDE WP3 and once the generic Pub-EAA JSON schema is available, work may be done towards a JSON-structure for the APTITUDE DTC.
+
+Also, independently, work may be done towards a globally interoperable framework for verification.
+
+In addition, it is recommended to make the content of the APTITUDE DTC TL available to Relying Parties outside of the EUDI Wallet ecosystem by a VICAL according to [ISO/IEC 18013-5].
+
 ## 3 Attestation Encoding
 
 ### 3.1 ISO/IEC 18013-5-compliant encoding
@@ -467,7 +475,7 @@ APTITUDE DTC (see pre-registration use cases 4.1 or 4.2)
 
 ## 5 Trust Anchors
 
-The APTITUDE DTC is derived from data contained in the LDS data groups of the corresponding physical eMRTD and is signed by the national issuing authority. The issuing authority SHALL sign the issuer signed data, i.e. the Mobile Security Object (MSO), using a DTC signer key and certificate under the respective CSCA root certificate.
+The issuing authority SHALL sign the issuer signed data, i.e. the Mobile Security Object (MSO), using a DTC signer key and certificate under the respective CSCA root certificate.
 The document signer key and certificate SHALL comply with clause 2.2 in [ICAO-DTC-VC-TR] and SHALL meet the following conditions:
 
 * The DTC signer certificate SHALL include the following OID in the extendedKeyUsage extension : xxxxx;
@@ -477,7 +485,7 @@ The following key usage period and certificate/public key validity period SHALL 
 * Private key usage period : between xx days and 3 months;
 * certificate/public key validity period : xxx;
 
-It is recommended to make the CSCA root certificates of the EU Member States available to Relying Parties in the EUDI Wallet ecosytem by a respective EU Trust List, i.e. APTITUDE DTC TL. In addition, it is recommended to make the content of the APTITUDE DTC TL available to Relying Parties outside of the EUDI Wallet ecosystem by a VICAL according to [ISO/IEC 18013-5].
+It is recommended to make the CSCA root certificates of the EU Member States available to Relying Parties in the EUDI Wallet ecosytem by a respective EU Trust List, i.e. APTITUDE DTC TL. 
 
 CSCA root certificates MAY also be obtained from the ICAO PKD by any Relying Party.
 
