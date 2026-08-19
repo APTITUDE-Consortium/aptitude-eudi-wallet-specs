@@ -397,7 +397,7 @@ The request may include ``age_over_18`` where required for age-based verificatio
 
 **Context:** Traveller presents their APTITUDE DTC from the EUDIW at the border control point (e‑gate, kiosk or officer reader) for immediate verification and biometric match. (D3.1 describes proximity presentation requirements and the need to reconcile ISO/IEC 18013‑5 and ICAO NFC/APDU approaches.)
 
-**Flow:** proximity (device engagement / NFC or mdoc proximity per chosen implementation). D3.1 notes both ISO/IEC 18013‑5 (EUDIW proximity) and ISO/IEC 14443/APDU (ICAO backwards compatibility) and does not mandate one universal mode — the pilot must specify which mode(s) will be tested.
+**Flow:** proximity (EUDIW proximity presentation according to ISO/IEC 18013‑5). 
 
 **Modalities (as defined in D3.2 Chapter 10.3 Functional Flow):**
 
