@@ -9,7 +9,7 @@ Author(s):
 * Alban Feraud, IN Groupe, France
 * Antonio Maio, INCM, Portugal
 * Arjan Geluk, ..., ...
-  
+ 
 | Version | Date | Description |
 |---------|------------|------------|
 | 0.1 | 11-02-2026 | First draft version - Filled par 1.1 |
@@ -321,7 +321,7 @@ The ICAO PhotoID data elements of APTITUDE DTC SHALL be as defined in Table 3 an
 
 #### 3.1.5 Additional document encryption
 
-If a Relying Party requires document encryption in addition to the session encryption layer, it SHALL use the "Document response encryption" security mechanism as defined in [ISO/IEC 18013-5.2] and encode the document request according to [ISO/IEC 18013-5.2]. The EUDI Wallet SHALL encrypt the requested data elements according to [ISO/IEC 18013-5.2].  
+If a Relying Party requires document encryption in addition to the session encryption layer, it SHALL use the "Document response encryption" security mechanism as defined in [ISO/IEC 18013-5.2] and encode the document request according to [ISO/IEC 18013-5.2]. The EUDI Wallet SHALL encrypt the requested data elements according to [ISO/IEC 18013-5.2].
 
 #### 3.1.6 Mapping from PhotoID to ICAO-based encoding
 
@@ -491,7 +491,7 @@ CSCA root certificates MAY also be obtained from the ICAO PKD by any Relying Par
 
 For the purpose of interoperability tests and piloting, issung authorities are requested to provide a certificates of a test CSCA which
 
-* SHALL be published at a stated distribution point, 
+* SHALL be published at a stated distribution point,
 * SHALL be bounded in validity
 * SHALL be distinguishable from production trust anchors, and the operator of the test PKI SHALL be named
 
