@@ -1,7 +1,7 @@
 # Generic issuance flow specification
 
-Version 0.9 (draft)
-Date 18-08-2026
+Version 0.91 (draft)
+Date 20-08-2026
 
 ## Authors
 
@@ -361,7 +361,7 @@ href="https://aptitude-consortium.github.io/wp2-trust-specifications/latest/sect
 <td></td>
 </tr>
 <tr>
-<td>V2.3, V2.5, V4a.2, V5.3, V6.4</td>
+<td>V2.3, V2.5, V4a.3, V5.4, V6.4</td>
 <td>Get LoTE</td>
 <td><p><a
 href="https://github.com/APTITUDE-Consortium/aptitude-eudi-wallet-specs/blob/rfc003-trust/docs/horizontal-RFCs/RFC003.md#71-lote-endpoint">RFC003
@@ -430,7 +430,15 @@ href="https://github.com/APTITUDE-Consortium/aptitude-eudi-wallet-specs/blob/mai
 <td></td>
 </tr>
 <tr>
-<td>V4a.3, V5.4, V6.1</td>
+<td>V4a.2, V5.3, V6.3</td>
+<td>Get Status list</td>
+<td>
+  <p>TODO: Add trust link</p>
+</td>
+<td></td>
+</tr>
+<tr>
+<td>V4a.4, V5.5, V6.1</td>
 <td>Validate DPoP</td>
 <td></td>
 <td></td>
