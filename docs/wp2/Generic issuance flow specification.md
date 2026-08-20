@@ -25,7 +25,8 @@ Date 20-08-2026
      * 3.1.1 OID4VCI requirements
      * 3.1.2 HAIP requirements
      * 3.1.3 ETSI 119 472-3 requirements
-      * 3.1.4 Additional Aptitude requirements
+     * 3.1.4 TS3 requirements
+     * 3.1.5 Additional Aptitude requirements
    * 3.2 Detailed technical flow description (sequence diagram)
      * 3.2.1 Steps mapping overview
 
@@ -242,7 +243,7 @@ impacting issuance flow and designed validation checks.
 |Issuer metadata shall be signed as per [OID4VCI instructions](https://openid.net/specs/openid-4-verifiable-credential-issuance-1_0.html#name-signed-metadata)|In scope|
 |Issuer metadata may include provision of EAA reuse policy|Not in the scope|
 
-#### 3.1.4 Additional Aptitude requirements
+#### 3.1.5 Additional Aptitude requirements
 
 In some cases to simplify implementation for the partners there are number of additional requirements added on the top of all formal standards and specifications
 
