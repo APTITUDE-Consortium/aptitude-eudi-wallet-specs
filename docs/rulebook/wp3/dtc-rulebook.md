@@ -495,7 +495,6 @@ For the purpose of interoperability tests and piloting, issung authorities are r
 * SHALL be bounded in validity
 * SHALL be distinguishable from production trust anchors, and the operator of the test PKI SHALL be named
 
-
 ## 6 Revocation
 
 ### 6.1 Reasons for revocation
