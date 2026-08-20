@@ -492,8 +492,8 @@ CSCA root certificates MAY also be obtained from the ICAO PKD by any Relying Par
 For the purpose of interoperability tests and piloting, issung authorities are requested to provide a certificates of a test CSCA which
 
 * SHALL be published at a stated distribution point,
-* SHALL be bounded in validity
-* SHALL be distinguishable from production trust anchors, and the operator of the test PKI SHALL be named
+* SHALL be bounded in validity and
+* SHALL be distinguishable from production trust anchors, and the operator of the test PKI SHALL be named.
 
 ## 6 Revocation
 
