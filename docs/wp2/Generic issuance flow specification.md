@@ -25,8 +25,7 @@ Date 20-08-2026
      * 3.1.1 OID4VCI requirements
      * 3.1.2 HAIP requirements
      * 3.1.3 ETSI 119 472-3 requirements
-     * 3.1.4 TS3 requirements
-     * 3.1.5 Additional Aptitude requirements
+      * 3.1.4 Additional Aptitude requirements
    * 3.2 Detailed technical flow description (sequence diagram)
      * 3.2.1 Steps mapping overview
 
@@ -119,10 +118,10 @@ href="https://eur-lex.europa.eu/legal-content/EN/TXT/PDF/?uri=OJ:L_202601731">CI
 <td>O5</td>
 <td><a
 href="https://github.com/eu-digital-identity-wallet/eudi-doc-standards-and-technical-specifications/blob/main/docs/technical-specifications/ts3-wallet-unit-attestation.md">TS3 ver1.5.2</a>, <a
-href="https://aptitude-consortium.github.io/wp2-trust-specifications/latest/sections/trust-management-lifecycle/">APTITUDE Trust management and lifecycle</a>, <a
+href="https://aptitude-consortium.github.io/wp2-trust-specifications/latest/sections/trust-management-lifecycle/#token-status-list-wallet-unit-attestation-profile">APTITUDE Trust management and lifecycle</a>, <a
 href="https://datatracker.ietf.org/doc/draft-ietf-oauth-status-list/21/">IETF Token Status List Draft 21</a></td>
-<td>Scheduled revocation checks for WIA and KA as per <a
-href="https://eudi.dev/3.0.0/annexes/annex-2/annex-2.02-high-level-requirements-by-topic/#a2322-topic-38-wallet-unit-revocation">ARF Topic 38</a> and requirement WURevocation_19</td>
+<td>Optional scheduled revocation checks by the Issuer against the Wallet Provider's status lists for WIA and KA, as per <a
+href="https://eudi.dev/3.0.0/annexes/annex-2/annex-2.02-high-level-requirements-by-topic/#a2322-topic-38-wallet-unit-revocation">ARF Topic 38</a> and requirement WURevocation_19.<br><br><em>Note: As specified in <a href="https://aptitude-consortium.github.io/wp2-trust-specifications/latest/sections/trust-management-lifecycle/#token-status-list-wallet-unit-attestation-profile">the APTITUDE Trust Management and Lifecycle profile</a>, for other attestation types within the APTITUDE profiles:</em><ul><li>Both WIA and KA operational checks SHALL be performed for device-bound credentials when operational monitoring is enabled.</li><li>Only the WIA operational check SHALL be performed for non-device-bound attestations when operational monitoring is enabled.</li></ul></td>
 </tr>
 <tr>
 <td>R1</td>
@@ -243,17 +242,7 @@ impacting issuance flow and designed validation checks.
 |Issuer metadata shall be signed as per [OID4VCI instructions](https://openid.net/specs/openid-4-verifiable-credential-issuance-1_0.html#name-signed-metadata)|In scope|
 |Issuer metadata may include provision of EAA reuse policy|Not in the scope|
 
-#### 3.1.4 TS3 requirements
-
-Latest [IA 2026/1731](https://eur-lex.europa.eu/legal-content/EN/TXT/HTML/?uri=OJ:L_202601731) with Annex Ib and according ARF TS03 specifications introduce following requirements relevant for the wallet providers and issuers during the issuance process.
-
-|**Requirement**|**Scope decision**|
-|-|-|
-|Issuer shall check run time WIA revocation status during the issuance process|In scope|
-|Issuer shall check run time KA revocation status during the issuance process of the device bound attestation|In scope|
-|Attestation provider issuing revocable attestation may set periodical revocation WIA and KA checks. Checks support decision to revoke an attestation in the case that the wallet provider revoked the wallet unit or the issued key|In scope|
-
-#### 3.1.5 Additional Aptitude requirements
+#### 3.1.4 Additional Aptitude requirements
 
 In some cases to simplify implementation for the partners there are number of additional requirements added on the top of all formal standards and specifications
 
@@ -265,7 +254,7 @@ In some cases to simplify implementation for the partners there are number of ad
 |Issuer shall require a presence of WIA and DPoP header on token endpoint for pre-authorized code flow  |In scope|
 |Wallet shall send WIA at the PAR and Token endpoints for Authorization Code Flow, prove possession of the WIA `cnf` key, and Issuers shall validate the WIA signature, expiry, and proof of possession as profiled in [RFC-01](https://github.com/APTITUDE-Consortium/aptitude-eudi-wallet-specs/blob/main/docs/horizontal-RFCs/RFC001.md#73-authorisation-endpoint-and-par)|In scope|
 |Wallet shall send KA at the Credential Endpoint using the selected proof method, and Issuers shall validate the KA and bind issued credentials to the attested keys as profiled in [RFC-01](https://github.com/APTITUDE-Consortium/aptitude-eudi-wallet-specs/blob/main/docs/horizontal-RFCs/RFC001.md#75-credential-endpoint)|In scope|
-|Trust anchors for EAA Providers shall be present in a dedicated LoTE|In scope|
+|Trust anchors for (Q)EAA Providers shall be present in a dedicated LoTE |In scope|
 |Authentic Source integration|Not in scope|
 |Common Credential Catalogue discovery|Not in scope|
 
@@ -425,7 +414,10 @@ href="https://github.com/APTITUDE-Consortium/aptitude-eudi-wallet-specs/blob/mai
 <td>V4a.1, V5.2</td>
 <td>Validate WIA</td>
 <td>
-  <p>TODO: Sign/Seal Validation link</p>
+  <p><a href="https://aptitude-consortium.github.io/wp2-trust-specifications/latest/sections/trust-artifacts/#signseal-certificate-path-validation">Sign/Seal Certificate Path Validation</a></p>
+  <p><a
+href="https://github.com/eu-digital-identity-wallet/eudi-doc-standards-and-technical-specifications/blob/main/docs/technical-specifications/ts3-wallet-unit-attestation.md#231-content-of-wia">TS3
+2.2.1.2</a></p>
 </td>
 <td></td>
 </tr>
@@ -433,7 +425,7 @@ href="https://github.com/APTITUDE-Consortium/aptitude-eudi-wallet-specs/blob/mai
 <td>V4a.2, V5.3, V6.3</td>
 <td>Get Status list</td>
 <td>
-  <p>TODO: Add trust link</p>
+  <p><a href="https://aptitude-consortium.github.io/wp2-trust-specifications/latest/sections/trust-management-lifecycle/#token-status-list">Token Status List</a></p>
 </td>
 <td></td>
 </tr>
@@ -491,7 +483,21 @@ href="https://github.com/APTITUDE-Consortium/aptitude-eudi-wallet-specs/blob/mai
 <tr>
 <td>V6.2</td>
 <td>Validate KA</td>
-<td></td>
+<td>
+  <p>
+    <a href="https://aptitude-consortium.github.io/wp2-trust-specifications/latest/sections/trust-artifacts/#signseal-certificate-path-validation">Sign/Seal Certificate Path Validation
+    </a>
+  </p>
+  <p>
+    <a
+href="https://github.com/eu-digital-identity-wallet/eudi-doc-standards-and-technical-specifications/blob/main/docs/technical-specifications/ts3-wallet-unit-attestation.md#232-content-of-key-attestation-ka">TS3
+2.2.2.2
+    </a>
+  </p>
+  <p><a
+href="https://openid.net/specs/openid-4-verifiable-credential-issuance-1_0.html#appendix-F.4">OID4VCI
+Appendix F.4</a></p>
+</td>
 <td></td>
 </tr>
 <tr>
