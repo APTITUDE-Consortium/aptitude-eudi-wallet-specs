@@ -189,6 +189,14 @@ The objective is to preserve a single interoperable DTC representation that is:
 | ``travel_document_number`` | according to [ISO/IEC 23220-4] | I13235678 |
 | ``travel_document_mrz`` | according to [ISO/IEC 23220-4] | P<ITA<<HARDT<<GIOVANNI<<<<<<<<<<<<<<<< |
 
+### Future Work
+
+In the future, after completion of APTITUDE WP3 and once the generic Pub-EAA JSON schema is available, work may be done towards a JSON-structure for the APTITUDE DTC.
+
+Also, independently, work may be done towards a globally interoperable framework for verification.
+
+In addition, it is recommended to make the content of the APTITUDE DTC TL available to Relying Parties outside of the EUDI Wallet ecosystem by a VICAL according to [ISO/IEC 18013-5].
+
 ## 3 Attestation Encoding
 
 ### 3.1 ISO/IEC 18013-5-compliant encoding
@@ -367,7 +375,7 @@ APTITUDE DTC:
 
 [//]: # (See D3.1 §§1.2 and 3.2 for traveller‑initiated advance submission.)
 
-**Flow:** remote (wallet → Traveller Router or direct submission endpoint → Border backend). The exact presentation protocol (OpenID4VP, mdoc, Traveller Router) is not mandated in D3.1 and must be chosen by implementers.
+**Flow:** remote (wallet → Traveller Router or direct submission endpoint → Border backend). The remote presentation protocol complies with the regulation's Implementing Acts (i.e. OpenID4VP and iso18013-7).
 
 **Requested attributes:**
 
@@ -387,9 +395,9 @@ The request may include ``age_over_18`` where required for age-based verificatio
 
 ### 4.3 Proximity presentation at border control (on‑site verification / e‑gate or officer kiosk)
 
-**Context:** Traveller presents their APTITUDE DTC from the EUDIW at the border control point (e‑gate, kiosk or officer reader) for immediate verification and biometric match. (D3.1 describes proximity presentation requirements and the need to reconcile ISO/IEC 18013‑5 and ICAO NFC/APDU approaches.)
+**Context:** Traveller presents their APTITUDE DTC from the EUDIW at the border control point (e‑gate, kiosk or officer reader) for immediate verification and biometric match.
 
-**Flow:** proximity (device engagement / NFC or mdoc proximity per chosen implementation). D3.1 notes both ISO/IEC 18013‑5 (EUDIW proximity) and ISO/IEC 14443/APDU (ICAO backwards compatibility) and does not mandate one universal mode — the pilot must specify which mode(s) will be tested.
+**Flow:** proximity (EUDIW proximity presentation according to ISO/IEC 18013‑5).
 
 **Modalities (as defined in D3.2 Chapter 10.3 Functional Flow):**
 
@@ -413,7 +421,7 @@ Priority attributes for on‑site verification and biometric matching are ``dg2`
 
 [//]: # (Chosen attributes reflect rulebook §2 priorities and D3.1 emphasis on DG2/SOD for biometric anchoring.)
 
-**Post‑processing:** the proximity reader / e‑gate performs device engagement, retrieves the APTITUDE DTC, validates SOD / passive authentication in accordance with ICAO trust framework(signature verification and PKI chain to CSCA/PKD), checks revocation/status and carries out biometric 1:1 matching of the live capture to dg2. The gate/backend then forwards verification results and any required DGs (dg1/dg2/sod and selected metadata) to backend systems for database checks (EES, SIS, SLTD) and final decision. The pilot MUST state whether translation to ASN.1 DTCContentInfo (DTC-VC compliant with [ICAO-DTC-VC-TR]) is required for legacy inspection systems; D3.1 signals this requirement as a possible necessity but does not fix the mapping responsibilities. The reader, eGate or officer interface presents the applicable operational outcome according to the Member State border-control process.
+**Post‑processing:** the proximity reader / e‑gate performs device engagement, retrieves the APTITUDE DTC, validates SOD / passive authentication in accordance with ICAO trust framework(signature verification and PKI chain to CSCA/PKD), checks revocation/status and carries out biometric 1:1 matching of the live capture to dg2. The gate/backend then forwards verification results and any required DGs (dg1/dg2/sod and selected metadata) to backend systems for database checks (EES, SIS, SLTD) and final decision. The pilot MUST state whether translation to ASN.1 DTCContentInfo (DTC-VC compliant with [ICAO-DTC-VC-TR]) is required for legacy inspection systems. The reader, eGate or officer interface presents the applicable operational outcome according to the Member State border-control process.
 Where deemed necessary by the border control authority, the field ``dg14`` obtained from the ICAO PhotoID data elements MAY be used by the reader to verify the cryptographic binding between the APTITUDE DTC being presented and the eMRTD owned by the traveller. The same applies for the DTC-VC compliant with [ICAO-DTC-VC-TR] obtained from the APTITUDE DTC.
 
 ### 4.4 Cross‑jurisdiction proximity presentation (EU traveller arriving outside Schengen — optional)
@@ -467,7 +475,7 @@ APTITUDE DTC (see pre-registration use cases 4.1 or 4.2)
 
 ## 5 Trust Anchors
 
-The APTITUDE DTC is derived from data contained in the LDS data groups of the corresponding physical eMRTD and is signed by the national issuing authority. The issuing authority SHALL sign the issuer signed data, i.e. the Mobile Security Object (MSO), using a DTC signer key and certificate under the respective CSCA root certificate.
+The issuing authority SHALL sign the issuer signed data, i.e. the Mobile Security Object (MSO), using a DTC signer key and certificate under the respective CSCA root certificate.
 The document signer key and certificate SHALL comply with clause 2.2 in [ICAO-DTC-VC-TR] and SHALL meet the following conditions:
 
 * The DTC signer certificate SHALL include the following OID in the extendedKeyUsage extension : xxxxx;
@@ -477,7 +485,7 @@ The following key usage period and certificate/public key validity period SHALL 
 * Private key usage period : between xx days and 3 months;
 * certificate/public key validity period : xxx;
 
-It is recommended to make the CSCA root certificates of the EU Member States available to Relying Parties in the EUDI Wallet ecosytem by a respective EU Trust List, i.e. APTITUDE DTC TL. In addition, it is recommended to make the content of the APTITUDE DTC TL available to Relying Parties outside of the EUDI Wallet ecosystem by a VICAL according to [ISO/IEC 18013-5].
+It is recommended to make the CSCA root certificates of the EU Member States available to Relying Parties in the EUDI Wallet ecosytem by a respective EU Trust List, i.e. APTITUDE DTC TL.
 
 CSCA root certificates MAY also be obtained from the ICAO PKD by any Relying Party.
 
