@@ -9,7 +9,7 @@ Author(s):
 * Alban Feraud, IN Groupe, France
 * Antonio Maio, INCM, Portugal
 * Arjan Geluk, ..., ...
-  
+ 
 | Version | Date | Description |
 |---------|------------|------------|
 | 0.1 | 11-02-2026 | First draft version - Filled par 1.1 |
@@ -40,11 +40,13 @@ The primary objective of the DTC is to facilitate secure and privacy-preserving 
 
 Within the APTITUDE context, the target model is the ICAO DTC Type 2, comprising a DTC-VC bound to (1) a physical eMRTD and (2) a DTC-PC which is an EUDI Wallet, and derived using mechanisms aligned with European regulations and ICAO guidelines. A DTC of Type 2 is therefore considered the primary and preferred implementation model. However, in the light of the features, interfaces and specifications of the EUDI Wallet, the mechanisms for binding the DTC-VC to the DTC-PC (i.e. the EUDI Wallet) differ from those envisionned by ICAO. It will therefore results in (1) differences in the content of the DTC-VC, as the methods and information for binding the DTC-VC to DTC-PC are different, and (2) the trust model, in order to leverage the one considered for the EUDI Wallet.
 
-This attestation Rulebook specified herewith aims at supporting the implementation of DTC bound to an EUDI Wallet and a physical eMRTD, aligned with the concept of DTC Type 2 as defined by ICAO. This attestation Rulebook assumes the eMRTD is an eMRTD issued by an EU Member State or a Schengen Associated Country, and thus supports the Chip Authentication mechanism and contains a DG14.
+The APTITUDE DTC draws inspiration from the principle underlying ICAO DTC Type 2: i.e. the secure physical element of the ID document, signed by a sovereign authority. The guiding idea is to preserve this trust anchor. Since the ICAO Type 2 specification is at the time or writing still under finalization, APTITUDE DTC may diverge from ICAO’s strict specifications in key ways:
 
-This attestation Rulebook specified herewidth aims at supporting implementation of DTC bound to an EUDI Wallet and a physical eMRTD, aligned with the concept of DTC Type 2 as defined by ICAO. This attestation Rulebook assumes the eMRTD is an eMRTD issued by an EU Member State or a Schengen Associated Country, and thus supporting the Chip Authentication mechanism and containing a DG14.
+* Binding mechanism: While ICAO DTC Type 2 envisions a direct cryptographic link between the DTC and the ID document‘s chip (via DG14 and Chip Authentication), the APTITUDE DTC-VC instead is bound to the EUDI Wallet’s Secure Component using mechanisms aligned with eIDAS 2.0 and EUDI Wallet standards. Therefore, it is the eIDAS 2.0 trust model and data structure that applies.
+* Data content: The APTITUDE DTC-VC retains ICAO’s core data groups (DG1, DG2, DG14, SOD) and extends them with EUDI Wallet-specific attributes (e.g. for  selective disclosure).
+* Presentation protocols: ICAO DTC Type 2 assumes proximity-based interactions with the ID document‘s chip, whereas the APTITUDE DTC leverages EUDI Wallet’s remote and proximity presentation protocols (e.g., OpenID4VP, ISO/IEC 18013-5), introducing additional layers for privacy and interoperability.
 
-This rulebook specifies:
+rulebook specifies:
 
 * The attributes and metadata that comprise an APTITUDE DTC attestation
 * The encoding formats to be supported for APTITUDE DTC attestations.
@@ -321,7 +323,7 @@ The ICAO PhotoID data elements of APTITUDE DTC SHALL be as defined in Table 3 an
 
 #### 3.1.5 Additional document encryption
 
-If a Relying Party requires document encryption in addition to the session encryption layer, it SHALL use the "Document response encryption" security mechanism as defined in [ISO/IEC 18013-5.2] and encode the document request according to [ISO/IEC 18013-5.2]. The EUDI Wallet SHALL encrypt the requested data elements according to [ISO/IEC 18013-5.2].  
+If a Relying Party requires document encryption in addition to the session encryption layer, it SHALL use the "Document response encryption" security mechanism as defined in [ISO/IEC 18013-5.2] and encode the document request according to [ISO/IEC 18013-5.2]. The EUDI Wallet SHALL encrypt the requested data elements according to [ISO/IEC 18013-5.2].
 
 #### 3.1.6 Mapping from PhotoID to ICAO-based encoding
 
@@ -489,7 +491,11 @@ It is recommended to make the CSCA root certificates of the EU Member States ava
 
 CSCA root certificates MAY also be obtained from the ICAO PKD by any Relying Party.
 
-For the purpose of interoperability tests and piloting, issung authorities are requested to provide a certificates of a test CSCA, that is technically equivalent to the CSCA.
+For the purpose of interoperability tests and piloting, issung authorities are requested to provide a certificates of a test CSCA which
+
+* SHALL be published at a stated distribution point,
+* SHALL be bounded in validity and
+* SHALL be distinguishable from production trust anchors, and the operator of the test PKI SHALL be name
 
 ## 6 Revocation
 
