@@ -9,7 +9,7 @@ Author(s):
 * Alban Feraud, IN Groupe, France
 * Antonio Maio, INCM, Portugal
 * Arjan Geluk, ..., ...
-  
+ 
 | Version | Date | Description |
 |---------|------------|------------|
 | 0.1 | 11-02-2026 | First draft version - Filled par 1.1 |
@@ -321,7 +321,7 @@ The ICAO PhotoID data elements of APTITUDE DTC SHALL be as defined in Table 3 an
 
 #### 3.1.5 Additional document encryption
 
-If a Relying Party requires document encryption in addition to the session encryption layer, it SHALL use the "Document response encryption" security mechanism as defined in [ISO/IEC 18013-5.2] and encode the document request according to [ISO/IEC 18013-5.2]. The EUDI Wallet SHALL encrypt the requested data elements according to [ISO/IEC 18013-5.2].  
+If a Relying Party requires document encryption in addition to the session encryption layer, it SHALL use the "Document response encryption" security mechanism as defined in [ISO/IEC 18013-5.2] and encode the document request according to [ISO/IEC 18013-5.2]. The EUDI Wallet SHALL encrypt the requested data elements according to [ISO/IEC 18013-5.2].
 
 #### 3.1.6 Mapping from PhotoID to ICAO-based encoding
 
@@ -614,7 +614,7 @@ dtcOtherInfos [23] EXPLICIT DTCOtherInfos OPTIONAL,
 | **Item Reference** | **Standard name/details**|
 | -----              | ----- |
 | [ISO/IEC 18013-5] |  ISO/IEC 18013-5, Personal identification --- ISO-compliant driving licence - Part 5: Mobile driving licence (mDL) application, First edition, 2021-09 |
-| [ISO/IEC 18013-5.2] |  ISO/IEC 18013-5, Personal identification --- ISO-compliant driving licence - Part 5: Mobile driving licence (mDL) application, second edition, 2026-xx (Status DIS) |
+| [ISO/IEC 18013-5.2] |  ISO/IEC 18013-5, Personal identification --- ISO-compliant driving licence - Part 5: Mobile driving licence (mDL) application, second edition, 2026-xx (Status DIS, voting termines on 2026-03-26) |
 | [ISO/IEC 23220-4] | ISO/IEC TS 23220-4: Cards and Security Devices for Personal Identification – Building Blocks for Identity Management via Mobile Devices –Part 4: Protocols and services for the operational phase, First edition, 2026-04  |
 | [ISO/IEC 23220-2.2] | ISO/IEC TS 23220-2: Cards and Security Devices for Personal Identification – Building Blocks for Identity Management via Mobile Devices –Part 2: Data objects and encoding rules for generic eID systems, Second edition, 2026-04  |
  | [RFC 2119] | RFC 2119 - Key words for use in RFCs to Indicate Requirement Levels, S. Bradner, March 1997 |
