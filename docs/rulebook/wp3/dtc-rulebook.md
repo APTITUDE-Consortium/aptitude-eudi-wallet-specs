@@ -16,24 +16,6 @@ Author(s):
 | 0.2 | 27-05-2026 | Updated based on design assumptions from D3.1  |
 | 0.3 | 29-05-2026 | Addition of schema and mapping |
 | 0.4 | 12-06-2026 | Synchronization with PhotoID specification in [ISO/IEC 23220-4] |
-# Attestation Rulebook for attestations of type  *APTITUDE DTC*
-
-Author(s):
-
-* Matthias Schwan, bdr, Germany
-* Corrado Guidobaldi, IPZS, Italy
-* Zahra Ebadi Ansaroudi, FBK, Italy
-* Anthony Carmoy, ANTS, France
-* Alban Feraud, IN Groupe, France
-* Antonio Maio, INCM, Portugal
-* Arjan Geluk, ..., ...
-
-| Version | Date | Description |
-|---------|------------|------------|
-| 0.1 | 11-02-2026 | First draft version - Filled par 1.1 |
-| 0.2 | 27-05-2026 | Updated based on design assumptions from D3.1  |
-| 0.3 | 29-05-2026 | Addition of schema and mapping |
-| 0.4 | 12-06-2026 | Synchronization with PhotoID specification in [ISO/IEC 23220-4] |
 | 0.5 | 01-07-2026 | Align clause 2 and 3 with rulebook template, bibliography added, trust model and revocation added |
 | 0.6 | 08-07-2026 | Use cases added in clause 4, editorial changes |
 | 0.7 | 23-07-2026 | Addition of modalities in clause 4.3, editorial changes |
