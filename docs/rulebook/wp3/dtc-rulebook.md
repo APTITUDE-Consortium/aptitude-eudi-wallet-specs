@@ -8,7 +8,7 @@ Author(s):
 * Anthony Carmoy, ANTS, France
 * Alban Feraud, IN Groupe, France
 * Antonio Maio, INCM, Portugal
-* Arjan Geluk, ..., ...
+* Arjan Geluk, A4 Adivsory, The Netherlands
 
 | Version | Date | Description |
 |---------|------------|------------|
