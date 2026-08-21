@@ -105,14 +105,14 @@ TS 119 412-6</a></td>
 <td>O3</td>
 <td><a
 href="https://github.com/eu-digital-identity-wallet/eudi-doc-standards-and-technical-specifications/blob/main/docs/technical-specifications/ts2-notification-publication-provider-information.md">TS2</a></td>
-<td>Notifying TLP’s for related TL’s (Wallet Providers, (Pub-)EAA
+<td>Notifying TLP’s for related LoTE’s (Wallet Providers, (Pub-)EAA
 Providers, Providers of Access and Register Certificate)</td>
 </tr>
 <tr>
 <td>O4</td>
 <td><a
 href="https://github.com/eu-digital-identity-wallet/eudi-doc-standards-and-technical-specifications/blob/main/docs/technical-specifications/ts3-wallet-unit-attestation.md">TS3 ver1.5.2</a></td>
-<td>Issuing of WUAs (WIA \\\&amp; KAs) for WI as per <a
+<td>Issuing of WUA's (WIA&KA's) for WI as per <a
 href="https://eur-lex.europa.eu/legal-content/EN/TXT/PDF/?uri=OJ:L_202601731">CIR 2026/1731</a></td>
 </tr>
 <tr>
@@ -152,7 +152,7 @@ TS 119 602 ver1.1.1</a>, <a
 href="https://www.etsi.org/deliver/etsi_ts/119600_119699/119612/02.04.01_60/ts_119612v020401p.pdf">ETSI
 TS 119 612 ver2.4.1</a>, <a
 href="https://datatracker.ietf.org/doc/html/rfc5280">RFC 5280</a></td>
-<td>Fetching QEAA or PubEAA TL (what do we do with EAA TL?)<br>Fetching WRPAC and WRPRC LoTEs from their respective LoTE Providers</td>
+<td>Fetching QEAA/Pub-EAA/EAA LoTE's<br>Fetching WRPAC and WRPRC LoTE's from their respective LoTE Providers</td>
 </tr>
 <tr>
 <td>R3</td>
@@ -176,7 +176,7 @@ href="https://eur-lex.europa.eu/legal-content/EN/TXT/PDF/?uri=OJ:L_202601731">CI
 href="https://github.com/eu-digital-identity-wallet/eudi-doc-standards-and-technical-specifications/blob/main/docs/technical-specifications/ts3-wallet-unit-attestation.md#243-pid-provider-and-attestation-provider-responsibilities">TS3 ver1.5.2</a>, <a
 href="https://aptitude-consortium.github.io/wp2-trust-specifications/latest/sections/trust-management-lifecycle/">APTITUDE Trust management and lifecycle</a>, <a
 href="https://datatracker.ietf.org/doc/draft-ietf-oauth-status-list/21/">IETF Token Status List Draft 21</a></td>
-<td>Runtime status, and key-storage status checks on WIA/KA; the checks are to be profiled precisely in <a href="../horizontal-RFCs/RFC004.md">RFC004</a>.</td>
+<td>Runtime status and key-storage status checks on WIA/KA; the checks are to be profiled precisely in <a href="../horizontal-RFCs/RFC004.md">RFC004</a>.</td>
 </tr>
 </tbody>
 </table>
@@ -187,7 +187,7 @@ The process behind O1, O2 and O3 is further explained in Apptitude on-boarding d
 ## 3\. Interaction details
 
 In this section generic issuance flow is further detailed by identifying exact API/message or other mechanism that takes place at each step.
-After the diagram each step is then linked to the underlying RFC that provides more details on it’s usage.
+After the diagram each step is then linked to the underlying RFC that provides more details on its usage.
 
 ### 3.1 Flow requirements
 
@@ -242,6 +242,16 @@ impacting issuance flow and designed validation checks.
 |Proofing that the same WSCA/WSCD possesses the private keys associated to the public keys in the WIA and one used for the attestation binding|In scope|
 |Issuer metadata shall be signed as per [OID4VCI instructions](https://openid.net/specs/openid-4-verifiable-credential-issuance-1_0.html#name-signed-metadata)|In scope|
 |Issuer metadata may include provision of EAA reuse policy|Not in the scope|
+
+#### 3.1.4 TS3 requirements
+
+Latest [IA 2026/1731](https://eur-lex.europa.eu/legal-content/EN/TXT/HTML/?uri=OJ:L_202601731) with Annex Ib and according ARF TS03 specifications introduces following requirements relevant for wallet providers and issuers during the issuance process.
+
+|**Requirement**|**Scope decision**|
+|-|-|
+|Issuer shall check run time WIA revocation status during the issuance process|In scope|
+|Issuer shall check run time KA revocation status during the issuance process of the device bound attestation|In scope|
+|Attestation provider issuing revocable attestation may set periodical revocation WIA and KA checks. Checks support decision to revoke an attestation in case the wallet provider revoked the wallet unit or issued key|In scope|
 
 #### 3.1.5 Additional Aptitude requirements
 
