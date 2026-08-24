@@ -1,12 +1,13 @@
 # Generic issuance flow specification
 
-Version 0.1 (draft)
+Version 0.91 (draft)
+Date 20-08-2026
 
 ## Authors
 
 1. Aleksandar Simsic, ICTU
-2. ....
-3. ....
+2. Nikos Triantafyllou, University of the Aegean
+3. Andrea Moro, Fondazione Bruno Kessler
 
 ## Reviewers
 
@@ -24,7 +25,8 @@ Version 0.1 (draft)
      * 3.1.1 OID4VCI requirements
      * 3.1.2 HAIP requirements
      * 3.1.3 ETSI 119 472-3 requirements
-     * 3.1.4 Additional trust framework validation requirements
+     * 3.1.4 TS3 requirements
+     * 3.1.5 Additional Aptitude requirements
    * 3.2 Detailed technical flow description (sequence diagram)
      * 3.2.1 Steps mapping overview
 
@@ -40,8 +42,7 @@ It does not define new requirements — those are in the RFCs. In case of confli
 
 ## 2\. Aptitude landscape overview
 
-Following diagram uses EUDI Wallet ecosystem roles diagram from [ARF 2.9](https://eudi.dev/2.9.0/architecture-and-reference-framework-main/#3-roles-within-the-eudi-wallet-ecosystem) as base and presents adaptations relevant for issuance process within
-the Aptitude LSP.
+Following diagram uses EUDI Wallet ecosystem roles diagram from [ARF 2.9](https://eudi.dev/2.9.0/architecture-and-reference-framework-main/#3-roles-within-the-eudi-wallet-ecosystem) as base and presents adaptations relevant for issuance process within the Aptitude LSP.
 
 ![Aptitude roles and interactions overview - issuance flow](Aptitude_roles_and_interactions_overview-issuance_flow.png)
 
@@ -53,7 +54,7 @@ Here we are only clarifying which roles and/or interfaces are out of the scope o
 |-----------|-------------|-----------|
 | Authentic Source → Issuer | How the Issuer retrieves data from the national authentic source | Assumed to be resolved at national level by each partner acting as Issuer |
 | QTSP → Attribute Catalogue | Citizen-initiated flow where a QTSP validates and issues a VC from scratch | No WP in APTITUDE covers this scenario |
-| Wallet → APTITUDE Register (runtime) | Runtime lookup from Wallet to APTITUDE Register | Redundant: WRPRC is provisioned at onboarding time (design-time); registration certificate is becoming mandatory per 2025/848 IA |
+| Wallet → APTITUDE Register (runtime) | Runtime lookup from Wallet to APTITUDE Register | Redundant: WRPRC is provisioned at onboarding time (design-time); registration certificate is becoming mandatory per 2025/848 IA.<br><br>*Note: A Wallet Instance MAY still use the Register APIs to:*<ul><li>*Check fresh Entity registration information as a backup to the WRPRC failure,*</li><li>*Check that the Registration certificate obtained by the WRP is bound to the service the Wallet Instance is interacting with.*</li></ul> |
 
 ### 2.1 Relation between different standards and interfaces
 
@@ -90,21 +91,38 @@ href="https://github.com/eu-digital-identity-wallet/eudi-doc-standards-and-techn
 href="https://www.etsi.org/deliver/etsi_ts/119400_119499/11941108/01.01.01_60/ts_11941108v010101p.pdf">ETSI
 TS 119 411-8 ver1.1.1</a>, <a
 href="https://www.etsi.org/deliver/etsi_ts/119400_119499/119475/01.02.01_60/ts_119475v010201p.pdf">ETSI
-TS 119 475 ver1.2.1</a></td>
-<td>Distribution of WRPASs \\\&amp; WRPRCs</td>
+TS 119 475 ver1.2.1</a>, <a
+href="https://datatracker.ietf.org/doc/html/rfc5280">RFC 5280</a>, <a
+href="https://www.etsi.org/deliver/etsi_en/319400_319499/31941202/02.04.01_60/en_31941202v020401p.pdf">ETSI
+EN 319 412-2</a>, <a
+href="https://www.etsi.org/deliver/etsi_en/319400_319499/31941203/01.03.01_60/en_31941203v010301p.pdf">ETSI
+EN 319 412-3</a>, <a
+href="https://www.etsi.org/deliver/etsi_ts/119400_119499/11941206/01.01.01_60/ts_11941206v010101p.pdf">ETSI
+TS 119 412-6</a></td>
+<td>Distribution of WRPACs, Sign/Seal Certififcates and WRPRCs</td>
 </tr>
 <tr>
 <td>O3</td>
 <td><a
 href="https://github.com/eu-digital-identity-wallet/eudi-doc-standards-and-technical-specifications/blob/main/docs/technical-specifications/ts2-notification-publication-provider-information.md">TS2</a></td>
-<td>Notifying TLP’s for related TL’s (Wallet Providers, (Pub-)EAA
+<td>Notifying TLP’s for related LoTE’s (Wallet Providers, (Pub-)EAA
 Providers, Providers of Access and Register Certificate)</td>
 </tr>
 <tr>
 <td>O4</td>
 <td><a
-href="https://github.com/eu-digital-identity-wallet/eudi-doc-standards-and-technical-specifications/blob/main/docs/technical-specifications/ts3-wallet-unit-attestation.md">TS3</a></td>
-<td>Issuing of WUAs (WIA \\\&amp; KAs) for WI</td>
+href="https://github.com/eu-digital-identity-wallet/eudi-doc-standards-and-technical-specifications/blob/main/docs/technical-specifications/ts3-wallet-unit-attestation.md">TS3 ver1.5.2</a></td>
+<td>Issuing of WUA's (WIA&KA's) for WI as per <a
+href="https://eur-lex.europa.eu/legal-content/EN/TXT/PDF/?uri=OJ:L_202601731">CIR 2026/1731</a></td>
+</tr>
+<tr>
+<td>O5</td>
+<td><a
+href="https://github.com/eu-digital-identity-wallet/eudi-doc-standards-and-technical-specifications/blob/main/docs/technical-specifications/ts3-wallet-unit-attestation.md">TS3 ver1.5.2</a>, <a
+href="https://aptitude-consortium.github.io/wp2-trust-specifications/latest/sections/trust-management-lifecycle/#token-status-list-wallet-unit-attestation-profile">APTITUDE Trust management and lifecycle</a>, <a
+href="https://datatracker.ietf.org/doc/draft-ietf-oauth-status-list/21/">IETF Token Status List Draft 21</a></td>
+<td>Optional scheduled revocation checks by the Issuer against the Wallet Provider's status lists for WIA and KA, as per <a
+href="https://eudi.dev/3.0.0/annexes/annex-2/annex-2.02-high-level-requirements-by-topic/#a2322-topic-38-wallet-unit-revocation">ARF Topic 38</a> and requirement WURevocation_19.<br><br><em>Note: As specified in <a href="https://aptitude-consortium.github.io/wp2-trust-specifications/latest/sections/trust-management-lifecycle/#token-status-list-wallet-unit-attestation-profile">the APTITUDE Trust Management and Lifecycle profile</a>, for other attestation types within the APTITUDE profiles:</em><ul><li>Both WIA and KA operational checks SHALL be performed for device-bound credentials when operational monitoring is enabled.</li><li>Only the WIA operational check SHALL be performed for non-device-bound attestations when operational monitoring is enabled.</li></ul></td>
 </tr>
 <tr>
 <td>R1</td>
@@ -114,7 +132,11 @@ href="https://openid.net/specs/openid-4-verifiable-credential-issuance-1_0.html"
 href="https://openid.net/specs/openid4vc-high-assurance-interoperability-profile-1_0-final.html">HAIP ver1.0</a>,
 <a
 href="https://www.etsi.org/deliver/etsi_ts/119400_119499/11947203/01.01.01_60/ts_11947203v010101p.pdf">ETSI
-TS 119 472-3 ver1.1.1</a></p>
+TS 119 472-3 ver1.1.1</a>,
+<a
+href="https://www.rfc-editor.org/rfc/rfc9449.html">RFC9449</a>,
+<a
+href="https://datatracker.ietf.org/doc/html/draft-ietf-oauth-attestation-based-client-auth-10">IETF OAuth 2.0 Attestation-Based Client Authentication Draft 10</a></p>
 <p>ISO18013-5, <a
 href="https://datatracker.ietf.org/doc/draft-ietf-oauth-sd-jwt-vc/17/">SD-JWT
 VC Draft 17</a>, <a
@@ -128,8 +150,9 @@ TS 119 472-1 ver1.1.1</a></p></td>
 href="https://www.etsi.org/deliver/etsi_ts/119600_119699/119602/01.01.01_60/ts_119602v010101p.pdf">ETSI
 TS 119 602 ver1.1.1</a>, <a
 href="https://www.etsi.org/deliver/etsi_ts/119600_119699/119612/02.04.01_60/ts_119612v020401p.pdf">ETSI
-TS 119 612 ver2.4.1</a></td>
-<td>Fetching QEAA or PubEAA TL (what do we do with EAA TL?)</td>
+TS 119 612 ver2.4.1</a>, <a
+href="https://datatracker.ietf.org/doc/html/rfc5280">RFC 5280</a></td>
+<td>Fetching QEAA/Pub-EAA/EAA LoTE's<br>Fetching WRPAC and WRPRC LoTE's from their respective LoTE Providers</td>
 </tr>
 <tr>
 <td>R3</td>
@@ -138,15 +161,22 @@ href="https://www.etsi.org/deliver/etsi_ts/119600_119699/119602/01.01.01_60/ts_1
 TS 119 602 ver1.1.1</a>, <a
 href="https://www.etsi.org/deliver/etsi_ts/119600_119699/119612/02.04.01_60/ts_119612v020401p.pdf">ETSI
 TS 119 612 ver2.4.1</a></td>
-<td>Fetching Wallet Providers TL</td>
+<td>Fetching Wallet Providers LoTE</td>
 </tr>
 <tr>
 <td>R4</td>
 <td><a
-href="https://github.com/eu-digital-identity-wallet/eudi-doc-standards-and-technical-specifications/blob/main/docs/technical-specifications/ts3-wallet-unit-attestation.md#222-transport-of-key-attestation-ka">TS3</a>
-(transport of KA)</td>
-<td>Optional - including nonce in KA for the <em>attestation</em> type
-of proof types</td>
+href="https://github.com/eu-digital-identity-wallet/eudi-doc-standards-and-technical-specifications/blob/main/docs/technical-specifications/ts3-wallet-unit-attestation.md#222-transport-of-key-attestation-ka">TS3 ver1.5.2</a></td>
+<td>Signing WIA and KA as per <a
+href="https://eur-lex.europa.eu/legal-content/EN/TXT/PDF/?uri=OJ:L_202601731">CIR 2026/1731</a></td>
+</tr>
+<tr>
+<td>R5</td>
+<td><a
+href="https://github.com/eu-digital-identity-wallet/eudi-doc-standards-and-technical-specifications/blob/main/docs/technical-specifications/ts3-wallet-unit-attestation.md#243-pid-provider-and-attestation-provider-responsibilities">TS3 ver1.5.2</a>, <a
+href="https://aptitude-consortium.github.io/wp2-trust-specifications/latest/sections/trust-management-lifecycle/">APTITUDE Trust management and lifecycle</a>, <a
+href="https://datatracker.ietf.org/doc/draft-ietf-oauth-status-list/21/">IETF Token Status List Draft 21</a></td>
+<td>Runtime status and key-storage status checks on WIA/KA; the checks are to be profiled precisely in <a href="../horizontal-RFCs/RFC004.md">RFC004</a>.</td>
 </tr>
 </tbody>
 </table>
@@ -157,7 +187,7 @@ The process behind O1, O2 and O3 is further explained in Apptitude on-boarding d
 ## 3\. Interaction details
 
 In this section generic issuance flow is further detailed by identifying exact API/message or other mechanism that takes place at each step.
-After the diagram each step is then linked to the underlying RFC that provides more details on it’s usage.
+After the diagram each step is then linked to the underlying RFC that provides more details on its usage.
 
 ### 3.1 Flow requirements
 
@@ -186,12 +216,12 @@ the requirements impacting issuance flow are listed.
 
 |**Requirement**|**Scope decision**|
 |-|-|
-|Authorization code flow must be supported|In scope|
-|Must use PKCE with s256 as the code challenge method ([RFC7636](https://www.rfc-editor.org/rfc/rfc7636.txt))|In scope|
-|Must use Pushed Authorization Request – PAR ([RFC9126](https://www.rfc-editor.org/rfc/rfc9126.txt))|In scope|
-|Must support DPOP including DPOP-Nonce HTTP header ([RFC9449](https://www.rfc-editor.org/rfc/rfc9449.txt))|In scope|
-|Must support wallet attestation as OAuth client authentication|In scope|
-|Must support attestation proof type including nonce within KA|In scope|
+|Authorization code flow shall be supported|In scope|
+|Shall use PKCE with s256 as the code challenge method ([RFC7636](https://www.rfc-editor.org/rfc/rfc7636.txt))|In scope|
+|Shall use Pushed Authorization Request – PAR ([RFC9126](https://www.rfc-editor.org/rfc/rfc9126.txt))|In scope|
+|Shall support DPOP including DPOP-Nonce HTTP header ([RFC9449](https://www.rfc-editor.org/rfc/rfc9449.txt))|In scope|
+|Shall support wallet attestation as OAuth client authentication|In scope|
+|Shall support attestation proof type including nonce within KA|In scope|
 
 #### 3.1.3 ETSI 119 472-3 requirements
 
@@ -199,32 +229,58 @@ ETSI profile is delivered on top of HAIP profile to clarify all the
 specifics for the EUDI wallet implementation. It includes clarifications
 on how different trust and policy checks should take place, something
 that is also referenced later within the generic technical flow
-(sequence diagram). Follow table includes therefore requirements
+(sequence diagram). Follow up table includes therefore requirements
 impacting issuance flow and designed validation checks.
 
 |**Requirement**|**Scope decision**|
 |-|-|
-|Support access and registration certificate of (Pub-)EAA provider|In scope|
-|Supports inclusion of embedded disclosure policy|In scope|
-|Wallet must include WIA to the push authorization and token endpoint|In scope|
-|Wallet must include WUA to the credential endpoint|In scope|
-|Holder must prove possession of private key associated to the public key in WUA|In scope|
-|Proofing that the same WSCA/WSCD possesses the private keys associated to the public keys in the WUA and one used for the attestation binding|In scope|
-|Issuer metadata must be signed as per [OID4VCI instructions](https://openid.net/specs/openid-4-verifiable-credential-issuance-1_0.html#name-signed-metadata)|In scope|
+|Issuer and wallet unit shall support access and registration certificate of (Pub-)EAA provider|In scope|
+|Issuer may support inclusion of embedded disclosure policy and wallet unit shall process it|In scope|
+|Wallet unit shall include WIA to the push authorization and token endpoint|In scope|
+|Wallet unit shall include KA to the credential endpoint when issuing device bound attestation|In scope|
+|Holder shall prove the possession of private key associated to the public key in KA|In scope|
+|Proofing that the same WSCA/WSCD possesses the private keys associated to the public keys in the WIA and one used for the attestation binding|In scope|
+|Issuer metadata shall be signed as per [OID4VCI instructions](https://openid.net/specs/openid-4-verifiable-credential-issuance-1_0.html#name-signed-metadata)|In scope|
 |Issuer metadata may include provision of EAA reuse policy|Not in the scope|
 
-#### 3.1.4 Additional trust framework validation requirements
+#### 3.1.4 TS3 requirements
 
-<TODO>
+Latest [IA 2026/1731](https://eur-lex.europa.eu/legal-content/EN/TXT/HTML/?uri=OJ:L_202601731) with Annex Ib and according ARF TS03 specifications introduces following requirements relevant for wallet providers and issuers during the issuance process.
+
+|**Requirement**|**Scope decision**|
+|-|-|
+|Issuer shall check run time WIA revocation status during the issuance process|In scope|
+|Issuer shall check run time KA revocation status during the issuance process of the device bound attestation|In scope|
+|Attestation provider issuing revocable attestation may set periodical revocation WIA and KA checks. Checks support decision to revoke an attestation in case the wallet provider revoked the wallet unit or issued key|In scope|
+
+#### 3.1.5 Additional Aptitude requirements
+
+In some cases to simplify implementation for the partners there are number of additional requirements added on the top of all formal standards and specifications
+
+|**Requirement**|**Scope decision**|
+|-|-|
+|Issuer and wallet unit shall use so called "combined mode" using only DPoP proof, as per [IETF oAuth attestation based client authentication DPoP Combined Mode](https://datatracker.ietf.org/doc/html/draft-ietf-oauth-attestation-based-client-auth-10#name-dpop-combined-mode) |In scope|
+|Issuer authorization and resource servers shall mandate using of fresh nonce value within the DPoP |In scope|
+|Issuer shall offer Nonce Endpoint  |In scope|
+|Issuer shall require a presence of WIA and DPoP header on token endpoint for pre-authorized code flow  |In scope|
+|Wallet shall send WIA at the PAR and Token endpoints for Authorization Code Flow, prove possession of the WIA `cnf` key, and Issuers shall validate the WIA signature, expiry, and proof of possession as profiled in [RFC-01](https://github.com/APTITUDE-Consortium/aptitude-eudi-wallet-specs/blob/main/docs/horizontal-RFCs/RFC001.md#73-authorisation-endpoint-and-par)|In scope|
+|Wallet shall send KA at the Credential Endpoint using the selected proof method, and Issuers shall validate the KA and bind issued credentials to the attested keys as profiled in [RFC-01](https://github.com/APTITUDE-Consortium/aptitude-eudi-wallet-specs/blob/main/docs/horizontal-RFCs/RFC001.md#75-credential-endpoint)|In scope|
+|Trust anchors for (Q)EAA Providers shall be present in a dedicated LoTE |In scope|
+|Authentic Source integration|Not in scope|
+|Common Credential Catalogue discovery|Not in scope|
+
+The generic issuance flow does not define an Authentic Source interface or a common Credential Catalogue. A Wallet therefore cannot discover credentials through a shared catalogue; each use case manages its own credential offers and selection.
 
 ### 3.2 Detailed technical flow description (sequence diagram)
 
 E2E issuance flow is presented through sequence diagram (SD) and after that each step is linked to the relevant Aptitude profile specification document. Referenced specs are:
 
-* [Aptitude Issuance profile RFC-01 ver 0.1](https://github.com/APTITUDE-Consortium/aptitude-eudi-wallet-specs/blob/main/docs/horizontal-RFCs/RFC001.md)
-* [Aptitude Trust Evaluation RFC-03 ver 0.1](https://github.com/APTITUDE-Consortium/aptitude-eudi-wallet-specs/blob/rfc003-trust/docs/horizontal-RFCs/RFC003.md)
-* [Aptitude trust framework ver 0.2](https://github.com/APTITUDE-Consortium/wp2-trust-specifications/blob/main/docs/trust-framework.md)
-* ....
+* [Aptitude Issuance profile RFC-01](https://github.com/APTITUDE-Consortium/aptitude-eudi-wallet-specs/blob/main/docs/horizontal-RFCs/RFC001.md)
+* [Aptitude Trust Evaluation RFC-03](https://github.com/APTITUDE-Consortium/aptitude-eudi-wallet-specs/blob/rfc003-trust/docs/horizontal-RFCs/RFC003.md)
+* [Aptitude Trust Evaluation RFC-04](https://github.com/APTITUDE-Consortium/aptitude-eudi-wallet-specs/blob/main/docs/horizontal-RFCs/RFC004.md)
+* [Aptitude trust framework](https://aptitude-consortium.github.io/wp2-trust-specifications/latest/trust-framework/)
+
+Within the following diagram we introduce the LoTE Provider endpoint as specified in [RFC003](https://github.com/APTITUDE-Consortium/aptitude-eudi-wallet-specs/blob/rfc003-trust/docs/horizontal-RFCs/RFC003.md#71-lote-endpoint). Each entity type (Wallet Provider, PID/Attestation Provider, WRPAC/WRPRC Provider) has a unique LoTE published at a specific endpoint detailed in the Official Journal of Aptitude (OJA), which will be made available by WP2 in piloting. The diagram abstracts these different LoTE endpoints into a single LoTE Provider interaction.
 
 ![QEAA issuance Aptitude profile sequence diagram]({Q}EAA_issuance_Aptitude_profile_on_top_of_HAIP&ETSI_profiles_including_trustframework.png)
 
@@ -275,7 +331,7 @@ href="https://github.com/APTITUDE-Consortium/aptitude-eudi-wallet-specs/blob/mai
 <td></td>
 </tr>
 <tr>
-<td>2</td>
+<td>2.1</td>
 <td>Get Issuer metadata</td>
 <td><p><a
 href="https://github.com/APTITUDE-Consortium/aptitude-eudi-wallet-specs/blob/main/docs/horizontal-RFCs/RFC001.md#611-configuration-and-discovery">RFC-01
@@ -291,41 +347,31 @@ href="https://github.com/APTITUDE-Consortium/aptitude-eudi-wallet-specs/blob/mai
 <td><p><a
 href="https://github.com/APTITUDE-Consortium/aptitude-eudi-wallet-specs/blob/rfc003-trust/docs/horizontal-RFCs/RFC001.md#89-metadata-endpoints">RFC-01
 8.9</a></p>
-<p><mark>TODO – trust group</mark></p></td>
+</td>
 <td></td>
 </tr>
 <tr>
 <td>V2.2</td>
 <td>Validate WRPAC</td>
-<td><a
+<td><p><a
 href="https://github.com/APTITUDE-Consortium/wp2-trust-specifications/blob/main/docs/topics/access-certificate.md">Aptitude
-WRPAC</a></td>
+WRPAC</a></p>
+<p><a
+href="https://aptitude-consortium.github.io/wp2-trust-specifications/latest/sections/trust-evaluation-process/#authentication-process">Authentication Process</a></p></td>
 <td></td>
 </tr>
 <tr>
-<td>V2.3, V4a.2</td>
+<td>V2.3, V2.5, V4a.3, V5.4, V6.4</td>
 <td>Get LoTE</td>
 <td><p><a
-href="https://github.com/APTITUDE-Consortium/wp2-trust-specifications/blob/main/docs/topics/trusted-list-and-list-of-trusted-lists.md#list-of-trusted-lists">Aptitude
-LoTE</a></p>
+href="https://github.com/APTITUDE-Consortium/aptitude-eudi-wallet-specs/blob/rfc003-trust/docs/horizontal-RFCs/RFC003.md#71-lote-endpoint">RFC003
+LoTE Endpoint</a></p>
 <p><a
-href="https://github.com/APTITUDE-Consortium/aptitude-eudi-wallet-specs/blob/rfc003-trust/docs/horizontal-RFCs/RFC003.md#71-lote-endpoint">RFC-03
-7.1</a></p></td>
+href="https://aptitude-consortium.github.io/wp2-trust-specifications/latest/sections/trust-evaluation-process/#list-of-trusted-entities-validation-process">LoTE Validation Process</a></p></td>
 <td></td>
 </tr>
 <tr>
 <td>V2.4</td>
-<td>Get QEAA/Pub-EAA/EAA TL</td>
-<td><p><a
-href="https://github.com/APTITUDE-Consortium/wp2-trust-specifications/blob/main/docs/topics/trusted-list-and-list-of-trusted-lists.md#list-of-trusted-entities">Aptitute
-TL</a></p>
-<p><a
-href="https://github.com/APTITUDE-Consortium/aptitude-eudi-wallet-specs/blob/rfc003-trust/docs/horizontal-RFCs/RFC003.md#72-lotltl-endpoint">RFC-03
-7.2</a></p></td>
-<td></td>
-</tr>
-<tr>
-<td>V2.5</td>
 <td>Validate WRPRC</td>
 <td><a
 href="https://github.com/APTITUDE-Consortium/wp2-trust-specifications/blob/main/docs/topics/registration-certificate.md">Aptitude
@@ -333,7 +379,7 @@ WRPRC</a></td>
 <td></td>
 </tr>
 <tr>
-<td>V2.6</td>
+<td>2.2</td>
 <td>Process Embedded Policy</td>
 <td><a
 href="https://github.com/APTITUDE-Consortium/wp2-trust-specifications/blob/main/docs/topics/embedded-disclosure-policy.md">Aptitude
@@ -341,27 +387,25 @@ embedded disclosure policies</a></td>
 <td></td>
 </tr>
 <tr>
+<td>2.3</td>
+<td>Get Authorization Server metadata</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
 <td>3</td>
-<td>Nonce Request</td>
-<td><a
-href="https://github.com/APTITUDE-Consortium/aptitude-eudi-wallet-specs/blob/main/docs/horizontal-RFCs/RFC001.md#86-nonce-endpoint">RFC-01
-8.6</a></td>
-<td></td>
-</tr>
-<tr>
-<td>3.1</td>
-<td>KA request</td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td>3.2</td>
 <td>WIA request</td>
 <td></td>
 <td></td>
 </tr>
 <tr>
-<td>4.a.2</td>
+<td>3.1, 4a.2, 4b.2, 6.2</td>
+<td>Create DPoP</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>4a.1, 4a.3</td>
 <td>PAR request</td>
 <td><p><a
 href="https://github.com/APTITUDE-Consortium/aptitude-eudi-wallet-specs/blob/main/docs/horizontal-RFCs/RFC001.md#613-pushed-authorisation-request-par">RFC-01
@@ -372,31 +416,44 @@ href="https://github.com/APTITUDE-Consortium/aptitude-eudi-wallet-specs/blob/mai
 <td></td>
 </tr>
 <tr>
-<td>4.a.3</td>
+<td>4a.4</td>
 <td>Authorization request</td>
 <td></td>
 <td></td>
 </tr>
 <tr>
-<td>V4a.1, V5.1</td>
+<td>V4a.1, V5.2</td>
 <td>Validate WIA</td>
+<td>
+  <p><a href="https://aptitude-consortium.github.io/wp2-trust-specifications/latest/sections/trust-artifacts/#signseal-certificate-path-validation">Sign/Seal Certificate Path Validation</a></p>
+  <p><a
+href="https://github.com/eu-digital-identity-wallet/eudi-doc-standards-and-technical-specifications/blob/main/docs/technical-specifications/ts3-wallet-unit-attestation.md#231-content-of-wia">TS3
+2.2.1.2</a></p>
+</td>
+<td></td>
+</tr>
+<tr>
+<td>V4a.2, V5.3, V6.3</td>
+<td>Get Status list</td>
+<td>
+  <p><a href="https://aptitude-consortium.github.io/wp2-trust-specifications/latest/sections/trust-management-lifecycle/#token-status-list">Token Status List</a></p>
+</td>
+<td></td>
+</tr>
+<tr>
+<td>V4a.4, V5.5, V6.1</td>
+<td>Validate DPoP</td>
 <td></td>
 <td></td>
 </tr>
 <tr>
-<td>V4a.3</td>
-<td>Get Wallet Providers TL</td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td>4.a.6</td>
+<td>4a.7</td>
 <td>Authorization response</td>
 <td></td>
 <td></td>
 </tr>
 <tr>
-<td>5.1</td>
+<td>4b.1, 5</td>
 <td>Token request</td>
 <td><p><a
 href="https://github.com/APTITUDE-Consortium/aptitude-eudi-wallet-specs/blob/main/docs/horizontal-RFCs/RFC001.md#615-token-request">RFC-01
@@ -407,7 +464,21 @@ href="https://github.com/APTITUDE-Consortium/aptitude-eudi-wallet-specs/blob/mai
 <td></td>
 </tr>
 <tr>
+<td>6</td>
+<td>Nonce Request</td>
+<td><a
+href="https://github.com/APTITUDE-Consortium/aptitude-eudi-wallet-specs/blob/main/docs/horizontal-RFCs/RFC001.md#86-nonce-endpoint">RFC-01
+8.6</a></td>
+<td></td>
+</tr>
+<tr>
 <td>6.1</td>
+<td>KA request</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>6.3</td>
 <td>Credential Request</td>
 <td><p><a
 href="https://github.com/APTITUDE-Consortium/aptitude-eudi-wallet-specs/blob/main/docs/horizontal-RFCs/RFC001.md#616-credential-request">RFC-01
@@ -421,13 +492,27 @@ href="https://github.com/APTITUDE-Consortium/aptitude-eudi-wallet-specs/blob/mai
 <td></td>
 </tr>
 <tr>
-<td>V6.1</td>
-<td>Verify Key Proof</td>
-<td></td>
+<td>V6.2</td>
+<td>Validate KA</td>
+<td>
+  <p>
+    <a href="https://aptitude-consortium.github.io/wp2-trust-specifications/latest/sections/trust-artifacts/#signseal-certificate-path-validation">Sign/Seal Certificate Path Validation
+    </a>
+  </p>
+  <p>
+    <a
+href="https://github.com/eu-digital-identity-wallet/eudi-doc-standards-and-technical-specifications/blob/main/docs/technical-specifications/ts3-wallet-unit-attestation.md#232-content-of-key-attestation-ka">TS3
+2.2.2.2
+    </a>
+  </p>
+  <p><a
+href="https://openid.net/specs/openid-4-verifiable-credential-issuance-1_0.html#appendix-F.4">OID4VCI
+Appendix F.4</a></p>
+</td>
 <td></td>
 </tr>
 <tr>
-<td>6.2</td>
+<td>6.5</td>
 <td>Deferred credential</td>
 <td><p><a
 href="https://github.com/APTITUDE-Consortium/aptitude-eudi-wallet-specs/blob/main/docs/horizontal-RFCs/RFC001.md#63-deferred-credential-request">RFC-01

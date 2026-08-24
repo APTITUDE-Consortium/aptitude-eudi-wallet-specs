@@ -489,7 +489,11 @@ It is recommended to make the CSCA root certificates of the EU Member States ava
 
 CSCA root certificates MAY also be obtained from the ICAO PKD by any Relying Party.
 
-For the purpose of interoperability tests and piloting, issung authorities are requested to provide a certificates of a test CSCA, that is technically equivalent to the CSCA.
+For the purpose of interoperability tests and piloting, issuing authorities are requested to provide a certificate of a test CSCA which
+
+* SHALL be published at a stated distribution point,
+* SHALL be bound in validity and
+* SHALL be distinguishable from production trust anchors, and the operator of the test PKI SHALL be named.
 
 ## 6 Revocation
 
