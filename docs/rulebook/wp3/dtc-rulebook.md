@@ -8,7 +8,7 @@ Author(s):
 * Anthony Carmoy, ANTS, France
 * Alban Feraud, IN Groupe, France
 * Antonio Maio, INCM, Portugal
-* Arjan Geluk, ..., ...
+* Arjan Geluk, A4 Adivsory, The Netherlands
 
 | Version | Date | Description |
 |---------|------------|------------|
@@ -40,11 +40,13 @@ The primary objective of the DTC is to facilitate secure and privacy-preserving 
 
 Within the APTITUDE context, the target model is the ICAO DTC Type 2, comprising a DTC-VC bound to (1) a physical eMRTD and (2) a DTC-PC which is an EUDI Wallet, and derived using mechanisms aligned with European regulations and ICAO guidelines. A DTC of Type 2 is therefore considered the primary and preferred implementation model. However, in the light of the features, interfaces and specifications of the EUDI Wallet, the mechanisms for binding the DTC-VC to the DTC-PC (i.e. the EUDI Wallet) differ from those envisionned by ICAO. It will therefore results in (1) differences in the content of the DTC-VC, as the methods and information for binding the DTC-VC to DTC-PC are different, and (2) the trust model, in order to leverage the one considered for the EUDI Wallet.
 
-This attestation Rulebook specified herewith aims at supporting the implementation of DTC bound to an EUDI Wallet and a physical eMRTD, aligned with the concept of DTC Type 2 as defined by ICAO. This attestation Rulebook assumes the eMRTD is an eMRTD issued by an EU Member State or a Schengen Associated Country, and thus supports the Chip Authentication mechanism and contains a DG14.
+The APTITUDE DTC draws inspiration from the principle underlying ICAO DTC Type 2: i.e. the secure physical element of the ID document, signed by a sovereign authority. The guiding idea is to preserve this trust anchor. Since the ICAO Type 2 specification is at the time or writing still under finalization, APTITUDE DTC may diverge from ICAO’s strict specifications in key ways:
 
-This attestation Rulebook specified herewidth aims at supporting implementation of DTC bound to an EUDI Wallet and a physical eMRTD, aligned with the concept of DTC Type 2 as defined by ICAO. This attestation Rulebook assumes the eMRTD is an eMRTD issued by an EU Member State or a Schengen Associated Country, and thus supporting the Chip Authentication mechanism and containing a DG14.
+* Binding mechanism: While ICAO DTC Type 2 envisions a direct cryptographic link between the DTC and the ID document‘s chip (via DG14 and Chip Authentication), the APTITUDE DTC-VC instead is bound to the EUDI Wallet’s Secure Component using mechanisms aligned with eIDAS 2.0 and EUDI Wallet standards. Therefore, it is the eIDAS 2.0 trust model and data structure that applies.
+* Data content: The APTITUDE DTC-VC retains ICAO’s core data groups (DG1, DG2, DG14, SOD) and extends them with EUDI Wallet-specific attributes (e.g. for  selective disclosure).
+* Presentation protocols: ICAO DTC Type 2 assumes proximity-based interactions with the ID document‘s chip, whereas the APTITUDE DTC leverages EUDI Wallet’s remote and proximity presentation protocols (e.g., OpenID4VP, ISO/IEC 18013-5), introducing additional layers for privacy and interoperability.
 
-This rulebook specifies:
+rulebook specifies:
 
 * The attributes and metadata that comprise an APTITUDE DTC attestation
 * The encoding formats to be supported for APTITUDE DTC attestations.
@@ -493,7 +495,11 @@ It is recommended to make the CSCA root certificates of the EU Member States ava
 
 CSCA root certificates MAY also be obtained from the ICAO PKD by any Relying Party.
 
-For the purpose of interoperability tests and piloting, issung authorities are requested to provide a certificates of a test CSCA, that is technically equivalent to the CSCA.
+For the purpose of interoperability tests and piloting, issung authorities are requested to provide a certificates of a test CSCA which
+
+* SHALL be published at a stated distribution point,
+* SHALL be bounded in validity and
+* SHALL be distinguishable from production trust anchors, and the operator of the test PKI SHALL be name
 
 ## 6 Revocation
 
@@ -513,7 +519,17 @@ Revocation of the linked eMRTD and LDS data given in the ICAO PhotoID data eleme
 
 ## 7 Compliance with ICAO specifications
 
-After successfully processing the device response and the verification procedure, a reader MAY recontruct from the content of the APTITUDE DTC Attestation an ICAO compliant DTC-VC as defined in [ICAO-DTC-VC-TR], supporting the following Type of ICAO DTC:
+1. APTITUDE DTC is compliant to DTC-VC Type 1 acc. to [ICAO-DTC-VC-TR], i.e. the eMRTD being the physical component.
+2. APTITUDE DTC is compliant to DTC-VC Type 2 acc. to [ICAO-DTC-VC-TR] with the following properties
+    * eMRTD-PC is implemented through EUDI-Wallet including WSCD/WSCA
+    * DTCCapabilitiesInfo is substituted by device engagement in proximity case
+    * DTCSignerInfo is substituted by IssuerSigned data, i.e. Mobile Security Object, of mdoc structure
+    * DTCSecurityInfo is substituted by IssuerSigned data, i.e. Mobile security Object, of mdoc structure
+    * Cryptographic link between DTC-VC and DTC-PC is provided by Device Request/Response protocol according to ISO/IEC 18013-5
+3. Strength of cloning protection of APTITUDE DTC, i.e authentication factor of possession, is determined by strength of WSCD/WSCA mechanisms, i.e. protection of the device key.
+4. APTITUDE DTC can be verified by any reader, i.e. Relying Party, within EUDI-Wallet ecosystem.
+5. APTITUDE DTC can be verified internationally by any reader compliant to ISO/IEC 18013-5 and ISO/IEC 18013-7.
+6. APTITUDE DTC does not support ICAO protocols, e.g. ISO/IEC 14443 interface, PACE protocols, and anti-cloning methods like Chip Authentication or Active Authentication as this is impleneted based on other protocols (see statement 2)
 
 * ICAO DTC Type 1, also named eMRTD bound DTC;
 * eMRTD bound extended DTC;
@@ -521,7 +537,7 @@ After successfully processing the device response and the verification procedure
 **ICAO DTC Type 1, also named eMRTD bound DTC**
 In this case the reader SHALL bundle the ``dg1``, ``dg2``, ``sod``, and if present ``dg3``, ``dg4``, ``dg5``, ``dg6``, ``dg7``, ``dg8``, ``dg9``, ``dg10``, ``dg11``, ``dg12``, ``dg13``, ``dg14``, ``dg15``, ``dg16`` within the structure ``DTCData`` to build the structure ``DTCContentInfo``.
 
-*Note:* In this case, the structure ``DTCContentInfo`` does not contain stuctures ``DTCTBS``, ``DTCSignerInfo``, ``DTCSecurityInfo`` and ``DTCOtherInfo``.
+After successfully processing the device response and the verification procedure, a reader MAY recontruct from the content of the APTITUDE DTC Attestation an ICAO compliant DTC-VC as defined in [ICAO-DTC-VC-TR].
 
 **eMRTD bound extended DTC**
 In this case the reader SHALL bundle the ``dg1``, ``dg2``, ``sod``, and if present ``dg3``, ``dg4``, ``dg5``, ``dg6``, ``dg7``, ``dg8``, ``dg9``, ``dg10``, ``dg11``, ``dg12``, ``dg13``, ``dg14``, ``dg15``, ``dg16`` to get the structure ``DTCData``. Subsequently, the reader SHALL (1) append the stucture ``DTCOtherInfo`` found within the APTITUDE DTC Attestation in the structure ``DTCData`` and (2) bundle the structures ``DTCTBS`` and ``DTCSignerInfo`` found within the APTITUDE DTC Attestation together with ``DTCData`` to build the structure ``DTCContentInfo``.
@@ -535,10 +551,9 @@ Conversly, during issuance of the APTITUDE DTC, the issuing authority SHALL comp
 
 The binding between the DTC-VC and the EUDI Wallet enabled by the Rulebook is not compliant with the mechanisms currently defined by ICAO for the binding between the DTC-VC and DTC-PC. Therefore, the following features allowed by the Rulebook are currently not compliant with ICAO specifications:
 
-* binding between the DTC-PC (EUDI Wallet) and the DTC-VC;
-* security mechanisms implemented by the DTC-PC (EUDI Wallet);
+*Note:* In this case, the structure ``DTCContentInfo`` does not contain stuctures ``DTCTBS``, ``DTCSignerInfo``, ``DTCSecurityInfo`` and ``DTCOtherInfo``.
 
-### 7.1 ICAO based encoding
+### 7.2 ICAO based encoding
 
 The ICAO based encoding for DTC-VC is defined in [ICAO-DTC-VC-TR] and encoding for DTC-PC is defined in [ICAO-DTC-PC-TR]. The ASN.1 definition below reproduces the generic ICAO DTC-VC encoding. For APTITUDE DTC, only the eMRTD-bound encoding is applicable. The eMRTD-PC-bound encoding is retained for comparison with the ICAO Type 2 model, while the PC-bound encoding is outside the scope of the current profile.
 
