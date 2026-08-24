@@ -1,0 +1,83 @@
+name: Release documentation
+
+# Manually triggered by an admin. Mints a new v<yyyymm>.<n> version (n resets
+# each month), publishes it via mike (updating the "latest" alias), and
+# attaches a zipped copy of the built site to the corresponding GitHub Release.
+# This is the only mechanism that publishes the site - there is no
+# deploy-on-push workflow.
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: "release"
+  cancel-in-progress: false
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    # Gated behind the "release" environment's required reviewers (wp2-leads):
+    # anyone with write access can trigger this workflow, but the job waits
+    # for approval from a wp2-leads member before it actually runs.
+    environment: release
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+        with:
+          ref: main
+          fetch-depth: 0
+          submodules: recursive
+          token: ${{ secrets.APTITUDE_REPO_UPDATE_PAT }}
+
+      - name: Set up Python
+        uses: actions/setup-python@v7
+        with:
+          python-version: "3.12"
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Configure git user
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+      - name: Compute next version
+        id: version
+        run: |
+          YEAR_MONTH=$(date -u +%Y%m)
+          LAST_N=$(git tag -l "v${YEAR_MONTH}.*" | sed "s/^v${YEAR_MONTH}\.//" | sort -n | tail -1)
+          NEXT_N=$(( ${LAST_N:-0} + 1 ))
+          VERSION="v${YEAR_MONTH}.${NEXT_N}"
+          echo "Next version: $VERSION"
+          echo "version=$VERSION" >> "$GITHUB_OUTPUT"
+
+      - name: Create and push tag
+        run: |
+          git tag "${{ steps.version.outputs.version }}"
+          git push origin "${{ steps.version.outputs.version }}"
+
+      - name: Build site
+        run: mkdocs build --clean
+
+      - name: Zip built site
+        run: zip -r "documentation-${{ steps.version.outputs.version }}.zip" site
+
+      - name: Create GitHub release
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        run: |
+          gh release create "${{ steps.version.outputs.version }}" \
+            "documentation-${{ steps.version.outputs.version }}.zip" \
+            --title "${{ steps.version.outputs.version }}" \
+            --generate-notes
+
+      - name: Publish version with mike
+        run: |
+          mike deploy --push --update-aliases "${{ steps.version.outputs.version }}" latest
+          mike set-default --push --allow-empty latest
