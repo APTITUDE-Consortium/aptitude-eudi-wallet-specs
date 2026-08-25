@@ -36,17 +36,16 @@ Feedback:
 
 This Attestation Rulebook defines the Digital Travel Credential (DTC) as an electronic attestation of attributes for the EUDI Wallet ecosystem. The DTC enables travellers to store and present identity data in their Wallet Unit for border control and travel-related use cases.
 
-The primary objective of the DTC is to facilitate secure and privacy-preserving identity verification and travel document validation at border crossing points and during travel. The DTC is designed to complement existing physical travel documents (e.g. passports, visas) by providing a digital equivalent that supports selective disclosure, offline and online presentation and strong cryptographic verification.
+The primary objective of the DTC is to facilitate secure and privacy-preserving identity verification and travel document validation at border crossing points and before as well as during travel (for details see §4). The DTC is designed to complement existing physical travel documents (e.g. passports, visas) by providing a digital equivalent that supports selective disclosure, proximity as well as remote presentation and strong cryptographic verification.
 
-Within the APTITUDE context, the target model is the ICAO DTC Type 2, comprising a DTC-VC bound to (1) a physical eMRTD and (2) a DTC-PC which is an EUDI Wallet, and derived using mechanisms aligned with European regulations and ICAO guidelines. A DTC of Type 2 is therefore considered the primary and preferred implementation model. However, in the light of the features, interfaces and specifications of the EUDI Wallet, the mechanisms for binding the DTC-VC to the DTC-PC (i.e. the EUDI Wallet) differ from those envisionned by ICAO. It will therefore results in (1) differences in the content of the DTC-VC, as the methods and information for binding the DTC-VC to DTC-PC are different, and (2) the trust model, in order to leverage the one considered for the EUDI Wallet.
+Within the APTITUDE context, the target model is the ICAO DTC Type 2, comprising a DTC-VC bound to (1) a physical eMRTD and (2) a DTC-PC which is an EUDI Wallet, and derived using mechanisms aligned with European regulations and ICAO guidelines. A DTC of Type 2 is therefore considered the primary and preferred implementation model. However, in the light of the features, interfaces and specifications of the EUDI Wallet, the mechanisms for binding the DTC-VC to the DTC-PC (i.e. the EUDI Wallet) differ from those specificied by ICAO in [ICAO-DTC-PC-TR] (for details see §7). This results in differences in the content of the DTC-VC, as the methods and information for binding the DTC-VC to DTC-PC are different.
 
-The APTITUDE DTC draws inspiration from the principle underlying ICAO DTC Type 2: i.e. the secure physical element of the ID document, signed by a sovereign authority. The guiding idea is to preserve this trust anchor. Since the ICAO Type 2 specification is at the time or writing still under finalization, APTITUDE DTC may diverge from ICAO’s strict specifications in key ways:
+Thus, the APTITUDE DTC draws inspiration from the principle underlying ICAO DTC Type 2: i.e. the secure physical element of the ID document, signed by a sovereign authority. The guiding idea is to preserve this trust anchor. Since the ICAO Type 2 specification is at the time or writing still under finalization, APTITUDE DTC may diverge from ICAO’s strict specifications in two key dimensions (for details see §7):
 
-* Binding mechanism: While ICAO DTC Type 2 envisions a direct cryptographic link between the DTC and the ID document‘s chip (via DG14 and Chip Authentication), the APTITUDE DTC-VC instead is bound to the EUDI Wallet’s Secure Component using mechanisms aligned with eIDAS 2.0 and EUDI Wallet standards. Therefore, it is the eIDAS 2.0 trust model and data structure that applies.
 * Data content: The APTITUDE DTC-VC retains ICAO’s core data groups (DG1, DG2, DG14, SOD) and extends them with EUDI Wallet-specific attributes (e.g. for  selective disclosure).
 * Presentation protocols: ICAO DTC Type 2 assumes proximity-based interactions with the ID document‘s chip, whereas the APTITUDE DTC leverages EUDI Wallet’s remote and proximity presentation protocols (e.g., OpenID4VP, ISO/IEC 18013-5), introducing additional layers for privacy and interoperability.
 
-rulebook specifies:
+The present rulebook specifies:
 
 * The attributes and metadata that comprise an APTITUDE DTC attestation
 * The encoding formats to be supported for APTITUDE DTC attestations.
@@ -518,6 +517,8 @@ If an APTITUDE DTC is marked revoked, a Relying Party SHALL reject the APTITUDE 
 Revocation of the linked eMRTD and LDS data given in the ICAO PhotoID data elements remains unchanged and is governed by the applicable ICAO, eMRTD and national procedures.
 
 ## 7 Compliance with ICAO specifications
+
+
 
 1. APTITUDE DTC is compliant to DTC-VC Type 1 acc. to [ICAO-DTC-VC-TR], i.e. the eMRTD being the physical component.
 2. APTITUDE DTC is compliant to DTC-VC Type 2 acc. to [ICAO-DTC-VC-TR] with the following properties
