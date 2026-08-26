@@ -8,8 +8,8 @@ Author(s):
 * Anthony Carmoy, ANTS, France
 * Alban Feraud, IN Groupe, France
 * Antonio Maio, INCM, Portugal
-* Arjan Geluk, ..., ...
-  
+* Arjan Geluk, A4 Adivsory, The Netherlands
+
 | Version | Date | Description |
 |---------|------------|------------|
 | 0.1 | 11-02-2026 | First draft version - Filled par 1.1 |
@@ -36,15 +36,16 @@ Feedback:
 
 This Attestation Rulebook defines the Digital Travel Credential (DTC) as an electronic attestation of attributes for the EUDI Wallet ecosystem. The DTC enables travellers to store and present identity data in their Wallet Unit for border control and travel-related use cases.
 
-The primary objective of the DTC is to facilitate secure and privacy-preserving identity verification and travel document validation at border crossing points and during travel. The DTC is designed to complement existing physical travel documents (e.g. passports, visas) by providing a digital equivalent that supports selective disclosure, offline and online presentation and strong cryptographic verification.
+The primary objective of the DTC is to facilitate secure and privacy-preserving identity verification and travel document validation at border crossing points, as well as before and during travel (for details see §4). The DTC is designed to complement existing physical travel documents (e.g., passports, visas) by providing a digital equivalent that supports selective disclosure, proximity, as well as remote presentation and strong cryptographic verification.
 
-Within the APTITUDE context, the target model is the ICAO DTC Type 2, comprising a DTC-VC bound to (1) a physical eMRTD and (2) a DTC-PC which is an EUDI Wallet, and derived using mechanisms aligned with European regulations and ICAO guidelines. A DTC of Type 2 is therefore considered the primary and preferred implementation model. However, in the light of the features, interfaces and specifications of the EUDI Wallet, the mechanisms for binding the DTC-VC to the DTC-PC (i.e. the EUDI Wallet) differ from those envisionned by ICAO. It will therefore results in (1) differences in the content of the DTC-VC, as the methods and information for binding the DTC-VC to DTC-PC are different, and (2) the trust model, in order to leverage the one considered for the EUDI Wallet.
+Within the APTITUDE context, the target model is the ICAO DTC Type 2, comprising a DTC-VC bound to (1) a physical eMRTD and (2) a DTC-PC which is an EUDI Wallet, and derived using mechanisms aligned with European regulations and ICAO guidelines. A DTC of Type 2 is therefore considered the primary and preferred implementation model. However, in the light of the features, interfaces and specifications of the EUDI Wallet, the mechanisms for binding the DTC-VC to the DTC-PC (i.e. the WSCD/WSCA of the EUDI Wallet) differ from those specificied by ICAO in [ICAO-DTC-PC-TR] (for details see §7). This results in differences in the content of the DTC-VC, as the methods and information for binding the DTC-VC to DTC-PC are different.
 
-This attestation Rulebook specified herewith aims at supporting the implementation of DTC bound to an EUDI Wallet and a physical eMRTD, aligned with the philosophy of DTC Type 2 as defined by ICAO. This attestation Rulebook assumes the eMRTD is an eMRTD issued by an EU Member State or a Schengen Associated Country, and thus supports the Chip Authentication mechanism and contains a DG14.
+Thus, the APTITUDE DTC draws inspiration from the principle underlying ICAO DTC Type 2, i.e. the secure physical element of the ID document, signed by a sovereign authority. The guiding idea is to preserve this trust anchor. Since the ICAO Type 2 specification is at the time of writing still under finalization, APTITUDE DTC may diverge from ICAO’s strict specifications in two key dimensions (for details see §7):
 
-This attestation Rulebook specified herewidth aims at supporting implementation of DTC bound to an EUDI Wallet and a physical eMRTD, aligned with the philosophy of DTC Type 2 as defined by ICAO. This attestation Rulebook assumes the eMRTD is an eMRTD issued by an EU Member State or a Schengen Associated Country, and thus supporting the Chip Authentication mechanism and containing a DG14.
+* Data content: The APTITUDE DTC-VC retains ICAO’s core data groups (DG1, DG2, DG14, SOD) and extends them with EUDI Wallet-specific attributes (e.g. for  selective disclosure).
+* Presentation protocols: ICAO DTC Type 2 assumes proximity-based interactions with the ID document‘s chip, whereas the APTITUDE DTC leverages EUDI Wallet’s remote and proximity presentation protocols (e.g., OpenID4VP, ISO/IEC 18013-5), introducing additional layers for privacy and interoperability.
 
-This rulebook specifies:
+The present rulebook specifies:
 
 * The attributes and metadata that comprise an APTITUDE DTC attestation
 * The encoding formats to be supported for APTITUDE DTC attestations.
@@ -368,7 +369,7 @@ APTITUDE DTC:
 
 [//]: # (See D3.1 §§1.2 and 3.2 for traveller‑initiated advance submission.)
 
-**Flow:** remote (wallet → Traveller Router or direct submission endpoint → Border backend). The exact presentation protocol (OpenID4VP, mdoc, Traveller Router) is not mandated in D3.1 and must be chosen by implementers.
+**Flow:** remote (wallet → Traveller Router or direct submission endpoint → Border backend). The remote presentation protocol complies with the regulation's Implementing Acts (i.e. OpenID4VP and iso18013-7).
 
 **Requested attributes:**
 
@@ -390,7 +391,7 @@ The request may include ``age_over_18`` where required for age-based verificatio
 
 **Context:** Traveller presents their APTITUDE DTC from the EUDIW at the border control point (e‑gate, kiosk or officer reader) for immediate verification and biometric match. (D3.1 describes proximity presentation requirements and the need to reconcile ISO/IEC 18013‑5 and ICAO NFC/APDU approaches.)
 
-**Flow:** proximity (device engagement / NFC or mdoc proximity per chosen implementation). D3.1 notes both ISO/IEC 18013‑5 (EUDIW proximity) and ISO/IEC 14443/APDU (ICAO backwards compatibility) and does not mandate one universal mode — the pilot must specify which mode(s) will be tested.
+**Flow:** proximity (device engagement / NFC or mdoc proximity per chosen implementation).
 
 **Modalities (as defined in D3.2 Chapter 10.3 Functional Flow):**
 
@@ -423,7 +424,9 @@ Where deemed necessary by the border control authority, the field ``dg14`` obtai
 
 [//]: # (D3.1 lists the outside‑Schengen arrival scenario as optional and highlights interoperability constraints.)
 
-**Flow:** proximity (wallet → non‑EU verifier). The destination’s native inspection interface determines the mode (NFC/APDU, mdoc, or other). D3.1 notes that non‑EU systems may expect ICAO ASN.1 structures and PKI anchors.
+**Flow:** proximity (wallet → non‑EU verifier). The destination’s native inspection interface determines the mode (NFC/APDU, mdoc, or other).
+
+[//]: # (D3.1 notes that non‑EU systems may expect ICAO ASN.1 structures and PKI anchors.)
 
 **Requested attributes:**
 
@@ -478,7 +481,15 @@ The following key usage period and certificate/public key validity period SHALL 
 * Private key usage period : between xx days and 3 months;
 * certificate/public key validity period : xxx;
 
-It is recommended to make the CSCA root certificates of the EU Member States available to Relying Parties in the EUDI Wallet ecosytem by a respective EU Trust List, i.e. APTITUDE DTC TL. In addition, it is recommended to make the content of the APTITUDE DTC TL available to Relying Parties outside of the EUDI Wallet ecosystem by a VICAL according to [ISO/IEC 18013-5].
+* Private key usage period : between xx days and 3 months;
+* certificate/public key validity period : xxx;
+
+The following key usage period and certificate/public key validity period SHALL be used for the DTC signer:
+
+* Private key usage period : between xx days and 3 months;
+* certificate/public key validity period : xxx;
+
+It is recommended to make the CSCA root certificates of the EU Member States available to Relying Parties in the EUDI Wallet ecosytem by a respective EU Trust List, i.e. APTITUDE DTC TL.
 
 CSCA root certificates MAY also be obtained from the ICAO PKD by any Relying Party.
 
@@ -504,15 +515,43 @@ Revocation of the linked eMRTD and LDS data given in the ICAO PhotoID data eleme
 
 After successfully processing the device response and the verification procedure, a reader MAY recontruct from the content of the APTITUDE DTC Attestation an ICAO compliant DTC-VC as defined in [ICAO-DTC-VC-TR], supporting the following Type of ICAO DTC:
 
-* ICAO DTC Type 1, also named eMRTD bound DTC;
-* eMRTD bound extended DTC;
-
 **ICAO DTC Type 1, also named eMRTD bound DTC**
 In this case the reader SHALL bundle the ``dg1``, ``dg2``, ``sod``, and if present ``dg3``, ``dg4``, ``dg5``, ``dg6``, ``dg7``, ``dg8``, ``dg9``, ``dg10``, ``dg11``, ``dg12``, ``dg13``, ``dg14``, ``dg15``, ``dg16`` within the structure ``DTCData`` to build the structure ``DTCContentInfo``.
 
 *Note:* In this case, the structure ``DTCContentInfo`` does not contain stuctures ``DTCTBS``, ``DTCSignerInfo``, ``DTCSecurityInfo`` and ``DTCOtherInfo``.
 
-**eMRTD bound extended DTC**
+The binding between the DTC-VC and the EUDI Wallet enabled by the Rulebook is not compliant with the mechanisms currently defined by ICAO for the binding between the DTC-VC and DTC-PC. Therefore, the following features allowed by the Rulebook are currently not compliant with ICAO specifications:
+
+* binding between the DTC-PC (EUDI Wallet) and the DTC-VC;
+* security mechanisms implemented by the DTC-PC (EUDI Wallet);
+
+### 7.1 Compliance with ICAO specifications
+
+The following statements apply for APTITUDE DTC:
+
+1. APTITUDE DTC is compliant to DTC-VC Type 1 acc. to [ICAO-DTC-VC-TR], i.e. the eMRTD being the physical component.
+2. APTITUDE DTC is compliant to DTC-VC Type 2 acc. to [ICAO-DTC-VC-TR] with the following properties
+    * eMRTD-PC is implemented through EUDI-Wallet including WSCD/WSCA
+    * DTCCapabilitiesInfo is substituted by device engagement in proximity case
+    * DTCSignerInfo is substituted by IssuerSigned data, i.e. Mobile Security Object, of mdoc structure
+    * DTCSecurityInfo is substituted by IssuerSigned data, i.e. Mobile security Object, of mdoc structure
+    * Cryptographic link between DTC-VC and DTC-PC is provided by Device Request/Response protocol according to ISO/IEC 18013-5
+3. Strength of cloning protection of APTITUDE DTC, i.e authentication factor of possession, is determined by strength of WSCD/WSCA mechanisms, i.e. protection of the device key managed by the WSCD/WASCA.
+4. APTITUDE DTC can be verified by any reader, i.e. Relying Party, within EUDI-Wallet ecosystem.
+5. APTITUDE DTC can be verified internationally by any reader compliant to ISO/IEC 18013-5 and ISO/IEC 18013-7.
+6. APTITUDE DTC does not support ICAO protocols according to [ICAO-DTC-PC-TR], e.g. ISO/IEC 14443 interface, PACE protocols, and anti-cloning methods like Chip Authentication or Active Authentication as this is impleneted based on other protocols (see statement 2)
+
+* ICAO DTC Type 1, also named eMRTD bound DTC;
+* eMRTD bound extended DTC;
+
+#### ICAO DTC Type 1, also named eMRTD bound DTC
+
+After successfully processing the device response and the verification procedure, a reader MAY recontruct from the content of the APTITUDE DTC Attestation an ICAO compliant DTC-VC as defined in [ICAO-DTC-VC-TR].
+
+In this case the reader SHALL bundle the ``dg1``, ``dg2``, ``sod``, and if present ``dg3``, ``dg4``, ``dg5``, ``dg6``, ``dg7``, ``dg8``, ``dg9``, ``dg10``, ``dg11``, ``dg12``, ``dg13``, ``dg14``, ``dg15``, ``dg16`` within the structure ``DTCData`` to build the structure ``DTCContentInfo`` (see §7.2).
+
+#### eMRTD bound extended DTC
+
 In this case the reader SHALL bundle the ``dg1``, ``dg2``, ``sod``, and if present ``dg3``, ``dg4``, ``dg5``, ``dg6``, ``dg7``, ``dg8``, ``dg9``, ``dg10``, ``dg11``, ``dg12``, ``dg13``, ``dg14``, ``dg15``, ``dg16`` to get the structure ``DTCData``. Subsequently, the reader SHALL (1) append the stucture ``DTCOtherInfo`` found within the APTITUDE DTC Attestation in the structure ``DTCData`` and (2) bundle the structures ``DTCTBS`` and ``DTCSignerInfo`` found within the APTITUDE DTC Attestation together with ``DTCData`` to build the structure ``DTCContentInfo``.
 Conversly, during issuance of the APTITUDE DTC, the issuing authority SHALL compute the following structures in accordance with [ICAO-DTC-VC-TR] and store them within the APTITUDE DTC Attestation:
 
@@ -527,7 +566,7 @@ The binding between the DTC-VC and the EUDI Wallet enabled by the Rulebook is no
 * binding between the DTC-PC (EUDI Wallet) and the DTC-VC;
 * security mechanisms implemented by the DTC-PC (EUDI Wallet);
 
-### 7.1 ICAO based encoding
+### 7.2 ICAO based encoding
 
 The ICAO based encoding for DTC-VC is defined in [ICAO-DTC-VC-TR] and encoding for DTC-PC is defined in [ICAO-DTC-PC-TR]. The ASN.1 definition below reproduces the generic ICAO DTC-VC encoding. For APTITUDE DTC, only the eMRTD-bound encoding is applicable. The eMRTD-PC-bound encoding is retained for comparison with the ICAO Type 2 model, while the PC-bound encoding is outside the scope of the current profile.
 
@@ -765,7 +804,7 @@ The second table below defines the rules applicable to each of these attributes 
 | **Item Reference** | **Standard name/details**|
 | -----              | ----- |
 | [ISO/IEC 18013-5] |  ISO/IEC 18013-5, Personal identification --- ISO-compliant driving licence - Part 5: Mobile driving licence (mDL) application, First edition, 2021-09 |
-| [ISO/IEC 18013-5.2] |  ISO/IEC 18013-5, Personal identification --- ISO-compliant driving licence - Part 5: Mobile driving licence (mDL) application, second edition, 2026-xx (Status DIS) |
+| [ISO/IEC 18013-5.2] |  ISO/IEC 18013-5, Personal identification --- ISO-compliant driving licence - Part 5: Mobile driving licence (mDL) application, second edition, 2026-xx (Status DIS, voting terminates on 2026-03-26) |
 | [ISO/IEC 23220-4] | ISO/IEC TS 23220-4: Cards and Security Devices for Personal Identification – Building Blocks for Identity Management via Mobile Devices –Part 4: Protocols and services for the operational phase, First edition, 2026-04  |
 | [ISO/IEC 23220-2.2] | ISO/IEC TS 23220-2: Cards and Security Devices for Personal Identification – Building Blocks for Identity Management via Mobile Devices –Part 2: Data objects and encoding rules for generic eID systems, Second edition, 2026-04  |
  | [RFC 2119] | RFC 2119 - Key words for use in RFCs to Indicate Requirement Levels, S. Bradner, March 1997 |
