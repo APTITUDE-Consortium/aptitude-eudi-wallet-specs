@@ -524,6 +524,7 @@ The binding between the DTC-VC and the EUDI Wallet enabled by the Rulebook is no
 
 * binding between the DTC-PC (EUDI Wallet) and the DTC-VC;
 * security mechanisms implemented by the DTC-PC (EUDI Wallet);
+
 ### 7.1 Compliance with ICAO specifications
 
 The following statements apply for APTITUDE DTC:
