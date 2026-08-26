@@ -537,13 +537,13 @@ The following statements apply for APTITUDE DTC:
 * ICAO DTC Type 1, also named eMRTD bound DTC;
 * eMRTD bound extended DTC;
 
-**ICAO DTC Type 1, also named eMRTD bound DTC**
+#### ICAO DTC Type 1, also named eMRTD bound DTC
 
 After successfully processing the device response and the verification procedure, a reader MAY recontruct from the content of the APTITUDE DTC Attestation an ICAO compliant DTC-VC as defined in [ICAO-DTC-VC-TR].
 
 In this case the reader SHALL bundle the ``dg1``, ``dg2``, ``sod``, and if present ``dg3``, ``dg4``, ``dg5``, ``dg6``, ``dg7``, ``dg8``, ``dg9``, ``dg10``, ``dg11``, ``dg12``, ``dg13``, ``dg14``, ``dg15``, ``dg16`` within the structure ``DTCData`` to build the structure ``DTCContentInfo`` (see §7.2).
 
-**eMRTD bound extended DTC**
+#### eMRTD bound extended DTC
 
 In this case the reader SHALL bundle the ``dg1``, ``dg2``, ``sod``, and if present ``dg3``, ``dg4``, ``dg5``, ``dg6``, ``dg7``, ``dg8``, ``dg9``, ``dg10``, ``dg11``, ``dg12``, ``dg13``, ``dg14``, ``dg15``, ``dg16`` to get the structure ``DTCData``. Subsequently, the reader SHALL (1) append the stucture ``DTCOtherInfo`` found within the APTITUDE DTC Attestation in the structure ``DTCData`` and (2) bundle the structures ``DTCTBS`` and ``DTCSignerInfo`` found within the APTITUDE DTC Attestation together with ``DTCData`` to build the structure ``DTCContentInfo``.
 Conversly, during issuance of the APTITUDE DTC, the issuing authority SHALL compute the following structures in accordance with [ICAO-DTC-VC-TR] and store them within the APTITUDE DTC Attestation:
