@@ -43,7 +43,7 @@ Within the APTITUDE context, the target model is the ICAO DTC Type 2, comprising
 Thus, the APTITUDE DTC draws inspiration from the principle underlying ICAO DTC Type 2, i.e. the secure physical element of the ID document, signed by a sovereign authority. The guiding idea is to preserve this trust anchor. Since the ICAO Type 2 specification is at the time of writing still under finalization, APTITUDE DTC may diverge from ICAO’s strict specifications in two key dimensions (for details see §7):
 
 * Data content: The APTITUDE DTC-VC retains ICAO’s core data groups (DG1, DG2, DG14, SOD) and extends them with EUDI Wallet-specific attributes (e.g. for  selective disclosure).
-* Presentation protocols: ICAO DTC Type 2 assumes proximity-based interactions with the ID document‘s chip, whereas the APTITUDE DTC leverages EUDI Wallet’s remote and proximity presentation protocols (e.g., OpenID4VP, ISO/IEC 18013-5), introducing additional layers for privacy and interoperability.
+* Presentation protocols: ICAO DTC Type 2 assumes proximity-based interactions with the ID Document eMRTD‘s chip, whereas the APTITUDE DTC leverages EUDI Wallet’s remote and proximity presentation protocols (e.g., OpenID4VP, ISO/IEC 18013-5), introducing additional layers for privacy and interoperability.
 
 The present rulebook specifies:
 
@@ -125,7 +125,7 @@ The objective is to preserve a single interoperable DTC representation that is:
 | ``age_over_18`` | according to [ISO/IEC 23220-2.2] | T  |
 | ``document_number`` | identifier of the APTITUDE DTC according to [ISO/IEC 23220-2.2] | YA1234567 |
 | ``person_id`` | according to [ISO/IEC 23220-4] | 1234567890 |
-| ``dg1`` | according to [ISO/IEC 23220-4] | P<ITA<<HARDT<<GIOVANNI<<<<<<<<<<<<<<<< |
+| ``dg1`` | according to [ISO/IEC 23220-4] | PPITA<<HARDT<<GIOVANNI<<<<<<<<<<<<<<<< |
 | ``dg2`` | according to [ISO/IEC 23220-4] | ... |
 | ``dg14`` | according to [ISO/IEC 23220-4] | ... |
 
@@ -138,7 +138,7 @@ The objective is to preserve a single interoperable DTC representation that is:
 | ``enrolment_portrait_image`` | according to [ISO/IEC 23220-4] <br><br> portrait image captured during enrolment of the APTITUDE DTC/PhotoID holder that can be different to image in ``portrait``| ...  |
 | ``age_in_years`` | according to [ISO/IEC 23220-4] | 28  |
 | ``age_birth_year`` | according to [ISO/IEC 23220-4] | 1998  |
-| ``portrait_capture_date`` | according to [ISO/IEC 23220-4] | 20-04-2023 |
+| ``portrait_capture_date`` | according to [ISO/IEC 23220-4] <br> this field denotes the date of capture of the portrait stored in the field “enrolment_portrait_image” | 20-04-2023 |
 | ``birthplace`` | according to [ISO/IEC 23220-4] | Italy, Trento |
 | ``name_at_birth`` | according to [ISO/IEC 23220-4] | Nick |
 | ``resident_address`` | according to [ISO/IEC 23220-4] and further clarified in [ISO/IEC 23220-2.2] | Roma, 45 |
@@ -147,8 +147,8 @@ The objective is to preserve a single interoperable DTC representation that is:
 | ``resident_postal_code`` | according to [ISO/IEC 23220-4] | 38122 |
 | ``resident_country`` | according to [ISO/IEC 23220-4] | IT |
 | ``resident_city_latin1`` | according to [ISO/IEC 23220-4] | ... |
-| ``sex`` | according to [ISO/IEC 23220-4] | '1' (for men) |
-| ``nationality`` | according to [ISO/IEC 23220-4] | IT  |
+| ``sex`` | according to [ISO/IEC 23220-4] <br> This field SHALL take either the values '1' (for male), '2' (for female) or '0' (when unknown)| '1' (for male) |
+| ``nationality`` | according to [ISO/IEC 23220-4] <br> This field SHALL be encoded in three letter code (alpha-3 code) defined in ISO 3166-1| ITA  |
 | ``family_name_latin1`` | according to [ISO/IEC 23220-4] | ...  |
 | ``given_name_latin1`` | according to [ISO/IEC 23220-4] | ...  |
 | ``birth_country`` |  according to [ISO/IEC 23220-4] | IT |
@@ -189,7 +189,7 @@ The objective is to preserve a single interoperable DTC representation that is:
 | ``administrative_number`` | according to [ISO/IEC 23220-4] | 9876543210 |
 | ``travel_document_type`` | according to [ISO/IEC 23220-2.2] | PP |
 | ``travel_document_number`` | according to [ISO/IEC 23220-4] | I13235678 |
-| ``travel_document_mrz`` | according to [ISO/IEC 23220-4] | P<ITA<<HARDT<<GIOVANNI<<<<<<<<<<<<<<<< |
+| ``travel_document_mrz`` | according to [ISO/IEC 23220-4] | PPITA<<HARDT<<GIOVANNI<<<<<<<<<<<<<<<< |
 
 ## 3 Attestation Encoding
 
@@ -493,7 +493,11 @@ It is recommended to make the CSCA root certificates of the EU Member States ava
 
 CSCA root certificates MAY also be obtained from the ICAO PKD by any Relying Party.
 
-For the purpose of interoperability tests and piloting, issung authorities are requested to provide a certificates of a test CSCA, that is technically equivalent to the CSCA.
+For the purpose of interoperability tests and piloting, issuing authorities are requested to provide certificates of a test CSCA which
+
+* SHALL be published at a stated distribution point,
+* SHALL be bounded in validity and
+* SHALL be distinguishable from production trust anchors, and the operator of the test PKI SHALL be name
 
 ## 6 Revocation
 
@@ -539,7 +543,7 @@ The following statements apply for APTITUDE DTC:
 3. Strength of cloning protection of APTITUDE DTC, i.e authentication factor of possession, is determined by strength of WSCD/WSCA mechanisms, i.e. protection of the device key managed by the WSCD/WASCA.
 4. APTITUDE DTC can be verified by any reader, i.e. Relying Party, within EUDI-Wallet ecosystem.
 5. APTITUDE DTC can be verified internationally by any reader compliant to ISO/IEC 18013-5 and ISO/IEC 18013-7.
-6. APTITUDE DTC does not support ICAO protocols according to [ICAO-DTC-PC-TR], e.g. ISO/IEC 14443 interface, PACE protocols, and anti-cloning methods like Chip Authentication or Active Authentication as this is impleneted based on other protocols (see statement 2)
+6. APTITUDE DTC does not support ICAO protocols according to [ICAO-DTC-PC-TR], e.g. ISO/IEC 14443 interface, PACE protocols, and anti-cloning methods like Chip Authentication or Active Authentication as this is implemented based on other protocols (see statement 2)
 
 * ICAO DTC Type 1, also named eMRTD bound DTC;
 * eMRTD bound extended DTC;
