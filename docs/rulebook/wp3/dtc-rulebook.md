@@ -126,7 +126,7 @@ The objective is to preserve a single interoperable DTC representation that is:
 | ``age_over_18`` | according to [ISO/IEC 23220-2.2] | T  |
 | ``document_number`` | identifier of the APTITUDE DTC according to [ISO/IEC 23220-2.2] | YA1234567 |
 | ``person_id`` | according to [ISO/IEC 23220-4] | 1234567890 |
-| ``dg1`` | according to [ISO/IEC 23220-4] | P<ITA<<HARDT<<GIOVANNI<<<<<<<<<<<<<<<< |
+| ``dg1`` | according to [ISO/IEC 23220-4] | PPITA<<HARDT<<GIOVANNI<<<<<<<<<<<<<<<< |
 | ``dg2`` | according to [ISO/IEC 23220-4] | ... |
 | ``dg14`` | according to [ISO/IEC 23220-4] | ... |
 
