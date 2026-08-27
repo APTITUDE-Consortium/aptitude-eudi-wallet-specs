@@ -42,7 +42,7 @@ Within the APTITUDE context, the target model is the ICAO DTC Type 2, comprising
 
 The APTITUDE DTC draws inspiration from the principle underlying ICAO DTC Type 2: i.e. the secure physical element of the ID document, signed by a sovereign authority. The guiding idea is to preserve this trust anchor. Since the ICAO Type 2 specification is at the time or writing still under finalization, APTITUDE DTC may diverge from ICAO’s strict specifications in key ways:
 
-* Binding mechanism: While ICAO DTC Type 2 envisions a direct cryptographic link between the DTC and the ID document‘s chip (via DG14 and Chip Authentication), the APTITUDE DTC-VC instead is bound to the EUDI Wallet’s Secure Component using mechanisms aligned with eIDAS 2.0 and EUDI Wallet standards. Therefore, it is the eIDAS 2.0 trust model and data structure that applies.
+* Binding mechanism: While ICAO DTC Type 2 envisions a direct cryptographic link between the DTC and the ID Document eMRTD‘s chip (via DG14 and Chip Authentication), the APTITUDE DTC-VC instead is bound to the EUDI Wallet’s Secure Component using mechanisms aligned with eIDAS 2.0 and EUDI Wallet standards. Therefore, it is the eIDAS 2.0 trust model and data structure that applies.
 * Data content: The APTITUDE DTC-VC retains ICAO’s core data groups (DG1, DG2, DG14, SOD) and extends them with EUDI Wallet-specific attributes (e.g. for  selective disclosure).
 * Presentation protocols: ICAO DTC Type 2 assumes proximity-based interactions with the ID document‘s chip, whereas the APTITUDE DTC leverages EUDI Wallet’s remote and proximity presentation protocols (e.g., OpenID4VP, ISO/IEC 18013-5), introducing additional layers for privacy and interoperability.
 
