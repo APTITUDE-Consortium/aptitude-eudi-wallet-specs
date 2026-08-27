@@ -44,7 +44,7 @@ The APTITUDE DTC draws inspiration from the principle underlying ICAO DTC Type 2
 
 * Binding mechanism: While ICAO DTC Type 2 envisions a direct cryptographic link between the DTC and the ID Document eMRTD‘s chip (via DG14 and Chip Authentication), the APTITUDE DTC-VC instead is bound to the EUDI Wallet’s Secure Component using mechanisms aligned with eIDAS 2.0 and EUDI Wallet standards. Therefore, it is the eIDAS 2.0 trust model and data structure that applies.
 * Data content: The APTITUDE DTC-VC retains ICAO’s core data groups (DG1, DG2, DG14, SOD) and extends them with EUDI Wallet-specific attributes (e.g. for  selective disclosure).
-* Presentation protocols: ICAO DTC Type 2 assumes proximity-based interactions with the ID document‘s chip, whereas the APTITUDE DTC leverages EUDI Wallet’s remote and proximity presentation protocols (e.g., OpenID4VP, ISO/IEC 18013-5), introducing additional layers for privacy and interoperability.
+* Presentation protocols: ICAO DTC Type 2 assumes proximity-based interactions with the ID Document eMRTD‘s chip, whereas the APTITUDE DTC leverages EUDI Wallet’s remote and proximity presentation protocols (e.g., OpenID4VP, ISO/IEC 18013-5), introducing additional layers for privacy and interoperability.
 
 rulebook specifies:
 
@@ -139,7 +139,7 @@ The objective is to preserve a single interoperable DTC representation that is:
 | ``enrolment_portrait_image`` | according to [ISO/IEC 23220-4] <br><br> portrait image captured during enrolment of the APTITUDE DTC/PhotoID holder that can be different to image in ``portrait``| ...  |
 | ``age_in_years`` | according to [ISO/IEC 23220-4] | 28  |
 | ``age_birth_year`` | according to [ISO/IEC 23220-4] | 1998  |
-| ``portrait_capture_date`` | according to [ISO/IEC 23220-4] | 20-04-2023 |
+| ``portrait_capture_date`` | according to [ISO/IEC 23220-4] <br> this field denotes the date of capture of the portrait stored in the field “enrolment_portrait_image” | 20-04-2023 |
 | ``birthplace`` | according to [ISO/IEC 23220-4] | Italy, Trento |
 | ``name_at_birth`` | according to [ISO/IEC 23220-4] | Nick |
 | ``resident_address`` | according to [ISO/IEC 23220-4] and further clarified in [ISO/IEC 23220-2.2] | Roma, 45 |
