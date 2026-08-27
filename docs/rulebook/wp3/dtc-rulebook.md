@@ -567,7 +567,8 @@ Conversly, during issuance of the APTITUDE DTC, the issuing authority SHALL comp
 
 The binding between the DTC-VC and the EUDI Wallet enabled by the Rulebook is not compliant with the mechanisms currently defined by ICAO for the binding between the DTC-VC and DTC-PC. Therefore, the following features allowed by the Rulebook are currently not compliant with ICAO specifications:
 
-*Note:* In this case, the structure ``DTCContentInfo`` does not contain stuctures ``DTCTBS``, ``DTCSignerInfo``, ``DTCSecurityInfo`` and ``DTCOtherInfo``.
+* binding between the DTC-PC (EUDI Wallet) and the DTC-VC;
+* security mechanisms implemented by the DTC-PC (EUDI Wallet);
 
 ### 7.2 ICAO based encoding
 
