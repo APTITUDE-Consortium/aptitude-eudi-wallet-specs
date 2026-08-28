@@ -158,8 +158,6 @@ The objective is to preserve a single interoperable DTC representation that is:
 | ``resident_street`` | according to [ISO/IEC 23220-4] | Roma |
 | ``resident_house_number`` | according to [ISO/IEC 23220-4] | 45 |
 | ``resident_state`` | according to [ISO/IEC 23220-4] | IT |
-| ``dg3`` | according to [ISO/IEC 23220-4] | ... |
-| ``dg4`` | according to [ISO/IEC 23220-4] | ... |
 | ``dg5`` | according to [ISO/IEC 23220-4] | ... |
 | ``dg6`` | according to [ISO/IEC 23220-4] | ... |
 | ``dg7`` | according to [ISO/IEC 23220-4] | ... |
