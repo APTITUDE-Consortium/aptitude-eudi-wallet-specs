@@ -19,6 +19,7 @@ Author(s):
 | 0.5 | 01-07-2026 | Align clause 2 and 3 with rulebook template, bibliography added, trust model and revocation added |
 | 0.6 | 08-07-2026 | Use cases added in clause 4, editorial changes |
 | 0.7 | 23-07-2026 | Addition of modalities in clause 4.3, editorial changes |
+| 0.8 | 27-08-2026 | changes after review |
 
 Feedback:
 
@@ -517,47 +518,38 @@ Revocation of the linked eMRTD and LDS data given in the ICAO PhotoID data eleme
 
 ## 7 Compliance
 
-After successfully processing the device response and the verification procedure, a reader MAY recontruct from the content of the APTITUDE DTC Attestation an ICAO compliant DTC-VC as defined in [ICAO-DTC-VC-TR], supporting the following Type of ICAO DTC:
-
-**ICAO DTC Type 1, also named eMRTD bound DTC**
-In this case the reader SHALL bundle the ``dg1``, ``dg2``, ``sod``, and if present ``dg3``, ``dg4``, ``dg5``, ``dg6``, ``dg7``, ``dg8``, ``dg9``, ``dg10``, ``dg11``, ``dg12``, ``dg13``, ``dg14``, ``dg15``, ``dg16`` within the structure ``DTCData`` to build the structure ``DTCContentInfo``.
-
-*Note:* In this case, the structure ``DTCContentInfo`` does not contain stuctures ``DTCTBS``, ``DTCSignerInfo``, ``DTCSecurityInfo`` and ``DTCOtherInfo``.
-
-The binding between the DTC-VC and the EUDI Wallet enabled by the Rulebook is not compliant with the mechanisms currently defined by ICAO for the binding between the DTC-VC and DTC-PC. Therefore, the following features allowed by the Rulebook are currently not compliant with ICAO specifications:
-
-* binding between the DTC-PC (EUDI Wallet) and the DTC-VC;
-* security mechanisms implemented by the DTC-PC (EUDI Wallet);
-
 ### 7.1 Compliance with ICAO specifications
 
 The following statements apply for APTITUDE DTC:
 
-1. APTITUDE DTC is compliant to DTC-VC Type 1 acc. to [ICAO-DTC-VC-TR], i.e. the eMRTD being the physical component.
-2. APTITUDE DTC is functionally euivalent to DTC-VC Type 2 acc. to [ICAO-DTC-VC-TR] with the following properties
-    * eMRTD-PC is implemented through EUDI-Wallet including WSCD/WSCA
-    * DTCCapabilitiesInfo is substituted by device engagement in proximity case
-    * DTCSignerInfo is substituted by IssuerSigned data, i.e. Mobile Security Object, of mdoc structure
-    * DTCSecurityInfo is substituted by IssuerSigned data, i.e. Mobile security Object, of mdoc structure
-    * Cryptographic link between DTC-VC and DTC-PC is provided by Device Request/Response protocol according to ISO/IEC 18013-5
-3. Strength of cloning protection of APTITUDE DTC, i.e authentication factor of possession, is determined by strength of WSCD/WSCA mechanisms, i.e. protection of the device key managed by the WSCD/WASCA.
+1. APTITUDE DTC is compliant to DTC-VC Type 1 acc. to [ICAO-DTC-VC-TR], i.e. the eMRTD being the physical component (see §7.2).
+   
+2. APTITUDE DTC is functionally euivalent to DTC-VC Type 2 according to [ICAO-DTC-VC-TR] with the following properties:
+    * eMRTD-PC is implemented through EUDI-Wallet including WSCD/WSCA,
+    * ``DTCCapabilitiesInfo`` is substituted by ``Engagement``structure as part of device engagement in proximity case,
+    * ``DTCSignerInfo`` and ``dtcTBS`` is substituted by ``IssuerAuth`` structure, i.e. Mobile Security Object, of mdoc structure,
+    * ``DTCSecurityInfo`` is substituted by ``IssuerAuth`` structure, i.e. Mobile Security Object, of mdoc structure,
+    * Cryptographic link between DTC-VC and DTC-PC is provided by Device Request/Response protocol according to [ISO/IEC 18013-5] and [ISO/IEC 18013-7.2].
+
+3. Strength of cloning protection of APTITUDE DTC, i.e. authentication factor of possession, is determined by strength of WSCD/WSCA mechanisms, i.e. protection of the device key managed by the WSCD/WSCA.
+
+*Note:* The EUDI Wallet including WSCD/WSCA is required to provide the PID on eIDAS level high [PID Rulebook]. If such level is required for DTC Type 2, the same mechanisms can be applied.
+
 4. APTITUDE DTC can be verified by any reader, i.e. Relying Party, within EUDI-Wallet ecosystem.
-5. APTITUDE DTC can be verified internationally by any reader compliant to ISO/IEC 18013-5 and ISO/IEC 18013-7.
-6. APTITUDE DTC does not support ICAO protocols according to [ICAO-DTC-PC-TR], e.g. ISO/IEC 14443 interface, PACE protocols, and anti-cloning methods like Chip Authentication or Active Authentication as this is implemented based on other protocols (see statement 2)
 
-* ICAO DTC Type 1, also named eMRTD bound DTC;
-* eMRTD bound extended DTC;
+5. APTITUDE DTC can be verified internationally by any reader compliant to [ISO/IEC 18013-5] and [ISO/IEC 18013-7.2], e.g. supporting OID4VP.
 
-#### ICAO DTC Type 1, also named eMRTD bound DTC
+6. APTITUDE DTC does not support ICAO protocols according to [ICAO-DTC-PC-TR], e.g. ISO/IEC 14443 interface, PACE protocols, and anti-cloning methods like Chip Authentication or Active Authentication as this is implemented based on other protocols (see statement 2).
 
-After successfully processing the device response and the verification procedure, a reader MAY recontruct from the content of the APTITUDE DTC Attestation an ICAO compliant DTC-VC as defined in [ICAO-DTC-VC-TR].
+### 7.2 ICAO DTC Type 1
 
-In this case the reader SHALL bundle the ``dg1``, ``dg2``, ``sod``, and if present ``dg3``, ``dg4``, ``dg5``, ``dg6``, ``dg7``, ``dg8``, ``dg9``, ``dg10``, ``dg11``, ``dg12``, ``dg13``, ``dg14``, ``dg15``, ``dg16`` within the structure ``DTCData`` to build the structure ``DTCContentInfo`` (see §7.2).
+After successful processing of the the device response and processing the verification procedure of APTITUDE DTC, a reader MAY recontruct from the content of the APTITUDE DTC Attestation an ICAO compliant DTC-VC of Type 1 as defined in [ICAO-DTC-VC-TR].
 
-[//]: remove all occurance of dg3 and dg4 in the text as those are not present or accessible
+In this case the reader SHALL bundle the ``dg1``, ``dg2``, ``sod`` and if present ``dg5``, ``dg6``, ``dg7``, ``dg8``, ``dg9``, ``dg10``, ``dg11``, ``dg12``, ``dg13``, ``dg14``, ``dg15``, ``dg16`` within the structure ``DTCData`` to build the structure ``DTCContentInfo`` (see §7.3).
 
+*Note:* In this case, the structure ``DTCContentInfo`` does not contain stuctures ``DTCTBS``, ``DTCSignerInfo``, ``DTCSecurityInfo`` and ``DTCOtherInfo``.
 
-### 7.2 ICAO based encoding
+### 7.3 ICAO based encoding
 
 The ICAO based encoding for DTC-VC is defined in [ICAO-DTC-VC-TR] and encoding for DTC-PC is defined in [ICAO-DTC-PC-TR]. The ASN.1 definition below reproduces the generic ICAO DTC-VC encoding. For APTITUDE DTC, only the eMRTD-bound encoding is applicable. The eMRTD-PC-bound encoding is retained for comparison with the ICAO Type 2 model, while the PC-bound encoding is outside the scope of the current profile.
 
@@ -694,8 +686,6 @@ The first table below aims at showing for each attribute of the APTITUDE DTC whe
 | ``resident_street`` | | X | |
 | ``resident_house_number`` | | X | |
 | ``resident_state`` | | X | |
-| ``dg3`` | X | | |
-| ``dg4`` | X | | |
 | ``dg5`` | X | | |
 | ``dg6`` | X | | |
 | ``dg7`` | X | | |
@@ -764,8 +754,6 @@ The second table below defines the rules applicable to each of these attributes 
 | ``resident_street`` |If the eMRTD contains a DG11, this field SHALL contain the street present in the DE “Permanent address” (if this DE is present).<br><br>Otherwise, this field SHALL be provided by the DTC issuing authority.|
 | ``resident_house_number`` |If the eMRTD contains a DG11, this field SHALL contain the house number present in the DE “Permanent address” (if this DE is present).<br><br>Otherwise, this field SHALL be provided by the DTC issuing authority.|
 | ``resident_state`` |If the eMRTD contains a DG11, this field SHALL contain the state present in the DE “Permanent address” (if this DE is present).<br><br>Otherwise, this field SHALL be provided by the DTC issuing authority.|
-| ``dg3`` |This field SHALL replicate the DG3 of the eMRTD.|
-| ``dg4`` |This field SHALL replicate the DG4 of the eMRTD.|
 | ``dg5`` |This field SHALL replicate the DG5 of the eMRTD.|
 | ``dg6`` |This field SHALL replicate the DG6 of the eMRTD.|
 | ``dg7`` |This field SHALL replicate the DG7 of the eMRTD.|
@@ -796,11 +784,13 @@ The second table below defines the rules applicable to each of these attributes 
 | -----              | ----- |
 | [ISO/IEC 18013-5] |  ISO/IEC 18013-5, Personal identification --- ISO-compliant driving licence - Part 5: Mobile driving licence (mDL) application, First edition, 2021-09 |
 | [ISO/IEC 18013-5.2] |  ISO/IEC 18013-5, Personal identification --- ISO-compliant driving licence - Part 5: Mobile driving licence (mDL) application, second edition, 2026-xx (Status DIS, voting terminates on 2026-03-26) |
+| [ISO/IEC 18013-7.2] |  ISO/IEC TS 18013-7, Personal identification --- ISO-compliant driving licence - Part 7: Mobile driving licence (mDL) additional functions, Second edition, 2025-05 |
 | [ISO/IEC 23220-4] | ISO/IEC TS 23220-4: Cards and Security Devices for Personal Identification – Building Blocks for Identity Management via Mobile Devices –Part 4: Protocols and services for the operational phase, First edition, 2026-04  |
 | [ISO/IEC 23220-2.2] | ISO/IEC TS 23220-2: Cards and Security Devices for Personal Identification – Building Blocks for Identity Management via Mobile Devices –Part 2: Data objects and encoding rules for generic eID systems, Second edition, 2026-04  |
  | [RFC 2119] | RFC 2119 - Key words for use in RFCs to Indicate Requirement Levels, S. Bradner, March 1997 |
- | [ICAO-DTC-VC-TR] | ICAO Technical Report, Digital Travel Credentials (DTC) - Virtual Component Data Structure and PKI Mechanisms, Version 1.2, October 2020 |
- | [ICAO-DTC-PC-TR] | ICAO Technical Report, Digital Travel Credentials (DTC) - Physical Component and Protocols, Version 1.1, October 2022 |
+ | [ICAO-DTC-VC-TR] | ICAO Technical Report, Digital Travel Credentials (DTC) - Virtual Component Data Structure and PKI Mechanisms, Version 1.2, October 2020, https://www.icao.int/sites/default/files/TRIP/Publications/Digital-Travel-Credentials-DTC.pdf |
+ | [ICAO-DTC-PC-TR] | ICAO Technical Report, Digital Travel Credentials (DTC) - Physical Component and Protocols, Version 1.1, October 2022, https://www.icao.int/sites/default/files/TRIP/Publications/ICAO-TR-Digital-Travel-Credentials-PC.pdf |
  | [APTITUDE-D3.1] | APTITUDE, D3.1: Stock‑Taking, Analysis and Specifications — pilot use cases and advance submission, 27‑02‑2026. |
  | [APTITUDE-D3.2] | APTITUDE, D3.2: Work in progress on Technical and functional specifications for DTC experimentations. |
  | [EU-API-2025-12] | Regulation (EU) 2025/12 of the European Parliament and of the Council of 19 December 2024 on the collection and transfer of  advance passenger information for enhancing and facilitating external border checks, amending Regulations (EU) 2018/1726 and (EU) 2019/817, and repealing Council Directive 2004/82/EC. |
+ | [PID Rulebook] | European Digital Identity Wallet - ARF Annex 3.01 - PID Rulebook, https://github.com/eu-digital-identity-wallet/eudi-doc-attestation-rulebooks-catalog/blob/main/rulebooks/pid/pid-rulebook.md |
