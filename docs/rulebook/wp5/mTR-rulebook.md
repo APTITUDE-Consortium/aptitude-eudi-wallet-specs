@@ -22,7 +22,7 @@ This document specifies the â€œEuropean Union mobile Technical Report (EU-mTR)â€
 
 ### 1.2 Document structure
 
-- Chapter 2, which describes ...
+- Chapter 2, which describes general description of the attestation rulebook.
 - Chapter 3, which specifies how the attestation, attributes and metadata are encoded in case the attestation complies with [ISO/IEC 18013-5] .
 - Chapter 4, which specifies attestation usage.
 - Chapter 5, which defines how trust anchors for attestation verification can be obtained.
