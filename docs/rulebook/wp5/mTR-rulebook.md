@@ -19,6 +19,7 @@ Author(s):
 ### 1.1 Document scope and purpose
 
 This document specifies the “European Union mobile Technical Report (EU-mTR)” serving as roadworthiness certificate in accordance with EU Directive [xzy]. An EU-mTR is a mobile document, i.e. QEAA or Pub-EAA, managed by an EUDI Wallet according to [European Digital Identity Regulation]. The specification of the EU-mTR is a profile of the mTR specified in [ISO/IEC 7367-3].
+
 ### 1.2 Document structure
 
 - Chapter 2, which describes ...
@@ -64,6 +65,9 @@ The document type for the **EU-mTR** SHALL be as specified in clause xx of [ISO/
 
 The namespace for **EU-mTR ISO compliant data elements** defined in clause 3.1.2 SHALL be as specified in clause xx of [ISO/IEC 7367-3].
 
-Member States MAY add additional namespaces under their responsibility. References to those specifications are given in clause 2.4. The namespace for **EU-mTR Member State specific data elements** SHALL be as specified in clauses xxx and xxx of [ISO/IEC 7367-3] appended by the respective country code of the Member State after a period and optionally followed by a version number.
+Member States MAY add additional namespaces under their responsibility. References to those specifications are given in clause xxx. 
+
+The namespace for **EU-mTR Member State specific data elements** SHALL be as specified in clauses xxx and xxx of [ISO/IEC 7367-3] appended by the respective country code of the Member State after a period and optionally followed by a version number.
 
 #### 3.1.2 EU-mVRC ISO compliant data elements
+t.b.d.
