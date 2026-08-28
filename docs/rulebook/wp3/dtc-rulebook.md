@@ -122,7 +122,7 @@ The objective is to preserve a single interoperable DTC representation that is:
 | ``family_name`` | according to [ISO/IEC 23220-2.2] | Hardt |
 | ``given_name`` | according to [ISO/IEC 23220-2.2] | Giovanni |
 | ``birth_date`` | according to [ISO/IEC 23220-2.2] | 01-01-1980 |
-| ``portrait`` | according to [ISO/IEC 23220-2.2] | ... |
+| ``portrait`` | according to [ISO/IEC 23220-2.2] <br> This field SHALL contain the same portrait data as stored in the DG2 of the eMRTD | ... |
 | ``age_over_18`` | according to [ISO/IEC 23220-2.2] | T  |
 | ``document_number`` | identifier of the APTITUDE DTC according to [ISO/IEC 23220-2.2] | YA1234567 |
 | ``person_id`` | according to [ISO/IEC 23220-4] | 1234567890 |
