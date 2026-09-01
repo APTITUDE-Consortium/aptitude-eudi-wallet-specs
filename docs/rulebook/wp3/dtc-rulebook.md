@@ -131,7 +131,7 @@ The objective is to preserve a single interoperable DTC representation that is:
 
 ### 2.3 Optional and conditional attributes
 
-Details about conditions and options related to the attributes are given in clause 3. 
+Details about conditions and options related to the attributes are given in clause 3.
 
 | **Identifier** | **Description** | **Example** |
 | --- | --- | --- |
