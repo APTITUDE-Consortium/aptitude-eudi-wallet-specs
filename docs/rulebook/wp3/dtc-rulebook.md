@@ -19,7 +19,7 @@ Author(s):
 | 0.5 | 01-07-2026 | Align clause 2 and 3 with rulebook template, bibliography added, trust model and revocation added |
 | 0.6 | 08-07-2026 | Use cases added in clause 4, editorial changes |
 | 0.7 | 23-07-2026 | Addition of modalities in clause 4.3, editorial changes |
-| 0.8 | 27-08-2026 | changes after review |
+| 0.8 | 27-08-2026 | changes after review by the group in all clauses |
 
 Feedback:
 
@@ -39,7 +39,7 @@ Within the European framework and in accordance with the EUDI Wallet Architectur
 
 The primary objective of the DTC is to support identity verification and travel document validation at border crossing points, as well as before and during travel (for details see §4). Within the European framework, its implementation is also expected to meet applicable privacy and data-minimisation requirements. The APTITUDE DTC complements the physical travel document and uses EUDI Wallet presentation mechanisms to support remote and proximity presentation and, where permitted by the selected credential format and protocol, selective disclosure as well as strong cryptographic verification.
 
-Within the APTITUDE context, the target model is the ICAO DTC Type 2, comprising a DTC-VC bound to (1) a physical electronic Machine Readable Travel Document (eMRTD) and (2) a DTC-PC which is an EUDI Wallet, and derived using mechanisms aligned with European regulations and ICAO guidelines. A DTC of Type 2 is therefore considered the primary and preferred implementation model. However, in the light of the features, interfaces and specifications of the EUDI Wallet, the mechanisms for binding the DTC-VC to the DTC-PC (i.e. the WSCD/WSCA of the EUDI Wallet) differ from those specificied by ICAO in [ICAO-DTC-PC-TR] (for details see §7). This results in differences in the content of the DTC-VC, as the methods and information for binding the DTC-VC to DTC-PC are different.
+Within the APTITUDE context, the target model is the ICAO DTC Type 2 [ICAO-DTC-VC-TR], comprising a DTC-VC bound to (1) a physical electronic Machine Readable Travel Document (eMRTD) and (2) a DTC-PC which is an EUDI Wallet, and derived using mechanisms aligned with European regulations and ICAO guidelines. A DTC of Type 2 is therefore considered the primary and preferred implementation model. However, in the light of the features, interfaces and specifications of the EUDI Wallet, the mechanisms for binding the DTC-VC to the DTC-PC (i.e. the WSCD/WSCA of the EUDI Wallet) differ from those specificied by ICAO in [ICAO-DTC-PC-TR] (for details see §7). This results in differences in the content of the DTC-VC, as the methods and information for binding the DTC-VC to DTC-PC are different.
 
 Thus, the APTITUDE DTC draws inspiration from the principle underlying ICAO DTC Type 2, i.e. the secure physical element of the ID document, signed by a sovereign authority. The guiding idea is to preserve this trust anchor. Since the ICAO Type 2 specification is at the time of writing still under finalization, APTITUDE DTC may diverge from ICAO’s strict specifications in two key dimensions (for details see §7):
 
@@ -52,6 +52,8 @@ The present rulebook specifies:
 * The encoding formats to be supported for APTITUDE DTC attestations.
 * The issuance, presentation and verification requirements for APTITUDE DTC attestations within the EUDI Wallet framework.
 * The trust anchor mechanisms, revocation procedures and compliance requirements that apply to APTITUDE DTC attestations.
+
+This rulebook does not specify the operational consultation of national, Schengen or international lost-and-stolen-document and police databases. Such checks remain subject to applicable border-control procedures and shall be addressed in the relevant experimentation specifications.
 
 ### 1.2 Document structure
 
@@ -343,7 +345,7 @@ APTITUDE DTC:
 
 [//]: # (These are the rulebook §2 mandatory/priority attributes; D3.1 does not define a stricter per‑scenario list.)
 
-**Post‑processing:** the airline backend (or its designated submission service) MUST verify holder proof/possession assertions from the wallet (if applicable), carry out the issuer data authentication of the APTITUDE DTC as defined in [ISO/IEC 18013-5.2], and validate the certificate chain and check revocation/status using the applicable trust anchors (CSCA/DS and/or EU trust lists) as defined in clause 5. The airline then packages the verified data for server‑to‑server submission to the Border Authority (mapping of APTITUDE DTC elements to the receiving envelope is a Member State decision; legacy readers may require extraction/encapsulation into ICAO DTCContentInfo/ASN.1 (DTC-VC compliant with [ICAO-DTC-VC-TR]). The Border Authority performs full verification in accordance with ICAO trust framework (passive authentication: SOD/DG hash checks, PKI chain, revocation/status) and ingests the required ICAO PhotoID data elements for registration and risk checks. Where supported by the Member State implementation, the verification outcome MAY be returned to the traveller through the carrier or designated submission channel.
+**Post‑processing:** the airline backend (or its designated submission service) MUST verify holder proof/possession assertions from the wallet (if applicable), carry out the issuer data authentication of the APTITUDE DTC as defined in [ISO/IEC 18013-5.2], and validate the certificate chain and check revocation/status using the applicable trust anchors (CSCA/DS and/or EU trust lists) as defined in clause 5. Optionally, the airline then packages the verified data for server‑to‑server submission to the Border Authority (mapping of APTITUDE DTC elements to the receiving envelope is a Member State decision; legacy readers may require extraction/encapsulation into ICAO DTCContentInfo/ASN.1 (DTC-VC compliant with [ICAO-DTC-VC-TR], see §7, includes data given in §3.1.4). The Border Authority performs full verification in accordance with ICAO trust framework (passive authentication: SOD/DG hash checks, PKI chain, revocation/status) and ingests the required ICAO PhotoID data elements (see §3.1.4) for registration and risk checks. Where supported by the Member State implementation, the verification outcome MAY be returned to the traveller through the carrier or designated submission channel. This use case does not include interaction with the eMRTD (see e.g. use case 4.3 modality 4 and 4.5). 
 
 [//]: # (D3.1 describes the pre‑assessment use case and the need for an interoperable transmission protocol; it does not mandate a single packaging mechanism — implementers must document the chosen transport and envelope.)
 
@@ -367,7 +369,7 @@ The request may include ``age_over_18`` where required for age-based verificatio
 
 [//]: # (These follow the rulebook §2 attribute set; D3.1 does not specify per‑scenario attribute subsets.)
 
-**Post-processing:** the receiving Border backend validates the wallet presentation, including any proof of possession, carry out the issuer data authentication of the APTITUDE DTC as defined in [ISO/IEC 18013-5.2], and validate the certificate chain and check revocation/status using the applicable trust anchors (CSCA/DS and/or EU trust lists) as defined in clause 5. Verification outcome drives pre-assessment workflows (EES/ETIAS/API/SIS/SLTD queries). If selective disclosure was used, the backend MUST verify the integrity and authenticity of the disclosed PhotoID data elements using the cryptographic mechanism of the selected data format. Where ICAO PhotoID data elements are disclosed, the backend SHALL additionally perform ICAO passive authentication by validating the SOD, checking the disclosed DG hashes, and verifying the applicable ICAO trust chain. Where supported by the Member State implementation, the backend MAY return a status or operational instruction to the traveller, such as confirmation of successful pre-registration, required corrective action, or guidance on the applicable border-control process.
+**Post-processing:** the receiving Border backend MUST verify holder proof/possession assertions from the wallet (if applicable), carry out the issuer data authentication of the APTITUDE DTC as defined in [ISO/IEC 18013-5.2], and validate the certificate chain and check revocation/status using the applicable trust anchors (CSCA/DS and/or EU trust lists) as defined in clause 5. Verification outcome drives pre-assessment workflows (EES/ETIAS/API/SIS/SLTD queries). If selective disclosure was used, the backend MUST verify the integrity and authenticity of the disclosed PhotoID data elements using the cryptographic mechanism of the selected data format. Where ICAO PhotoID data elements are disclosed, the backend SHALL additionally perform ICAO passive authentication by validating the SOD, checking the disclosed DG hashes, and verifying the applicable ICAO trust chain. Where supported by the Member State implementation, the backend MAY return a status or operational instruction to the traveller, such as confirmation of successful pre-registration, required corrective action, or guidance on the applicable border-control process.
 
 [//]: # (D3.1 highlights the selective‑disclosure vs LDS integrity tension but does not prescribe a single resolution, so the Member State policy must define acceptance criteria.)
 
@@ -381,11 +383,11 @@ The request may include ``age_over_18`` where required for age-based verificatio
 
 1. Proximity presentation of the APTITUDE DTC and 1:1 matching: The user presents its APTITUDE DTC from the EUDI Wallet, with device engagement, allowing gates to retrieve the APTITUDE DTC from the wallet with biometric verification in 1:1 between the passenger and the photo contained in his APTITUDE DTC.
 
-2. Proximity presentation of a token and 1:1 matching: The user presents a token, containing a decryption key, allowing the gates to decrypt the pre-loaded APTITUDE DTC for a specific flight. 1:1 biometric matching between the passenger and the photo contained in the pre-loaded APTITUDE DTC.
+2. Proximity presentation of a token and 1:1 matching: The user presents a token, containing a decryption key, allowing the gates to decrypt the pre-loaded APTITUDE DTC for a specific flight. 1:1 biometric matching between the passenger and the photo contained in the pre-loaded APTITUDE DTC.<br><br>*Note:* This modality as an experimentation hypothesis outside the normative profile, with security and interoperability aspects to be assessed.
 
-3. Proximity presentation of the DTC‑VC (compliant with [ICAO-DTC-VC-TR]), retrieval of the pre-loaded DTC‑VC and 1:1 matching: The traveller presents the DTC-VC stored in their wallet (or taps their passport at the gate). The information presented enables the gate to identify and retrieve the corresponding DTC-VC, previously pre-loaded in the gate system together with its associated pre-clearance status. The gate then performs a matching between the DTC-VC presented by the traveller and the pre-loaded DTC-VC to authenticate the traveller and confirm the correct record has been retrieved. Once this matching has been successfully completed, a 1:1 biometric verification is performed between the traveller and the portrait contained in the corresponding pre-loaded DTC-VC.
+3. Proximity presentation of the DTC‑VC (compliant with [ICAO-DTC-VC-TR]), retrieval of the pre-loaded DTC‑VC and 1:1 matching: The traveller presents the DTC-VC stored in their wallet (or taps their passport at the gate). The information presented enables the gate to identify and retrieve the corresponding DTC-VC, previously pre-loaded in the gate system together with its associated pre-clearance status. The gate then performs a matching between the DTC-VC presented by the traveller and the pre-loaded DTC-VC to authenticate the traveller and confirm the correct record has been retrieved. Once this matching has been successfully completed, a 1:1 biometric verification is performed between the traveller and the portrait contained in the corresponding pre-loaded DTC-VC.<br><br>*Note:* A lifecycle management of the pre-loaded DTC-VC including distribution, update, one-time use and deletion is to be designed and implemented by the backend systems per experimentation site.<br>*Note*: The specific implemention of distribution mechanisms of pre-loaded DTC-VC within the beckend system is out of scope of this rulebook.<br>*Note*: The specific implementaion of a gate system including a physical gate, its local controller, an airport border-control subsystem or a central border backend is out of scope of this rulebook. 
 
-4. Matching 1:n then presentation of the APTITUDE DTC: The user approaches the gates, and proceeds to a 1:n matching to retrieve the APTITUDE DTC preloaded in the gates. He then presents his APTITUDE DTC stored in his EUDI Wallet (or tap his passport), in order to establish the cryptographic link to authenticate the passenger and his APTITUDE DTC.
+4. Matching 1:n then presentation of the APTITUDE DTC: The user approaches the gates, and proceeds to a 1:n matching to retrieve the APTITUDE DTC pre-loaded in the gates. The user then presents his APTITUDE DTC stored in its EUDI Wallet (or tap his passport), in order to establish the cryptographic link to authenticate the user and its APTITUDE DTC or eMRTD.<br><br>*Note:* The APTITUDE DTC is cryptographically linked to both the respective EUDI Wallet and eMRTD.<br>*Note:*The 1:n identification is performed against the gallery of facial templates associated with pre-registered travellers. Following identification, the national implementation determines whether presentation of the DTC-VC or physical document is required to confirm possession and complete authentication.
 
 **Requested attributes:**
 
@@ -395,7 +397,7 @@ APTITUDE DTC
 * Special PhotoID data elements: ``person_id``
 * ICAO PhotoID data elements: ``version``, ``dg1``, ``dg2``, ``dg14``, ``sod``, and ``dg15`` where available and required for Active Authentication.
 
-Priority attributes for on‑site verification and biometric matching are ``dg2`` (portrait), ``dg1`` (biographic / MRZ), ``sod``, ``dg14`` if the Member State uses it for inspection. Attributes ``version``, ``person_id``, ``expiry_date``, ``issuing_authority``, ``age_over_18`` and ``portrait`` are optional depending on the check (age verification, biometric fallback).
+Priority attributes for on‑site verification and biometric matching are ``dg2`` (portrait), ``dg1`` (biographic / MRZ), ``sod``, ``dg14`` if the Member State uses it for inspection. Attributes ``version``, ``person_id``, ``expiry_date``, ``issuing_authority``, ``age_over_18`` and ``portrait`` are optional depending on the check (age verification, biometric fallback).<br><br>: *Note:* The portrait is used for identity-related facial comparison, not for estimating age.
 
 [//]: # (Chosen attributes reflect rulebook §2 priorities and D3.1 emphasis on DG2/SOD for biometric anchoring.)
 
@@ -487,7 +489,7 @@ For the purpose of interoperability tests and piloting, issuing authorities are 
 
 ### 6.1 Reasons for revocation
 
-Reasons for revocation or invalidation may include, but are not limited to, device loss or compromise of the Wallet Unit, revocation or replacement of the corresponding physical eMRTD, compromise of the APTITUDE DTC issuer certificate or issuer trust chain, incorrect or fraudulently issued APTITUDE DTC data, or invalidation of the applicable ICAO certificate chain.
+Reasons for revocation or invalidation may include, but are not limited to, device loss or compromise of the Wallet Unit, revocation or replacement of the corresponding physical eMRTD, compromise of the APTITUDE DTC issuer certificate or issuer trust chain, incorrect or fraudulently issued APTITUDE DTC data, or invalidation of the applicable ICAO certificate chain. Credential-level revocation enables the issuing authority to invalidate an APTITUDE DTC, for example following wallet loss or compromise, without automatically invalidating the corresponding physical eMRTD. Revocation of the eMRTD remains governed separately under clause 6.3.
 
 ### 6.2 APTITUDE DTC revocation
 
@@ -515,7 +517,7 @@ The following statements apply for APTITUDE DTC:
 3. Strength of cloning protection of APTITUDE DTC, i.e. authentication factor of possession, is determined by strength of WSCD/WSCA mechanisms, i.e. protection of the device key managed by the WSCD/WSCA. <br><br>*Note:* The EUDI Wallet including WSCD/WSCA is required to provide the PID on eIDAS level high [PID Rulebook]. If such level is required for DTC Type 2, the same mechanisms can be applied.<br><br>
 4. APTITUDE DTC can be verified by any reader, i.e. Relying Party, within EUDI-Wallet ecosystem.<br><br>
 5. APTITUDE DTC can be verified internationally by any reader compliant to [ISO/IEC 18013-5] and [ISO/IEC 18013-7.2], e.g. supporting OpenID4VP.<br><br>
-6. APTITUDE DTC does not support ICAO protocols according to [ICAO-DTC-PC-TR], e.g. ISO/IEC 14443 interface, PACE protocols, and anti-cloning methods like Chip Authentication or Active Authentication as this is implemented based on other protocols (see statement 2).
+6. APTITUDE DTC does not support ICAO protocols according to [ICAO-DTC-PC-TR], e.g. ISO/IEC 14443 interface, PACE protocols, and anti-cloning methods like Chip Authentication or Active Authentication as this is implemented based on other protocols (see statement 2). The APTITUDE DTC does not rely on the ICAO DTC-PC protocols defined in [ICAO-DTC-PC-TR] for presentation from the EUDI Wallet, such as PACE or ICAO Chip Authentication. It instead relies on the applicable EUDI Wallet engagement, transfer and device-binding mechanisms. This does not exclude the use of NFC, BLE or other interfaces required by the selected wallet presentation protocol.
 
 ### 7.2 ICAO DTC Type 1
 
@@ -527,20 +529,12 @@ In this case the reader SHALL bundle the ``dg1``, ``dg2``, ``sod`` and if presen
 
 ### 7.3 ICAO based encoding
 
-The ICAO based encoding for DTC-VC is defined in [ICAO-DTC-VC-TR] and encoding for DTC-PC is defined in [ICAO-DTC-PC-TR]. The ASN.1 definition below reproduces the generic ICAO DTC-VC encoding. For APTITUDE DTC, only the eMRTD-bound encoding is applicable. The eMRTD-PC-bound encoding is retained for comparison with the ICAO Type 2 model, while the PC-bound encoding is outside the scope of the current profile.
+The ICAO based encoding for DTC-VC is defined in [ICAO-DTC-VC-TR] and encoding for DTC-PC is defined in [ICAO-DTC-PC-TR]. The ASN.1 definition below reproduces the generic ICAO DTC-VC encoding. For APTITUDE DTC, only the eMRTD-bound encoding is applicable.
 
 ```asn.1
 DTCContentInfo ::= SEQUENCE {
 version Version,
-dtcData DTCData,
-dtcTBS [0] EXPLICIT DTCTBSValues OPTIONAL,
--- MUST be present if DTC is eMRTD-PC Bound or PC
--- Bound. This field MUST NOT be present if DTC is
--- eMRTD Bound.
-dtcSignerInfo [1] EXPLICIT DTCSignerInfo OPTIONAL
--- MUST be present if DTC is eMRTD-PC Bound or PC
--- Bound. This field MUST NOT be present if DTC is
--- eMRTD Bound.
+dtcData DTCData
 }
 DTCTBSValues ::= SEQUENCE SIZE (3..ub-DTCData) OF DTCTBSValue
 Version ::= INTEGER { v1(1) }
@@ -600,10 +594,6 @@ dtcDG16 [16] IMPLICIT OCTET STRING OPTIONAL,
 -- Contains the encoding of Data Group 16 defined
 -- in [Doc 9303]-10.
 ...,
-dtcSecurityInfo [22] EXPLICIT DTCSecurityInfo OPTIONAL,
--- MUST be present if DTC is eMRTD-PC Bound or PC
--- Bound. This field MUST NOT be present if DTC
--- is eMRTD Bound.
 dtcOtherInfos [23] EXPLICIT DTCOtherInfos OPTIONAL,
 -- The dtcOtherInfos is for internal State use.
 -- MAY be present if DTC is eMRTD-PC Bound or PC
@@ -615,9 +605,7 @@ dtcOtherInfos [23] EXPLICIT DTCOtherInfos OPTIONAL,
 
 ## 8 Consideration for issuance of APTITUDE DTC credentials
 
-APTITUDE DTC is bound to an existing eMRTD, either issued before the APTITUDE DTC (pre-existing eMRTD) or issued simultaneously.
-Many of the attributes contained in the APTITUDE DTC are or may be also present in the underlying eMRTD. Therefore it is of the utmost importance to ensure their consistency with the eMRTD content to (1) avoid creation of flawed APTITUDE DTC and (2) avoid errors when the APTITUDE DTC is processed by a relying party. Where the issuing authority reads out the eMRTD and reuses its content for APTITUDE DTC issuance, consistency is directly ensured. Alternatively, issuing authority may also issue an APTITUDE DTC with attributes obtained from its own registers, provided consistency with eMRTD content is guaranteed.
-Other attributes contained in the APTITUDE DTC are not present in eMRTD, and therefore have to be provided by the issuing authority at DTC issuance. These attributes are either attributes related to the holder which are absent from eMRTD LDS, or relating to the APTITUDE DTC credential.
+APTITUDE DTC is bound to an existing eMRTD, either issued before the APTITUDE DTC (pre-existing eMRTD) or issued simultaneously. Many of the attributes contained in the APTITUDE DTC are or may be also present in the underlying eMRTD. Therefore it is of the utmost importance to ensure their consistency with the eMRTD content to (1) avoid creation of flawed APTITUDE DTC and (2) avoid errors when the APTITUDE DTC is processed by a relying party. Where the issuing authority reads out the eMRTD and reuses its content for APTITUDE DTC issuance, consistency is directly ensured. Alternatively, issuing authority may also issue an APTITUDE DTC with attributes obtained from its own registers, provided consistency with eMRTD content is guaranteed. Other attributes contained in the APTITUDE DTC are not present in eMRTD, and therefore have to be provided by the issuing authority at DTC issuance. These attributes are either attributes related to the holder which are absent from eMRTD LDS, or relating to the APTITUDE DTC credential.
 The first table below aims at showing for each attribute of the APTITUDE DTC whether:
 
 * it is present in the underlying eMRTD;
@@ -709,12 +697,12 @@ The second table below defines the rules applicable to each of these attributes 
 | **Optional Attributes**||
 | ``family_name_viz`` |This field SHALL contain the family name present in the DE “name of holder” as found in DG1 of the eMRTD|
 | ``given_name_viz`` |This field SHALL contain the given name present in the DE “name of holder” as found in DG1 of the eMRTD|
-| ``enrolment_portrait_image`` |This field MAY contain a newer portrait acquired in the course of the DTC issuance process by the issuing authority, provided it is matched with the one stored in the DG2 of the eMRTD|
+| ``enrolment_portrait_image`` |This field MAY contain a newer portrait acquired in the course of the DTC issuance process by the issuing authority, provided it is matched with the one stored in the DG2 of the eMRTD <br><br>*Note:* The portriat image in DG2 of eMRTD remains the authoritative passport biometric reference unless national law and the applicable trust framework expressly permit another image.|
 | ``age_in_years`` |This field SHALL be computed by the issuing authority at DTC issuance from the DE “date of birth” (see above) and a date of reference.|
 | ``age_birth_year`` |This field SHALL contain the year present in the DE “Date of birth” as found in DG1 of the eMRTD|
 | ``portrait_capture_date`` |This field MAY be present if the field ``enrolment_portrait_image`` is present. If present, it SHALL indicate the capture date of ``enrolment_portrait_image``.|
 | ``birthplace`` |If the eMRTD contains a DG11, this field SHALL contain the value present in the DE “place of birth” (if this DE is present).<br><br>Otherwise, this field SHALL be provided by the DTC issuing authority.|
-| ``name_at_birth`` |This field is not present in the eMRTD LDS.<br><br>This field SHALL be provided by the DTC issuing authority.|
+| ``name_at_birth`` |This field is not present in the eMRTD LDS.<br><br>This field SHALL be provided by the DTC issuing authority.<br><br>*Note:*  Name at birth is considered the holder’s name as recorded in the authoritative civil-status or birth record. |
 | ``resident_address`` |If the eMRTD contains a DG11, this field SHALL contain the value present in the DE “Permanent address” (if this DE is present).<br><br>Otherwise, this field SHALL be provided by the DTC issuing authority.|
 | ``resident_address_latin1`` |If the eMRTD contains a DG11, this field SHALL contain the value present in the DE “Permanent address” (if this DE is present and if expressed using latin alphabet).<br><br>Otherwise, this field SHALL be provided by the DTC issuing authority.|
 | ``resident_city`` |If the eMRTD contains a DG11, this field SHALL contain the resident city present in the DE “Permanent address” (if this DE is present).<br><br>Otherwise, this field SHALL be provided by the DTC issuing authority.|
@@ -759,11 +747,11 @@ The second table below defines the rules applicable to each of these attributes 
 
 | **Item Reference** | **Standard name/details**|
 | -----              | ----- |
-| [ISO/IEC 18013-5] |  ISO/IEC 18013-5, Personal identification --- ISO-compliant driving licence - Part 5: Mobile driving licence (mDL) application, First edition, 2021-09 |
+| [ISO/IEC 18013-5] |  ISO/IEC 18013-5, Personal identification --- ISO-compliant driving licence - Part 5: Mobile driving licence (mDL) application, First edition, 2021-09.<br>[Download URL free of charge](https://dinmedia.mdoc.online/en) |
 | [ISO/IEC 18013-5.2] |  ISO/IEC 18013-5, Personal identification --- ISO-compliant driving licence - Part 5: Mobile driving licence (mDL) application, second edition, 2026-xx (Status DIS, voting terminates on 2026-03-26) |
-| [ISO/IEC 18013-7.2] |  ISO/IEC TS 18013-7, Personal identification --- ISO-compliant driving licence - Part 7: Mobile driving licence (mDL) additional functions, Second edition, 2025-05 |
-| [ISO/IEC 23220-4] | ISO/IEC TS 23220-4: Cards and Security Devices for Personal Identification – Building Blocks for Identity Management via Mobile Devices –Part 4: Protocols and services for the operational phase, First edition, 2026-04  |
-| [ISO/IEC 23220-2.2] | ISO/IEC TS 23220-2: Cards and Security Devices for Personal Identification – Building Blocks for Identity Management via Mobile Devices –Part 2: Data objects and encoding rules for generic eID systems, Second edition, 2026-04  |
+| [ISO/IEC 18013-7.2] |  ISO/IEC TS 18013-7, Personal identification --- ISO-compliant driving licence - Part 7: Mobile driving licence (mDL) additional functions, Second edition, 2025-05.<br>[Download URL free of charge](https://dinmedia.mdoc.online/en)|
+| [ISO/IEC 23220-4] | ISO/IEC TS 23220-4: Cards and Security Devices for Personal Identification – Building Blocks for Identity Management via Mobile Devices –Part 4: Protocols and services for the operational phase, First edition, 2026-04.<br>[Download URL free of charge](https://dinmedia.mdoc.online/en)  |
+| [ISO/IEC 23220-2.2] | ISO/IEC TS 23220-2: Cards and Security Devices for Personal Identification – Building Blocks for Identity Management via Mobile Devices –Part 2: Data objects and encoding rules for generic eID systems, Second edition, 2026-04.<br>[Download URL free of charge](https://dinmedia.mdoc.online/en)  |
  | [RFC 2119] | RFC 2119 - Key words for use in RFCs to Indicate Requirement Levels, S. Bradner, March 1997 |
  | [ICAO-DTC-VC-TR] | ICAO Technical Report, Digital Travel Credentials (DTC) - Virtual Component Data Structure and PKI Mechanisms, Version 1.2, October 2020.<br>[Digital-Travel-Credentials-DTC.pdf URL](https://www.icao.int/sites/default/files/TRIP/Publications/Digital-Travel-Credentials-DTC.pdf) |
  | [ICAO-DTC-PC-TR] | ICAO Technical Report, Digital Travel Credentials (DTC) - Physical Component and Protocols, Version 1.1, October 2022.<br>[ICAO-TR-Digital-Travel-Credentials-PC.pdf URL](https://www.icao.int/sites/default/files/TRIP/Publications/ICAO-TR-Digital-Travel-Credentials-PC.pdf) |
