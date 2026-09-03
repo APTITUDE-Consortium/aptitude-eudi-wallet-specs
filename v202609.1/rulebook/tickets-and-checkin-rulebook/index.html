@@ -1,0 +1,2002 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="APTITUDE Technical Specification">
+      
+      
+        <meta name="author" content="APTITUDE Consortium">
+      
+      
+        <link rel="canonical" href="https://aptitude-consortium.github.io/aptitude-eudi-wallet-specs/v202609.1/rulebook/tickets-and-checkin-rulebook/">
+      
+      
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+    
+    
+      
+        <title>Tickets and checkin rulebook - APTITUDE Technical Specification</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.ec1eaa64.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../media/extra.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#aptitude-tickets-and-check-in-rulebook" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+      <div data-md-color-scheme="default" data-md-component="outdated" hidden>
+        
+      </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="APTITUDE Technical Specification" class="md-header__button md-logo" aria-label="APTITUDE Technical Specification" data-md-component="logo">
+      
+  <img src="../../img/logo.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            APTITUDE Technical Specification
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Tickets and checkin rulebook
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/APTITUDE-Consortium/aptitude-eudi-wallet-specs" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    APTITUDE-Consortium/aptitude-eudi-wallet-specs
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+    
+      
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Attestation Rulebooks
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../trust-framework/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Trust Specifications
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../horizontal-RFCs/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  RFCs
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../itb_plus_user_onboarding/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Testing and Conformance
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../schema/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Schemas
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../standards/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Standards
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../glossary/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Glossary
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+  
+
+<nav class="md-nav md-nav--primary md-nav--lifted md-nav--integrated" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="APTITUDE Technical Specification" class="md-nav__button md-logo" aria-label="APTITUDE Technical Specification" data-md-component="logo">
+      
+  <img src="../../img/logo.png" alt="logo">
+
+    </a>
+    APTITUDE Technical Specification
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/APTITUDE-Consortium/aptitude-eudi-wallet-specs" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    APTITUDE-Consortium/aptitude-eudi-wallet-specs
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Attestation Rulebooks
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_2" id="__nav_2_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Attestation Rulebooks
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../wp5/mVRC-rulebook/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    mVRC
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../wp3/dtc-rulebook/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DTC
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Trust Specifications
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Trust Specifications
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../trust-framework/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Trust Framework
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../horizontal-RFCs/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    RFCs
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_4" id="__nav_4_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    RFCs
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../horizontal-RFCs/RFC001/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    RFC-01 Credential Issuance Profile
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../horizontal-RFCs/RFC002/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    RFC-02 Presentation Profile
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../horizontal-RFCs/RFC004/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    RFC-04 Revocation Profile
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../itb_plus_user_onboarding/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Testing and Conformance
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_5" id="__nav_5_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Testing and Conformance
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../itb_plus_user_onboarding/aptitude-itb-user-onboarding-manual/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ITB+ User Onboarding Guide
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../itb_plus_user_onboarding/report-submission/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Reporting Conformance Results
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../schema/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Schemas
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Schemas
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../standards/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Standards
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Glossary
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Glossary
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../glossary/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Glossary
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../glossary-definitions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Definitions
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+                
+
+
+
+  
+
+
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+    <a href="https://github.com/APTITUDE-Consortium/aptitude-eudi-wallet-specs/edit/main/docs/rulebook/tickets-and-checkin-rulebook.md" title="Edit this page" class="md-content__button md-icon" rel="edit">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10 20H6V4h7v5h5v3.1l2-2V8l-6-6H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h4zm10.2-7c.1 0 .3.1.4.2l1.3 1.3c.2.2.2.6 0 .8l-1 1-2.1-2.1 1-1c.1-.1.2-.2.4-.2m0 3.9L14.1 23H12v-2.1l6.1-6.1z"/></svg>
+    </a>
+  
+  
+    
+      
+    
+    <a href="https://github.com/APTITUDE-Consortium/aptitude-eudi-wallet-specs/raw/main/docs/rulebook/tickets-and-checkin-rulebook.md" title="View source of this page" class="md-content__button md-icon">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 18c.56 0 1 .44 1 1s-.44 1-1 1-1-.44-1-1 .44-1 1-1m0-3c-2.73 0-5.06 1.66-6 4 .94 2.34 3.27 4 6 4s5.06-1.66 6-4c-.94-2.34-3.27-4-6-4m0 6.5a2.5 2.5 0 0 1-2.5-2.5 2.5 2.5 0 0 1 2.5-2.5 2.5 2.5 0 0 1 2.5 2.5 2.5 2.5 0 0 1-2.5 2.5M9.27 20H6V4h7v5h5v4.07c.7.08 1.36.25 2 .49V8l-6-6H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h4.5a8.2 8.2 0 0 1-1.23-2"/></svg>
+    </a>
+  
+
+
+<table>
+<thead>
+<tr>
+<th>Version</th>
+<th>Date</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+</tr>
+<tr>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+</tr>
+<tr>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+</tr>
+<tr>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+</tr>
+</tbody>
+</table>
+<h1 id="aptitude-tickets-and-check-in-rulebook">APTITUDE - <em>Tickets and check-in rulebook</em><a class="headerlink" href="#aptitude-tickets-and-check-in-rulebook" title="Permanent link">&para;</a></h1>
+<p><em>Provide information about the author(s) of this Rulebook in the following form:</em></p>
+<ul>
+<li>Author(s):<ul>
+<li>[NAME SURNAME, AFFILIATION]</li>
+<li>[NAME SURNAME, AFFILIATION]</li>
+</ul>
+</li>
+<li>Previous Authors<ul>
+<li>[NAME SURNAME, AFFILIATION (versions)]</li>
+<li>[NAME SURNAME, AFFILIATION (versions)]</li>
+</ul>
+</li>
+</ul>
+<p><em>Provide versioning information about the Rulebook in the following form:</em></p>
+<table>
+<thead>
+<tr>
+<th>Version</th>
+<th>Date</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>[VERSION NUMBER]</td>
+<td>[PUBLICATION DATE]</td>
+<td>[DESCRIPTION OR LINK TO THE CHANGELOG]</td>
+</tr>
+<tr>
+<td>[VERSION NUMBER]</td>
+<td>[PUBLICATION DATE]</td>
+<td>[DESCRIPTION OR LINK TO THE CHANGELOG]</td>
+</tr>
+</tbody>
+</table>
+<p><em>Provide a contact email address and/or a link to an issue tracking system that can be used for
+providing feedback, e.g.:</em></p>
+<p><strong>Feedback:</strong></p>
+<ul>
+<li><a href="https://example.com/tracker">https://example.com/tracker</a></li>
+</ul>
+<h2 id="1-introduction">1 Introduction<a class="headerlink" href="#1-introduction" title="Permanent link">&para;</a></h2>
+<h3 id="11-document-scope-and-purpose">1.1 Document scope and purpose<a class="headerlink" href="#11-document-scope-and-purpose" title="Permanent link">&para;</a></h3>
+<p><em>Provide a concise explanation of the purpose of the defined attestation type, explicitly stating
+why it exists and what its primary objective is within the context of the EUDI Wallet ecosystem</em></p>
+<p>[RULEBOOK AUTHOR TO DEFINE]</p>
+<h3 id="12-document-structure">1.2 Document structure<a class="headerlink" href="#12-document-structure" title="Permanent link">&para;</a></h3>
+<p><em>Provide a brief overview of the Rulebook's sections and their purpose. The main
+sections of the Rulebook SHOULD be</em></p>
+<ul>
+<li>Chapter 2, which describes the attestation attributes and metadata in an
+encoding-independent manner.</li>
+<li>Chapter 3, which specifies how the attestation
+attributes and metadata are encoded in case the attestation complies with [ISO/IEC
+18013-5] and/or [SD-JWT VC] and/or [W3C VCDM v2.0]. Each encoding SHALL be specified in a separate section, or even in a separate chapter.</li>
+<li>Chapter 4, which specifies attestation usage.</li>
+<li>Chapter 5, which defines how trust anchors for attestation verification can be obtained.</li>
+<li>Chapter 6, which defines attestation revocation mechanisms.</li>
+<li>Chapter 7, which provides compliance information.</li>
+</ul>
+<h3 id="13-key-words">1.3 Key words<a class="headerlink" href="#13-key-words" title="Permanent link">&para;</a></h3>
+<p><em>The following are the recommended keywords. Modify if necessary</em></p>
+<p>This document uses the capitalised key words 'SHALL', 'SHOULD' and 'MAY' as
+specified in [RFC 2119], i.e., to indicate requirements, recommendations and
+options specified in this document.</p>
+<p>In addition, 'must' (non-capitalised) is used to indicate an external
+constraint, i.e., a requirement that is not mandated by this document, but, for
+instance, by an external document. The word 'can' indicates a capability,
+whereas other words, such as 'will', and 'is' or 'are' are intended as
+statements of fact.</p>
+<h3 id="14-terminology">1.4 Terminology<a class="headerlink" href="#14-terminology" title="Permanent link">&para;</a></h3>
+<p><em>It is recommended to use the terminology defined in Annex 1 of ARF. For example
+the following text can be used.</em></p>
+<p>This document uses the terminology specified in Annex 1 of the ARF.</p>
+<h2 id="2-attestation-attributes-and-metadata">2 Attestation attributes and metadata<a class="headerlink" href="#2-attestation-attributes-and-metadata" title="Permanent link">&para;</a></h2>
+<h3 id="chapter-overview-and-requirements">Chapter overview and requirements<a class="headerlink" href="#chapter-overview-and-requirements" title="Permanent link">&para;</a></h3>
+<p><em>This chapter is used for defining all attributes that an
+attestation of the defined type may contain. In this section
+the attributes SHALL be defined in an encoding-independent manner (see ARB_06 in [Topic 12]).
+Each attribute can be mandatory, optional, or conditional
+and this SHALL be specified in the corresponding section (see ARB_09 in [Topic 12]).</em></p>
+<p><em>When attributes are defined, referring to attributes that
+already exist in a catalogue of attestation attributes
+SHOULD be considered (see ARB_07 in [Topic 12]).</em></p>
+<p><em>[Topic 12] of Annex 2 of the ARF defines the following High-Level Requirements with
+respect to the Attestation Rulebooks:</em></p>
+<p><strong>Requirements for QEAA</strong></p>
+<ul>
+<li>An attribute as meant in Annex V point a)  of the [European Digital Identity Regulation]
+SHALL be included (see ARB_11 in [Topic 12]). See also section 2.1.</li>
+<li>One or more attributes or metadata representing the set of data meant in Annex
+V point b) of the [European Digital Identity Regulation] SHALL be included (see ARB_13 in [Topic 12])</li>
+<li>One or more attributes representing the set of data meant in Annex V point c)<br />
+of the [European Digital Identity Regulation] SHALL be included (see ARB_16 in [Topic 12]).</li>
+<li>One or more attributes or metadata representing the set of data meant in Annex V point e)
+of the [European Digital Identity Regulation] SHALL be included (see ARB_18 in [Topic 12]).</li>
+<li>One or more attributes or metadata representing the location meant in Annex V point h)
+of the [European Digital Identity Regulation] SHALL be included. This location SHALL
+indicate at least the URL at which a machine-readable version of the trust anchor to be
+used for verifying the QEAA can be found or looked up (see ARB_20 in [Topic 12]).</li>
+</ul>
+<p><strong>Requirements for PuB-EAA</strong></p>
+<ul>
+<li>Αn attribute as meant in  Annex VII point a) of the [European Digital Identity Regulation]
+SHALL be included (see ARB_11 in [Topic 12]). See also section 2.1.</li>
+<li>Οne or more attributes or metadata representing the set of data meant in Annex
+ VII point b) of the [European Digital Identity Regulation] SHALL be included (see ARB_14 in [Topic 12]).</li>
+<li>Οne or more attributes representing the set of data meant in Annex VII point c)
+of the [European Digital Identity Regulation] SHALL be included (see ARB_16 in [Topic 12]).</li>
+<li>Οne or more attributes or metadata representing the set of data meant in Annex VII point e)
+of the [European Digital Identity Regulation] SHALL be included (see ARB_18 in [Topic 12]).</li>
+<li>one or more attributes or metadata representing the location meant in Annex VII point h)
+of the [European Digital Identity Regulation] SHALL be included. This location SHALL
+indicate at least the URL at which a machine-readable version of the qualified
+certificate that signed the PuB-EAA can be found or looked up. (see ARB_20 in [Topic 12])</li>
+</ul>
+<p><strong>Requirements for non-qualified EAA</strong></p>
+<ul>
+<li>An attribute indicating that the attestation is an EAA should be included (see ARB_12 in [Topic 12]).
+See also section 2.1.</li>
+<li>Οne or more attributes or metadata representing the set of data meant in Annex
+V point b) of the [European Digital Identity Regulation] SHALL be included (see ARB_15 in [Topic 12]).</li>
+<li>Οne or more attributes representing the set of data meant in Annex V point c) of the
+[European Digital Identity Regulation] SHOULD be included (see ARB_17 in [Topic 12])</li>
+<li>Οne or more attributes representing the set of data meant in Annex V point e) of
+the [European Digital Identity Regulation] SHOULD be defined (see ARB_19 in [Topic 12]).</li>
+<li>Οne or more attributes or metadata representing the location at which a machine-readable
+version of the trust anchor to be used for verifying the EAA can be found or
+looked up SHOULD be defined. What this location indicates precisely is dependent
+on the nature of the mechanism used for distributing trust anchors, detailed in section
+5 (see ARB_21 in [Topic 12])</li>
+</ul>
+<h3 id="21-introduction">2.1 Introduction<a class="headerlink" href="#21-introduction" title="Permanent link">&para;</a></h3>
+<p><em>In this section, briefly introduce the overall design and purpose of the specific attestation type
+defined by this Rulebook, including key decisions regarding its attributes and
+legal categorization.</em></p>
+<p>*According to Annex V point a) and  Annex VII point a) of the [European Digital Identity Regulation]
+an indication, at least in a form suitable for automated processing, that the attestation
+has been issued as a QEAA or Pub-EAA SHALL be defined. Similarly, according to ARB_12
+of [Topic 12] of Annex 2 of the ARF a similar indication SHOULD be defined for non-qualified EAA.</p>
+<p>This document defines the attribute "attestation_legal_category" which SHALL have
+the value "QEAA" or "PuB-EAA" or "non-qualified-EAA".*</p>
+<p><em>In the following subsections 2.1 - 2.7 define in an encoding independent manner all
+mandatory, optional, and conditional attributes and metadata. In each subsection
+provide a table of the following form:</em></p>
+<table>
+<thead>
+<tr>
+<th><strong>Data Identifier</strong></th>
+<th><strong>Definition</strong></th>
+<th><strong>Data type</strong></th>
+<th><strong>Example value</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><em>Provide a unique attribute identifier</em></td>
+<td><em>Briefly describe the semantic of this attribute</em></td>
+<td><em>Provide a type, e.g., integer, string, boolean, date.</em></td>
+<td><em>Give an example value</em></td>
+</tr>
+</tbody>
+</table>
+<p><em>NOTE Data identifiers should be unambiguous, machine-readable where possible, and
+avoid natural-language ambiguities.</em></p>
+<h3 id="22-mandatory-attributes">2.2 Mandatory attributes<a class="headerlink" href="#22-mandatory-attributes" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th><strong>Data Identifier</strong></th>
+<th><strong>Definition</strong></th>
+<th><strong>Data type</strong></th>
+<th><strong>Example value</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><em>Provide a value</em></td>
+<td><em>Provide succinct text</em></td>
+<td><em>Provide a value</em></td>
+<td><em>Provide a value</em></td>
+</tr>
+</tbody>
+</table>
+<h3 id="23-optional-attributes">2.3 Optional attributes<a class="headerlink" href="#23-optional-attributes" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th><strong>Data Identifier</strong></th>
+<th><strong>Definition</strong></th>
+<th><strong>Data type</strong></th>
+<th><strong>Example value</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><em>Provide a value</em></td>
+<td><em>Provide succinct text</em></td>
+<td><em>Provide a value</em></td>
+<td><em>Provide a value</em></td>
+</tr>
+</tbody>
+</table>
+<h3 id="24-conditional-attributes">2.4 Conditional attributes<a class="headerlink" href="#24-conditional-attributes" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th><strong>Data Identifier</strong></th>
+<th><strong>Definition</strong></th>
+<th><strong>Data type</strong></th>
+<th><strong>Example value</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><em>Provide a value</em></td>
+<td><em>Provide succinct text</em></td>
+<td><em>Provide a value</em></td>
+<td><em>Provide a value</em></td>
+</tr>
+</tbody>
+</table>
+<h3 id="25-mandatory-metadata">2.5 Mandatory metadata<a class="headerlink" href="#25-mandatory-metadata" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th><strong>Data Identifier</strong></th>
+<th><strong>Definition</strong></th>
+<th><strong>Data type</strong></th>
+<th><strong>Example value</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><em>Provide a value</em></td>
+<td><em>Provide succinct text</em></td>
+<td><em>Provide a value</em></td>
+<td><em>Provide a value</em></td>
+</tr>
+</tbody>
+</table>
+<h3 id="26-optional-metadata">2.6 Optional metadata<a class="headerlink" href="#26-optional-metadata" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th><strong>Data Identifier</strong></th>
+<th><strong>Definition</strong></th>
+<th><strong>Data type</strong></th>
+<th><strong>Example value</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><em>Provide a value</em></td>
+<td><em>Provide succinct text</em></td>
+<td><em>Provide a value</em></td>
+<td><em>Provide a value</em></td>
+</tr>
+</tbody>
+</table>
+<h3 id="27-conditional-metadata">2.7 Conditional metadata<a class="headerlink" href="#27-conditional-metadata" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th><strong>Data Identifier</strong></th>
+<th><strong>Definition</strong></th>
+<th><strong>Data type</strong></th>
+<th><strong>Example value</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><em>Provide a value</em></td>
+<td><em>Provide succinct text</em></td>
+<td><em>Provide a value</em></td>
+<td><em>Provide a value</em></td>
+</tr>
+</tbody>
+</table>
+<h1 id="3-attestation-encoding">3 Attestation encoding<a class="headerlink" href="#3-attestation-encoding" title="Permanent link">&para;</a></h1>
+<h2 id="31-isoiec-18013-5-compliant-encoding">3.1 ISO/IEC 18013-5-compliant encoding<a class="headerlink" href="#31-isoiec-18013-5-compliant-encoding" title="Permanent link">&para;</a></h2>
+<p><em>If the attestation type supports the the format specified in ISO/IEC 18013-5,
+then in this section the  ISO/IEC 18013-5-compliant encoding of attributes and metadata
+should be defined.</em></p>
+<p><em>It is noted that (see ARB_02 in [Topic 12]) the Schema Provider SHALL analyse whether it must
+be possible for a User to present that type of attestation when the Wallet Unit
+and the Relying Party are in proximity and attestations are presented without
+using the internet. If so,the attestations must be issued in the ISO/IEC 18013-5-compliant
+mdoc format.</em></p>
+<p><em>Furthermore, in this section a document type SHALL be defined, which SHALL be
+unique within the scope of the EUDI Wallet ecosystem (see ARB_05 in [Topic 12]).</em></p>
+<p>[RULEBOOK AUTHOR TO DEFINE THE ATTESTATION TYPE]</p>
+<p><em>Provide a list of available encoding formats and their specifications (e.g., encoding, maximum lengths,
+date formats, etc). For example:</em></p>
+<ul>
+<li>tstr, uint, bstr, bool and tdate are CDDL representation types defined in
+  [RFC 8610].<ul>
+<li>Regarding type tstr: this document confirms that, as specified in [RFC
+8949], a tstr SHALL be encoded in UTF-8 and SHALL support the full Unicode
+range.</li>
+<li>All attributes having encoding type tstr SHALL have a maximum length of
+150 characters.</li>
+<li>This document specifies full-date as full-date = #6.1004(tstr), where tag
+1004 is specified in [RFC 8943].</li>
+<li>In accordance with [RFC 8949], section 3.4.1, a tdate attribute SHALL
+contain a date-time string as specified in [RFC 3339]. In accordance with
+[RFC 8943], a full-date attribute SHALL contain a full-date string as
+specified in [RFC 3339].</li>
+<li>The following requirements apply to the representation of dates in
+attributes, unless otherwise indicated:<ul>
+<li>Fractions of seconds SHALL NOT be used;</li>
+<li>A local offset from UTC SHALL NOT be used; the time-offset defined in
+[RFC 3339] SHALL be to "Z".</li>
+</ul>
+</li>
+<li>[RFC 8949], section 4.2, describes four rules for canonical CBOR. Three of
+those rules SHALL be implemented for all CBOR structures, as
+follows:<ul>
+<li>integers (major types 0 and 1) SHALL be as small as possible;</li>
+<li>the expression of the length in a bstr, tstr, array or map SHALL be as
+short as possible;</li>
+<li>indefinite-length items SHALL be made into definite-length items.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p><em>This section should include a table the data identifier specified in
+Chapter 2,  the corresponding attribute identifier to be used in
+presentation requests and responses according to [ISO/IEC 18013-5] and the encoding
+of each attribute.</em></p>
+<p><em>Additionally, the following rules should be followed:</em></p>
+<ul>
+<li>When specifying new attributes, existing conventions
+for attribute identifier values and attribute syntaxes SHOULD
+be considered (see ARB_07 in [Topic 12]).</li>
+<li>Each attribute SHALL be defined within an attribute namespace.<ul>
+<li>An attribute namespace
+SHALL fully define the identifier, the syntax, and the semantics of each attribute
+within that namespace.</li>
+<li>An attribute namespace SHALL have an identifier that is
+unique within the scope of the EUDI Wallet ecosystem, and each attribute
+identifier SHALL be unique within that namespace (see ARB_06a in [Topic 12])</li>
+<li>A domestic namespace MAY defined
+to specify attributes that are specific to this Rulebook and are not included in
+the applicable EU-wide or sectoral namespace (see ARB_10 in [Topic 12]).</li>
+</ul>
+</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th><strong>Data Identifier</strong></th>
+<th><strong>Attribute identifier</strong></th>
+<th><strong>Encoding format</strong></th>
+<th><strong>Namespace</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>family_name</td>
+<td>family_name</td>
+<td>tstr</td>
+<td>com.example.att.1</td>
+</tr>
+</tbody>
+</table>
+<p><em>The corresponding entry for the "attestation_legal_category" attribute defined
+in Section 2.1 SHALL be:</em></p>
+<table>
+<thead>
+<tr>
+<th><strong>Data Identifier</strong></th>
+<th><strong>Attribute identifier</strong></th>
+<th><strong>Encoding format</strong></th>
+<th><strong>Namespace</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>attestation_legal_category</td>
+<td>attestation_legal_category</td>
+<td>tstr</td>
+<td>com.example.att.1</td>
+</tr>
+</tbody>
+</table>
+<p>Finally, illustrative examples SHALL be included.</p>
+<p>[RULEBOOK AUTHOR TO PROVIDE AN EXAMPLE OF FULL OR PARTIAL mDOC OF THE ATTESTATION]</p>
+<p>[RULEBOOK AUTHOR TO PROVIDE THE ATTRIBUTES AND THEIR VALUES INCLUDED IN THE EXAMPLE]</p>
+<h3 id="32-sd-jwt-vc-based-encoding">3.2 SD-JWT VC-based encoding<a class="headerlink" href="#32-sd-jwt-vc-based-encoding" title="Permanent link">&para;</a></h3>
+<p><em>If the attestation type supports the format specified in "SD-JWT-based Verifiable
+Credentials (SD-JWT VC)", then in this section the SD-JWT VC-compliant encoding
+of attributes and metadata SHALL be defined. It SHALL be ensured that the attestations
+comply with the 'SD-JWT VCs' profile specified in [HAIP] (see ARB_01b in [Topic 12]).</em></p>
+<p><em>It is noted that a Schema Provider MAY specify in the Attestation
+Rulebook that that type of attestation must be issued in the [SD-JWT VC]-compliant
+format, provided the [SD-JWT VC] specification has been approved by an EU standardisation
+body or by the European Digital Identity Cooperation Group established pursuant to
+Article 46e(1) of the [European Digital Identity Regulation] (see ARB_03 in [Topic 12]).</em></p>
+<p><em>In this section, a Verifiable Credential Type (<code>vct</code>) SHALL be defined,
+which SHALL be unique within the scope of the EUDI Wallet ecosystem (see ARB_05 in [Topic 12]).</em></p>
+<p>[RULEBOOK AUTHOR TO DEFINE THE ATTESTATION TYPE]</p>
+<p><em>Additionally, when specifying new attributes, existing conventions
+for attribute identifier values and attribute syntaxes SHOULD
+be considered (see ARB_07 in [Topic 12]).</em></p>
+<p>*Rulebook authors SHALL ensure that each claim name is either</p>
+<ul>
+<li>included in the IANA registry for JWT claims,</li>
+<li>is a Public Name as defined in [RFC 7519], or</li>
+<li>or is a Private Name specific to the attestation type. (see ARB_06b in [Topic 12]).*</li>
+</ul>
+<p><em>For all claims (i.e., all top-level properties, all nested properties, and all array entries),
+the Rulebook SHALL specify whether an Attestation Provider MUST, MAY, or MUST NOT make that
+claim selectively disclosable (see ARB_30 in [Topic 12]).</em></p>
+<p><em>Rulebook authors SHOULD consider defining a Type Metadata Document for the attestation type
+specified in the Rulebook, as defined in Chapter 6 of [SD-JWT VC]. If such a document is defined,
+it SHOULD contain the Claim Selective Disclosure Metadata (defined in Section 9.3 of [SD-JWT VC])
+for each of the claims, in order to specify if that claim is selectively disclosable (see ARB_31
+in [Topic 12]).</em></p>
+<p><em>IANA-registered claims should be presented in table that
+includes their data identifier, attribute identifier,
+encoding format, and reference or note. For example,</em></p>
+<table>
+<thead>
+<tr>
+<th><strong>Data Identifier</strong></th>
+<th><strong>Attribute identifier</strong></th>
+<th><strong>Encoding format</strong></th>
+<th><strong>Reference/Notes</strong></th>
+<th><strong>Disclosable</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>family_name</td>
+<td>family_name</td>
+<td>string</td>
+<td>Section 5.1 of [OIDC]</td>
+<td>MUST</td>
+</tr>
+</tbody>
+</table>
+<p><em>A similar table should be used for Public Names and for Private Names specific
+to the attestation type defined in this document. For
+example:</em></p>
+<table>
+<thead>
+<tr>
+<th><strong>Data Identifier</strong></th>
+<th><strong>Attribute identifier</strong></th>
+<th><strong>Encoding format</strong></th>
+<th><strong>Notes</strong></th>
+<th><strong>Disclosable</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>trust_anchor</td>
+<td>trust_anchor</td>
+<td>string</td>
+<td>The trust anchor defined in Section 5</td>
+<td>MUST NOT</td>
+</tr>
+</tbody>
+</table>
+<p><em>The corresponding entry for the "attestation_legal_category" attribute defined
+in Section 2.1 SHALL be:</em></p>
+<table>
+<thead>
+<tr>
+<th><strong>Data Identifier</strong></th>
+<th><strong>Attribute identifier</strong></th>
+<th><strong>Encoding format</strong></th>
+<th><strong>Notes</strong></th>
+<th><strong>Disclosable</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>attestation_legal_category</td>
+<td>attestation_legal_category</td>
+<td>string</td>
+<td>Defined in Attestation Rulebook template</td>
+<td>MUST NOT</td>
+</tr>
+</tbody>
+</table>
+<p>Finally, illustrative examples SHALL be included.</p>
+<p>[RULEBOOK AUTHOR TO PROVIDE AN EXAMPLE OF THE JWT CLAIM SET USED BY THE PROVIDER]</p>
+<p>[RULEBOOK AUTHOR TO PROVIDE AN EXAMPLE OF THE ISSUED SD-JWT (IN base64 ENCODING)]</p>
+<p>[RULEBOOK AUTHOR TO PROVIDE AN EXAMPLE OF A HUMAN READABLE VERSION OF THE SD-JWT PAYLOAD
+AND A DESCRIPTION OF THE DISCLOSURES INCLUDED IN THE EXAMPLE]</p>
+<h3 id="33-w3c-verifiable-credentials-data-model-based-encoding">3.3 W3C Verifiable Credentials Data Model-based encoding<a class="headerlink" href="#33-w3c-verifiable-credentials-data-model-based-encoding" title="Permanent link">&para;</a></h3>
+<p><em>If the attestation type supports the the format specified in W3C Verifiable Credentials
+Data Model, then in this section the  corresponding encoding  of attributes and
+metadata should be defined.</em></p>
+<p><em>It is noted that only a a non-qualified EAA can use this format (see ARB_01a in [Topic 12])</em></p>
+<p><em>Tables similar to the ones specified in section 4 SHALL be defined.</em></p>
+<p><em>This section SHALL reference one or more documents specifying in detail how a
+Relying Party can request attributes from a such an attestation, and how a User
+can selectively disclose attributes from such an attestation. Moreover, these
+referenced documents SHALL be approved by an EU standardisation body or by the European
+Digital Identity Cooperation Group established pursuant to Article 46e(1) of the
+[European Digital Identity Regulation] (see ARB_04 in [Topic 12]).</em></p>
+<p><em>Finally, illustrative examples SHALL be included.</em></p>
+<p>[RULEBOOK AUTHOR TO PROVIDE HUMAN READABLE EXAMPLE OF THE ISSUED ATTESTATION]</p>
+<p>[RULEBOOK AUTHOR TO PROVIDE AN EXAMPLE OF THE PROOF TYPE]</p>
+<h2 id="4-attestation-usage">4 Attestation usage<a class="headerlink" href="#4-attestation-usage" title="Permanent link">&para;</a></h2>
+<p><em>Briefly describe the primary use cases or scenarios for which this attestation
+type is intended</em></p>
+<p><em>Additionally, in this section it SHOULD  be specified whether a Relying Party receiving the attestation
+must request and verify a PID (see ARB_27 in [Topic 12]). Also beyond PID verification,
+it SHOULD be defined what other key obligations does a Relying Party have when processing
+this attestation type (e.g., signature verification, freshness checks)</em></p>
+<p><em>Furthermore, provide potential presentation requirements, e.g., are there specific
+requirements for how this attestation must be presented (e.g., online, offline, specific protocols)?"</em></p>
+<p><em>Specify whether an attestation of this type must be device-bound or non device-bound, see ARB_34 in [Topic 12]</em></p>
+<p><em>If an attestation of this type is device-bound, include the optional attribute  <code>cryptographically_bound_to</code> (as defined in ARB_28) in <a href="#26-optional-metadata">Section 2.5</a>. If present in an Attestation Rulebook, the identifier for this attribute SHALL be "`cryptographically_bound_to" for both ISO/IEC 18013-5 and SD-JWT VC-compliant attestations, and its contents SHALL be tstr or string (as applicable) containing an attestation type or vct (see ARB_05).</em></p>
+<p><em>Finally, in this section information about potential transactional data
+SHALL be defined; see [Topic 20] of Annex 2 of the ARF.</em></p>
+<h2 id="5-trust-anchors">5 Trust anchors<a class="headerlink" href="#5-trust-anchors" title="Permanent link">&para;</a></h2>
+<p><em>Mechanisms for the provision of a trust anchor that SHALL
+be used for the verification of an attestation SHALL be defined in this section.</em></p>
+<p><em>It is noted that the ARF specifies the following for QEAAs and Pub-EAAs:</em></p>
+<blockquote>
+<p>To do this for [...] QEAAs the Relying Party Instance uses a trust anchor of
+the Provider obtained from a Trusted List. Note that the PID Provider or QEAA
+Provider may use an intermediate signing certificate to sign the PID or
+attestation, and use the trust anchor to sign the signing certificate, instead
+of signing the PID or attestation directly with the trust anchor.</p>
+<p>For PuB-EAAs, the Relying Party Instance verifies a PuB-EAA by first
+verifying the signature of the PuB-EAA Provider over the PuB-EAA, using the
+PuB-EAA Provider certificate issued by a QTSP. Subsequently, the Relying Party
+Instance verifies the signature over this certificate, using the corresponding
+trust anchor from the QTSP Trusted List. Note that both the PuB-EAA Provider
+and the QTSP may use an intermediate signing certificate. All other things
+being equal, the verification of a PuB-EAA will therefore involve one or more
+extra certificates, compared to the verification of a PID or QEAA.</p>
+</blockquote>
+<p><em>For non-qualified EAA in this section it SHOULD  be defined (see ARB_26 in [Topic 12])
+how the attributes or metadata representing the location at which a machine-readable
+version of the trust anchor to be used for verifying the attestation can be found,
+specified in section 2, are used. This includes a detailed description about how
+a Relying Party can obtain the trust anchors, as well as a detailed description about
+how this trust anchor can be used for verifying that the provider is authorized
+to issue the attestation. Additionally, for non-qualified EAA Providers this section
+MAY include a description of mechanisms that can be used by a Wallet Unit for
+verifying that the provider is authorized to issue this type of attestation (see
+ISSU_34 in [Topic 10])</em></p>
+<h2 id="6-revocation">6 Revocation<a class="headerlink" href="#6-revocation" title="Permanent link">&para;</a></h2>
+<p>(Refer to [Topic 7] of the ARF for a list of High-Level Requirements related to Revocation)</p>
+<p><em>In this section information about the revocation mechanism used SHALL be defined.</em></p>
+<p><em>For PID, QEAA, or PuB-EAA it SHALL  be defined whether  only short-lived attestations
+will be used, having a validity period of 24 hours or less, such that revocation
+will never be necessary, or that the attestations are revocable.</em></p>
+<p><em>For revocable attestations it SHALL be defined which of the following methods must be implemented:</em></p>
+<ul>
+<li>Use an Attestation Status List mechanism included in a Technical Specification
+that will be specified by the Commission.</li>
+<li>Use an Attestation Revocation List mechanism included in a Technical Specification
+that will be specified by the Commission.</li>
+</ul>
+<h2 id="7-compliance">7 Compliance<a class="headerlink" href="#7-compliance" title="Permanent link">&para;</a></h2>
+<p><em>In this section explicitly state how this specific rulebook complies with the
+general EUDI framework, ARF, and relevant regulations</em></p>
+<p>[RULEBOOK AUTHOR TO DEFINE]</p>
+<h2 id="8-references">8 References<a class="headerlink" href="#8-references" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th><strong>Item Reference</strong></th>
+<th><strong>Standard name/details</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>[European Digital Identity Regulation]</td>
+<td><a href="https://eur-lex.europa.eu/legal-content/EN/TXT/HTML/?uri=OJ:L_202401183">Regulation (EU) 2024/1183</a> of the European Parliament and of the Council of 11 April 2024 amending Regulation (EU) No 910/2014 as regards establishing the European Digital Identity Framework</td>
+</tr>
+<tr>
+<td>[HAIP]</td>
+<td>Yasuda, K. <em>et al,</em> OpenID4VC High Assurance Interoperability Profile, OpenId Foundation, Version draft-03</td>
+</tr>
+<tr>
+<td>[IANA-JWT-Claims]</td>
+<td>IANA JSON Web Token Claims Registry. Available: <a href="https://www.iana.org/assignments/jwt/jwt.xhtml">https://www.iana.org/assignments/jwt/jwt.xhtml</a></td>
+</tr>
+<tr>
+<td>[ISO/IEC 18013-5]</td>
+<td>ISO/IEC 18013-5, Personal identification --- ISO-compliant driving licence - Part 5: Mobile driving licence (mDL) application, First edition, 2021-09</td>
+</tr>
+<tr>
+<td>[OIDC]</td>
+<td>Sakimura, N. et al., "OpenID Connect Core 1.0", OpenID Foundation. Available: <a href="https://openid.net/specs/openid-connect-core-1_0.html">https://openid.net/specs/openid-connect-core-1_0.html</a></td>
+</tr>
+<tr>
+<td>[RFC 3339]</td>
+<td>RFC 3339  - Date and Time on the Internet: Timestamps, G. Klyne et al., July 2002</td>
+</tr>
+<tr>
+<td>[RFC 8610]</td>
+<td>RFC 8610  - Concise Data Definition Language (CDDL): A Notational Convention to Express Concise Binary Object Representation (CBOR) and JSON Data Structures, H. Birkholz et al., June 2019</td>
+</tr>
+<tr>
+<td>[RFC 8943]</td>
+<td>RFC 8943  - Concise Binary Object Representation (CBOR) Tags for Date, M. Jones et al., November 2020</td>
+</tr>
+<tr>
+<td>[RFC 8949]</td>
+<td>RFC 8949 - Concise Binary Object Representation (CBOR), C. Bormann et al., December 2020</td>
+</tr>
+<tr>
+<td>[SD-JWT VC]</td>
+<td>SD-JWT-based Verifiable Credentials (SD-JWT VC). Available: <a href="https://datatracker.ietf.org/doc/draft-ietf-oauth-sd-jwt-vc/">https://datatracker.ietf.org/doc/draft-ietf-oauth-sd-jwt-vc/</a>, version draft-ietf-oauth-sd-jwt-vc-09</td>
+</tr>
+<tr>
+<td>[Topic 7]</td>
+<td>ARF Annex 2 - Topic 7 - Attestation revocation and revocation checking Available: <a href="https://eu-digital-identity-wallet.github.io/eudi-doc-architecture-and-reference-framework/latest/annexes/annex-2/annex-2-high-level-requirements/#a237-topic-7-attestation-revocation-and-revocation-checking">https://eu-digital-identity-wallet.github.io/eudi-doc-architecture-and-reference-framework/latest/annexes/annex-2/annex-2-high-level-requirements/#a237-topic-7-attestation-revocation-and-revocation-checking</a></td>
+</tr>
+<tr>
+<td>[Topic 10]</td>
+<td>ARF Annex 2 - Topic 10 - Issuing a PID or attestation to a Wallet Unit: <a href="https://eu-digital-identity-wallet.github.io/eudi-doc-architecture-and-reference-framework/latest/annexes/annex-2/annex-2-high-level-requirements/#a2310-topic-10-issuing-a-pid-or-attestation-to-a-wallet-unit">https://eu-digital-identity-wallet.github.io/eudi-doc-architecture-and-reference-framework/latest/annexes/annex-2/annex-2-high-level-requirements/#a2310-topic-10-issuing-a-pid-or-attestation-to-a-wallet-unit</a></td>
+</tr>
+<tr>
+<td>[Topic 12]</td>
+<td>ARF Annex 2 - Topic 12 - Attestation Rulebooks, Available: <a href="https://eu-digital-identity-wallet.github.io/eudi-doc-architecture-and-reference-framework/latest/annexes/annex-2/annex-2-high-level-requirements/#a2312-topic-12-attestation-rulebooks">https://eu-digital-identity-wallet.github.io/eudi-doc-architecture-and-reference-framework/latest/annexes/annex-2/annex-2-high-level-requirements/#a2312-topic-12-attestation-rulebooks</a></td>
+</tr>
+<tr>
+<td>[Topic 20]</td>
+<td>ARF Annex 2 - Strong User authentication for electronic payments, Available: <a href="https://eu-digital-identity-wallet.github.io/eudi-doc-architecture-and-reference-framework/latest/annexes/annex-2/annex-2-high-level-requirements/#a2320-topic-20-strong-user-authentication-for-electronic-payments">https://eu-digital-identity-wallet.github.io/eudi-doc-architecture-and-reference-framework/latest/annexes/annex-2/annex-2-high-level-requirements/#a2320-topic-20-strong-user-authentication-for-electronic-payments</a></td>
+</tr>
+<tr>
+<td>[W3C VCDM v2.0]</td>
+<td>Sporny, M. <em>et al,</em> Verifiable Credentials Data Model v2.0, W3C Recommendation.</td>
+</tr>
+</tbody>
+</table>
+
+
+
+
+
+
+
+  
+    
+  
+  
+
+
+  <aside class="md-source-file">
+    
+      
+  <span class="md-source-file__fact">
+    <span class="md-icon" title="Last update">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
+    </span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-datetime" title="February 26, 2026 10:56:03 UTC">February 26, 2026 10:56:03</span>
+  </span>
+
+    
+    
+    
+    
+  </aside>
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+    <div class="md-footer-meta md-typeset">
+        <div class="md-footer-meta__inner md-grid">
+            <div class="md-copyright">
+                <div>
+                    Made with
+                    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+                        Material for MkDocs
+                    </a>
+                </div>
+            </div>
+            <div class="md-footer-cofunded">
+                <img src="../../img/eu-cofunded.png" alt="Co-funded by the European Union">
+            </div>
+        </div>
+    </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+      <div class="md-progress" data-md-component="progress" role="progressbar"></div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["content.action.edit", "content.action.view", "content.code.annotate", "content.code.copy", "navigation.footer", "navigation.indexes", "navigation.instant", "navigation.instant.progress", "navigation.path", "navigation.tabs", "navigation.tabs.sticky", "navigation.top", "navigation.tracking", "search.highlight", "search.suggest", "toc.follow", "toc.integrate"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"alias": true, "provider": "mike"}}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+        <script src="../../media/mermaid.min.js"></script>
+      
+        <script src="../../media/mermaid-init.js"></script>
+      
+        <script src="../../media/mathjax-init.js"></script>
+      
+        <script src="../../media/mathjax-tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>

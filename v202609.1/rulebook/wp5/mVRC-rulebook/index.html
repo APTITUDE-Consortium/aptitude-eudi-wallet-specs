@@ -1,0 +1,3351 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="APTITUDE Technical Specification">
+      
+      
+        <meta name="author" content="APTITUDE Consortium">
+      
+      
+        <link rel="canonical" href="https://aptitude-consortium.github.io/aptitude-eudi-wallet-specs/v202609.1/rulebook/wp5/mVRC-rulebook/">
+      
+      
+        <link rel="prev" href="../../">
+      
+      
+        <link rel="next" href="../../wp3/dtc-rulebook/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+    
+    
+      
+        <title>mVRC - APTITUDE Technical Specification</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.ec1eaa64.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../../media/extra.css">
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#attestation-rulebook-for-attestations-of-type-eu-mvrc" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+      <div data-md-color-scheme="default" data-md-component="outdated" hidden>
+        
+      </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../.." title="APTITUDE Technical Specification" class="md-header__button md-logo" aria-label="APTITUDE Technical Specification" data-md-component="logo">
+      
+  <img src="../../../img/logo.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            APTITUDE Technical Specification
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              mVRC
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/APTITUDE-Consortium/aptitude-eudi-wallet-specs" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    APTITUDE-Consortium/aptitude-eudi-wallet-specs
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+    
+      
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../../" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Attestation Rulebooks
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../trust-framework/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Trust Specifications
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../horizontal-RFCs/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  RFCs
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../itb_plus_user_onboarding/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Testing and Conformance
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../schema/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Schemas
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../standards/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Standards
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../glossary/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Glossary
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+  
+
+<nav class="md-nav md-nav--primary md-nav--lifted md-nav--integrated" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="APTITUDE Technical Specification" class="md-nav__button md-logo" aria-label="APTITUDE Technical Specification" data-md-component="logo">
+      
+  <img src="../../../img/logo.png" alt="logo">
+
+    </a>
+    APTITUDE Technical Specification
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/APTITUDE-Consortium/aptitude-eudi-wallet-specs" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    APTITUDE-Consortium/aptitude-eudi-wallet-specs
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Attestation Rulebooks
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_2" id="__nav_2_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Attestation Rulebooks
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    mVRC
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    mVRC
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-introduction" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1 Introduction
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1 Introduction">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#11-document-scope-and-purpose" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.1 Document scope and purpose
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#12-document-structure" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.2 Document structure
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#13-key-words" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.3 Key words
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#14-terminology" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.4 Terminology
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-attestation-attributes-and-metadata" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2 Attestation attributes and metadata
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2 Attestation attributes and metadata">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21-introduction" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.1 Introduction
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-attestation-encoding" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3 Attestation encoding
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3 Attestation encoding">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31-isoiec-18013-5-compliant-encoding" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.1 ISO/IEC 18013-5-compliant encoding
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-attestation-usage" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4 Attestation usage
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-trust-anchors" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5 Trust anchors
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-revocation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6 Revocation
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-compliance" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7 Compliance
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8-references" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8 References
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#annex-a-mapping-of-data-elements-of-council-directive" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Annex A Mapping of data elements of COUNCIL DIRECTIVE
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Annex A Mapping of data elements of COUNCIL DIRECTIVE">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#table-a1-mapping-of-data-elements-of-council-directive-to-eu-mvrc" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Table A.1 — Mapping of data elements of COUNCIL DIRECTIVE to EU-mVRC
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../wp3/dtc-rulebook/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DTC
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Trust Specifications
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Trust Specifications
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../trust-framework/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Trust Framework
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../../horizontal-RFCs/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    RFCs
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_4" id="__nav_4_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    RFCs
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../horizontal-RFCs/RFC001/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    RFC-01 Credential Issuance Profile
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../horizontal-RFCs/RFC002/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    RFC-02 Presentation Profile
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../horizontal-RFCs/RFC004/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    RFC-04 Revocation Profile
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../../itb_plus_user_onboarding/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Testing and Conformance
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_5" id="__nav_5_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Testing and Conformance
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../itb_plus_user_onboarding/aptitude-itb-user-onboarding-manual/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ITB+ User Onboarding Guide
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../itb_plus_user_onboarding/report-submission/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Reporting Conformance Results
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../../schema/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Schemas
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Schemas
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../standards/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Standards
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Glossary
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Glossary
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../glossary/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Glossary
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../glossary-definitions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Definitions
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+                
+
+
+
+  
+
+
+  <nav class="md-path" aria-label="Navigation" >
+    <ol class="md-path__list">
+      
+        
+  
+  
+    <li class="md-path__item">
+      <a href="../../.." class="md-path__link">
+        
+  <span class="md-ellipsis">
+    Home
+  </span>
+
+      </a>
+    </li>
+  
+
+      
+      
+        
+  
+  
+    
+    
+      <li class="md-path__item">
+        <a href="../../" class="md-path__link">
+          
+  <span class="md-ellipsis">
+    Attestation Rulebooks
+  </span>
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ol>
+  </nav>
+
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+    <a href="https://github.com/APTITUDE-Consortium/aptitude-eudi-wallet-specs/edit/main/docs/rulebook/wp5/mVRC-rulebook.md" title="Edit this page" class="md-content__button md-icon" rel="edit">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10 20H6V4h7v5h5v3.1l2-2V8l-6-6H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h4zm10.2-7c.1 0 .3.1.4.2l1.3 1.3c.2.2.2.6 0 .8l-1 1-2.1-2.1 1-1c.1-.1.2-.2.4-.2m0 3.9L14.1 23H12v-2.1l6.1-6.1z"/></svg>
+    </a>
+  
+  
+    
+      
+    
+    <a href="https://github.com/APTITUDE-Consortium/aptitude-eudi-wallet-specs/raw/main/docs/rulebook/wp5/mVRC-rulebook.md" title="View source of this page" class="md-content__button md-icon">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 18c.56 0 1 .44 1 1s-.44 1-1 1-1-.44-1-1 .44-1 1-1m0-3c-2.73 0-5.06 1.66-6 4 .94 2.34 3.27 4 6 4s5.06-1.66 6-4c-.94-2.34-3.27-4-6-4m0 6.5a2.5 2.5 0 0 1-2.5-2.5 2.5 2.5 0 0 1 2.5-2.5 2.5 2.5 0 0 1 2.5 2.5 2.5 2.5 0 0 1-2.5 2.5M9.27 20H6V4h7v5h5v4.07c.7.08 1.36.25 2 .49V8l-6-6H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h4.5a8.2 8.2 0 0 1-1.23-2"/></svg>
+    </a>
+  
+
+
+<h1 id="attestation-rulebook-for-attestations-of-type-eu-mvrc">Attestation Rulebook for attestations of type  <em>EU-mVRC</em><a class="headerlink" href="#attestation-rulebook-for-attestations-of-type-eu-mvrc" title="Permanent link">&para;</a></h1>
+<p>Author(s):</p>
+<ul>
+<li>Matthias Schwan, Bundesdruckerei GmbH, Germany</li>
+<li>Jan Willem Stekelenburg, RDW, the Netherlands</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>Version</th>
+<th>Date</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0.2</td>
+<td>14.02.2026</td>
+<td>first draft of EU-mVRC</td>
+</tr>
+<tr>
+<td>0.3</td>
+<td>17.04.2026</td>
+<td>refinement of description of presence of data elements and encoding of user, holder and consumer; some changes from conditional to optional</td>
+</tr>
+<tr>
+<td>0.4</td>
+<td>11.05.2026</td>
+<td>synchronization with final version of [ISO/IEC 7367-2], e.g. changed identifiers chassis_number and class_off_hybrid_vehicle_code as well as editorial changes</td>
+</tr>
+<tr>
+<td>0.5</td>
+<td>15.06.2026</td>
+<td>Structure added in supplemental_person_data and supplemental_organization_data and changed to conditional; editorial changes</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Feedback:</strong></p>
+<ul>
+<li><a href="&#109;&#97;&#105;&#108;&#116;&#111;&#58;&#109;&#97;&#116;&#116;&#104;&#105;&#97;&#115;&#46;&#115;&#99;&#104;&#119;&#97;&#110;&#64;&#98;&#100;&#114;&#46;&#100;&#101;">&#109;&#97;&#116;&#116;&#104;&#105;&#97;&#115;&#46;&#115;&#99;&#104;&#119;&#97;&#110;&#64;&#98;&#100;&#114;&#46;&#100;&#101;</a></li>
+<li><a href="&#109;&#97;&#105;&#108;&#116;&#111;&#58;&#106;&#115;&#116;&#101;&#107;&#101;&#108;&#101;&#110;&#98;&#117;&#114;&#103;&#64;&#114;&#100;&#119;&#46;&#110;&#108;">&#106;&#115;&#116;&#101;&#107;&#101;&#108;&#101;&#110;&#98;&#117;&#114;&#103;&#64;&#114;&#100;&#119;&#46;&#110;&#108;</a></li>
+</ul>
+<h2 id="1-introduction">1 Introduction<a class="headerlink" href="#1-introduction" title="Permanent link">&para;</a></h2>
+<h3 id="11-document-scope-and-purpose">1.1 Document scope and purpose<a class="headerlink" href="#11-document-scope-and-purpose" title="Permanent link">&para;</a></h3>
+<p>This document specifies the “European Union mobile Vehicle Registration Certificate (EU-mVRC)” in accordance with EU Directive on the registration documents for vehicles [EU DIR 2025/0096][EU DIR 1999/37]. An EU-mVRC is a mobile document, i.e. QEAA or Pub-EAA, managed by an EUDI Wallet according to [European Digital Identity Regulation]. The specification of the EU-mVRC is a profile of the mVC specified in [ISO/IEC 7367-2]. The approach of specifying the EU-mVRC profile is given in 2.1. The EU-mVRC as well as the mobile Technical Report (mTR) [ISO/IEC 7367-3] are considered companion documents to the mDL as specified in ARF Annex 3.2 mDL Rulebook.</p>
+<h3 id="12-document-structure">1.2 Document structure<a class="headerlink" href="#12-document-structure" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Chapter 2, which describes the approach of specifying the EU profile of an ISO-mVC</li>
+<li>Chapter 3, which specifies how the attestation, attributes and metadata are encoded in case the attestation complies with [ISO/IEC 18013-5] .</li>
+<li>Chapter 4, which specifies attestation usage.</li>
+<li>Chapter 5, which defines how trust anchors for attestation verification can be obtained.</li>
+<li>Chapter 6, which defines attestation revocation mechanisms.</li>
+<li>Chapter 7, which provides compliance information.</li>
+<li>Annex A, which describes a mapping of data elements of COUNCIL DIRECTIVE to the EU-mVRC</li>
+</ul>
+<h3 id="13-key-words">1.3 Key words<a class="headerlink" href="#13-key-words" title="Permanent link">&para;</a></h3>
+<p>This document uses the capitalised key words 'SHALL', 'SHOULD' and 'MAY' as
+specified in [RFC 2119], i.e., to indicate requirements, recommendations and
+options specified in this document.</p>
+<p>In addition, 'must' (non-capitalised) is used to indicate an external
+constraint, i.e., a requirement that is not mandated by this document, but, for
+instance, by an external document. The word 'can' indicates a capability,
+whereas other words, such as 'will', and 'is' or 'are' are intended as
+statements of fact.</p>
+<h3 id="14-terminology">1.4 Terminology<a class="headerlink" href="#14-terminology" title="Permanent link">&para;</a></h3>
+<p>Terminologies and definitions within Aptitude project are listed in <a href="/docs/glossary.md">APTITUDE Glossary</a></p>
+<h2 id="2-attestation-attributes-and-metadata">2 Attestation attributes and metadata<a class="headerlink" href="#2-attestation-attributes-and-metadata" title="Permanent link">&para;</a></h2>
+<h3 id="21-introduction">2.1 Introduction<a class="headerlink" href="#21-introduction" title="Permanent link">&para;</a></h3>
+<p>This document describes the structure, type, data element identifiers, and logical organisation of the mandatory and optional attributes of the EU-mVRC attestation within the EUDI Wallet. It also describes how Member States can specify any possible national attributes.</p>
+<p>The specification of the EU-mVRC is a profile of the mVC specified in [ISO/IEC 7367-2]. The mVC [ISO/IEC 7367-2] references data structures and security mechanisms defined for <a class="mkdocs-ezglossary-link"
+    id="429d415f325ae6f7816da30feace415f"
+    title="The mobile driving licence per ISO/IEC 18013-5/-7; used alongside mVRC and mTR in the EUDI Wallet."
+    data-tooltip="The mobile driving licence per ISO/IEC 18013-5/-7; used alongside mVRC and mTR in the EUDI Wallet."
+    name="credentials:mobile Driving Licence (mDL)"
+    href="../../../glossary-definitions/#6bb3b4893eaaca2f9db79a80c7159c0a">mDL</a> and <a class="mkdocs-ezglossary-link"
+    id="b01f881cd809782fe8bd33db6c2f64ae"
+    title="Document or application that resides on a mobile device or requires a mobile device as part of the process to gain access to the document or application. [ISO/IEC 18013-5]"
+    data-tooltip="Document or application that resides on a mobile device or requires a mobile device as part of the process to gain access to the document or application. [ISO/IEC 18013-5]"
+    name="artifacts:mdoc"
+    href="../../../glossary-definitions/#031388425bd438379deb45f5a630d4ff">mdoc</a>, such as device request/response structures, IssuerSigned and IssuerAuth structures (MSO) as well as protocols for proximity and remote flows. These protocols and structures are mandatory features of the EUDI Wallet ecosystem . The EU-mVRC profile mandates the use of doc type and name space according to [ISO/IEC 7367-2] and gives more detailed information on the use of the data elements. A profile further specifies additional name spaces under responsibility of the EU and of respective Member States.</p>
+<p><img alt="EU mVRC profile" src="../img/EU_mVRC_profile.png" /></p>
+<h2 id="3-attestation-encoding">3 Attestation encoding<a class="headerlink" href="#3-attestation-encoding" title="Permanent link">&para;</a></h2>
+<h3 id="31-isoiec-18013-5-compliant-encoding">3.1 ISO/IEC 18013-5-compliant encoding<a class="headerlink" href="#31-isoiec-18013-5-compliant-encoding" title="Permanent link">&para;</a></h3>
+<h4 id="311-eu-mvrc-document-type-and-namespace">3.1.1 EU mVRC document type and namespace<a class="headerlink" href="#311-eu-mvrc-document-type-and-namespace" title="Permanent link">&para;</a></h4>
+<p>The objects <code>docType</code> and <code>namespace</code> are used to encapsulate the document type and the space in which the data elements are defined.</p>
+<p>The document type for the <strong>EU-mVRC</strong> SHALL be as specified in clause 6.1 of [ISO/IEC 7367-2].</p>
+<p>The namespace for <strong>EU-mVRC ISO compliant data elements</strong> defined in clause 3.1.2 SHALL be as specified in clause 6.1 of [ISO/IEC 7367-2].</p>
+<p>The namespace for <strong>EU-mVRC EU data elements</strong> defined in clause 3.1.3 SHALL be as specified in clauses 6.2.5 and 6.2.6 of [ISO/IEC 7367-2] appended by “EU.1” after a period. The number “1” in the namespace might be increased in future versions of this namespace specification.</p>
+<p>Member States MAY add additional namespaces under their responsibility. References to those specifications are given in clause 2.4. The namespace for <strong>EU-mVRC Member State specific data elements</strong> SHALL be as specified in clauses 6.2.5 and 6.2.6 of [ISO/IEC 7367-2] appended by the respective country code of the Member State after a period and optionally followed by a version number.</p>
+<h4 id="312-eu-mvrc-iso-compliant-data-elements">3.1.2 EU-mVRC ISO compliant data elements<a class="headerlink" href="#312-eu-mvrc-iso-compliant-data-elements" title="Permanent link">&para;</a></h4>
+<h5 id="3121-overview">3.1.2.1 Overview<a class="headerlink" href="#3121-overview" title="Permanent link">&para;</a></h5>
+<p>The data elements are specified in Table 1 in clause 3.1.2.2.</p>
+<p>— The "Identifier" column is the reference of the data element specified in [ISO/IEC 7367-2].</p>
+<p>— The “EU additional description” column gives further information on the usage of the respective data element in the context of [EU DIR 2025/0096]. The description in [ISO/IEC 7367-2] applies.</p>
+<p>— The "Presence" column indicates whether the presence of the element on an EU-mVRC is mandatory (M), optional (O) or conditional (C). A mandatory data elemement SHALL be present in an EU-mVRC whereas an optional data element MAY be present. If a data element is conditional the respective condition is given in the specification. If the condition is met the data element SHALL be present.</p>
+<h5 id="3122-iso-compliant-data-elements">3.1.2.2 ISO compliant data elements<a class="headerlink" href="#3122-iso-compliant-data-elements" title="Permanent link">&para;</a></h5>
+<p>The EU-mVRC ISO compliant data elements SHALL be as defined in Table 1 and belong to the namespace given in 3.1.1. The encoding of the data elements as given in [ISO/IEC 7367-2] applies.</p>
+<h6 id="table-1-iso-compliant-data-elements">Table 1 — ISO compliant data elements<a class="headerlink" href="#table-1-iso-compliant-data-elements" title="Permanent link">&para;</a></h6>
+<table>
+<thead>
+<tr>
+<th><strong>Identifier</strong></th>
+<th><strong>EU additional description</strong></th>
+<th><strong>Presence in EU-mVRC</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>issue_date</code></td>
+<td>no further information</td>
+<td>M</td>
+</tr>
+<tr>
+<td><code>expiry_date</code></td>
+<td>EU - corresponding harmonised Union code: <br> <strong>(H)</strong> period of validity<br><br> <em>Condition:</em> mandatory if not unlimited</td>
+<td>C</td>
+</tr>
+<tr>
+<td><code>issuing_authority_unicode</code></td>
+<td>EU - the name of the competent authority according to Annex I, clause (d)(iii) of [EU DIR 2025/0096]</td>
+<td>M</td>
+</tr>
+<tr>
+<td><code>issuing_authority_latin1</code></td>
+<td>no further information</td>
+<td>M</td>
+</tr>
+<tr>
+<td><code>issuing_country</code></td>
+<td>no further information</td>
+<td>M</td>
+</tr>
+<tr>
+<td><code>issuing_subdivision</code></td>
+<td>no further information</td>
+<td>O</td>
+</tr>
+<tr>
+<td><code>document_number</code></td>
+<td>no further information</td>
+<td>M</td>
+</tr>
+<tr>
+<td><code>un_distinguishing_sign</code></td>
+<td>no further information</td>
+<td>M</td>
+</tr>
+<tr>
+<td><code>registration_number</code></td>
+<td>EU - corresponding harmonised Union code: <br> <strong>(A)</strong> registration number</td>
+<td>M</td>
+</tr>
+<tr>
+<td><code>registration_number_type</code></td>
+<td>no further information</td>
+<td>O</td>
+</tr>
+<tr>
+<td><code>register_number</code></td>
+<td>no further information</td>
+<td>O</td>
+</tr>
+<tr>
+<td><code>date_of_registration</code></td>
+<td>EU - corresponding harmonised Union code: <br> <strong>(I)</strong> date of the registration to which this certificate refers</td>
+<td>M</td>
+</tr>
+<tr>
+<td><code>year_of_manufacturing</code></td>
+<td>no further information</td>
+<td>O</td>
+</tr>
+<tr>
+<td><code>date_of_first_registration</code></td>
+<td>EU - corresponding harmonised Union code: <br> <strong>(B)</strong> date of first registration of the vehicle<br> Optional data element in ISO/IEC 7367-2</td>
+<td>M</td>
+</tr>
+<tr>
+<td><code>document_number_techn_insp_report</code></td>
+<td>no further information</td>
+<td>O</td>
+</tr>
+<tr>
+<td><code>approval_date_technical_inspection</code></td>
+<td>no further information</td>
+<td>O</td>
+</tr>
+<tr>
+<td><code>expiry_date_technical_inspection</code></td>
+<td>EU - corresponding harmonised Union code: <br> <strong>(X)</strong> proof of having passed the roadworthiness test, date of next roadworthiness test or expiry of current certificate<br><br> <em>Condition:</em> mandatory if a technical inspection is relevant for the vehicle</td>
+<td>C</td>
+</tr>
+<tr>
+<td><code>chassis_number_info</code></td>
+<td>EU - corresponding harmonised Union code: <br> <strong>(E)</strong> vehicle identification number <br> eCoC corresponding code: VehicleIdentificationNumber</td>
+<td>M</td>
+</tr>
+<tr>
+<td><code>users</code></td>
+<td>EU - corresponding harmonised Union code: <br> <strong>(C.1)</strong> holder of the Registration Certificate <br> Specification according to clause 6.2.3.2 in [ISO/IEC 7367-2] and clause 3.1.2.3 below<br> a holder is either a natural person or an organization according to Table 2 in [ISO/IEC 7367-2]</td>
+<td>M</td>
+</tr>
+<tr>
+<td><code>owners</code></td>
+<td>EU - corresponding harmonised Union code: <br> <strong>(C.2)</strong> owner of the vehicle (repeated as many times as there are owners) <br> Specification according to clause 6.2.3.3 in [ISO/IEC 7367-2] and clause 3.1.2.3<br> an owner is either a natural person or an organization according to Table 2 in [ISO/IEC 7367-2]</td>
+<td>O</td>
+</tr>
+<tr>
+<td><code>basic_vehicle_info</code></td>
+<td>Specification according to clause 6.2.4.3 in [ISO/IEC 7367-2] and Table 5 in clause 3.1.2.4</td>
+<td>M</td>
+</tr>
+<tr>
+<td><code>mass_info</code></td>
+<td>Specification according to clause 6.2.4.4 in [ISO/IEC 7367-2] and Table 6 in clause 3.1.2.5</td>
+<td>O</td>
+</tr>
+<tr>
+<td><code>towed_trailer_mass_info</code></td>
+<td>Specification according to clause 6.2.4.5 in [ISO/IEC 7367-2] and Table 7 in clause 3.1.2.6</td>
+<td>O</td>
+</tr>
+<tr>
+<td><code>engine_info</code></td>
+<td>Specification according to clause 6.2.4.6 in [ISO/IEC 7367-2] and Table 8 in clause 3.1.2.7</td>
+<td>O</td>
+</tr>
+<tr>
+<td><code>seating_info</code></td>
+<td>Specification according to clause 6.2.4.7 in [ISO/IEC 7367-2] and Table 9 in clause 3.1.2.8</td>
+<td>O</td>
+</tr>
+<tr>
+<td><code>dimensions_info</code></td>
+<td>Specification according to clause 6.2.4.8 in [ISO/IEC 7367-2] and Table 10 in clause 3.1.2.9</td>
+<td>O</td>
+</tr>
+</tbody>
+</table>
+<h5 id="3123-user-and-owner-data-elements">3.1.2.3   User and owner data elements<a class="headerlink" href="#3123-user-and-owner-data-elements" title="Permanent link">&para;</a></h5>
+<p>The user information in data element <code>users</code> contains information describing the name and address of the <strong>holder</strong> (C.1) of the vehicle according to [EU DIR 2025/0096]. There SHALL be one holder. The data element <code>users</code> contains one recorded entity with the specific personal details. A holder SHALL be either a natural person with details given in Table 2 or an organization with details given in Table 3. The encoding of the data elements as given in clause 6.2.3.2 in [ISO/IEC 7367-2] applies.</p>
+<p>The owner information in data element <code>owners</code> contains information describing the name and address of the recorded <strong>owner(s)</strong> (C.2) of the vehicle according to [EU DIR 2025/0096]. There can be more than one owner. The data element <code>owners</code> MAY contain more than one recorded entity with the specific personal details. One recorded entity of an owner SHALL be either a natural person with details given in Table 2 or an organization with details given in Table 3. The encoding of the data elements as given in clause 6.2.3.3 in [ISO/IEC 7367-2] applies.</p>
+<h6 id="table-2-naturalperson-key-details">Table 2 — NaturalPerson - key details<a class="headerlink" href="#table-2-naturalperson-key-details" title="Permanent link">&para;</a></h6>
+<table>
+<thead>
+<tr>
+<th><strong>Identifier</strong></th>
+<th><strong>EU additional description</strong></th>
+<th><strong>Presence in EU-mVRC</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>full_address</code></td>
+<td>no further information, see Table 4</td>
+<td>M</td>
+</tr>
+<tr>
+<td><code>family_name</code></td>
+<td>EU - corresponding harmonised Union code: <br> <strong>(C.1.1)</strong> surname(s) or business name<br> <strong>(C.2.1)</strong> surname or business name<br> <strong>(C.3.1)</strong> surname or business name<br> <em>Note:</em> applicable if C.1.1, C.2.1 or C.3.1  refer to a natural person</td>
+<td>M</td>
+</tr>
+<tr>
+<td><code>family_name_latin1</code></td>
+<td>EU - corresponding harmonised Union code: <br> <strong>(C.1.1)</strong> surname(s) or business name<br>  <strong>(C.2.1)</strong> surname or business Name<br>  <strong>(C.3.1)</strong> surname or business Name<br> <em>Note:</em> applicable if C.1.1, C.2.1 or C.3.1 refer to a natural person</td>
+<td>O</td>
+</tr>
+<tr>
+<td><code>given_name</code></td>
+<td>EU - corresponding harmonised Union code:<br>  <strong>(C.1.2)</strong> other name(s) or initial(s) (where appropriate)<br>  <strong>(C.2.2)</strong> other name(s) or initial(s) (where appropriate)<br> <strong>(C.3.2)</strong> other name(s) or initial(s) (where appropriate)<br> <em>Note:</em> applicable if C.1.2, C.2.2 or C.3.2refer to a natural Person<br> in case not available use '-'</td>
+<td>M</td>
+</tr>
+<tr>
+<td><code>given_name_latin1</code></td>
+<td>EU - corresponding harmonised Union code:<br> <strong>(C.1.2)</strong> other name(s) or initial(s) (where appropriate)<br> <strong>(C.2.2)</strong> other name(s) or initial(s) (where appropriate)<br> <em>Note:</em> applicable if C.1.2 or C.2.2 refer to a natural Person<br> <strong>(C.3.2)</strong> other name(s) or initial(s) (where appropriate)<br> <em>Note:</em> applicable if C.1.2 or C.2.2 refer to a natural Person</td>
+<td>O</td>
+</tr>
+<tr>
+<td><code>supplemental_person_data</code></td>
+<td>encoding as given after the table<br><br> EU - corresponding harmonised Union code:<br> <strong>(C.1.4)</strong> electronic address (e-mail) of the holder of the registration<br> <strong>(C.2.4)</strong> electronic address (e-mail) of the owner certificate<br> <strong>(C.4)</strong> Where the particulars specified in f, code C.2 are not included in the Registration Certificate, reference to the fact that the holder of the Registration Certificate: (a) is the vehicle owner, (b) is not the vehicle owner, (c) is not identified by the Registration Certificate as being the vehicle owner<br><br> <em>Condition:</em> mandatory if one of the items <strong>(C.1.4)</strong>, <strong>(C.2.4)</strong>, <strong>(C.4)</strong> apply</td>
+<td>C</td>
+</tr>
+</tbody>
+</table>
+<h6 id="table-3-organization-key-details">Table 3 — Organization - key details<a class="headerlink" href="#table-3-organization-key-details" title="Permanent link">&para;</a></h6>
+<table>
+<thead>
+<tr>
+<th><strong>Identifier</strong></th>
+<th><strong>EU additional description</strong></th>
+<th><strong>Presence in EU-mVRC</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>full_adress</code></td>
+<td>no further information, see Table 4</td>
+<td>M</td>
+</tr>
+<tr>
+<td><code>organization_name</code></td>
+<td>EU - corresponding harmonised Union code: <br> <strong>(C.1.1)</strong> surname(s) or business name <br> <strong>(C.2.1)</strong> surname or business name<br> <strong>(C.3.1)</strong> surname or business name<br> <em>Note:</em> applicable if C.1.1, C.2.1 or C.3.1 refer to an organization</td>
+<td>M</td>
+</tr>
+<tr>
+<td><code>organization_name_latin1</code></td>
+<td>EU - corresponding harmonised Union code: <br> <strong>(C.1.1)</strong> surname(s) or business name<br> <strong>(C.2.1)</strong> surname or business name<br> <strong>(C.3.1)</strong> surname or business name<br> <em>Note:</em> applicable if C.1.1, C.2.1 or C.3.1 refer to an organization</td>
+<td>O</td>
+</tr>
+<tr>
+<td><code>supplemental_organization_data</code></td>
+<td>encoding as given after the table<br><br> EU - corresponding harmonised Union code:<br> <strong>(C.1.4)</strong> electronic address (e-mail) of the holder of the registration<br> <strong>(C.2.4)</strong> electronic address (e-mail) of the owner certificate<br> <strong>(C.4)</strong> Where the particulars specified in f, code C.2 are not included in the Registration Certificate, reference to the fact that the holder of the Registration Certificate: (a) is the vehicle owner, (b) is not the vehicle owner, (c) is not identified by the Registration Certificate as being the vehicle owner<br><br> <em>Condition:</em> mandatory if one of the items <strong>(C.1.4)</strong>, <strong>(C.2.4)</strong>, <strong>(C.4)</strong> apply</td>
+<td>C</td>
+</tr>
+</tbody>
+</table>
+<p>The elements <code>supplemental_person_data</code> and <code>supplemental_organization_data</code> are defined as a map structure in clause 6.2.3.2 in [ISO/IEC 7367-2]. In the EU-mVRC this map SHALL be encoded as follows. The element <code>additional_info</code> MAY contain any additional information.</p>
+<div class="highlight"><pre><span></span><code><span class="nc">supplemental_person_data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="s2">"email"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="nb">tstr</span><span class="p">,</span><span class="w">                                         </span><span class="c1">; according to Table 2</span>
+<span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="s2">"rel_holder_to_owner"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="nc">rel_holder_to_owner_value</span><span class="p">,</span><span class="w">      </span><span class="c1">; according to Table 2</span>
+<span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="s2">"additional_info"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="nb">tstr</span>
+<span class="p">}</span>
+
+<span class="nc">supplemental_organization_data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="s2">"email"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="nb">tstr</span><span class="p">,</span><span class="w">                                         </span><span class="c1">; according to Table 3</span>
+<span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="s2">"rel_holder_to_owner"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="nc">rel_holder_to_owner_value</span><span class="p">,</span><span class="w">      </span><span class="c1">; according to Table 3</span>
+<span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="s2">"additional_info"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="nb">tstr</span>
+<span class="p">}</span>
+
+<span class="nc">rel_holder_to_owner_value</span><span class="w"> </span><span class="o">=</span>
+<span class="w">     </span><span class="s2">"(a) is the vehicle owner"</span><span class="w"> </span><span class="o">/</span>
+<span class="w">     </span><span class="s2">"(b) is not the vehicle owner"</span><span class="w"> </span><span class="o">/</span>
+<span class="w">     </span><span class="s2">"(c) is not identified by the Regsistration Certificate as being the vehicle owner"</span>
+</code></pre></div>
+<h6 id="table-4-address-key-details">Table 4 — Address - key details<a class="headerlink" href="#table-4-address-key-details" title="Permanent link">&para;</a></h6>
+<table>
+<thead>
+<tr>
+<th><strong>Identifier</strong></th>
+<th><strong>EU additional description</strong></th>
+<th><strong>Presence in EU-mVRC</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>address</code></td>
+<td>EU - corresponding harmonised Union code:<br> <strong>(C.1.3)</strong> address in the Member State of registration, on the date of issue of the document<br> <strong>(C.2.3)</strong> address in the Member State of registration, on the date of issue of the document<br> <strong>(C.3.3)</strong> address in the Member State of registration, on the date of issue of the document</td>
+<td>M</td>
+</tr>
+<tr>
+<td><code>address_latin1</code></td>
+<td>EU - corresponding harmonised Union code:<br> <strong>(C.1.3)</strong> address in the Member State of registration, on the date of issue of the document<br> <strong>(C.2.3)</strong> address in the Member State of registration, on the date of issue of the document<br> <strong>(C.3.3)</strong> address in the Member State of registration, on the date of issue of the document</td>
+<td>O</td>
+</tr>
+<tr>
+<td><code>city</code></td>
+<td>EU - corresponding harmonised Union code: <br> <strong>(C.1.3)</strong> address in the Member State of registration, on the date of issue of the document<br> <strong>(C.2.3)</strong> address in the Member State of registration, on the date of issue of the document<br> <strong>(C.3.3)</strong> address in the Member State of registration, on the date of issue of the document</td>
+<td>M</td>
+</tr>
+<tr>
+<td><code>city_latin1</code></td>
+<td>EU - corresponding harmonised Union code:<br> <strong>(C.1.3)</strong> address in the Member State of registration, on the date of issue of the document<br> <strong>(C.2.3)</strong> address in the Member State of registration, on the date of issue of the document<br> <strong>(C.3.3)</strong> address in the Member State of registration, on the date of issue of the document</td>
+<td>O</td>
+</tr>
+<tr>
+<td><code>state</code></td>
+<td>EU - corresponding harmonised Union code:<br> <strong>(C.1.3)</strong> address in the Member State of registration, on the date of issue of the document<br> <strong>(C.2.3)</strong> address in the Member State of registration, on the date of issue of the document<br> <strong>(C.3.3)</strong> address in the Member State of registration, on the date of issue of the document</td>
+<td>O</td>
+</tr>
+<tr>
+<td><code>state_latin1</code></td>
+<td>EU - corresponding harmonised Union code:<br> <strong>(C.1.3)</strong> address in the Member State of registration, on the date of issue of the document<br> <strong>(C.2.3)</strong> address in the Member State of registration, on the date of issue of the document<br> <strong>(C.3.3)</strong> address in the Member State of registration, on the date of issue of the document</td>
+<td>O</td>
+</tr>
+<tr>
+<td><code>postal_code</code></td>
+<td>EU - corresponding harmonised Union code:<br> <strong>(C.1.3)</strong> address in the Member State of registration, on the date of issue of the document<br> <strong>(C.2.3)</strong> address in the Member State of registration, on the date of issue of the document<br> <strong>(C.3.3)</strong> address in the Member State of registration, on the date of issue of the document</td>
+<td>O</td>
+</tr>
+<tr>
+<td><code>country</code></td>
+<td>EU - corresponding harmonised Union code:<br> <strong>(C.1.3)</strong> address in the Member State of registration, on the date of issue of the document<br> <strong>(C.2.3)</strong> address in the Member State of registration, on the date of issue of the document<br> <strong>(C.3.3)</strong> address in the Member State of registration, on the date of issue of the document</td>
+<td>M</td>
+</tr>
+<tr>
+<td><code>supplemental_location_data</code></td>
+<td>no further information</td>
+<td>O</td>
+</tr>
+</tbody>
+</table>
+<h5 id="3124-basic-vehicle-info">3.1.2.4   Basic vehicle info<a class="headerlink" href="#3124-basic-vehicle-info" title="Permanent link">&para;</a></h5>
+<p>The basic vehicle information contains information describing the basic data elements of a vehicle according to clause 6.2.4.3 in [ISO/IEC 7367-2].</p>
+<h6 id="table-5-basic-vehicle-info-key-details">Table 5 — Basic vehicle info key details<a class="headerlink" href="#table-5-basic-vehicle-info-key-details" title="Permanent link">&para;</a></h6>
+<table>
+<thead>
+<tr>
+<th><strong>Identifier</strong></th>
+<th><strong>EU additional description</strong></th>
+<th><strong>Presence in EU-mVRC</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>vehicle_category_code</code></td>
+<td>EU - the European vehicle category as mentioned in 167/2013, 168/2013 and 2018/858 <br> EU - corresponding harmonised Union code:<br> <strong>(J)</strong> vehicle category<br> eCoC corresponding code: VehicleCategory, <br> <em>Note:</em> according to [EU DIR 2025/0096] it is mandatory if available</td>
+<td>O</td>
+</tr>
+<tr>
+<td><code>vehicle_category_national</code></td>
+<td>no further information</td>
+<td>O</td>
+</tr>
+<tr>
+<td><code>approval_number</code></td>
+<td>EU - corresponding harmonised Union code:<br> <strong>(K)</strong> whole-vehicle vehicle type-approval number or the European Individual approval number (if available),<br> CoC corresponding code: TypeApprovalNumber, mandatory if available</td>
+<td>C</td>
+</tr>
+<tr>
+<td><code>make</code></td>
+<td>EU - corresponding harmonised Union code:<br> <strong>(D.1)</strong> make<br> eCoC corresponding code: Make</td>
+<td>M</td>
+</tr>
+<tr>
+<td><code>type</code></td>
+<td>EU - corresponding harmonised Union code:<br> <strong>(D.2)</strong> type,<br> <em>Note:</em> according to [EU DIR 2025/0096] it is mandatory if available</td>
+<td>O</td>
+</tr>
+<tr>
+<td><code>variant</code></td>
+<td>EU - corresponding harmonised Union code:<br> <strong>(D.2.1)</strong> variant,<br> <em>Note:</em> according to [EU DIR 2025/0096] it is mandatory if available</td>
+<td>O</td>
+</tr>
+<tr>
+<td><code>version</code></td>
+<td>EU - corresponding harmonised Union code:<br> <strong>(D.2.2)</strong> version,<br> <em>Note:</em> according to [EU DIR 2025/0096] it is mandatory if available</td>
+<td>O</td>
+</tr>
+<tr>
+<td><code>commercial_name</code></td>
+<td>EU - corresponding harmonised Union code:<br> <strong>(D.3)</strong> commercial description(s)<br> eCoC corresponding code: CommercialName,<br> <em>Note:</em> according to [EU DIR 2025/0096] it is mandatory if available</td>
+<td>O</td>
+</tr>
+<tr>
+<td><code>colours</code></td>
+<td>EU - corresponding harmonised Union code:<br> <strong>(R)</strong> colour of the vehicle<br> eCoC corresponding code: Colour</td>
+<td>O</td>
+</tr>
+<tr>
+<td><code>automation_level</code></td>
+<td>no further information</td>
+<td>O</td>
+</tr>
+<tr>
+<td><code>status_vehicle</code></td>
+<td>no further information</td>
+<td>O</td>
+</tr>
+</tbody>
+</table>
+<h5 id="3125-mass-info">3.1.2.5   Mass info<a class="headerlink" href="#3125-mass-info" title="Permanent link">&para;</a></h5>
+<p>The mass information contains information describing the mass data elements of a vehicle in kilograms.</p>
+<h6 id="table-6-mass-info-key-details">Table 6 — mass info key details<a class="headerlink" href="#table-6-mass-info-key-details" title="Permanent link">&para;</a></h6>
+<table>
+<thead>
+<tr>
+<th><strong>Identifier</strong></th>
+<th><strong>EU additional description</strong></th>
+<th><strong>Presence in EU-mVRC</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>techn_perm_max_laden_mass</code></td>
+<td>EU - corresponding harmonised Union code:<br> <strong>(F.1)</strong> maximum technically permissible laden mass, except for motorcycles<br> eCoC corresponding code: TechnPermMaxLadenMass</td>
+<td>O</td>
+</tr>
+<tr>
+<td><code>vehicle_max_mass</code></td>
+<td>EU - corresponding harmonised Union code:<br> <strong>(F.2)</strong> maximum permissible laden mass of the vehicle in service in the Member State of registration<br> eCoC corresponding code: InServiceMaximumPermissibleMass</td>
+<td>O</td>
+</tr>
+<tr>
+<td><code>mass_in_running_order</code></td>
+<td>EU - corresponding harmonised Union code:<br> <strong>(G)</strong> mass of the vehicle in service with bodywork, and with coupling device in the case of a towing vehicle in service from any category other than M1<br> eCoC corresponding code: MassOfTheVehicleInRunningOrder, <br> <em>Note:</em> according to [EU DIR 2025/0096] it is mandatory if available</td>
+<td>O</td>
+</tr>
+<tr>
+<td><code>mass_in_running_order_variable_min</code></td>
+<td>no further information</td>
+<td>O</td>
+</tr>
+<tr>
+<td><code>mass_in_running_order_variable_max</code></td>
+<td>no further information</td>
+<td>O</td>
+</tr>
+</tbody>
+</table>
+<h5 id="3126-towed-trailer-mass-info">3.1.2.6 Towed trailer mass info<a class="headerlink" href="#3126-towed-trailer-mass-info" title="Permanent link">&para;</a></h5>
+<p>The towed trailer mass information contains information about the towing vehicle’s maximum allowable towed mass for both unbraked and braked trailers to be coupled in kilograms.</p>
+<h6 id="table-7-towed-trailer-mass-info-key-details">Table 7 — Towed trailer mass info key details<a class="headerlink" href="#table-7-towed-trailer-mass-info-key-details" title="Permanent link">&para;</a></h6>
+<table>
+<thead>
+<tr>
+<th><strong>Identifier</strong></th>
+<th><strong>EU additional description</strong></th>
+<th><strong>Presence in EU-mVRC</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>tech_perm_max_tow_mass</code></td>
+<td>EU - corresponding harmonised Union code:<br> <strong>(O1)</strong> technically permissible maximum towable mass of the trailer braked (in kg)<br> <strong>(O2)</strong> technically permissible maximum towable mass of the trailer unbraked (in kg)<br> For brake type see braked_type_trail_code</td>
+<td>O</td>
+</tr>
+<tr>
+<td><code>technically_permissible_</code><br><code>maximum_combination_mass</code></td>
+<td>no further information</td>
+<td>O</td>
+</tr>
+<tr>
+<td><code>braked_type_trail_code</code></td>
+<td>no further information</td>
+<td>O</td>
+</tr>
+<tr>
+<td><code>type_trailer_code</code></td>
+<td>no further information</td>
+<td>O</td>
+</tr>
+</tbody>
+</table>
+<h5 id="3127-engine-info">3.1.2.7 Engine info<a class="headerlink" href="#3127-engine-info" title="Permanent link">&para;</a></h5>
+<p>The engine information contains information describing the relevant data elements the engine.</p>
+<h6 id="table-8-engine-info-key-details">Table 8 — Engine info key details<a class="headerlink" href="#table-8-engine-info-key-details" title="Permanent link">&para;</a></h6>
+<table>
+<thead>
+<tr>
+<th><strong>Identifier</strong></th>
+<th><strong>EU additional description</strong></th>
+<th><strong>Presence in EU-mVRC</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>engine_number</code></td>
+<td>EU - corresponding harmonised Union code:<br> <strong>(P.5)</strong> engine identification number<br> eCoC corresponding code: EngineNumber</td>
+<td>O</td>
+</tr>
+<tr>
+<td><code>engine_capacity</code></td>
+<td>EU - corresponding harmonised Union code:<br> <strong>(P.1)</strong> capacity (in cm3)<br> eCoC corresponding code: EngineCapacity, mandatory if available</td>
+<td>C</td>
+</tr>
+<tr>
+<td><code>engine_power</code></td>
+<td>EU - corresponding harmonised Union code:<br> <strong>(P.2)</strong> maximum net power (in kW) (if available)<br> eCoC corresponding code: MaximumNetPower, MaximumContinuousRatedPower, RatedEngineNetPower, , mandatory if available</td>
+<td>C</td>
+</tr>
+<tr>
+<td><code>class_of_hybrid_vehicle_code</code></td>
+<td>no further information</td>
+<td>O</td>
+</tr>
+<tr>
+<td><code>energy_sources</code></td>
+<td>EU - corresponding harmonised Union code:<br> <strong>(P.3)</strong> type of fuel or power source (where applicable)<br> eCoC corresponding code: EnergySource, <br> <em>Note:</em> according to [EU DIR 2025/0096] it is mandatory if available</td>
+<td>O</td>
+</tr>
+</tbody>
+</table>
+<h5 id="3128-seating-info">3.1.2.8 Seating info<a class="headerlink" href="#3128-seating-info" title="Permanent link">&para;</a></h5>
+<p>The seating information contains information describing the seating and standing elements of a vehicle.</p>
+<h6 id="table-9-seating-info-key-details">Table 9 — seating info key details<a class="headerlink" href="#table-9-seating-info-key-details" title="Permanent link">&para;</a></h6>
+<table>
+<thead>
+<tr>
+<th><strong>Identifier</strong></th>
+<th><strong>EU additional description</strong></th>
+<th><strong>Presence in EU-mVRC</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>number_of_seating_positions_including_driver</code></td>
+<td>EU - corresponding harmonised Union code:<br> <strong>(S.1)</strong> number of seats, including the driver's seat<br> eCoC corresponding code: NrOfSeatingPositions, <br> <em>Note:</em> according to [EU DIR 2025/0096] it is mandatory if available</td>
+<td>O</td>
+</tr>
+<tr>
+<td><code>number_of_standing_places</code></td>
+<td>EU - corresponding harmonised Union code:<br> <strong>(S.2)</strong> number of standing places (where appropriate)<br> eCoC corresponding code: NumberOfStandingPlaces, <br> <em>Note:</em> according to [EU DIR 2025/0096] it is mandatory if available</td>
+<td>O</td>
+</tr>
+</tbody>
+</table>
+<h5 id="3129-dimensions-info">3.1.2.9   Dimensions info<a class="headerlink" href="#3129-dimensions-info" title="Permanent link">&para;</a></h5>
+<p>The dimension information contains details about the dimensions of a vehicle such as wheelbase, length and width. All elements within dimension information are optional and can be absent. If present, the conditions on some of the elements specified in [ISO/IEC 7367-2] apply.</p>
+<h6 id="table-10-dimensions-info-key-details">Table 10 — Dimensions info key details<a class="headerlink" href="#table-10-dimensions-info-key-details" title="Permanent link">&para;</a></h6>
+<table>
+<thead>
+<tr>
+<th><strong>Identifier</strong></th>
+<th><strong>EU additional description</strong></th>
+<th><strong>Presence in EU-mVRC</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>wheelbase</code></td>
+<td>EU - corresponding harmonised Union code:<br> <strong>(M)</strong> wheelbase (in mm)<br> eCoC corresponding code: Wheelbase</td>
+<td>O</td>
+</tr>
+<tr>
+<td><code>wheelbase_adjustable_min</code></td>
+<td>no further information</td>
+<td>O</td>
+</tr>
+<tr>
+<td><code>wheelbase_adjustable_max</code></td>
+<td>no further information</td>
+<td>O</td>
+</tr>
+<tr>
+<td><code>length</code></td>
+<td>no further information</td>
+<td>O</td>
+</tr>
+<tr>
+<td><code>length_adjustable_min</code></td>
+<td>no further information</td>
+<td>O</td>
+</tr>
+<tr>
+<td><code>length_adjustable_max</code></td>
+<td>no further information</td>
+<td>O</td>
+</tr>
+<tr>
+<td><code>width</code></td>
+<td>no further information</td>
+<td>O</td>
+</tr>
+<tr>
+<td><code>width_adjustable_min</code></td>
+<td>no further information</td>
+<td>O</td>
+</tr>
+<tr>
+<td><code>width_adjustable_max</code></td>
+<td>no further information</td>
+<td>O</td>
+</tr>
+<tr>
+<td><code>height</code></td>
+<td>no further information</td>
+<td>O</td>
+</tr>
+<tr>
+<td><code>height_adjustable_min</code></td>
+<td>no further information</td>
+<td>O</td>
+</tr>
+<tr>
+<td><code>height_adjustable_max</code></td>
+<td>no further information</td>
+<td>O</td>
+</tr>
+<tr>
+<td><code>distance_frontend_centrecoupling</code></td>
+<td>no further information</td>
+<td>O</td>
+</tr>
+<tr>
+<td><code>distance_frontend_centrecoupling_adjustable_min</code></td>
+<td>no further information</td>
+<td>O</td>
+</tr>
+<tr>
+<td><code>distance_frontend_centrecoupling_adjustable_max</code></td>
+<td>no further information</td>
+<td>O</td>
+</tr>
+<tr>
+<td><code>distance_centrecoupling_rearend</code></td>
+<td>no further information</td>
+<td>O</td>
+</tr>
+<tr>
+<td><code>distance_centrecoupling_rearend_adjustable_min</code></td>
+<td>no further information</td>
+<td>O</td>
+</tr>
+<tr>
+<td><code>distance_centrecoupling_rearend_adjustable_max</code></td>
+<td>no further information</td>
+<td>O</td>
+</tr>
+</tbody>
+</table>
+<h4 id="313-eu-mvrc-eu-data-elements">3.1.3 EU-mVRC EU data elements<a class="headerlink" href="#313-eu-mvrc-eu-data-elements" title="Permanent link">&para;</a></h4>
+<h5 id="3131-overview">3.1.3.1 Overview<a class="headerlink" href="#3131-overview" title="Permanent link">&para;</a></h5>
+<p>The data elements are specified in Table 11 in clause 3.1.3.2.</p>
+<p>— The "Identifier" column is used for <code>DataElementIdentifier</code> in the mdoc request in accordance with ISO/IEC TS 23220-4.</p>
+<p>— The "Presence" column indicates whether the presence of the element on an mVC is mandatory (M), optional (O) or conditional (C). A mandatory data elemement SHALL be present in an EU-mVRC whereas an optional data element MAY be present. If a data element is conditional the respective condition is given in the specification. If the condition is met the data element SHALL be present.</p>
+<p>— The “Encoding format” column indicates how the data elements SHALL be encoded. “tstr”, “uint”, “bstr”, “bool” and “tdate” are CDDL representation types as defined in RFC 8610. “full-date” SHALL be implemented according to the additional information tag 1004 for full-date elements as defined in RFC 8943.</p>
+<p>— The following requirements SHALL apply to dates in EU-mVRC data elements unless otherwise indicated and when applicable: Dates SHALL not use fraction of seconds. No local offset from UTC SHALL be used, as indicated by setting the time-offset defined in RFC 3339 to “Z”.</p>
+<h5 id="3132-eu-data-elements">3.1.3.2 EU data elements<a class="headerlink" href="#3132-eu-data-elements" title="Permanent link">&para;</a></h5>
+<p>The EU data elements are grouped in five main data elements as given in Table 11. If an optional data element is encoded, it must contain at minimum all mandatory elements defined in the sub-structures.</p>
+<h6 id="table-11-eu-data-elements-key-details">Table 11 - EU data elements - key details<a class="headerlink" href="#table-11-eu-data-elements-key-details" title="Permanent link">&para;</a></h6>
+<table>
+<thead>
+<tr>
+<th><strong>Identifier</strong></th>
+<th><strong>Meaning</strong></th>
+<th><strong>Description</strong></th>
+<th><strong>Presence</strong></th>
+<th>Encoding format</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>vehicle_info_ext_eu</code></td>
+<td>Vehicle info extended EU</td>
+<td>The vehicle information specified in the European namespace</td>
+<td>O</td>
+<td>See 3.1.3.3</td>
+</tr>
+<tr>
+<td><code>consumer_info_eu</code></td>
+<td>Consumer info EU</td>
+<td>EU - corresponding harmonised Union code:<br> <strong>C.3)</strong> natural or legal person who may use the vehicle by virtue of a legal right other than that of ownership</td>
+<td>O</td>
+<td>See 3.1.3.4</td>
+</tr>
+<tr>
+<td><code>axle_info_eu</code></td>
+<td>Axle info</td>
+<td>The axle information of a vehicle</td>
+<td>O</td>
+<td>See 3.1.3.5</td>
+</tr>
+<tr>
+<td><code>env_info_eu</code></td>
+<td>Environmental info</td>
+<td>Environmental info of a vehicle</td>
+<td>O</td>
+<td>See 3.1.3.6</td>
+</tr>
+</tbody>
+</table>
+<h5 id="3133-vehicle-info-extended-eu">3.1.3.3 Vehicle info extended EU<a class="headerlink" href="#3133-vehicle-info-extended-eu" title="Permanent link">&para;</a></h5>
+<p>The data element <code>vehicle_info_ext_eu</code> contains information describing extra common data elements of the vehicle. The definition of the elements in the extended vehicle information is given in Table 12.</p>
+<p>The structure is absent when none of the data elements are applicable.</p>
+<p>The <code>VehicleInfoExtEU</code> structure SHALL be encoded as <a class="mkdocs-ezglossary-link"
+    id="b7f3f3504269a2a8e52fa699446478f2"
+    title="The binary serialisation format used for mdoc transfers."
+    data-tooltip="The binary serialisation format used for mdoc transfers."
+    name="formats:Concise Binary Object Representation (CBOR)"
+    href="../../../glossary-definitions/#bd896d90646af3853fca4158c8c25077">CBOR</a> for device retrieval and SHALL be formatted as following <a class="mkdocs-ezglossary-link"
+    id="e33a55eae280ac5e7750456d89834a46"
+    title="The language to define CBOR structures (e.g., tstr, uint, bstr, tdate)."
+    data-tooltip="The language to define CBOR structures (e.g., tstr, uint, bstr, tdate)."
+    name="formats:Concise Data Definition Language (CDDL)"
+    href="../../../glossary-definitions/#55475ed49e692fa05518d4777454943e">CDDL</a> structure:</p>
+<div class="highlight"><pre><span></span><code><span class="nc">VehicleInfoExtEU</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="s2">"bodywork"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="nb">tstr</span><span class="p">,</span><span class="w">                           </span><span class="c1">; according to Table 12</span>
+<span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="s2">"whole_vehicle_max_mass"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="nb">uint</span><span class="p">,</span><span class="w">             </span><span class="c1">; according to Table 12</span>
+<span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="s2">"power_mass_ratio"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="nb">uint</span><span class="p">,</span><span class="w">                   </span><span class="c1">; according to Table 12</span>
+<span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="s2">"rated_speed"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="nb">uint</span><span class="p">,</span><span class="w">                        </span><span class="c1">; according to Table 12</span>
+<span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="s2">"max_speed"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="nb">uint</span><span class="p">,</span><span class="w">                          </span><span class="c1">; according to Table 12</span>
+<span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="s2">"fuel_tank"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="nb">uint</span><span class="p">,</span><span class="w">                          </span><span class="c1">; according to Table 12</span>
+<span class="p">}</span>
+</code></pre></div>
+<h6 id="table-12-vehicle-info-extended-eu-data-elements-key-details">Table 12 – Vehicle info extended EU data elements - key details<a class="headerlink" href="#table-12-vehicle-info-extended-eu-data-elements-key-details" title="Permanent link">&para;</a></h6>
+<table>
+<thead>
+<tr>
+<th><strong>Identifier</strong></th>
+<th><strong>Meaning</strong></th>
+<th><strong>Description</strong></th>
+<th><strong>Presence</strong></th>
+<th>Encoding format</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>bodywork</code></td>
+<td>Bodywork</td>
+<td>EU - corresponding harmonised Union code:<br> <strong>(J.21)</strong> bodywork<br> eCoC corresponding code: CodeForBodywork, <br> <em>Note:</em> according to [EU DIR 2025/0096] it is mandatory if available</td>
+<td>O</td>
+<td>tstr</td>
+</tr>
+<tr>
+<td><code>whole_vehicle_max_mass</code></td>
+<td>Whole vehicle maximum mass</td>
+<td>EU - corresponding harmonised Union code:<br> <strong>(F.3)</strong> maximum permissible laden mass of the whole vehicle in service in the Member State of registration<br> eCoC corresponding code: InServiceMaximumPermissibleMassCombination</td>
+<td>O</td>
+<td>uint</td>
+</tr>
+<tr>
+<td><code>power_mass_ratio</code></td>
+<td>Power mass ratio</td>
+<td>EU - corresponding harmonised Union code:<br> <strong>(Q)</strong> power/weight ratio (in kW/kg) (only for motorcycles)<br> eCoC corresponding code: PowerMassRatio, <br> <em>Note:</em> according to [EU DIR 2025/0096] it is mandatory if available</td>
+<td>O</td>
+<td>uint</td>
+</tr>
+<tr>
+<td><code>rated_speed</code></td>
+<td>Rated speed</td>
+<td>EU - corresponding harmonised Union code:<br> <strong>(P.4)</strong> rated speed (in min-1)</td>
+<td>O</td>
+<td>uint</td>
+</tr>
+<tr>
+<td><code>max_speed</code></td>
+<td>Maximum speed</td>
+<td>EU - corresponding harmonised Union code:<br> <strong>(T)</strong> maximum speed (in km/h)<br> eCoC corresponding code: MaximumSpeed</td>
+<td>O</td>
+<td>uint</td>
+</tr>
+<tr>
+<td><code>fuel_tank</code></td>
+<td>Capacity fuel tank</td>
+<td>EU - corresponding harmonised Union code:<br> <strong>(W)</strong> fuel tank(s) capacity (in litres)</td>
+<td>O</td>
+<td>uint</td>
+</tr>
+</tbody>
+</table>
+<h5 id="3134-consumer-info-extended-eu">3.1.3.4 Consumer info extended EU<a class="headerlink" href="#3134-consumer-info-extended-eu" title="Permanent link">&para;</a></h5>
+<p>The data element <code>consumer_info_ext_eu</code> contains information describing the name and address of the recorded consumer of the vehicle. A consumer is natural person or organization who may use the vehicle by virtue of a legal right other than that of ownership. There SHALL be one consumer. The data element <code>consumer_info_ext_eu</code> contains one recorded entity with the specific personal details. A consumer SHALL be either a natural person with details given in Table 2 or an organization with details given in Table 3. The encoding of the structure <code>RecordedEntity</code> as given in clause 6.2.3.2 in [ISO/IEC 7367-2] applies.</p>
+<p>The structure is absent when none of the data elements is applicable.</p>
+<p>The <code>ConsInfoExt</code> structure SHALL be encoded as CBOR for device retrieval and SHALL be formatted as following CDDL structure:</p>
+<div class="highlight"><pre><span></span><code><span class="nc">ConsInfoExt</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="o">+</span><span class="nc">RecordedEntity</span><span class="p">]</span><span class="w">      </span><span class="c1">; according to paragraph 6.2.3.2 User information of [ISO/IEC 7367-2] and</span>
+<span class="w">                                     </span><span class="c1">; Table 2 and Table 3 of this document</span>
+</code></pre></div>
+<h5 id="3135-axle-info-eu">3.1.3.5 Axle info EU<a class="headerlink" href="#3135-axle-info-eu" title="Permanent link">&para;</a></h5>
+<p>The data element <code>axle_info_eu</code> contains details about the distribution of the technically permissible maximum laden mass among the axles of vehicles with a total exceeding 3 500 kg. The definition of the elements in the axle information can be found in Table 13.</p>
+<p>The structure is absent when none of the data elements is applicable.</p>
+<p>The <code>AxleInfoEU</code> structure SHALL be encoded as CBOR for device retrieval and SHALL be formatted as following CDDL structure:</p>
+<div class="highlight"><pre><span></span><code><span class="nc">AxleInfoEU</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="s2">"number_of_axles"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="nb">uint</span><span class="p">,</span><span class="w">                </span><span class="c1">; according to Table 13</span>
+<span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="s2">"axle_info"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="o">+</span><span class="w"> </span><span class="nc">axledata</span><span class="p">]</span><span class="w">               </span><span class="c1">; according to Table 13</span>
+<span class="w"> </span><span class="p">}</span>
+<span class="nc">axledata</span><span class="w"> </span><span class="o">=</span><span class="w">  </span><span class="p">{</span>
+<span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="s2">"axle_number"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="nb">uint</span><span class="p">,</span><span class="w">                    </span><span class="c1">; according to Table 13</span>
+<span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="s2">"techn_perm_max_laden_mass_axle"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="nb">uint</span><span class="w">  </span><span class="c1">; according to Table 13</span>
+<span class="w"> </span><span class="p">}</span>
+</code></pre></div>
+<h6 id="table-13-axle-info-eu-key-details">Table 13 — Axle info EU key details<a class="headerlink" href="#table-13-axle-info-eu-key-details" title="Permanent link">&para;</a></h6>
+<table>
+<thead>
+<tr>
+<th><strong>Identifier</strong></th>
+<th><strong>Meaning</strong></th>
+<th><strong>Description</strong></th>
+<th><strong>Presence</strong></th>
+<th>Encoding format</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>number_of_axles</code></td>
+<td>Number of axles</td>
+<td>EU - corresponding harmonised Union code:<br> <strong>(L)</strong> number of axles<br> eCoC corresponding code: numberOfAxles</td>
+<td>O</td>
+<td>uint</td>
+</tr>
+<tr>
+<td><code>axle_number</code></td>
+<td>Axle number</td>
+<td>EU - corresponding harmonised Union code:<br> <strong>(N)</strong> axle 1 (in kg), where appropriate</td>
+<td>O</td>
+<td>uint</td>
+</tr>
+<tr>
+<td><code>techn_perm_max_laden_mass_axle</code></td>
+<td>technically permissible maximum laden mass on the axle</td>
+<td>EU - corresponding harmonised Union code:<br> <strong>(N)</strong> (in kg), where appropriate</td>
+<td>O</td>
+<td>uint</td>
+</tr>
+</tbody>
+</table>
+<h5 id="3136-environmental-info-eu">3.1.3.6 Environmental info EU<a class="headerlink" href="#3136-environmental-info-eu" title="Permanent link">&para;</a></h5>
+<p>The data element <code>env_info_eu</code> contains about the environmental aspects of vehicles. The definition of the elements in the environmental information can be found in Table 14.</p>
+<p>The structure is absent when none of the data elements is applicable.</p>
+<p>The <code>EnvInfoEU</code> structure SHALL be encoded as CBOR for device retrieval and SHALL be formatted as following CDDL structure:</p>
+<div class="highlight"><pre><span></span><code><span class="nc">EnvInfoEU</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="s2">"sound_stat"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="nb">uint</span><span class="p">,</span><span class="w">               </span><span class="c1">; according to Table 14</span>
+<span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="s2">"sound_speed"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="nb">uint</span><span class="p">,</span><span class="w">              </span><span class="c1">; according to Table 14</span>
+<span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="s2">"sound_drive_by"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="nb">uint</span><span class="p">,</span><span class="w">           </span><span class="c1">; according to Table 14</span>
+<span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="s2">"co"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="nb">uint</span><span class="p">,</span><span class="w">                       </span><span class="c1">; according to Table 14</span>
+<span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="s2">"co_unit"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="nb">tstr</span><span class="p">,</span><span class="w">                  </span><span class="c1">; according to Table 14</span>
+<span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="s2">"thc"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="nb">uint</span><span class="p">,</span><span class="w">                      </span><span class="c1">; according to Table 14</span>
+<span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="s2">"thc_unit"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="nb">tstr</span><span class="p">,</span><span class="w">                 </span><span class="c1">; according to Table 14</span>
+<span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="s2">"nox"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="nb">uint</span><span class="p">,</span><span class="w">                      </span><span class="c1">; according to Table 14</span>
+<span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="s2">"nox_unit"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="nb">tstr</span><span class="p">,</span><span class="w">                 </span><span class="c1">; according to Table 14</span>
+<span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="s2">"thc_nox"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="nb">uint</span><span class="p">,</span><span class="w">                  </span><span class="c1">; according to Table 14</span>
+<span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="s2">"thc_nox_unit"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="nb">tstr</span><span class="p">,</span><span class="w">             </span><span class="c1">; according to Table 14</span>
+<span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="s2">"pm"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="nb">uint</span><span class="p">,</span><span class="w">                       </span><span class="c1">; according to Table 14</span>
+<span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="s2">"pm_unit"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="nb">tstr</span><span class="p">,</span><span class="w">                  </span><span class="c1">; according to Table 14</span>
+<span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="s2">"corr_abs_coefficient"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="nb">uint</span><span class="p">,</span><span class="w">     </span><span class="c1">; according to Table 14</span>
+<span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="s2">"co2"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="nb">uint</span><span class="p">,</span><span class="w">                      </span><span class="c1">; according to Table 14</span>
+<span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="s2">"co2_unit"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="nb">tstr</span><span class="p">,</span><span class="w">                 </span><span class="c1">; according to Table 14</span>
+<span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="s2">"comb_fuel_consumption"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="nb">uint</span><span class="p">,</span><span class="w">    </span><span class="c1">; according to Table 14</span>
+<span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="s2">"environmental_category"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="nb">tstr</span><span class="p">,</span><span class="w">   </span><span class="c1">; according to Table 14</span>
+<span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="s2">"co2_emission_class"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="nb">tstr</span><span class="p">,</span><span class="w">       </span><span class="c1">; according to Table 14</span>
+<span class="p">}</span>
+</code></pre></div>
+<h6 id="table-14-environmental-info-eu-key-details">Table 14 — Environmental info EU key details<a class="headerlink" href="#table-14-environmental-info-eu-key-details" title="Permanent link">&para;</a></h6>
+<table>
+<thead>
+<tr>
+<th><strong>Identifier</strong></th>
+<th><strong>Meaning</strong></th>
+<th><strong>Description</strong></th>
+<th><strong>Presence</strong></th>
+<th>Encoding format</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>sound_stat</code></td>
+<td>sound level stationary</td>
+<td>EU - corresponding harmonised Union code:<br> <strong>(U.1)</strong> sound level stationary (in dB(A))<br> eCoC corresponding code: SoundLevelStationary</td>
+<td>O</td>
+<td>uint</td>
+</tr>
+<tr>
+<td><code>sound_speed</code></td>
+<td>sound level engine speed</td>
+<td>EU - corresponding harmonised Union code:<br> <strong>(U.2)</strong> sound level engine speed (in min-1)<br> eCoC corresponding code: SoundLevelStationaryEngineSpeed</td>
+<td>O</td>
+<td>uint</td>
+</tr>
+<tr>
+<td><code>sound_drive_by</code></td>
+<td>sound level drive-by</td>
+<td>EU - corresponding harmonised Union code:<br> <strong>(U.3)</strong> sound level drive-by (in dB(A))</td>
+<td>O</td>
+<td>uint</td>
+</tr>
+<tr>
+<td><code>co</code></td>
+<td>CO</td>
+<td>EU - corresponding harmonised Union code:<br> <strong>(V.1)</strong> Value of the CO ((in g/km, mg/km, g/kWh or mg/kWh)</td>
+<td>O</td>
+<td>uint</td>
+</tr>
+<tr>
+<td><code>co_unit</code></td>
+<td>unit of CO</td>
+<td>unit ((in g/km, mg/km, g/kWh or mg/kWh) of the CO as mentioned in item CO, <br> EU - corresponding harmonised Union code:<br> <strong>(V.1)</strong> Value of the CO ((in g/km, mg/km, g/kWh or mg/kWh) <br><br> <em>Condition:</em> mandatory in case of a CO-value, not present if co-element is not present</td>
+<td>C</td>
+<td>tstr</td>
+</tr>
+<tr>
+<td><code>thc</code></td>
+<td>THC</td>
+<td>EU - corresponding harmonised Union code:<br> <strong>(V.2)</strong> THC (in g/km or g/kWh)</td>
+<td>O</td>
+<td>uint</td>
+</tr>
+<tr>
+<td><code>thc_unit</code></td>
+<td>unit of THC</td>
+<td>unit ((in g/km, mg/km, g/kWh or mg/kWh) of the THC as mentioned in item thc,<br> EU - corresponding harmonised Union code:<br> <strong>(V.2)</strong> THC (in g/km or g/kWh) <br><br> <em>Condition:</em> mandatory in case of a thc-value, not present if thc-element is not present</td>
+<td>C</td>
+<td>tstr</td>
+</tr>
+<tr>
+<td><code>nox</code></td>
+<td>NOx</td>
+<td>EU - corresponding harmonised Union code:<br> <strong>(V.3)</strong> NOx (in g/km, mg/km, g/kWh or mg/kWh)</td>
+<td>O</td>
+<td>uint</td>
+</tr>
+<tr>
+<td><code>nox_unit</code></td>
+<td>unit of NOx</td>
+<td>unit (in g/km or/kWh) of the NOx as mentioned in item nox, <br> EU - corresponding harmonised Union code:<br> <strong>(V.3)</strong> NOx (in g/km, mg/km, g/kWh or mg/kWh) <br><br> <em>Condition:</em> mandatory in case of a nox-value, not present if nox-elment is not present</td>
+<td>C</td>
+<td>tstr</td>
+</tr>
+<tr>
+<td><code>thc_nox</code></td>
+<td>THC and NOx</td>
+<td>EU - corresponding harmonised Union code:<br> <strong>(V.4)</strong> THC + NOx (in g/km)</td>
+<td>O</td>
+<td>uint</td>
+</tr>
+<tr>
+<td><code>thc_nox_unit</code></td>
+<td>unit of THC and NOx</td>
+<td>unit (in g/km) of the THC and NOx as mentioned in item thc_nox, <br> EU - corresponding harmonised Union code:<br> <strong>(V.4)</strong> THC + NOx (in g/km) <br><br> <em>Condition:</em> mandatory in case of a thc_nox-value, not present if thc_nox-element is not present</td>
+<td>C</td>
+<td>tstr</td>
+</tr>
+<tr>
+<td><code>pm</code></td>
+<td>Mass of particulate matter</td>
+<td>EU - corresponding harmonised Union code:<br> <strong>(V.5)</strong> Mass of particulate matter (PM) (in g/km or g/kWh)</td>
+<td>O</td>
+<td>uint</td>
+</tr>
+<tr>
+<td><code>pm_unit</code></td>
+<td>unit of Mass of particulate matter</td>
+<td>unit  (in g/km or g/kWh) of the mass of particulate matter (PM) as mentioned in item pm, <br> EU - corresponding harmonised Union code:<br> <strong>(V.5)</strong> Mass of particulate matter (PM) (in g/km or g/kWh) <br><br> <em>Condition:</em> mandatory in case of a pm-value, not present if pm-element is not present</td>
+<td>C</td>
+<td>tstr</td>
+</tr>
+<tr>
+<td><code>corr_abs_coefficient</code></td>
+<td>corrected absorption coefficient</td>
+<td>EU - corresponding harmonised Union code:<br> <strong>(V.6)</strong> corrected absorption coefficient for diesel (in min-1)</td>
+<td>O</td>
+<td>uint</td>
+</tr>
+<tr>
+<td><code>co2</code></td>
+<td>CO2</td>
+<td>EU - corresponding harmonised Union code:<br> <strong>(V.7)</strong> CO2 (in g/km) or Specific CO2 emissions where indicated at entry 49.5 of the Certificate of Conformity of heavy-duty vehicles defined in the Appendix to Annex VIII to Commission Implementing Regulation (EU) 2020/6831 or at entry 49.5 of the individual vehicle approval certificate defined in Appendix 1 to Annex III to that Regulation, <br> <em>Note:</em> according to [EU DIR 2025/0096] it is mandatory if available</td>
+<td>O</td>
+<td>uint</td>
+</tr>
+<tr>
+<td><code>co2_unit</code></td>
+<td>unit of CO2</td>
+<td>unit  (in g/km or g/kWh) of the CO2 as mentioned in item CO2, <br> EU - corresponding harmonised Union code:<br> <strong>(V.7)</strong> CO2 (in g/km) or Specific CO2 emissions where indicated at entry 49.5 of the Certificate of Conformity of heavy-duty vehicles defined in the Appendix to Annex VIII to Commission Implementing Regulation (EU) 2020/6831 or at entry 49.5 of the individual vehicle approval certificate defined in Appendix 1 to Annex III to that Regulation <br><br> <em>Condition:</em> mandatory in case of a CO2-value, not present if CO2-element is not present</td>
+<td>C</td>
+<td>tstr</td>
+</tr>
+<tr>
+<td><code>comb_fuel_consumption</code></td>
+<td>combined fuel consumption</td>
+<td>EU - corresponding harmonised Union code:<br> <strong>(V.8)</strong> combined fuel consumption (in l/100 km),</td>
+<td>O</td>
+<td>uint</td>
+</tr>
+<tr>
+<td><code>environmental_category</code></td>
+<td>exhaust emission level environmental category</td>
+<td>EU - corresponding harmonised Union code:<br> <strong>(V.9)</strong> indication of the exhaust emission level environmental category at entry 47 of part 2 of the Certificate of Conformity as defined in the Appendix to Annex VIII to Commission Implementing Regulation (EU) 2020/683 or at entry 47 of the individual approval certificate defined in Appendix 1 to Annex III to that Regulation, <br> <em>Note:</em> according to [EU DIR 2025/0096] it is mandatory if available</td>
+<td>O</td>
+<td>tstr</td>
+</tr>
+<tr>
+<td><code>co2_emission_class</code></td>
+<td>CO2 emission class</td>
+<td>EU - corresponding harmonised Union code:<br> <strong>(V.10)</strong> CO2 emission class of heavy-duty vehicles determined at the moment of first registration, in accordance with Article 7ga(2) of Directive 1999/62/EC of the European Parliament and of the Council (5)</td>
+<td>O</td>
+<td>tstr</td>
+</tr>
+</tbody>
+</table>
+<h2 id="4-attestation-usage">4 Attestation usage<a class="headerlink" href="#4-attestation-usage" title="Permanent link">&para;</a></h2>
+<p>Use Case of an mVC are given in Annex A.1 and A.2 of [ISO/IEC 7367-2]. Moreover, a typical inspection procedure in a law enforcement use case includes the verification of an mDL, an mVC and mTR in one single request.</p>
+<h2 id="5-trust-anchors">5 Trust anchors<a class="headerlink" href="#5-trust-anchors" title="Permanent link">&para;</a></h2>
+<p>The certificates specified in Annex C of [ISO/IEC 7367-2] SHALL be used. The Pub-EAA provider MAY use the IACA already set up for mDL according to Annex C of [ISO/IEC 7367-2] or may establish a separate IACA.</p>
+<h2 id="6-revocation">6 Revocation<a class="headerlink" href="#6-revocation" title="Permanent link">&para;</a></h2>
+<p>If revocation of mVC is required the Pub-EAA provider SHALL provide a status list according to  [ISO/IEC 18013-5.2].</p>
+<h2 id="7-compliance">7 Compliance<a class="headerlink" href="#7-compliance" title="Permanent link">&para;</a></h2>
+<p>The specification of the EU-mVRC is compliant to the ARF, i.e. the mdoc encoding of a Pub-EAA, and [ISO/IEC 7367-2] as well as with [EU DIR 2025/0096].</p>
+<p>If the content of any optional data element or any optional element within a structure is not encoded as specified in the EU-mVRC rulebook, the reader SHALL ignore the content.</p>
+<h2 id="8-references">8 References<a class="headerlink" href="#8-references" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th><strong>Item Reference</strong></th>
+<th><strong>Standard name/details</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>[European Digital Identity Regulation]</td>
+<td><a href="https://eur-lex.europa.eu/legal-content/EN/TXT/HTML/?uri=OJ:L_202401183">Regulation (EU) 2024/1183</a> of the European Parliament and of the Council of 11 April 2024 amending Regulation (EU) No 910/2014 as regards establishing the European Digital Identity Framework</td>
+</tr>
+<tr>
+<td>[HAIP]</td>
+<td>Yasuda, K. <em>et al,</em> OpenID4VC High Assurance Interoperability Profile, OpenId Foundation, Version draft-03</td>
+</tr>
+<tr>
+<td>[IANA-JWT-Claims]</td>
+<td>IANA JSON Web Token Claims Registry. Available: <a href="https://www.iana.org/assignments/jwt/jwt.xhtml">https://www.iana.org/assignments/jwt/jwt.xhtml</a></td>
+</tr>
+<tr>
+<td>[ISO/IEC 18013-5]</td>
+<td>ISO/IEC 18013-5, Personal identification --- ISO-compliant driving licence - Part 5: Mobile driving licence (mDL) application, First edition, 2021-09</td>
+</tr>
+<tr>
+<td>[ISO/IEC 18013-5.2]</td>
+<td>ISO/IEC 18013-5, Personal identification --- ISO-compliant driving licence - Part 5: Mobile driving licence (mDL) application, second edition, 2026-xx (Status DIS)</td>
+</tr>
+<tr>
+<td>[OIDC]</td>
+<td>Sakimura, N. et al., "OpenID Connect Core 1.0", OpenID Foundation. Available: <a href="https://openid.net/specs/openid-connect-core-1_0.html">https://openid.net/specs/openid-connect-core-1_0.html</a></td>
+</tr>
+<tr>
+<td>[RFC 3339]</td>
+<td>RFC 3339  - Date and Time on the Internet: Timestamps, G. Klyne et al., July 2002</td>
+</tr>
+<tr>
+<td>[RFC 8610]</td>
+<td>RFC 8610  - Concise Data Definition Language (CDDL): A Notational Convention to Express Concise Binary Object Representation (CBOR) and JSON Data Structures, H. Birkholz et al., June 2019</td>
+</tr>
+<tr>
+<td>[RFC 8943]</td>
+<td>RFC 8943  - Concise Binary Object Representation (CBOR) Tags for Date, M. Jones et al., November 2020</td>
+</tr>
+<tr>
+<td>[RFC 8949]</td>
+<td>RFC 8949 - Concise Binary Object Representation (CBOR), C. Bormann et al., December 2020</td>
+</tr>
+<tr>
+<td>[SD-JWT VC]</td>
+<td>SD-JWT-based Verifiable Credentials (SD-JWT VC). Available: <a href="https://datatracker.ietf.org/doc/draft-ietf-oauth-sd-jwt-vc/">https://datatracker.ietf.org/doc/draft-ietf-oauth-sd-jwt-vc/</a>, version draft-ietf-oauth-sd-jwt-vc-09</td>
+</tr>
+<tr>
+<td>[Topic 7]</td>
+<td>ARF Annex 2 - Topic 7 - Attestation revocation and revocation checking Available: <a href="https://eu-digital-identity-wallet.github.io/eudi-doc-architecture-and-reference-framework/latest/annexes/annex-2/annex-2-high-level-requirements/#a237-topic-7-attestation-revocation-and-revocation-checking">https://eu-digital-identity-wallet.github.io/eudi-doc-architecture-and-reference-framework/latest/annexes/annex-2/annex-2-high-level-requirements/#a237-topic-7-attestation-revocation-and-revocation-checking</a></td>
+</tr>
+<tr>
+<td>[Topic 10]</td>
+<td>ARF Annex 2 - Topic 10 - Issuing a PID or attestation to a Wallet Unit: <a href="https://eu-digital-identity-wallet.github.io/eudi-doc-architecture-and-reference-framework/latest/annexes/annex-2/annex-2-high-level-requirements/#a2310-topic-10-issuing-a-pid-or-attestation-to-a-wallet-unit">https://eu-digital-identity-wallet.github.io/eudi-doc-architecture-and-reference-framework/latest/annexes/annex-2/annex-2-high-level-requirements/#a2310-topic-10-issuing-a-pid-or-attestation-to-a-wallet-unit</a></td>
+</tr>
+<tr>
+<td>[Topic 12]</td>
+<td>ARF Annex 2 - Topic 12 - Attestation Rulebooks, Available: <a href="https://eu-digital-identity-wallet.github.io/eudi-doc-architecture-and-reference-framework/latest/annexes/annex-2/annex-2-high-level-requirements/#a2312-topic-12-attestation-rulebooks">https://eu-digital-identity-wallet.github.io/eudi-doc-architecture-and-reference-framework/latest/annexes/annex-2/annex-2-high-level-requirements/#a2312-topic-12-attestation-rulebooks</a></td>
+</tr>
+<tr>
+<td>[Topic 20]</td>
+<td>ARF Annex 2 - Strong User authentication for electronic payments, Available: <a href="https://eu-digital-identity-wallet.github.io/eudi-doc-architecture-and-reference-framework/latest/annexes/annex-2/annex-2-high-level-requirements/#a2320-topic-20-strong-user-authentication-for-electronic-payments">https://eu-digital-identity-wallet.github.io/eudi-doc-architecture-and-reference-framework/latest/annexes/annex-2/annex-2-high-level-requirements/#a2320-topic-20-strong-user-authentication-for-electronic-payments</a></td>
+</tr>
+<tr>
+<td>[W3C VCDM v2.0]</td>
+<td>Sporny, M. <em>et al,</em> Verifiable Credentials Data Model v2.0, W3C Recommendation.</td>
+</tr>
+<tr>
+<td>[ISO/IEC 18013-7]</td>
+<td>ISO/IEC TS 18013-7: Personal identification — ISO-compliant driving licence — Part 7:Mobile driving licence (mDL) add-on functions</td>
+</tr>
+<tr>
+<td>[ISO/IEC 23220-4]</td>
+<td>ISO/IEC TS 23220-4: Cards and Security Devices for Personal Identification – Building Blocks for Identity Management via Mobile Devices –Part 4: Protocols and services for the operational phase</td>
+</tr>
+<tr>
+<td>[ISO/IEC 7367-2]</td>
+<td>ISO/IEC TS 7367-2: Personal identification – ISO compliant mdoc schemas – Part 2: Mobile Vehicle Certificate, 2026 (current status is DTS)</td>
+</tr>
+<tr>
+<td>[ISO/IEC 7367-3]</td>
+<td>ISO/IEC TS 7367-3: Personal identification – ISO compliant mdoc schemas – Part 3: Mobile Technical Report, 2026 (current status is NWIP)</td>
+</tr>
+<tr>
+<td>[EU DIR 2025/0096]</td>
+<td>COUNCIL DIRECTIVE 2025/0096 on the registration documents for vehicles and vehicle registration data recorded in national vehicle registers (repealing Council Directive 1999/37/EC, [EU DIR 1999/37]), Draft 27.11.2025, <a href="https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:52025PC0179">https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:52025PC0179</a></td>
+</tr>
+<tr>
+<td>[EU DIR 1999/37]</td>
+<td>COUNCIL DIRECTIVE 1999/37/EC of 29 April 1999 on the registration documents for vehicles</td>
+</tr>
+</tbody>
+</table>
+<h2 id="annex-a-mapping-of-data-elements-of-council-directive">Annex A Mapping of data elements of COUNCIL DIRECTIVE<a class="headerlink" href="#annex-a-mapping-of-data-elements-of-council-directive" title="Permanent link">&para;</a></h2>
+<p>A mapping from elements of Part 1 of the Registration Certificate defined in Annex I of [EU DIR 2025/0096] to the data elements defined in clause 3 is given in Table A.1.</p>
+<h3 id="table-a1-mapping-of-data-elements-of-council-directive-to-eu-mvrc">Table A.1 — Mapping of data elements of COUNCIL DIRECTIVE to EU-mVRC<a class="headerlink" href="#table-a1-mapping-of-data-elements-of-council-directive-to-eu-mvrc" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th><strong>Part I (M/C/O)</strong></th>
+<th><strong>mVRC (M/C/O)</strong></th>
+<th><strong>Community Code</strong></th>
+<th><strong>Description</strong></th>
+<th><strong>Data element identifier</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>M</td>
+<td>M</td>
+<td>-</td>
+<td>name of the Member State issuing the Registration Certificate</td>
+<td><code>issuing_country</code> in<br>ISO namespace</td>
+</tr>
+<tr>
+<td>M</td>
+<td>M</td>
+<td>-</td>
+<td>the name of the competent authority</td>
+<td><code>issuing_authority_unicode</code> in<br> ISO namespace</td>
+</tr>
+<tr>
+<td>M</td>
+<td>M</td>
+<td>-</td>
+<td>the unambiguous consecutive number of the document as used within the Member State</td>
+<td><code>document_number</code> in <br> ISO namespace</td>
+</tr>
+<tr>
+<td>M</td>
+<td>M</td>
+<td>A</td>
+<td>registration number</td>
+<td><code>registration_number</code> in<br> ISO namespace</td>
+</tr>
+<tr>
+<td>M</td>
+<td>M</td>
+<td>B</td>
+<td>date of first registration of the vehicle</td>
+<td><code>date_of_first_registration</code> in <br> ISO namespace</td>
+</tr>
+<tr>
+<td>M</td>
+<td>M</td>
+<td>I</td>
+<td>date of the registration to which this certificate refers</td>
+<td><code>date_of_registration</code> in<br> ISO namespace</td>
+</tr>
+<tr>
+<td>-</td>
+<td>-</td>
+<td>C</td>
+<td>personal data</td>
+<td>-</td>
+</tr>
+<tr>
+<td>-</td>
+<td>-</td>
+<td>C.1</td>
+<td>holder of the Registration Certificate:</td>
+<td><code>users</code> in<br> ISO namespace</td>
+</tr>
+<tr>
+<td>M</td>
+<td>M</td>
+<td>C.1.1</td>
+<td>surname(s) or business name</td>
+<td><code>users</code> in<br> ISO namespace</td>
+</tr>
+<tr>
+<td>M</td>
+<td>M</td>
+<td>C.1.2</td>
+<td>other name(s) or initial(s) (where appropriate)</td>
+<td><code>users</code> in<br> ISO namespace</td>
+</tr>
+<tr>
+<td>M</td>
+<td>M</td>
+<td>C.1.3</td>
+<td>address in the Member State of registration on the date of issue of the document</td>
+<td><code>users</code> in<br> ISO namespace</td>
+</tr>
+<tr>
+<td>M</td>
+<td>M</td>
+<td>C.4</td>
+<td>Where the particulars specified in II.6, code C.2 are not included in the Registration Certificate, reference to the fact that the holder of the Registration Certificate:<br> (a) is the vehicle owner,<br> (b) is not the vehicle owner,<br> (c) is not identified by the Registration Certificate as being the vehicle owner;</td>
+<td><code>supplemental_person_data</code> in<br> ISO name space</td>
+</tr>
+<tr>
+<td>-</td>
+<td>-</td>
+<td>D</td>
+<td>vehicle</td>
+<td>-</td>
+</tr>
+<tr>
+<td>M</td>
+<td>M</td>
+<td>D.1</td>
+<td>make</td>
+<td><code>make</code> in<br> ISO namespace</td>
+</tr>
+<tr>
+<td>M</td>
+<td>C</td>
+<td>D.2</td>
+<td>type</td>
+<td><code>type</code>in <br> ISO namespace</td>
+</tr>
+<tr>
+<td>C</td>
+<td>C</td>
+<td>D.2.1</td>
+<td>variant (if available)</td>
+<td><code>variant in</code><br> ISO namespace</td>
+</tr>
+<tr>
+<td>C</td>
+<td>C</td>
+<td>D.2.2</td>
+<td>version (if available);</td>
+<td><code>version</code> in<br> ISO namespace</td>
+</tr>
+<tr>
+<td>M</td>
+<td>C</td>
+<td>D.3</td>
+<td>commercial description(s)</td>
+<td><code>commercial_name</code> in<br> ISO namespace</td>
+</tr>
+<tr>
+<td>M</td>
+<td>M</td>
+<td>E</td>
+<td>vehicle identification number</td>
+<td><code>chassis_number_info</code> in<br> ISO namespace</td>
+</tr>
+<tr>
+<td>-</td>
+<td>-</td>
+<td>F</td>
+<td>mass:</td>
+<td>-</td>
+</tr>
+<tr>
+<td>O</td>
+<td>O</td>
+<td>F.1</td>
+<td>maximum technically permissible laden mass, except for motorcycles</td>
+<td><code>techn_perm_max_laden_mass</code> in<br> ISO namespace</td>
+</tr>
+<tr>
+<td>C</td>
+<td>C</td>
+<td>G</td>
+<td>mass of the vehicle in service with bodywork, and with coupling device in the case of a towing vehicle in service from any category other than M1</td>
+<td><code>mass_in_running_order</code> in<br> ISO namespace</td>
+</tr>
+<tr>
+<td>C</td>
+<td>C</td>
+<td>H</td>
+<td>period of validity, if not unlimited</td>
+<td><code>issue_date</code> and <code>expiry_date</code> in<br> ISO namespace</td>
+</tr>
+<tr>
+<td>C</td>
+<td>C</td>
+<td>K</td>
+<td>type-approval number (if available)</td>
+<td><code>approval_number</code> in<br> ISO namespace</td>
+</tr>
+<tr>
+<td>M</td>
+<td>C</td>
+<td>J</td>
+<td>vehicle category</td>
+<td><code>vehicle_category_code</code> in<br> ISO name space</td>
+</tr>
+<tr>
+<td>M</td>
+<td>C</td>
+<td>J.21</td>
+<td>bodywork</td>
+<td><code>vehicle_info_ext_eu</code> in<br> EU name space</td>
+</tr>
+<tr>
+<td>-</td>
+<td>-</td>
+<td>P</td>
+<td>engine;</td>
+<td></td>
+</tr>
+<tr>
+<td>M</td>
+<td>C</td>
+<td>P.1</td>
+<td>capacity (in cm3)</td>
+<td><code>engine_capacity</code> in<br> ISO namespace</td>
+</tr>
+<tr>
+<td>C</td>
+<td>C</td>
+<td>P.2</td>
+<td>maximum net power (in kW) (if available)</td>
+<td><code>engine_power</code> in<br> ISO namespace</td>
+</tr>
+<tr>
+<td>C</td>
+<td>C</td>
+<td>P.3</td>
+<td>type of fuel or power source</td>
+<td><code>energy_source</code> in<br> ISO namespace</td>
+</tr>
+<tr>
+<td>C</td>
+<td>C</td>
+<td>Q</td>
+<td>power/weight ratio (in kW/kg) (only for motorcycles)</td>
+<td><code>power_mass_ratio</code> in<br> EU namespace</td>
+</tr>
+<tr>
+<td>M</td>
+<td>C</td>
+<td>S.1</td>
+<td>number of seats, including the driver's seat</td>
+<td><code>number_of_seating_positions_including_driver</code> in<br> ISO namespace</td>
+</tr>
+<tr>
+<td>C</td>
+<td>C</td>
+<td>S.2</td>
+<td>number of standing places (where appropriate)</td>
+<td><code>number_of_standing_places</code> in<br> ISO namespace</td>
+</tr>
+<tr>
+<td>O</td>
+<td>O</td>
+<td>C.1.4</td>
+<td>electronic address (e-mail) of the holder of the registration certificate</td>
+<td><code>supplemental_person_data</code> in<br> ISO namespace<br> <code>supplemental_organization_data</code> in<br> ISO namespace</td>
+</tr>
+<tr>
+<td>-</td>
+<td>-</td>
+<td>C.2</td>
+<td>owner of the vehicle (repeated as many times as there are owners),</td>
+<td><code>owners</code> in<br> ISO namespace</td>
+</tr>
+<tr>
+<td>O</td>
+<td>O</td>
+<td>C.2.1</td>
+<td>surname or business name</td>
+<td><code>owners</code> in<br> ISO namespace</td>
+</tr>
+<tr>
+<td>O</td>
+<td>O</td>
+<td>C.2.2</td>
+<td>other name(s) or initial(s) (where appropriate),</td>
+<td><code>owners</code> in<br> ISO namespace</td>
+</tr>
+<tr>
+<td>O</td>
+<td>O</td>
+<td>C.2.3</td>
+<td>address in the Member State of registration, on the date of issue of the document</td>
+<td><code>owners</code> in<br> ISO namespace</td>
+</tr>
+<tr>
+<td>O</td>
+<td>O</td>
+<td>C.2.4</td>
+<td>electronic address (e-mail) of the owner</td>
+<td><code>supplemental_person_data</code> in<br> ISO namespace<br> <code>supplemental_organization_data</code> in<br> ISO namespace</td>
+</tr>
+<tr>
+<td>-</td>
+<td>-</td>
+<td>C.3</td>
+<td>natural or legal person who may use the vehicle by virtue of a legal right other than that of ownership</td>
+<td><code>consumers</code> in<br> EU namespace</td>
+</tr>
+<tr>
+<td>O</td>
+<td>O</td>
+<td>C.3.1</td>
+<td>surname or business name</td>
+<td><code>consumers</code> in<br> EU namespace</td>
+</tr>
+<tr>
+<td>O</td>
+<td>O</td>
+<td>C.3.2</td>
+<td>other name(s) or initial(s) (where appropriate),</td>
+<td><code>consumers</code> in<br> EU namespace</td>
+</tr>
+<tr>
+<td>O</td>
+<td>O</td>
+<td>C.3.3</td>
+<td>address in the Member State of registration, on the date of issue of the document</td>
+<td><code>consumers</code> in<br> EU namespace</td>
+</tr>
+<tr>
+<td>O</td>
+<td>O</td>
+<td>C.5, C.6,<br> C.7, C.8</td>
+<td>where a change in the personal data given in code C.1, code C.2 and/or code C.3 does not give rise to the issue of a new Registration Certificate, the new personal data corresponding to these points may be included under codes (C.5), (C.6), (C.7) or (C.8); they are then broken down in accordance with the references in code C.1, code C.2,  code C3, code C4.</td>
+<td>t.b.d</td>
+</tr>
+<tr>
+<td>-</td>
+<td>F</td>
+<td>mass</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>O</td>
+<td>O</td>
+<td>F.2</td>
+<td>maximum permissible laden mass of the vehicle in service in the Member State of registration</td>
+<td><code>vehicle_max_mass</code> in<br> ISO namespace</td>
+</tr>
+<tr>
+<td>O</td>
+<td>O</td>
+<td>F.3</td>
+<td>maximum permissible laden mass of the whole vehicle in service in the Member State of registration</td>
+<td><code>mass_in_running_order_variable_max</code> in<br> ISO namespace</td>
+</tr>
+<tr>
+<td>O</td>
+<td>O</td>
+<td>J</td>
+<td>vehicle category</td>
+<td><code>vehicle_category_code</code> in<br> ISO namespace</td>
+</tr>
+<tr>
+<td>O</td>
+<td>O</td>
+<td>L</td>
+<td>number of axles</td>
+<td><code>axle_info_eu</code> in<br> EU namespace</td>
+</tr>
+<tr>
+<td>O</td>
+<td>O</td>
+<td>M</td>
+<td>wheelbase (in mm)</td>
+<td><code>wheelbase</code> in<br> ISO namespace</td>
+</tr>
+<tr>
+<td>-</td>
+<td>-</td>
+<td>N</td>
+<td>for vehicles with a total exceeding 3 500 kg, distribution of the technically permissible maximum laden mass among the axles</td>
+<td></td>
+</tr>
+<tr>
+<td>O</td>
+<td>O</td>
+<td>N.1 - <br>N.5</td>
+<td>axle (in kg)</td>
+<td><code>axle_info_eu</code> in<br> EU namespace</td>
+</tr>
+<tr>
+<td>-</td>
+<td>-</td>
+<td>O</td>
+<td>technically permissible maximum towable mass of the trailer</td>
+<td></td>
+</tr>
+<tr>
+<td>O</td>
+<td>O</td>
+<td>O.1</td>
+<td>braked (in kg)</td>
+<td><code>tech_perm_max_tow_mass</code> in<br> EU namespace</td>
+</tr>
+<tr>
+<td>O</td>
+<td>O</td>
+<td>O.2</td>
+<td>unbraked (in kg)</td>
+<td><code>tech_perm_max_tow_mass</code> in<br> EU namespace</td>
+</tr>
+<tr>
+<td>-</td>
+<td>-</td>
+<td>P</td>
+<td>Engine</td>
+<td></td>
+</tr>
+<tr>
+<td>O</td>
+<td>O</td>
+<td>P.4</td>
+<td>rated speed (in min -1 )</td>
+<td><code>rated_speed</code> in<br> ISO namespace</td>
+</tr>
+<tr>
+<td>O</td>
+<td>O</td>
+<td>P.5</td>
+<td>engine identification number</td>
+<td><code>engine_number</code> in<br> ISO namespace</td>
+</tr>
+<tr>
+<td>O</td>
+<td>O</td>
+<td>R</td>
+<td>colour of the vehicle</td>
+<td><code>colours</code> in<br> ISO namespace</td>
+</tr>
+<tr>
+<td>O</td>
+<td>O</td>
+<td>T</td>
+<td>maximum speed (in km/h)</td>
+<td><code>vehicle_info_ext_eu</code> in<br> EU namespace</td>
+</tr>
+<tr>
+<td>-</td>
+<td>-</td>
+<td>U</td>
+<td>sound level</td>
+<td></td>
+</tr>
+<tr>
+<td>O</td>
+<td>O</td>
+<td>U.1</td>
+<td>stationary (in dB(A))</td>
+<td><code>env_info_eu</code> in<br> EU namespace</td>
+</tr>
+<tr>
+<td>O</td>
+<td>O</td>
+<td>U.2</td>
+<td>engine speed (in min-1)</td>
+<td><code>env_info_eu</code> in<br> EU namespace</td>
+</tr>
+<tr>
+<td>O</td>
+<td>O</td>
+<td>U.3</td>
+<td>drive-by (in dB(A)); (V) exhaust emissions</td>
+<td><code>env_info_eu</code> in<br> EU namespace</td>
+</tr>
+<tr>
+<td>-</td>
+<td>-</td>
+<td>V</td>
+<td>Exhaust emissions</td>
+<td></td>
+</tr>
+<tr>
+<td>O</td>
+<td>O</td>
+<td>V.1</td>
+<td>CO (in g/km, mg/km, g/kWh or mg/kWh)</td>
+<td><code>env_info_eu</code> in<br> EU namespace</td>
+</tr>
+<tr>
+<td>O</td>
+<td>O</td>
+<td>V.2</td>
+<td>THC (in g/km, mg/km, g/kWh or mg/kWh)</td>
+<td><code>env_info_eu</code> in<br> EU namespace</td>
+</tr>
+<tr>
+<td>O</td>
+<td>O</td>
+<td>V.3</td>
+<td>NOx (in g/km, mg/km, g/kWh or mg/kWh)</td>
+<td><code>env_info_eu</code> in<br> EU namespace</td>
+</tr>
+<tr>
+<td>O</td>
+<td>O</td>
+<td>V.4</td>
+<td>THC + NOx (in g/km)</td>
+<td><code>env_info_eu</code> in<br> EU namespace</td>
+</tr>
+<tr>
+<td>O</td>
+<td>O</td>
+<td>V.5</td>
+<td>Mass of particulate matter (PM) (in g/km or g/kWh)</td>
+<td><code>env_info_eu</code> in<br> EU namespace</td>
+</tr>
+<tr>
+<td>O</td>
+<td>O</td>
+<td>V.6</td>
+<td>corrected absorption coefficient for diesel (in min-1)</td>
+<td><code>env_info_eu</code> in<br> EU namespace</td>
+</tr>
+<tr>
+<td>M</td>
+<td>C</td>
+<td>V.7</td>
+<td>CO 2 (in g/km) or Specific CO 2 emissions where indicated at position 49.5 of the Certificate of Conformity of heavy-duty vehicles defined in the Appendix to Annex VIII to Commission Implementing Regulation (EU) 2020/683 (1 )  or at position 49.5 of the individual vehicle approval certificate defined in Appendix 1 to Annex III to that Regulation</td>
+<td><code>env_info_eu</code> in<br> EU namespace</td>
+</tr>
+<tr>
+<td>O</td>
+<td>O</td>
+<td>V.8</td>
+<td>combined fuel consumption (in l/100 km)</td>
+<td><code>env_info_eu</code> in<br> EU namespace</td>
+</tr>
+<tr>
+<td>M</td>
+<td>C</td>
+<td>V.9</td>
+<td>indication of the exhaust emission level environmental category at entry 47 of part 2 of the Certificate of Conformity as defined in the Appendix to Annex VIII to Commission Implementing Regulation (EU) 2020/683 or at entry 47 of the individual approval certificate defined in Appendix 1 to Annex III to that Regulation</td>
+<td><code>env_info_eu</code> in<br> EU namespace</td>
+</tr>
+<tr>
+<td>O</td>
+<td>O</td>
+<td>V.10</td>
+<td>CO2 emission class of heavy-duty vehicles determined at the moment of first registration, in accordance with Article 7ga(2) of Directive 1999/62/EC of the European Parliament and of the Council (5)</td>
+<td><code>env_info_eu</code> in<br> EU namespace</td>
+</tr>
+<tr>
+<td>O</td>
+<td>O</td>
+<td>W</td>
+<td>fuel tank(s) capacity (in litres)</td>
+<td><code>fuel_tank</code> in<br> ISO namespace</td>
+</tr>
+<tr>
+<td>O</td>
+<td>O</td>
+<td>X</td>
+<td>proof of having passed the roadworthiness test, date of next roadworthiness test or expiry of current certificate on mobile registration certificates</td>
+<td><code>expiry_date_technical_inspection</code> in<br> ISO  namespace</td>
+</tr>
+</tbody>
+</table>
+
+
+
+
+
+
+
+  
+    
+  
+  
+
+
+  <aside class="md-source-file">
+    
+      
+  <span class="md-source-file__fact">
+    <span class="md-icon" title="Last update">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
+    </span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-datetime" title="July 22, 2026 14:09:02 UTC">July 22, 2026 14:09:02</span>
+  </span>
+
+    
+    
+    
+    
+  </aside>
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+    <div class="md-footer-meta md-typeset">
+        <div class="md-footer-meta__inner md-grid">
+            <div class="md-copyright">
+                <div>
+                    Made with
+                    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+                        Material for MkDocs
+                    </a>
+                </div>
+            </div>
+            <div class="md-footer-cofunded">
+                <img src="../../../img/eu-cofunded.png" alt="Co-funded by the European Union">
+            </div>
+        </div>
+    </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+      <div class="md-progress" data-md-component="progress" role="progressbar"></div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["content.action.edit", "content.action.view", "content.code.annotate", "content.code.copy", "navigation.footer", "navigation.indexes", "navigation.instant", "navigation.instant.progress", "navigation.path", "navigation.tabs", "navigation.tabs.sticky", "navigation.top", "navigation.tracking", "search.highlight", "search.suggest", "toc.follow", "toc.integrate"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"alias": true, "provider": "mike"}}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+        <script src="../../../media/mermaid.min.js"></script>
+      
+        <script src="../../../media/mermaid-init.js"></script>
+      
+        <script src="../../../media/mathjax-init.js"></script>
+      
+        <script src="../../../media/mathjax-tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>
