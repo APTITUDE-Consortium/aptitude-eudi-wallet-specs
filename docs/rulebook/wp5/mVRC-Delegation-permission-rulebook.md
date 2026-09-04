@@ -3,17 +3,15 @@
 * Author(s):
   * Tomasz Sikorski, COI
 
-
 | Version | Date       | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
 | ------- | ---------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | 0.1     | 31.03.2026 | Initial draft of the mVRC Delegation Permission Attestation Rulebook                                                                                                                                                                                                                                                                                                                                                                                                                             |
 | 0.2     | 12.05.2026 | Added initial attribute model and mdoc encoding for the mVRC Delegation Permission attestation.                                                                                                                                                                                                                                                                                                                                                                                                  |
 | 0.5     | 02.07.2026 | Removed delegated user identity data from the attestation model to support data minimization. Clarified that delegated user identity verification is performed separately by the mVRC Issuer during the delegated mVRC issuance flow. Aligned attribute identifiers and encoding with snake_case naming, including `vehicle_privileges`, `privileges_scope`, `partial_privileges`, `expiration_date_time`, and `issuing_organization`. Updated the CDDL definition and mdoc example accordingly. |
 
-
 Feedback:
 
-* tomasz.sikorski@coi.gov.pl
+* <tomasz.sikorski@coi.gov.pl>
 
 ## 1 Introduction
 
@@ -26,23 +24,24 @@ The purpose of this attestation is to provide a short-lived authorization creden
 Within the EUDI Wallet ecosystem, the mVRC Delegation Permission is intended to be issued to the delegated user’s Wallet and subsequently presented to the official mVRC Issuer, together with an identity credential, as proof of authorization in the delegated mVRC issuance flow. The attestation itself does not contain delegated user identity data; identity verification is performed separately by the mVRC Issuer during issuance.
 
 This Rulebook defines:
-- the semantic meaning of the attestation attributes and metadata in an encoding-independent manner;
-- the attestation encoding for ISO/IEC 18013-5:2021-compliant mdoc;
-- the intended usage of the attestation;
-- trust anchor considerations;
-- revocation and status considerations;
-- compliance requirements.
+
+* the semantic meaning of the attestation attributes and metadata in an encoding-independent manner;
+* the attestation encoding for ISO/IEC 18013-5:2021-compliant mdoc;
+* the intended usage of the attestation;
+* trust anchor considerations;
+* revocation and status considerations;
+* compliance requirements.
 
 ### 1.2 Document structure
 
 This document is structured as follows:
 
-- Chapter 2 defines the attestation attributes and metadata in an encoding-independent manner.
-- Chapter 3 defines the encoding of the attestation.
-- Chapter 4 defines the intended usage of the attestation.
-- Chapter 5 defines how trust anchors for attestation verification can be obtained.
-- Chapter 6 defines revocation and status considerations.
-- Chapter 7 provides compliance information.
+* Chapter 2 defines the attestation attributes and metadata in an encoding-independent manner.
+* Chapter 3 defines the encoding of the attestation.
+* Chapter 4 defines the intended usage of the attestation.
+* Chapter 5 defines how trust anchors for attestation verification can be obtained.
+* Chapter 6 defines revocation and status considerations.
+* Chapter 7 provides compliance information.
 
 ### 1.3 Key words
 
@@ -69,7 +68,6 @@ The mVRC Delegation Permission is intended to be used as an authorization attest
 
 The attestation does not include delegated user identity data. The delegated user identity is verified separately during the delegated mVRC issuance flow, by presenting an identity credential together with the mVRC Delegation Permission.
 
-
 ### 2.1 Attestation legal category
 
 This Rulebook assumes that the attestation legal category is defined by the applicable governance and issuance model.
@@ -93,11 +91,10 @@ Unless otherwise specified by the applicable trust framework, this attestation i
 |---|---|---|---|
 | `partial_privileges` | SHALL be present when `vehicle_privileges.privileges_scope` indicates partial delegation. | array of strings | `["drive","road_suitability"]` |
 
-
-
 ## 3 Attestation encoding
 
 ### 3.1 ISO/IEC 18013-5:2021-compliant encoding
+
 This Rulebook defines an ISO/IEC 18013-5:2021-compliant mdoc encoding for the **mVRC Delegation Permission**.
 
 The attestation is intended to be proximity-presentable and internet-presentable within the EUDI Wallet ecosystem and therefore SHALL support an mdoc representation.
@@ -115,21 +112,20 @@ Unless otherwise specified by the implementation profile, the following namespac
 ### 3.1.2 Attributes overview
 
 The following general encoding rules apply:
-- `tstr`, `uint`, `bstr`, and `bool` follow the CDDL representation conventions.
-- All string values SHALL be UTF-8 encoded.
-- Dates expressed as textual values SHOULD follow RFC 3339-compatible syntax where applicable.
-- Canonical CBOR encoding SHOULD be used for mdoc payloads.
+
+* `tstr`, `uint`, `bstr`, and `bool` follow the CDDL representation conventions.
+* All string values SHALL be UTF-8 encoded.
+* Dates expressed as textual values SHOULD follow RFC 3339-compatible syntax where applicable.
+* Canonical CBOR encoding SHOULD be used for mdoc payloads.
 
 | **Data Identifier** | **Attribute identifier** | **Encoding format** | **Namespace**|
 |------------------------|--------------|------------------|------------------|
 | `delegation_permission_id` | `delegation_permission_id` | tstr | `eu.europa.ec.eudiw.mvrc.delegation_permission.1`|
 | `vehicle_identification_number` |   `vehicle_identification_number` | tstr | `eu.europa.ec.eudiw.mvrc.delegation_permission.1`|
 | `vehicle_registration_number` |   `vehicle_registration_number` | tstr | `eu.europa.ec.eudiw.mvrc.delegation_permission.1`|
-| `vehicle_privileges` |   `vehicle_privileges` | map, see [Section 3.1.2.1](#3121-Attribute-vehicle_privileges) | `eu.europa.ec.eudiw.mvrc.delegation_permission.1`|
+| `vehicle_privileges` |   `vehicle_privileges` | map, see [Section 3.1.2.1](#3121-attribute-vehicle_privileges) | `eu.europa.ec.eudiw.mvrc.delegation_permission.1`|
 | `expiration_date_time` |   `expiration_date_time` | tdate | `eu.europa.ec.eudiw.mvrc.delegation_permission.1`|
 | `issuing_organization` |   `issuing_organization` | tstr | `eu.europa.ec.eudiw.mvrc.delegation_permission.1`|
-
-
 
 #### 3.1.2.1 Attribute vehicle_privileges
 
@@ -165,6 +161,7 @@ If present, `partial_privileges` SHALL contain one or more values from the follo
 The set of values for partial_privileges can be expanded based on the business needs and development of the mVRC pilot. At the moment, the proposed values refer to an authorisation to drive a car (drive), proof of road suitability (road_suitability), presenting an ID plate when registering for a parking subscription (id_plate), proof of technical properties in order to e.g. access a restricted place etc. (technical_properties). The owner or holder can decide what kind of privileges they wish to grant to the consumer.
 
 ### 3.1.3 CDDL definition
+
 ```cddl
 mvrc_delegation_permission = {
   "delegation_permission_id": tstr,
@@ -192,8 +189,7 @@ partial_privilege_enum = "drive"
                        / "technical_properties"
 ```
 
-
-### 3.1.4 Example 
+### 3.1.4 Example
 
 ```cbor-diag
 {
@@ -286,8 +282,8 @@ partial_privilege_enum = "drive"
 }
 ```
 
-
 ## 4 Attestation usage
+
 ### 4.1 Intended usage
 
 The mVRC Delegation Permission SHALL be used as an authorization attestation in the delegated mVRC issuance process.
@@ -299,7 +295,6 @@ It is intended to prove that:
 * the authorization defines the expiration date and time to be applied to the delegated mVRC issued on the basis of this permission;
 * the authorization may be limited to a partial set of vehicle privileges.
 
-
 ### 4.2 Usage constraints
 
 The mVRC Delegation Permission:
@@ -310,7 +305,6 @@ The mVRC Delegation Permission:
 * SHALL NOT be used as a substitute for a final delegated mVRC in scenarios that require the final delegated mVRC.
 
 The `expiration_date_time` attribute defines the expiration date and time of the delegated mVRC to be issued, while the validity period of the mVRC Delegation Permission itself is defined by the mdoc `validityInfo` structure.
-
 
 ### 4.3 Cryptographic binding
 
@@ -325,7 +319,6 @@ At a minimum, the verifier of the attestation SHALL be able to determine:
 
 * the trust anchor and trust list used for validating the issuing organization’s certificate chain;
 * the certificate status or trust status of the issuing organization where applicable.
-
 
 If a machine-readable trusted list or trust anchor publication endpoint is used, its location SHOULD be made available through applicable metadata or governance documentation.
 
@@ -348,7 +341,6 @@ In particular:
 * issuers SHALL issue the attestation with the attributes defined as mandatory in this Rulebook;
 * wallets SHALL be able to process the mdoc encoding defined in this Rulebook;
 * verifiers SHALL be able to interpret and validate the attestation according to the defined attribute semantics, trust requirements, and usage constraints.
-
 
 ## 8 References
 
