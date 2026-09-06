@@ -260,15 +260,19 @@ sequenceDiagram
     end
     W->>W: [3.5] Encrypt response as JWE
     W->>R: [4.1] Post Authorization Response (VP token)
+    R->>R: [4.2] Decrypt response
+    Opt Cryptographic holder binding proof is used
+      R->>R: [V4.1] Validate proof (for SD-JWT KB-JWT, for mDoc DeviceAuth)
+    end
+    Opt Long lived attestation (TTL > 24h)
+      R->>I: [V4.2] Get Status list
+      I-->R: SLT
+    end
     Opt Same-device flow
       R-->>W: redirect_uri
       W->>R: [4.2] Redirect user agent back to the RP
     end
-    Opt Long lived attestation (TTL > 24h)
-      R->I: [V4.1] Get Status list
-      I-->R: SLT
-    end
-
+    U-)R: [5] Continue with service usage
 ```
 
 ### 3.2.1 Steps mapping overview
@@ -347,6 +351,18 @@ WRPRC</a></td>
 <td></td>
 </tr>
 <tr>
+<td>3.4</td>
+<td>Generate holder binding proof</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>3.5</td>
+<td>Encrypt response as JWE</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
 <td>4.1</td>
 <td>Post Authorization Response</td>
 <td><a
@@ -354,7 +370,19 @@ href="https://github.com/APTITUDE-Consortium/aptitude-eudi-wallet-specs/blob/mai
 <td></td>
 </tr>
 <tr>
+<td>4.2</td>
+<td>Decrypt response</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
 <td>V4.1</td>
+<td>Validate holder binding proof</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>V4.2</td>
 <td>Get Status list</td>
 <td>
   <p><a href="https://aptitude-consortium.github.io/wp2-trust-specifications/latest/sections/trust-management-lifecycle/#token-status-list">Token Status List</a></p>
