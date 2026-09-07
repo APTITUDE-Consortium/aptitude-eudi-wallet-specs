@@ -112,6 +112,7 @@ href="https://www.rfc-editor.org/info/rfc9101/">RFC 9101</a></p>
 <p>ISO18013-5, <a
 href="https://datatracker.ietf.org/doc/draft-ietf-oauth-sd-jwt-vc/17/">SD-JWT
 VC Draft 17</a>, <a
+href="https://www.rfc-editor.org/info/rfc9901/">RFC9901 (SD-JWT)</a>, <a
 href="https://www.etsi.org/deliver/etsi_ts/119400_119499/11947201/01.01.01_60/ts_11947201v010101p.pdf">ETSI
 TS 119 472-1 ver1.1.1</a></p></td>
 <td>VP and supporting standards</td>
@@ -353,13 +354,16 @@ WRPRC</a></td>
 <tr>
 <td>3.4</td>
 <td>Generate holder binding proof</td>
-<td></td>
+<td><a
+href="https://www.rfc-editor.org/info/rfc9901/#section-4.3">KB-JWT section of RFC9901</a></p>
+<p><mark>To add for mDoc</mark></p></td>
 <td></td>
 </tr>
 <tr>
 <td>3.5</td>
 <td>Encrypt response as JWE</td>
-<td></td>
+<td><a
+href="https://openid.net/specs/openid-4-verifiable-presentations-1_0.html#name-encrypted-responses">Encrypted responses section from OID4VP</a></td>
 <td></td>
 </tr>
 <tr>
