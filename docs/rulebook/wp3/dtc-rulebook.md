@@ -127,7 +127,8 @@ The objective is to preserve a single interoperable DTC representation that is:
 | ``portrait`` | according to [ISO/IEC 23220-2.2] <br> This field SHALL contain the same portrait data as stored in the DG2 of the eMRTD | ... |
 | ``age_over_18`` | according to [ISO/IEC 23220-2.2] | O  |
 | ``document_number`` | identifier of the APTITUDE DTC according to [ISO/IEC 23220-2.2] | YA1234567 |
-| ``dg1`` | according to [ISO/IEC 23220-4] | PPITA<<HARDT<<GIOVANNI<<<<<<<<<<<<<<<< |
+| ``dg1`` | according to [ISO/IEC 23220-4] | PPITAHARDT<<GIOVANNI<<<<<<<<<<<<<<<<<<<<<<<<
+                                             YA12345676ITA8009010M3304042<<<<<<<<<<<<<<08 |
 | ``dg2`` | according to [ISO/IEC 23220-4] | ... |
 | ``dg14`` | according to [ISO/IEC 23220-4] | ... |
 
@@ -550,12 +551,6 @@ dtcDG1 [1] IMPLICIT OCTET STRING,
 -- in [Doc 9303]-10.
 dtcDG2 [2] IMPLICIT OCTET STRING,
 -- Contains the encoding of Data Group 2 defined
--- in [Doc 9303]-10.
-dtcDG3 [3] IMPLICIT OCTET STRING OPTIONAL,
--- Contains the encoding of Data Group 3 defined
--- in [Doc 9303]-10.
-dtcDG4 [4] IMPLICIT OCTET STRING OPTIONAL,
--- Contains the encoding of Data Group 4 defined
 -- in [Doc 9303]-10.
 dtcDG5 [5] IMPLICIT OCTET STRING OPTIONAL,
 -- Contains the encoding of Data Group 5 defined
