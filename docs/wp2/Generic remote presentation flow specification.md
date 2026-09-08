@@ -1,7 +1,7 @@
 # Generic issuance flow specification
 
-Version 0.8
-Date 07-09-2026
+Version 0.91
+Date 08-09-2026
 
 ## Authors
 
@@ -156,15 +156,15 @@ In follow up table the requirements relevant for the flow are listed with decisi
 |-|-|-|
 |Same-device and cross-device flow|In scope|
 |Browser mediation API (Digital Credential API) usage in cross-device flow|Not in the scope|To introduce it as optional within the ver 1.1|
-|Response with VP Token through browser redirect or HTTP POST request|Partially in scope|Only HTTP Post shall be used|
+|Response with VP Token through browser redirect or HTTP POST request|Partially in scope|Only HTTP Post shall be used, as mandated by HAIP|
 |RO (Request Object) shall be retrieved as JAR, as per [RFC9101](https://www.rfc-editor.org/info/rfc9101/)|In scope|It shall be used by both same-device and cross-device flow. Verifier is passing reference to the RO, wallet is retrieving it|
 |Verifier and wallet may support using of request_uri_method=post, allowing wallet to pass its technical capabilities when requesting RO|Not in the scope|Only the value of get is supported|
 |Support for verifiable presentations and for low-security credentials (without holder binding)|In scope|Impact on the validation steps by verifier
-|response_type=vp_token parameter, combined with parameters response_uri and response_mode, that can have values of direct_post or direct_post.jwt is recommended to use within the RO|In scope
+|response_type=vp_token parameter, combined with parameters response_uri and response_mode, that can have values of direct_post or direct_post.jwt is recommended to use within the RO|Partially in scope|HAIP mandates that always response_mode=direct_post.jwt is used (direct_post response_mode is out of scope)
 |Protocol supports broad range of client_id_prefix schemes|Partially in the scope|Subsequent profiles are limiting prefixes use. Retrieval of the verifier metadata depends on the prefix value, hence listing requirements as relevant for the flow|
 |Support for trusted_authorities attribute usage within the credential query|In scope|Impacts (trust) validation of issuer of the credential, otional usage|
 |Wallet should offer its metadata through the Authorization Server Metadata endpoint, as defined by [RFC8414](https://www.rfc-editor.org/info/rfc8414/)|In scope|Optional usage by the Verifier|
-|Requirements on transaction_data usage?||<mark>To validate with WP6?</mark>|
+|transaction_data attribute usage|In scope|Required for payments use cases by WP6|
 
 #### 3.1.2 HAIP requirements
 
@@ -176,8 +176,8 @@ the requirements impacting presentation flow are listed.
 |-|-|-|
 |The response type shall be vp_token|In scope|It rules out other options from OID4VP|
 |JAR must be accompanied by the using of x509_hash as client_id_prefix|In scope|It influences wallet validation steps|
-|VP token response shall be encrypted, verifiers are providing publick key via client_metadata within the RO|In scope|It mandates using of direct_post.jwt value for the response_mode
-|aki based usage of trusted_authorities shall be supported (see related requirement from OID4VP from the previous section)|In scope| <mark>Do we need this within the Aptitude for any of the WP's?</mark>|
+|VP token response shall be encrypted, verifiers are providing public key via client_metadata within the RO|In scope|It mandates using of direct_post.jwt value for the response_mode
+|aki based usage of trusted_authorities shall be supported (see related requirement from OID4VP from the previous section)|In scope| 
 |Wallet shall support using of browers mediation API|Not in scope|To introduce it as optional within the ver 1.1|
 
 #### 3.1.3 ETSI 119 472-2 requirements
@@ -198,7 +198,7 @@ impacting presentation flow and designed validation checks.
 |WRPRC shall be provided through verifier_info parameter within the RO|In scope||
 |Verifier shall provide public key (that wallet will use to encrypt VP token) within the client_metadata parameter of the RO|In scope|Alligned with HAIP requirement|
 |Verifier shall provide nonce and state value within the RO|In scope|It influences verifier validation process|
-|aki based trusted authority for DCQL shall use ETSI trusted list mechanisam|In scope|It further profiles this use comparing to the HAIP requirement.<mark>See question under comment on the HAIP requirement</mark>|
+|aki based trusted authority for DCQL shall use ETSI trusted list mechanisam|In scope|It further profiles this use comparing to the HAIP requirement|
 |Verifier will sign RO within the JAR using private key corresponding to the public key of WRPAC, provided through x5c parameter of JAR the header|In scope||
 
 #### 3.1.5 Additional Aptitude requirements
@@ -255,6 +255,7 @@ sequenceDiagram
     L-->>W: LoTE
     U-)W: [3.1] Authenticate
     W->>W: [3.2] Load requested VP's (VC's with disclosures)
+    note left of W: Embed transaction_data with request to user for consent<br/>WP6 paument use cases
     U-)W: [3.3] Provide consent to share VP's with RP
     Opt Cryptographic holder binding proof is required
       W->>W: [3.4] Use nonce and generate proof (for SD-JWT generate KB-JWT, for mDoc use DeviceAuth)
@@ -265,13 +266,15 @@ sequenceDiagram
     Opt Cryptographic holder binding proof is used
       R->>R: [V4.1] Validate proof (for SD-JWT KB-JWT, for mDoc DeviceAuth)
     end
+    R->>R: [V4.2] Validate VC signature (SD-JWT issuer signed JWT and disclosures, mDoc ????)
+    R->>L: [V4.3] Fetch and cache LoTE of Pub-EAA/(Q)EAA Providers
     Opt Long lived attestation (TTL > 24h)
-      R->>I: [V4.2] Get Status list
+      R->>I: [V4.4] Get Status list
       I-->R: SLT
     end
     Opt Same-device flow
       R-->>W: redirect_uri
-      W->>R: [4.2] Redirect user agent back to the RP
+      W->>R: [4.3] Redirect user agent back to the RP
     end
     U-)R: [5] Continue with service usage
 ```
@@ -334,7 +337,7 @@ href="https://aptitude-consortium.github.io/wp2-trust-specifications/latest/sect
 <td></td>
 </tr>
 <tr>
-<td>V2.3</td>
+<td>V2.3, V2.5, V4.3</td>
 <td>Get LoTE</td>
 <td><p><a
 href="https://github.com/APTITUDE-Consortium/aptitude-eudi-wallet-specs/blob/rfc003-trust/docs/horizontal-RFCs/RFC003.md#71-lote-endpoint">RFC003
@@ -387,6 +390,14 @@ href="https://github.com/APTITUDE-Consortium/aptitude-eudi-wallet-specs/blob/mai
 </tr>
 <tr>
 <td>V4.2</td>
+<td>VC signature validation</td>
+<td><a
+href="https://www.rfc-editor.org/info/rfc9901/#section-7.1">SD-JWT validation section of RFC9901</a></p>
+<p><mark>To add for mDoc</mark></p></td>
+<td></td>
+</tr>
+<tr>
+<td>V4.4</td>
 <td>Get Status list</td>
 <td>
   <p><a href="https://aptitude-consortium.github.io/wp2-trust-specifications/latest/sections/trust-management-lifecycle/#token-status-list">Token Status List</a></p>
