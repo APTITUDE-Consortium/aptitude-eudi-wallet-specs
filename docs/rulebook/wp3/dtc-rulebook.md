@@ -127,8 +127,7 @@ The objective is to preserve a single interoperable DTC representation that is:
 | ``portrait`` | according to [ISO/IEC 23220-2.2] <br> This field SHALL contain the same portrait data as stored in the DG2 of the eMRTD | ... |
 | ``age_over_18`` | according to [ISO/IEC 23220-2.2] | O  |
 | ``document_number`` | identifier of the APTITUDE DTC according to [ISO/IEC 23220-2.2] | YA1234567 |
-| ``dg1`` | according to [ISO/IEC 23220-4] | PPITAHARDT<<GIOVANNI<<<<<<<<<<<<<<<<<<<<<<<<
-                                             YA12345676ITA8009010M3304042<<<<<<<<<<<<<<08 |
+| ``dg1`` | according to [ISO/IEC 23220-4] | PPITAHARDT<<GIOVANNI<<<<<<<<<<<<<<<<<<<<<<<<<br>YA12345676ITA8009010M3304042<<<<<<<<<<<<<<08 |
 | ``dg2`` | according to [ISO/IEC 23220-4] | ... |
 | ``dg14`` | according to [ISO/IEC 23220-4] | ... |
 
