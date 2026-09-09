@@ -23,3 +23,5 @@ site/
 
 # Local draft notes
 docs/horizontal-RFCs/RFC002-ISO18013-7-alignment.md
+# Local review plans
+/docs/horizontal-RFCs/RFC002-alignment-plan.md
