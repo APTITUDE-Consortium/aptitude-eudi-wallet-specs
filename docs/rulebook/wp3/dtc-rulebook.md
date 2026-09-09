@@ -124,8 +124,8 @@ The objective is to preserve a single interoperable DTC representation that is:
 | ``family_name`` | according to [ISO/IEC 23220-2.2] | Hardt |
 | ``given_name`` | according to [ISO/IEC 23220-2.2] | Giovanni |
 | ``birth_date`` | according to [ISO/IEC 23220-2.2] | 01-01-1980 |
-| ``portrait`` | according to [ISO/IEC 23220-2.2] <br> This field SHALL contain the same portrait data as stored in the DG2 of the eMRTD | ... |
-| ``age_over_18`` | according to [ISO/IEC 23220-2.2] | O  |
+| ``portrait`` | according to [ISO/IEC 23220-2.2] <br> This field SHALL contain the same portrait data as stored in the DG2 of the eMRTD. | ... |
+| ``age_in_years`` | according to [ISO/IEC 23220-4] | 28  |
 | ``document_number`` | identifier of the APTITUDE DTC according to [ISO/IEC 23220-2.2] | YA1234567 |
 | ``dg1`` | according to [ISO/IEC 23220-4] | PPITAHARDT<<GIOVANNI<<<<<<<<<<<<<<<<<<<<<<<<<br>YA12345676ITA8009010M3304042<<<<<<<<<<<<<<08 |
 | ``dg2`` | according to [ISO/IEC 23220-4] | ... |
@@ -139,8 +139,8 @@ Details about conditions and options related to the attributes are given in clau
 | --- | --- | --- |
 | ``family_name_viz`` | according to [ISO/IEC 23220-4] | HARDT |
 | ``given_name_viz`` | according to [ISO/IEC 23220-4] | GIOVANNI |
-| ``enrolment_portrait_image`` | according to [ISO/IEC 23220-4] <br><br> portrait image captured during enrolment of the APTITUDE DTC/PhotoID holder that can be different to image in ``portrait``| ...  |
-| ``age_in_years`` | according to [ISO/IEC 23220-4] | M  |
+| ``enrolment_portrait_image`` | according to [ISO/IEC 23220-4] <br>portrait image captured during enrolment of the APTITUDE DTC/PhotoID holder that can be different to image in ``portrait``| ...  |
+| ``age_over_18`` | according to [ISO/IEC 23220-2.2] | T  |
 | ``age_birth_year`` | according to [ISO/IEC 23220-4] | 1998  |
 | ``portrait_capture_date`` | according to [ISO/IEC 23220-4] <br> this field denotes the date of capture of the portrait stored in the field “enrolment_portrait_image” | 20-04-2023 |
 | ``birthplace`` | according to [ISO/IEC 23220-4] | Italy, Trento |
@@ -246,8 +246,8 @@ The general PhotoID data elements of APTITUDE DTC SHALL be as defined in Table 1
 | ``expiry_date`` | -- | M  |
 | ``issuing_authority`` | -- | M  |
 | ``issuing_country`` | -- | M  |
-| ``age_over_18`` | -- | M  |
-| ``age_in_years`` | -- | O  |
+| ``age_over_18`` | -- | O  |
+| ``age_in_years`` | -- | M  |
 | ``age_birth_year`` | -- | O  |
 | ``portrait_capture_date`` | -- | O  |
 | ``birthplace`` | -- | O  |
