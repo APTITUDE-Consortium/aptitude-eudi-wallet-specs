@@ -139,7 +139,7 @@ Details about conditions and options related to the attributes are given in clau
 | --- | --- | --- |
 | ``family_name_viz`` | according to [ISO/IEC 23220-4] | HARDT |
 | ``given_name_viz`` | according to [ISO/IEC 23220-4] | GIOVANNI |
-| ``enrolment_portrait_image`` | according to [ISO/IEC 23220-4] <br>portrait image captured during enrolment of the APTITUDE DTC/PhotoID holder that can be different to image in ``portrait``| ...  |
+| ``enrolment_portrait_image`` | according to [ISO/IEC 23220-4] <br>portrait image captured during enrolment of the APTITUDE DTC/PhotoID holder that can be different from the image in ``portrait``.| ...  |
 | ``age_over_18`` | according to [ISO/IEC 23220-2.2] | T  |
 | ``age_birth_year`` | according to [ISO/IEC 23220-4] | 1998  |
 | ``portrait_capture_date`` | according to [ISO/IEC 23220-4] <br> this field denotes the date of capture of the portrait stored in the field “enrolment_portrait_image” | 20-04-2023 |
