@@ -6,7 +6,7 @@ This section contains the Request for Comments (RFCs) that define the technical 
 | ----------------------------------------------- | --------------------------------------------------------------------------------------- |
 | [RFC-01 Credential Issuance Profile](RFC001.md) | Defines the credential issuance flow and baseline specifications for APTITUDE pilots    |
 | [RFC-02 Presentation Profile](RFC002.md)        | Defines the credential presentation and verification flow for APTITUDE pilots           |
-| [RFC-04 Revocation Profile](RFC004.md)          | Defines the profile for interoperable credential verification across APTITUDE pilots    |
+| [RFC-04 Revocation Profile](RFC004.md)          | Defines the Trust Artifact Status Profile for interoperable status establishment and revocation checking across APTITUDE pilots   |
 | [RFC-05 Proximity RFC](RFC005.md)               | Defines the credential proximity presentation and verification flow for APTITUDE pilots |
 |                                                 |                                                                                         |
 
