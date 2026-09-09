@@ -9,7 +9,7 @@ Published specifications are available on [GitHub Pages](https://aptitude-consor
 This repository uses MkDocs to build documentation from the `/docs/` folder. The generated site is available at [APTITUDE Technical Specification](https://aptitude-consortium.github.io/aptitude-eudi-wallet-specs/).
 
 - `/docs/` - Documentation sources included in the published site
-  - `/docs/horizontal-RFCs/` - RFC documents and index pages
+  - `/docs/RFCs/` - RFC documents and index pages
   - `/docs/rulebook/` - Rulebooks, including `/docs/rulebook/wp2-trust-specifications/`
   - `/docs/img/` - Images and diagrams
   - `/docs/media/` - CSS and frontend assets
