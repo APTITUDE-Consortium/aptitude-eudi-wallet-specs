@@ -36,7 +36,7 @@
 }
 
 .md-typeset table tr:nth-child(even) {
-  background-color: var(--md-typeset-table-striped-background-color, #f5f5f5);
+  background-color: var(--md-typeset-table-color--light, #f5f5f5)
 }
 
 /* Logo sizing */
