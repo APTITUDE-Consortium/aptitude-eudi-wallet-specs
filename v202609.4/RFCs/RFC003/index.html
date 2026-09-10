@@ -1,0 +1,2917 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="APTITUDE Technical Specification">
+      
+      
+        <meta name="author" content="APTITUDE Consortium">
+      
+      
+        <link rel="canonical" href="https://aptitude-consortium.github.io/aptitude-eudi-wallet-specs/v202609.4/RFCs/RFC003/">
+      
+      
+        <link rel="prev" href="../RFC002/">
+      
+      
+        <link rel="next" href="../RFC004/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+    
+    
+      
+        <title>RFC-03 Trust Evaluation - APTITUDE Technical Specification</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.ec1eaa64.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../media/extra.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#aptitude-rfc-03-trust-evaluation" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+      <div data-md-color-scheme="default" data-md-component="outdated" hidden>
+        
+      </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="APTITUDE Technical Specification" class="md-header__button md-logo" aria-label="APTITUDE Technical Specification" data-md-component="logo">
+      
+  <img src="../../img/logo.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            APTITUDE Technical Specification
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              RFC-03 Trust Evaluation
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/APTITUDE-Consortium/aptitude-eudi-wallet-specs" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    APTITUDE-Consortium/aptitude-eudi-wallet-specs
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+    
+      
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../rulebook/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Attestation Rulebooks
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../rulebook/wp2-trust-specifications/docs/trust-framework/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Trust Specifications
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../" class="md-tabs__link">
+          
+  
+  
+    
+  
+  RFCs
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../itb_plus_user_onboarding/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Testing and Conformance
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../schema/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Schemas
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../standards/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Standards
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../glossary/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Glossary
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+  
+
+<nav class="md-nav md-nav--primary md-nav--lifted md-nav--integrated" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="APTITUDE Technical Specification" class="md-nav__button md-logo" aria-label="APTITUDE Technical Specification" data-md-component="logo">
+      
+  <img src="../../img/logo.png" alt="logo">
+
+    </a>
+    APTITUDE Technical Specification
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/APTITUDE-Consortium/aptitude-eudi-wallet-specs" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    APTITUDE-Consortium/aptitude-eudi-wallet-specs
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../rulebook/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Attestation Rulebooks
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_2" id="__nav_2_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Attestation Rulebooks
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../rulebook/wp5/mVRC-rulebook/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    mVRC
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../rulebook/wp3/dtc-rulebook/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DTC
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Trust Specifications
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Trust Specifications
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_1" id="__nav_3_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Trust Framework
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Trust Framework
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../rulebook/wp2-trust-specifications/docs/trust-framework/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../rulebook/wp2-trust-specifications/docs/sections/trust-architecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Trust Architecture
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../rulebook/wp2-trust-specifications/docs/sections/trust-artifacts/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Trust Artifacts
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../rulebook/wp2-trust-specifications/docs/sections/onboarding-process/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Onboarding Process
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../rulebook/wp2-trust-specifications/docs/sections/trust-evaluation-process/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Trust Evaluation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../rulebook/wp2-trust-specifications/docs/sections/trust-management-lifecycle/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Trust Management and Lifecycle
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../rulebook/wp2-trust-specifications/docs/sections/use-cases/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Trust Use Cases
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../rulebook/wp2-trust-specifications/docs/sections/references/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    References
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" checked>
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    RFCs
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_4" id="__nav_4_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    RFCs
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../RFC001/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    RFC-01 Credential Issuance Profile
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../RFC002/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    RFC-02 Presentation Profile
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    RFC-03 Trust Evaluation
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    RFC-03 Trust Evaluation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#authors" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Authors
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#reviewers" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Reviewers
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1-introduction" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Introduction
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-scope" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Scope
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-normative-language" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Normative Language
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-roles-and-components" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Roles and Components
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4. Roles and Components">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#41-wallet-unit" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.1 Wallet Unit
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#42-wallet-relying-party" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.2 Wallet Relying Party
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#43-provider-of-wrpac" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.3 Provider of WRPAC
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#44-provider-of-wrprc" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.4 Provider of WRPRC
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#45-attestation-provider-and-qtsp" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.5 Attestation Provider and QTSP
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#46-lote-publisher" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.6 LoTE Publisher
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#47-registrar" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.7 Registrar
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-trust-model-and-high-level-flows" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Trust Model and High-Level Flows
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5. Trust Model and High-Level Flows">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#51-entity-type-lote-model" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.1 Entity-Type LoTE Model
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#52-validation-flow" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.2 Validation Flow
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-normative-requirements" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Normative Requirements
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6. Normative Requirements">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#61-wallet-unit-requirements" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.1 Wallet Unit Requirements
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#62-wp2-operated-entities" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.2 WP2 Operated Entities
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-interface-definitions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. Interface Definitions
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="7. Interface Definitions">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#71-lote-endpoint" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.1 LoTE Endpoint
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#72-register-endpoint" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.2 Register Endpoint
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8-security-considerations" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. Security Considerations
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#9-conformance" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9. Conformance
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#10-conformance-check-catalogue-and-test-matrix" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10. Conformance Check Catalogue and Test Matrix
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="10. Conformance Check Catalogue and Test Matrix">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#101-conformance-check-catalogue" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.1 Conformance Check Catalogue
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#102-deployed-test-case-matrix" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.2 Deployed Test Case Matrix
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../RFC004/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    RFC-04 Revocation Profile
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../itb_plus_user_onboarding/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Testing and Conformance
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_5" id="__nav_5_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Testing and Conformance
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../itb_plus_user_onboarding/aptitude-itb-user-onboarding-manual/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ITB+ User Onboarding Guide
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../itb_plus_user_onboarding/report-submission/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Reporting Conformance Results
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../schema/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Schemas
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Schemas
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../standards/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Standards
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Glossary
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Glossary
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../glossary/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Glossary
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../glossary-definitions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Definitions
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+                
+
+
+
+  
+
+
+  <nav class="md-path" aria-label="Navigation" >
+    <ol class="md-path__list">
+      
+        
+  
+  
+    <li class="md-path__item">
+      <a href="../.." class="md-path__link">
+        
+  <span class="md-ellipsis">
+    Home
+  </span>
+
+      </a>
+    </li>
+  
+
+      
+      
+        
+  
+  
+    
+    
+      <li class="md-path__item">
+        <a href="../" class="md-path__link">
+          
+  <span class="md-ellipsis">
+    RFCs
+  </span>
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ol>
+  </nav>
+
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+    <a href="https://github.com/APTITUDE-Consortium/aptitude-eudi-wallet-specs/edit/main/docs/RFCs/RFC003.md" title="Edit this page" class="md-content__button md-icon" rel="edit">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10 20H6V4h7v5h5v3.1l2-2V8l-6-6H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h4zm10.2-7c.1 0 .3.1.4.2l1.3 1.3c.2.2.2.6 0 .8l-1 1-2.1-2.1 1-1c.1-.1.2-.2.4-.2m0 3.9L14.1 23H12v-2.1l6.1-6.1z"/></svg>
+    </a>
+  
+  
+    
+      
+    
+    <a href="https://github.com/APTITUDE-Consortium/aptitude-eudi-wallet-specs/raw/main/docs/RFCs/RFC003.md" title="View source of this page" class="md-content__button md-icon">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 18c.56 0 1 .44 1 1s-.44 1-1 1-1-.44-1-1 .44-1 1-1m0-3c-2.73 0-5.06 1.66-6 4 .94 2.34 3.27 4 6 4s5.06-1.66 6-4c-.94-2.34-3.27-4-6-4m0 6.5a2.5 2.5 0 0 1-2.5-2.5 2.5 2.5 0 0 1 2.5-2.5 2.5 2.5 0 0 1 2.5 2.5 2.5 2.5 0 0 1-2.5 2.5M9.27 20H6V4h7v5h5v4.07c.7.08 1.36.25 2 .49V8l-6-6H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h4.5a8.2 8.2 0 0 1-1.23-2"/></svg>
+    </a>
+  
+
+
+<h1 id="aptitude-rfc-03-trust-evaluation">APTITUDE RFC-03 Trust Evaluation<a class="headerlink" href="#aptitude-rfc-03-trust-evaluation" title="Permanent link">&para;</a></h1>
+<p><strong>Status:</strong> v0.1
+<strong>Type:</strong> Cross-pilot baseline RFC
+<strong>Scope:</strong> Trust establishment and trust evaluation
+<strong>Related profiles:</strong> <a href="https://aptitude-consortium.github.io/wp2-trust-specifications/latest/">APTITUDE Trust Specifications</a>
+<strong>Companion RFC:</strong> RFC-04 Revocation</p>
+<h2 id="authors">Authors<a class="headerlink" href="#authors" title="Permanent link">&para;</a></h2>
+<p>Andrea Moro (Fondazione Bruno Kessler - Center for Cybersecurity)</p>
+<h2 id="reviewers">Reviewers<a class="headerlink" href="#reviewers" title="Permanent link">&para;</a></h2>
+<p>Nikos Triantafyllou, University of Aegean;
+Leif Johansson, SIROS Fundation.</p>
+<h2 id="1-introduction">1. Introduction<a class="headerlink" href="#1-introduction" title="Permanent link">&para;</a></h2>
+<p>This document defines the APTITUDE Trust Evaluation Profile for interoperable trust evaluation across the APTITUDE pilots.</p>
+<p>It profiles the trust evaluation processes defined by the <a href="https://aptitude-consortium.github.io/wp2-trust-specifications/latest/">APTITUDE Trust Specifications</a>. The profile separates common trust operations from checks that are specific to WRPAC authentication, WRPRC authorization, Register responses, and signatures or seals on attestations.</p>
+<p>The detailed source processes are the Authentication Process, X.509 Certificate Chain Validation, and Sign/Seal Validation Process in the <a href="https://aptitude-consortium.github.io/wp2-trust-specifications/latest/sections/trust-evaluation-process/">Trust Evaluation Process</a> section. These are:</p>
+<ul>
+<li><a href="https://aptitude-consortium.github.io/wp2-trust-specifications/latest/sections/trust-evaluation-process/#trust-anchor-validation-process">Trust Anchor Validation</a>;</li>
+<li><a href="https://aptitude-consortium.github.io/wp2-trust-specifications/latest/sections/trust-evaluation-process/#authentication-process">Authentication Validation</a>;</li>
+<li><a href="https://aptitude-consortium.github.io/wp2-trust-specifications/latest/sections/trust-evaluation-process/#authorization-process">Authorization Validation</a></li>
+<li><a href="https://aptitude-consortium.github.io/wp2-trust-specifications/latest/sections/trust-evaluation-process/">Signature Validation</a></li>
+</ul>
+<p>The purpose of this RFC is to define:</p>
+<ul>
+<li>
+<p>the common validation of Trust Artifacts:</p>
+</li>
+<li>
+<p>the WRPAC validation used to authenticate a WRP;</p>
+</li>
+<li>the mandatory WRPRC and optional Register-response checks used to establish authorization context;</li>
+<li>
+<p>the Sign/Seal Certificate and attestation signature validation checks;</p>
+</li>
+<li>
+<p>interfaces and conformance checks that can be converted into ITB+ test cases.</p>
+</li>
+</ul>
+<p>This RFC is a cross-pilot baseline. A pilot MAY add stricter requirements, but it SHALL NOT weaken the mandatory checks defined here.</p>
+<hr />
+<h2 id="2-scope">2. Scope<a class="headerlink" href="#2-scope" title="Permanent link">&para;</a></h2>
+<p>This RFC covers the following trust evaluation layers:</p>
+<ol>
+<li><strong>Trust-source validation:</strong> validation of the applicable List of Trusted Entities (LoTE), followed by extraction of a Trust Anchor from <code>ServiceDigitalIdentity</code>.</li>
+<li><strong>Common X.509 validation:</strong> validation of a certificate path against the extracted Trust Anchor.</li>
+<li><strong>WRPAC validation:</strong> authentication of a WRP using its WRPAC and a signature over the interaction artifact.</li>
+<li><strong>WRPRC validation:</strong> validation of the WRP registration certificate as authorization evidence.</li>
+<li><strong>Register-response validation:</strong> optional validation of the applicable signed or sealed Registrar response in addition to the WRPRC.</li>
+<li><strong>Sign/Seal validation:</strong> validation of the certificate used to sign or seal an Attestation and verification of the Attestation signature or seal.</li>
+</ol>
+<p>APTITUDE profiles use LoTEs only. They do not use a List of Trusted Lists (LOTL), a national Trusted List (TL), or a LOTL-to-TL discovery hierarchy. A LoTE MAY be published in JSON or XML, as specified for its entity type.</p>
+<p>Each entity type SHALL have a dedicated LoTE. WP2 SHALL manage and publish the LoTEs used by that pilot, including the relevant publication endpoints and applicable profiles. The applicable LoTE is selected by the artifact or entity type being validated.</p>
+<p>The QTSPs Trust Anchors SHALL be published in a dedicated QEAA-provider LoTE. The pilot is expected to publish this LoTE in XML; the final XML publication and signature profile remain a WP2 configuration point.</p>
+<p>This RFC includes baseline requirements for:</p>
+<ul>
+<li>Wallet Units;</li>
+<li>Wallet Relying Parties;</li>
+<li>Providers of WRPAC and WRPRC;</li>
+<li>Attestation and PID Providers;</li>
+<li>LoTE management and publication by the WP2 lead organization;</li>
+<li>Registrars and Registers.</li>
+</ul>
+<p>This RFC does not define:</p>
+<ul>
+<li>sector-specific certificate semantics, which are defined by the relevant WRPAC, WRPRC, and Sign/Seal Certificate <a href="https://aptitude-consortium.github.io/wp2-trust-specifications/latest/sections/trust-artifacts/">profiles</a>;</li>
+<li>the administrative <a href="https://aptitude-consortium.github.io/wp2-trust-specifications/latest/sections/trust-management-lifecycle/">lifecycle</a> of entities and Trust Anchors;</li>
+<li>revocation mechanisms or revocation endpoint protocols, which are outside this document's detailed scope and SHALL be referenced through RFC004;</li>
+<li>pilot-specific user-interface requirements;</li>
+<li>detailed implementation assertions beyond the conformance catalogue in this document.</li>
+</ul>
+<hr />
+<h2 id="3-normative-language">3. Normative Language<a class="headerlink" href="#3-normative-language" title="Permanent link">&para;</a></h2>
+<p>The key words <strong>SHALL</strong>, <strong>SHALL NOT</strong>, <strong>SHOULD</strong>, <strong>SHOULD NOT</strong>, <strong>MAY</strong>, and <strong>OPTIONAL</strong> in this document are to be interpreted as described in <a href="https://datatracker.ietf.org/doc/html/rfc2119">RFC 2119</a> and <a href="https://datatracker.ietf.org/doc/html/rfc8174">RFC 8174</a>.</p>
+<hr />
+<h2 id="4-roles-and-components">4. Roles and Components<a class="headerlink" href="#4-roles-and-components" title="Permanent link">&para;</a></h2>
+<h3 id="41-wallet-unit">4.1 Wallet Unit<a class="headerlink" href="#41-wallet-unit" title="Permanent link">&para;</a></h3>
+<p>The Wallet Unit, including its, performs the trust evaluation on behalf of the User.</p>
+<h3 id="42-wallet-relying-party">4.2 Wallet Relying Party<a class="headerlink" href="#42-wallet-relying-party" title="Permanent link">&para;</a></h3>
+<p>The Wallet Relying Party (WRP) is the entity authenticated with a WRPAC. Depending on the interaction, it may be a direct Relying Party or a Relying Party Intermediary.</p>
+<h3 id="43-provider-of-wrpac">4.3 Provider of WRPAC<a class="headerlink" href="#43-provider-of-wrpac" title="Permanent link">&para;</a></h3>
+<p>The Provider of WRPAC issues WRPACs. Its Trust Anchor certificates SHALL be published in the dedicated WRPAC-provider LoTE.</p>
+<h3 id="44-provider-of-wrprc">4.4 Provider of WRPRC<a class="headerlink" href="#44-provider-of-wrprc" title="Permanent link">&para;</a></h3>
+<p>The Provider of WRPRC issues WRPRCs. Its Trust Anchor certificates SHALL be published in the dedicated WRPRC-provider LoTE.</p>
+<h3 id="45-attestation-provider-and-qtsp">4.5 Attestation Provider and QTSP<a class="headerlink" href="#45-attestation-provider-and-qtsp" title="Permanent link">&para;</a></h3>
+<p>An Attestation Provider issues an Attestation and signs or seals it using a Sign/Seal Certificate. The Trust Anchor certificates for the applicable Sign/Seal Certificate issuers SHALL be published in the LoTE dedicated to the relevant entity type, including the QEAA-provider LoTE for QEAA providers.</p>
+<h3 id="46-lote-publisher">4.6 LoTE Publisher<a class="headerlink" href="#46-lote-publisher" title="Permanent link">&para;</a></h3>
+<p>The LoTE Publisher is the WP2 trust group within the pilot. It SHALL manage and publish one LoTE per configured entity type and SHALL make the applicable format and endpoint available to relying implementations.</p>
+<h3 id="47-registrar">4.7 Registrar<a class="headerlink" href="#47-registrar" title="Permanent link">&para;</a></h3>
+<p>The Registrar and its APIs are managed and published the WP2 trust group within the pilot. This service stores WRP registration data and exposes the Register API. The Registrar's Trust Anchor certificates SHALL be published in the dedicated Registrar and Register LoTE.</p>
+<hr />
+<h2 id="5-trust-model-and-high-level-flows">5. Trust Model and High-Level Flows<a class="headerlink" href="#5-trust-model-and-high-level-flows" title="Permanent link">&para;</a></h2>
+<h3 id="51-entity-type-lote-model">5.1 Entity-Type LoTE Model<a class="headerlink" href="#51-entity-type-lote-model" title="Permanent link">&para;</a></h3>
+<p>The following table defines the minimum LoTE separation for this profile.</p>
+<table>
+<thead>
+<tr>
+<th>Entity type</th>
+<th>Trust source</th>
+<th>Expected format</th>
+<th>Used to validate</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Wallet Providers</td>
+<td>Wallet Provider LoTE</td>
+<td>JSON</td>
+<td>WUAs, WIAs, and related wallet artifacts</td>
+</tr>
+<tr>
+<td>PID Providers</td>
+<td>PID Provider LoTE</td>
+<td>JSON</td>
+<td>PID signatures</td>
+</tr>
+<tr>
+<td>PuB-EAA Providers</td>
+<td>PuB-EAA Provider LoTE</td>
+<td>JSON</td>
+<td>PuB-EAA signatures</td>
+</tr>
+<tr>
+<td>Providers of WRPAC</td>
+<td>WRPAC-provider LoTE</td>
+<td>JSON</td>
+<td>WRPAC chains</td>
+</tr>
+<tr>
+<td>Providers of WRPRC</td>
+<td>WRPRC-provider LoTE</td>
+<td>JSON</td>
+<td>WRPRC signatures and chains</td>
+</tr>
+<tr>
+<td>Registrars and Registers</td>
+<td>Registrar and Register LoTE</td>
+<td>JSON</td>
+<td>Register responses</td>
+</tr>
+<tr>
+<td>QEAA providers and QTSPs</td>
+<td>QEAA-provider LoTE</td>
+<td>XML</td>
+<td>QEAA Sign/Seal Certificates</td>
+</tr>
+<tr>
+<td>EAA Providers</td>
+<td>EAA Provider LoTE</td>
+<td>JSON</td>
+<td>EAA signatures</td>
+</tr>
+</tbody>
+</table>
+<p>All LoTEs use the TS 119 602 data model. TS 119 615 is used as the procedural basis for validating the LoTE structure, integrity, freshness, and trust chain. The JSON and XML signature or seal mechanisms differ; this RFC requires the applicable format-specific signature or seal verification but does not duplicate its detailed mechanics.</p>
+<h3 id="52-validation-flow">5.2 Validation Flow<a class="headerlink" href="#52-validation-flow" title="Permanent link">&para;</a></h3>
+<p>The common sequence for WRP trust evaluation is:</p>
+<ol>
+<li>Apply the artifact-specific signature and content checks.</li>
+<li>Select the LoTE for the entity type.</li>
+<li>Retrieve and validate the LoTE.</li>
+<li>Extract the entity's Trust Anchor from <code>ServiceDigitalIdentity</code>.</li>
+<li>Apply the common X.509 path validation to the presented certificate chain.</li>
+<li>Apply the revocation checks defined by RFC004, wherever required.</li>
+</ol>
+<p>Steps 5. and 6. SHALL be executed whenever validation of the specific Trust Artifact requires validation of an X.509 trust chain or a status check.</p>
+<p>Successful completion of an intermediate step permits only continuation to the remaining applicable checks. A Wallet Unit or WRP SHALL NOT output a final <code>AUTHENTICATED</code>, <code>AUTHORIZED</code>, or <code>ACCEPTED</code> result until all applicable trust, path-validation, and status checks have succeeded.</p>
+<ul>
+<li>
+<p>To Authenticate a WRP,</p>
+</li>
+<li>
+<p>Step 1. is applied to the Credential Issuer Metadata, or Presentation Request, depending on the flow using the public key within the WRPAC transmitted within the artifact.</p>
+</li>
+<li>Steps 2., 3., 4. are applied to the WRPAC Provider LoTE.</li>
+<li>
+<p>Steps 5., 6. are applied to the WRPAC and its X.509 chain.</p>
+</li>
+<li>
+<p>To Authorize a WRP,</p>
+</li>
+<li>
+<p>Step 1. is applied to the mandatory WRPRC transmitted in the Credential Issuer Metadata or Presentation Request. When optional Register-response validation is invoked, the applicable syntax, signature, pertinence, and consistency checks are also applied to the Register response. Step 1. is divided into (i) syntax and signature validation, (ii) authorization checks comprising WRPAC binding, issuance or presentation binding, entitlement verification, and EDP validation, and (iii) the applicable user-override behavior. These checks are described in the <a href="https://aptitude-consortium.github.io/wp2-trust-specifications/latest/sections/trust-evaluation-process/#evaluation-procedures">Authorization Process Profile</a>.</p>
+</li>
+<li>Steps 2., 3., 4. are applied to the WRPRC Provider LoTE and, when optional Register-response validation is invoked, to the Registrar LoTE.</li>
+<li>Step 5. is applied to the WRPRC signing certificate and its X.509 chain and, when optional Register-response validation is invoked, to the Register-response signing certificate and its X.509 chain.</li>
+<li>
+<p>Step 6. is applied to both the WRPRC and (if needed) the WRPRC signing certificate and its X.509 chain. When optional Register-response validation is invoked, Step 6. is also applied to the Register-response signing certificate and its X.509 chain wherever required by RFC004.</p>
+</li>
+<li>
+<p>To Validate the Signature of a WIA, KA, PID, QEAA, EAA, PuB-EAA,</p>
+</li>
+<li>
+<p>Step 1. is applied to the Attestation using the public key within the Sign/Seal Certificate transmitted within the Attestation itself.</p>
+</li>
+<li>Steps 2., 3., 4. are applied to the specific Entity LoTE.</li>
+<li>Steps 5., 6. are applied to the Sign/Seal Certificate and its X.509 chain.</li>
+<li>Step 6. is applied to both the Attestation and the Sign/Seal certificate and its X.509 chain.</li>
+</ul>
+<hr />
+<h2 id="6-normative-requirements">6. Normative Requirements<a class="headerlink" href="#6-normative-requirements" title="Permanent link">&para;</a></h2>
+<p>Unless otherwise stated, these requirements apply to trust evaluation interactions.</p>
+<h3 id="61-wallet-unit-requirements">6.1 Wallet Unit Requirements<a class="headerlink" href="#61-wallet-unit-requirements" title="Permanent link">&para;</a></h3>
+<p>A Wallet Unit or WRP conforming to this RFC SHALL:</p>
+<ul>
+<li>support validation of JSON and XML LoTEs according to the applicable entity-type profile as specified in <a href="https://aptitude-consortium.github.io/wp2-trust-specifications/latest/sections/trust-evaluation-process/#trust-anchor-validation-process">Trust Anchor Validation</a>;</li>
+<li>select the LoTE according to the type of entity or Attestation being validated;</li>
+<li>retrieve the Trust Anchor from the validated LoTE <code>ServiceDigitalIdentity</code>;</li>
+<li>implement the common X.509 path validation in the X.509 Certificate Chain Validation process in the <a href="https://aptitude-consortium.github.io/wp2-trust-specifications/latest/sections/trust-evaluation-process/">Trust Evaluation Process</a>;</li>
+<li>perform WRPAC validation as specified in <a href="https://aptitude-consortium.github.io/wp2-trust-specifications/latest/sections/trust-evaluation-process/#authentication-process">Authentication Validation</a>;</li>
+<li>validate a WRPRC as specified in <a href="https://aptitude-consortium.github.io/wp2-trust-specifications/latest/sections/trust-evaluation-process/#authorization-process">Authorization Validation</a>;</li>
+<li>perform Sign/Seal Certificate and Attestation signature validation as specified in the <a href="https://aptitude-consortium.github.io/wp2-trust-specifications/latest/sections/trust-evaluation-process/">Trust Evaluation Process</a>;</li>
+</ul>
+<p>A Wallet Unit or WRP MAY support optional Register-response validation. When it invokes this validation, it SHALL validate the response as specified in <a href="https://aptitude-consortium.github.io/wp2-trust-specifications/latest/sections/trust-evaluation-process/#register-validation-procedure">Register Response Validation</a>.</p>
+<p>For this profile, references to Authorization Validation do not make Register-response validation or Register fallback mandatory. A missing or invalid mandatory WRPRC SHALL fail authorization.</p>
+<h3 id="62-wp2-operated-entities">6.2 WP2 Operated Entities<a class="headerlink" href="#62-wp2-operated-entities" title="Permanent link">&para;</a></h3>
+<p>A Provider of WRPAC, WRPRC, or Sign/Seal Certificates SHALL:</p>
+<ul>
+<li>be represented in the dedicated entity-type LoTE;</li>
+<li>publish the Trust Anchor certificate in its <code>ServiceDigitalIdentity</code>;</li>
+<li>ensure that certificate identity data is consistent with the entity identity in the LoTE;</li>
+<li>expose the endpoint or service required by the applicable artifact profile, including revocation checks.</li>
+</ul>
+<p>The LoTE Publisher SHALL:</p>
+<ul>
+<li>manage and publish one LoTE per entity type used by the pilot;</li>
+<li>publish each LoTE in its declared JSON or XML format;</li>
+<li>maintain the integrity, authenticity, and freshness information required by the applicable LoTE profile;</li>
+<li>publish the QEAA-provider/QTSP Trust Anchors in the dedicated QEAA-provider LoTE;</li>
+<li>make the LoTE endpoint and format discoverable to relying implementations.</li>
+</ul>
+<p>A Registrar SHALL:</p>
+<ul>
+<li>be represented in the dedicated Registrar and Register LoTE;</li>
+<li>publish or expose the Register API according to the <a href="https://aptitude-consortium.github.io/wp2-trust-specifications/latest/api/register-api/">Register API OAS</a>;</li>
+<li>return signed or sealed responses that can be verified with a Trust Anchor in the Registrar and Register LoTE.</li>
+</ul>
+<hr />
+<h2 id="7-interface-definitions">7. Interface Definitions<a class="headerlink" href="#7-interface-definitions" title="Permanent link">&para;</a></h2>
+<p>These interfaces define the minimum observable behavior for conformance testing.</p>
+<h3 id="71-lote-endpoint">7.1 LoTE Endpoint<a class="headerlink" href="#71-lote-endpoint" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Direction:</strong> Wallet Unit or WRP to the LoTE Publisher.</li>
+<li><strong>Method:</strong> <code>GET</code></li>
+</ul>
+<p>The Wallet unit SHALL retrieve the LoTE for the entity type being validated.</p>
+<p>The endpoint URI and media type SHALL be the ones published by the WP2 lead organization for that entity type. A request SHALL include:</p>
+<ul>
+<li><code>Host</code>, containing the endpoint hostname;</li>
+<li><code>Accept: application/json</code> for a JSON LoTE, or <code>Accept: application/xml</code> for an XML LoTE.</li>
+</ul>
+<p>A successful response SHALL:</p>
+<ul>
+<li>return <code>200 OK</code>;</li>
+<li>set <code>Content-Type</code> to the corresponding JSON or XML media type;</li>
+<li>contain a structurally valid TS 119 602 LoTE;</li>
+<li>contain the signature or seal required by the published format profile.</li>
+</ul>
+<p>The Wallet Unit SHALL perform the LoTE validation required by Section 6.1 and <a href="https://aptitude-consortium.github.io/wp2-trust-specifications/latest/sections/trust-evaluation-process/#trust-anchor-validation-process">Trust Anchor Validation</a> before using any Trust Anchor from the response.</p>
+<h3 id="72-register-endpoint">7.2 Register Endpoint<a class="headerlink" href="#72-register-endpoint" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Direction:</strong> Wallet Unit to Registrar/Register API.</li>
+<li><strong>Method:</strong> <code>GET</code></li>
+<li><strong>Authentication:</strong> Public query access, unless the applicable API profile requires otherwise.</li>
+</ul>
+<p>The endpoint SHALL be implemented according to the <a href="https://aptitude-consortium.github.io/wp2-trust-specifications/latest/api/register-api/">Register API OAS</a>.</p>
+<p>Use of this endpoint is OPTIONAL for Wallet Unit and WRP conformance. When a Wallet Unit invokes optional Register-response validation, it SHALL construct a query containing the WRP identifier and the context-specific intended-use or Attestation information. The response SHALL:</p>
+<ul>
+<li>return the status defined by the API for the query result;</li>
+<li>return a signed or sealed response for a successful query;</li>
+<li>use the media type specified by the OAS;</li>
+<li>be validated according to Section 6.1 and <a href="https://aptitude-consortium.github.io/wp2-trust-specifications/latest/sections/trust-evaluation-process/#register-validation-procedure">Register Response Validation</a>.</li>
+</ul>
+<p>An HTTP success status alone SHALL NOT make a Register response trusted.</p>
+<p>If the response is unavailable or fails authenticity, integrity, or pertinence validation, the Wallet Unit SHALL discard it and continue authorization using the valid mandatory WRPRC. If a response passes those checks but is inconsistent with the mandatory WRPRC, the Wallet Unit SHALL fail authorization and SHALL NOT offer a user override.</p>
+<hr />
+<h2 id="8-security-considerations">8. Security Considerations<a class="headerlink" href="#8-security-considerations" title="Permanent link">&para;</a></h2>
+<p>Implementations SHALL use HTTPS for LoTE and Register retrieval and MAY apply caching and endpoint privacy measures consistent with the applicable pilot profile.</p>
+<p>Trust Anchors SHALL NOT be accepted from an unvalidated LoTE or from self-declared interaction data.</p>
+<p>Certificates and Certificate chains SHALL NOT be accepted solely because a leaf signature verifies.</p>
+<hr />
+<h2 id="9-conformance">9. Conformance<a class="headerlink" href="#9-conformance" title="Permanent link">&para;</a></h2>
+<p>A Wallet Solution or WRP implementation conforms to this RFC if:</p>
+<ol>
+<li>implements the requirements in Section 6.1;</li>
+<li>implements the LoTE interface in Section 7.1 and, if it claims optional Register-response validation, the Register interface in Section 7.2;</li>
+<li>passes the common, WRPAC, mandatory WRPRC, and Sign/Seal checks in Section 10, and passes the optional Register-response checks if it claims that capability.</li>
+</ol>
+<hr />
+<h2 id="10-conformance-check-catalogue-and-test-matrix">10. Conformance Check Catalogue and Test Matrix<a class="headerlink" href="#10-conformance-check-catalogue-and-test-matrix" title="Permanent link">&para;</a></h2>
+<h3 id="101-conformance-check-catalogue">10.1 Conformance Check Catalogue<a class="headerlink" href="#101-conformance-check-catalogue" title="Permanent link">&para;</a></h3>
+<p>The checks below map the normative requirements to verifiable runtime behavior. Revocation checks are intentionally referenced only through RFC004.</p>
+<table>
+<thead>
+<tr>
+<th>Check ID</th>
+<th>Conformance check</th>
+<th>Runtime verification</th>
+<th>Reference</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>CHK-COM-01</strong></td>
+<td>Entity-type LoTE selection</td>
+<td>The validator selects the LoTE dedicated to the entity or Attestation type.</td>
+<td><a href="#51-entity-type-lote-model">Section 5.1</a></td>
+</tr>
+<tr>
+<td><strong>CHK-COM-02</strong></td>
+<td>LoTE retrieval and format</td>
+<td>The validator retrieves the published LoTE, checks <code>200 OK</code>, checks the matching JSON or XML media type, and validates the TS 119 602 structure.</td>
+<td><a href="#71-lote-endpoint">Section 7.1</a>, <a href="https://aptitude-consortium.github.io/wp2-trust-specifications/latest/sections/trust-artifacts/#list-of-trusted-entities">LoTE Schema</a></td>
+</tr>
+<tr>
+<td><strong>CHK-COM-03</strong></td>
+<td>LoTE integrity and freshness</td>
+<td>The validator verifies the LoTE signature or seal and its freshness using the applicable format-specific mechanism.</td>
+<td><a href="https://aptitude-consortium.github.io/wp2-trust-specifications/latest/sections/trust-evaluation-process/#trust-anchor-validation-process">Trust Anchor Validation</a></td>
+</tr>
+<tr>
+<td><strong>CHK-COM-04</strong></td>
+<td>Trust Anchor mapping</td>
+<td>The selected entity is resolved and its Trust Anchor is obtained from <code>ServiceDigitalIdentity</code>.</td>
+<td><a href="https://aptitude-consortium.github.io/wp2-trust-specifications/latest/sections/trust-evaluation-process/">Trust Evaluation Process</a></td>
+</tr>
+<tr>
+<td><strong>CHK-COM-05</strong></td>
+<td>Common X.509 path validation</td>
+<td>The certificate path is validated according to RFC 5280 and the applicable profile constraints.</td>
+<td><a href="https://aptitude-consortium.github.io/wp2-trust-specifications/latest/sections/trust-evaluation-process/">Trust Evaluation Process</a></td>
+</tr>
+<tr>
+<td><strong>AUTHN-01</strong></td>
+<td>WRPAC interaction signature</td>
+<td>The WRP signature on the Credential Issuer Metadata or Presentation Request is verified with the WRPAC public key.</td>
+<td><a href="#52-validation-flow">Section 5.2</a>, <a href="https://aptitude-consortium.github.io/wp2-trust-specifications/latest/sections/trust-evaluation-process/#authentication-process">Authentication Process</a></td>
+</tr>
+<tr>
+<td><strong>AUTHN-02</strong></td>
+<td>WRPAC-provider LoTE selection</td>
+<td>The validator selects the dedicated WRPAC-provider LoTE.</td>
+<td><a href="#52-validation-flow">Section 5.2</a></td>
+</tr>
+<tr>
+<td><strong>AUTHN-03</strong></td>
+<td>WRPAC-provider LoTE validation</td>
+<td>The validator retrieves and validates the WRPAC-provider LoTE via the shared LoTE validation procedure.</td>
+<td><a href="#52-validation-flow">Section 5.2</a>, <a href="https://aptitude-consortium.github.io/wp2-trust-specifications/latest/sections/trust-evaluation-process/#trust-anchor-validation-process">Trust Anchor Validation</a></td>
+</tr>
+<tr>
+<td><strong>AUTHN-04</strong></td>
+<td>WRPAC Trust Anchor extraction</td>
+<td>The Provider of WRPAC is resolved and its Trust Anchor is obtained from <code>ServiceDigitalIdentity</code>.</td>
+<td><a href="#52-validation-flow">Section 5.2</a></td>
+</tr>
+<tr>
+<td><strong>AUTHN-05</strong></td>
+<td>WRPAC path validation</td>
+<td>The WRPAC certificate path is validated against the selected Trust Anchor using the shared X.509 validation procedure.</td>
+<td><a href="#52-validation-flow">Section 5.2</a>, <a href="https://aptitude-consortium.github.io/wp2-trust-specifications/latest/sections/trust-evaluation-process/">Trust Evaluation Process</a></td>
+</tr>
+<tr>
+<td><strong>AUTHN-06</strong></td>
+<td>WRPAC status</td>
+<td>WRPAC revocation or status is checked using <a href="../RFC004/">RFC004</a> requirements.</td>
+<td><a href="#52-validation-flow">Section 5.2</a></td>
+</tr>
+<tr>
+<td><strong>AUTHZ-01</strong></td>
+<td>WRPRC syntax and signature</td>
+<td>The mandatory WRPRC is present in the flow-specific location, has the expected syntax and type, uses an accepted algorithm, and its signature is valid.</td>
+<td><a href="#52-validation-flow">Section 5.2</a>, <a href="https://aptitude-consortium.github.io/wp2-trust-specifications/latest/sections/trust-evaluation-process/#authorization-process">Authorization Process</a></td>
+</tr>
+<tr>
+<td><strong>AUTHZ-02</strong></td>
+<td>Direct or intermediary WRPAC binding</td>
+<td>For issuance, the authorization subject binds to the <code>organizationIdentifier</code> of the authenticated WRPAC subject. For presentation, the validator first attempts direct binding between that identifier, the WRPRC <code>sub</code>, and the flow-specific claimed RP identifier. If direct binding does not succeed, it attempts intermediary binding by matching <code>intermediary.sub</code> in the WRPRC to the authenticated WRPAC identifier while treating the WRPRC <code>sub</code> as the final RP.</td>
+<td><a href="#52-validation-flow">Section 5.2</a>, <a href="https://aptitude-consortium.github.io/wp2-trust-specifications/latest/sections/trust-evaluation-process/#authorization-process">Authorization Process</a></td>
+</tr>
+<tr>
+<td><strong>AUTHZ-03</strong></td>
+<td>Authorization-subject consistency</td>
+<td>The WRPRC, protocol request or metadata, and the applicable authorization subject are mutually consistent. In intermediary presentation, this check applies to the intermediated final RP.</td>
+<td><a href="#52-validation-flow">Section 5.2</a>, <a href="https://aptitude-consortium.github.io/wp2-trust-specifications/latest/sections/trust-evaluation-process/#authorization-process">Authorization Process</a></td>
+</tr>
+<tr>
+<td><strong>AUTHZ-04</strong></td>
+<td>Entitlement verification</td>
+<td>The WRPRC entitlement matches the expected issuance or presentation role and requested/issued Attestations.</td>
+<td><a href="#52-validation-flow">Section 5.2</a>, <a href="https://aptitude-consortium.github.io/wp2-trust-specifications/latest/sections/trust-evaluation-process/#authorization-process">Authorization Process</a></td>
+</tr>
+<tr>
+<td><strong>AUTHZ-05</strong></td>
+<td>EDP validation</td>
+<td>The applicable Embedded Disclosure Policy is validated and evaluated against the authorized relying-party context and requested Attestation.</td>
+<td><a href="#52-validation-flow">Section 5.2</a>, <a href="https://aptitude-consortium.github.io/wp2-trust-specifications/latest/sections/trust-evaluation-process/#authorization-process">Authorization Process</a></td>
+</tr>
+<tr>
+<td><strong>AUTHZ-06</strong></td>
+<td>User override</td>
+<td>User override is offered only for authorization outcomes explicitly marked overridable; syntax, signature, identity binding, mandatory evidence, and integrity failures remain blocking.</td>
+<td><a href="#52-validation-flow">Section 5.2</a>, <a href="https://aptitude-consortium.github.io/wp2-trust-specifications/latest/sections/trust-evaluation-process/#override-rules">Authorization Process</a></td>
+</tr>
+<tr>
+<td><strong>AUTHZ-07</strong></td>
+<td>WRPRC-provider LoTE selection</td>
+<td>The validator selects the dedicated WRPRC-provider LoTE.</td>
+<td><a href="#52-validation-flow">Section 5.2</a></td>
+</tr>
+<tr>
+<td><strong>AUTHZ-08</strong></td>
+<td>WRPRC-provider LoTE validation</td>
+<td>The validator retrieves and validates the WRPRC-provider LoTE via the shared LoTE validation procedure.</td>
+<td><a href="#52-validation-flow">Section 5.2</a>, <a href="https://aptitude-consortium.github.io/wp2-trust-specifications/latest/sections/trust-evaluation-process/#trust-anchor-validation-process">Trust Anchor Validation</a></td>
+</tr>
+<tr>
+<td><strong>AUTHZ-09</strong></td>
+<td>WRPRC Trust Anchor extraction</td>
+<td>The Provider of WRPRC is resolved and its Trust Anchor is obtained from <code>ServiceDigitalIdentity</code>.</td>
+<td><a href="#52-validation-flow">Section 5.2</a></td>
+</tr>
+<tr>
+<td><strong>AUTHZ-10</strong></td>
+<td>WRPRC path validation</td>
+<td>The WRPRC signing certificate path is validated against the selected Trust Anchor using the shared X.509 validation procedure.</td>
+<td><a href="#52-validation-flow">Section 5.2</a>, <a href="https://aptitude-consortium.github.io/wp2-trust-specifications/latest/sections/trust-evaluation-process/">Trust Evaluation Process</a></td>
+</tr>
+<tr>
+<td><strong>AUTHZ-11</strong></td>
+<td>WRPRC and certificate status</td>
+<td>WRPRC and, where applicable, its signing certificate path are checked for revocation or status using <a href="../RFC004/">RFC004</a> requirements.</td>
+<td><a href="#52-validation-flow">Section 5.2</a></td>
+</tr>
+<tr>
+<td><strong>AUTHZ-12</strong></td>
+<td>[OPTIONAL] Register response</td>
+<td>When Register-response validation is claimed and invoked, the response is authenticated, checked for pertinence, bound to the WRP and WRPRC, and checked for consistency with the applicable issuance or presentation context. An unavailable response or a response that fails authenticity, integrity, or pertinence validation is discarded; a response that passes those checks but conflicts with the mandatory WRPRC fails authorization.</td>
+<td><a href="#72-register-endpoint">Section 7.2</a>, <a href="https://aptitude-consortium.github.io/wp2-trust-specifications/latest/api/register-api/">Register API</a></td>
+</tr>
+<tr>
+<td><strong>SIGNSEAL-01</strong></td>
+<td>Attestation signature or seal</td>
+<td>The Attestation signature or seal is verified with the public key in the transmitted Sign/Seal Certificate.</td>
+<td><a href="#52-validation-flow">Section 5.2</a>, <a href="https://aptitude-consortium.github.io/wp2-trust-specifications/latest/sections/trust-evaluation-process/#signseal-validation-process">Sign/Seal Validation</a></td>
+</tr>
+<tr>
+<td><strong>SIGNSEAL-02</strong></td>
+<td>Entity-type LoTE selection</td>
+<td>The validator selects the LoTE dedicated to the Attestation provider type.</td>
+<td><a href="#52-validation-flow">Section 5.2</a></td>
+</tr>
+<tr>
+<td><strong>SIGNSEAL-03</strong></td>
+<td>Entity-type LoTE validation</td>
+<td>The validator retrieves and validates the selected LoTE using the shared LoTE validation procedure.</td>
+<td><a href="#52-validation-flow">Section 5.2</a>, <a href="https://aptitude-consortium.github.io/wp2-trust-specifications/latest/sections/trust-evaluation-process/#trust-anchor-validation-process">Trust Anchor Validation</a></td>
+</tr>
+<tr>
+<td><strong>SIGNSEAL-04</strong></td>
+<td>Sign/Seal Trust Anchor extraction</td>
+<td>The Attestation provider is resolved and its Trust Anchor is obtained from <code>ServiceDigitalIdentity</code>.</td>
+<td><a href="#52-validation-flow">Section 5.2</a></td>
+</tr>
+<tr>
+<td><strong>SIGNSEAL-05</strong></td>
+<td>Sign/Seal Certificate path validation</td>
+<td>The Sign/Seal Certificate chain is validated against the selected Trust Anchor using the shared X.509 validation procedure.</td>
+<td><a href="#52-validation-flow">Section 5.2</a>, <a href="https://aptitude-consortium.github.io/wp2-trust-specifications/latest/sections/trust-evaluation-process/">Trust Evaluation Process</a></td>
+</tr>
+<tr>
+<td><strong>SIGNSEAL-06</strong></td>
+<td>Attestation and certificate status</td>
+<td>Attestation and, where applicable, Sign/Seal Certificate path revocation or status is checked using <a href="../RFC004/">RFC004</a> requirements.</td>
+<td><a href="#52-validation-flow">Section 5.2</a></td>
+</tr>
+</tbody>
+</table>
+<h3 id="102-deployed-test-case-matrix">10.2 Deployed Test Case Matrix<a class="headerlink" href="#102-deployed-test-case-matrix" title="Permanent link">&para;</a></h3>
+<p>The matrix is organized by the artifact-specific checks in Section 10.1. The numeric portion of each test case ID identifies the corresponding catalogue check and does not define a separate execution order. Each applicable AUTHN, AUTHZ, and SIGNSEAL check has positive and negative coverage. <code>AUTHZ-12</code> cases apply only to implementations that claim optional Register-response validation.</p>
+<table>
+<thead>
+<tr>
+<th>Test case ID</th>
+<th>Conformance check</th>
+<th>Scenario</th>
+<th>Checks covered</th>
+<th>Expected outcome</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>AUTHN-1-OK</strong></td>
+<td>WRPAC interaction signature</td>
+<td>The WRP signature on the flow-specific Credential Issuer Metadata or Presentation Request verifies with the presented WRPAC public key.</td>
+<td><code>AUTHN-01</code></td>
+<td>Continue authentication; no final result is available.</td>
+</tr>
+<tr>
+<td><strong>AUTHN-1-FAIL</strong></td>
+<td>WRPAC interaction signature</td>
+<td>The interaction signature is invalid, uses the wrong key, or is carried in the wrong location.</td>
+<td><code>AUTHN-01</code></td>
+<td><code>NON_AUTHENTICATED</code>; authorization does not start.</td>
+</tr>
+<tr>
+<td><strong>AUTHN-2-OK</strong></td>
+<td>WRPAC-provider LoTE selection</td>
+<td>The dedicated WRPAC-provider LoTE is selected for the presented WRPAC.</td>
+<td><code>AUTHN-02</code></td>
+<td>Continue to LoTE retrieval and validation.</td>
+</tr>
+<tr>
+<td><strong>AUTHN-2-FAIL</strong></td>
+<td>WRPAC-provider LoTE selection</td>
+<td>A LoTE for another entity type is selected.</td>
+<td><code>AUTHN-02</code></td>
+<td>Authentication fails before LoTE retrieval.</td>
+</tr>
+<tr>
+<td><strong>AUTHN-3-OK</strong></td>
+<td>WRPAC-provider LoTE validation</td>
+<td>The WRPAC-provider LoTE has the expected format and structure, a valid signature or seal, and acceptable freshness.</td>
+<td><code>AUTHN-03</code></td>
+<td>Continue to Trust Anchor extraction.</td>
+</tr>
+<tr>
+<td><strong>AUTHN-3-FAIL</strong></td>
+<td>WRPAC-provider LoTE validation</td>
+<td>The WRPAC-provider LoTE has an invalid format, structure, signature or seal, or freshness value.</td>
+<td><code>AUTHN-03</code></td>
+<td>Authentication fails before certificate validation.</td>
+</tr>
+<tr>
+<td><strong>AUTHN-4-OK</strong></td>
+<td>WRPAC Trust Anchor extraction</td>
+<td>The Provider of WRPAC Trust Anchor is found in <code>ServiceDigitalIdentity</code>.</td>
+<td><code>AUTHN-04</code></td>
+<td>Continue to WRPAC path validation.</td>
+</tr>
+<tr>
+<td><strong>AUTHN-4-FAIL</strong></td>
+<td>WRPAC Trust Anchor extraction</td>
+<td>The provider is present but the required Trust Anchor is absent or does not match <code>ServiceDigitalIdentity</code>.</td>
+<td><code>AUTHN-04</code></td>
+<td>Authentication fails.</td>
+</tr>
+<tr>
+<td><strong>AUTHN-5-OK</strong></td>
+<td>WRPAC path validation</td>
+<td>The WRPAC chain validates to the selected Trust Anchor.</td>
+<td><code>AUTHN-05</code></td>
+<td>Continue to required status checking; no final result is available.</td>
+</tr>
+<tr>
+<td><strong>AUTHN-5-FAIL</strong></td>
+<td>WRPAC path validation</td>
+<td>Certificate signature, issuer binding, validity, CA constraint, policy, or path-length validation fails.</td>
+<td><code>AUTHN-05</code></td>
+<td><code>NON_AUTHENTICATED</code>.</td>
+</tr>
+<tr>
+<td><strong>AUTHN-6-OK</strong></td>
+<td>WRPAC status</td>
+<td>The WRPAC status check returns an acceptable status under RFC004.</td>
+<td><code>AUTHN-06</code></td>
+<td><code>AUTHENTICATED</code>.</td>
+</tr>
+<tr>
+<td><strong>AUTHN-6-FAIL</strong></td>
+<td>WRPAC status</td>
+<td>The WRPAC or applicable certificate status is revoked, unknown, stale, or otherwise unacceptable.</td>
+<td><code>AUTHN-06</code></td>
+<td><code>NON_AUTHENTICATED</code>.</td>
+</tr>
+<tr>
+<td><strong>AUTHZ-1-OK</strong></td>
+<td>WRPRC syntax and signature</td>
+<td>The mandatory WRPRC is present, correctly encoded and typed, uses an accepted algorithm, and its signature is internally valid.</td>
+<td><code>AUTHZ-01</code></td>
+<td>Continue authorization; no final result is available.</td>
+</tr>
+<tr>
+<td><strong>AUTHZ-1-FAIL</strong></td>
+<td>WRPRC syntax and signature</td>
+<td>The WRPRC is missing, malformed, wrong-typed, unsigned, internally invalid, or uses a forbidden algorithm.</td>
+<td><code>AUTHZ-01</code></td>
+<td>Blocking <code>CERTIFICATE_INVALID</code>; no override is offered.</td>
+</tr>
+<tr>
+<td><strong>AUTHZ-2-DIRECT-OK</strong></td>
+<td>Direct WRPAC binding</td>
+<td>In issuance, the authorization-subject identifier matches the <code>organizationIdentifier</code> of the authenticated WRPAC subject. In direct presentation, that identifier matches the WRPRC <code>sub</code> and the claimed RP identifier from <code>verifier_info.data.identifier</code> in the remote flow or <code>docRequest.itemsRequest[].requestInfo.EUWrpRegistrarInfo.identifier</code> in the proximity flow.</td>
+<td><code>AUTHZ-02</code></td>
+<td>Direct binding succeeds; continue authorization.</td>
+</tr>
+<tr>
+<td><strong>AUTHZ-2-DIRECT-FAIL</strong></td>
+<td>Direct WRPAC binding</td>
+<td>The direct comparison with the <code>organizationIdentifier</code> of the authenticated WRPAC subject fails and no valid intermediary binding exists.</td>
+<td><code>AUTHZ-02</code></td>
+<td>Blocking <code>BINDING_FAILED</code>; no override is offered.</td>
+</tr>
+<tr>
+<td><strong>AUTHZ-2-INTERMEDIARY-OK</strong></td>
+<td>Intermediary WRPAC binding</td>
+<td>After direct binding does not succeed, the WRPRC <code>sub</code> matches the final RP identifier from the flow-specific Presentation Request field and <code>intermediary.sub</code> matches the <code>organizationIdentifier</code> of the authenticated intermediary WRPAC subject.</td>
+<td><code>AUTHZ-02</code></td>
+<td>The intermediary association is verified; subsequent authorization checks use the final RP context, and both identities are made available to the User.</td>
+</tr>
+<tr>
+<td><strong>AUTHZ-2-INTERMEDIARY-FAIL</strong></td>
+<td>Intermediary WRPAC binding</td>
+<td>After direct binding does not succeed, the WRPRC does not contain <code>intermediary.sub</code>, it does not match the authenticated intermediary identifier, or the WRPRC <code>sub</code> does not match the final RP identifier from the flow-specific Presentation Request field.</td>
+<td><code>AUTHZ-02</code></td>
+<td>Blocking <code>BINDING_FAILED</code>; no override is offered.</td>
+</tr>
+<tr>
+<td><strong>AUTHZ-3-OK</strong></td>
+<td>Authorization-subject consistency</td>
+<td>The WRPRC, request or metadata, and applicable authorization subject are mutually consistent for issuance, direct presentation, or intermediary presentation.</td>
+<td><code>AUTHZ-03</code></td>
+<td>Continue to entitlement checks.</td>
+</tr>
+<tr>
+<td><strong>AUTHZ-3-FAIL</strong></td>
+<td>Authorization-subject consistency</td>
+<td>Attestation Provider, direct RP, final RP, or intended-use identifiers are inconsistent across the applicable inputs.</td>
+<td><code>AUTHZ-03</code></td>
+<td>Blocking <code>BINDING_FAILED</code>; no override is offered.</td>
+</tr>
+<tr>
+<td><strong>AUTHZ-4-OK</strong></td>
+<td>Entitlement verification</td>
+<td>The WRPRC contains the entitlement required for the issuance or presentation context.</td>
+<td><code>AUTHZ-04</code></td>
+<td>Continue authorization.</td>
+</tr>
+<tr>
+<td><strong>AUTHZ-4-FAIL</strong></td>
+<td>Entitlement verification</td>
+<td>The expected entitlement is absent or does not match the required role.</td>
+<td><code>AUTHZ-04</code></td>
+<td>Authorization advisory is shown according to the applicable profile.</td>
+</tr>
+<tr>
+<td><strong>AUTHZ-5-OK</strong></td>
+<td>EDP validation</td>
+<td>The EDP is absent or its applicable policy evaluates successfully for the authorized relying-party context.</td>
+<td><code>AUTHZ-05</code></td>
+<td>Continue to user approval.</td>
+</tr>
+<tr>
+<td><strong>AUTHZ-5-FAIL</strong></td>
+<td>EDP validation</td>
+<td>The EDP does not permit the relying-party context or requested Attestation.</td>
+<td><code>AUTHZ-05</code></td>
+<td><code>EDP_NOT_SATISFIED</code>; user override is handled by <code>AUTHZ-06</code>.</td>
+</tr>
+<tr>
+<td><strong>AUTHZ-6-OK</strong></td>
+<td>User override</td>
+<td>The User overrides an explicitly overridable check after the Wallet Unit presents a failed Authorization Validation.</td>
+<td><code>AUTHZ-06</code></td>
+<td>Continue only after explicit User approval; the final result remains subject to all applicable trust and status checks.</td>
+</tr>
+<tr>
+<td><strong>AUTHZ-6-FAIL</strong></td>
+<td>User override</td>
+<td>The Wallet Unit offers an override for an explicitly overridable check after the Wallet Unit presents a failed Authorization Validation but the User denies it.</td>
+<td><code>AUTHZ-06</code></td>
+<td>Authorization fails.</td>
+</tr>
+<tr>
+<td><strong>AUTHZ-7-OK</strong></td>
+<td>WRPRC-provider LoTE selection</td>
+<td>The dedicated WRPRC-provider LoTE is selected for the presented WRPRC.</td>
+<td><code>AUTHZ-07</code></td>
+<td>Continue to LoTE retrieval and validation.</td>
+</tr>
+<tr>
+<td><strong>AUTHZ-7-FAIL</strong></td>
+<td>WRPRC-provider LoTE selection</td>
+<td>A LoTE for another entity type is selected.</td>
+<td><code>AUTHZ-07</code></td>
+<td>Authorization fails before LoTE retrieval.</td>
+</tr>
+<tr>
+<td><strong>AUTHZ-8-OK</strong></td>
+<td>WRPRC-provider LoTE validation</td>
+<td>The WRPRC-provider LoTE has the expected format and structure, a valid signature or seal, and acceptable freshness.</td>
+<td><code>AUTHZ-08</code></td>
+<td>Continue to Trust Anchor extraction.</td>
+</tr>
+<tr>
+<td><strong>AUTHZ-8-FAIL</strong></td>
+<td>WRPRC-provider LoTE validation</td>
+<td>The WRPRC-provider LoTE has an invalid format, structure, signature or seal, or freshness value.</td>
+<td><code>AUTHZ-08</code></td>
+<td>Authorization fails before WRPRC path validation.</td>
+</tr>
+<tr>
+<td><strong>AUTHZ-9-OK</strong></td>
+<td>WRPRC Trust Anchor extraction</td>
+<td>The Provider of WRPRC Trust Anchor is found in <code>ServiceDigitalIdentity</code>.</td>
+<td><code>AUTHZ-09</code></td>
+<td>Continue to WRPRC path validation.</td>
+</tr>
+<tr>
+<td><strong>AUTHZ-9-FAIL</strong></td>
+<td>WRPRC Trust Anchor extraction</td>
+<td>The provider is present but its required Trust Anchor is absent or mismatched.</td>
+<td><code>AUTHZ-09</code></td>
+<td>Authorization fails.</td>
+</tr>
+<tr>
+<td><strong>AUTHZ-10-OK</strong></td>
+<td>WRPRC path validation</td>
+<td>The WRPRC signing certificate chain validates to the selected Trust Anchor.</td>
+<td><code>AUTHZ-10</code></td>
+<td>Continue to required status checking; no final result is available.</td>
+</tr>
+<tr>
+<td><strong>AUTHZ-10-FAIL</strong></td>
+<td>WRPRC path validation</td>
+<td>WRPRC certificate signature, issuer binding, validity, CA constraint, policy, or path-length validation fails.</td>
+<td><code>AUTHZ-10</code></td>
+<td>Blocking <code>CERTIFICATE_INVALID</code>; no override is offered.</td>
+</tr>
+<tr>
+<td><strong>AUTHZ-11-OK</strong></td>
+<td>WRPRC and certificate status</td>
+<td>The WRPRC and applicable signing-certificate status checks return acceptable statuses under RFC004.</td>
+<td><code>AUTHZ-11</code></td>
+<td>The mandatory WRPRC trust and status checks are complete; authorization may be finalized after all other applicable checks succeed.</td>
+</tr>
+<tr>
+<td><strong>AUTHZ-11-FAIL</strong></td>
+<td>WRPRC and certificate status</td>
+<td>The WRPRC or applicable signing-certificate status is revoked, unknown, stale, or otherwise unacceptable.</td>
+<td><code>AUTHZ-11</code></td>
+<td>Trust evaluation fails; no authorization override is offered.</td>
+</tr>
+<tr>
+<td><strong>AUTHZ-12-OK</strong></td>
+<td>[OPTIONAL] Register response</td>
+<td>The optional Register response is authenticated, pertinent, bound to the WRP and WRPRC, and consistent with the interaction context.</td>
+<td><code>AUTHZ-12</code></td>
+<td>The Register response may be used as additional authorization evidence.</td>
+</tr>
+<tr>
+<td><strong>AUTHZ-12-INVALID</strong></td>
+<td>[OPTIONAL] Register response</td>
+<td>The optional Register response is unavailable, unsigned, untrusted, stale, or not pertinent.</td>
+<td><code>AUTHZ-12</code></td>
+<td>Discard the response and continue using the valid mandatory WRPRC.</td>
+</tr>
+<tr>
+<td><strong>AUTHZ-12-MISMATCH</strong></td>
+<td>[OPTIONAL] Register response</td>
+<td>The Register response passes authenticity, integrity, and pertinence checks but is inconsistent with the mandatory WRPRC.</td>
+<td><code>AUTHZ-12</code></td>
+<td>Authorization fails; no override is offered.</td>
+</tr>
+<tr>
+<td><strong>SIGNSEAL-1-OK</strong></td>
+<td>Attestation signature or seal</td>
+<td>The Attestation signature or seal verifies using the public key in the transmitted Sign/Seal Certificate.</td>
+<td><code>SIGNSEAL-01</code></td>
+<td>Continue Sign/Seal validation; no final result is available.</td>
+</tr>
+<tr>
+<td><strong>SIGNSEAL-1-FAIL</strong></td>
+<td>Attestation signature or seal</td>
+<td>The Attestation signature or seal is invalid, malformed, or uses the wrong certificate.</td>
+<td><code>SIGNSEAL-01</code></td>
+<td>Attestation validation fails.</td>
+</tr>
+<tr>
+<td><strong>SIGNSEAL-2-OK</strong></td>
+<td>Entity-type LoTE selection</td>
+<td>The LoTE dedicated to the Attestation provider type is selected.</td>
+<td><code>SIGNSEAL-02</code></td>
+<td>Continue to LoTE retrieval and validation.</td>
+</tr>
+<tr>
+<td><strong>SIGNSEAL-2-FAIL</strong></td>
+<td>Entity-type LoTE selection</td>
+<td>A LoTE for another entity type is selected.</td>
+<td><code>SIGNSEAL-02</code></td>
+<td>Attestation validation fails before LoTE retrieval.</td>
+</tr>
+<tr>
+<td><strong>SIGNSEAL-3-OK</strong></td>
+<td>Entity-type LoTE validation</td>
+<td>The selected LoTE has the expected format and structure, a valid signature or seal, and acceptable freshness.</td>
+<td><code>SIGNSEAL-03</code></td>
+<td>Continue to Trust Anchor extraction.</td>
+</tr>
+<tr>
+<td><strong>SIGNSEAL-3-FAIL</strong></td>
+<td>Entity-type LoTE validation</td>
+<td>The selected LoTE has an invalid format, structure, signature or seal, or freshness value.</td>
+<td><code>SIGNSEAL-03</code></td>
+<td>Attestation validation fails before certificate validation.</td>
+</tr>
+<tr>
+<td><strong>SIGNSEAL-4-OK</strong></td>
+<td>Sign/Seal Trust Anchor extraction</td>
+<td>The Attestation provider Trust Anchor is found in <code>ServiceDigitalIdentity</code>.</td>
+<td><code>SIGNSEAL-04</code></td>
+<td>Continue to Sign/Seal Certificate path validation.</td>
+</tr>
+<tr>
+<td><strong>SIGNSEAL-4-FAIL</strong></td>
+<td>Sign/Seal Trust Anchor extraction</td>
+<td>The provider Trust Anchor is absent or does not match <code>ServiceDigitalIdentity</code>.</td>
+<td><code>SIGNSEAL-04</code></td>
+<td>Attestation validation fails.</td>
+</tr>
+<tr>
+<td><strong>SIGNSEAL-5-OK</strong></td>
+<td>Sign/Seal Certificate path validation</td>
+<td>The Sign/Seal Certificate chain validates to the selected Trust Anchor.</td>
+<td><code>SIGNSEAL-05</code></td>
+<td>Continue to required status checking; no final result is available.</td>
+</tr>
+<tr>
+<td><strong>SIGNSEAL-5-FAIL</strong></td>
+<td>Sign/Seal Certificate path validation</td>
+<td>Sign/Seal Certificate signature, issuer binding, validity, CA constraint, policy, or path-length validation fails.</td>
+<td><code>SIGNSEAL-05</code></td>
+<td>Attestation validation fails.</td>
+</tr>
+<tr>
+<td><strong>SIGNSEAL-6-OK</strong></td>
+<td>Attestation and certificate status</td>
+<td>Attestation and applicable Sign/Seal Certificate status checks return acceptable statuses under RFC004.</td>
+<td><code>SIGNSEAL-06</code></td>
+<td><code>ACCEPTED</code>.</td>
+</tr>
+<tr>
+<td><strong>SIGNSEAL-6-FAIL</strong></td>
+<td>Attestation and certificate status</td>
+<td>Attestation or applicable certificate status is revoked, unknown, stale, or otherwise unacceptable.</td>
+<td><code>SIGNSEAL-06</code></td>
+<td>Attestation validation fails.</td>
+</tr>
+</tbody>
+</table>
+
+
+
+
+
+
+
+  
+    
+  
+  
+
+
+  <aside class="md-source-file">
+    
+      
+  <span class="md-source-file__fact">
+    <span class="md-icon" title="Last update">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
+    </span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-datetime" title="September 10, 2026 06:29:26 UTC">September 10, 2026 06:29:26</span>
+  </span>
+
+    
+    
+    
+    
+  </aside>
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+    <div class="md-footer-meta md-typeset">
+        <div class="md-footer-meta__inner md-grid">
+            <div class="md-copyright">
+                <div>
+                    Made with
+                    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+                        Material for MkDocs
+                    </a>
+                </div>
+            </div>
+            <div class="md-footer-cofunded">
+                <img src="../../img/eu-cofunded.png" alt="Co-funded by the European Union">
+            </div>
+        </div>
+    </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+      <div class="md-progress" data-md-component="progress" role="progressbar"></div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["content.action.edit", "content.action.view", "content.code.annotate", "content.code.copy", "navigation.footer", "navigation.indexes", "navigation.instant", "navigation.instant.progress", "navigation.path", "navigation.tabs", "navigation.tabs.sticky", "navigation.top", "navigation.tracking", "search.highlight", "search.suggest", "toc.follow", "toc.integrate"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"alias": true, "provider": "mike"}}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+        <script src="../../media/mermaid.min.js"></script>
+      
+        <script src="../../media/mermaid-init.js"></script>
+      
+        <script src="../../media/mathjax-init.js"></script>
+      
+        <script src="../../media/mathjax-tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>
