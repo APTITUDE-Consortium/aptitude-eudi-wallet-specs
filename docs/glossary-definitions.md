@@ -166,6 +166,9 @@ artifacts:mdoc
 artifacts:Normalised Certificate Policy (NCP)
 : A standardized set of rules and requirements that a Trust Service Provider must adhere to when issuing digital certificates. These include, e.g., organizational liability, security management, data privacy, and rigorous identity verification of the certificate subscriber.
 
+artifacts:Official Journal of APTITUDE (OJA)
+: The authoritative entity responsible for publishing and maintaining the certificates used to sign or seal the APTITUDE List of Trusted Entities (LoTE). Within the APTITUDE ecosystem, this entity serves as the functional equivalent of the Official Journal of the European Union (OJEU).
+
 artifacts:Official Journal of the European Union (OJEU)
 : The Official Journal of the European Union, published by the EU's Publications Office, is the official publication for EU legal acts. The authenticity and integrity of the machine processable version of the LOTL is ensured through a digital signature supported by a certificate which can be authenticated through a publication in the OJEU.
 
