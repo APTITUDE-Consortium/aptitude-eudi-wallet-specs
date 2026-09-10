@@ -133,6 +133,7 @@ nav:
     - Overview: RFCs/index.md
     - RFC-01 Credential Issuance Profile: RFCs/RFC001.md
     - RFC-02 Presentation Profile: RFCs/RFC002.md
+    - RFC-03 Trust Evaluation: RFCs/RFC003.md
     - RFC-04 Revocation Profile: RFCs/RFC004.md
     - RFC-05 Proximity Presentation Profile: RFCs/RFC005.md
   - Testing and Conformance:
