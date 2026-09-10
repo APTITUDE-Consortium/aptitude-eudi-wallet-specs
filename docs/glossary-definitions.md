@@ -11,9 +11,6 @@ roles:Certificate Authority (CA)
 roles:Conformity Assessment Body (CAB)
 : A conformity assessment body as defined in Article 2, point 13, of Regulation (EC) No 765/2008, which is accredited in accordance with that Regulation as competent to carry out conformity assessment of a qualified trust service provider and the qualified trust services it provides, or as competent to carry out certification of European Digital Identity Wallets or electronic identification means. [ARF]
 
-roles:EAA Provider
-: Provider of EEAs.
-
 roles:Issuer Authority Certificate Authority (IACA)
 : The issuing authority/CA used in the mDL/mVRC trust infrastructure under ISO standards (may be shared with mDL or set up separately).
 
@@ -29,26 +26,29 @@ roles:National Accreditation Bodies (NAB)
 roles:Owner of a Scheme for the Attestation of Attribute
 : An entity responsible for establishing and maintaining a scheme for the attestation of attributes. [CIR 2025/1569]
 
+roles:Provider of Electronic Attestation of Attributes (EAA Provider)
+: The entity responsible for issuing and revoking Electronic Attestation of Attributes (EAA).
+
 roles:Provider of Person Identification Data (PID Provider)
 : A natural or legal person responsible for issuing and revoking the person identification data and ensuring that the person identification data of a user is cryptographically bound to a Wallet Unit. [ARF]
 
+roles:Provider of Public Electronic Attestation of Attributes (PuB-EAA Provider)
+: The entity responsible for issuing and revoking Public Electronic Attestation of Attributes (PuB-EAA).
+
+roles:Provider of Qualified Electronic Attestation of Attributes (QEAA Provider)
+: The entity responsible for issuing and revoking Qualified Electronic Attestation of Attributes (QEAA).
+
 roles:Provider of Wallet-Relying Party Access Certificate (Provider of WRPAC)
-: A natural or legal person mandated by a Member State to issue Relying Party access certificates to (Wallet-) Relying Parties registered in that Member State. [ARF]
+: A natural or legal person mandated by a Member State to issue Relying Party Access Certificates to (Wallet-) Relying Parties registered in that Member State. [ARF]
 
 roles:Provider of Wallet-Relying Party Registration Certificate (Provider of WRPRC)
-: A natural or legal person mandated by a Member State to issue (wallet-relying party) registration certificates to (wallet-)relying parties registered in that Member State. [ARF]
-
-roles:PuB-EAA Provider
-: Provider of Public Electronic Attestation of Attributes (PuB-EAAs).
+: A natural or legal person mandated by a Member State to issue (Wallet-Relying Party) registration certificates to (Wallet-)Relying Parties registered in that Member State. [ARF]
 
 roles:Public Sector Body
 : A state, regional or local authority, a body governed by public law or an association formed by one or several such authorities or one or several such bodies governed by public law, or a private entity mandated by at least one of those authorities, bodies or associations to provide public services, when acting under such a mandate. [ARF]
 
-roles:QEAA Provider
-: Provider of Qualified Electronic Attestation of Attributes (QEAAs).
-
 roles:Qualified Trust Service Provider (QTSP)
-: Qualified Trust Service Provider means a trust service provider who provides one or more qualified trust services and is granted the qualified status by the supervisory body. [ARF]
+: A trust service provider who provides one or more qualified trust services and is granted the qualified status by the supervisory body. [ARF]
 
 roles:Registrar
 : The body responsible for establishing and maintaining the list of registered wallet-relying parties established in their territory who has been designated by a Member State. [ARF]
@@ -84,8 +84,8 @@ roles:Wallet-Relying Party (WRP)
 components:Authentic Source
 : A repository or system, held under the responsibility of a public sector body or private entity, that contains and provides attributes about a natural or legal person or object and that is considered to be a primary source of that information or recognised as authentic in accordance with Union law or national law, including administrative practice. [ARF]
 
-components:Authorisation Server
-: OAuth 2.0 / OpenID component responsible for authenticating the User (Holder) and issuing tokens authorising access to protected endpoints.
+components:Authorization Server
+: OAuth 2.0 / OpenID component responsible for authenticating the User (Holder) and issuing tokens authorizing access to protected endpoints.
 
 components:EUDI Wallet
 : European Digital Identity Wallet, in accordance with Regulation (EU) 910/2014 (as amended), used in APTITUDE pilots.
@@ -200,7 +200,7 @@ artifacts:Wallet Unit Attestation (WUA)
 : A data object that describes the components of the Wallet Unit or allows authentication and validation of those components. [ARF]
 
 artifacts:Wallet-Relying Party Access Certificate (WRPAC)
-: A certificate for electronic seals or signatures authenticating and validating the (Wallet-) Relying Party, issued by a provider of wallet-relying party access certificates. [ARF]
+: A certificate for electronic seals or signatures authenticating and validating the (Wallet-) Relying Party, issued by a Provider of Wallet-Relying Party Access Certificates. [ARF]
 
 artifacts:Wallet-Relying Party Registration Certificate (WRPRC)
 : A data object that indicates the attributes the Relying Party has registered to intend to request from Users. [ARF]
