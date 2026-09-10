@@ -140,6 +140,7 @@ nav:
       - References: rulebook/wp2-trust-specifications/docs/sections/references.md
   - RFCs:
     - Overview: RFCs/index.md
+    - Generic Issuance Flow: wp2/generic-issuance-flow-specification.md
     - RFC-01 Credential Issuance Profile: RFCs/RFC001.md
     - RFC-02 Presentation Profile: RFCs/RFC002.md
     - RFC-03 Trust Evaluation: RFCs/RFC003.md

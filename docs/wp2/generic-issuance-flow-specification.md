@@ -276,11 +276,11 @@ The generic issuance flow does not define an Authentic Source interface or a com
 E2E issuance flow is presented through sequence diagram (SD) and after that each step is linked to the relevant Aptitude profile specification document. Referenced specs are:
 
 * [Aptitude Issuance profile RFC-01](https://github.com/APTITUDE-Consortium/aptitude-eudi-wallet-specs/blob/main/docs/RFCs/RFC001.md)
-* [Aptitude Trust Evaluation RFC-03](https://github.com/APTITUDE-Consortium/aptitude-eudi-wallet-specs/blob/rfc003-trust/docs/RFCs/RFC003.md)
+* [Aptitude Trust Evaluation RFC-03](https://github.com/APTITUDE-Consortium/aptitude-eudi-wallet-specs/blob/main/docs/RFCs/RFC003.md)
 * [Aptitude Trust Evaluation RFC-04](https://github.com/APTITUDE-Consortium/aptitude-eudi-wallet-specs/blob/main/docs/RFCs/RFC004.md)
 * [Aptitude trust framework](https://aptitude-consortium.github.io/wp2-trust-specifications/latest/trust-framework/)
 
-Within the following diagram we introduce the LoTE Provider endpoint as specified in [RFC003](https://github.com/APTITUDE-Consortium/aptitude-eudi-wallet-specs/blob/rfc003-trust/docs/RFCs/RFC003.md#71-lote-endpoint). Each entity type (Wallet Provider, PID/Attestation Provider, WRPAC/WRPRC Provider) has a unique LoTE published at a specific endpoint detailed in the Official Journal of Aptitude (OJA), which will be made available by WP2 in piloting. The diagram abstracts these different LoTE endpoints into a single LoTE Provider interaction.
+Within the following diagram we introduce the LoTE Provider endpoint as specified in [RFC003](https://github.com/APTITUDE-Consortium/aptitude-eudi-wallet-specs/blob/main/docs/RFCs/RFC003.md#71-lote-endpoint). Each entity type (Wallet Provider, PID/Attestation Provider, WRPAC/WRPRC Provider) has a unique LoTE published at a specific endpoint detailed in the Official Journal of Aptitude (OJA), which will be made available by WP2 in piloting. The diagram abstracts these different LoTE endpoints into a single LoTE Provider interaction.
 
 ![QEAA issuance Aptitude profile sequence diagram]({Q}EAA_issuance_Aptitude_profile_on_top_of_HAIP&ETSI_profiles_including_trustframework.png)
 
@@ -345,7 +345,7 @@ href="https://github.com/APTITUDE-Consortium/aptitude-eudi-wallet-specs/blob/mai
 <td>V2.1</td>
 <td>Validate issuer metadata</td>
 <td><p><a
-href="https://github.com/APTITUDE-Consortium/aptitude-eudi-wallet-specs/blob/rfc003-trust/docs/RFCs/RFC001.md#89-metadata-endpoints">RFC-01
+href="https://github.com/APTITUDE-Consortium/aptitude-eudi-wallet-specs/blob/main/docs/RFCs/RFC001.md#89-metadata-endpoints">RFC-01
 8.9</a></p>
 </td>
 <td></td>
@@ -364,7 +364,7 @@ href="https://aptitude-consortium.github.io/wp2-trust-specifications/latest/sect
 <td>V2.3, V2.5, V4a.3, V5.4, V6.4</td>
 <td>Get LoTE</td>
 <td><p><a
-href="https://github.com/APTITUDE-Consortium/aptitude-eudi-wallet-specs/blob/rfc003-trust/docs/RFCs/RFC003.md#71-lote-endpoint">RFC003
+href="https://github.com/APTITUDE-Consortium/aptitude-eudi-wallet-specs/blob/main/docs/RFCs/RFC003.md#71-lote-endpoint">RFC003
 LoTE Endpoint</a></p>
 <p><a
 href="https://aptitude-consortium.github.io/wp2-trust-specifications/latest/sections/trust-evaluation-process/#list-of-trusted-entities-validation-process">LoTE Validation Process</a></p></td>
