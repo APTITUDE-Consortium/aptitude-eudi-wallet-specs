@@ -143,7 +143,7 @@ TS 119 472-3 ver1.1.1</a>,
 <a
 href="https://www.rfc-editor.org/rfc/rfc9449.html">RFC9449</a>,
 <a
-href="https://datatracker.ietf.org/doc/html/draft-ietf-oauth-attestation-based-client-auth-10">IETF OAuth 2.0 Attestation-Based Client Authentication Draft 10</a></p>
+href="https://datatracker.ietf.org/doc/html/draft-ietf-oauth-attestation-based-client-auth-11">IETF OAuth 2.0 Attestation-Based Client Authentication Draft 11</a></p>
 <p>ISO18013-5, <a
 href="https://datatracker.ietf.org/doc/draft-ietf-oauth-sd-jwt-vc/17/">SD-JWT
 VC Draft 17</a>, <a
