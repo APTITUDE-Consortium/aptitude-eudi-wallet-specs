@@ -267,6 +267,7 @@ sequenceDiagram
     end
     U-)W: [3.1] Authenticate User
     W->>W: [3.2] Select credentials and disclosures
+    Note over W: For payments UC's present transaction data
     U-)W: [3.3] Approve or deny disclosure
     alt [3.4] Holder binding is required
       Note over W: Generate holder proof
