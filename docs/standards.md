@@ -62,6 +62,7 @@ Note: Titles are shortened and  omit the shared series prefix carried by every e
 
 |Deliverable|Title|Version|Status|Consumed by|Scope|
 |:---|:---|:---|:---|:---|:---|
+|[EC ARF](https://github.com/eu-digital-identity-wallet/eudi-doc-architecture-and-reference-framework/releases/tag/v3.0.0)|European Digital Identity Wallet Architecture and Reference Framework|3.0.0|Published|RFC-01, RFC-02, RFC-05, trust-fw — architectural baseline and ARF/CIR requirement traceability|issuance-process, issuance-protocol, presentation-protocol, format, trust-model, validation|
 |[ETSI TS 119 602](https://www.etsi.org/deliver/etsi_ts/119600_119699/119602/01.01.01_60/ts_119602v010101p.pdf)| Lists of trusted entities; Data model|1.1.1|Published|RFC-03, RFC-05, trust-fw — list of trusted entities (LoTE) data model|trust-model|
 |[ETSI TS 119 612](https://www.etsi.org/deliver/etsi_ts/119600_119699/119612/02.04.01_60/ts_119612v020401p.pdf)| Trusted Lists|2.4.1|Published|trust-fw — EU trusted list format|trust-model|
 |[ETSI TS 119 615](https://www.etsi.org/deliver/etsi_ts/119600_119699/119615/01.03.01_60/ts_119615v010301p.pdf)|Trusted lists; Procedures for using and interpreting European Union Member States national trusted lists|1.3.1|Published|RFC-03, trust-fw — trusted list processing and interpretation procedures|trust-model|
