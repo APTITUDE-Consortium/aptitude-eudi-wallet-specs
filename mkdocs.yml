@@ -74,6 +74,7 @@ plugins:
         - 'rulebook/wp2-trust-specifications/references/**'
         - 'rulebook/wp2-trust-specifications/requirements/**'
         - 'rulebook/wp2-trust-specifications/topics/**'
+        - 'rulebook/wp2-trust-specifications/docs/examples/**'
         - 'rulebook/wp2-trust-specifications/docs/topics/**'
   - include-markdown:
       comments: true
@@ -128,7 +129,15 @@ nav:
     - mVRC: rulebook/wp5/mVRC-rulebook.md
     - DTC: rulebook/wp3/dtc-rulebook.md
   - Trust Specifications:
-    - Trust Framework: rulebook/trust-framework.md
+    - Trust Framework:
+      - Overview: rulebook/wp2-trust-specifications/docs/trust-framework.md
+      - Trust Architecture: rulebook/wp2-trust-specifications/docs/sections/trust-architecture.md
+      - Trust Artifacts: rulebook/wp2-trust-specifications/docs/sections/trust-artifacts.md
+      - Onboarding Process: rulebook/wp2-trust-specifications/docs/sections/onboarding-process.md
+      - Trust Evaluation: rulebook/wp2-trust-specifications/docs/sections/trust-evaluation-process.md
+      - Trust Management and Lifecycle: rulebook/wp2-trust-specifications/docs/sections/trust-management-lifecycle.md
+      - Trust Use Cases: rulebook/wp2-trust-specifications/docs/sections/use-cases.md
+      - References: rulebook/wp2-trust-specifications/docs/sections/references.md
   - RFCs:
     - Overview: RFCs/index.md
     - RFC-01 Credential Issuance Profile: RFCs/RFC001.md
