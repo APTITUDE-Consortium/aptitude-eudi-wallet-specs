@@ -53,7 +53,6 @@ Here we are only clarifying which roles and/or interfaces are out of the scope o
 |-----------|-------------|-----------|
 | Wallet → APTITUDE Register (runtime) | Runtime lookup from Wallet to APTITUDE Register | Redundant: WRPRC is provisioned at onboarding time (design-time); registration certificate is becoming mandatory per 2025/848 IA.<br><br>*Note: A Wallet Instance MAY still use the Register APIs to:*<ul><li>*Check fresh Entity registration information as a backup to the WRPRC failure,*</li><li>*Check that the Registration certificate obtained by the WRP is bound to the service the Wallet Instance is interacting with.*</li></ul> |
 
-
 ### 2.1 Relation between different standards and interfaces
 
 Following diagram uses Aptitude EUDI Wallet ecosystem diagram as a starting point, keeping in the picture just the roles that are relevant for the scope of this flow specification. It labels each interaction between the two roles and classifies each interface as a design time (blue label) or as a runtime (red label) interface.
@@ -161,7 +160,7 @@ In follow up table the requirements relevant for the flow are listed with decisi
 |Response with VP Token through browser redirect or HTTP POST request|Partially in scope | Only HTTP Post shall be used, as mandated by HAIP|
 |RO (Request Object) shall be retrieved as JAR, as per [RFC9101](https://www.rfc-editor.org/info/rfc9101/)|In scope|For this applied HAIP/ETSI flow, the signed JAR Request Object is passed by reference using `request_uri` in same-device and cross-device flows. Its JOSE header has `typ` set to `oauth-authz-req+jwt`, and `client_id` uses the `x509_hash` prefix. The Wallet checks the audience, nonce, validity period, signature, and applicable `x5c` restrictions. These are profile choices for this flow, not baseline RFC002 trust-governance rules.|
 |Verifier and wallet may support using of request_uri_method=post, allowing wallet to pass its technical capabilities when requesting RO|Not in the scope|Only the value of get is supported|
-|Support for verifiable presentations and for low-security credentials (without holder binding)|In scope|Impact on the validation steps by verifier
+|Support for verifiable presentations and for low-security credentials (without holder binding)|In scope|Impact on the validation steps by verifier|
 |response_type=vp_token parameter, combined with parameters response_uri and response_mode, that can have values of direct_post or direct_post.jwt is recommended to use within the RO|Partially in scope|This applied HAIP/ETSI flow uses `response_mode=direct_post.jwt`. The encrypted response uses verifier response-encryption key material supplied in `client_metadata`; the verifier provides fresh key material for each request.|
 |Protocol supports broad range of client_id_prefix schemes|Partially in the scope|Subsequent profiles are limiting prefixes use. Retrieval of the verifier metadata depends on the prefix value, hence listing requirements as relevant for the flow|
 |Support for `trusted_authorities` attribute usage within the credential query|In scope|The request parameter is optional, but implementations support processing `trusted_authorities.type` with value `etsi_tl` for the applied flow. Each `trusted_authority.values` value is the URI referencing the expected LoTE which contains the Trust Anchor of the Sign/Seal certificate which signed the credential.|
@@ -209,7 +208,6 @@ In some cases to simplify implementation for the partners there are number of ad
 
 |**Requirement**|**Scope decision**|
 |-|-|
-
 
 ### 3.2 Detailed technical flow description (sequence diagram)
 
