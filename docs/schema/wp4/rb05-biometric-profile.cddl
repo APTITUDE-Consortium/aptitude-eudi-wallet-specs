@@ -1,0 +1,72 @@
+; RB05 Biometric Profile Attestation v0.1
+; Draft proposal for review — NON-PRODUCTION
+;
+; This structural CDDL defines the complete issuance/full-credential values grouped
+; by namespace. It is not a schema for a selectively disclosed DeviceResponse.
+; The complete credential SHALL use ISO/IEC 18013-5 IssuerSignedItemBytes,
+; MobileSecurityObject, COSE and DeviceResponse structures.
+;
+; The document type and RB05 namespace below are reserved example values.
+; They SHALL be replaced after APTITUDE governance allocates production values.
+
+rb05-semantic-document = {
+  "docType": rb05-doctype,
+  "nameSpaces": rb05-namespaced-values
+}
+
+rb05-doctype = "org.example.aptitude.biometric-profile.1"
+iso-namespace = "org.iso.23220.1"
+rb05-namespace = "org.example.aptitude.biometric-profile.1"
+
+rb05-namespaced-values = {
+  iso-namespace => rb05-iso-data,
+  rb05-namespace => rb05-specific-data
+}
+
+rb05-iso-data = {
+  family_name: iso-text,
+  given_name: iso-text,
+  document_number: iso-text,
+  issue_date: full-date,
+  expiry_date: full-date,
+  issuing_authority_unicode: iso-text
+}
+
+rb05-specific-data = {
+  biometric_reference: protected-face-reference
+}
+
+protected-face-reference = {
+  modality: "face",
+  verification_mode: "one_to_one",
+  reference_type: "protected_template",
+  format_id: profile-uri,
+  format_version: version-text,
+  protection_profile_id: profile-uri,
+  matcher_profile_id: profile-uri,
+  payload: protected-template
+}
+
+iso-text = tstr .regexp ".+"
+profile-uri = tstr .size (1..512)
+version-text = tstr .size (1..32)
+protected-template = bstr .size (1..16384)
+
+; RFC 8943 CBOR tag 1004 carrying an RFC 3339 full-date string.
+full-date = #6.1004(tstr)
+
+; Conformance rules not expressible here:
+; - category is prohibited for the provisional non-qualified EU mdoc EAA.
+; - ISO identity tstr values are non-empty here. Their exact upper-length and
+;   character constraints SHALL be confirmed against ISO/IEC 23220-2 under D10/D11.
+; - .size limits on custom tstr values count UTF-8 encoded bytes; the JSON
+;   projection needs semantic validation to enforce the same byte ceilings.
+; - full-date values SHALL use YYYY-MM-DD.
+; - the JSON review projection represents payload bstr as canonical base64 text.
+; - issue_date SHALL be no later than expiry_date.
+; - expiry_date SHALL satisfy the maximum lifetime rule in RB05 Section 2.5.
+; - format/protection/matcher identifiers SHALL exist in the approved registry.
+; - the full format/version/protection/matcher tuple SHALL be approved together.
+; - payload SHALL conform to the approved tuple.
+; - status is mandatory for the proposed v0.1 full mdoc and belongs in the MSO,
+;   not in either namespace map; oneTime and shortLived are omitted.
