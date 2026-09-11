@@ -127,8 +127,6 @@ Note: Titles are shortened and  omit the shared series prefix carried by every e
 |ISO/IEC 18013-5|Part 5: Mobile driving licence (mDL) application|Ed2|Draft (DIS)|Not yet consumed — monitored for mdoc revocation and other Ed2 changes|presentation-protocol, format, trust-model, validation|
 |ISO/IEC 18013-7|Part 7: Mobile driving licence (mDL) add-on functions|2025|Published|RFC-02, mVRC rulebook — online mdoc presentation|presentation-protocol, format, trust-model, validation|
 |ISO/IEC 18013-7|Part 7: Mobile driving licence (mDL) add-on functions|Ed2|Draft (DTS)|Not yet consumed — monitored for Ed2 changes|presentation-protocol, format, trust-model, validation|
-|ISO/IEC 23220-2|Part 2: Data objects and encoding rules for generic eID systems|2024|Published|DTC rulebook — data objects and encoding rules|format|
-|ISO/IEC 23220-4|Part 4: Protocols and services for operational phase||Draft (DTS)|DTC rulebook, mVRC rulebook — operational-phase protocols and data element identifiers|presentation-protocol, format, validation|
 |ISO/IEC 7367-2|Personal identification — mdoc schemas Part 2: Mobile vehicle certificate||Draft (DTS)|mVRC rulebook — mobile vehicle certificate schema|format|
 |ISO/IEC 7367-3|Personal identification — mdoc schemas Part 3: Mobile technical report||Draft (NWIP)|mVRC rulebook — referenced alongside ISO/IEC 7367-2|format|
 |ISO 3166-1|Codes for the representation of names of countries and their subdivisions — Part 1: Country codes|2020|Published|trust-fw — country codes in the Register data model and in certificate attributes|trust-model, format|
@@ -136,5 +134,3 @@ Note: Titles are shortened and  omit the shared series prefix carried by every e
 |[ITU-T X.690](https://www.itu.int/rec/T-REC-X.690)|Information technology — ASN.1 encoding rules: Specification of Basic (BER), Canonical (CER) and Distinguished (DER) Encoding Rules; published jointly as ISO/IEC 8825-1|02/2021|Published|Used but not referenced — DER encoding of CRLs and OCSP messages in RFC-04|validation, other|
 
 </div>
-
-> **Note:** For the complete table of standards and specifications, refer to the [relevant-standards.md](https://github.com/APTITUDE-Consortium/aptitude-eudi-wallet-rfcs/blob/main/doc/relevant-standards.md) file in the repository documentation folder.
