@@ -56,8 +56,6 @@ an applicability that has been proposed but not yet confirmed.
 
 Note: Titles are shortened and  omit the shared series prefix carried by every entry from the same body (e.g. the ETSI "…(ESI);" lead-in, and the ISO/IEC 18013 and 23220 family headers). Only the distinctive part is shown; the full official title is at the linked source in *Deliverable*.
 
-Note: Titles are shortened and  omit the shared series prefix carried by every entry from the same body (e.g. the ETSI "…(ESI);" lead-in, and the ISO/IEC 18013 and 23220 family headers). Only the distinctive part is shown; the full official title is at the linked source in *Deliverable*.
-
 <div class="standards-table" markdown>
 
 |Deliverable|Title|Version|Status|Consumed by|Scope|
