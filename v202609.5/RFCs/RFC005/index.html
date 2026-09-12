@@ -1,0 +1,4446 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="APTITUDE Technical Specification">
+      
+      
+        <meta name="author" content="APTITUDE Consortium">
+      
+      
+        <link rel="canonical" href="https://aptitude-consortium.github.io/aptitude-eudi-wallet-specs/v202609.5/RFCs/RFC005/">
+      
+      
+        <link rel="prev" href="../RFC004/">
+      
+      
+        <link rel="next" href="../../itb_plus_user_onboarding/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+    
+    
+      
+        <title>RFC-05 Proximity Presentation Profile - APTITUDE Technical Specification</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.ec1eaa64.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../media/extra.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#aptitude-rfc-05-proximity-presentation-profile" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+      <div data-md-color-scheme="default" data-md-component="outdated" hidden>
+        
+      </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="APTITUDE Technical Specification" class="md-header__button md-logo" aria-label="APTITUDE Technical Specification" data-md-component="logo">
+      
+  <img src="../../img/logo.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            APTITUDE Technical Specification
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              RFC-05 Proximity Presentation Profile
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/APTITUDE-Consortium/aptitude-eudi-wallet-specs" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    APTITUDE-Consortium/aptitude-eudi-wallet-specs
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+    
+      
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../rulebook/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Attestation Rulebooks
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../rulebook/wp2-trust-specifications/docs/trust-framework/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Trust Specifications
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../" class="md-tabs__link">
+          
+  
+  
+    
+  
+  RFCs
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../itb_plus_user_onboarding/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Testing and Conformance
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../schema/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Schemas
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../standards/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Standards
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../glossary/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Glossary
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+  
+
+<nav class="md-nav md-nav--primary md-nav--lifted md-nav--integrated" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="APTITUDE Technical Specification" class="md-nav__button md-logo" aria-label="APTITUDE Technical Specification" data-md-component="logo">
+      
+  <img src="../../img/logo.png" alt="logo">
+
+    </a>
+    APTITUDE Technical Specification
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/APTITUDE-Consortium/aptitude-eudi-wallet-specs" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    APTITUDE-Consortium/aptitude-eudi-wallet-specs
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../rulebook/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Attestation Rulebooks
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_2" id="__nav_2_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Attestation Rulebooks
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../rulebook/wp5/mVRC-rulebook/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    mVRC
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../rulebook/wp3/dtc-rulebook/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DTC
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Trust Specifications
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Trust Specifications
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_1" id="__nav_3_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Trust Framework
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Trust Framework
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../rulebook/wp2-trust-specifications/docs/trust-framework/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../rulebook/wp2-trust-specifications/docs/sections/trust-architecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Trust Architecture
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../rulebook/wp2-trust-specifications/docs/sections/trust-artifacts/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Trust Artifacts
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../rulebook/wp2-trust-specifications/docs/sections/onboarding-process/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Onboarding Process
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../rulebook/wp2-trust-specifications/docs/sections/trust-evaluation-process/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Trust Evaluation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../rulebook/wp2-trust-specifications/docs/sections/trust-management-lifecycle/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Trust Management and Lifecycle
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../rulebook/wp2-trust-specifications/docs/sections/use-cases/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Trust Use Cases
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../rulebook/wp2-trust-specifications/docs/sections/references/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    References
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" checked>
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    RFCs
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_4" id="__nav_4_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    RFCs
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../wp2/generic-issuance-flow-specification/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Generic Issuance Flow
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../RFC001/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    RFC-01 Credential Issuance Profile
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../RFC002/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    RFC-02 Presentation Profile
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../RFC003/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    RFC-03 Trust Evaluation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../RFC004/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    RFC-04 Revocation Profile
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    RFC-05 Proximity Presentation Profile
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    RFC-05 Proximity Presentation Profile
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#authors" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Authors
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#reviewers" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Reviewers
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1-introduction" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Introduction
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-scope" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Scope
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-normative-language" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Normative Language
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-roles-and-components" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Roles and Components
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4. Roles and Components">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#41-user" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.1 User
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#42-wallet-unit-wallet" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.2 Wallet Unit / Wallet
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#43-relying-party" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.3 Relying Party
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#44-proximity-reader" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.4 Proximity Reader
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#45-relying-party-backend" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.5 Relying Party Backend
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#46-reader-user" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.6 Reader User
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-protocol-overview" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Protocol Overview
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5. Protocol Overview">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#51-baseline-aptitude-proximity-presentation-mode" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.1 Baseline APTITUDE proximity presentation mode
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#52-etsi-aligned-requirements" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.2 ETSI-aligned requirements
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#53-supported-proximity-interaction-patterns" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.3 Supported proximity interaction patterns
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#54-high-level-proximity-presentation-sequence" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.4 High-level proximity presentation sequence
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#55-mdoc-device-authentication" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.5 mdoc device authentication
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#56-relation-to-etsi-aligned-proximity-presentation-profiling" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.6 Relation to ETSI-aligned proximity presentation profiling
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-high-level-flows" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. High-Level Flows
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6. High-Level Flows">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#61-qr-code-device-engagement-with-ble-device-retrieval" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.1 QR Code Device Engagement with BLE Device Retrieval
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#62-extended-trust-and-credential-status-validation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.2 Extended Trust and Credential Status Validation
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#63-nfc-device-engagement-with-nfc-device-retrieval" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.3 NFC Device Engagement with NFC Device Retrieval
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#64-mixed-device-engagement-and-device-retrieval-modes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.4 Mixed Device Engagement and Device Retrieval Modes
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-normative-requirements" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. Normative Requirements
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="7. Normative Requirements">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#71-wallet-requirements" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.1 Wallet Requirements
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#72-proximity-reader-requirements" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.2 Proximity Reader Requirements
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8-interface-definitions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. Interface Definitions
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="8. Interface Definitions">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#81-device-engagement-interface" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.1 Device Engagement Interface
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#82-device-retrieval-transport-interface" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.2 Device Retrieval Transport Interface
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#83-device-request-interface" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.3 Device Request Interface
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#84-device-response-interface" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.4 Device Response Interface
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#9-privacy-and-security-considerations" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9. Privacy and Security Considerations
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="9. Privacy and Security Considerations">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#91-data-minimisation-and-disclosure-control" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9.1 Data Minimisation and Disclosure Control
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#92-reader-authentication-and-trust" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9.2 Reader Authentication and Trust
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#93-session-binding-replay-and-relay-protection" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9.3 Session Binding, Replay and Relay Protection
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#94-session-confidentiality-and-transport-protection" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9.4 Session Confidentiality and Transport Protection
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#95-proximity-interaction-and-user-awareness" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9.5 Proximity Interaction and User Awareness
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#96-credential-authenticity-trust-and-status" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9.6 Credential Authenticity, Trust and Status
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#97-logging-retention-and-local-protection" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9.7 Logging, Retention and Local Protection
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#98-baseline-rfc-boundary" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9.8 Baseline RFC Boundary
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#10-conformance" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10. Conformance
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="10. Conformance">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#101-wallet-conformance" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.1 Wallet Conformance
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#102-proximity-reader-conformance" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.2 Proximity Reader Conformance
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#103-optional-proximity-capability-claims" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.3 Optional Proximity Capability Claims
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#104-conformance-boundaries" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.4 Conformance Boundaries
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#11-proximity-presentation-conformance-catalogue-and-deployed-test-matrix" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        11. Proximity Presentation Conformance Catalogue and Deployed Test Matrix
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="11. Proximity Presentation Conformance Catalogue and Deployed Test Matrix">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#111-conformance-check-catalogue" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        11.1 Conformance Check Catalogue
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#112-deployed-test-case-matrix" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        11.2 Deployed Test Case Matrix
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#113-negative-and-error-test-cases" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        11.3 Negative and Error Test Cases
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#114-test-assumptions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        11.4 Test Assumptions
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#12-references" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12. References
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../itb_plus_user_onboarding/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Testing and Conformance
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_5" id="__nav_5_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Testing and Conformance
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../itb_plus_user_onboarding/aptitude-itb-user-onboarding-manual/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ITB+ User Onboarding Guide
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../itb_plus_user_onboarding/report-submission/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Reporting Conformance Results
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../schema/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Schemas
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Schemas
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../standards/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Standards
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Glossary
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Glossary
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../glossary/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Glossary
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../glossary-definitions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Definitions
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+                
+
+
+
+  
+
+
+  <nav class="md-path" aria-label="Navigation" >
+    <ol class="md-path__list">
+      
+        
+  
+  
+    <li class="md-path__item">
+      <a href="../.." class="md-path__link">
+        
+  <span class="md-ellipsis">
+    Home
+  </span>
+
+      </a>
+    </li>
+  
+
+      
+      
+        
+  
+  
+    
+    
+      <li class="md-path__item">
+        <a href="../" class="md-path__link">
+          
+  <span class="md-ellipsis">
+    RFCs
+  </span>
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ol>
+  </nav>
+
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+    <a href="https://github.com/APTITUDE-Consortium/aptitude-eudi-wallet-specs/edit/main/docs/RFCs/RFC005.md" title="Edit this page" class="md-content__button md-icon" rel="edit">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10 20H6V4h7v5h5v3.1l2-2V8l-6-6H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h4zm10.2-7c.1 0 .3.1.4.2l1.3 1.3c.2.2.2.6 0 .8l-1 1-2.1-2.1 1-1c.1-.1.2-.2.4-.2m0 3.9L14.1 23H12v-2.1l6.1-6.1z"/></svg>
+    </a>
+  
+  
+    
+      
+    
+    <a href="https://github.com/APTITUDE-Consortium/aptitude-eudi-wallet-specs/raw/main/docs/RFCs/RFC005.md" title="View source of this page" class="md-content__button md-icon">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 18c.56 0 1 .44 1 1s-.44 1-1 1-1-.44-1-1 .44-1 1-1m0-3c-2.73 0-5.06 1.66-6 4 .94 2.34 3.27 4 6 4s5.06-1.66 6-4c-.94-2.34-3.27-4-6-4m0 6.5a2.5 2.5 0 0 1-2.5-2.5 2.5 2.5 0 0 1 2.5-2.5 2.5 2.5 0 0 1 2.5 2.5 2.5 2.5 0 0 1-2.5 2.5M9.27 20H6V4h7v5h5v4.07c.7.08 1.36.25 2 .49V8l-6-6H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h4.5a8.2 8.2 0 0 1-1.23-2"/></svg>
+    </a>
+  
+
+
+<h1 id="aptitude-rfc-05-proximity-presentation-profile"><strong>APTITUDE RFC-05 Proximity Presentation Profile</strong><a class="headerlink" href="#aptitude-rfc-05-proximity-presentation-profile" title="Permanent link">&para;</a></h1>
+<p><strong>Status:</strong> Draft</p>
+<p><strong>Type:</strong> Cross-pilot baseline RFC</p>
+<p><strong>Scope:</strong> Credential Proximity Presentation / Verification</p>
+<p><strong>Target protocols:</strong> ISO/IEC 18013-5</p>
+<p><strong>Proximity Presentation profiles:</strong></p>
+<ul>
+<li><strong>Device Engagement:</strong> QR Code, NFC</li>
+<li><strong>Device Retrieval:</strong> BLE, NFC</li>
+</ul>
+<h2 id="authors"><strong>Authors</strong><a class="headerlink" href="#authors" title="Permanent link">&para;</a></h2>
+<ul>
+<li>Tomasz Sikorski, COI</li>
+</ul>
+<h2 id="reviewers"><strong>Reviewers</strong><a class="headerlink" href="#reviewers" title="Permanent link">&para;</a></h2>
+<h2 id="1-introduction"><strong>1. Introduction</strong><a class="headerlink" href="#1-introduction" title="Permanent link">&para;</a></h2>
+<p>This document defines the <strong>APTITUDE Proximity Presentation Profile</strong> for interoperable credential presentation and verification in proximity scenarios across APTITUDE pilots.</p>
+<p>It specifies a baseline, cross-pilot profile for the proximity presentation and verification of <code>mso_mdoc</code> attestations, aligned with the Architecture and Reference Framework (ARF) and based on <strong>ISO/IEC 18013-5</strong> device engagement and proximity data retrieval. Where applicable, the profile incorporates relevant requirements from the <strong>ETSI TS 119 472-2 ISO/IEC-mdoc presentation profile</strong>.</p>
+<p>The purpose of this RFC is to establish a stable starting point for interoperability across APTITUDE pilots by defining:</p>
+<ul>
+<li>common proximity presentation and verification requirements</li>
+<li>roles and interfaces between Wallets and proximity Readers</li>
+<li>baseline device engagement and proximity transport requirements</li>
+<li>secure session establishment and encrypted data exchange</li>
+<li>request and response processing for <code>mso_mdoc</code> attestations</li>
+<li>user consent and selective disclosure requirements</li>
+<li>device authentication and holder-binding requirements</li>
+<li>Reader authentication and trust validation requirements, where applicable</li>
+<li>baseline security and privacy expectations for proximity presentation</li>
+<li>a requirements baseline that can be mapped into corresponding <strong>ITB+ conformance test cases</strong></li>
+</ul>
+<p>This RFC is intended to support interoperability first. Credential-specific, sector-specific, or pilot-specific extensions may be added separately, but they should not weaken the baseline proximity presentation requirements defined here.</p>
+<hr />
+<h2 id="2-scope"><strong>2. Scope</strong><a class="headerlink" href="#2-scope" title="Permanent link">&para;</a></h2>
+<p>This RFC defines the conformance profile for <strong>proximity credential presentation and verification</strong> in APTITUDE.</p>
+<p>It covers requirements for:</p>
+<ul>
+<li><strong><span class="mkdocs-ezglossary-link"
+    id="0138218c061417af2bcc787a4bb4f262"
+    data-term="Wallet Unit"
+    data-tooltip="A unique configuration of a Wallet Solution that includes Wallet instances, Wallet Secure Cryptographic Applications and Wallet Secure Cryptographic Devices provided by a Wallet Provider to an individual Wallet User. [ARF]"
+    name="components:Wallet Unit"
+    href="../../glossary-definitions/#19efe3de871ea7c8dc94e428e66b8cd5">Wallet Units</span> / Wallets</strong> acting on behalf of the <span class="mkdocs-ezglossary-link"
+    id="734ed089c65f2ead8c9982acb58f4f4a"
+    data-term="User"
+    data-tooltip="A natural or legal person, or a natural person representing another natural person or a legal person, that uses trust services or electronic identification means provided in accordance with the [European Digital Identity Regulation]. [ARF]"
+    name="roles:User"
+    href="../../glossary-definitions/#7db9d61b526a435034b8a82bac8c1422">roles:User</span></li>
+<li><strong><span class="mkdocs-ezglossary-link"
+    id="a08489209d959cdda37defdf31d1167a"
+    data-term="Relying Party (RP)"
+    data-tooltip="A natural or legal person that relies upon electronic identification, European Digital Identity Wallets or other electronic identification means, or upon a trust service. [ARF]"
+    name="roles:Relying Party (RP)"
+    href="../../glossary-definitions/#becf30626d3616054723a7e5e9a6f458">Relying Parties</span></strong>, through a proximity <strong>Reader</strong>, requesting and validating credential presentations</li>
+<li>an optional <strong>Reader User</strong>, operating the Reader on behalf of the Relying Party in supervised proximity presentation scenarios</li>
+</ul>
+<p>A proximity Reader may operate in either a <strong>supervised</strong> or <strong>unsupervised</strong> mode.</p>
+<p>In supervised mode, the Reader is operated by a natural person acting on behalf of the Relying Party. In unsupervised mode, the Reader operates as an unattended device or automated system without active involvement of a Reader User. Both operating modes are within the scope of this RFC and SHALL use the same baseline proximity presentation protocol defined herein.</p>
+<p>This profile defines a baseline for interoperable proximity presentation using <strong>ISO/IEC 18013-5</strong> device engagement, session establishment, and device retrieval mechanisms.</p>
+<p>The baseline credential format for this profile is <strong>ISO mdoc (<code>mso_mdoc</code>)</strong>. Credential-specific document types, namespaces, data elements, and semantic validation rules are determined by the applicable attestation Rulebook or data model and are not defined by this RFC.</p>
+<p>This RFC includes baseline requirements for:</p>
+<ul>
+<li>device engagement and establishment of a proximity interaction between the Wallet and Reader</li>
+<li>QR Code-based device engagement</li>
+<li>Bluetooth Low Energy (BLE) communication for proximity device retrieval</li>
+<li>optional Near Field Communication (NFC) for device engagement</li>
+<li>optional Near Field Communication (NFC) for proximity device retrieval</li>
+<li>establishment and protection of an encrypted ISO/IEC 18013-5 session</li>
+<li>construction, transmission, and processing of <code>DeviceRequest</code> and <code>DeviceResponse</code></li>
+<li>presentation of one or more <code>mso_mdoc</code> attestations within a single proximity session</li>
+<li>explicit user consent before disclosure of requested credential data</li>
+<li>selective disclosure of requested data elements</li>
+<li>cryptographic binding of the presentation to the active proximity session</li>
+<li>mdoc device authentication using MAC Authentication and, where applicable, mdoc ECDSA / EdDSA Authentication</li>
+<li>Reader authentication and Reader identity processing, where applicable</li>
+<li>validation of credential authenticity and issuer trust</li>
+<li>credential status validation, where applicable</li>
+<li>secure session termination and disposal of ephemeral session key material</li>
+<li>baseline privacy and security requirements applicable to proximity presentation</li>
+</ul>
+<p>The baseline proximity interaction defined by this RFC uses:</p>
+<ul>
+<li><strong>QR Code</strong> for device engagement</li>
+<li><strong>Bluetooth Low Energy (BLE)</strong> for device retrieval</li>
+<li>Wallet operation in <strong>BLE Peripheral Server mode</strong></li>
+<li>Reader operation in <strong>BLE Central Client mode</strong></li>
+<li><strong>GATT</strong> as the baseline BLE communication profile</li>
+</ul>
+<p>The following capabilities are supported as optional extensions to the baseline profile:</p>
+<ul>
+<li><strong>NFC-based device engagement</strong></li>
+<li><strong>NFC-based device retrieval</strong></li>
+<li>Wallet operation in <strong>BLE Central Client mode</strong></li>
+<li>Reader operation in <strong>BLE Peripheral Server mode</strong></li>
+<li>BLE <strong>L2CAP Connection-Oriented Channels (CoC)</strong></li>
+</ul>
+<p>Where NFC device retrieval is supported, the Wallet and Reader MAY use <strong>NFC as the device retrieval transport instead of BLE</strong>, in accordance with ISO/IEC 18013-5.</p>
+<p>Device engagement and device retrieval transport are treated as separate aspects of the proximity interaction. Support for NFC-based device engagement therefore does not imply that NFC-based device retrieval is used. Likewise, implementations supporting NFC-based device retrieval SHALL follow the applicable ISO/IEC 18013-5 mechanisms independently of the device engagement method used to initiate the proximity interaction.</p>
+<p>Where applicable, implementations SHALL also apply the relevant requirements of the <strong>ETSI TS 119 472-2 ISO/IEC-mdoc presentation profile</strong>, including requirements related to:</p>
+<ul>
+<li>Reader/verifier identification</li>
+<li>Reader authentication</li>
+<li>trust validation</li>
+<li>encrypted session handling</li>
+<li>holder binding</li>
+<li>credential status validation</li>
+</ul>
+<p>This RFC does <strong>not</strong> define:</p>
+<ul>
+<li>sector-specific credential semantics, document types, namespaces, or data elements</li>
+<li>credential issuance or credential lifecycle management protocols</li>
+<li>credential-specific business rules or validation decisions</li>
+<li>business processes performed before or after the proximity presentation</li>
+<li>governance rules of the applicable trust framework</li>
+<li>organizational rules for issuing Reader, registration, access, or credential issuer certificates</li>
+<li>pilot-specific or sector-specific user-interface requirements</li>
+<li>business-specific behavior of supervised or unsupervised Readers</li>
+<li>detailed conformance test assertions; these are derived into the ITB+ test suite from the requirements matrix defined in this document</li>
+</ul>
+<p>Where this RFC defines mechanisms for Reader authentication, issuer authentication, trust validation, or credential status verification, these mechanisms are included solely to support interoperable and secure proximity presentation and verification. They do not by themselves define the governance, authorization model, or legal effect of the corresponding trust framework.</p>
+<hr />
+<h2 id="3-normative-language"><strong>3. Normative Language</strong><a class="headerlink" href="#3-normative-language" title="Permanent link">&para;</a></h2>
+<p>The key words <strong>SHALL</strong>, <strong>SHALL NOT</strong>, <strong>SHOULD</strong>, <strong>SHOULD NOT</strong>, <strong>MAY</strong>, and <strong>OPTIONAL</strong> in this document are to be interpreted as described in RFC 2119 and RFC 8174.</p>
+<hr />
+<h2 id="4-roles-and-components"><strong>4. Roles and Components</strong><a class="headerlink" href="#4-roles-and-components" title="Permanent link">&para;</a></h2>
+<p>This RFC uses the following roles and components.</p>
+<h3 id="41-user"><strong>4.1 User</strong><a class="headerlink" href="#41-user" title="Permanent link">&para;</a></h3>
+<p>The <strong><span class="mkdocs-ezglossary-link"
+    id="a7648810522041401eab46e348036ceb"
+    data-term="User"
+    data-tooltip="A natural or legal person, or a natural person representing another natural person or a legal person, that uses trust services or electronic identification means provided in accordance with the [European Digital Identity Regulation]. [ARF]"
+    name="roles:User"
+    href="../../glossary-definitions/#7db9d61b526a435034b8a82bac8c1422">roles:User</span></strong>, as defined in the APTITUDE glossary, is the natural person or legal representative controlling the Wallet and authorising the proximity presentation of credentials.</p>
+<p>The User reviews the data requested by the proximity Reader and explicitly authorises disclosure before credential data is released by the Wallet.</p>
+<h3 id="42-wallet-unit-wallet"><strong>4.2 Wallet Unit / Wallet</strong><a class="headerlink" href="#42-wallet-unit-wallet" title="Permanent link">&para;</a></h3>
+<p>The <strong>Wallet Unit</strong> is the <span class="mkdocs-ezglossary-link"
+    id="49042d732a8485013bd01dfead112daf"
+    data-term="Wallet Unit"
+    data-tooltip="A unique configuration of a Wallet Solution that includes Wallet instances, Wallet Secure Cryptographic Applications and Wallet Secure Cryptographic Devices provided by a Wallet Provider to an individual Wallet User. [ARF]"
+    name="components:Wallet Unit"
+    href="../../glossary-definitions/#19efe3de871ea7c8dc94e428e66b8cd5">Wallet Unit</span> as defined in the ARF and APTITUDE glossary, including one or more <span class="mkdocs-ezglossary-link"
+    id="d4d674f266aac67c6e4fd344696a172b"
+    data-term="Wallet Instance"
+    data-tooltip="The application installed and configured on a User's device or environment, which is part of a Wallet Unit, and that the User uses to interact with the Wallet Unit. [ARF]"
+    name="components:Wallet Instance"
+    href="../../glossary-definitions/#a886c8bc8feb4b7b239b07e272228cd9">Wallet Instances</span> on the Holder’s device or environment.</p>
+<p>In this RFC, the term <strong>Wallet</strong> refers to the Wallet Unit, and its Wallet Instances where the distinction is not material, acting on behalf of the <span class="mkdocs-ezglossary-link"
+    id="0af997dd9dc9f147b14bb20443a45cc0"
+    data-term="User"
+    data-tooltip="A natural or legal person, or a natural person representing another natural person or a legal person, that uses trust services or electronic identification means provided in accordance with the [European Digital Identity Regulation]. [ARF]"
+    name="roles:User"
+    href="../../glossary-definitions/#7db9d61b526a435034b8a82bac8c1422">roles:User</span> to manage credentials and perform proximity presentation using ISO/IEC 18013-5.</p>
+<p>The Wallet participates in device engagement, establishes the secure proximity session with the Reader, processes the <code>DeviceRequest</code>, obtains User consent, and generates and transmits the corresponding <code>DeviceResponse</code>.</p>
+<h3 id="43-relying-party"><strong>4.3 Relying Party</strong><a class="headerlink" href="#43-relying-party" title="Permanent link">&para;</a></h3>
+<p>The <strong><span class="mkdocs-ezglossary-link"
+    id="b220733fc3772f2407e54b03b4cc8814"
+    data-term="Relying Party (RP)"
+    data-tooltip="A natural or legal person that relies upon electronic identification, European Digital Identity Wallets or other electronic identification means, or upon a trust service. [ARF]"
+    name="roles:Relying Party (RP)"
+    href="../../glossary-definitions/#becf30626d3616054723a7e5e9a6f458">Relying Party</span></strong>, as defined in the APTITUDE glossary, is the entity requesting credential data through a proximity Reader, validating the received presentation, and making an authorisation or business decision based on the verification outcome.</p>
+<p>The business purpose for which the credential data is requested is outside the scope of this RFC.</p>
+<h3 id="44-proximity-reader"><strong>4.4 Proximity Reader</strong><a class="headerlink" href="#44-proximity-reader" title="Permanent link">&para;</a></h3>
+<p>The <strong>Proximity Reader</strong> is the <span class="mkdocs-ezglossary-link"
+    id="105af92248b280bb9c59507fc8fb8f83"
+    data-term="Relying Party Instance"
+    data-tooltip="A software and/or hardware module with the capability to interact with a Wallet Unit and to perform Relying Party authentication, that is controlled by a Relying Party. [ARF]"
+    name="components:Relying Party Instance"
+    href="../../glossary-definitions/#2f9e325081d53589e48e481fca803165">Relying Party Instance</span> that interacts locally with the Wallet using the proximity presentation mechanisms defined by this RFC.</p>
+<p>The Proximity Reader performs the Reader-side functions of the ISO/IEC 18013-5 proximity presentation protocol, including, as applicable:</p>
+<ul>
+<li>device engagement processing</li>
+<li>establishment of the proximity communication channel</li>
+<li>generation and transmission of the <code>DeviceRequest</code></li>
+<li>establishment of the encrypted session</li>
+<li>receipt and processing of the <code>DeviceResponse</code></li>
+<li>validation of mdoc issuer authentication and device authentication</li>
+<li>validation of the presentation against the active session context</li>
+<li>Reader authentication and provision of Reader identity information</li>
+<li>trust and credential status validation, where applicable</li>
+<li>secure termination of the proximity session</li>
+</ul>
+<p>A Proximity Reader may be implemented as software, hardware, or a combination thereof.</p>
+<p>A Proximity Reader may operate in either <strong>supervised</strong> or <strong>unsupervised</strong> mode. The operating mode does not change the baseline ISO/IEC 18013-5 proximity presentation protocol defined by this RFC.</p>
+<h3 id="45-relying-party-backend"><strong>4.5 Relying Party Backend</strong><a class="headerlink" href="#45-relying-party-backend" title="Permanent link">&para;</a></h3>
+<p>The <strong><span class="mkdocs-ezglossary-link"
+    id="77d8b1d35554540b840d18f7ba33384a"
+    data-term="Verifier Backend"
+    data-tooltip="Server-side component that creates presentation requests, receives presentation responses, validates them, and returns the result to the Relying Party Instance."
+    name="components:Verifier Backend"
+    href="../../glossary-definitions/#8be5901459f3f26d31d514f76311a827">Relying Party Backend</span></strong>, as defined in the APTITUDE glossary, is an optional server-side component supporting the Proximity Reader.</p>
+<p>Where used, the Relying Party Backend MAY perform functions such as:</p>
+<ul>
+<li>definition or preparation of credential data requests</li>
+<li>validation of received credential data</li>
+<li>issuer trust validation</li>
+<li>Reader trust or registration-related processing</li>
+<li>credential status validation</li>
+<li>application-specific processing of the verification result</li>
+</ul>
+<p>The use of a Relying Party Backend is not required by this RFC. A Proximity Reader MAY perform the required proximity presentation and verification functions locally without relying on a continuously connected backend.</p>
+<p>The interface between the Proximity Reader and the Relying Party Backend is outside the scope of this RFC.</p>
+<h3 id="46-reader-user"><strong>4.6 Reader User</strong><a class="headerlink" href="#46-reader-user" title="Permanent link">&para;</a></h3>
+<p>The <strong>Reader User</strong> is an optional natural person operating the Proximity Reader on behalf of the Relying Party.</p>
+<p>The Reader User is present in <strong>supervised</strong> proximity presentation scenarios and may initiate the verification process, select or confirm the requested credential data, and receive the verification result through the Reader interface.</p>
+<p>In <strong>unsupervised</strong> scenarios, no Reader User is involved and the Proximity Reader operates as an unattended or automated system.</p>
+<p>The presence or absence of a Reader User does not alter the Wallet-to-Reader protocol requirements defined by this RFC.</p>
+<h2 id="5-protocol-overview"><strong>5. Protocol Overview</strong><a class="headerlink" href="#5-protocol-overview" title="Permanent link">&para;</a></h2>
+<p>The APTITUDE Proximity Presentation Profile is based on <strong>ISO/IEC 18013-5</strong> as the baseline protocol for proximity presentation and verification of ISO mdoc (<code>mso_mdoc</code>) attestations.</p>
+<p>The profile covers device engagement, establishment of a proximity communication channel, secure session establishment, credential data request and response processing, device authentication, selective disclosure, and verification of the resulting mdoc presentation.</p>
+<p>This RFC defines a <strong>baseline APTITUDE proximity presentation mode</strong> intended to provide interoperable Wallet-to-Reader communication across APTITUDE pilots. Where applicable, it applies the relevant requirements of the <strong>ETSI TS 119 472-2 ISO/IEC-mdoc presentation profile</strong>.</p>
+<h3 id="51-baseline-aptitude-proximity-presentation-mode"><strong>5.1 Baseline APTITUDE proximity presentation mode</strong><a class="headerlink" href="#51-baseline-aptitude-proximity-presentation-mode" title="Permanent link">&para;</a></h3>
+<p>In the baseline mode:</p>
+<ul>
+<li>the Wallet initiates device engagement and makes the required <code>DeviceEngagement</code> information available to the Reader</li>
+<li>device engagement is performed using a QR Code</li>
+<li>the Reader establishes a proximity communication channel with the Wallet using Bluetooth Low Energy (BLE)</li>
+<li>the Wallet operates as a BLE Peripheral Server and the Reader operates as a BLE Central Client</li>
+<li>the Reader and Wallet establish an encrypted ISO/IEC 18013-5 session using ephemeral session key material</li>
+<li>the Reader creates and sends a <code>DeviceRequest</code> identifying the credential documents and data elements requested for presentation</li>
+<li>the Wallet validates and processes the request before presenting the requested data to the <span class="mkdocs-ezglossary-link"
+    id="62a666fe48587b986889c1315fb3f823"
+    data-term="User"
+    data-tooltip="A natural or legal person, or a natural person representing another natural person or a legal person, that uses trust services or electronic identification means provided in accordance with the [European Digital Identity Regulation]. [ARF]"
+    name="roles:User"
+    href="../../glossary-definitions/#7db9d61b526a435034b8a82bac8c1422">roles:User</span></li>
+<li>the <span class="mkdocs-ezglossary-link"
+    id="bc2da1d5df3eceb24418e15e0efd64e3"
+    data-term="User"
+    data-tooltip="A natural or legal person, or a natural person representing another natural person or a legal person, that uses trust services or electronic identification means provided in accordance with the [European Digital Identity Regulation]. [ARF]"
+    name="roles:User"
+    href="../../glossary-definitions/#7db9d61b526a435034b8a82bac8c1422">roles:User</span> reviews the requested disclosure and explicitly approves release of credential data</li>
+<li>the Wallet creates a <code>DeviceResponse</code> containing one or more requested <code>mso_mdoc</code> attestations and the corresponding cryptographic authentication material</li>
+<li>the Wallet encrypts and transmits the <code>DeviceResponse</code> within the established ISO/IEC 18013-5 session</li>
+<li>the Reader decrypts and validates the received response, including issuer authentication, device authentication, session binding, and other applicable trust and status checks</li>
+<li>the Wallet and Reader securely terminate the session and dispose of ephemeral session key material after completion</li>
+</ul>
+<p>The baseline proximity mode requires interoperability at protocol level and does <strong>not</strong> depend on a particular business use case, credential type, or Reader deployment model.</p>
+<h3 id="52-etsi-aligned-requirements"><strong>5.2 ETSI-aligned requirements</strong><a class="headerlink" href="#52-etsi-aligned-requirements" title="Permanent link">&para;</a></h3>
+<p>For proximity presentation flows in scope for this RFC, the exchange SHALL apply the relevant requirements of the <strong>ETSI TS 119 472-2 ISO/IEC-mdoc presentation profile</strong>, where applicable.</p>
+<p>These requirements include:</p>
+<ul>
+<li>identification of the Reader / Relying Party</li>
+<li>Reader authentication, where required by the applicable deployment and trust model</li>
+<li>processing and validation of Reader authentication and trust information</li>
+<li>integrity protection of the Reader request</li>
+<li>establishment and use of an encrypted ISO/IEC 18013-5 session</li>
+<li>cryptographic binding of the <code>DeviceResponse</code> to the active session</li>
+<li>issuer authentication of presented mdoc attestations</li>
+<li>device authentication of presented mdoc attestations</li>
+<li>validation of credential status information, where applicable</li>
+</ul>
+<p>Where Reader registration certificates, Reader access certificates, trusted lists, or equivalent trust information are used, their processing SHALL follow the applicable ETSI profile and trust framework requirements.</p>
+<p>This RFC profiles their use within the proximity presentation exchange but does <strong>not</strong> define the governance, issuance, or legal effect of the corresponding certificates or trust infrastructure.</p>
+<h3 id="53-supported-proximity-interaction-patterns"><strong>5.3 Supported proximity interaction patterns</strong><a class="headerlink" href="#53-supported-proximity-interaction-patterns" title="Permanent link">&para;</a></h3>
+<p>The mandatory interoperability baseline defined by this RFC is <strong>QR Code Device Engagement → BLE Device Retrieval</strong>, using:</p>
+<ul>
+<li>Wallet as <strong>BLE Peripheral Server</strong></li>
+<li>Reader as <strong>BLE Central Client</strong></li>
+<li><strong>GATT</strong> as the baseline BLE communication profile</li>
+</ul>
+<p>The following additional proximity capabilities are optional:</p>
+<ul>
+<li><strong>NFC Device Engagement</strong></li>
+<li><strong>NFC Device Retrieval</strong></li>
+<li>Wallet operation as a <strong>BLE Central Client</strong></li>
+<li>Reader operation as a <strong>BLE Peripheral Server</strong></li>
+<li>BLE <strong>L2CAP Connection-Oriented Channels (CoC)</strong></li>
+</ul>
+<p>Where NFC Device Retrieval is supported, NFC MAY be used instead of BLE for the device retrieval phase in accordance with ISO/IEC 18013-5.</p>
+<p>Device Engagement and Device Retrieval are independent protocol aspects. The Device Engagement mechanism communicates the information required to establish the subsequent proximity interaction, including the supported connection method or methods. The selected Device Retrieval transport is then used for the secure exchange of the <code>DeviceRequest</code> and <code>DeviceResponse</code>.</p>
+<p>The Proximity Reader may operate in either:</p>
+<ul>
+<li><strong>supervised mode</strong>, where a Reader User operates the Reader; or</li>
+<li><strong>unsupervised mode</strong>, where the Reader operates as an unattended or automated system.</li>
+</ul>
+<p>Both operating modes use the same Wallet-to-Reader proximity protocol defined by this RFC.</p>
+<h3 id="54-high-level-proximity-presentation-sequence"><strong>5.4 High-level proximity presentation sequence</strong><a class="headerlink" href="#54-high-level-proximity-presentation-sequence" title="Permanent link">&para;</a></h3>
+<p>At a high level, the proximity presentation process is:</p>
+<ol>
+<li>The Wallet prepares ephemeral device engagement key material and creates <code>DeviceEngagement</code>.</li>
+<li>The Reader obtains the <code>DeviceEngagement</code> information using a supported Device Engagement mechanism.</li>
+<li>The Wallet and Reader establish the selected Device Retrieval communication channel.</li>
+<li>The Reader generates ephemeral reader key material and the Wallet and Reader establish the ISO/IEC 18013-5 session context and session encryption keys.</li>
+<li>The Reader constructs a <code>DeviceRequest</code> containing the requested document types, namespaces, and data elements.</li>
+<li>The Reader transmits the encrypted <code>DeviceRequest</code> to the Wallet within the established session.</li>
+<li>The Wallet decrypts and validates the request and performs applicable Reader authentication and trust validation.</li>
+<li>The Wallet presents the requested disclosure to the <span class="mkdocs-ezglossary-link"
+    id="009978715d6e7a161202df3cef6b05d6"
+    data-term="User"
+    data-tooltip="A natural or legal person, or a natural person representing another natural person or a legal person, that uses trust services or electronic identification means provided in accordance with the [European Digital Identity Regulation]. [ARF]"
+    name="roles:User"
+    href="../../glossary-definitions/#7db9d61b526a435034b8a82bac8c1422">roles:User</span> and obtains explicit consent.</li>
+<li>The Wallet creates a <code>DeviceResponse</code>, including issuer authentication and device authentication, and transmits the encrypted response to the Reader.</li>
+<li>The Reader decrypts and validates the <code>DeviceResponse</code>, including credential authenticity, device authentication, session binding, trust, and credential status where applicable.</li>
+<li>The Wallet and Reader terminate the proximity session and securely dispose of ephemeral session key material.</li>
+</ol>
+<h3 id="55-mdoc-device-authentication"><strong>5.5 mdoc device authentication</strong><a class="headerlink" href="#55-mdoc-device-authentication" title="Permanent link">&para;</a></h3>
+<p>The Wallet SHALL provide mdoc device authentication for every presented mdoc in accordance with ISO/IEC 18013-5.</p>
+<p>The Wallet <strong>SHOULD use MAC Authentication</strong> for mdoc device authentication where technically feasible.</p>
+<p>Where MAC Authentication is not technically feasible in the applicable implementation context, the Wallet <strong>MAY use mdoc ECDSA / EdDSA Authentication</strong>.</p>
+<p>A conforming Proximity Reader <strong>SHALL support validation of both</strong>:</p>
+<ul>
+<li>MAC Authentication; and</li>
+<li>mdoc ECDSA / EdDSA Authentication.</li>
+</ul>
+<p>The authentication result SHALL be cryptographically bound to the active ISO/IEC 18013-5 session and the corresponding <code>SessionTranscript</code>.</p>
+<h3 id="56-relation-to-etsi-aligned-proximity-presentation-profiling"><strong>5.6 Relation to ETSI-aligned proximity presentation profiling</strong><a class="headerlink" href="#56-relation-to-etsi-aligned-proximity-presentation-profiling" title="Permanent link">&para;</a></h3>
+<p>ETSI TS 119 472-2 defines an <strong>ISO/IEC-mdoc presentation profile</strong> for proximity-based, non-API-mediated device retrieval based on ISO/IEC 18013-5.</p>
+<p>This RFC adopts that proximity presentation model as the basis for the APTITUDE proximity interoperability profile and adds APTITUDE-specific baseline choices where a common implementation baseline is required.</p>
+<p>In particular, this RFC defines common APTITUDE expectations for:</p>
+<ul>
+<li>supported Device Engagement mechanisms</li>
+<li>supported Device Retrieval transports</li>
+<li>BLE operating roles</li>
+<li>processing of <code>DeviceRequest</code> and <code>DeviceResponse</code></li>
+<li>user consent and selective disclosure</li>
+<li>mdoc device authentication</li>
+<li>Reader authentication and trust validation</li>
+<li>secure session establishment and termination</li>
+<li>handling of one or more mdoc attestations within a single proximity session</li>
+</ul>
+<p>Credential-specific document types, namespaces, data elements, disclosure policies, and validation rules remain defined by the applicable credential Rulebook and are outside the scope of this horizontal RFC.</p>
+<h2 id="6-high-level-flows"><strong>6. High-Level Flows</strong><a class="headerlink" href="#6-high-level-flows" title="Permanent link">&para;</a></h2>
+<p>This section defines the high-level proximity presentation flows supported by this RFC.</p>
+<p>The mandatory APTITUDE interoperability baseline is <strong>QR Code Device Engagement → BLE Device Retrieval</strong>.</p>
+<p>Implementations MAY additionally support:</p>
+<ul>
+<li><strong>NFC Device Engagement → NFC Device Retrieval</strong></li>
+<li><strong>NFC Device Engagement → BLE Device Retrieval</strong></li>
+<li><strong>QR Code Device Engagement → NFC Device Retrieval</strong></li>
+</ul>
+<p>The Device Engagement mechanism and the Device Retrieval transport are separate aspects of the ISO/IEC 18013-5 proximity presentation flow.</p>
+<p>Unless explicitly stated otherwise, the same requirements for request processing, User consent, selective disclosure, mdoc authentication, response validation, trust processing, and session termination apply independently of the Device Engagement and Device Retrieval mechanisms selected for a particular proximity interaction.</p>
+<p>The high-level relationship between the participants is:</p>
+<pre class="mermaid"><code>flowchart LR
+    U[Wallet User]
+    W[EUDI Wallet]
+    R[Proximity Reader]
+    RU[Reader User]
+
+    U --&gt; W
+    W &lt;--&gt;|ISO/IEC 18013-5&lt;br/&gt;BLE or NFC| R
+    R -. supervised mode .-&gt; RU</code></pre>
+<p>The Reader User is optional and is present only in supervised Reader deployments.</p>
+<hr />
+<h3 id="61-qr-code-device-engagement-with-ble-device-retrieval"><strong>6.1 QR Code Device Engagement with BLE Device Retrieval</strong><a class="headerlink" href="#61-qr-code-device-engagement-with-ble-device-retrieval" title="Permanent link">&para;</a></h3>
+<p>This flow defines the mandatory proximity interoperability baseline of this RFC.</p>
+<p>The Wallet performs Device Engagement using a QR Code and advertises BLE as an available Device Retrieval method. The Reader obtains the Device Engagement information by scanning the QR Code and subsequently establishes a BLE connection with the Wallet.</p>
+<h4 id="sequence-diagram"><strong>Sequence diagram</strong><a class="headerlink" href="#sequence-diagram" title="Permanent link">&para;</a></h4>
+<pre class="mermaid"><code>sequenceDiagram
+    autonumber
+
+    Actor U as Wallet User
+    participant Wallet as EUDI Wallet (Peripheral, GATT Server)
+    participant Reader as Proximity Reader (Central, GATT Client)
+    Actor RU as Reader User
+
+    rect rgba(230, 230, 230, 0.18)
+        Note left of Wallet: Initialization
+
+        opt Supervised Reader mode
+            RU-&gt;&gt;Reader: Launch Proximity Reader
+            Reader-&gt;&gt;RU: Display presentation request definition
+            RU-&gt;&gt;Reader: Select / confirm requested data
+        end
+
+        Reader-&gt;&gt;Reader: Prepare DeviceRequest
+        Reader-&gt;&gt;Reader: Enable QR Code scanner
+
+        U-&gt;&gt;Wallet: Start proximity presentation
+        Wallet-&gt;&gt;Wallet: Prepare EDeviceKey + BLE ConnectionMethod
+        Wallet-&gt;&gt;Wallet: Render DeviceEngagement QR Code
+    end
+
+    rect rgba(230, 230, 230, 0.18)
+        Note left of Wallet: Device Engagement
+
+        Reader-&gt;&gt;Wallet: Scan QR Code
+        Wallet-&gt;&gt;Reader: DeviceEngagement (CBOR)
+        Reader-&gt;&gt;Reader: Process DeviceEngagement
+        Reader-&gt;&gt;Reader: Build SessionTranscript base
+        Reader-&gt;&gt;Reader: Scan for BLE mdoc service
+        Reader-&gt;&gt;Wallet: BLE Connect
+        Wallet-&gt;&gt;Reader: BLE connection established
+
+        opt Ident characteristic used
+            Reader-&gt;&gt;Wallet: Read Ident = SHA-256(EDeviceKeyBytes)
+        end
+
+        Reader-&gt;&gt;Wallet: Enable required notifications
+    end
+
+    rect rgba(230, 230, 230, 0.18)
+        Note left of Wallet: Session Establishment and Device Request
+
+        Reader-&gt;&gt;Wallet: Write State = Start
+        Reader-&gt;&gt;Reader: Generate EReaderKey
+        Reader-&gt;&gt;Reader: Derive session keys
+        Reader-&gt;&gt;Reader: Build + encrypt DeviceRequest
+
+        loop Fragmented message
+            Reader-&gt;&gt;Wallet: SessionEstablishment + encrypted DeviceRequest (more data)
+        end
+
+        Reader-&gt;&gt;Wallet: SessionEstablishment + encrypted DeviceRequest (last fragment)
+
+        Wallet-&gt;&gt;Wallet: Derive session keys
+        Wallet-&gt;&gt;Wallet: Build SessionTranscript
+        Wallet-&gt;&gt;Wallet: Decrypt and parse DeviceRequest
+
+        opt Reader authentication / trust validation
+            Wallet-&gt;&gt;Wallet: Validate ReaderAuth and Reader trust
+        end
+
+        Wallet-&gt;&gt;U: Display requested credential data
+    end
+
+    rect rgba(230, 230, 230, 0.18)
+        Note left of Wallet: User Consent and Device Response
+
+        U-&gt;&gt;Wallet: Approve sharing
+        Wallet-&gt;&gt;Wallet: Build DeviceResponse + DeviceAuthentication
+
+        alt MAC Authentication
+            Wallet-&gt;&gt;Wallet: Perform ECKA-DH
+            Wallet-&gt;&gt;Wallet: Derive EMacKey using HKDF
+            Wallet-&gt;&gt;Wallet: Calculate MAC
+            Wallet-&gt;&gt;Wallet: Add deviceMac to DeviceAuth
+        else mdoc ECDSA / EdDSA Authentication
+            Wallet-&gt;&gt;Wallet: Sign DeviceAuthentication
+            Wallet-&gt;&gt;Wallet: Add deviceSignature to DeviceAuth
+        end
+
+        Wallet-&gt;&gt;Wallet: Encrypt DeviceResponse
+
+        loop Fragmented message
+            Wallet--&gt;&gt;Reader: Encrypted DeviceResponse (more data)
+        end
+
+        Wallet--&gt;&gt;Reader: Encrypted DeviceResponse (last fragment)
+
+        Reader-&gt;&gt;Reader: Decrypt DeviceResponse
+        Reader-&gt;&gt;Reader: Validate IssuerAuth
+        Reader-&gt;&gt;Reader: Validate DeviceAuthentication
+        Reader-&gt;&gt;Reader: Validate SessionTranscript binding
+    end
+
+    rect rgba(230, 230, 230, 0.18)
+        Note left of Wallet: Session Termination
+
+        alt End Command
+            Reader-&gt;&gt;Wallet: Write State = End
+        else Session Termination
+            Reader-&gt;&gt;Wallet: SessionData (statusCode=20)
+        end
+
+        Wallet-&gt;&gt;Wallet: Delete EDeviceKey and session keys
+        Reader-&gt;&gt;Reader: Delete EReaderKey and session keys
+        Wallet-&gt;&gt;Wallet: Close communication channel
+        Reader-&gt;&gt;Reader: Close communication channel
+    end
+
+    rect rgba(230, 230, 230, 0.18)
+        Note left of Wallet: Finalization
+
+        Wallet-&gt;&gt;U: Present result
+
+        opt Supervised Reader mode
+            Reader-&gt;&gt;RU: Present verification result
+        end
+    end</code></pre>
+<h4 id="611-presentation-request-preparation"><strong>6.1.1 Presentation Request Preparation</strong><a class="headerlink" href="#611-presentation-request-preparation" title="Permanent link">&para;</a></h4>
+<p>Before initiating Device Retrieval, the Proximity Reader SHALL determine the credential information that it intends to request from the Wallet.</p>
+<p>The request definition SHOULD identify, as applicable:</p>
+<ul>
+<li>requested mdoc document type or types</li>
+<li>requested namespaces</li>
+<li>requested data elements</li>
+<li>intent to retain information, where applicable</li>
+<li>additional request information required by the applicable credential Rulebook or presentation profile</li>
+</ul>
+<p>In a <strong>supervised</strong> Reader deployment, the Reader User MAY select or confirm the requested credential data before the proximity interaction begins.</p>
+<p>In an <strong>unsupervised</strong> Reader deployment, the request MAY be predefined or dynamically determined by the Relying Party system without involvement of a Reader User.</p>
+<p>The operating mode of the Reader SHALL NOT change the Wallet-to-Reader protocol defined by this RFC.</p>
+<h4 id="612-wallet-initialization-and-device-engagement"><strong>6.1.2 Wallet Initialization and Device Engagement</strong><a class="headerlink" href="#612-wallet-initialization-and-device-engagement" title="Permanent link">&para;</a></h4>
+<p>The <span class="mkdocs-ezglossary-link"
+    id="1d71279024d33713e14f7fbd9ee6d984"
+    data-term="User"
+    data-tooltip="A natural or legal person, or a natural person representing another natural person or a legal person, that uses trust services or electronic identification means provided in accordance with the [European Digital Identity Regulation]. [ARF]"
+    name="roles:User"
+    href="../../glossary-definitions/#7db9d61b526a435034b8a82bac8c1422">roles:User</span> initiates the proximity presentation function of the Wallet.</p>
+<p>The Wallet SHALL prepare the ISO/IEC 18013-5 Device Engagement information required to establish and secure the subsequent Device Retrieval session.</p>
+<p>This includes, as applicable:</p>
+<ul>
+<li>ephemeral device engagement key material (<code>EDeviceKey</code>)</li>
+<li>supported cipher suite information</li>
+<li>supported Device Retrieval connection information</li>
+<li>additional Device Engagement information required by ISO/IEC 18013-5</li>
+</ul>
+<p>For the baseline flow, the Wallet SHALL include the BLE ConnectionMethod information required to establish the subsequent BLE communication channel.</p>
+<p>The Wallet SHALL encode the <code>DeviceEngagement</code> structure according to ISO/IEC 18013-5 and make it available to the Reader through a QR Code.</p>
+<p>The Reader SHALL scan and process the QR Code before establishing the Device Retrieval connection.</p>
+<p>The ephemeral device engagement private key SHALL be generated for the proximity interaction and SHALL NOT be reused across independent presentation sessions.</p>
+<h4 id="613-ble-connection-establishment"><strong>6.1.3 BLE Connection Establishment</strong><a class="headerlink" href="#613-ble-connection-establishment" title="Permanent link">&para;</a></h4>
+<p>After processing <code>DeviceEngagement</code>, the Reader SHALL establish the BLE Device Retrieval connection using the connection information provided by the Wallet.</p>
+<p>For the mandatory baseline:</p>
+<ul>
+<li>the Wallet SHALL operate as a <strong>BLE Peripheral Server</strong></li>
+<li>the Reader SHALL operate as a <strong>BLE Central Client</strong></li>
+<li>the Reader SHALL discover and connect to the Wallet's mdoc BLE service</li>
+<li><strong>GATT</strong> SHALL be supported as the baseline BLE communication profile</li>
+</ul>
+<p>The Wallet and Reader SHALL perform the BLE state and characteristic operations required by ISO/IEC 18013-5 before exchanging protected Device Retrieval messages.</p>
+<p>The Wallet MAY additionally support BLE Central Client mode and the Reader MAY support BLE Peripheral Server mode.</p>
+<p>Where both parties support BLE L2CAP Connection-Oriented Channels (CoC), L2CAP MAY be used as an alternative supported BLE communication mechanism in accordance with the applicable ISO/IEC 18013-5 requirements.</p>
+<h4 id="614-session-establishment-and-device-request"><strong>6.1.4 Session Establishment and Device Request</strong><a class="headerlink" href="#614-session-establishment-and-device-request" title="Permanent link">&para;</a></h4>
+<p>The Reader SHALL generate ephemeral reader key material (<code>EReaderKey</code>) for the active proximity session.</p>
+<p>The Wallet and Reader SHALL establish the ISO/IEC 18013-5 session context and derive the corresponding session encryption keys using the key agreement and key derivation mechanisms defined by ISO/IEC 18013-5.</p>
+<p>The <code>SessionTranscript</code> SHALL cryptographically bind the presentation to the active proximity session.</p>
+<p>The Reader SHALL construct a <code>DeviceRequest</code> containing one or more document requests.</p>
+<p>Each document request SHALL identify, as applicable:</p>
+<ul>
+<li>requested document type</li>
+<li>requested namespaces</li>
+<li>requested data elements</li>
+<li>intent to retain information</li>
+<li>additional request information defined by the applicable credential profile</li>
+</ul>
+<p>Where Reader Authentication is applicable, the Reader SHALL provide the corresponding Reader Authentication information in accordance with ISO/IEC 18013-5 and the applicable ETSI presentation profile requirements.</p>
+<p>The Reader SHALL transmit the <code>DeviceRequest</code> using the protected ISO/IEC 18013-5 session.</p>
+<p>No credential data SHALL be transmitted by the Wallet before the secure session has been successfully established.</p>
+<h4 id="615-wallet-request-validation"><strong>6.1.5 Wallet Request Validation</strong><a class="headerlink" href="#615-wallet-request-validation" title="Permanent link">&para;</a></h4>
+<p>The Wallet SHALL decrypt and validate the received <code>DeviceRequest</code> before presenting the request to the <span class="mkdocs-ezglossary-link"
+    id="5d7cf168b9e0dba9bc0d490493fce108"
+    data-term="User"
+    data-tooltip="A natural or legal person, or a natural person representing another natural person or a legal person, that uses trust services or electronic identification means provided in accordance with the [European Digital Identity Regulation]. [ARF]"
+    name="roles:User"
+    href="../../glossary-definitions/#7db9d61b526a435034b8a82bac8c1422">roles:User</span>.</p>
+<p>Validation SHALL include, as applicable:</p>
+<ul>
+<li>validity and structure of the <code>DeviceRequest</code></li>
+<li>supported document types</li>
+<li>supported namespaces and data elements</li>
+<li>compatibility with credentials available in the Wallet</li>
+<li>integrity of the active session</li>
+<li><code>SessionTranscript</code> binding</li>
+<li>Reader Authentication</li>
+<li>Reader identity and trust information</li>
+<li>Reader authorisation to request the specified data, where such authorisation information is available</li>
+</ul>
+<p>Where Reader registration certificates, Reader access certificates, trusted lists, or equivalent trust information are used, the Wallet SHALL process them according to the applicable ETSI profile and trust framework requirements.</p>
+<p>Invalid, malformed, unsupported, or unauthorised requests SHALL NOT result in disclosure of credential data.</p>
+<h4 id="616-holder-consent"><strong>6.1.6 Holder Consent</strong><a class="headerlink" href="#616-holder-consent" title="Permanent link">&para;</a></h4>
+<p>After successful request processing, the Wallet SHALL present the requested disclosure to the <span class="mkdocs-ezglossary-link"
+    id="c38964d8688005884540ca38bcc5f050"
+    data-term="User"
+    data-tooltip="A natural or legal person, or a natural person representing another natural person or a legal person, that uses trust services or electronic identification means provided in accordance with the [European Digital Identity Regulation]. [ARF]"
+    name="roles:User"
+    href="../../glossary-definitions/#7db9d61b526a435034b8a82bac8c1422">roles:User</span> in a transparent and understandable manner.</p>
+<p>The Wallet SHOULD display, where applicable:</p>
+<ul>
+<li>identity of the Relying Party / Reader</li>
+<li>purpose or context of the request</li>
+<li>requested credential or credentials</li>
+<li>requested data elements</li>
+<li>mandatory or optional nature of requested data elements, where this information is available</li>
+<li>retention information, where provided</li>
+</ul>
+<p>The <span class="mkdocs-ezglossary-link"
+    id="d0a20851041c928a701d0b200f45f164"
+    data-term="User"
+    data-tooltip="A natural or legal person, or a natural person representing another natural person or a legal person, that uses trust services or electronic identification means provided in accordance with the [European Digital Identity Regulation]. [ARF]"
+    name="roles:User"
+    href="../../glossary-definitions/#7db9d61b526a435034b8a82bac8c1422">roles:User</span> SHALL explicitly approve the release of credential data before the Wallet generates the corresponding <code>DeviceResponse</code>.</p>
+<p>The Wallet SHALL support selective disclosure and SHALL disclose only data elements that:</p>
+<ul>
+<li>were requested by the Reader</li>
+<li>are available in the selected credential</li>
+<li>were authorised for disclosure by the <span class="mkdocs-ezglossary-link"
+    id="c3414cda2bbe1fba244d09fa1027f4ed"
+    data-term="User"
+    data-tooltip="A natural or legal person, or a natural person representing another natural person or a legal person, that uses trust services or electronic identification means provided in accordance with the [European Digital Identity Regulation]. [ARF]"
+    name="roles:User"
+    href="../../glossary-definitions/#7db9d61b526a435034b8a82bac8c1422">roles:User</span></li>
+</ul>
+<p>The <span class="mkdocs-ezglossary-link"
+    id="f588190919d5785889f5cf8bb78a6e20"
+    data-term="User"
+    data-tooltip="A natural or legal person, or a natural person representing another natural person or a legal person, that uses trust services or electronic identification means provided in accordance with the [European Digital Identity Regulation]. [ARF]"
+    name="roles:User"
+    href="../../glossary-definitions/#7db9d61b526a435034b8a82bac8c1422">roles:User</span> SHALL be able to cancel the proximity presentation before credential data is disclosed.</p>
+<h4 id="617-device-response-generation-and-transmission"><strong>6.1.7 Device Response Generation and Transmission</strong><a class="headerlink" href="#617-device-response-generation-and-transmission" title="Permanent link">&para;</a></h4>
+<p>After User consent, the Wallet SHALL construct an ISO/IEC 18013-5 <code>DeviceResponse</code>.</p>
+<p>The <code>DeviceResponse</code> MAY contain one or more mdoc documents within the same proximity session.</p>
+<p>For each presented mdoc, the Wallet SHALL provide:</p>
+<ul>
+<li>requested issuer-signed data elements</li>
+<li>applicable issuer authentication information</li>
+<li>applicable device-signed data</li>
+<li>mdoc device authentication bound to the active <code>SessionTranscript</code></li>
+</ul>
+<p>For mdoc device authentication, the Wallet <strong>SHOULD use MAC Authentication</strong> where technically feasible.</p>
+<p>Where MAC Authentication is not technically feasible, the Wallet <strong>MAY use mdoc ECDSA / EdDSA Authentication</strong>.</p>
+<p>The Wallet SHALL protect and transmit the <code>DeviceResponse</code> within the active ISO/IEC 18013-5 session.</p>
+<p>Where the selected Device Retrieval transport requires message fragmentation, the Wallet and Reader SHALL perform fragmentation and reassembly according to the applicable ISO/IEC 18013-5 transport requirements.</p>
+<h4 id="618-reader-validation-and-result-handling"><strong>6.1.8 Reader Validation and Result Handling</strong><a class="headerlink" href="#618-reader-validation-and-result-handling" title="Permanent link">&para;</a></h4>
+<p>The Reader SHALL decrypt and validate the received <code>DeviceResponse</code>.</p>
+<p>Validation SHALL include, as applicable:</p>
+<ul>
+<li>successful session decryption</li>
+<li>consistency of the response with the active <code>SessionTranscript</code></li>
+<li>consistency with the original <code>DeviceRequest</code></li>
+<li>document type consistency</li>
+<li>namespace and data element consistency</li>
+<li>issuer authentication</li>
+<li>validation of issuer-signed data element digests</li>
+<li>mdoc device authentication</li>
+<li>validation of MAC Authentication or mdoc ECDSA / EdDSA Authentication, as applicable</li>
+<li>issuer trust validation</li>
+<li>credential validity</li>
+<li>credential status validation, where applicable</li>
+</ul>
+<p>A conforming Proximity Reader SHALL support validation of both:</p>
+<ul>
+<li><strong>MAC Authentication</strong></li>
+<li><strong>mdoc ECDSA / EdDSA Authentication</strong></li>
+</ul>
+<p>Trust and status validation MAY be performed locally by the Reader or with support from an optional Relying Party Backend or external trust/status infrastructure.</p>
+<p>The core ISO/IEC 18013-5 Device Retrieval exchange SHALL NOT depend on continuous network connectivity between the Reader and an external backend.</p>
+<p>The resulting verification outcome SHOULD clearly distinguish, as applicable:</p>
+<ul>
+<li>successful verification</li>
+<li>verification failure</li>
+<li>User cancellation</li>
+<li>unsupported request or credential</li>
+<li>Reader authentication or trust failure</li>
+<li>credential authentication failure</li>
+<li>credential status failure</li>
+<li>protocol or transport failure</li>
+</ul>
+<p>In supervised mode, the result MAY be presented to the Reader User.</p>
+<p>In unsupervised mode, the result MAY be consumed directly by the automated Relying Party system.</p>
+<p>The Wallet SHOULD provide the <span class="mkdocs-ezglossary-link"
+    id="da00ca5cc14baec9bfbdbc06b1450e6a"
+    data-term="User"
+    data-tooltip="A natural or legal person, or a natural person representing another natural person or a legal person, that uses trust services or electronic identification means provided in accordance with the [European Digital Identity Regulation]. [ARF]"
+    name="roles:User"
+    href="../../glossary-definitions/#7db9d61b526a435034b8a82bac8c1422">roles:User</span> with an understandable indication that the proximity presentation has completed or failed.</p>
+<h4 id="619-session-termination"><strong>6.1.9 Session Termination</strong><a class="headerlink" href="#619-session-termination" title="Permanent link">&para;</a></h4>
+<p>After completion, cancellation, or failure of the proximity presentation, the Wallet and Reader SHALL terminate the active Device Retrieval session according to ISO/IEC 18013-5.</p>
+<p>Session termination MAY use the applicable ISO/IEC 18013-5 session termination mechanism or transport-specific termination mechanism.</p>
+<p>After termination:</p>
+<ul>
+<li>the Wallet SHALL dispose of the <code>EDeviceKey</code> private key material associated with the completed session</li>
+<li>the Reader SHALL dispose of the <code>EReaderKey</code> private key material associated with the completed session</li>
+<li>both parties SHALL dispose of derived session encryption keys</li>
+<li>the Device Retrieval communication channel SHALL be closed</li>
+<li>ephemeral session key material SHALL NOT be reused for a subsequent independent presentation session</li>
+</ul>
+<hr />
+<h3 id="62-extended-trust-and-credential-status-validation"><strong>6.2 Extended Trust and Credential Status Validation</strong><a class="headerlink" href="#62-extended-trust-and-credential-status-validation" title="Permanent link">&para;</a></h3>
+<p>Trust establishment and credential status processing may require additional infrastructure outside the direct Wallet-to-Reader proximity channel.</p>
+<p>The following diagram illustrates an extended proximity presentation flow in which the Wallet performs Reader trust validation and the Reader performs credential issuer trust and status validation.</p>
+<p>These interactions are logical and MAY be performed using locally cached trust material instead of online requests during the proximity transaction.</p>
+<h4 id="extended-sequence-diagram"><strong>Extended sequence diagram</strong><a class="headerlink" href="#extended-sequence-diagram" title="Permanent link">&para;</a></h4>
+<pre class="mermaid"><code>sequenceDiagram
+    autonumber
+
+    Actor U as Wallet User
+    participant Wallet as EUDI Wallet
+    participant TL as Trusted List Provider (LOTE, LOTL)
+    participant Status as Credential Issuer
+    participant Reader as Proximity Reader
+    Actor RU as Reader User
+
+    rect rgba(230, 230, 230, 0.18)
+        Note left of Wallet: Initialization and Device Engagement
+
+        opt Supervised Reader mode
+            RU-&gt;&gt;Reader: Launch Proximity Reader
+            Reader-&gt;&gt;RU: Display presentation request definition
+            RU-&gt;&gt;Reader: Select / confirm requested data
+        end
+
+        U-&gt;&gt;Wallet: Start proximity presentation
+        Wallet-&gt;&gt;Wallet: Prepare DeviceEngagement
+        Reader-&gt;&gt;Wallet: Obtain DeviceEngagement
+        Reader-&gt;&gt;Wallet: Establish Device Retrieval transport
+        Wallet--&gt;&gt;Reader: Device Retrieval transport established
+    end
+
+    rect rgba(230, 230, 230, 0.18)
+        Note left of Wallet: Session Establishment and Request Validation
+
+        Reader-&gt;&gt;Reader: Generate EReaderKey
+        Reader-&gt;&gt;Reader: Build + protect DeviceRequest
+        Reader-&gt;&gt;Wallet: SessionEstablishment + DeviceRequest
+
+        Wallet-&gt;&gt;Wallet: Derive session keys
+        Wallet-&gt;&gt;Wallet: Decrypt and parse DeviceRequest
+
+        opt Reader trust validation
+            Wallet-&gt;&gt;TL: Obtain Reader trust information
+            TL-&gt;&gt;Wallet: Reader trust information
+            Wallet-&gt;&gt;Wallet: Validate Reader authentication and trust
+        end
+
+        Wallet-&gt;&gt;U: Display requested credential data
+    end
+
+    rect rgba(230, 230, 230, 0.18)
+        Note left of Wallet: Device Response
+
+        U-&gt;&gt;Wallet: Approve sharing
+        Wallet-&gt;&gt;Wallet: Build DeviceResponse + DeviceAuthentication
+        Wallet-&gt;&gt;Reader: Protected DeviceResponse
+
+        Reader-&gt;&gt;Reader: Decrypt and validate DeviceResponse
+
+        opt Credential issuer trust validation
+            Reader-&gt;&gt;TL: Obtain issuer trust information
+            TL-&gt;&gt;Reader: Issuer trust information
+            Reader-&gt;&gt;Reader: Validate IssuerAuth trust chain
+        end
+
+        opt Credential status validation
+            Reader-&gt;&gt;Status: Obtain credential status information
+            Status-&gt;&gt;Reader: Credential status information
+            Reader-&gt;&gt;Reader: Validate credential status
+        end
+    end
+
+    rect rgba(230, 230, 230, 0.18)
+        Note left of Wallet: Termination and Finalization
+
+        Reader-&gt;&gt;Wallet: Terminate session
+        Wallet-&gt;&gt;Wallet: Delete ephemeral session material
+        Reader-&gt;&gt;Reader: Delete ephemeral session material
+
+        Wallet-&gt;&gt;U: Present result
+
+        opt Supervised Reader mode
+            Reader-&gt;&gt;RU: Present verification result
+        end
+    end</code></pre>
+<p>The mechanisms used to distribute, cache, refresh, or obtain trust and credential status information are outside the direct ISO/IEC 18013-5 Device Retrieval exchange.</p>
+<p>Where such mechanisms are used, implementations SHALL apply the requirements of the applicable trust framework, ETSI profile, credential Rulebook, and status mechanism.</p>
+<p>Absence of continuous network connectivity SHALL NOT by itself prevent execution of the core proximity presentation protocol where the required trust and validation information is otherwise available locally.</p>
+<hr />
+<h3 id="63-nfc-device-engagement-with-nfc-device-retrieval"><strong>6.3 NFC Device Engagement with NFC Device Retrieval</strong><a class="headerlink" href="#63-nfc-device-engagement-with-nfc-device-retrieval" title="Permanent link">&para;</a></h3>
+<p>This flow defines the optional <strong>NFC-to-NFC</strong> proximity presentation mode.</p>
+<p>Both Device Engagement and subsequent Device Retrieval are performed using NFC.</p>
+<p>The logical request, consent, authentication, response generation, and validation processing remains equivalent to the baseline flow defined in Section 6.1. The main difference is the Device Engagement and Device Retrieval transport.</p>
+<h4 id="sequence-diagram_1"><strong>Sequence diagram</strong><a class="headerlink" href="#sequence-diagram_1" title="Permanent link">&para;</a></h4>
+<pre class="mermaid"><code>sequenceDiagram
+    autonumber
+
+    Actor U as Wallet User
+    participant Wallet as EUDI Wallet (NFC)
+    participant Reader as Proximity Reader (NFC)
+    Actor RU as Reader User
+
+    rect rgba(230, 230, 230, 0.18)
+        Note left of Wallet: Initialization
+
+        opt Supervised Reader mode
+            RU-&gt;&gt;Reader: Launch Proximity Reader
+            Reader-&gt;&gt;RU: Display presentation request definition
+            RU-&gt;&gt;Reader: Select / confirm requested data
+        end
+
+        Reader-&gt;&gt;Reader: Prepare DeviceRequest
+
+        U-&gt;&gt;Wallet: Start proximity presentation
+        Wallet-&gt;&gt;Wallet: Prepare EDeviceKey
+        Wallet-&gt;&gt;Wallet: Prepare NFC Device Engagement
+        Wallet-&gt;&gt;Wallet: Advertise / enable NFC Device Retrieval capability
+    end
+
+    rect rgba(230, 230, 230, 0.18)
+        Note left of Wallet: NFC Device Engagement
+
+        U-&gt;&gt;Reader: Bring Wallet device into NFC proximity
+        Reader-&gt;&gt;Wallet: Initiate NFC Device Engagement
+
+        Wallet-&gt;&gt;Reader: DeviceEngagement + Device Retrieval information
+        Reader-&gt;&gt;Reader: Process DeviceEngagement
+        Reader-&gt;&gt;Reader: Select NFC Device Retrieval
+        Reader-&gt;&gt;Reader: Build SessionTranscript base
+    end
+
+    rect rgba(230, 230, 230, 0.18)
+        Note left of Wallet: NFC Device Retrieval and Session Establishment
+
+        Reader-&gt;&gt;Wallet: Establish NFC Device Retrieval communication
+
+        Reader-&gt;&gt;Reader: Generate EReaderKey
+        Reader-&gt;&gt;Reader: Derive session keys
+        Reader-&gt;&gt;Reader: Build + encrypt DeviceRequest
+
+        Reader-&gt;&gt;Wallet: SessionEstablishment + encrypted DeviceRequest
+        Note over Reader,Wallet: NFC Device Retrieval transport
+
+        Wallet-&gt;&gt;Wallet: Derive session keys
+        Wallet-&gt;&gt;Wallet: Build SessionTranscript
+        Wallet-&gt;&gt;Wallet: Decrypt and parse DeviceRequest
+
+        opt Reader authentication / trust validation
+            Wallet-&gt;&gt;Wallet: Validate ReaderAuth and Reader trust
+        end
+
+        Wallet-&gt;&gt;U: Display requested credential data
+    end
+
+    rect rgba(230, 230, 230, 0.18)
+        Note left of Wallet: User Consent and Device Response
+
+        Note over U,Reader: Maintain NFC proximity during the active exchange
+
+        U-&gt;&gt;Wallet: Approve sharing
+        Wallet-&gt;&gt;Wallet: Build DeviceResponse + DeviceAuthentication
+
+        alt MAC Authentication
+            Wallet-&gt;&gt;Wallet: Perform ECKA-DH
+            Wallet-&gt;&gt;Wallet: Derive EMacKey using HKDF
+            Wallet-&gt;&gt;Wallet: Calculate MAC
+            Wallet-&gt;&gt;Wallet: Add deviceMac to DeviceAuth
+        else mdoc ECDSA / EdDSA Authentication
+            Wallet-&gt;&gt;Wallet: Sign DeviceAuthentication
+            Wallet-&gt;&gt;Wallet: Add deviceSignature to DeviceAuth
+        end
+
+        Wallet-&gt;&gt;Wallet: Encrypt DeviceResponse
+        Wallet--&gt;&gt;Reader: Encrypted DeviceResponse
+        Note over Reader,Wallet: NFC Device Retrieval transport
+
+        Reader-&gt;&gt;Reader: Decrypt DeviceResponse
+        Reader-&gt;&gt;Reader: Validate IssuerAuth
+        Reader-&gt;&gt;Reader: Validate DeviceAuthentication
+        Reader-&gt;&gt;Reader: Validate SessionTranscript binding
+
+        opt Trust and status checks
+            Reader-&gt;&gt;Reader: Validate issuer trust
+            Reader-&gt;&gt;Reader: Validate credential status
+        end
+    end
+
+    rect rgba(230, 230, 230, 0.18)
+        Note left of Wallet: Session Termination
+
+        Reader-&gt;&gt;Wallet: Session termination
+        Wallet-&gt;&gt;Wallet: Delete EDeviceKey and session keys
+        Reader-&gt;&gt;Reader: Delete EReaderKey and session keys
+        Reader-&gt;&gt;Wallet: Terminate NFC communication
+    end
+
+    rect rgba(230, 230, 230, 0.18)
+        Note left of Wallet: Finalization
+
+        Wallet-&gt;&gt;U: Present result
+
+        opt Supervised Reader mode
+            Reader-&gt;&gt;RU: Present verification result
+        end
+    end</code></pre>
+<h4 id="631-nfc-device-engagement"><strong>6.3.1 NFC Device Engagement</strong><a class="headerlink" href="#631-nfc-device-engagement" title="Permanent link">&para;</a></h4>
+<p>Where NFC Device Engagement is supported, the Wallet and Reader SHALL perform Device Engagement using the applicable NFC Device Engagement mechanisms defined by ISO/IEC 18013-5.</p>
+<p>The Wallet SHALL make available the information required for the Reader to:</p>
+<ul>
+<li>obtain the Device Engagement information</li>
+<li>obtain the ephemeral device engagement public key</li>
+<li>determine the Device Retrieval methods supported for the session</li>
+<li>establish the selected Device Retrieval transport</li>
+</ul>
+<p>Where NFC Device Retrieval is selected, the proximity interaction proceeds directly using NFC as the Device Retrieval transport.</p>
+<p>Where another mutually supported Device Retrieval method is selected, such as BLE, the subsequent presentation flow SHALL continue using that transport.</p>
+<h4 id="632-nfc-device-retrieval-and-session-establishment"><strong>6.3.2 NFC Device Retrieval and Session Establishment</strong><a class="headerlink" href="#632-nfc-device-retrieval-and-session-establishment" title="Permanent link">&para;</a></h4>
+<p>Where NFC is selected as the Device Retrieval transport, the Wallet and Reader SHALL use the NFC Device Retrieval mechanisms defined by ISO/IEC 18013-5.</p>
+<p>The same logical session establishment requirements defined in Section 6.1.4 apply.</p>
+<p>The Reader SHALL:</p>
+<ul>
+<li>generate ephemeral <code>EReaderKey</code> key material</li>
+<li>establish the session context</li>
+<li>derive the applicable session keys</li>
+<li>construct the <code>DeviceRequest</code></li>
+<li>protect the <code>DeviceRequest</code> using the active ISO/IEC 18013-5 session</li>
+</ul>
+<p>The Wallet SHALL:</p>
+<ul>
+<li>establish the corresponding session context</li>
+<li>derive the applicable session keys</li>
+<li>reconstruct the corresponding <code>SessionTranscript</code></li>
+<li>decrypt and validate the <code>DeviceRequest</code></li>
+</ul>
+<p>The use of NFC SHALL NOT weaken session protection or cryptographic binding requirements.</p>
+<h4 id="633-request-validation-and-user-consent"><strong>6.3.3 Request Validation and User Consent</strong><a class="headerlink" href="#633-request-validation-and-user-consent" title="Permanent link">&para;</a></h4>
+<p>The Wallet request validation requirements defined in Section 6.1.5 SHALL apply.</p>
+<p>The Holder Consent requirements defined in Section 6.1.6 SHALL apply.</p>
+<p>Because NFC Device Retrieval requires physical proximity between the Wallet device and Reader during the active exchange, the Wallet interaction SHOULD be designed so that User consent can be provided without unnecessarily interrupting the NFC communication.</p>
+<h4 id="634-device-response-and-reader-validation"><strong>6.3.4 Device Response and Reader Validation</strong><a class="headerlink" href="#634-device-response-and-reader-validation" title="Permanent link">&para;</a></h4>
+<p>The Device Response generation and authentication requirements defined in Section 6.1.7 SHALL apply.</p>
+<p>The Reader validation and result handling requirements defined in Section 6.1.8 SHALL apply.</p>
+<p>In particular:</p>
+<ul>
+<li>the Wallet SHOULD use MAC Authentication where technically feasible</li>
+<li>the Wallet MAY use mdoc ECDSA / EdDSA Authentication where MAC Authentication is not technically feasible</li>
+<li>the Reader SHALL support validation of both authentication methods</li>
+<li>the resulting presentation SHALL remain cryptographically bound to the active <code>SessionTranscript</code></li>
+</ul>
+<p>The <code>DeviceResponse</code> SHALL be transported using the applicable ISO/IEC 18013-5 NFC Device Retrieval mechanism.</p>
+<h4 id="635-nfc-session-termination"><strong>6.3.5 NFC Session Termination</strong><a class="headerlink" href="#635-nfc-session-termination" title="Permanent link">&para;</a></h4>
+<p>After the presentation is completed, cancelled, or fails:</p>
+<ul>
+<li>the active ISO/IEC 18013-5 session SHALL be terminated</li>
+<li>NFC Device Retrieval communication SHALL be terminated</li>
+<li>the Wallet SHALL dispose of <code>EDeviceKey</code> private key material</li>
+<li>the Reader SHALL dispose of <code>EReaderKey</code> private key material</li>
+<li>both parties SHALL dispose of derived session encryption keys</li>
+<li>ephemeral session key material SHALL NOT be reused</li>
+</ul>
+<hr />
+<h3 id="64-mixed-device-engagement-and-device-retrieval-modes"><strong>6.4 Mixed Device Engagement and Device Retrieval Modes</strong><a class="headerlink" href="#64-mixed-device-engagement-and-device-retrieval-modes" title="Permanent link">&para;</a></h3>
+<p>Device Engagement and Device Retrieval are independent protocol phases.</p>
+<p>Accordingly, implementations MAY support combinations in which the mechanism used for Device Engagement differs from the transport subsequently used for Device Retrieval.</p>
+<p>This RFC supports the following optional mixed modes:</p>
+<table>
+<thead>
+<tr>
+<th>Device Engagement</th>
+<th>Device Retrieval</th>
+<th>Requirement</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>QR Code</td>
+<td>BLE</td>
+<td><strong>Mandatory baseline</strong></td>
+</tr>
+<tr>
+<td>NFC</td>
+<td>NFC</td>
+<td>Optional</td>
+</tr>
+<tr>
+<td>NFC</td>
+<td>BLE</td>
+<td>Optional</td>
+</tr>
+<tr>
+<td>QR Code</td>
+<td>NFC</td>
+<td>Optional</td>
+</tr>
+</tbody>
+</table>
+<h4 id="641-nfc-device-engagement-with-ble-device-retrieval"><strong>6.4.1 NFC Device Engagement with BLE Device Retrieval</strong><a class="headerlink" href="#641-nfc-device-engagement-with-ble-device-retrieval" title="Permanent link">&para;</a></h4>
+<p>Where NFC Device Engagement is used and BLE is selected as the Device Retrieval transport:</p>
+<ol>
+<li>the Reader obtains the Device Engagement information through NFC;</li>
+<li>the Device Engagement information identifies BLE as an available Device Retrieval method;</li>
+<li>the Reader establishes the BLE connection using the corresponding connection information;</li>
+<li>the remainder of the presentation follows the BLE Device Retrieval requirements defined in Sections 6.1.3 through 6.1.9.</li>
+</ol>
+<p>Use of NFC for Device Engagement SHALL NOT change the security, User consent, mdoc authentication, or verification requirements applicable to the subsequent BLE Device Retrieval session.</p>
+<h4 id="642-qr-code-device-engagement-with-nfc-device-retrieval"><strong>6.4.2 QR Code Device Engagement with NFC Device Retrieval</strong><a class="headerlink" href="#642-qr-code-device-engagement-with-nfc-device-retrieval" title="Permanent link">&para;</a></h4>
+<p>Where QR Code Device Engagement is used and NFC is selected as the Device Retrieval transport:</p>
+<ol>
+<li>the Reader obtains <code>DeviceEngagement</code> by scanning the Wallet QR Code;</li>
+<li>the Device Engagement information identifies NFC as an available Device Retrieval method;</li>
+<li>the Reader and Wallet establish NFC Device Retrieval communication;</li>
+<li>the remainder of the presentation follows the NFC Device Retrieval requirements defined in Sections 6.3.2 through 6.3.5.</li>
+</ol>
+<p>Use of QR Code Device Engagement SHALL NOT change the security, User consent, mdoc authentication, or verification requirements applicable to the subsequent NFC Device Retrieval session.</p>
+<h4 id="643-device-retrieval-method-selection"><strong>6.4.3 Device Retrieval Method Selection</strong><a class="headerlink" href="#643-device-retrieval-method-selection" title="Permanent link">&para;</a></h4>
+<p>A Device Retrieval method SHALL be selected only where it is supported by both the Wallet and Reader.</p>
+<p>The selected Device Retrieval method SHALL be consistent with the connection information exchanged during Device Engagement and the applicable ISO/IEC 18013-5 requirements.</p>
+<p>Selection of the Device Retrieval transport SHALL NOT change:</p>
+<ul>
+<li>credential semantics</li>
+<li>requested document types, namespaces, or data elements</li>
+<li>User consent requirements</li>
+<li>selective disclosure requirements</li>
+<li>issuer authentication requirements</li>
+<li>mdoc device authentication requirements</li>
+<li>Reader authentication requirements, where applicable</li>
+<li><code>SessionTranscript</code> binding requirements</li>
+<li>trust validation requirements</li>
+<li>credential status validation requirements, where applicable</li>
+</ul>
+<p>The selected transport affects only the proximity communication mechanism used to carry the ISO/IEC 18013-5 Device Retrieval exchange.</p>
+<h2 id="7-normative-requirements"><strong>7. Normative Requirements</strong><a class="headerlink" href="#7-normative-requirements" title="Permanent link">&para;</a></h2>
+<h3 id="71-wallet-requirements"><strong>7.1 Wallet Requirements</strong><a class="headerlink" href="#71-wallet-requirements" title="Permanent link">&para;</a></h3>
+<p>A Wallet conforming to this RFC SHALL:</p>
+<p><strong>APT-PROX-WALLET-01</strong>
+Support proximity presentation of ISO mdoc (<code>mso_mdoc</code>) attestations in accordance with ISO/IEC 18013-5 and the requirements defined by this RFC.</p>
+<p><strong>APT-PROX-WALLET-02</strong>
+Support the <code>mso_mdoc</code> credential format and process the applicable document types, namespaces, and data elements according to the corresponding credential Rulebook or data model.</p>
+<p><strong>APT-PROX-WALLET-03</strong>
+Support QR Code-based Device Engagement in accordance with ISO/IEC 18013-5.</p>
+<p><strong>APT-PROX-WALLET-04</strong>
+Support Bluetooth Low Energy (BLE) Device Retrieval using the Wallet as a <strong>BLE Peripheral Server</strong> and the Reader as a <strong>BLE Central Client</strong>.</p>
+<p><strong>APT-PROX-WALLET-05</strong>
+Support <strong>GATT</strong> as the baseline BLE communication mechanism for Device Retrieval.</p>
+<p><strong>APT-PROX-WALLET-06</strong>
+Generate fresh ephemeral device engagement key material (<code>EDeviceKey</code>) for each independent proximity presentation session.</p>
+<p><strong>APT-PROX-WALLET-07</strong>
+Establish the ISO/IEC 18013-5 secure session and derive the applicable session keys before transmitting credential data.</p>
+<p>No credential data SHALL be disclosed before successful establishment of the protected session.</p>
+<p><strong>APT-PROX-WALLET-08</strong>
+Construct and maintain the <code>SessionTranscript</code> required by ISO/IEC 18013-5 and cryptographically bind the resulting mdoc presentation to the active proximity session.</p>
+<p><strong>APT-PROX-WALLET-09</strong>
+Receive, decrypt, parse, and validate the <code>DeviceRequest</code> before presenting the requested disclosure to the <span class="mkdocs-ezglossary-link"
+    id="22c4ad0bfbee036a116bebcdb53c70fb"
+    data-term="User"
+    data-tooltip="A natural or legal person, or a natural person representing another natural person or a legal person, that uses trust services or electronic identification means provided in accordance with the [European Digital Identity Regulation]. [ARF]"
+    name="roles:User"
+    href="../../glossary-definitions/#7db9d61b526a435034b8a82bac8c1422">roles:User</span>.</p>
+<p>Request validation SHALL include, as applicable:</p>
+<ul>
+<li>structural validity of the <code>DeviceRequest</code></li>
+<li>requested document types</li>
+<li>requested namespaces and data elements</li>
+<li>compatibility with credentials available in the Wallet</li>
+<li>integrity of the active session</li>
+<li>applicable Reader Authentication information</li>
+<li>applicable Reader identity, registration, authorisation, and trust information</li>
+</ul>
+<p><strong>APT-PROX-WALLET-10</strong>
+Reject malformed, unsupported, cryptographically invalid, or otherwise invalid <code>DeviceRequest</code> messages.</p>
+<p>Where Reader Authentication or Reader authorisation is required by the applicable profile or trust framework, a failure of that validation SHALL prevent disclosure of credential data.</p>
+<p><strong>APT-PROX-WALLET-11</strong>
+Support processing of Reader Authentication information in accordance with ISO/IEC 18013-5 where Reader Authentication is applicable.</p>
+<p><strong>APT-PROX-WALLET-12</strong>
+Where the applicable ETSI profile requires Reader registration, authorisation, or trust information to be transported to the Wallet, process the corresponding information in accordance with ETSI TS 119 472-2 and the applicable trust framework.</p>
+<p>Where Reader registration certificates, Reader access certificates, or equivalent trust evidence are present or required, the Wallet SHALL validate them before relying on the corresponding Reader identity or authorisation.</p>
+<p><strong>APT-PROX-WALLET-13</strong>
+Present the requested disclosure to the <span class="mkdocs-ezglossary-link"
+    id="f2632bbd14d486a4e4eb9cf2446e4245"
+    data-term="User"
+    data-tooltip="A natural or legal person, or a natural person representing another natural person or a legal person, that uses trust services or electronic identification means provided in accordance with the [European Digital Identity Regulation]. [ARF]"
+    name="roles:User"
+    href="../../glossary-definitions/#7db9d61b526a435034b8a82bac8c1422">roles:User</span> in a transparent and understandable manner before credential data is released.</p>
+<p>The information presented to the User SHOULD include, where available:</p>
+<ul>
+<li>the Relying Party / Reader identity</li>
+<li>the purpose or context of the request</li>
+<li>the credential or credentials requested</li>
+<li>the requested data elements</li>
+<li>information concerning optional or mandatory disclosure, where available</li>
+<li>retention information, where provided</li>
+</ul>
+<p><strong>APT-PROX-WALLET-14</strong>
+Require explicit <span class="mkdocs-ezglossary-link"
+    id="53db3f88ec427ee12b066edf08895b12"
+    data-term="User"
+    data-tooltip="A natural or legal person, or a natural person representing another natural person or a legal person, that uses trust services or electronic identification means provided in accordance with the [European Digital Identity Regulation]. [ARF]"
+    name="roles:User"
+    href="../../glossary-definitions/#7db9d61b526a435034b8a82bac8c1422">roles:User</span> consent before releasing credential data to the Reader.</p>
+<p><strong>APT-PROX-WALLET-15</strong>
+Support selective disclosure and disclose only data elements that:</p>
+<ul>
+<li>were requested by the Reader;</li>
+<li>are available in the selected credential; and</li>
+<li>were authorised for disclosure by the <span class="mkdocs-ezglossary-link"
+    id="7c4aa451f57e382907fa7196d8fec28f"
+    data-term="User"
+    data-tooltip="A natural or legal person, or a natural person representing another natural person or a legal person, that uses trust services or electronic identification means provided in accordance with the [European Digital Identity Regulation]. [ARF]"
+    name="roles:User"
+    href="../../glossary-definitions/#7db9d61b526a435034b8a82bac8c1422">roles:User</span>.</li>
+</ul>
+<p><strong>APT-PROX-WALLET-16</strong>
+Allow the <span class="mkdocs-ezglossary-link"
+    id="d30e6c81c968cf0bd3b4e1db6268fedf"
+    data-term="User"
+    data-tooltip="A natural or legal person, or a natural person representing another natural person or a legal person, that uses trust services or electronic identification means provided in accordance with the [European Digital Identity Regulation]. [ARF]"
+    name="roles:User"
+    href="../../glossary-definitions/#7db9d61b526a435034b8a82bac8c1422">roles:User</span> to cancel the presentation process at any time before credential data has been disclosed.</p>
+<p>Cancellation before disclosure SHALL NOT result in transmission of credential data.</p>
+<p><strong>APT-PROX-WALLET-17</strong>
+Support processing of a <code>DeviceRequest</code> containing one or more document requests and support presentation of one or more <code>mso_mdoc</code> attestations within a single ISO/IEC 18013-5 proximity session.</p>
+<p>Each presented mdoc SHALL remain independently cryptographically verifiable.</p>
+<p><strong>APT-PROX-WALLET-18</strong>
+Construct a valid ISO/IEC 18013-5 <code>DeviceResponse</code> containing the credential data approved by the <span class="mkdocs-ezglossary-link"
+    id="21e15d1bc2321434caea1a2e5dc16952"
+    data-term="User"
+    data-tooltip="A natural or legal person, or a natural person representing another natural person or a legal person, that uses trust services or electronic identification means provided in accordance with the [European Digital Identity Regulation]. [ARF]"
+    name="roles:User"
+    href="../../glossary-definitions/#7db9d61b526a435034b8a82bac8c1422">roles:User</span> and the required issuer and device authentication information.</p>
+<p><strong>APT-PROX-WALLET-19</strong>
+Provide mdoc device authentication for every presented mdoc and bind that authentication to the active <code>SessionTranscript</code>.</p>
+<p>The Wallet <strong>SHOULD use MAC Authentication</strong> where technically feasible.</p>
+<p>Where MAC Authentication is not technically feasible in the applicable implementation context, the Wallet <strong>MAY use mdoc ECDSA / EdDSA Authentication</strong>.</p>
+<p><strong>APT-PROX-WALLET-20</strong>
+Protect the <code>DeviceResponse</code> using the active ISO/IEC 18013-5 session protection before transmitting it to the Reader.</p>
+<p><strong>APT-PROX-WALLET-21</strong>
+Correctly process transport-specific message fragmentation and reassembly where required by the selected Device Retrieval transport.</p>
+<p><strong>APT-PROX-WALLET-22</strong>
+Handle protocol, transport, Reader authentication, trust, and validation failures without disclosing credential data when the failure prevents successful and secure processing of the presentation.</p>
+<p>The Wallet SHOULD provide the <span class="mkdocs-ezglossary-link"
+    id="ad9090766e0bf156ffa58d3618f0ebc1"
+    data-term="User"
+    data-tooltip="A natural or legal person, or a natural person representing another natural person or a legal person, that uses trust services or electronic identification means provided in accordance with the [European Digital Identity Regulation]. [ARF]"
+    name="roles:User"
+    href="../../glossary-definitions/#7db9d61b526a435034b8a82bac8c1422">roles:User</span> with an understandable indication of the resulting success, cancellation, or failure state.</p>
+<p><strong>APT-PROX-WALLET-23</strong>
+Terminate the active Device Retrieval session in accordance with ISO/IEC 18013-5 after completion, cancellation, or unrecoverable failure.</p>
+<p><strong>APT-PROX-WALLET-24</strong>
+Securely dispose of the following ephemeral material after termination of the session:</p>
+<ul>
+<li><code>EDeviceKey</code> private key material</li>
+<li>derived session encryption keys</li>
+<li>other ephemeral cryptographic material specific to the completed session</li>
+</ul>
+<p>Such material SHALL NOT be reused for a subsequent independent proximity presentation session.</p>
+<p>A Wallet conforming to this RFC SHALL NOT:</p>
+<p><strong>APT-PROX-WALLET-25</strong>
+Release credential data before establishment of the protected ISO/IEC 18013-5 session.</p>
+<p><strong>APT-PROX-WALLET-26</strong>
+Release credential data without explicit <span class="mkdocs-ezglossary-link"
+    id="452ae74065d1963f71a9af88722aa646"
+    data-term="User"
+    data-tooltip="A natural or legal person, or a natural person representing another natural person or a legal person, that uses trust services or electronic identification means provided in accordance with the [European Digital Identity Regulation]. [ARF]"
+    name="roles:User"
+    href="../../glossary-definitions/#7db9d61b526a435034b8a82bac8c1422">roles:User</span> consent where User consent is required.</p>
+<p><strong>APT-PROX-WALLET-27</strong>
+Release data elements that were not requested and approved for disclosure, unless explicitly permitted by the applicable credential profile and separately authorised by the <span class="mkdocs-ezglossary-link"
+    id="b5fdf20e83c9d3bf16052991c633b22b"
+    data-term="User"
+    data-tooltip="A natural or legal person, or a natural person representing another natural person or a legal person, that uses trust services or electronic identification means provided in accordance with the [European Digital Identity Regulation]. [ARF]"
+    name="roles:User"
+    href="../../glossary-definitions/#7db9d61b526a435034b8a82bac8c1422">roles:User</span>.</p>
+<p><strong>APT-PROX-WALLET-28</strong>
+Reuse ephemeral session key material across independent proximity presentation sessions.</p>
+<h4 id="711-optional-wallet-proximity-capabilities"><strong>7.1.1 Optional Wallet Proximity Capabilities</strong><a class="headerlink" href="#711-optional-wallet-proximity-capabilities" title="Permanent link">&para;</a></h4>
+<p>The following capabilities are optional under the baseline conformance profile.</p>
+<p>Where implemented, the following requirements apply.</p>
+<p><strong>APT-PROX-WALLET-NFC-01</strong>
+Where NFC Device Engagement is supported, the Wallet SHALL perform NFC Device Engagement in accordance with ISO/IEC 18013-5.</p>
+<p><strong>APT-PROX-WALLET-NFC-02</strong>
+Where NFC Device Retrieval is supported, the Wallet SHALL support transmission and reception of the applicable ISO/IEC 18013-5 Device Retrieval messages using NFC.</p>
+<p><strong>APT-PROX-WALLET-NFC-03</strong>
+Use of NFC Device Retrieval SHALL NOT weaken:</p>
+<ul>
+<li>secure session establishment</li>
+<li><code>SessionTranscript</code> binding</li>
+<li>Reader Authentication, where applicable</li>
+<li>User consent</li>
+<li>selective disclosure</li>
+<li>mdoc device authentication</li>
+<li>response protection</li>
+<li>session termination requirements</li>
+</ul>
+<p>defined by this RFC.</p>
+<p><strong>APT-PROX-WALLET-BLE-EXT-01</strong>
+The Wallet MAY support <strong>BLE Central Client mode</strong> for interaction with a Reader operating as a BLE Peripheral Server.</p>
+<p>Where implemented, the resulting proximity presentation SHALL satisfy the same security and protocol requirements as the mandatory BLE Peripheral Server mode.</p>
+<p><strong>APT-PROX-WALLET-BLE-EXT-02</strong>
+The Wallet MAY support BLE <strong>L2CAP Connection-Oriented Channels (CoC)</strong> where supported by ISO/IEC 18013-5.</p>
+<p>Where implemented, L2CAP CoC SHALL interoperate with a compliant Reader supporting the corresponding transport capability.</p>
+<hr />
+<h3 id="72-proximity-reader-requirements"><strong>7.2 Proximity Reader Requirements</strong><a class="headerlink" href="#72-proximity-reader-requirements" title="Permanent link">&para;</a></h3>
+<p>A Proximity Reader conforming to this RFC SHALL:</p>
+<p><strong>APT-PROX-READER-01</strong>
+Support ISO/IEC 18013-5 proximity presentation for requesting and validating ISO mdoc (<code>mso_mdoc</code>) attestations.</p>
+<p><strong>APT-PROX-READER-02</strong>
+Support parsing and validation of the <code>mso_mdoc</code> credential format according to ISO/IEC 18013-5 and the applicable credential Rulebook or data model.</p>
+<p><strong>APT-PROX-READER-03</strong>
+Support QR Code-based Device Engagement and process the resulting <code>DeviceEngagement</code> structure in accordance with ISO/IEC 18013-5.</p>
+<p><strong>APT-PROX-READER-04</strong>
+Support BLE Device Retrieval using the Reader as a <strong>BLE Central Client</strong> and the Wallet as a <strong>BLE Peripheral Server</strong>.</p>
+<p><strong>APT-PROX-READER-05</strong>
+Support <strong>GATT</strong> as the baseline BLE communication mechanism for Device Retrieval.</p>
+<p><strong>APT-PROX-READER-06</strong>
+Generate fresh ephemeral reader key material (<code>EReaderKey</code>) for each independent proximity presentation session.</p>
+<p><strong>APT-PROX-READER-07</strong>
+Establish and enforce the ISO/IEC 18013-5 protected session before requesting or accepting credential data.</p>
+<p><strong>APT-PROX-READER-08</strong>
+Construct the active session context and <code>SessionTranscript</code> in accordance with ISO/IEC 18013-5.</p>
+<p><strong>APT-PROX-READER-09</strong>
+Construct a valid <code>DeviceRequest</code> identifying, as applicable:</p>
+<ul>
+<li>requested document type or types</li>
+<li>requested namespaces</li>
+<li>requested data elements</li>
+<li>intent to retain information</li>
+<li>additional request information required by the applicable credential Rulebook or presentation profile</li>
+</ul>
+<p><strong>APT-PROX-READER-10</strong>
+Request only credential data necessary for the intended presentation purpose.</p>
+<p>The Reader SHALL NOT request unnecessary personal data.</p>
+<p><strong>APT-PROX-READER-11</strong>
+Support requests containing one or more document requests within a single ISO/IEC 18013-5 proximity session.</p>
+<p><strong>APT-PROX-READER-12</strong>
+Support Reader Authentication mechanisms defined by ISO/IEC 18013-5 where Reader Authentication is applicable.</p>
+<p>Where Reader Authentication is required by the applicable profile or trust framework, the Reader SHALL provide valid Reader Authentication information to the Wallet.</p>
+<p><strong>APT-PROX-READER-13</strong>
+Where Reader registration certificates, Reader access certificates, or equivalent Reader trust evidence are required by the applicable ETSI profile or trust framework, provide the corresponding information to the Wallet using the applicable proximity presentation mechanism.</p>
+<p><strong>APT-PROX-READER-14</strong>
+Transmit the <code>DeviceRequest</code> using the protected ISO/IEC 18013-5 session.</p>
+<p><strong>APT-PROX-READER-15</strong>
+Receive, decrypt, and validate the <code>DeviceResponse</code> before relying on any credential data contained in the response.</p>
+<p><strong>APT-PROX-READER-16</strong>
+Validate, as applicable:</p>
+<ul>
+<li><code>DeviceResponse</code> structure and processing status</li>
+<li>document type consistency</li>
+<li>namespace and requested data element consistency</li>
+<li>correlation with the originating <code>DeviceRequest</code></li>
+<li>active <code>SessionTranscript</code> binding</li>
+<li>issuer authentication</li>
+<li>issuer-signed data element digest integrity</li>
+<li>mdoc device authentication</li>
+<li>credential validity</li>
+<li>satisfaction of the requested presentation constraints</li>
+</ul>
+<p><strong>APT-PROX-READER-17</strong>
+Support validation of both mdoc device authentication methods permitted by this RFC:</p>
+<ul>
+<li><strong>MAC Authentication</strong></li>
+<li><strong>mdoc ECDSA / EdDSA Authentication</strong></li>
+</ul>
+<p>The Reader SHALL reject a presented mdoc where device authentication validation fails.</p>
+<p><strong>APT-PROX-READER-18</strong>
+Validate that each presented mdoc is cryptographically bound to the active ISO/IEC 18013-5 session.</p>
+<p>Presentations that cannot be cryptographically bound to the active session SHALL be rejected.</p>
+<p><strong>APT-PROX-READER-19</strong>
+Implement replay protection by validating the freshness and uniqueness of the active session context and by rejecting presentations derived from reused or invalid session parameters.</p>
+<p><strong>APT-PROX-READER-20</strong>
+Validate issuer authentication cryptographically before relying on issuer-signed credential data.</p>
+<p>A Reader SHALL reject credentials for which issuer authentication or issuer-signed data element digest validation fails.</p>
+<p><strong>APT-PROX-READER-21</strong>
+Determine whether the credential issuer is trusted according to the applicable trust framework before relying on credential data where issuer trust validation is required.</p>
+<p>Issuer trust validation MAY use locally available trust information or external trust infrastructure.</p>
+<p><strong>APT-PROX-READER-22</strong>
+Where an applicable credential status mechanism is defined and status validation is required by the corresponding credential Rulebook or trust framework, verify the current credential status before relying on the credential.</p>
+<p>A Reader <strong>SHOULD</strong> support applicable status mechanisms used by credentials within its claimed interoperability scope.</p>
+<p><strong>APT-PROX-READER-23</strong>
+Handle protocol, transport, authentication, trust, and credential validation errors and return an appropriate verification outcome.</p>
+<p>The verification outcome SHOULD distinguish, as applicable:</p>
+<ul>
+<li>successful verification</li>
+<li>verification failure</li>
+<li>User cancellation</li>
+<li>unsupported request or credential</li>
+<li>Reader authentication or trust failure</li>
+<li>credential authentication failure</li>
+<li>credential status failure</li>
+<li>protocol or transport failure</li>
+</ul>
+<p><strong>APT-PROX-READER-24</strong>
+Support both <strong>supervised</strong> and <strong>unsupervised</strong> deployment models without changing the baseline Wallet-to-Reader proximity protocol.</p>
+<p>In supervised mode, the Reader MAY expose request configuration and verification results to a Reader User.</p>
+<p>In unsupervised mode, equivalent functionality MAY be performed automatically by the Relying Party system.</p>
+<p><strong>APT-PROX-READER-25</strong>
+Terminate the active Device Retrieval session in accordance with ISO/IEC 18013-5 after successful completion, cancellation, or unrecoverable failure.</p>
+<p><strong>APT-PROX-READER-26</strong>
+Securely dispose of:</p>
+<ul>
+<li><code>EReaderKey</code> private key material</li>
+<li>derived session encryption keys</li>
+<li>other ephemeral cryptographic material specific to the completed session</li>
+</ul>
+<p>after termination.</p>
+<p>Such material SHALL NOT be reused across independent proximity presentation sessions.</p>
+<p>A Proximity Reader conforming to this RFC SHALL NOT:</p>
+<p><strong>APT-PROX-READER-27</strong>
+Rely on credential data before completing all mandatory cryptographic and protocol validation applicable to the active session.</p>
+<p><strong>APT-PROX-READER-28</strong>
+Accept an mdoc presentation for which the active <code>SessionTranscript</code> binding or device authentication cannot be successfully validated.</p>
+<p><strong>APT-PROX-READER-29</strong>
+Request unnecessary credential data beyond the needs of the intended presentation purpose.</p>
+<p><strong>APT-PROX-READER-30</strong>
+Treat the presence of Reader or issuer certificate material by itself as proof of trust without performing the validation required by the applicable trust framework.</p>
+<h4 id="721-optional-reader-proximity-capabilities"><strong>7.2.1 Optional Reader Proximity Capabilities</strong><a class="headerlink" href="#721-optional-reader-proximity-capabilities" title="Permanent link">&para;</a></h4>
+<p>The following capabilities are optional under the baseline conformance profile.</p>
+<p>Where implemented, the following requirements apply.</p>
+<p><strong>APT-PROX-READER-NFC-01</strong>
+Where NFC Device Engagement is supported, the Reader SHALL perform NFC Device Engagement in accordance with ISO/IEC 18013-5.</p>
+<p><strong>APT-PROX-READER-NFC-02</strong>
+Where NFC Device Retrieval is supported, the Reader SHALL support the applicable ISO/IEC 18013-5 NFC Device Retrieval mechanisms for transmitting the <code>DeviceRequest</code> and receiving the <code>DeviceResponse</code>.</p>
+<p><strong>APT-PROX-READER-NFC-03</strong>
+Use of NFC Device Retrieval SHALL NOT weaken the session establishment, presentation validation, replay protection, Reader Authentication, issuer authentication, device authentication, trust validation, or session termination requirements defined by this RFC.</p>
+<p><strong>APT-PROX-READER-BLE-EXT-01</strong>
+The Reader MAY support <strong>BLE Peripheral Server mode</strong> for interaction with a Wallet operating as a BLE Central Client.</p>
+<p>Where implemented, the resulting proximity presentation SHALL satisfy the same security and protocol requirements as the mandatory BLE Central Client mode.</p>
+<p><strong>APT-PROX-READER-BLE-EXT-02</strong>
+The Reader MAY support BLE <strong>L2CAP Connection-Oriented Channels (CoC)</strong>.</p>
+<p>Where implemented, L2CAP CoC SHALL interoperate with a compliant Wallet supporting the corresponding transport capability.</p>
+<hr />
+<h2 id="8-interface-definitions"><strong>8. Interface Definitions</strong><a class="headerlink" href="#8-interface-definitions" title="Permanent link">&para;</a></h2>
+<p>This section defines the protocol interfaces used between the Wallet and Proximity Reader for ISO/IEC 18013-5 proximity presentation.</p>
+<p>The interfaces described in this section are logical protocol interfaces and do not imply the use of an IP-based API or continuously connected backend infrastructure.</p>
+<p>The proximity presentation exchange consists of the following main interfaces:</p>
+<ol>
+<li><strong>Device Engagement Interface</strong></li>
+<li><strong>Device Retrieval Transport Interface</strong></li>
+<li><strong>Device Request Interface</strong></li>
+<li><strong>Device Response Interface</strong></li>
+</ol>
+<hr />
+<h3 id="81-device-engagement-interface"><strong>8.1 Device Engagement Interface</strong><a class="headerlink" href="#81-device-engagement-interface" title="Permanent link">&para;</a></h3>
+<p><strong>Direction:</strong> Wallet → Proximity Reader
+<strong>Purpose:</strong> Provide the information required to establish a secure Device Retrieval session.</p>
+<p>The Device Engagement Interface SHALL use the <code>DeviceEngagement</code> structure defined by ISO/IEC 18013-5.</p>
+<p>The <code>DeviceEngagement</code> information SHALL contain the parameters required by the Reader to establish the subsequent proximity session, including, as applicable:</p>
+<ul>
+<li>protocol version information</li>
+<li>the Wallet ephemeral device engagement public key (<code>EDeviceKey</code>)</li>
+<li>supported security parameters</li>
+<li>one or more supported Device Retrieval methods</li>
+<li>connection information required by the corresponding Device Retrieval transport</li>
+</ul>
+<p>The mandatory Device Engagement mechanism defined by this RFC is:</p>
+<ul>
+<li><strong>QR Code Device Engagement</strong></li>
+</ul>
+<p>The following Device Engagement mechanism is optional:</p>
+<ul>
+<li><strong>NFC Device Engagement</strong></li>
+</ul>
+<p>For QR Code Device Engagement, the Wallet SHALL encode the <code>DeviceEngagement</code> information according to ISO/IEC 18013-5 and make it available to the Reader through a QR Code.</p>
+<p>For NFC Device Engagement, the Wallet and Reader SHALL use the applicable ISO/IEC 18013-5 NFC Device Engagement mechanism.</p>
+<p>Device Engagement SHALL establish the information required for the subsequent session but SHALL NOT itself disclose credential data.</p>
+<p>The Device Engagement mechanism and the Device Retrieval transport are independent. The Device Engagement information MAY therefore identify a Device Retrieval transport different from the technology used to perform Device Engagement.</p>
+<hr />
+<h3 id="82-device-retrieval-transport-interface"><strong>8.2 Device Retrieval Transport Interface</strong><a class="headerlink" href="#82-device-retrieval-transport-interface" title="Permanent link">&para;</a></h3>
+<p><strong>Direction:</strong> Bidirectional between Wallet and Proximity Reader
+<strong>Purpose:</strong> Transport protected ISO/IEC 18013-5 Device Retrieval messages.</p>
+<p>The mandatory Device Retrieval transport defined by this RFC is:</p>
+<ul>
+<li><strong>Bluetooth Low Energy (BLE)</strong></li>
+</ul>
+<p>For the baseline BLE profile:</p>
+<ul>
+<li>the Wallet SHALL operate as a <strong>BLE Peripheral Server</strong></li>
+<li>the Reader SHALL operate as a <strong>BLE Central Client</strong></li>
+<li><strong>GATT</strong> SHALL be supported</li>
+</ul>
+<p>The Wallet MAY additionally operate as a BLE Central Client and the Reader MAY operate as a BLE Peripheral Server.</p>
+<p>BLE L2CAP Connection-Oriented Channels (CoC) MAY be supported where implemented by both parties and permitted by the applicable ISO/IEC 18013-5 profile.</p>
+<p>The following Device Retrieval transport is optional:</p>
+<ul>
+<li><strong>Near Field Communication (NFC)</strong></li>
+</ul>
+<p>Where NFC Device Retrieval is supported, the Wallet and Reader SHALL use the applicable ISO/IEC 18013-5 NFC Device Retrieval mechanisms.</p>
+<p>The Device Retrieval transport SHALL carry, as applicable:</p>
+<ul>
+<li>session establishment information</li>
+<li>protected <code>DeviceRequest</code></li>
+<li>protected <code>DeviceResponse</code></li>
+<li><code>SessionData</code></li>
+<li>protocol status and termination information</li>
+</ul>
+<p>Transport-specific fragmentation and reassembly SHALL be performed according to the requirements of the selected ISO/IEC 18013-5 Device Retrieval transport.</p>
+<p>Credential data SHALL only be exchanged within the protected ISO/IEC 18013-5 session.</p>
+<hr />
+<h3 id="83-device-request-interface"><strong>8.3 Device Request Interface</strong><a class="headerlink" href="#83-device-request-interface" title="Permanent link">&para;</a></h3>
+<p><strong>Direction:</strong> Proximity Reader → Wallet
+<strong>Purpose:</strong> Request presentation of one or more mdoc attestations and selected data elements.</p>
+<p>The Reader SHALL send a <code>DeviceRequest</code> as defined by ISO/IEC 18013-5.</p>
+<p>The <code>DeviceRequest</code> SHALL contain one or more document requests.</p>
+<p>Each document request SHALL identify, as applicable:</p>
+<ul>
+<li>the requested document type (<code>docType</code>)</li>
+<li>requested <a href="data-elements:Namespace|namespaces">data-elements:Namespace|namespaces</a></li>
+<li>requested data elements</li>
+<li>intent-to-retain information</li>
+<li>additional request information required by the applicable credential Rulebook or presentation profile</li>
+</ul>
+<p>The <code>DeviceRequest</code> MAY request multiple mdoc attestations within the same proximity presentation session.</p>
+<p>The Wallet SHALL process each requested document independently and SHALL only return credential data that is:</p>
+<ul>
+<li>requested by the Reader</li>
+<li>available in the Wallet</li>
+<li>approved for disclosure by the <span class="mkdocs-ezglossary-link"
+    id="eeae2399126a5cb6c93fc6830a0fc740"
+    data-term="User"
+    data-tooltip="A natural or legal person, or a natural person representing another natural person or a legal person, that uses trust services or electronic identification means provided in accordance with the [European Digital Identity Regulation]. [ARF]"
+    name="roles:User"
+    href="../../glossary-definitions/#7db9d61b526a435034b8a82bac8c1422">roles:User</span></li>
+</ul>
+<h4 id="831-reader-authentication"><strong>8.3.1 Reader Authentication</strong><a class="headerlink" href="#831-reader-authentication" title="Permanent link">&para;</a></h4>
+<p>Where Reader Authentication is applicable, the document request SHALL contain the corresponding <code>readerAuth</code> structure defined by ISO/IEC 18013-5.</p>
+<p>Reader Authentication SHALL cryptographically bind the Reader request to:</p>
+<ul>
+<li>the active <code>SessionTranscript</code></li>
+<li>the requested data</li>
+<li>the Reader authentication key</li>
+</ul>
+<p>Where RP access certificates are used, the Reader Authentication signature SHALL be created using the private key corresponding to the RP access certificate.</p>
+<p>The Wallet SHALL validate Reader Authentication before relying on the authenticated Reader identity or releasing data for which successful Reader Authentication is required.</p>
+<h4 id="832-reader-trust-and-registration-information"><strong>8.3.2 Reader Trust and Registration Information</strong><a class="headerlink" href="#832-reader-trust-and-registration-information" title="Permanent link">&para;</a></h4>
+<p>Where the applicable ETSI TS 119 472-2 proximity profile requires Reader registration or registrar information, the corresponding <code>ItemsRequest</code> SHALL carry the applicable information through <code>requestInfo</code>.</p>
+<p>This MAY include, as defined by the applicable ETSI profile:</p>
+<ul>
+<li>RP registration certificate information</li>
+<li>RP registrar-provided information</li>
+<li>Relying Party identifiers</li>
+<li>service description</li>
+<li>intended-use information</li>
+<li>purpose information</li>
+<li>privacy-policy information</li>
+<li>information concerning the credentials and data elements that the Reader is authorised to request</li>
+</ul>
+<p>Where RP access certificates, RP registration certificates, or equivalent trust evidence are provided, the Wallet SHALL process and validate them according to the applicable ETSI profile and trust framework.</p>
+<p>The presence of Reader registration or certificate information SHALL NOT by itself be treated as proof of trust without the required trust validation.</p>
+<h4 id="833-device-request-validation"><strong>8.3.3 Device Request Validation</strong><a class="headerlink" href="#833-device-request-validation" title="Permanent link">&para;</a></h4>
+<p>Before presenting the request to the <span class="mkdocs-ezglossary-link"
+    id="3024d722a4d4e950076a170b1d3fd180"
+    data-term="User"
+    data-tooltip="A natural or legal person, or a natural person representing another natural person or a legal person, that uses trust services or electronic identification means provided in accordance with the [European Digital Identity Regulation]. [ARF]"
+    name="roles:User"
+    href="../../glossary-definitions/#7db9d61b526a435034b8a82bac8c1422">roles:User</span>, the Wallet SHALL validate the <code>DeviceRequest</code>.</p>
+<p>Validation SHALL include, as applicable:</p>
+<ul>
+<li>CBOR structure and syntax</li>
+<li>supported protocol version</li>
+<li>presence of at least one valid document request</li>
+<li>requested <code>docType</code></li>
+<li>requested namespaces and data elements</li>
+<li>active session binding</li>
+<li>Reader Authentication</li>
+<li>Reader certificate and trust information</li>
+<li>Reader authorisation to request the specified data</li>
+</ul>
+<p>Malformed, unsupported, cryptographically invalid, or unauthorised requests SHALL NOT result in credential data disclosure.</p>
+<hr />
+<h3 id="84-device-response-interface"><strong>8.4 Device Response Interface</strong><a class="headerlink" href="#84-device-response-interface" title="Permanent link">&para;</a></h3>
+<p><strong>Direction:</strong> Wallet → Proximity Reader
+<strong>Purpose:</strong> Return the mdoc presentation corresponding to the approved <code>DeviceRequest</code>.</p>
+<p>After successful request processing and explicit <span class="mkdocs-ezglossary-link"
+    id="70b6db3728062ec12d51076902c564e7"
+    data-term="User"
+    data-tooltip="A natural or legal person, or a natural person representing another natural person or a legal person, that uses trust services or electronic identification means provided in accordance with the [European Digital Identity Regulation]. [ARF]"
+    name="roles:User"
+    href="../../glossary-definitions/#7db9d61b526a435034b8a82bac8c1422">roles:User</span> consent, the Wallet SHALL generate a <code>DeviceResponse</code> as defined by ISO/IEC 18013-5.</p>
+<p>The <code>DeviceResponse</code> MAY contain one or more mdoc documents.</p>
+<p>For each returned document, the response SHALL contain the applicable:</p>
+<ul>
+<li>issuer-signed data</li>
+<li>issuer authentication information</li>
+<li>device-signed data</li>
+<li>device authentication information</li>
+</ul>
+<p>Only credential data requested by the Reader and approved by the <span class="mkdocs-ezglossary-link"
+    id="1c3586be0e5de6fcc5fefb631fafc634"
+    data-term="User"
+    data-tooltip="A natural or legal person, or a natural person representing another natural person or a legal person, that uses trust services or electronic identification means provided in accordance with the [European Digital Identity Regulation]. [ARF]"
+    name="roles:User"
+    href="../../glossary-definitions/#7db9d61b526a435034b8a82bac8c1422">roles:User</span> SHALL be included in the response.</p>
+<h4 id="841-issuer-authentication"><strong>8.4.1 Issuer Authentication</strong><a class="headerlink" href="#841-issuer-authentication" title="Permanent link">&para;</a></h4>
+<p>Each presented mdoc SHALL contain the issuer authentication material required by ISO/IEC 18013-5.</p>
+<p>The Reader SHALL validate:</p>
+<ul>
+<li>issuer authentication cryptographic integrity</li>
+<li>issuer-signed data element digest integrity</li>
+<li>credential validity</li>
+<li>issuer trust according to the applicable trust framework</li>
+</ul>
+<p>The Reader SHALL NOT rely on credential data where mandatory issuer authentication validation fails.</p>
+<h4 id="842-device-authentication"><strong>8.4.2 Device Authentication</strong><a class="headerlink" href="#842-device-authentication" title="Permanent link">&para;</a></h4>
+<p>Each presented mdoc SHALL include device authentication cryptographically bound to the active <code>SessionTranscript</code>.</p>
+<p>The Wallet SHOULD use:</p>
+<ul>
+<li><strong>MAC Authentication</strong></li>
+</ul>
+<p>where technically feasible.</p>
+<p>Where MAC Authentication is not technically feasible, the Wallet MAY use:</p>
+<ul>
+<li><strong>mdoc ECDSA / EdDSA Authentication</strong></li>
+</ul>
+<p>The Reader SHALL support validation of both authentication methods.</p>
+<p>A response for which device authentication or <code>SessionTranscript</code> binding cannot be successfully validated SHALL be rejected.</p>
+<h4 id="843-response-protection"><strong>8.4.3 Response Protection</strong><a class="headerlink" href="#843-response-protection" title="Permanent link">&para;</a></h4>
+<p>The <code>DeviceResponse</code> SHALL be transmitted within the protected ISO/IEC 18013-5 session.</p>
+<p>The Wallet and Reader SHALL use the session protection derived during session establishment to provide confidentiality and integrity protection for Device Retrieval messages.</p>
+<p>The Reader SHALL associate the received <code>DeviceResponse</code> with:</p>
+<ul>
+<li>the active proximity session</li>
+<li>the active <code>SessionTranscript</code></li>
+<li>the originating <code>DeviceRequest</code></li>
+</ul>
+<p>A <code>DeviceResponse</code> received outside the expected session context SHALL NOT be accepted as a valid response to another proximity transaction.</p>
+<h4 id="844-credential-status-validation"><strong>8.4.4 Credential Status Validation</strong><a class="headerlink" href="#844-credential-status-validation" title="Permanent link">&para;</a></h4>
+<p>Where the presented credential defines an applicable credential status mechanism, the Reader SHOULD validate the current credential status before relying on the credential.</p>
+<p>Credential status validation MAY use:</p>
+<ul>
+<li>locally cached status information</li>
+<li>status information obtained through an external status service</li>
+<li>another status mechanism defined by the applicable credential Rulebook or trust framework</li>
+</ul>
+<p>The credential status interface itself is outside the ISO/IEC 18013-5 Wallet-to-Reader Device Retrieval channel and is not further profiled by this RFC.</p>
+<h4 id="845-error-and-status-handling"><strong>8.4.5 Error and Status Handling</strong><a class="headerlink" href="#845-error-and-status-handling" title="Permanent link">&para;</a></h4>
+<p>Protocol and processing errors SHALL be handled according to ISO/IEC 18013-5.</p>
+<p>Error conditions MAY include:</p>
+<ul>
+<li>malformed <code>DeviceRequest</code></li>
+<li>unsupported document type</li>
+<li>unsupported requested data elements</li>
+<li>Reader Authentication failure</li>
+<li>Reader trust or authorisation failure</li>
+<li>User cancellation</li>
+<li>issuer authentication failure</li>
+<li>device authentication failure</li>
+<li>credential status failure</li>
+<li>session establishment failure</li>
+<li>transport failure</li>
+</ul>
+<p>The Wallet SHALL NOT disclose credential data where an error condition prevents secure completion of the presentation.</p>
+<p>The Reader SHALL NOT rely on credential data where mandatory validation has failed.</p>
+<h2 id="9-privacy-and-security-considerations"><strong>9. Privacy and Security Considerations</strong><a class="headerlink" href="#9-privacy-and-security-considerations" title="Permanent link">&para;</a></h2>
+<p>Implementations conforming to this RFC SHOULD follow strong privacy and security practices consistent with ISO/IEC 18013-5 proximity presentation and the assurance requirements of the applicable deployment profile.</p>
+<p>This RFC defines a baseline interoperability profile. It specifies protocol-level mechanisms supporting secure proximity presentation, but it does <strong>not</strong> by itself define a complete Reader trust framework, certificate governance model, or sector-specific authorisation policy.</p>
+<h3 id="91-data-minimisation-and-disclosure-control"><strong>9.1 Data Minimisation and Disclosure Control</strong><a class="headerlink" href="#91-data-minimisation-and-disclosure-control" title="Permanent link">&para;</a></h3>
+<p>Proximity Readers SHOULD request only the minimum credential data necessary for the stated purpose of the transaction.</p>
+<p>Wallets SHALL support selective disclosure and SHOULD release only the data elements necessary to satisfy the approved request.</p>
+<p>Implementations SHOULD avoid requesting, presenting, transmitting, retaining, or logging credential data beyond what is necessary for the intended purpose.</p>
+<p>The Wallet SHALL obtain explicit <span class="mkdocs-ezglossary-link"
+    id="2d307edac1bb64ef4b38c7e0b314c90d"
+    data-term="User"
+    data-tooltip="A natural or legal person, or a natural person representing another natural person or a legal person, that uses trust services or electronic identification means provided in accordance with the [European Digital Identity Regulation]. [ARF]"
+    name="roles:User"
+    href="../../glossary-definitions/#7db9d61b526a435034b8a82bac8c1422">roles:User</span> consent before disclosing credential data.</p>
+<h3 id="92-reader-authentication-and-trust"><strong>9.2 Reader Authentication and Trust</strong><a class="headerlink" href="#92-reader-authentication-and-trust" title="Permanent link">&para;</a></h3>
+<p>Physical proximity to a Reader SHALL NOT by itself be treated as proof that the Reader is trusted or authorised to request credential data.</p>
+<p>Where Reader Authentication is applicable, the Wallet SHALL validate the Reader Authentication information before relying on the authenticated Reader identity.</p>
+<p>Where RP access certificates, RP registration certificates, trusted lists, or equivalent trust information are used, their validation SHALL follow the applicable ETSI profile and trust framework requirements.</p>
+<p>The presence of Reader certificate or registration information alone SHALL NOT be treated as sufficient proof of trust without the corresponding validation.</p>
+<p>Where reliable Reader identity information is available, the Wallet SHOULD present meaningful information about the Relying Party / Reader to the <span class="mkdocs-ezglossary-link"
+    id="5627cfd13c7a5629520c2fdb7da008d2"
+    data-term="User"
+    data-tooltip="A natural or legal person, or a natural person representing another natural person or a legal person, that uses trust services or electronic identification means provided in accordance with the [European Digital Identity Regulation]. [ARF]"
+    name="roles:User"
+    href="../../glossary-definitions/#7db9d61b526a435034b8a82bac8c1422">roles:User</span> before consent is given.</p>
+<h3 id="93-session-binding-replay-and-relay-protection"><strong>9.3 Session Binding, Replay and Relay Protection</strong><a class="headerlink" href="#93-session-binding-replay-and-relay-protection" title="Permanent link">&para;</a></h3>
+<p>Wallets and Proximity Readers SHALL construct and validate the <code>SessionTranscript</code> according to ISO/IEC 18013-5.</p>
+<p>The <code>DeviceRequest</code>, <code>DeviceResponse</code>, and mdoc device authentication SHALL be processed within the context of the active proximity session.</p>
+<p>Implementations SHALL use fresh ephemeral session key material for independent proximity presentation sessions and SHALL NOT reuse session-specific ephemeral private keys across independent sessions.</p>
+<p>The Reader SHALL reject a presentation that cannot be cryptographically bound to the active <code>SessionTranscript</code>.</p>
+<p>Implementations SHOULD protect against replay and session-misbinding attacks and SHALL NOT accept presentation data from a previous or unrelated proximity session.</p>
+<p>Physical proximity technologies such as BLE or NFC SHALL NOT by themselves be considered sufficient proof of physical co-location. Implementations SHOULD take reasonable measures to reduce the risk of relay attacks where relevant to the deployment environment.</p>
+<h3 id="94-session-confidentiality-and-transport-protection"><strong>9.4 Session Confidentiality and Transport Protection</strong><a class="headerlink" href="#94-session-confidentiality-and-transport-protection" title="Permanent link">&para;</a></h3>
+<p>Credential data SHALL only be exchanged after successful establishment of the protected ISO/IEC 18013-5 session.</p>
+<p>Wallets and Readers SHALL use the session protection mechanisms defined by ISO/IEC 18013-5 to provide confidentiality and integrity protection for Device Retrieval messages.</p>
+<p>The security properties of the presentation SHALL NOT depend solely on the security properties of the underlying BLE or NFC transport.</p>
+<p>Transport-specific fragmentation, reassembly, and connection handling SHALL NOT weaken the confidentiality, integrity, or session-binding properties of the protected presentation exchange.</p>
+<p>After session termination, both parties SHALL securely dispose of ephemeral session key material associated with the completed transaction.</p>
+<h3 id="95-proximity-interaction-and-user-awareness"><strong>9.5 Proximity Interaction and User Awareness</strong><a class="headerlink" href="#95-proximity-interaction-and-user-awareness" title="Permanent link">&para;</a></h3>
+<p>The Wallet SHOULD provide the <span class="mkdocs-ezglossary-link"
+    id="9c06af3765322338234aa228050b0886"
+    data-term="User"
+    data-tooltip="A natural or legal person, or a natural person representing another natural person or a legal person, that uses trust services or electronic identification means provided in accordance with the [European Digital Identity Regulation]. [ARF]"
+    name="roles:User"
+    href="../../glossary-definitions/#7db9d61b526a435034b8a82bac8c1422">roles:User</span> with sufficient information to understand:</p>
+<ul>
+<li>which Relying Party / Reader is requesting data, where reliable identity information is available</li>
+<li>which credential or credentials are requested</li>
+<li>which data elements are requested</li>
+<li>the stated purpose or context of the request, where available</li>
+</ul>
+<p>The Wallet SHOULD make clear that credential disclosure occurs only after User approval.</p>
+<p>For NFC Device Retrieval, implementations SHOULD design the User interaction so that consent can be completed without unnecessarily interrupting the active NFC proximity exchange.</p>
+<p>Supervised and unsupervised Reader deployments SHALL apply the same Wallet-side consent and disclosure-control requirements.</p>
+<h3 id="96-credential-authenticity-trust-and-status"><strong>9.6 Credential Authenticity, Trust and Status</strong><a class="headerlink" href="#96-credential-authenticity-trust-and-status" title="Permanent link">&para;</a></h3>
+<p>The Reader SHALL validate issuer authentication and mdoc device authentication before relying on presented credential data.</p>
+<p>Issuer authentication SHALL include validation of the cryptographic integrity of issuer-signed data and the associated issuer authentication material.</p>
+<p>Where issuer trust validation is required, the Reader SHALL validate the issuer according to the applicable trust framework.</p>
+<p>Where an applicable credential status mechanism exists and status validation is required by the corresponding credential Rulebook or trust framework, the Reader SHOULD verify the current credential status before relying on the credential.</p>
+<p>Successful cryptographic validation of an mdoc SHALL NOT by itself be interpreted as proof that the issuer is trusted or that the credential is currently valid.</p>
+<h3 id="97-logging-retention-and-local-protection"><strong>9.7 Logging, Retention and Local Protection</strong><a class="headerlink" href="#97-logging-retention-and-local-protection" title="Permanent link">&para;</a></h3>
+<p>Implementations SHOULD avoid logging sensitive <code>DeviceRequest</code>, <code>DeviceResponse</code>, credential data, cryptographic material, or User disclosure decisions except where operationally necessary.</p>
+<p>Where logging is required for security, interoperability testing, or troubleshooting purposes, implementations SHOULD minimise retained personal data and protect logs against unauthorised access or modification.</p>
+<p>Wallets, Proximity Readers, and related backend components SHOULD protect locally stored:</p>
+<ul>
+<li>credential presentation data</li>
+<li>request and response artefacts</li>
+<li>trust and status information</li>
+<li>session metadata</li>
+<li>cryptographic material</li>
+</ul>
+<p>against unauthorised disclosure or modification.</p>
+<p>Ephemeral private keys and derived session keys SHALL NOT be retained after they are no longer required for the active proximity session.</p>
+<h3 id="98-baseline-rfc-boundary"><strong>9.8 Baseline RFC Boundary</strong><a class="headerlink" href="#98-baseline-rfc-boundary" title="Permanent link">&para;</a></h3>
+<p>This RFC defines protocol-level privacy and security expectations for interoperable ISO/IEC 18013-5 proximity presentation.</p>
+<p>It does <strong>not</strong> by itself define:</p>
+<ul>
+<li>Reader trust framework governance</li>
+<li>Reader registration or certificate issuance procedures</li>
+<li>trusted-list supervision or trust-anchor governance</li>
+<li>sector-specific authorisation policies</li>
+<li>sector-specific legal reliance rules</li>
+<li>retention periods required by specific legislation</li>
+<li>complete device or application security requirements outside the proximity presentation protocol</li>
+<li>operational incident-management requirements</li>
+</ul>
+<p>These aspects MAY be defined by the applicable trust framework, credential Rulebook, sectoral deployment profile, or other ecosystem specification applied together with this RFC.</p>
+<h2 id="10-conformance"><strong>10. Conformance</strong><a class="headerlink" href="#10-conformance" title="Permanent link">&para;</a></h2>
+<p>This RFC defines conformance for interoperable ISO/IEC 18013-5 proximity presentation and verification in APTITUDE.</p>
+<p>The mandatory interoperability baseline defined by this RFC is <strong>QR Code Device Engagement → BLE Device Retrieval</strong>, using:</p>
+<ul>
+<li>ISO mdoc (<code>mso_mdoc</code>)</li>
+<li>Wallet operating as a <strong>BLE Peripheral Server</strong></li>
+<li>Proximity Reader operating as a <strong>BLE Central Client</strong></li>
+<li><strong>GATT</strong> as the baseline BLE communication mechanism</li>
+<li>protected ISO/IEC 18013-5 session establishment</li>
+<li><code>DeviceRequest</code> and <code>DeviceResponse</code> processing</li>
+<li>mdoc issuer and device authentication</li>
+<li>User consent and selective disclosure</li>
+<li>secure session termination</li>
+</ul>
+<p>Support for additional Device Engagement or Device Retrieval mechanisms SHALL be stated separately as optional conformance capabilities.</p>
+<h3 id="101-wallet-conformance"><strong>10.1 Wallet Conformance</strong><a class="headerlink" href="#101-wallet-conformance" title="Permanent link">&para;</a></h3>
+<p>An implementation conforms to this RFC as a <strong>Wallet</strong> if it:</p>
+<ol>
+<li>satisfies all applicable Wallet requirements defined in Section 7.1;</li>
+<li>implements the applicable interfaces defined in Section 8;</li>
+<li>supports ISO/IEC 18013-5 proximity presentation using <code>mso_mdoc</code>;</li>
+<li>supports QR Code Device Engagement;</li>
+<li>supports BLE Device Retrieval as a BLE Peripheral Server using GATT;</li>
+<li>correctly processes <code>DeviceRequest</code>;</li>
+<li>establishes and validates the ISO/IEC 18013-5 session context and <code>SessionTranscript</code>;</li>
+<li>obtains explicit <span class="mkdocs-ezglossary-link"
+    id="4755c35c453d4ab591df3dd93195bfb5"
+    data-term="User"
+    data-tooltip="A natural or legal person, or a natural person representing another natural person or a legal person, that uses trust services or electronic identification means provided in accordance with the [European Digital Identity Regulation]. [ARF]"
+    name="roles:User"
+    href="../../glossary-definitions/#7db9d61b526a435034b8a82bac8c1422">roles:User</span> consent before credential disclosure;</li>
+<li>supports selective disclosure of requested credential data;</li>
+<li>generates a valid <code>DeviceResponse</code>;</li>
+<li>provides valid mdoc device authentication;</li>
+<li>securely terminates the session and disposes of ephemeral session cryptographic material.</li>
+</ol>
+<p>A conforming Wallet SHOULD use <strong>MAC Authentication</strong> for mdoc device authentication where technically feasible.</p>
+<p>Where MAC Authentication is not technically feasible, the Wallet MAY use <strong>mdoc ECDSA / EdDSA Authentication</strong>.</p>
+<h3 id="102-proximity-reader-conformance"><strong>10.2 Proximity Reader Conformance</strong><a class="headerlink" href="#102-proximity-reader-conformance" title="Permanent link">&para;</a></h3>
+<p>An implementation conforms to this RFC as a <strong>Proximity Reader</strong> if it:</p>
+<ol>
+<li>satisfies all applicable Proximity Reader requirements defined in Section 7.2;</li>
+<li>implements the applicable interfaces defined in Section 8;</li>
+<li>supports ISO/IEC 18013-5 proximity verification of <code>mso_mdoc</code> attestations;</li>
+<li>supports QR Code Device Engagement;</li>
+<li>supports BLE Device Retrieval as a BLE Central Client using GATT;</li>
+<li>constructs a valid <code>DeviceRequest</code>;</li>
+<li>establishes and validates the ISO/IEC 18013-5 session context and <code>SessionTranscript</code>;</li>
+<li>receives and validates <code>DeviceResponse</code>;</li>
+<li>validates issuer authentication and issuer-signed data integrity;</li>
+<li>
+<p>supports validation of both:</p>
+<ul>
+<li>MAC Authentication; and</li>
+<li>mdoc ECDSA / EdDSA Authentication;
+11. validates cryptographic binding of the presentation to the active proximity session;
+12. performs applicable Reader, issuer trust, and credential status processing where required;
+13. securely terminates the session and disposes of ephemeral session cryptographic material.</li>
+</ul>
+</li>
+</ol>
+<p>A conforming Proximity Reader MAY operate in either <strong>supervised</strong> or <strong>unsupervised</strong> mode. The operating mode does not affect protocol conformance.</p>
+<h3 id="103-optional-proximity-capability-claims"><strong>10.3 Optional Proximity Capability Claims</strong><a class="headerlink" href="#103-optional-proximity-capability-claims" title="Permanent link">&para;</a></h3>
+<p>The following capabilities are optional and SHALL NOT be required for baseline RFC005 conformance:</p>
+<ul>
+<li>NFC Device Engagement</li>
+<li>NFC Device Retrieval</li>
+<li>NFC Device Engagement with BLE Device Retrieval</li>
+<li>QR Code Device Engagement with NFC Device Retrieval</li>
+<li>Wallet operation as BLE Central Client</li>
+<li>Reader operation as BLE Peripheral Server</li>
+<li>BLE L2CAP Connection-Oriented Channels (CoC)</li>
+</ul>
+<p>An implementation claiming support for an optional capability SHALL satisfy all requirements defined by this RFC for that capability.</p>
+<p>Optional capability claims SHOULD clearly identify the supported combination of:</p>
+<ul>
+<li>Device Engagement mechanism</li>
+<li>Device Retrieval transport</li>
+<li>BLE operating role, where applicable</li>
+<li>BLE communication mechanism, where applicable</li>
+</ul>
+<p>For example, an implementation MAY claim:</p>
+<ul>
+<li><code>QR → BLE/GATT</code></li>
+<li><code>NFC → NFC</code></li>
+<li><code>NFC → BLE/GATT</code></li>
+<li><code>QR → NFC</code></li>
+</ul>
+<p>The <strong><code>QR → BLE/GATT</code></strong> capability is mandatory for baseline RFC005 conformance. The remaining combinations are optional.</p>
+<h3 id="104-conformance-boundaries"><strong>10.4 Conformance Boundaries</strong><a class="headerlink" href="#104-conformance-boundaries" title="Permanent link">&para;</a></h3>
+<p>Conformance to this RFC demonstrates protocol-level interoperability for ISO/IEC 18013-5 proximity presentation within the scope of the capabilities claimed by the implementation.</p>
+<p>Conformance demonstrates support for the applicable:</p>
+<ul>
+<li>Device Engagement processing</li>
+<li>Device Retrieval transport</li>
+<li>secure session establishment</li>
+<li><code>DeviceRequest</code> processing</li>
+<li>User consent and selective disclosure</li>
+<li><code>DeviceResponse</code> generation and validation</li>
+<li>issuer authentication</li>
+<li>mdoc device authentication</li>
+<li><code>SessionTranscript</code> binding</li>
+<li>session termination</li>
+</ul>
+<p>Conformance to this RFC does <strong>not</strong> by itself demonstrate:</p>
+<ul>
+<li>compliance with a complete Reader trust framework</li>
+<li>compliance with Reader registration governance</li>
+<li>compliance with trusted-list supervision or trust-anchor governance</li>
+<li>compliance with all ARF or Implementing Act requirements outside the proximity presentation protocol scope</li>
+<li>compliance with sector-specific credential semantics</li>
+<li>compliance with sector-specific legal, supervisory, or authorisation requirements</li>
+<li>compliance with credential issuance or lifecycle-management requirements</li>
+<li>compliance with complete device, Wallet, Reader, or backend security requirements outside the protocol boundary</li>
+</ul>
+<p>Where additional trust-framework, credential-specific, sector-specific, or regulatory profiles are applied together with this RFC, conformance to those profiles SHOULD be claimed and evaluated separately.</p>
+<h2 id="11-proximity-presentation-conformance-catalogue-and-deployed-test-matrix"><strong>11. Proximity Presentation Conformance Catalogue and Deployed Test Matrix</strong><a class="headerlink" href="#11-proximity-presentation-conformance-catalogue-and-deployed-test-matrix" title="Permanent link">&para;</a></h2>
+<h3 id="111-conformance-check-catalogue"><strong>11.1 Conformance Check Catalogue</strong><a class="headerlink" href="#111-conformance-check-catalogue" title="Permanent link">&para;</a></h3>
+<p>This catalogue defines the baseline conformance checks supporting RFC005 interoperability claims under Section 10.</p>
+<p>The catalogue focuses on protocol-level interoperability between a Wallet and a Proximity Reader.</p>
+<h4 id="1111-baseline-conformance-checks"><strong>11.1.1 Baseline Conformance Checks</strong><a class="headerlink" href="#1111-baseline-conformance-checks" title="Permanent link">&para;</a></h4>
+<table>
+<thead>
+<tr>
+<th>Check ID</th>
+<th>Conformance Check</th>
+<th>What Is Verified At Runtime</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>PROX-CHECK-01</code></td>
+<td>QR Code Device Engagement</td>
+<td>The Wallet generates a valid ISO/IEC 18013-5 <code>DeviceEngagement</code> structure and the Reader successfully obtains and processes it through the QR Code.</td>
+</tr>
+<tr>
+<td><code>PROX-CHECK-02</code></td>
+<td>BLE Device Retrieval establishment</td>
+<td>The Wallet operating as BLE Peripheral Server and the Reader operating as BLE Central Client successfully establish the baseline GATT Device Retrieval communication channel.</td>
+</tr>
+<tr>
+<td><code>PROX-CHECK-03</code></td>
+<td>Secure session establishment</td>
+<td>The Wallet and Reader successfully establish the ISO/IEC 18013-5 secure session using fresh ephemeral key material and construct a consistent <code>SessionTranscript</code>.</td>
+</tr>
+<tr>
+<td><code>PROX-CHECK-04</code></td>
+<td><code>DeviceRequest</code> processing</td>
+<td>The Reader generates a valid <code>DeviceRequest</code>, and the Wallet decrypts, parses, and processes the requested document types, namespaces, and data elements without protocol or structural failure.</td>
+</tr>
+<tr>
+<td><code>PROX-CHECK-05</code></td>
+<td>Reader Authentication processing</td>
+<td>Where Reader Authentication is used, the Reader generates valid Reader Authentication information and the Wallet successfully validates its cryptographic binding to the active session and request.</td>
+</tr>
+<tr>
+<td><code>PROX-CHECK-06</code></td>
+<td>User consent and selective disclosure</td>
+<td>The Wallet presents the requested disclosure to the User and releases only requested and User-approved data after explicit consent.</td>
+</tr>
+<tr>
+<td><code>PROX-CHECK-07</code></td>
+<td><code>DeviceResponse</code> generation and processing</td>
+<td>The Wallet generates a valid ISO/IEC 18013-5 <code>DeviceResponse</code> and the Reader successfully decrypts and processes the returned mdoc presentation.</td>
+</tr>
+<tr>
+<td><code>PROX-CHECK-08</code></td>
+<td>Issuer Authentication validation</td>
+<td>The Reader successfully validates issuer authentication and issuer-signed data element integrity for each presented mdoc.</td>
+</tr>
+<tr>
+<td><code>PROX-CHECK-09</code></td>
+<td>MAC Authentication</td>
+<td>The Wallet generates valid MAC-based mdoc device authentication and the Reader successfully validates it against the active <code>SessionTranscript</code>.</td>
+</tr>
+<tr>
+<td><code>PROX-CHECK-10</code></td>
+<td>mdoc ECDSA / EdDSA Authentication</td>
+<td>Where signature-based mdoc device authentication is used, the Wallet generates a valid device signature and the Reader successfully validates it against the active <code>SessionTranscript</code>.</td>
+</tr>
+<tr>
+<td><code>PROX-CHECK-11</code></td>
+<td>Multiple mdoc presentation</td>
+<td>The Wallet processes a <code>DeviceRequest</code> containing multiple document requests and returns the corresponding mdoc documents within one logical ISO/IEC 18013-5 proximity session. The Reader validates each returned mdoc independently.</td>
+</tr>
+<tr>
+<td><code>PROX-CHECK-12</code></td>
+<td>Session binding and replay protection</td>
+<td>The Reader confirms that the returned presentation is cryptographically bound to the active <code>SessionTranscript</code> and does not accept presentation data from an unrelated or previous session.</td>
+</tr>
+<tr>
+<td><code>PROX-CHECK-13</code></td>
+<td>Session termination</td>
+<td>The Wallet and Reader correctly terminate the Device Retrieval session and dispose of session-specific ephemeral key material.</td>
+</tr>
+<tr>
+<td><code>PROX-CHECK-14</code></td>
+<td>Reader trust information processing</td>
+<td>Where Reader registration, access certificates, or equivalent trust information are used, the Wallet correctly processes and validates the applicable Reader trust information.</td>
+</tr>
+<tr>
+<td><code>PROX-CHECK-15</code></td>
+<td>Credential status validation</td>
+<td>Where an applicable credential status mechanism is used, the Reader correctly determines the current credential status and rejects a credential that is not valid for reliance.</td>
+</tr>
+</tbody>
+</table>
+<h4 id="1112-optional-transport-conformance-checks"><strong>11.1.2 Optional Transport Conformance Checks</strong><a class="headerlink" href="#1112-optional-transport-conformance-checks" title="Permanent link">&para;</a></h4>
+<p>The following checks apply only where the implementation claims the corresponding optional RFC005 capability.</p>
+<table>
+<thead>
+<tr>
+<th>Check ID</th>
+<th>Conformance Check</th>
+<th>What Is Verified At Runtime</th>
+<th>Capability</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>PROX-CHECK-NFC-01</code></td>
+<td>NFC Device Engagement</td>
+<td>The Wallet and Reader successfully perform ISO/IEC 18013-5 Device Engagement using NFC.</td>
+<td>NFC Device Engagement</td>
+</tr>
+<tr>
+<td><code>PROX-CHECK-NFC-02</code></td>
+<td>NFC Device Retrieval</td>
+<td>The Wallet and Reader successfully establish NFC Device Retrieval and exchange the protected <code>DeviceRequest</code> and <code>DeviceResponse</code> over NFC.</td>
+<td>NFC Device Retrieval</td>
+</tr>
+<tr>
+<td><code>PROX-CHECK-NFC-03</code></td>
+<td>NFC-to-NFC presentation</td>
+<td>The complete presentation flow is performed using NFC Device Engagement followed by NFC Device Retrieval without weakening session protection or presentation validation.</td>
+<td><code>NFC → NFC</code></td>
+</tr>
+<tr>
+<td><code>PROX-CHECK-MIXED-01</code></td>
+<td>NFC engagement with BLE retrieval</td>
+<td>NFC Device Engagement successfully provides the information required to establish the subsequent BLE Device Retrieval session.</td>
+<td><code>NFC → BLE/GATT</code></td>
+</tr>
+<tr>
+<td><code>PROX-CHECK-MIXED-02</code></td>
+<td>QR engagement with NFC retrieval</td>
+<td>QR Code Device Engagement successfully provides the information required to establish the subsequent NFC Device Retrieval session.</td>
+<td><code>QR → NFC</code></td>
+</tr>
+<tr>
+<td><code>PROX-CHECK-BLE-EXT-01</code></td>
+<td>Reverse BLE roles</td>
+<td>Where supported, the Wallet operating as BLE Central Client and Reader operating as BLE Peripheral Server successfully complete Device Retrieval.</td>
+<td>Optional reverse BLE roles</td>
+</tr>
+<tr>
+<td><code>PROX-CHECK-L2CAP-01</code></td>
+<td>BLE L2CAP CoC</td>
+<td>Where supported by both parties, Device Retrieval successfully operates using BLE L2CAP Connection-Oriented Channels.</td>
+<td>Optional BLE L2CAP CoC</td>
+</tr>
+</tbody>
+</table>
+<h3 id="112-deployed-test-case-matrix"><strong>11.2 Deployed Test Case Matrix</strong><a class="headerlink" href="#112-deployed-test-case-matrix" title="Permanent link">&para;</a></h3>
+<p>The following matrix defines representative interoperability scenarios that may be exercised against implementations claiming RFC005 conformance.</p>
+<p>Credential-specific document types and namespaces used during testing SHALL be selected according to the credentials supported by the participating implementations and SHALL NOT affect RFC005 protocol conformance.</p>
+<table>
+<thead>
+<tr>
+<th>Test Case ID</th>
+<th>Deployed Scenario</th>
+<th>Transport / Variant</th>
+<th>Checks Covered</th>
+<th>Expected Outcome</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>PROX-001</code></td>
+<td>Presentation of a single <code>mso_mdoc</code> credential using the baseline proximity flow with MAC Authentication</td>
+<td>QR → BLE/GATT</td>
+<td><code>PROX-CHECK-01</code>, <code>02</code>, <code>03</code>, <code>04</code>, <code>06</code>, <code>07</code>, <code>08</code>, <code>09</code>, <code>12</code>, <code>13</code></td>
+<td>Successful completion of the baseline RFC005 proximity presentation session</td>
+</tr>
+<tr>
+<td><code>PROX-002</code></td>
+<td>Presentation of multiple <code>mso_mdoc</code> credentials within one logical proximity session</td>
+<td>QR → BLE/GATT</td>
+<td><code>PROX-CHECK-01</code>, <code>02</code>, <code>03</code>, <code>04</code>, <code>06</code>, <code>07</code>, <code>08</code>, <code>09</code>, <code>11</code>, <code>12</code>, <code>13</code></td>
+<td>All requested and approved credentials are returned and independently validated within the same session</td>
+</tr>
+<tr>
+<td><code>PROX-003</code></td>
+<td>Presentation using mdoc ECDSA / EdDSA Authentication instead of MAC Authentication</td>
+<td>QR → BLE/GATT</td>
+<td><code>PROX-CHECK-01</code>, <code>02</code>, <code>03</code>, <code>04</code>, <code>06</code>, <code>07</code>, <code>08</code>, <code>10</code>, <code>12</code>, <code>13</code></td>
+<td>Successful presentation and validation using signature-based mdoc device authentication</td>
+</tr>
+<tr>
+<td><code>PROX-004</code></td>
+<td>Presentation request containing Reader Authentication and applicable Reader trust information</td>
+<td>QR → BLE/GATT</td>
+<td><code>PROX-CHECK-01</code>, <code>02</code>, <code>03</code>, <code>04</code>, <code>05</code>, <code>06</code>, <code>07</code>, <code>08</code>, <code>09</code> or <code>10</code>, <code>12</code>, <code>13</code>, <code>14</code></td>
+<td>Wallet successfully validates the Reader context before releasing requested credential data</td>
+</tr>
+<tr>
+<td><code>PROX-005</code></td>
+<td>Presentation of a credential for which status validation is applicable</td>
+<td>QR → BLE/GATT</td>
+<td><code>PROX-CHECK-01</code>, <code>02</code>, <code>03</code>, <code>04</code>, <code>06</code>, <code>07</code>, <code>08</code>, <code>09</code> or <code>10</code>, <code>12</code>, <code>13</code>, <code>15</code></td>
+<td>Reader successfully validates the credential status before relying on the credential</td>
+</tr>
+<tr>
+<td><code>PROX-006</code></td>
+<td>Complete presentation using NFC Device Engagement and NFC Device Retrieval</td>
+<td>NFC → NFC</td>
+<td><code>PROX-CHECK-NFC-01</code>, <code>PROX-CHECK-NFC-02</code>, <code>PROX-CHECK-NFC-03</code>, together with applicable baseline cryptographic checks</td>
+<td>Successful completion of an NFC-only proximity presentation session</td>
+</tr>
+<tr>
+<td><code>PROX-007</code></td>
+<td>NFC Device Engagement followed by BLE Device Retrieval</td>
+<td>NFC → BLE/GATT</td>
+<td><code>PROX-CHECK-NFC-01</code>, <code>PROX-CHECK-MIXED-01</code>, together with applicable baseline BLE checks</td>
+<td>Successful transition from NFC Device Engagement to BLE Device Retrieval</td>
+</tr>
+<tr>
+<td><code>PROX-008</code></td>
+<td>QR Code Device Engagement followed by NFC Device Retrieval</td>
+<td>QR → NFC</td>
+<td><code>PROX-CHECK-01</code>, <code>PROX-CHECK-NFC-02</code>, <code>PROX-CHECK-MIXED-02</code>, together with applicable baseline cryptographic checks</td>
+<td>Successful transition from QR Device Engagement to NFC Device Retrieval</td>
+</tr>
+</tbody>
+</table>
+<h3 id="113-negative-and-error-test-cases"><strong>11.3 Negative and Error Test Cases</strong><a class="headerlink" href="#113-negative-and-error-test-cases" title="Permanent link">&para;</a></h3>
+<p>Negative test cases SHOULD be included in interoperability and conformance testing to verify that implementations fail securely.</p>
+<p>Representative negative cases include:</p>
+<table>
+<thead>
+<tr>
+<th>Test Case ID</th>
+<th>Condition</th>
+<th>Expected Behaviour</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>PROX-NEG-01</code></td>
+<td>Malformed or unsupported <code>DeviceRequest</code></td>
+<td>Wallet rejects the request and does not disclose credential data</td>
+</tr>
+<tr>
+<td><code>PROX-NEG-02</code></td>
+<td>Invalid Reader Authentication</td>
+<td>Wallet rejects the authenticated request or prevents disclosure of data requiring successful Reader Authentication</td>
+</tr>
+<tr>
+<td><code>PROX-NEG-03</code></td>
+<td>Reader not authorised to request the requested data</td>
+<td>Wallet prevents disclosure of the unauthorised data</td>
+</tr>
+<tr>
+<td><code>PROX-NEG-04</code></td>
+<td>User rejects or cancels the request</td>
+<td>Wallet does not disclose credential data</td>
+</tr>
+<tr>
+<td><code>PROX-NEG-05</code></td>
+<td>Invalid Issuer Authentication</td>
+<td>Reader rejects the affected mdoc</td>
+</tr>
+<tr>
+<td><code>PROX-NEG-06</code></td>
+<td>Invalid MAC or device signature</td>
+<td>Reader rejects the affected mdoc</td>
+</tr>
+<tr>
+<td><code>PROX-NEG-07</code></td>
+<td>Invalid or mismatched <code>SessionTranscript</code></td>
+<td>Reader rejects the presentation</td>
+</tr>
+<tr>
+<td><code>PROX-NEG-08</code></td>
+<td>Replay of a previous <code>DeviceResponse</code></td>
+<td>Reader rejects the replayed presentation</td>
+</tr>
+<tr>
+<td><code>PROX-NEG-09</code></td>
+<td>Credential reported as revoked, suspended, or otherwise invalid by the applicable status mechanism</td>
+<td>Reader rejects the credential for reliance</td>
+</tr>
+<tr>
+<td><code>PROX-NEG-10</code></td>
+<td>Device Retrieval transport interrupted before successful completion</td>
+<td>The transaction fails without treating incomplete credential data as a successful presentation</td>
+</tr>
+</tbody>
+</table>
+<h3 id="114-test-assumptions"><strong>11.4 Test Assumptions</strong><a class="headerlink" href="#114-test-assumptions" title="Permanent link">&para;</a></h3>
+<p>Unless a test case explicitly verifies an error condition:</p>
+<ul>
+<li>the Wallet under test is assumed to contain at least one valid <code>mso_mdoc</code> credential suitable for the requested presentation</li>
+<li>the Reader defines a valid request compatible with the credential available in the Wallet</li>
+<li>the Wallet and Reader possess the trust material necessary for the trust checks exercised by the test</li>
+<li>QR Code Device Engagement and BLE/GATT Device Retrieval are used as the default interoperability configuration</li>
+<li>optional NFC, reverse-BLE-role, and L2CAP capabilities are tested only where explicitly claimed by the participating implementation</li>
+</ul>
+<p>The test infrastructure does not need to be continuously publicly accessible. It SHALL, however, be available to participating implementations for the duration of the applicable interoperability test session.</p>
+<p>The conformance tests defined by this section demonstrate <strong>protocol interoperability</strong> within the capabilities exercised by the test. They do not constitute a complete assessment of ARF, CIR, trust-framework, legal, governance, or sector-specific compliance.</p>
+<h2 id="12-references"><strong>12. References</strong><a class="headerlink" href="#12-references" title="Permanent link">&para;</a></h2>
+<ol>
+<li>ISO/IEC 18013-5:2021, <em>Personal identification — ISO-compliant driving licence — Part 5: Mobile driving licence (mDL) application</em></li>
+<li>ETSI TS 119 472-2 V1.2.1 (2026-03), <em>Electronic Signatures and Trust Infrastructures (ESI); Profiles for Electronic Attestation of Attributes; Part 2: Profiles for EAA/PID Presentations to Relying Party</em></li>
+<li>ETSI TS 119 475 V1.2.1 (2026-03), <em>Electronic Signatures and Trust Infrastructures (ESI); Relying party attributes supporting EUDI Wallet user's authorization decisions</em></li>
+<li>ETSI TS 119 602 V1.1.1 (2025-11), <em>Electronic Signatures and Trust Infrastructures (ESI); Lists of trusted entities; Data model</em></li>
+<li>Architecture and Reference Framework (ARF)</li>
+<li>IETF, <em>Token Status List (TSL)</em>, <code>draft-ietf-oauth-status-list</code></li>
+<li>RFC 5280, <em>Internet X.509 Public Key Infrastructure Certificate and Certificate Revocation List (CRL) Profile</em></li>
+<li>RFC 8949, <em>Concise Binary Object Representation (CBOR)</em></li>
+<li>RFC 8610, <em>Concise Data Definition Language (CDDL)</em></li>
+<li>RFC 8392, <em>CBOR Web Token (CWT)</em></li>
+<li>RFC 9052, <em>CBOR Object Signing and Encryption (COSE): Structures and Process</em></li>
+<li>RFC 2119, <em>Key words for use in RFCs to Indicate Requirement Levels</em></li>
+<li>RFC 8174, <em>Ambiguity of Uppercase vs Lowercase in RFC 2119 Key Words</em></li>
+<li>APTITUDE interoperability and conformance testing materials</li>
+</ol>
+
+
+
+
+
+
+
+  
+    
+  
+  
+
+
+  <aside class="md-source-file">
+    
+      
+  <span class="md-source-file__fact">
+    <span class="md-icon" title="Last update">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
+    </span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-datetime" title="September 11, 2026 10:35:41 UTC">September 11, 2026 10:35:41</span>
+  </span>
+
+    
+    
+    
+    
+  </aside>
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+    <div class="md-footer-meta md-typeset">
+        <div class="md-footer-meta__inner md-grid">
+            <div class="md-copyright">
+                <div>
+                    Made with
+                    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+                        Material for MkDocs
+                    </a>
+                </div>
+            </div>
+            <div class="md-footer-cofunded">
+                <img src="../../img/eu-cofunded.png" alt="Co-funded by the European Union">
+            </div>
+        </div>
+    </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+      <div class="md-progress" data-md-component="progress" role="progressbar"></div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["content.action.edit", "content.action.view", "content.code.annotate", "content.code.copy", "navigation.footer", "navigation.indexes", "navigation.instant", "navigation.instant.progress", "navigation.path", "navigation.tabs", "navigation.tabs.sticky", "navigation.top", "navigation.tracking", "search.highlight", "search.suggest", "toc.follow", "toc.integrate"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"alias": true, "provider": "mike"}}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+        <script src="../../media/mermaid.min.js"></script>
+      
+        <script src="../../media/mermaid-init.js"></script>
+      
+        <script src="../../media/mathjax-init.js"></script>
+      
+        <script src="../../media/mathjax-tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>
