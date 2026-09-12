@@ -128,6 +128,9 @@ nav:
     - Overview: rulebook/index.md
     - mVRC: rulebook/wp5/mVRC-rulebook.md
     - DTC: rulebook/wp3/dtc-rulebook.md
+    - RB05 Biometric Profile (draft):
+      - Rulebook: rulebook/wp4/RB05_BIOMETRIC_PROFILE_RULEBOOK_v0.1.md
+      - Proposed test catalogue: rulebook/wp4/RB05_TEST_CATALOGUE.md
   - Trust Specifications:
     - Trust Framework:
       - Overview: rulebook/wp2-trust-specifications/docs/trust-framework.md
@@ -156,5 +159,4 @@ nav:
   - Glossary: 
     - Glossary: glossary.md
     - Definitions: glossary-definitions.md
-
 
