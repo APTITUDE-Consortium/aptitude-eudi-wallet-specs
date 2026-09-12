@@ -1,7 +1,7 @@
 # Generic issuance flow specification
 
-Version 0.91 (draft)
-Date 20-08-2026
+Version 1.0
+Date 11-09-2026
 
 ## Authors
 
@@ -122,7 +122,14 @@ href="https://github.com/eu-digital-identity-wallet/eudi-doc-standards-and-techn
 href="https://aptitude-consortium.github.io/wp2-trust-specifications/latest/sections/trust-management-lifecycle/#token-status-list-wallet-unit-attestation-profile">APTITUDE Trust management and lifecycle</a>, <a
 href="https://datatracker.ietf.org/doc/draft-ietf-oauth-status-list/21/">IETF Token Status List Draft 21</a></td>
 <td>Optional scheduled revocation checks by the Issuer against the Wallet Provider's status lists for WIA and KA, as per <a
-href="https://eudi.dev/3.0.0/annexes/annex-2/annex-2.02-high-level-requirements-by-topic/#a2322-topic-38-wallet-unit-revocation">ARF Topic 38</a> and requirement WURevocation_19.<br><br><em>Note: As specified in <a href="https://aptitude-consortium.github.io/wp2-trust-specifications/latest/sections/trust-management-lifecycle/#token-status-list-wallet-unit-attestation-profile">the APTITUDE Trust Management and Lifecycle profile</a>, for other attestation types within the APTITUDE profiles:</em><ul><li>Both WIA and KA operational checks SHALL be performed for device-bound credentials when operational monitoring is enabled.</li><li>Only the WIA operational check SHALL be performed for non-device-bound attestations when operational monitoring is enabled.</li></ul></td>
+href="https://eudi.dev/3.0.0/annexes/annex-2/annex-2.02-high-level-requirements-by-topic/#a2322-topic-38-wallet-unit-revocation">ARF Topic 38</a> and requirement WURevocation_19.<br><br><em>Note: As specified in <a href="https://aptitude-consortium.github.io/wp2-trust-specifications/latest/sections/trust-management-lifecycle/#token-status-list-wallet-unit-attestation-profile">the APTITUDE Trust Management and Lifecycle profile</a>, for other attestation types within the APTITUDE profiles:</em><ul><li>Both WIA and KA operational checks SHALL be performed for device-bound credentials when operational monitoring is enabled.</li><li>Only the WIA operational check SHALL be performed for non-device-bound attestations when operational monitoring is enabled.\[^1]</li></ul></td>
+</tr>
+<tr>
+<td>O6</td>
+<td><a
+href="https://openid.net/specs/openid-4-verifiable-credential-issuance-1_0.html#name-notification-endpoint">OID4VCI ver1.0 notification endpoint</a>, <a
+href="../RFCs/RFC001.md#87-notification-interface">RFC001 notification interface</a></td>
+<td>Notification channel allowing issuer to perform life cycle management of the issued credential\[^1]</td>
 </tr>
 <tr>
 <td>R1</td>
@@ -136,7 +143,7 @@ TS 119 472-3 ver1.1.1</a>,
 <a
 href="https://www.rfc-editor.org/rfc/rfc9449.html">RFC9449</a>,
 <a
-href="https://datatracker.ietf.org/doc/html/draft-ietf-oauth-attestation-based-client-auth-10">IETF OAuth 2.0 Attestation-Based Client Authentication Draft 10</a></p>
+href="https://datatracker.ietf.org/doc/html/draft-ietf-oauth-attestation-based-client-auth-11">IETF OAuth 2.0 Attestation-Based Client Authentication Draft 11</a></p>
 <p>ISO18013-5, <a
 href="https://datatracker.ietf.org/doc/draft-ietf-oauth-sd-jwt-vc/17/">SD-JWT
 VC Draft 17</a>, <a
@@ -181,7 +188,7 @@ href="https://datatracker.ietf.org/doc/draft-ietf-oauth-status-list/21/">IETF To
 </tbody>
 </table>
 
-The process behind O1, O2 and O3 is further explained in Apptitude on-boarding document, please look here <span class="mark"><</span>
+O1-6 interfaces are not used runtime and are therefore not further elaborated within this issuance flow specification. The process behind O1, O2 and O3 is explained in Apptitude on-boarding document, please look here <span class="mark"><</span>
 <span class="mark">[wp2-trust-specifications/docs/topics/onboarding-process.md at main · APTITUDE-Consortium/wp2-trust-specifications](https://github.com/APTITUDE-Consortium/wp2-trust-specifications/blob/main/docs/topics/onboarding-process.md)></span> for more details.
 
 ## 3\. Interaction details
@@ -199,14 +206,14 @@ In follow up table the requirements are listed with decision if it is in the sco
 
 |**Requirement**|**Scope decision**|
 |-|-|
-|Authorization and pre-authorized code flows|In scope\[^1]\[^2]|
+|Authorization and pre-authorized code flows|In scope\[^2]\[^3]|
 |Wallet initiated and issuer initiated flow|In scope|
 |Same device and cross-device flow|In scope|
 |Immediate and deferred issuance|In scope|
 |Nonce Endpoint offered by the issuer|In scope|
 |Metadata Endpoint offered by the issuer|In scope|
 |Sending credential offer by value and by reference|In scope|
-|Notification Endpoint for credential lifecycle mngmt|Not in the scope|
+|Notification Endpoint for credential lifecycle mngmt|In scope|
 
 #### 3.1.2 HAIP requirements
 
@@ -528,6 +535,8 @@ href="../RFCs/RFC001.md#88-deferred-credential-endpoint">RFC-01
 </tbody>
 </table>
 
-\[^1]: Note that wallet must implement both code flows, the issuer may choose to implement only one
+\[^1]: Scheduled statuslist checks on WIA/KA's and attestation life cycle event notifications from wallet instance towards Issuer are not showned within the sequence diagram, as there are not happening during the actual credential issuance process.
 
-\[^2]: Note that pre-authorized code flow doesn’t meet requirements for issuing the attestation with Level of Assurance HIGH
+\[^2]: Note that wallet must implement both code flows, the issuer may choose to implement only one.
+
+\[^3]: Note that pre-authorized code flow doesn’t meet requirements for issuing the attestation with Level of Assurance HIGH.
