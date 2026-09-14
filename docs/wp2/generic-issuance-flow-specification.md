@@ -189,10 +189,8 @@ href="https://datatracker.ietf.org/doc/draft-ietf-oauth-status-list/21/">IETF To
 </table>
 
 O1-6 interfaces are operational interface where some of them can also be used runtime. 
-
 The process behind O1, O2 and O3 is explained in Apptitude on-boarding document, please look here <span class="mark"><</span>
 <span class="mark">[wp2-trust-specifications/docs/topics/onboarding-process.md at main · APTITUDE-Consortium/wp2-trust-specifications](https://github.com/APTITUDE-Consortium/wp2-trust-specifications/blob/main/docs/topics/onboarding-process.md)></span> for more details. 
-
 Interfaces O4 and O5 are used runtime and are shown within the sequence diagram.
 
 Usage of the interface O6 is further explained within the RFC001.
