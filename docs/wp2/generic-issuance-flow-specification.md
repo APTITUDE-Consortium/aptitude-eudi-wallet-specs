@@ -1,7 +1,7 @@
 # Generic issuance flow specification
 
 Version 1.0
-Date 11-09-2026
+Date 14-09-2026
 
 ## Authors
 
@@ -129,7 +129,7 @@ href="https://eudi.dev/3.0.0/annexes/annex-2/annex-2.02-high-level-requirements-
 <td><a
 href="https://openid.net/specs/openid-4-verifiable-credential-issuance-1_0.html#name-notification-endpoint">OID4VCI ver1.0 notification endpoint</a>, <a
 href="../RFCs/RFC001.md#87-notification-interface">RFC001 notification interface</a></td>
-<td>Notification channel allowing issuer to perform life cycle management of the issued credential\[^1]</td>
+<td>Notification channel allowing issuer to get updates related to the previosly issued credential\[^1]</td>
 </tr>
 <tr>
 <td>R1</td>
@@ -188,8 +188,14 @@ href="https://datatracker.ietf.org/doc/draft-ietf-oauth-status-list/21/">IETF To
 </tbody>
 </table>
 
-O1-6 interfaces are not used runtime and are therefore not further elaborated within this issuance flow specification. The process behind O1, O2 and O3 is explained in Apptitude on-boarding document, please look here <span class="mark"><</span>
-<span class="mark">[wp2-trust-specifications/docs/topics/onboarding-process.md at main · APTITUDE-Consortium/wp2-trust-specifications](https://github.com/APTITUDE-Consortium/wp2-trust-specifications/blob/main/docs/topics/onboarding-process.md)></span> for more details.
+O1-6 interfaces are operational interface where some of them can also be used runtime. 
+
+The process behind O1, O2 and O3 is explained in Apptitude on-boarding document, please look here <span class="mark"><</span>
+<span class="mark">[wp2-trust-specifications/docs/topics/onboarding-process.md at main · APTITUDE-Consortium/wp2-trust-specifications](https://github.com/APTITUDE-Consortium/wp2-trust-specifications/blob/main/docs/topics/onboarding-process.md)></span> for more details. 
+
+Interfaces O4 and O5 are used runtime and are shown within the sequence diagram.
+
+Usage of the interface O6 is further explained within the RFC001.
 
 ## 3\. Interaction details
 
@@ -266,7 +272,7 @@ In some cases to simplify implementation for the partners there are number of ad
 
 |**Requirement**|**Scope decision**|
 |-|-|
-|Issuer and wallet unit shall use so called "combined mode" using only DPoP proof, as per [IETF oAuth attestation based client authentication DPoP Combined Mode](https://datatracker.ietf.org/doc/html/draft-ietf-oauth-attestation-based-client-auth-10#name-dpop-combined-mode) |In scope|
+|Issuer and wallet unit shall use so called "combined mode" using only DPoP proof, as per [IETF oAuth attestation based client authentication DPoP Combined Mode](https://datatracker.ietf.org/doc/html/draft-ietf-oauth-attestation-based-client-auth-11#name-dpop-combined-mode) |In scope|
 |Issuer authorization and resource servers shall mandate using of fresh nonce value within the DPoP |In scope|
 |Issuer shall offer Nonce Endpoint  |In scope|
 |Issuer shall require a presence of WIA and DPoP header on token endpoint for pre-authorized code flow  |In scope|
@@ -535,7 +541,7 @@ href="../RFCs/RFC001.md#88-deferred-credential-endpoint">RFC-01
 </tbody>
 </table>
 
-\[^1]: Scheduled statuslist checks on WIA/KA's and attestation life cycle event notifications from wallet instance towards Issuer are not showned within the sequence diagram, as there are not happening during the actual credential issuance process.
+\[^1]: Scheduled statuslist checks on WIAs/KAs and attestation life cycle event notifications from wallet instance towards Issuer are not showned within the sequence diagram, as they do not occur during the actual credential issuance process.
 
 \[^2]: Note that wallet must implement both code flows, the issuer may choose to implement only one.
 
