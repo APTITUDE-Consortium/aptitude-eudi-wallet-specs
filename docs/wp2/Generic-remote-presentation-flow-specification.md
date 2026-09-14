@@ -1,7 +1,7 @@
 # Generic remote presentation flow specification
 
-Version 0.91
-Date 08-09-2026
+Version 0.98
+Date 14-09-2026
 
 ## Authors
 
@@ -104,8 +104,8 @@ href="https://openid.net/specs/openid-4-verifiable-presentations-1_0.html">OID4V
 <a
 href="https://openid.net/specs/openid4vc-high-assurance-interoperability-profile-1_0-final.html">HAIP ver1.0</a>,
 <a
-href="https://www.etsi.org/deliver/etsi_ts/119400_119499/11947202/01.01.01_60/ts_11947202v010101p.pdf">ETSI
-TS 119 472-2 ver1.1.1</a>,
+href="https://www.etsi.org/deliver/etsi_ts/119400_119499/11947202/01.02.01_60/ts_11947202v010201p.pdf">ETSI
+TS 119 472-2 ver1.2.1</a>,
 <a
 href="https://www.rfc-editor.org/info/rfc9101/">RFC 9101</a></p>
 <p>ISO18013-5, <a
@@ -143,7 +143,7 @@ The process behind O1, O2 and O3 is further explained in the [APTITUDE onboardin
 ## 3\. Interaction details
 
 In this section, the generic remote presentation flow is further detailed by identifying the exact API, message, or other mechanism that takes place at each step.
-After the diagram each step is then linked to the underlying RFC that provides more details on it’s usage.
+After the diagram each step is then linked to the underlying RFC that provides more details on its usage.
 
 ### 3.1 Flow requirements
 
@@ -199,12 +199,12 @@ impacting presentation flow and designed validation checks.
 |WRPRC shall be provided through the `verifier_info` parameter within the RO|In scope|`verifier_info` also carries the RPRC_19a context used for authorization and Register fallback.|
 |Verifier shall provide public key material within the `client_metadata` parameter of the RO|In scope|The Wallet uses this fresh per-request key material to encrypt the response.|
 |Verifier shall provide `nonce` and `state` values within the RO|In scope|The values are used for request, response, and session correlation as applicable.|
-|`etsi_tl`-based trusted-authority processing for DCQL|In scope|The Wallet matches each `etsi_tl` to the LOTE URL which harvors the Trust Anchor of the Sign/Seal certificate signing the credential being requested.|
+|`etsi_tl`-based trusted-authority processing for DCQL|In scope|The Wallet matches each `etsi_tl` to the LOTE URL which harbors the Trust Anchor of the Sign/Seal certificate signing the credential being requested.|
 |Verifier signs the Request Object within the JAR using the private key corresponding to its WRPAC|In scope|The WRPAC chain is provided through the JAR `x5c` header, and the Wallet validates that signature as the interaction signature after validating the chain.|
 
 #### 3.1.4 Additional Aptitude requirements
 
-In some cases to simplify implementation for the partners there are number of additional requirements added on the top of all formal standards and specifications
+In some cases to simplify implementation for the partners there are number of additional requirements added on the top of all formal standards and specifications. At this moment it is only a placeholder, with ver 1.1 we will add Aptitude requirement around optional browser mediation (DC API) usage.
 
 |**Requirement**|**Scope decision**|
 |-|-|
@@ -246,7 +246,7 @@ sequenceDiagram
     R-->>W: Signed JAR Request Object
     Note over W: [V2.1] Validate Request Object
     W->>L: [V2.2] Retrieve and validate WRPAC-provider LoTE
-    L-->>W: WRPAC-provider LoTE
+    L-->>W: LoTE
     Note over W: [V2.3] Authenticate WRP
     alt WRPAC authentication fails
       W-->>U: NON_AUTHENTICATED - stop interaction
@@ -255,7 +255,7 @@ sequenceDiagram
     end
     Note over W: [2.3] Extract authorization evidence
     W->>L: [V2.4] Retrieve and validate WRPRC-provider LoTE
-    L-->>W: WRPRC-provider LoTE
+    L-->>W: LoTE
     Note over W: [V2.5] Validate WRPRC
     Note over W: [V2.6] Evaluate presentation authorization
     alt Non-overridable authorization failure
@@ -265,7 +265,7 @@ sequenceDiagram
     end
     U-)W: [3.1] Authenticate User
     W->>W: [3.2] Select credentials and disclosures
-    Note over W: For payments UC's present transaction data
+    Note over W: For payments UCs present transaction data
     U-)W: [3.3] Approve or deny disclosure
     alt [3.4] Holder binding is required
       Note over W: Generate holder proof
@@ -276,8 +276,8 @@ sequenceDiagram
     W->>R: [4.1] Submit Authorization Response
     R->>R: [4.2] Decrypt Authorization Response
     Note over R: [V4.1] Validate presentations
-    R->>L: [V4.2] Retrieve and validate Credential Issuer LoTE
-    L-->>R: Credential Issuer LoTE
+    R->>L: [V4.2] Fetch and validate QEAA-/(Pub)EAA-Provider LoTE
+    L-->>R: LoTE
     Note over R: [V4.3] Validate credentials
     opt Credential status is applicable
       R->>S: [4.3] Retrieve Status List Token
@@ -288,7 +288,11 @@ sequenceDiagram
       R-->>W: [4.4] Return redirect URI
       W->>R: [4.5] Follow redirect URI
     end
-    U-)R: [5.1] Continue with service usage
+    alt Validation check successfull
+      U-)R: [5.1] Continue with service usage
+    else
+      U-)R: [5.2] Deny of service
+    end
 ```
 
 ### 3.2.1 Steps mapping overview
