@@ -1,0 +1,661 @@
+<mxfile host="Electron" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/29.6.6 Chrome/144.0.7559.236 Electron/40.8.4 Safari/537.36">
+  <diagram name="Page-1" id="13e1069c-82ec-6db2-03f1-153e76fe0fe0">
+    <mxGraphModel dx="1030" dy="1476" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1100" pageHeight="850" background="none" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="7baba1c4bc27f4b0-2" parent="1" style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;html=1;container=1;collapsible=0;recursiveResize=0;outlineConnect=0;rounded=1;shadow=0;comic=0;labelBackgroundColor=none;strokeWidth=1;fontFamily=Verdana;fontSize=12;align=center;" value="EUDIW" vertex="1">
+          <mxGeometry height="2680" width="100" x="280" y="-780" as="geometry" />
+        </mxCell>
+        <mxCell id="7baba1c4bc27f4b0-10" parent="7baba1c4bc27f4b0-2" style="html=1;points=[];perimeter=orthogonalPerimeter;rounded=0;shadow=0;comic=0;labelBackgroundColor=none;strokeWidth=1;fontFamily=Verdana;fontSize=12;align=center;" value="" vertex="1">
+          <mxGeometry height="2580" width="10" x="45" y="70" as="geometry" />
+        </mxCell>
+        <mxCell id="6PVqhWmN0gAd-pwTR8wD-4" edge="1" parent="7baba1c4bc27f4b0-2" style="html=1;verticalAlign=bottom;endArrow=block;curved=0;rounded=0;strokeColor=#009900;entryX=1.067;entryY=0.327;entryDx=0;entryDy=0;entryPerimeter=0;strokeWidth=2;" value="&lt;font style=&quot;font-size: 12px;&quot; face=&quot;Verdana&quot;&gt;[1b.2B1] Credential offer (credential_offer_uri)&lt;/font&gt;">
+          <mxGeometry relative="1" width="80" as="geometry">
+            <mxPoint x="397.83000000000004" y="330" as="sourcePoint" />
+            <mxPoint x="55.00000000000006" y="331.98" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="6PVqhWmN0gAd-pwTR8wD-7" edge="1" parent="7baba1c4bc27f4b0-2" style="html=1;verticalAlign=bottom;endArrow=block;labelBackgroundColor=none;fontFamily=Verdana;fontSize=12;edgeStyle=elbowEdgeStyle;elbow=vertical;strokeWidth=2;" value="[1b.2B2] Get credential offer">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="55" y="350" as="sourcePoint" />
+            <mxPoint x="400" y="350" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="6PVqhWmN0gAd-pwTR8wD-9" parent="7baba1c4bc27f4b0-2" style="shape=umlFrame;whiteSpace=wrap;html=1;pointerEvents=0;width=410;height=15;" value="&lt;font face=&quot;Verdana&quot;&gt;Alt - Same device, authorization code flow, passing URI for offer&lt;/font&gt;" vertex="1">
+          <mxGeometry height="90" width="1000" x="-230" y="290" as="geometry" />
+        </mxCell>
+        <mxCell id="gwPEvvnB112rL40ztaE_-2" edge="1" parent="7baba1c4bc27f4b0-2" style="html=1;verticalAlign=bottom;endArrow=block;labelBackgroundColor=none;fontFamily=Verdana;fontSize=12;edgeStyle=elbowEdgeStyle;elbow=vertical;strokeColor=#3333FF;" target="7baba1c4bc27f4b0-3" value="[1b.2C1] Scan QR code by wallet (credential_offer_uri)">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points" />
+            <mxPoint x="-210" y="460" as="sourcePoint" />
+            <mxPoint x="360" y="460" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="gwPEvvnB112rL40ztaE_-4" edge="1" parent="7baba1c4bc27f4b0-2" style="html=1;verticalAlign=bottom;endArrow=block;labelBackgroundColor=none;fontFamily=Verdana;fontSize=12;edgeStyle=elbowEdgeStyle;elbow=vertical;strokeWidth=2;" value="[1b.2C2]Get credential offer">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="55" y="480" as="sourcePoint" />
+            <mxPoint x="399.5" y="480" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="gwPEvvnB112rL40ztaE_-6" parent="7baba1c4bc27f4b0-2" style="shape=umlFrame;whiteSpace=wrap;html=1;pointerEvents=0;width=590;height=20;" value="&lt;font face=&quot;Verdana&quot;&gt;Alt - Cross device, authorization codeflow, use QR code for collection of&amp;nbsp; credential offer&lt;/font&gt;" vertex="1">
+          <mxGeometry height="120" width="1000" x="-230" y="390" as="geometry" />
+        </mxCell>
+        <mxCell id="gwPEvvnB112rL40ztaE_-1" edge="1" parent="7baba1c4bc27f4b0-2" style="html=1;align=left;spacingLeft=2;endArrow=block;rounded=0;edgeStyle=orthogonalEdgeStyle;curved=0;rounded=0;entryX=1.5;entryY=0.49;entryDx=0;entryDy=0;entryPerimeter=0;strokeColor=#000000;" value="&lt;font style=&quot;font-size: 12px;&quot; face=&quot;Verdana&quot;&gt;[1b.2C]Present QR code&lt;/font&gt;">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="435" y="410" />
+              <mxPoint x="435" y="440" />
+            </Array>
+            <mxPoint x="405" y="410" as="sourcePoint" />
+            <mxPoint x="410" y="440.4000000000001" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="6PVqhWmN0gAd-pwTR8wD-8" edge="1" parent="7baba1c4bc27f4b0-2" style="html=1;verticalAlign=bottom;endArrow=open;dashed=1;endSize=8;labelBackgroundColor=none;fontFamily=Verdana;fontSize=12;edgeStyle=elbowEdgeStyle;elbow=vertical;exitX=0.733;exitY=0.475;exitDx=0;exitDy=0;exitPerimeter=0;entryX=1.333;entryY=0.474;entryDx=0;entryDy=0;entryPerimeter=0;" value="Credential offer (credential_issuer, credential_configurations_ids)">
+          <mxGeometry relative="1" x="0.0014" as="geometry">
+            <mxPoint as="offset" />
+            <Array as="points" />
+            <mxPoint x="393.9999999999999" y="370.62" as="sourcePoint" />
+            <mxPoint x="49.99999999999994" y="369.38" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="gwPEvvnB112rL40ztaE_-5" edge="1" parent="7baba1c4bc27f4b0-2" style="html=1;verticalAlign=bottom;endArrow=open;dashed=1;endSize=8;labelBackgroundColor=none;fontFamily=Verdana;fontSize=12;edgeStyle=elbowEdgeStyle;elbow=vertical;exitX=0.733;exitY=0.475;exitDx=0;exitDy=0;exitPerimeter=0;entryX=1.7;entryY=0.468;entryDx=0;entryDy=0;entryPerimeter=0;" value="Credential offer (credential_issuer, issuer_state)">
+          <mxGeometry relative="1" x="-0.0013" as="geometry">
+            <mxPoint as="offset" />
+            <Array as="points" />
+            <mxPoint x="394.9999999999999" y="501.24" as="sourcePoint" />
+            <mxPoint x="62" y="502.68000000000006" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="BSqbYX83szVoNUcahtam-6" parent="7baba1c4bc27f4b0-2" style="shape=umlFrame;whiteSpace=wrap;html=1;pointerEvents=0;width=550;height=15;" value="&lt;font face=&quot;Verdana&quot;&gt;Alt - Pre-authorized flow, same device, passing URI for the credential offer&lt;/font&gt;" vertex="1">
+          <mxGeometry height="230" width="1000" x="-230" y="520" as="geometry" />
+        </mxCell>
+        <mxCell id="7RPd9Uao0YmXFBeTUD8Y-25" edge="1" parent="7baba1c4bc27f4b0-2" style="html=1;verticalAlign=bottom;endArrow=block;labelBackgroundColor=none;fontFamily=Verdana;fontSize=12;edgeStyle=elbowEdgeStyle;elbow=vertical;strokeWidth=2;" target="7baba1c4bc27f4b0-3" value="[1b.2E6]Get credential offer">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="55" y="970" as="sourcePoint" />
+            <mxPoint x="399.5" y="970" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Qy9stcuZ5-BJ21bOemi3-3" edge="1" parent="7baba1c4bc27f4b0-2" style="html=1;align=left;spacingLeft=2;endArrow=block;rounded=0;edgeStyle=orthogonalEdgeStyle;curved=0;rounded=0;strokeColor=#000000;" target="7baba1c4bc27f4b0-2" value="&lt;font face=&quot;Verdana&quot;&gt;&lt;span style=&quot;font-size: 12px;&quot;&gt;[V2.1] Validate JWS signature of metadata&lt;/span&gt;&lt;/font&gt;">
+          <mxGeometry relative="1" x="-0.0328" y="-40" as="geometry">
+            <mxPoint as="offset" />
+            <Array as="points">
+              <mxPoint x="-80" y="1100" />
+              <mxPoint x="-80" y="1130" />
+            </Array>
+            <mxPoint x="50" y="1100" as="sourcePoint" />
+            <mxPoint x="-20.5" y="1135" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="w0e50c6tviU1Amx3WjOk-9" edge="1" parent="7baba1c4bc27f4b0-2" style="html=1;align=left;spacingLeft=2;endArrow=block;rounded=0;edgeStyle=orthogonalEdgeStyle;curved=0;rounded=0;strokeColor=#000000;" value="&lt;font face=&quot;Verdana&quot;&gt;&lt;span style=&quot;font-size: 12px;&quot;&gt;[V2.2] Validate WRPAC&amp;nbsp;&lt;/span&gt;&lt;/font&gt;">
+          <mxGeometry relative="1" x="0.0658" y="-95" as="geometry">
+            <mxPoint as="offset" />
+            <Array as="points">
+              <mxPoint x="-15" y="1140" />
+              <mxPoint x="-15" y="1170" />
+            </Array>
+            <mxPoint x="45" y="1140" as="sourcePoint" />
+            <mxPoint x="45" y="1170" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Qy9stcuZ5-BJ21bOemi3-13" edge="1" parent="7baba1c4bc27f4b0-2" style="html=1;align=left;spacingLeft=2;endArrow=block;rounded=0;edgeStyle=orthogonalEdgeStyle;curved=0;rounded=0;strokeColor=#000000;" value="&lt;font face=&quot;Verdana&quot;&gt;&lt;span style=&quot;font-size: 12px;&quot;&gt;[V2.5] Validate WRPRC (providesAttestations)&amp;nbsp;&lt;/span&gt;&lt;/font&gt;">
+          <mxGeometry relative="1" y="-50" as="geometry">
+            <mxPoint as="offset" />
+            <Array as="points">
+              <mxPoint x="-15.069999999999993" y="1250" />
+              <mxPoint x="-15.069999999999993" y="1270" />
+              <mxPoint x="44.93000000000001" y="1270" />
+            </Array>
+            <mxPoint x="44.93000000000001" y="1250" as="sourcePoint" />
+            <mxPoint x="44.93000000000001" y="1270" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="WZdvunHvaE9ooUDwLayx-2" edge="1" parent="7baba1c4bc27f4b0-2" style="html=1;align=left;spacingLeft=2;endArrow=block;rounded=0;edgeStyle=orthogonalEdgeStyle;curved=0;rounded=0;strokeColor=#000000;" value="&lt;font face=&quot;Verdana&quot;&gt;&lt;span style=&quot;font-size: 12px;&quot;&gt;[V2.6] Save embedded policies&amp;nbsp;&lt;/span&gt;&lt;/font&gt;">
+          <mxGeometry relative="1" x="0.0084" y="-50" as="geometry">
+            <mxPoint as="offset" />
+            <Array as="points">
+              <mxPoint x="-14.999999999999993" y="1290" />
+              <mxPoint x="-14.999999999999993" y="1310" />
+              <mxPoint x="45.00000000000001" y="1310" />
+            </Array>
+            <mxPoint x="45.00000000000001" y="1290" as="sourcePoint" />
+            <mxPoint x="45.00000000000001" y="1310" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="7baba1c4bc27f4b0-3" parent="1" style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;html=1;container=1;collapsible=0;recursiveResize=0;outlineConnect=0;rounded=1;shadow=0;comic=0;labelBackgroundColor=none;strokeWidth=1;fontFamily=Verdana;fontSize=12;align=center;" value="(Q)EAA Provider (Issuer)" vertex="1">
+          <mxGeometry height="2650" width="120" x="620" y="-780" as="geometry" />
+        </mxCell>
+        <mxCell id="7baba1c4bc27f4b0-13" parent="7baba1c4bc27f4b0-3" style="html=1;points=[];perimeter=orthogonalPerimeter;rounded=0;shadow=0;comic=0;labelBackgroundColor=none;strokeWidth=1;fontFamily=Verdana;fontSize=12;align=center;" value="" vertex="1">
+          <mxGeometry height="2550" width="10" x="55" y="80" as="geometry" />
+        </mxCell>
+        <mxCell id="k0Uac-jmLrF5oc3W4FYV-4" edge="1" parent="7baba1c4bc27f4b0-3" style="html=1;verticalAlign=bottom;endArrow=block;curved=0;rounded=0;strokeColor=#009900;entryX=0.933;entryY=0.271;entryDx=0;entryDy=0;entryPerimeter=0;strokeWidth=2;" value="&lt;font style=&quot;font-size: 12px;&quot; face=&quot;Verdana&quot;&gt;[1b.2A]Credential offer (credential_offer)&lt;/font&gt;">
+          <mxGeometry relative="1" width="80" as="geometry">
+            <mxPoint x="55" y="270" as="sourcePoint" />
+            <mxPoint x="-286.1700000000001" y="270.53999999999996" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="7RPd9Uao0YmXFBeTUD8Y-20" edge="1" parent="7baba1c4bc27f4b0-3" style="html=1;align=left;spacingLeft=2;endArrow=block;rounded=0;edgeStyle=orthogonalEdgeStyle;curved=0;rounded=0;entryX=1.5;entryY=0.49;entryDx=0;entryDy=0;entryPerimeter=0;strokeColor=#000000;" value="&lt;font style=&quot;font-size: 12px;&quot; face=&quot;Verdana&quot;&gt;[1b.2E2]Generate pre-authorized_code and tx_code&amp;nbsp;&lt;/font&gt;&lt;div&gt;&lt;font style=&quot;font-size: 12px;&quot; face=&quot;Verdana&quot;&gt;for proces of&amp;nbsp;&lt;/font&gt;&lt;span style=&quot;font-size: 12px; font-family: Verdana;&quot;&gt;releasing credential&lt;/span&gt;&lt;/div&gt;">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="110" y="850" />
+              <mxPoint x="110" y="870" />
+            </Array>
+            <mxPoint x="65" y="850" as="sourcePoint" />
+            <mxPoint x="65" y="870.4000000000001" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="7RPd9Uao0YmXFBeTUD8Y-23" edge="1" parent="7baba1c4bc27f4b0-3" style="html=1;align=left;spacingLeft=2;endArrow=block;rounded=0;edgeStyle=orthogonalEdgeStyle;curved=0;rounded=0;strokeColor=#000000;" value="&lt;font style=&quot;font-size: 12px;&quot; face=&quot;Verdana&quot;&gt;[1b.2E4]Present QR code&lt;/font&gt;">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="95" y="890" />
+              <mxPoint x="95" y="921" />
+            </Array>
+            <mxPoint x="65" y="890" as="sourcePoint" />
+            <mxPoint x="70" y="921" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="k0Uac-jmLrF5oc3W4FYV-3" edge="1" parent="7baba1c4bc27f4b0-3" style="html=1;align=left;spacingLeft=2;endArrow=block;rounded=0;edgeStyle=orthogonalEdgeStyle;curved=0;rounded=0;entryX=1.5;entryY=0.49;entryDx=0;entryDy=0;entryPerimeter=0;strokeColor=#3333FF;" value="&lt;font style=&quot;font-size: 12px;&quot; face=&quot;Verdana&quot;&gt;[4a.5] User provides consent&lt;/font&gt;&lt;div&gt;&lt;font style=&quot;font-size: 12px;&quot; face=&quot;Verdana&quot;&gt;&amp;nbsp;to load attestation to EUDIW&lt;/font&gt;&lt;/div&gt;">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="95" y="1900" />
+              <mxPoint x="95" y="1930" />
+            </Array>
+            <mxPoint x="65" y="1900" as="sourcePoint" />
+            <mxPoint x="70" y="1930.4" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="ao1CpA_UGoOq-ZWHPJiM-1" edge="1" parent="7baba1c4bc27f4b0-3" style="html=1;verticalAlign=bottom;endArrow=block;curved=0;rounded=0;strokeColor=#009900;strokeWidth=2;" value="&lt;font style=&quot;font-size: 12px;&quot; face=&quot;Verdana&quot;&gt;[4a.6] Authorization Response (code)&lt;/font&gt;">
+          <mxGeometry relative="1" width="80" as="geometry">
+            <mxPoint x="55" y="1950" as="sourcePoint" />
+            <mxPoint x="-290.5" y="1950" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="mUOJ_DAdSQa9nRYP9Ctj-1" parent="7baba1c4bc27f4b0-3" style="shape=umlFrame;whiteSpace=wrap;html=1;pointerEvents=0;width=180;height=15;" value="&lt;font face=&quot;Verdana&quot;&gt;Authorization code flow&lt;/font&gt;" vertex="1">
+          <mxGeometry height="490" width="1020" x="-570" y="1480" as="geometry" />
+        </mxCell>
+        <mxCell id="g2Y_uvPVVWonB69OOXUa-3" parent="7baba1c4bc27f4b0-3" style="text;html=1;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;" value="&lt;font color=&quot;#ff8000&quot; style=&quot;font-size: 14px;&quot;&gt;Alternative is that AS provides new nonce value within the token response by using DPOP-Nonce header of HTTP response&lt;/font&gt;" vertex="1">
+          <mxGeometry height="50" width="370" x="80" y="1335.5" as="geometry" />
+        </mxCell>
+        <mxCell id="BSqbYX83szVoNUcahtam-11" parent="7baba1c4bc27f4b0-3" style="shape=umlFrame;whiteSpace=wrap;html=1;pointerEvents=0;width=310;height=20;" value="&lt;font face=&quot;Verdana&quot;&gt;Security enhancement PKCE - RFC 7636&amp;nbsp;&lt;/font&gt;" vertex="1">
+          <mxGeometry height="70" width="290" x="40" y="2120" as="geometry" />
+        </mxCell>
+        <mxCell id="w0e50c6tviU1Amx3WjOk-10" edge="1" parent="7baba1c4bc27f4b0-3" style="html=1;align=left;spacingLeft=2;endArrow=block;rounded=0;edgeStyle=orthogonalEdgeStyle;curved=0;rounded=0;entryX=1.5;entryY=0.49;entryDx=0;entryDy=0;entryPerimeter=0;strokeColor=#000000;" value="&lt;font face=&quot;Verdana&quot;&gt;&lt;span style=&quot;font-size: 12px;&quot;&gt;[V4a.1]Validate WIA&lt;/span&gt;&lt;/font&gt;">
+          <mxGeometry relative="1" x="0.7608" y="-15" as="geometry">
+            <mxPoint as="offset" />
+            <Array as="points">
+              <mxPoint x="115" y="1690.2" />
+              <mxPoint x="115" y="1720.2" />
+            </Array>
+            <mxPoint x="65" y="1690" as="sourcePoint" />
+            <mxPoint x="70" y="1720.4" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="w0e50c6tviU1Amx3WjOk-6" edge="1" parent="7baba1c4bc27f4b0-3" source="w0e50c6tviU1Amx3WjOk-5" style="html=1;verticalAlign=bottom;endArrow=open;dashed=1;endSize=8;curved=0;rounded=0;entryX=0.967;entryY=0.66;entryDx=0;entryDy=0;entryPerimeter=0;exitX=0.233;exitY=0.467;exitDx=0;exitDy=0;exitPerimeter=0;" value="&lt;font face=&quot;Verdana&quot; style=&quot;font-size: 12px;&quot;&gt;LoTE&lt;/font&gt;">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="379.83000000000004" y="1760" as="sourcePoint" />
+            <mxPoint x="65.00000000000011" y="1760" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="w0e50c6tviU1Amx3WjOk-11" edge="1" parent="7baba1c4bc27f4b0-3" style="html=1;align=left;spacingLeft=2;endArrow=block;rounded=0;edgeStyle=orthogonalEdgeStyle;curved=0;rounded=0;entryX=1.5;entryY=0.49;entryDx=0;entryDy=0;entryPerimeter=0;strokeColor=#000000;" value="&lt;font face=&quot;Verdana&quot;&gt;&lt;span style=&quot;font-size: 12px;&quot;&gt;[V5.1]Validate WIA&lt;/span&gt;&lt;/font&gt;">
+          <mxGeometry relative="1" x="0.7544" y="-15" as="geometry">
+            <mxPoint as="offset" />
+            <Array as="points">
+              <mxPoint x="115" y="2210.2" />
+              <mxPoint x="115" y="2240.2" />
+            </Array>
+            <mxPoint x="65" y="2210" as="sourcePoint" />
+            <mxPoint x="70" y="2240.4" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="w0e50c6tviU1Amx3WjOk-12" edge="1" parent="7baba1c4bc27f4b0-3" style="html=1;align=left;spacingLeft=2;endArrow=block;rounded=0;edgeStyle=orthogonalEdgeStyle;curved=0;rounded=0;entryX=1.5;entryY=0.49;entryDx=0;entryDy=0;entryPerimeter=0;strokeColor=#000000;" value="&lt;font face=&quot;Verdana&quot;&gt;&lt;span style=&quot;font-size: 12px;&quot;&gt;[V6.1]Verify key proof&lt;/span&gt;&lt;/font&gt;">
+          <mxGeometry relative="1" x="0.7608" y="-15" as="geometry">
+            <mxPoint as="offset" />
+            <Array as="points">
+              <mxPoint x="115" y="2310.2" />
+              <mxPoint x="115" y="2340.2" />
+            </Array>
+            <mxPoint x="65" y="2310" as="sourcePoint" />
+            <mxPoint x="70" y="2340.4" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="FR5oopMDEDjj7DkyaaEM-2" parent="1" style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;html=1;container=1;dropTarget=0;collapsible=0;recursiveResize=0;outlineConnect=0;portConstraint=eastwest;newEdgeStyle={&quot;curved&quot;:0,&quot;rounded&quot;:0};participant=umlActor;" value="" vertex="1">
+          <mxGeometry height="2660" width="20" x="60" y="-780" as="geometry" />
+        </mxCell>
+        <mxCell id="6tH1284-k3fJ5HwHm-IV-1" edge="1" parent="1" style="html=1;verticalAlign=bottom;endArrow=block;labelBackgroundColor=none;fontFamily=Verdana;fontSize=12;edgeStyle=elbowEdgeStyle;elbow=vertical;strokeColor=#3333FF;" value="[1a] Select pr&lt;span style=&quot;background-color: initial;&quot;&gt;edefined issuer?&lt;/span&gt;">
+          <mxGeometry relative="1" x="-0.0769" as="geometry">
+            <mxPoint as="offset" />
+            <Array as="points" />
+            <mxPoint x="70" y="-695.5" as="sourcePoint" />
+            <mxPoint x="329.5" y="-695.5" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="6tH1284-k3fJ5HwHm-IV-4" parent="1" style="shape=umlFrame;whiteSpace=wrap;html=1;pointerEvents=0;width=240;height=15;" value="&lt;font face=&quot;Verdana&quot;&gt;&amp;nbsp;1a Initiating process from wallet&lt;br&gt;&lt;/font&gt;" vertex="1">
+          <mxGeometry height="90" width="1050" x="20" y="-730" as="geometry" />
+        </mxCell>
+        <mxCell id="6PVqhWmN0gAd-pwTR8wD-1" parent="1" style="text;html=1;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;" value="&lt;font style=&quot;color: rgb(255, 128, 0); font-size: 14px;&quot;&gt;Initiation from wallet can be triggerd on two ways:&lt;/font&gt;&lt;div&gt;&lt;font style=&quot;color: rgb(255, 128, 0);&quot; size=&quot;3&quot;&gt;a.) There is preconfigured list of Credentials (with link to the National Issuers?)&lt;/font&gt;&lt;/div&gt;&lt;div&gt;&lt;font style=&quot;color: rgb(255, 128, 0);&quot; size=&quot;3&quot;&gt;b.) From RP wallet (holder) gets request for a credential it doesn&#39;t hold locally. Wallet should have internally information about credential issuer Identifier, in order to be able to query its metadata&amp;nbsp;&lt;/font&gt;&lt;/div&gt;" vertex="1">
+          <mxGeometry height="90" width="570" x="390" y="-730" as="geometry" />
+        </mxCell>
+        <mxCell id="BSqbYX83szVoNUcahtam-3" parent="1" style="shape=umlFrame;whiteSpace=wrap;html=1;pointerEvents=0;width=250;height=30;strokeColor=#3333FF;" value="&lt;font face=&quot;Verdana&quot;&gt;&amp;nbsp;[1.b.2D1] OID4VP&lt;br&gt;User authentication via EUDIW&lt;/font&gt;" vertex="1">
+          <mxGeometry height="50" width="640" x="60" y="-210" as="geometry" />
+        </mxCell>
+        <mxCell id="BSqbYX83szVoNUcahtam-4" edge="1" parent="1" style="html=1;align=left;spacingLeft=2;endArrow=block;rounded=0;edgeStyle=orthogonalEdgeStyle;curved=0;rounded=0;entryX=1.5;entryY=0.49;entryDx=0;entryDy=0;entryPerimeter=0;strokeColor=#000000;" value="&lt;font style=&quot;font-size: 12px;&quot; face=&quot;Verdana&quot;&gt;[1b.2D2]Generate pre-authorized_code and tx_code&amp;nbsp;&lt;/font&gt;&lt;div&gt;&lt;font style=&quot;font-size: 12px;&quot; face=&quot;Verdana&quot;&gt;for proces of&amp;nbsp;&lt;/font&gt;&lt;span style=&quot;font-size: 12px; font-family: Verdana;&quot;&gt;releasing credential&lt;/span&gt;&lt;/div&gt;">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="730" y="-150" />
+              <mxPoint x="730" y="-130" />
+            </Array>
+            <mxPoint x="685" y="-150" as="sourcePoint" />
+            <mxPoint x="685" y="-129.5999999999999" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="BSqbYX83szVoNUcahtam-5" edge="1" parent="1" style="html=1;verticalAlign=bottom;endArrow=block;curved=0;rounded=0;strokeColor=#009900;entryX=0.7;entryY=0.388;entryDx=0;entryDy=0;entryPerimeter=0;strokeWidth=2;" value="&lt;font style=&quot;font-size: 12px;&quot; face=&quot;Verdana&quot;&gt;[1b.2D4]Credential offer (credential_offer_uri)&lt;/font&gt;">
+          <mxGeometry relative="1" width="80" as="geometry">
+            <mxPoint x="670" y="-90" as="sourcePoint" />
+            <mxPoint x="332" y="-89.63999999999987" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="gwPEvvnB112rL40ztaE_-12" parent="1" style="shape=umlFrame;whiteSpace=wrap;html=1;pointerEvents=0;width=240;height=15;" value="&lt;font face=&quot;Verdana&quot;&gt;&amp;nbsp;1b Initiating process from Issuer&lt;br&gt;&lt;/font&gt;" vertex="1">
+          <mxGeometry height="847.5" width="1050" x="20" y="-597.5" as="geometry" />
+        </mxCell>
+        <mxCell id="7baba1c4bc27f4b0-11" edge="1" parent="1" style="html=1;verticalAlign=bottom;endArrow=block;labelBackgroundColor=none;fontFamily=Verdana;fontSize=12;edgeStyle=elbowEdgeStyle;elbow=vertical;strokeColor=#3333FF;" value="[1b.1] request VC issuing">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points" />
+            <mxPoint x="70" y="-570" as="sourcePoint" />
+            <mxPoint x="680" y="-570" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="6PVqhWmN0gAd-pwTR8wD-5" parent="1" style="shape=umlFrame;whiteSpace=wrap;html=1;pointerEvents=0;width=420;height=15;" value="&lt;font face=&quot;Verdana&quot;&gt;Alt - Same device, authorization code flow, passing credential offer&lt;/font&gt;" vertex="1">
+          <mxGeometry height="60" width="1000" x="50" y="-560" as="geometry" />
+        </mxCell>
+        <mxCell id="7RPd9Uao0YmXFBeTUD8Y-4" edge="1" parent="1" style="html=1;verticalAlign=bottom;endArrow=block;labelBackgroundColor=none;fontFamily=Verdana;fontSize=12;edgeStyle=elbowEdgeStyle;elbow=vertical;strokeColor=#3333FF;" value="[1b.2D3] receive tx_code through separate comm. channel (i.e. via mail)">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points" />
+            <mxPoint x="60" y="-120" as="sourcePoint" />
+            <mxPoint x="670" y="-120" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="7RPd9Uao0YmXFBeTUD8Y-7" edge="1" parent="1" style="html=1;verticalAlign=bottom;endArrow=block;labelBackgroundColor=none;fontFamily=Verdana;fontSize=12;edgeStyle=elbowEdgeStyle;elbow=vertical;strokeWidth=2;" value="[1b.2D5]Get credential offer">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="330" y="-60" as="sourcePoint" />
+            <mxPoint x="674.5" y="-60" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="7RPd9Uao0YmXFBeTUD8Y-8" edge="1" parent="1" style="html=1;verticalAlign=bottom;endArrow=open;dashed=1;endSize=8;labelBackgroundColor=none;fontFamily=Verdana;fontSize=12;edgeStyle=elbowEdgeStyle;elbow=vertical;exitX=0.733;exitY=0.475;exitDx=0;exitDy=0;exitPerimeter=0;entryX=1.02;entryY=0.429;entryDx=0;entryDy=0;entryPerimeter=0;" value="Credential offer (pre-authorized_code)">
+          <mxGeometry relative="1" x="-0.0013" as="geometry">
+            <mxPoint as="offset" />
+            <Array as="points" />
+            <mxPoint x="672.9999999999999" y="-40" as="sourcePoint" />
+            <mxPoint x="335.20000000000005" y="-39.36999999999989" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="7RPd9Uao0YmXFBeTUD8Y-22" edge="1" parent="1" style="html=1;verticalAlign=bottom;endArrow=block;labelBackgroundColor=none;fontFamily=Verdana;fontSize=12;edgeStyle=elbowEdgeStyle;elbow=vertical;strokeColor=#3333FF;" value="[1b.2E3] receive tx_code through separate comm. channel (i.e. via mail)">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points" />
+            <mxPoint x="70" y="100" as="sourcePoint" />
+            <mxPoint x="680" y="100" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="7RPd9Uao0YmXFBeTUD8Y-21" parent="1" style="shape=umlFrame;whiteSpace=wrap;html=1;pointerEvents=0;width=250;height=30;strokeColor=#3333FF;" value="&lt;font face=&quot;Verdana&quot;&gt;&amp;nbsp;[1.b.2E1] OID4VP&lt;br&gt;User authentication via EUDIW&lt;/font&gt;" vertex="1">
+          <mxGeometry height="40" width="640" x="60" y="10" as="geometry" />
+        </mxCell>
+        <mxCell id="7RPd9Uao0YmXFBeTUD8Y-24" edge="1" parent="1" style="html=1;verticalAlign=bottom;endArrow=block;labelBackgroundColor=none;fontFamily=Verdana;fontSize=12;edgeStyle=elbowEdgeStyle;elbow=vertical;strokeColor=#3333FF;" value="[1b.2E5] Scan QR code by wallet (credential_offer_uri)">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="370" y="157" />
+            </Array>
+            <mxPoint x="70" y="157" as="sourcePoint" />
+            <mxPoint x="680" y="157" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="7RPd9Uao0YmXFBeTUD8Y-27" parent="1" style="shape=umlFrame;whiteSpace=wrap;html=1;pointerEvents=0;width=550;height=15;" value="&lt;font face=&quot;Verdana&quot;&gt;Alt - Pre-authorized flow, cross-device device, passing uri for credential offer&lt;/font&gt;" vertex="1">
+          <mxGeometry height="250" width="1000" x="50" y="-20" as="geometry" />
+        </mxCell>
+        <mxCell id="rV34-YQWZOG_d1JZD1iC-1" parent="1" style="text;html=1;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;" value="&lt;font style=&quot;color: rgb(255, 128, 0); font-size: 14px;&quot;&gt;Assume no discovery of Wallet&#39;s Credential Offer EP,&lt;/font&gt;&lt;div&gt;&lt;font style=&quot;color: rgb(255, 128, 0);&quot; size=&quot;3&quot;&gt;&amp;nbsp;but using custom URL scheme&lt;/font&gt;&lt;div&gt;&lt;span style=&quot;text-wrap-mode: nowrap; font-family: Verdana; text-align: center; background-color: transparent;&quot;&gt;&lt;font style=&quot;color: rgb(255, 128, 0);&quot; size=&quot;3&quot;&gt;VCI - openid-credential-offer://&lt;/font&gt;&lt;/span&gt;&lt;/div&gt;&lt;/div&gt;&lt;div&gt;&lt;span style=&quot;text-wrap-mode: nowrap; font-family: Verdana; text-align: center; background-color: transparent;&quot;&gt;&lt;font style=&quot;color: rgb(255, 128, 0);&quot; size=&quot;3&quot;&gt;HAIP - haip-vci://&lt;/font&gt;&lt;/span&gt;&lt;/div&gt;&lt;div&gt;&lt;span style=&quot;text-wrap-mode: nowrap; font-family: Verdana; text-align: center; background-color: transparent;&quot;&gt;&lt;font style=&quot;color: rgb(255, 128, 0);&quot; size=&quot;3&quot;&gt;ETSI - eu&lt;/font&gt;&lt;/span&gt;&lt;span style=&quot;color: rgb(255, 128, 0); font-family: Verdana; font-size: medium; text-align: center; text-wrap-mode: nowrap; background-color: transparent;&quot;&gt;-eaa-offer://&lt;/span&gt;&lt;/div&gt;" vertex="1">
+          <mxGeometry height="90" width="340" x="720" y="-490" as="geometry" />
+        </mxCell>
+        <mxCell id="gwPEvvnB112rL40ztaE_-7" edge="1" parent="1" style="html=1;verticalAlign=bottom;endArrow=block;labelBackgroundColor=none;fontFamily=Verdana;fontSize=12;edgeStyle=elbowEdgeStyle;elbow=vertical;exitX=0.9;exitY=0.597;exitDx=0;exitDy=0;exitPerimeter=0;strokeWidth=2;" value="[2] Credential Issuer Metadata Request">
+          <mxGeometry relative="1" x="-0.0858" as="geometry">
+            <mxPoint as="offset" />
+            <mxPoint x="335" y="280.3299999999999" as="sourcePoint" />
+            <mxPoint x="674.5" y="279.9966666666669" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="gwPEvvnB112rL40ztaE_-10" edge="1" parent="1" style="html=1;verticalAlign=bottom;endArrow=open;dashed=1;endSize=8;labelBackgroundColor=none;fontFamily=Verdana;fontSize=12;edgeStyle=elbowEdgeStyle;elbow=vertical;" value="Metadata (authorization_servers, credential_endpoint, WRPAC, WRPRC)">
+          <mxGeometry relative="1" x="0.09" y="-5" as="geometry">
+            <mxPoint as="offset" />
+            <Array as="points" />
+            <mxPoint x="670" y="305" as="sourcePoint" />
+            <mxPoint x="340" y="304.78999999999996" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="gwPEvvnB112rL40ztaE_-8" parent="1" style="text;html=1;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;" value="&lt;font style=&quot;font-size: 14px;&quot;&gt;&lt;font style=&quot;color: rgb(255, 128, 0);&quot;&gt;- EndPoint to which wallet send credential issuer metadata&amp;nbsp;&lt;/font&gt;&lt;/font&gt;&lt;font style=&quot;font-size: 14px; background-color: transparent; color: rgb(255, 128, 0);&quot;&gt;request&amp;nbsp;&lt;/font&gt;&lt;span style=&quot;font-size: 14px; background-color: transparent; color: rgb(255, 128, 0);&quot;&gt;is formed by&amp;nbsp;&lt;/span&gt;&lt;div&gt;&lt;div&gt;&lt;div&gt;&lt;span style=&quot;font-family: Verdana; text-align: center; text-wrap-mode: nowrap;&quot;&gt;&lt;font style=&quot;color: rgb(255, 128, 0); font-size: 10px;&quot;&gt;&amp;lt;CredentialIssuerIdentifiar&amp;gt;/.well-known/openid-credential-issuer&lt;/font&gt;&lt;/span&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;div&gt;&lt;span style=&quot;color: rgb(255, 128, 0); font-size: 14px;&quot;&gt;- Optional inclusion of embedded disclosure policy&lt;/span&gt;&lt;/div&gt;" vertex="1">
+          <mxGeometry height="50" width="330" x="720" y="265" as="geometry" />
+        </mxCell>
+        <mxCell id="g2Y_uvPVVWonB69OOXUa-2" edge="1" parent="1" style="html=1;verticalAlign=bottom;endArrow=open;dashed=1;endSize=8;curved=0;rounded=0;" value="&lt;font face=&quot;Verdana&quot; style=&quot;font-size: 12px;&quot;&gt;nonce response&lt;/font&gt;">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="545.83" y="565.5" />
+            </Array>
+            <mxPoint x="675.33" y="565.5" as="sourcePoint" />
+            <mxPoint x="340" y="565.5" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="7RPd9Uao0YmXFBeTUD8Y-26" edge="1" parent="1" style="html=1;verticalAlign=bottom;endArrow=open;dashed=1;endSize=8;labelBackgroundColor=none;fontFamily=Verdana;fontSize=12;edgeStyle=elbowEdgeStyle;elbow=vertical;exitX=0.733;exitY=0.475;exitDx=0;exitDy=0;exitPerimeter=0;" value="Credential offer (pre-authorized_code)">
+          <mxGeometry relative="1" x="-0.0013" as="geometry">
+            <mxPoint as="offset" />
+            <Array as="points" />
+            <mxPoint x="674.9999999999999" y="210" as="sourcePoint" />
+            <mxPoint x="340" y="210" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="fGrXH7FAOiRxgPZlxq4g-1" parent="1" style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;html=1;container=1;dropTarget=0;collapsible=0;recursiveResize=0;outlineConnect=0;portConstraint=eastwest;newEdgeStyle={&quot;curved&quot;:0,&quot;rounded&quot;:0};" value="Wallet Provider" vertex="1">
+          <mxGeometry height="2660" width="100" x="120" y="-780" as="geometry" />
+        </mxCell>
+        <mxCell id="fGrXH7FAOiRxgPZlxq4g-2" edge="1" parent="fGrXH7FAOiRxgPZlxq4g-1" style="html=1;verticalAlign=bottom;endArrow=block;curved=0;rounded=0;" target="fGrXH7FAOiRxgPZlxq4g-3" value="[3.1] KA request (nonce)">
+          <mxGeometry relative="1" width="80" as="geometry">
+            <mxPoint x="205" y="1395.5" as="sourcePoint" />
+            <mxPoint x="90" y="1395.5" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="fGrXH7FAOiRxgPZlxq4g-3" parent="fGrXH7FAOiRxgPZlxq4g-1" style="html=1;points=[[0,0,0,0,5],[0,1,0,0,-5],[1,0,0,0,5],[1,1,0,0,-5]];perimeter=orthogonalPerimeter;outlineConnect=0;targetShapes=umlLifeline;portConstraint=eastwest;newEdgeStyle={&quot;curved&quot;:0,&quot;rounded&quot;:0};" value="" vertex="1">
+          <mxGeometry height="84.5" width="10" x="45" y="1385.5" as="geometry" />
+        </mxCell>
+        <mxCell id="fGrXH7FAOiRxgPZlxq4g-4" edge="1" parent="1" style="html=1;verticalAlign=bottom;endArrow=open;dashed=1;endSize=8;curved=0;rounded=0;" value="KA attestation">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="180" y="635.5" as="sourcePoint" />
+            <mxPoint x="329.5" y="635.5" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="fGrXH7FAOiRxgPZlxq4g-5" parent="1" style="shape=umlFrame;whiteSpace=wrap;html=1;pointerEvents=0;width=310;height=20;align=left;" value="&lt;font face=&quot;Verdana&quot;&gt;&amp;nbsp;Alt: attestation proof type with nonce&lt;/font&gt;" vertex="1">
+          <mxGeometry height="70" width="330" x="50" y="575.5" as="geometry" />
+        </mxCell>
+        <mxCell id="Qy9stcuZ5-BJ21bOemi3-4" parent="1" style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;html=1;container=1;dropTarget=0;collapsible=0;recursiveResize=0;outlineConnect=0;portConstraint=eastwest;newEdgeStyle={&quot;curved&quot;:0,&quot;rounded&quot;:0};" value="LoTE/TL" vertex="1">
+          <mxGeometry height="2650" width="100" x="950" y="-790" as="geometry" />
+        </mxCell>
+        <mxCell id="Qy9stcuZ5-BJ21bOemi3-7" parent="Qy9stcuZ5-BJ21bOemi3-4" style="html=1;points=[[0,0,0,0,5],[0,1,0,0,-5],[1,0,0,0,5],[1,1,0,0,-5]];perimeter=orthogonalPerimeter;outlineConnect=0;targetShapes=umlLifeline;portConstraint=eastwest;newEdgeStyle={&quot;curved&quot;:0,&quot;rounded&quot;:0};" value="" vertex="1">
+          <mxGeometry height="115" width="10" x="45" y="1135" as="geometry" />
+        </mxCell>
+        <mxCell id="w0e50c6tviU1Amx3WjOk-5" parent="Qy9stcuZ5-BJ21bOemi3-4" style="html=1;points=[[0,0,0,0,5],[0,1,0,0,-5],[1,0,0,0,5],[1,1,0,0,-5]];perimeter=orthogonalPerimeter;outlineConnect=0;targetShapes=umlLifeline;portConstraint=eastwest;newEdgeStyle={&quot;curved&quot;:0,&quot;rounded&quot;:0};" value="" vertex="1">
+          <mxGeometry height="90" width="10" x="45" y="1730" as="geometry" />
+        </mxCell>
+        <mxCell id="Qy9stcuZ5-BJ21bOemi3-8" edge="1" parent="1" style="html=1;verticalAlign=bottom;endArrow=open;dashed=1;endSize=8;curved=0;rounded=0;entryX=0.853;entryY=0.475;entryDx=0;entryDy=0;entryPerimeter=0;" value="&lt;font face=&quot;Verdana&quot; style=&quot;font-size: 12px;&quot;&gt;LoTE&lt;/font&gt;">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="991.47" y="424" as="sourcePoint" />
+            <mxPoint x="330.0000000000002" y="424" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Qy9stcuZ5-BJ21bOemi3-11" edge="1" parent="1" style="html=1;verticalAlign=bottom;endArrow=open;dashed=1;endSize=8;curved=0;rounded=0;entryX=0.96;entryY=0.493;entryDx=0;entryDy=0;entryPerimeter=0;" value="&lt;font face=&quot;Verdana&quot; style=&quot;font-size: 12px;&quot;&gt;QEAA/(Pub-)EAA-Provider TL&lt;/font&gt;">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="995" y="460.0000000000002" as="sourcePoint" />
+            <mxPoint x="334.5999999999999" y="460.0000000000002" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="BSqbYX83szVoNUcahtam-7" parent="1" style="shape=umlFrame;whiteSpace=wrap;html=1;pointerEvents=0;width=310;height=20;align=left;" value="&lt;font face=&quot;Verdana&quot;&gt;Alt - Pre authorized flow&lt;/font&gt;" vertex="1">
+          <mxGeometry height="70" width="1020" x="50" y="1230" as="geometry" />
+        </mxCell>
+        <mxCell id="BSqbYX83szVoNUcahtam-8" edge="1" parent="1" style="html=1;align=left;spacingLeft=2;endArrow=block;rounded=0;edgeStyle=orthogonalEdgeStyle;curved=0;rounded=0;entryX=1.5;entryY=0.49;entryDx=0;entryDy=0;entryPerimeter=0;strokeColor=#3333FF;" value="&lt;font face=&quot;Verdana&quot;&gt;&lt;span style=&quot;font-size: 12px;&quot;&gt;[4b]Provide input for tx&amp;nbsp;&lt;/span&gt;&lt;/font&gt;&lt;font face=&quot;Verdana&quot;&gt;&lt;span style=&quot;font-size: 12px;&quot;&gt;code&amp;nbsp;&lt;/span&gt;&lt;/font&gt;&lt;div&gt;&lt;span style=&quot;font-size: 12px; font-family: Verdana;&quot;&gt;(distributed to user separately)&lt;/span&gt;&lt;/div&gt;">
+          <mxGeometry relative="1" x="0.0572" y="-200" as="geometry">
+            <mxPoint as="offset" />
+            <Array as="points">
+              <mxPoint x="290" y="1260.5" />
+              <mxPoint x="290" y="1290.5" />
+            </Array>
+            <mxPoint x="330" y="1260" as="sourcePoint" />
+            <mxPoint x="335" y="1290.4" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="ao1CpA_UGoOq-ZWHPJiM-4" edge="1" parent="1" style="html=1;verticalAlign=bottom;endArrow=block;labelBackgroundColor=none;fontFamily=Verdana;fontSize=12;edgeStyle=elbowEdgeStyle;elbow=vertical;exitX=1.433;exitY=0.867;exitDx=0;exitDy=0;exitPerimeter=0;" value="[6.1]Credential request (access token,KA, jwt/attestation proof type)">
+          <mxGeometry relative="1" x="-0.0025" as="geometry">
+            <mxPoint as="offset" />
+            <mxPoint x="339.3299999999999" y="1500.1799999999998" as="sourcePoint" />
+            <mxPoint x="680" y="1500" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="BSqbYX83szVoNUcahtam-12" edge="1" parent="1" style="html=1;align=left;spacingLeft=2;endArrow=block;rounded=0;edgeStyle=orthogonalEdgeStyle;curved=0;rounded=0;entryX=1.5;entryY=0.49;entryDx=0;entryDy=0;entryPerimeter=0;strokeColor=#000000;" value="&lt;font face=&quot;Verdana&quot;&gt;&lt;span style=&quot;font-size: 12px;&quot;&gt;5.2 Calculate/validate code challange&lt;/span&gt;&lt;/font&gt;">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="715" y="1370" />
+              <mxPoint x="715" y="1400" />
+            </Array>
+            <mxPoint x="685" y="1370" as="sourcePoint" />
+            <mxPoint x="690" y="1400.4" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="ao1CpA_UGoOq-ZWHPJiM-2" edge="1" parent="1" style="html=1;verticalAlign=bottom;endArrow=block;entryX=0.18;entryY=0.824;labelBackgroundColor=none;fontFamily=Verdana;fontSize=12;edgeStyle=elbowEdgeStyle;elbow=vertical;entryDx=0;entryDy=0;entryPerimeter=0;" value="[5.1]Token request&amp;nbsp;&lt;div&gt;(code,code_verifier OR pre-authorized_code,tx_code|WIA)&lt;/div&gt;">
+          <mxGeometry relative="1" x="-0.0008" as="geometry">
+            <mxPoint as="offset" />
+            <mxPoint x="340" y="1330" as="sourcePoint" />
+            <mxPoint x="681.8" y="1330.48" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="BSqbYX83szVoNUcahtam-1" edge="1" parent="1" style="html=1;align=left;spacingLeft=2;endArrow=block;rounded=0;edgeStyle=orthogonalEdgeStyle;curved=0;rounded=0;entryX=1.5;entryY=0.49;entryDx=0;entryDy=0;entryPerimeter=0;strokeColor=#000000;" value="&lt;font style=&quot;font-size: 12px;&quot; face=&quot;Verdana&quot;&gt;4a.1Generate code verifier&lt;/font&gt;&lt;div&gt;&lt;font style=&quot;font-size: 12px;&quot; face=&quot;Verdana&quot;&gt;Derive code challange&lt;/font&gt;&lt;/div&gt;">
+          <mxGeometry relative="1" x="0.0348" y="-185" as="geometry">
+            <mxPoint as="offset" />
+            <Array as="points">
+              <mxPoint x="285" y="750" />
+              <mxPoint x="285" y="780" />
+            </Array>
+            <mxPoint x="320" y="750" as="sourcePoint" />
+            <mxPoint x="325" y="780.4000000000001" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="BSqbYX83szVoNUcahtam-2" parent="1" style="shape=umlFrame;whiteSpace=wrap;html=1;pointerEvents=0;width=310;height=20;" value="&lt;font face=&quot;Verdana&quot;&gt;Security enhancement PKCE - RFC 7636&amp;nbsp;&lt;/font&gt;" vertex="1">
+          <mxGeometry height="70" width="360" x="90" y="720" as="geometry" />
+        </mxCell>
+        <mxCell id="FR5oopMDEDjj7DkyaaEM-4" edge="1" parent="1" style="html=1;verticalAlign=bottom;endArrow=block;labelBackgroundColor=none;fontFamily=Verdana;fontSize=12;edgeStyle=elbowEdgeStyle;elbow=vertical;strokeColor=#009900;exitX=1.02;exitY=0.589;exitDx=0;exitDy=0;exitPerimeter=0;entryX=0.02;entryY=0.737;entryDx=0;entryDy=0;entryPerimeter=0;strokeWidth=2;" value="[4a.3] Authorization request&amp;nbsp; (request_uri)">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="335.00000000000006" y="880" as="sourcePoint" />
+            <mxPoint x="675.2" y="881.3499999999999" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="7baba1c4bc27f4b0-30" edge="1" parent="1" style="html=1;verticalAlign=bottom;endArrow=open;dashed=1;endSize=8;labelBackgroundColor=none;fontFamily=Verdana;fontSize=12;edgeStyle=elbowEdgeStyle;elbow=vertical;" value="pushed authorization response (request_uri)">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="535.5" y="860" />
+              <mxPoint x="575.5" y="870" />
+            </Array>
+            <mxPoint x="679.5" y="860" as="sourcePoint" />
+            <mxPoint x="335" y="860" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="7baba1c4bc27f4b0-14" edge="1" parent="1" style="html=1;verticalAlign=bottom;endArrow=block;labelBackgroundColor=none;fontFamily=Verdana;fontSize=12;edgeStyle=elbowEdgeStyle;elbow=vertical;exitX=0.9;exitY=0.597;exitDx=0;exitDy=0;exitPerimeter=0;strokeWidth=2;" value="[4a.2]pushed authorization request (code_chalange,WIA)">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="335" y="840" as="sourcePoint" />
+            <mxPoint x="680.5" y="840.03" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="gwPEvvnB112rL40ztaE_-16" parent="1" style="shape=umlFrame;whiteSpace=wrap;html=1;pointerEvents=0;width=340;height=20;" value="&lt;font face=&quot;Verdana&quot;&gt;Security enhancement PAR - RFC 9126&lt;/font&gt;" vertex="1">
+          <mxGeometry height="100" width="610" x="90" y="800" as="geometry" />
+        </mxCell>
+        <mxCell id="g2Y_uvPVVWonB69OOXUa-4" parent="1" style="text;html=1;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;" value="&lt;font color=&quot;#ff8000&quot;&gt;&lt;span style=&quot;font-size: 14px;&quot;&gt;Code chalange method is S256&lt;/span&gt;&lt;/font&gt;" vertex="1">
+          <mxGeometry height="50" width="330" x="460" y="730" as="geometry" />
+        </mxCell>
+        <mxCell id="g2Y_uvPVVWonB69OOXUa-9" parent="1" style="text;whiteSpace=wrap;html=1;" value="&lt;font color=&quot;#ff8000&quot;&gt;&lt;span style=&quot;font-size: 14px;&quot;&gt;It sends WIA for wallet authentication&lt;/span&gt;&lt;/font&gt;" vertex="1">
+          <mxGeometry height="30" width="350" x="720" y="820" as="geometry" />
+        </mxCell>
+        <mxCell id="w0e50c6tviU1Amx3WjOk-1" edge="1" parent="1" style="html=1;verticalAlign=bottom;endArrow=block;curved=0;rounded=0;" target="fGrXH7FAOiRxgPZlxq4g-3" value="[3.2] WIA request (short living)">
+          <mxGeometry relative="1" width="80" x="-0.0031" as="geometry">
+            <mxPoint x="1" as="offset" />
+            <Array as="points">
+              <mxPoint x="230" y="665.5" />
+            </Array>
+            <mxPoint x="329.5" y="665.5" as="sourcePoint" />
+            <mxPoint x="170" y="655.5" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="w0e50c6tviU1Amx3WjOk-2" edge="1" parent="1" style="html=1;verticalAlign=bottom;endArrow=open;dashed=1;endSize=8;curved=0;rounded=0;entryX=0.4;entryY=0.556;entryDx=0;entryDy=0;entryPerimeter=0;" value="WIA attestation">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="175" y="685.4999999999999" as="sourcePoint" />
+            <mxPoint x="320" y="685.4999999999999" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="w0e50c6tviU1Amx3WjOk-3" parent="1" style="text;html=1;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;" value="&lt;font color=&quot;#ff8000&quot; style=&quot;font-size: 14px;&quot;&gt;Assumption here is that WSCD is remote hosted by Wallet provider&amp;nbsp;&lt;/font&gt;" vertex="1">
+          <mxGeometry height="50" width="440" x="405" y="615.5" as="geometry" />
+        </mxCell>
+        <mxCell id="w0e50c6tviU1Amx3WjOk-4" edge="1" parent="1" style="html=1;verticalAlign=bottom;endArrow=block;curved=0;rounded=0;exitX=1.167;exitY=0.643;exitDx=0;exitDy=0;exitPerimeter=0;" value="&lt;font face=&quot;Verdana&quot; style=&quot;font-size: 12px;&quot;&gt;[V4a.2]Fetch and cache Aptitude LoTE&amp;nbsp;&lt;/font&gt;">
+          <mxGeometry relative="1" width="80" as="geometry">
+            <mxPoint x="690.0000000000001" y="960.0000000000002" as="sourcePoint" />
+            <mxPoint x="998.33" y="960.0000000000002" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="w0e50c6tviU1Amx3WjOk-8" edge="1" parent="1" source="w0e50c6tviU1Amx3WjOk-5" style="html=1;verticalAlign=bottom;endArrow=open;dashed=1;endSize=8;curved=0;rounded=0;entryX=0.572;entryY=0.683;entryDx=0;entryDy=0;entryPerimeter=0;exitX=0;exitY=1;exitDx=0;exitDy=-5;exitPerimeter=0;" target="7baba1c4bc27f4b0-3" value="&lt;font face=&quot;Verdana&quot; style=&quot;font-size: 12px;&quot;&gt;Wallet Providers TL&lt;/font&gt;">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="990" y="1000" as="sourcePoint" />
+            <mxPoint x="680" y="1010" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Qy9stcuZ5-BJ21bOemi3-9" edge="1" parent="1" style="html=1;verticalAlign=bottom;endArrow=block;curved=0;rounded=0;exitX=0.589;exitY=0.488;exitDx=0;exitDy=0;exitPerimeter=0;entryX=0.453;entryY=0.454;entryDx=0;entryDy=0;entryPerimeter=0;" value="&lt;font face=&quot;Verdana&quot; style=&quot;font-size: 12px;&quot;&gt;[V2.4]Fetch TL of QEAA-Provider /(Pub-)EAA-Provider&amp;nbsp;&lt;/font&gt;">
+          <mxGeometry relative="1" width="80" as="geometry">
+            <mxPoint x="335.0000000000001" y="440.0000000000002" as="sourcePoint" />
+            <mxPoint x="995.3000000000002" y="443.10000000000036" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Qy9stcuZ5-BJ21bOemi3-5" edge="1" parent="1" style="html=1;verticalAlign=bottom;endArrow=block;curved=0;rounded=0;entryX=0.487;entryY=0.437;entryDx=0;entryDy=0;entryPerimeter=0;" value="&lt;font face=&quot;Verdana&quot; style=&quot;font-size: 12px;&quot;&gt;[V2.3]Fetch and cache Aptitude LoTE&amp;nbsp;&lt;/font&gt;">
+          <mxGeometry relative="1" width="80" as="geometry">
+            <mxPoint x="335" y="401.95000000000005" as="sourcePoint" />
+            <mxPoint x="998.6999999999998" y="400.0000000000002" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="g2Y_uvPVVWonB69OOXUa-1" edge="1" parent="1" style="html=1;verticalAlign=bottom;endArrow=block;labelBackgroundColor=none;fontFamily=Verdana;fontSize=12;edgeStyle=elbowEdgeStyle;elbow=horizontal;exitX=0.9;exitY=0.597;exitDx=0;exitDy=0;exitPerimeter=0;strokeWidth=2;" value="[3] Nonce Request&amp;nbsp;">
+          <mxGeometry relative="1" x="-0.0878" as="geometry">
+            <mxPoint as="offset" />
+            <mxPoint x="335" y="550.333333333333" as="sourcePoint" />
+            <mxPoint x="674.5" y="550" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="w0e50c6tviU1Amx3WjOk-7" edge="1" parent="1" source="7baba1c4bc27f4b0-3" style="html=1;verticalAlign=bottom;endArrow=block;curved=0;rounded=0;exitX=0.572;exitY=0.675;exitDx=0;exitDy=0;exitPerimeter=0;entryX=0.453;entryY=0.678;entryDx=0;entryDy=0;entryPerimeter=0;" target="Qy9stcuZ5-BJ21bOemi3-4" value="&lt;font face=&quot;Verdana&quot; style=&quot;font-size: 12px;&quot;&gt;[V4a.3]Fetch TL of Wallet Providers&amp;nbsp;&lt;/font&gt;">
+          <mxGeometry relative="1" width="80" x="-0.0022" as="geometry">
+            <mxPoint as="offset" />
+            <mxPoint x="684.9999999999999" y="1000.0400000000004" as="sourcePoint" />
+            <mxPoint x="989.67" y="1000" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="k0Uac-jmLrF5oc3W4FYV-1" parent="1" style="shape=umlFrame;whiteSpace=wrap;html=1;pointerEvents=0;width=250;height=30;strokeColor=#3333FF;" value="&lt;font face=&quot;Verdana&quot;&gt;&amp;nbsp;[4a.4] OID4VP&lt;br&gt;User authentication via EUDIW&lt;/font&gt;" vertex="1">
+          <mxGeometry height="50" width="640" x="60" y="1050" as="geometry" />
+        </mxCell>
+        <mxCell id="ao1CpA_UGoOq-ZWHPJiM-3" edge="1" parent="1" style="html=1;verticalAlign=bottom;endArrow=open;dashed=1;endSize=8;labelBackgroundColor=none;fontFamily=Verdana;fontSize=12;edgeStyle=elbowEdgeStyle;elbow=vertical;exitX=0.167;exitY=0.857;exitDx=0;exitDy=0;exitPerimeter=0;" value="&amp;nbsp; (access token)">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="660" y="1470.22" />
+              <mxPoint x="593.83" y="1483.22" />
+            </Array>
+            <mxPoint x="676.6700000000001" y="1469.9999999999998" as="sourcePoint" />
+            <mxPoint x="329.5" y="1470.22" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="HrBhTZqUGF0DmbQqyIks-1" edge="1" parent="1" style="html=1;verticalAlign=bottom;endArrow=open;dashed=1;endSize=8;labelBackgroundColor=none;fontFamily=Verdana;fontSize=12;edgeStyle=elbowEdgeStyle;elbow=vertical;" value="credential">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint as="offset" />
+            <Array as="points">
+              <mxPoint x="590" y="1580" />
+            </Array>
+            <mxPoint x="675" y="1580" as="sourcePoint" />
+            <mxPoint x="335" y="1580" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Qy9stcuZ5-BJ21bOemi3-1" edge="1" parent="1" style="html=1;align=left;spacingLeft=2;endArrow=block;rounded=0;edgeStyle=orthogonalEdgeStyle;curved=0;rounded=0;strokeColor=#000000;" value="&lt;font face=&quot;Verdana&quot;&gt;&lt;span style=&quot;font-size: 12px;&quot;&gt;Refresh nonce value for next usage&lt;/span&gt;&lt;/font&gt;">
+          <mxGeometry relative="1" x="-0.0921" y="-145" as="geometry">
+            <mxPoint y="1" as="offset" />
+            <Array as="points">
+              <mxPoint x="295" y="1630" />
+              <mxPoint x="295" y="1670" />
+            </Array>
+            <mxPoint x="325" y="1630" as="sourcePoint" />
+            <mxPoint x="325" y="1670" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Qy9stcuZ5-BJ21bOemi3-2" parent="1" style="shape=umlFrame;whiteSpace=wrap;html=1;pointerEvents=0;width=310;height=20;" value="&lt;font face=&quot;Verdana&quot;&gt;Alt: Response includes&amp;nbsp;&lt;/font&gt;&lt;span style=&quot;text-align: start; background-color: transparent; color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255));&quot;&gt;DPoP-Nonce HTTP header&lt;/span&gt;" vertex="1">
+          <mxGeometry height="80" width="320" x="60" y="1600" as="geometry" />
+        </mxCell>
+        <mxCell id="BSqbYX83szVoNUcahtam-17" edge="1" parent="1" style="html=1;verticalAlign=bottom;endArrow=open;dashed=1;endSize=8;labelBackgroundColor=none;fontFamily=Verdana;fontSize=12;edgeStyle=elbowEdgeStyle;elbow=vertical;" value="credential">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint as="offset" />
+            <Array as="points">
+              <mxPoint x="581" y="1795" />
+            </Array>
+            <mxPoint x="675" y="1795" as="sourcePoint" />
+            <mxPoint x="335" y="1795" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="BSqbYX83szVoNUcahtam-14" edge="1" parent="1" style="html=1;align=left;spacingLeft=2;endArrow=block;rounded=0;edgeStyle=orthogonalEdgeStyle;curved=0;rounded=0;entryX=1.5;entryY=0.49;entryDx=0;entryDy=0;entryPerimeter=0;strokeColor=#000000;" value="&lt;font face=&quot;Verdana&quot;&gt;&lt;span style=&quot;font-size: 12px;&quot;&gt;Generate transaction Id&lt;/span&gt;&lt;/font&gt;">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="715" y="1705" />
+              <mxPoint x="715" y="1735" />
+            </Array>
+            <mxPoint x="685" y="1705" as="sourcePoint" />
+            <mxPoint x="690" y="1735.4" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="BSqbYX83szVoNUcahtam-18" parent="1" style="shape=umlFrame;whiteSpace=wrap;html=1;pointerEvents=0;width=310;height=20;" value="&lt;font face=&quot;Verdana&quot;&gt;Alt - Deferred credential issuance&lt;/font&gt;" vertex="1">
+          <mxGeometry height="110" width="830" x="60" y="1695" as="geometry" />
+        </mxCell>
+        <mxCell id="ao1CpA_UGoOq-ZWHPJiM-6" edge="1" parent="1" style="html=1;verticalAlign=bottom;endArrow=block;labelBackgroundColor=none;fontFamily=Verdana;fontSize=12;edgeStyle=elbowEdgeStyle;elbow=vertical;strokeColor=#3333FF;" value="[7.] View VC">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points" />
+            <mxPoint x="70" y="1835.9899999999998" as="sourcePoint" />
+            <mxPoint x="329.5" y="1835.3266666666664" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="BSqbYX83szVoNUcahtam-16" edge="1" parent="1" style="html=1;verticalAlign=bottom;endArrow=block;labelBackgroundColor=none;fontFamily=Verdana;fontSize=12;edgeStyle=elbowEdgeStyle;elbow=vertical;exitX=1.173;exitY=0.964;exitDx=0;exitDy=0;exitPerimeter=0;" value="[6.2]Deferred credential request (access token,transaction_id)">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="336.7299999999998" y="1775" as="sourcePoint" />
+            <mxPoint x="679.5" y="1775.1999999999998" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="BSqbYX83szVoNUcahtam-13" edge="1" parent="1" style="html=1;verticalAlign=bottom;endArrow=open;dashed=1;endSize=8;labelBackgroundColor=none;fontFamily=Verdana;fontSize=12;edgeStyle=elbowEdgeStyle;elbow=vertical;" value="transaction_id">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint as="offset" />
+            <Array as="points">
+              <mxPoint x="581" y="1745" />
+            </Array>
+            <mxPoint x="675" y="1745" as="sourcePoint" />
+            <mxPoint x="335" y="1745" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="WZdvunHvaE9ooUDwLayx-3" parent="1" style="shape=umlFrame;whiteSpace=wrap;html=1;pointerEvents=0;width=190;height=15;" value="Alt: embedded policies provided" vertex="1">
+          <mxGeometry height="40" width="370" x="50" y="500" as="geometry" />
+        </mxCell>
+        <mxCell id="D3K-0ltU7zJggkJZibJS-1" parent="1" style="rounded=0;whiteSpace=wrap;html=1;strokeColor=#0000FF;" value="" vertex="1">
+          <mxGeometry height="100" width="400" x="640" y="1910" as="geometry" />
+        </mxCell>
+        <mxCell id="D3K-0ltU7zJggkJZibJS-2" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;rounded=0;" value="Legend:" vertex="1">
+          <mxGeometry height="40" width="50" x="640" y="1920" as="geometry" />
+        </mxCell>
+        <mxCell id="D3K-0ltU7zJggkJZibJS-3" edge="1" parent="1" style="endArrow=none;html=1;rounded=0;entryX=1;entryY=0.25;entryDx=0;entryDy=0;startArrow=classic;startFill=1;strokeWidth=2;" target="D3K-0ltU7zJggkJZibJS-2" value="">
+          <mxGeometry height="50" relative="1" width="50" as="geometry">
+            <mxPoint x="760" y="1930" as="sourcePoint" />
+            <mxPoint x="690" y="2080" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="D3K-0ltU7zJggkJZibJS-5" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;rounded=0;" value="Systems interaction" vertex="1">
+          <mxGeometry height="20" width="160" x="770" y="1920" as="geometry" />
+        </mxCell>
+        <mxCell id="D3K-0ltU7zJggkJZibJS-6" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;rounded=0;" value="Systems interaction including browser redirect" vertex="1">
+          <mxGeometry height="20" width="270" x="770" y="1940" as="geometry" />
+        </mxCell>
+        <mxCell id="D3K-0ltU7zJggkJZibJS-7" edge="1" parent="1" style="endArrow=none;html=1;rounded=0;entryX=1;entryY=0.25;entryDx=0;entryDy=0;startArrow=classic;startFill=1;strokeColor=#009900;strokeWidth=2;" value="">
+          <mxGeometry height="50" relative="1" width="50" as="geometry">
+            <mxPoint x="760" y="1949.5" as="sourcePoint" />
+            <mxPoint x="690" y="1949.5" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="D3K-0ltU7zJggkJZibJS-8" edge="1" parent="1" style="endArrow=none;html=1;rounded=0;entryX=1;entryY=0.25;entryDx=0;entryDy=0;startArrow=classic;startFill=1;strokeColor=#0000FF;strokeWidth=2;" value="">
+          <mxGeometry height="50" relative="1" width="50" as="geometry">
+            <mxPoint x="760" y="1970" as="sourcePoint" />
+            <mxPoint x="690" y="1970" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="D3K-0ltU7zJggkJZibJS-9" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;rounded=0;" value="User interaction" vertex="1">
+          <mxGeometry height="20" width="270" x="770" y="1960" as="geometry" />
+        </mxCell>
+        <mxCell id="D3K-0ltU7zJggkJZibJS-10" parent="1" style="text;html=1;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;" value="&lt;font color=&quot;#ff8000&quot;&gt;&lt;span style=&quot;font-size: 14px;&quot;&gt;text&lt;/span&gt;&lt;/font&gt;" vertex="1">
+          <mxGeometry height="20" width="70" x="690" y="1980" as="geometry" />
+        </mxCell>
+        <mxCell id="D3K-0ltU7zJggkJZibJS-11" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;rounded=0;" value="Supporting explanation" vertex="1">
+          <mxGeometry height="20" width="270" x="770" y="1980" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
