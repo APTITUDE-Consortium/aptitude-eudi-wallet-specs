@@ -41,7 +41,7 @@ It does not define new requirements — those are in the RFCs. In case of confli
 
 ## 2\. Aptitude landscape overview
 
-Following diagram uses EUDI Wallet ecosystem roles diagram from [ARF 2.9](https://eudi.dev/2.9.0/architecture-and-reference-framework-main/#3-roles-within-the-eudi-wallet-ecosystem) as base and presents adaptations relevant for the remote presentation process within the Aptitude LSP.
+Following diagram uses EUDI Wallet ecosystem roles diagram from [ARF 3.0](https://eudi.dev/3.0.0/architecture-and-reference-framework-main/#3-roles-within-the-eudi-wallet-ecosystem) as base and presents adaptations relevant for the remote presentation process within the Aptitude LSP.
 
 ![Aptitude full landscape roles with marked interfaces for remote presentation](Aptitude_roles_and_interactions_overview_(presentation).png)
 
