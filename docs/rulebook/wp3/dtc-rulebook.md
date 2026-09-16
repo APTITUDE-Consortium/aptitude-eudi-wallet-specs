@@ -351,7 +351,7 @@ APTITUDE DTC:
 
 ### 4.2 Traveller direct pre‑registration (traveller → Member State pre‑travel system)
 
-**Context:** EU national uses their EUDIW or the EU Digital Travel Application to submit their DTC directly to a Member State’s pre‑travel system for advance checks within a 36‑hour window.
+**Context:** EU national uses their EUDIW to submit their DTC directly to a Member State’s pre‑travel system for advance checks within a 36‑hour window.
 
 [//]: # (See D3.1 §§1.2 and 3.2 for traveller‑initiated advance submission.)
 
