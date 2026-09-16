@@ -97,7 +97,7 @@ The objective is to preserve a single interoperable DTC representation that is:
 | DTC_AE_05 | APTITUDE DTC SHALL preserve the ISO/IEC 23220-4 PhotoID profile. |
 | DTC_AE_06 | APTITUDE DTC SHALL adopt open, standard-based encoding to maximize interoperability and avoid vendor lock-in. <br><br> Note : "open" means that the specification is public and free to use.<br> Note : "vendor lock-in" can include specific vendor templates for the photo encoding. |
 | DTC_AE_07 | APTITUDE DTC SHALL support a trust architecture that enables verification via ICAO CSCA/DS and EUDI Wallet/eIDAS trust anchors. |
-| DTC_AE_08 | APTITUDE DTC SHALL preserve the cryptographic binding between the virtual credential and the WSCD, in accordance with the applicable credential format, across issuance, storage, presentation, and verification. <br><br> Note : The EUDI WSCD is the WSCD and WSCA, which can be implemented in various ways including cloud based solutions.|
+| DTC_AE_08 | APTITUDE DTC SHALL preserve the cryptographic binding between the virtual credential and the WSCD, in accordance with the applicable credential format, across issuance, storage, presentation, and verification. <br><br> Note : The EUDI WSCD can be implemented in various ways including cloud based solutions.|
 | DTC_AE_09 | APTITUDE DTC SHALL support selective disclosure and minimisation as a layer on top of the single PhotoID credential format, not by introducing a second credential format. |
 
 #### Table 2 — Requirements on issuing
