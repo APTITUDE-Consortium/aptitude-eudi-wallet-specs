@@ -174,7 +174,7 @@ Details about conditions and options related to the attributes are given in clau
 | ``dg15`` | according to [ISO/IEC 23220-4] <br><br>*Condition:* mandatory if available in the corresponding physical eMRTD | ... |
 | ``dg16`` | according to [ISO/IEC 23220-4] | ... |
 
-**Note:* `age_over_18` is currently retained as an optional attribute for age-based verification and may be removed if no concrete DTC use case requiring it is identified.
+**Note:* `age_over_18` is currently retained as an optional attribute for age-based verification and may be removed if no use case requiring it is identified.
 
 ### 2.4 Mandatory metadata
 
