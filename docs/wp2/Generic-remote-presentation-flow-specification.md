@@ -1,7 +1,7 @@
 # Generic remote presentation flow specification
 
-Version 0.98
-Date 14-09-2026
+Version 0.99
+Date 15-09-2026
 
 ## Authors
 
@@ -126,7 +126,7 @@ TS 119 612 ver2.4.1</a>, <a
 href="../RFCs/RFC003.md#71-lote-endpoint">APTITUDE RFC003 LoTE Endpoint</a>, <a
 href="https://aptitude-consortium.github.io/wp2-trust-specifications/latest/sections/trust-evaluation-process/#trust-anchor-validation-process">APTITUDE Trust Anchor Validation Process</a>, <a
 href="https://aptitude-consortium.github.io/wp2-trust-specifications/latest/sections/trust-artifacts/#list-of-trusted-entities">APTITUDE List of Trusted Entities</a></td>
-<td>Fetching the dedicated LoTEs for Providers of WRPACs and Providers of WRPRCs through the LoTE endpoint</td>
+<td>Fetching the dedicated LoTEs for Providers of WRPACs, Providers of WRPRCs and QEAA-/(Pub)EAA-Providers LoTE through the LoTE endpoint</td>
 </tr>
 <tr>
 <td>R3</td>
