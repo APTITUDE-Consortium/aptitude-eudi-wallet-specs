@@ -463,7 +463,7 @@ APTITUDE DTC (see pre-registration use cases 4.1 or 4.2)
 
 The APTITUDE DTC is derived from data contained in the LDS data groups of the corresponding physical eMRTD and is signed by the national issuing authority. The issuing authority SHALL sign the issuer signed data, i.e. the Mobile Security Object (MSO), using a DTC signer key and certificate under the respective CSCA root certificate.
 
-*Note:* If the CSCA of the eMRTD is different to the CSCA of the APTITUDE DTC, the respective trust model is to be validated by the reader according to its policy. 
+*Note:* If the CSCA of the eMRTD is different to the CSCA of the APTITUDE DTC, the respective trust model is to be validated by the Relying Party according to its policy.
 
 The document signer key and certificate SHALL comply with clause 2.2 in [ICAO-DTC-VC-TR] and SHALL meet the following conditions:
 
@@ -472,27 +472,23 @@ The document signer key and certificate SHALL comply with clause 2.2 in [ICAO-DT
 The following key usage period and certificate/public key validity period SHALL be used for the DTC signer:
 
 * Private key usage period : between xx days and 3 months;
-* certificate/public key validity period : xxx;
-
-* Private key usage period : between xx days and 3 months;
 * certificate/public key validity period : xxx.
 
 For the purpose of interoperability tests and piloting, issuing authorities are requested to provide certificates of a test CSCA which
 
 * SHALL be published at a stated distribution point,
 * SHALL be bounded in validity and
-* SHALL be distinguishable from production trust anchors, and the operator of the test PKI SHALL be name
+* SHALL be distinguishable from production trust anchors, and the operator of the test PKI SHALL be named.
 
 ### Trust in EUDI Wallet ecosystem
 
-The root of trust for any Relying Party registered in the EUDI-Wallet ecosystem is the list of trusted entities issued by the EU. It is recommended to make the CSCA root certificates of the EU Member States available to Relying Parties within the EUDI Wallet ecosytem by a respective EU list of trusted entities according to [ETSI TS 119 602], e.g. APTITUDE-DTC-TL.
+The root of trust for any Relying Party registered in the EUDI Wallet ecosystem is the list of trusted entities issued by the EU. It is recommended to make the CSCA root certificates of the EU Member States available to Relying Parties within the EUDI Wallet ecosytem by a respective list of trusted entities according to [ETSI TS 119 602] published by the EU, e.g. named APTITUDE-DTC-TL.
 
-In order to allow verification of the APTITUDE-DTC by Relying Parties compliant to protocols defined in [ISO/IEC 18013-5.2] but not registered in the EUDI Wallet ecosystem, it is recommended to issue the content of the EU APTITUDE-DTC-TL also as a VICAL according to [ISO/IEC 18013-5.2]. 
+In order to allow verification of the APTITUDE DTC by Relying Parties compliant to protocols defined in [ISO/IEC 18013-5.2] but not registered in the EUDI Wallet ecosystem, it is recommended to issue the content of the EU APTITUDE-DTC-TL also as a VICAL according to [ISO/IEC 18013-5.2]. The respective Relying Parties must establish trust to the issuer of the VICAL.
 
 ### Trust according to ICAO
 
-Relying Parties acting as Inspectin Systems according to ICAO obtain the CSCA root certificates from the ICAO PKD by any Relying Party. They MAY establish trust through the ICAO PKD.
-
+Relying Parties acting as Inspection Systems according to ICAO MAY obtain the CSCA root certificates from the ICAO PKD. They MAY establish trust through the ICAO PKD and its masterlists.
 
 ## 6 Revocation
 
