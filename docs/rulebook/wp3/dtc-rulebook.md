@@ -689,8 +689,8 @@ The second table below defines the rules applicable to each of these attributes 
 | ``dg2`` |This field SHALL replicate the DG2 of the eMRTD|
 | ``dg14`` |This field SHALL replicate the DG14 of the eMRTD|
 | **Optional Attributes**||
-| ``family_name_MRZ`` |This field SHALL contain the family name present in the DE “name of holder” as found in DG1 of the eMRTD|
-| ``given_name_MRZ`` |This field SHALL contain the given name present in the DE “name of holder” as found in DG1 of the eMRTD|
+| ``family_name_viz`` |This field SHALL contain the family name present in the DE “name of holder” as found in DG1 of the eMRTD|
+| ``given_name_viz`` |This field SHALL contain the given name present in the DE “name of holder” as found in DG1 of the eMRTD|
 | ``enrolment_portrait_image`` |This field MAY contain a newer portrait acquired in the course of the DTC issuance process by the issuing authority, provided it is matched with the one stored in the DG2 of the eMRTD <br><br>*Note:* The portriat image in DG2 of eMRTD remains the authoritative passport biometric reference unless national law and the applicable trust framework expressly permit another image.|
 | ``age_in_years`` |This field SHALL be computed by the issuing authority at DTC issuance from the DE “date of birth” (see above) and a date of reference.|
 | ``age_birth_year`` |This field SHALL contain the year present in the DE “Date of birth” as found in DG1 of the eMRTD|
