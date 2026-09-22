@@ -620,8 +620,8 @@ The first table below aims at showing for each attribute of the APTITUDE DTC whe
 | ``dg2`` | X | | |
 | ``dg14`` | X | | |
 | **Optional Attributes**||||
-| ``family_name_MRZ`` | X | | |
-| ``given_name_MRZ`` | X | | |
+| ``family_name_viz`` | X | | |
+| ``given_name_viz`` | X | | |
 | ``enrolment_portrait_image`` | | | X |
 | ``age_in_years`` | | X | |
 | ``age_birth_year`` | X | | |
