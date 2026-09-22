@@ -39,7 +39,7 @@ Within the European framework and in accordance with the EUDI Wallet Architectur
 
 The primary objective of the DTC is to support identity verification and travel document validation at border crossing points, as well as before and during travel (for details see §4). Within the European framework, its implementation is also expected to meet applicable privacy and data-minimisation requirements. The APTITUDE DTC complements the physical travel document and uses EUDI Wallet presentation mechanisms to support remote and proximity presentation and, where permitted by the selected credential format and protocol, selective disclosure as well as strong cryptographic verification.
 
-Within the APTITUDE context, the target model is the ICAO DTC Type 2 [ICAO-DTC-VC-TR], comprising a DTC-VC bound to (1) a physical electronic Machine Readable Travel Document (eMRTD) and (2) a DTC-PC which is an EUDI Wallet, and derived using mechanisms aligned with European regulations and ICAO guidelines. A DTC of Type 2 is therefore considered the primary and preferred implementation model. However, in the light of the features, interfaces and specifications of the EUDI Wallet, the mechanisms for binding the DTC-VC to the DTC-PC (i.e. the WSCD/WSCA of the EUDI Wallet) differ from those specificied by ICAO in [ICAO-DTC-PC-TR] (for details see §7). This results in differences in the content of the DTC-VC, as the methods and information for binding the DTC-VC to DTC-PC are different.
+Within the APTITUDE context, the target model is the ICAO DTC Type 2 [ICAO-DTC-VC-TR], comprising a DTC-VC bound to (1) a physical electronic Machine Readable Travel Document (eMRTD) and (2) a DTC-PC which is an EUDI Wallet, and derived using mechanisms aligned with European regulations and ICAO guidelines. A DTC of Type 2 is therefore considered the primary and preferred implementation model. However, in the light of the features, interfaces and specifications of the EUDI Wallet, the mechanisms for binding the DTC-VC to the DTC-PC (i.e. the WSCD of the EUDI Wallet) differ from those specificied by ICAO in [ICAO-DTC-PC-TR] (for details see §7). This results in differences in the content of the DTC-VC, as the methods and information for binding the DTC-VC to DTC-PC are different.
 
 Thus, the APTITUDE DTC draws inspiration from the principle underlying ICAO DTC Type 2, i.e. the secure physical element of the ID document, signed by a sovereign authority. The guiding idea is to preserve this trust anchor. Since the ICAO Type 2 specification is at the time of writing still under finalization, APTITUDE DTC may diverge from ICAO’s strict specifications in two key dimensions (for details see §7):
 
@@ -84,7 +84,7 @@ The objective is to preserve a single interoperable DTC representation that is:
 * aligned with ICAO DTC Type 2 concept and eMRTD LDS semantics and data model,
 * compatible with EUDI Wallet proximity presentation,
 * suitable for both on-site border-control use cases and remote wallet-driven presentations,
-* capable of preserving the cryptographic binding between the virtual credential and the Wallet Secure Component Application (WSCA).
+* capable of preserving the cryptographic binding between the virtual credential and the WSCD.
 
 #### Table 1 — Requirements on data model
 
@@ -97,7 +97,7 @@ The objective is to preserve a single interoperable DTC representation that is:
 | DTC_AE_05 | APTITUDE DTC SHALL preserve the ISO/IEC 23220-4 PhotoID profile. |
 | DTC_AE_06 | APTITUDE DTC SHALL adopt open, standard-based encoding to maximize interoperability and avoid vendor lock-in. <br><br> Note : "open" means that the specification is public and free to use.<br> Note : "vendor lock-in" can include specific vendor templates for the photo encoding. |
 | DTC_AE_07 | APTITUDE DTC SHALL support a trust architecture that enables verification via ICAO CSCA/DS and EUDI Wallet/eIDAS trust anchors. |
-| DTC_AE_08 | APTITUDE DTC SHALL preserve the cryptographic binding between the virtual credential and the Wallet secure component, in accordance with the applicable credential format, across issuance, storage, presentation, and verification. <br><br> Note : The EUDI Wallet secure component is the WSCD and WSCA, which can be implemented in various ways including cloud based solutions.|
+| DTC_AE_08 | APTITUDE DTC SHALL preserve the cryptographic binding between the virtual credential and the WSCD, in accordance with the applicable credential format, across issuance, storage, presentation, and verification. <br><br> Note : The EUDI WSCD can be implemented in various ways including cloud based solutions.|
 | DTC_AE_09 | APTITUDE DTC SHALL support selective disclosure and minimisation as a layer on top of the single PhotoID credential format, not by introducing a second credential format. |
 
 #### Table 2 — Requirements on issuing
@@ -124,8 +124,10 @@ The objective is to preserve a single interoperable DTC representation that is:
 | ``family_name`` | according to [ISO/IEC 23220-2.2] | Hardt |
 | ``given_name`` | according to [ISO/IEC 23220-2.2] | Giovanni |
 | ``birth_date`` | according to [ISO/IEC 23220-2.2] | 01-01-1980 |
-| ``portrait`` | according to [ISO/IEC 23220-2.2] <br> This field SHALL contain the same portrait data as stored in the DG2 of the eMRTD | ... |
-| ``age_over_18`` | according to [ISO/IEC 23220-2.2] | O  |
+| ``portrait`` | according to [ISO/IEC 23220-2.2] <br> This field SHALL contain the same portrait data as stored in the DG2 of the eMRTD. | ... |
+| ``age_in_years`` | according to [ISO/IEC 23220-4] | 28  |
+| ``sex`` | according to [ISO/IEC 23220-4] <br> This field SHALL take either the values '1' (for male), '2' (for female) or '0' (when unknown)| '1' (for male) |
+| ``nationality`` | according to [ISO/IEC 23220-4] <br> This field SHALL be encoded in three letter code (alpha-3 code) defined in ISO 3166-1| ITA  |
 | ``document_number`` | identifier of the APTITUDE DTC according to [ISO/IEC 23220-2.2] | YA1234567 |
 | ``dg1`` | according to [ISO/IEC 23220-4] | PPITAHARDT<<GIOVANNI<<<<<<<<<<<<<<<<<<<<<<<<<br>YA12345676ITA8009010M3304042<<<<<<<<<<<<<<08 |
 | ``dg2`` | according to [ISO/IEC 23220-4] | ... |
@@ -139,8 +141,8 @@ Details about conditions and options related to the attributes are given in clau
 | --- | --- | --- |
 | ``family_name_viz`` | according to [ISO/IEC 23220-4] | HARDT |
 | ``given_name_viz`` | according to [ISO/IEC 23220-4] | GIOVANNI |
-| ``enrolment_portrait_image`` | according to [ISO/IEC 23220-4] <br><br> portrait image captured during enrolment of the APTITUDE DTC/PhotoID holder that can be different to image in ``portrait``| ...  |
-| ``age_in_years`` | according to [ISO/IEC 23220-4] | M  |
+| ``enrolment_portrait_image`` | according to [ISO/IEC 23220-4] <br>portrait image captured during enrolment of the APTITUDE DTC/PhotoID holder that can be different from the image in ``portrait``.| ...  |
+| ``age_over_18`` | according to [ISO/IEC 23220-2.2] | T  |
 | ``age_birth_year`` | according to [ISO/IEC 23220-4] | 1998  |
 | ``portrait_capture_date`` | according to [ISO/IEC 23220-4] <br> this field denotes the date of capture of the portrait stored in the field “enrolment_portrait_image” | 20-04-2023 |
 | ``birthplace`` | according to [ISO/IEC 23220-4] | Italy, Trento |
@@ -151,8 +153,6 @@ Details about conditions and options related to the attributes are given in clau
 | ``resident_postal_code`` | according to [ISO/IEC 23220-4] | 38122 |
 | ``resident_country`` | according to [ISO/IEC 23220-4] | IT |
 | ``resident_city_latin1`` | according to [ISO/IEC 23220-4] | ... |
-| ``sex`` | according to [ISO/IEC 23220-4] <br> This field SHALL take either the values '1' (for male), '2' (for female) or '0' (when unknown)| '1' (for male) |
-| ``nationality`` | according to [ISO/IEC 23220-4] <br> This field SHALL be encoded in three letter code (alpha-3 code) defined in ISO 3166-1| ITA  |
 | ``family_name_latin1`` | according to [ISO/IEC 23220-4] | ...  |
 | ``given_name_latin1`` | according to [ISO/IEC 23220-4] | ...  |
 | ``birth_country`` |  according to [ISO/IEC 23220-4] | IT |
@@ -173,6 +173,8 @@ Details about conditions and options related to the attributes are given in clau
 | ``dg13`` | according to [ISO/IEC 23220-4] | ... |
 | ``dg15`` | according to [ISO/IEC 23220-4] <br><br>*Condition:* mandatory if available in the corresponding physical eMRTD | ... |
 | ``dg16`` | according to [ISO/IEC 23220-4] | ... |
+
+**Note:* `age_over_18` is currently retained as an optional attribute for age-based verification and may be removed if no use case requiring it is identified.
 
 ### 2.4 Mandatory metadata
 
@@ -246,8 +248,8 @@ The general PhotoID data elements of APTITUDE DTC SHALL be as defined in Table 1
 | ``expiry_date`` | -- | M  |
 | ``issuing_authority`` | -- | M  |
 | ``issuing_country`` | -- | M  |
-| ``age_over_18`` | -- | M  |
-| ``age_in_years`` | -- | O  |
+| ``age_over_18`` | -- | O  |
+| ``age_in_years`` | -- | M  |
 | ``age_birth_year`` | -- | O  |
 | ``portrait_capture_date`` | -- | O  |
 | ``birthplace`` | -- | O  |
@@ -258,8 +260,8 @@ The general PhotoID data elements of APTITUDE DTC SHALL be as defined in Table 1
 | ``resident_postal_code`` | -- | O  |
 | ``resident_country`` | -- | O  |
 | ``resident_city_latin1`` | -- | O  |
-| ``sex`` | -- | O  |
-| ``nationality`` | -- | O  |
+| ``sex`` | -- | M  |
+| ``nationality`` | -- | M  |
 | ``document_number`` | -- | M  |
 | ``issuing_subdivision`` | -- | O  |
 | ``family_name_latin1`` | -- | O  |
@@ -351,7 +353,7 @@ APTITUDE DTC:
 
 ### 4.2 Traveller direct pre‑registration (traveller → Member State pre‑travel system)
 
-**Context:** EU national uses their EUDIW or the EU Digital Travel Application to submit their DTC directly to a Member State’s pre‑travel system for advance checks within a 36‑hour window.
+**Context:** EU national uses their EUDIW to submit their DTC directly to a Member State’s pre‑travel system for advance checks within a 36‑hour window.
 
 [//]: # (See D3.1 §§1.2 and 3.2 for traveller‑initiated advance submission.)
 
@@ -509,12 +511,12 @@ The following statements apply for APTITUDE DTC:
 
 1. APTITUDE DTC is compliant to DTC-VC Type 1 acc. to [ICAO-DTC-VC-TR], i.e. the eMRTD being the physical component (see §7.2).<br><br>
 2. APTITUDE DTC is functionally euivalent to DTC-VC Type 2 according to [ICAO-DTC-VC-TR] with the following properties:
-    * eMRTD-PC is implemented through EUDI-Wallet including WSCD/WSCA,
+    * eMRTD-PC is implemented through EUDI-Wallet including WSCD,
     * ``DTCCapabilitiesInfo`` is substituted by ``Engagement``structure as part of device engagement in proximity case,
     * ``DTCSignerInfo`` and ``dtcTBS`` is substituted by ``IssuerAuth`` structure, i.e. Mobile Security Object, of mdoc structure,
     * ``DTCSecurityInfo`` is substituted by ``IssuerAuth`` structure, i.e. Mobile Security Object, of mdoc structure,
     * Cryptographic link between DTC-VC and DTC-PC is provided by Device Request/Response protocol according to [ISO/IEC 18013-5] and [ISO/IEC 18013-7.2].<br><br>
-3. Strength of cloning protection of APTITUDE DTC, i.e. authentication factor of possession, is determined by strength of WSCD/WSCA mechanisms, i.e. protection of the device key managed by the WSCD/WSCA. <br><br>*Note:* The EUDI Wallet including WSCD/WSCA is required to provide the PID on eIDAS level high [PID Rulebook]. If such level is required for DTC Type 2, the same mechanisms can be applied.<br><br>
+3. Strength of cloning protection of APTITUDE DTC, i.e. authentication factor of possession, is determined by strength of WSCD mechanisms, i.e. protection of the device key managed by the WSCD. <br><br>*Note:* The EUDI Wallet including WSCD is required to provide the PID on eIDAS level high [PID Rulebook]. If such level is required for DTC Type 2, the same mechanisms can be applied.<br><br>
 4. APTITUDE DTC can be verified by any reader, i.e. Relying Party, within EUDI-Wallet ecosystem.<br><br>
 5. APTITUDE DTC can be verified internationally by any reader compliant to [ISO/IEC 18013-5] and [ISO/IEC 18013-7.2], e.g. supporting OpenID4VP.<br><br>
 6. APTITUDE DTC does not support ICAO protocols according to [ICAO-DTC-PC-TR], e.g. ISO/IEC 14443 interface, PACE protocols, and anti-cloning methods like Chip Authentication or Active Authentication as this is implemented based on other protocols (see statement 2). The APTITUDE DTC does not rely on the ICAO DTC-PC protocols defined in [ICAO-DTC-PC-TR] for presentation from the EUDI Wallet, such as PACE or ICAO Chip Authentication. It instead relies on the applicable EUDI Wallet engagement, transfer and device-binding mechanisms. This does not exclude the use of NFC, BLE or other interfaces required by the selected wallet presentation protocol.
@@ -613,13 +615,15 @@ The first table below aims at showing for each attribute of the APTITUDE DTC whe
 | ``given_name`` | | X | |
 | ``birth_date`` | X | | |
 | ``portrait`` | | X | |
-| ``age_over_18`` | | | X |
+| ``sex`` | X | | |
+| ``nationality`` | X | | |
 | ``document_number`` | | | X |
-| ``person_id`` | | | X |
 | ``dg1`` | X  | | |
 | ``dg2`` | X | | |
 | ``dg14`` | X | | |
 | **Optional Attributes**||||
+| ``person_id`` | | | X |
+| ``age_over_18`` | | | X |
 | ``family_name_viz`` | X | | |
 | ``given_name_viz`` | X | | |
 | ``enrolment_portrait_image`` | | | X |
@@ -634,8 +638,6 @@ The first table below aims at showing for each attribute of the APTITUDE DTC whe
 | ``resident_postal_code`` | | X | |
 | ``resident_country`` | | X | |
 | ``resident_city_latin1`` | | X | |
-| ``sex`` | X | | |
-| ``nationality`` | X | | |
 | ``family_name_latin1`` | | X | |
 | ``given_name_latin1`` | | X | |
 | ``birth_country`` | | X | |
@@ -682,13 +684,13 @@ The second table below defines the rules applicable to each of these attributes 
 | ``given_name`` |This field MAY not be present in the eMRTD.<br><br>If a DG11 is present in the eMRTD this field SHALL contain the given name present in the DE “Name of holder (in full)” of the DG11 (if this DE is present).<br><br>Otherwise, this field SHALL be provided by the DTC issuing authority|
 | ``birth_date`` |This field SHALL contain the DE “Date of birth” as found in DG1 of the eMRTD|
 | ``portrait`` |This field SHALL contain the image present in the DG2 (JPEG or JPEG2000 without any metadata) of the eMRTD|
-| ``age_over_18`` |This field SHALL be computed by the issuing authority at DTC issuance from the DE “date of birth” (see above) and a date of reference.|
 | ``document_number`` |This field SHALL be assigned by the issuing authority at DTC issuance.<br><br>This information is related to the DTC and not the eMRTD.|
-| ``person_id`` |This field SHALL be assigned by the issuing authority at DTC issuance.|
 | ``dg1`` |This field SHALL replicate the DG1 of the eMRTD|
 | ``dg2`` |This field SHALL replicate the DG2 of the eMRTD|
 | ``dg14`` |This field SHALL replicate the DG14 of the eMRTD|
 | **Optional Attributes**||
+| ``person_id`` |This field SHALL be assigned by the issuing authority at DTC issuance.|
+| ``age_over_18`` |This field SHALL be computed by the issuing authority at DTC issuance from the DE “date of birth” (see above) and a date of reference.|
 | ``family_name_viz`` |This field SHALL contain the family name present in the DE “name of holder” as found in DG1 of the eMRTD|
 | ``given_name_viz`` |This field SHALL contain the given name present in the DE “name of holder” as found in DG1 of the eMRTD|
 | ``enrolment_portrait_image`` |This field MAY contain a newer portrait acquired in the course of the DTC issuance process by the issuing authority, provided it is matched with the one stored in the DG2 of the eMRTD <br><br>*Note:* The portriat image in DG2 of eMRTD remains the authoritative passport biometric reference unless national law and the applicable trust framework expressly permit another image.|
