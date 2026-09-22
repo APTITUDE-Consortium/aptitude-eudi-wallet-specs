@@ -32,10 +32,10 @@ roles:Owner of a Scheme for the Attestation of Attribute
 roles:Provider of Person Identification Data (PID Provider)
 : A natural or legal person responsible for issuing and revoking the person identification data and ensuring that the person identification data of a user is cryptographically bound to a Wallet Unit. [ARF]
 
-roles:Provider of Wallet Relying Party Access Certificate (Provider of WRPAC)
+roles:Provider of Wallet-Relying Party Access Certificate (Provider of WRPAC)
 : A natural or legal person mandated by a Member State to issue Relying Party access certificates to (Wallet-) Relying Parties registered in that Member State. [ARF]
 
-roles:Provider of Wallet Relying Party Registration Certificate (Provider of WRPRC)
+roles:Provider of Wallet-Relying Party Registration Certificate (Provider of WRPRC)
 : A natural or legal person mandated by a Member State to issue (wallet-relying party) registration certificates to (wallet-)relying parties registered in that Member State. [ARF]
 
 roles:PuB-EAA Provider
