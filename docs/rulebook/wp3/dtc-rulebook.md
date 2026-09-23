@@ -486,7 +486,7 @@ For the purpose of interoperability tests and piloting, issuing authorities are 
 
 The root of trust for any Relying Party registered in the EUDI Wallet ecosystem is the list of trusted entities issued by the EU. It is recommended to make the CSCA root certificates of the EU Member States available to Relying Parties within the EUDI Wallet ecosytem by a respective list of trusted entities according to [ETSI TS 119 602] published by the EU, e.g. named APTITUDE-DTC-TL.
 
-In order to allow for international acceptance of the APTITUDE DTC by Relying Parties compliant to protocols defined in [ISO/IEC 18013-5.2][ISO/IEC 18013-7.2], it is recommended to issue the content of the EU APTITUDE-DTC-TL as a VICAL according to [ISO/IEC 18013-5.2].
+In order to allow for international acceptance of the APTITUDE DTC by Relying Parties compliant to protocols defined in [ISO/IEC 18013-5.2] and [ISO/IEC 18013-7.2], it is recommended to issue the content of the EU APTITUDE-DTC-TL as a VICAL according to [ISO/IEC 18013-5.2].
 
 For the purpose of interoperability tests and piloting, the APTITUDE project provides an APTITUDE DTC VICAL.
 
