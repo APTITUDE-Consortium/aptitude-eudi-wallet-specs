@@ -467,16 +467,18 @@ The APTITUDE DTC is derived from data contained in the LDS data groups of the co
 
 The document signer key and certificate SHALL comply with clause 2.2 in [ICAO-DTC-VC-TR] and SHALL meet the following conditions:
 
-* The DTC signer certificate SHALL include the following OID in the extendedKeyUsage extension : xxxxx;
+* The DTC signer certificate SHALL include the following OIDs in the ``extendedKeyUsage`` extension:
+  <br>``1.0.23220.4.1.2`` according to [ISO/IEC 23220-4] indicating it is an mdoc and
+  <br>``2.23.136.1.1.12.1`` according to [ICAO-DTC-VC-TR] indicating it is DTC.
 
 The following key usage period and certificate/public key validity period SHALL be used for the DTC signer:
 
-* Private key usage period : between xx days and 3 months;
+* Private key usage period : between xx days and 3 months and
 * certificate/public key validity period : xxx.
 
 For the purpose of interoperability tests and piloting, issuing authorities are requested to provide certificates of a test CSCA which
 
-* SHALL be published at a stated distribution point,
+* SHALL be published at a stated distribution point and through the APTITUDE DTC VICAl (see §5.2),
 * SHALL be bounded in validity and
 * SHALL be distinguishable from production trust anchors, and the operator of the test PKI SHALL be named.
 
@@ -484,7 +486,9 @@ For the purpose of interoperability tests and piloting, issuing authorities are 
 
 The root of trust for any Relying Party registered in the EUDI Wallet ecosystem is the list of trusted entities issued by the EU. It is recommended to make the CSCA root certificates of the EU Member States available to Relying Parties within the EUDI Wallet ecosytem by a respective list of trusted entities according to [ETSI TS 119 602] published by the EU, e.g. named APTITUDE-DTC-TL.
 
-In order to allow verification of the APTITUDE DTC by Relying Parties compliant to protocols defined in [ISO/IEC 18013-5.2] but not registered in the EUDI Wallet ecosystem, it is recommended to issue the content of the EU APTITUDE-DTC-TL also as a VICAL according to [ISO/IEC 18013-5.2]. The respective Relying Parties must establish trust to the issuer of the VICAL.
+In order to allow for international acceptance of the APTITUDE DTC by Relying Parties compliant to protocols defined in [ISO/IEC 18013-5.2][ISO/IEC 18013-7], it is recommended to issue the content of the EU APTITUDE-DTC-TL as a VICAL according to [ISO/IEC 18013-5.2].
+
+For the purpose of interoperability tests and piloting, the APTITUDE project provides a VICAL.
 
 ### Trust according to ICAO
 
