@@ -126,6 +126,8 @@ The objective is to preserve a single interoperable DTC representation that is:
 | ``birth_date`` | according to [ISO/IEC 23220-2.2] | 01-01-1980 |
 | ``portrait`` | according to [ISO/IEC 23220-2.2] <br> This field SHALL contain the same portrait data as stored in the DG2 of the eMRTD. | ... |
 | ``age_in_years`` | according to [ISO/IEC 23220-4] | 28  |
+| ``sex`` | according to [ISO/IEC 23220-4] <br> This field SHALL take either the values '1' (for male), '2' (for female) or '0' (when unknown)| '1' (for male) |
+| ``nationality`` | according to [ISO/IEC 23220-4] <br> This field SHALL be encoded in three letter code (alpha-3 code) defined in ISO 3166-1| ITA  |
 | ``document_number`` | identifier of the APTITUDE DTC according to [ISO/IEC 23220-2.2] | YA1234567 |
 | ``dg1`` | according to [ISO/IEC 23220-4] | PPITAHARDT<<GIOVANNI<<<<<<<<<<<<<<<<<<<<<<<<<br>YA12345676ITA8009010M3304042<<<<<<<<<<<<<<08 |
 | ``dg2`` | according to [ISO/IEC 23220-4] | ... |
@@ -151,8 +153,6 @@ Details about conditions and options related to the attributes are given in clau
 | ``resident_postal_code`` | according to [ISO/IEC 23220-4] | 38122 |
 | ``resident_country`` | according to [ISO/IEC 23220-4] | IT |
 | ``resident_city_latin1`` | according to [ISO/IEC 23220-4] | ... |
-| ``sex`` | according to [ISO/IEC 23220-4] <br> This field SHALL take either the values '1' (for male), '2' (for female) or '0' (when unknown)| '1' (for male) |
-| ``nationality`` | according to [ISO/IEC 23220-4] <br> This field SHALL be encoded in three letter code (alpha-3 code) defined in ISO 3166-1| ITA  |
 | ``family_name_latin1`` | according to [ISO/IEC 23220-4] | ...  |
 | ``given_name_latin1`` | according to [ISO/IEC 23220-4] | ...  |
 | ``birth_country`` |  according to [ISO/IEC 23220-4] | IT |
@@ -173,6 +173,8 @@ Details about conditions and options related to the attributes are given in clau
 | ``dg13`` | according to [ISO/IEC 23220-4] | ... |
 | ``dg15`` | according to [ISO/IEC 23220-4] <br><br>*Condition:* mandatory if available in the corresponding physical eMRTD | ... |
 | ``dg16`` | according to [ISO/IEC 23220-4] | ... |
+
+**Note:* `age_over_18` is currently retained as an optional attribute for age-based verification and may be removed if no use case requiring it is identified.
 
 ### 2.4 Mandatory metadata
 
@@ -258,8 +260,8 @@ The general PhotoID data elements of APTITUDE DTC SHALL be as defined in Table 1
 | ``resident_postal_code`` | -- | O  |
 | ``resident_country`` | -- | O  |
 | ``resident_city_latin1`` | -- | O  |
-| ``sex`` | -- | O  |
-| ``nationality`` | -- | O  |
+| ``sex`` | -- | M  |
+| ``nationality`` | -- | M  |
 | ``document_number`` | -- | M  |
 | ``issuing_subdivision`` | -- | O  |
 | ``family_name_latin1`` | -- | O  |
@@ -375,7 +377,9 @@ The request may include ``age_over_18`` where required for age-based verificatio
 
 ### 4.3 Proximity presentation at border control (on‑site verification / e‑gate or officer kiosk)
 
-**Context:** Traveller presents their APTITUDE DTC from the EUDIW at the border control point (e‑gate, kiosk or officer reader) for immediate verification and biometric match. (D3.1 describes proximity presentation requirements and the need to reconcile ISO/IEC 18013‑5 and ICAO NFC/APDU approaches.)
+**Context:** Traveller presents their APTITUDE DTC from the EUDIW at the border control point (e‑gate, kiosk or officer reader) for immediate verification and biometric match.
+
+[//]: #  (D3.1 describes proximity presentation requirements and the need to reconcile ISO/IEC 18013‑5 and ICAO NFC/APDU approaches.)
 
 **Flow:** proximity (device engagement / NFC or mdoc proximity per chosen implementation).
 
@@ -401,7 +405,7 @@ Priority attributes for on‑site verification and biometric matching are ``dg2`
 
 [//]: # (Chosen attributes reflect rulebook §2 priorities and D3.1 emphasis on DG2/SOD for biometric anchoring.)
 
-**Post‑processing:** the proximity reader / e‑gate performs device engagement, retrieves the APTITUDE DTC, validates SOD / passive authentication in accordance with ICAO trust framework(signature verification and PKI chain to CSCA/PKD), checks revocation/status and carries out biometric 1:1 matching of the live capture to dg2. The gate/backend then forwards verification results and any required DGs (dg1/dg2/sod and selected metadata) to backend systems for database checks (EES, SIS, SLTD) and final decision. The pilot MUST state whether translation to ASN.1 DTCContentInfo (DTC-VC compliant with [ICAO-DTC-VC-TR]) is required for legacy inspection systems; D3.1 signals this requirement as a possible necessity but does not fix the mapping responsibilities. The reader, eGate or officer interface presents the applicable operational outcome according to the Member State border-control process.
+**Post‑processing:** the proximity reader / e‑gate performs device engagement, retrieves the APTITUDE DTC, validates SOD / passive authentication in accordance with ICAO trust framework(signature verification and PKI chain to CSCA/PKD), checks revocation/status and carries out biometric 1:1 matching of the live capture to dg2. The gate/backend then forwards verification results and any required DGs (dg1/dg2/sod and selected metadata) to backend systems for database checks (EES, SIS, SLTD) and final decision. The pilot MUST state whether translation to ASN.1 DTCContentInfo (DTC-VC compliant with [ICAO-DTC-VC-TR]) is required for legacy inspection systems. The reader, eGate or officer interface presents the applicable operational outcome according to the Member State border-control process.
 Where deemed necessary by the border control authority, the field ``dg14`` obtained from the ICAO PhotoID data elements MAY be used by the reader to verify the cryptographic binding between the APTITUDE DTC being presented and the eMRTD owned by the traveller. The same applies for the DTC-VC compliant with [ICAO-DTC-VC-TR] obtained from the APTITUDE DTC.
 
 ### 4.4 Cross‑jurisdiction proximity presentation (EU traveller arriving outside Schengen — optional)
@@ -424,7 +428,7 @@ APTITUDE DTC
 
 [//]: # (D3.1 does not define which attributes a receiving non‑EU authority will require; this baseline reflects rulebook §2 mandatory/priority elements typically needed for equivalence to an eMRTD.)
 
-**Post‑processing:** the non‑EU verifier validates the credential using ICAO PKI (CSCA/DS via PKD) and its local acceptance policy. If the receiving system requires ICAO ASN.1 DTCContentInfo (DTC-VC compliant with [ICAO-DTC-VC-TR]), an intermediate gateway or the wallet/traveller router may need to extract the disclosed ICAO PhotoID data elements and encapsulate them accordingly; D3.1 documents that such translation and trust alignment are common cross‑jurisdiction issues but does not prescribe which actor must perform the translation. If the verifier cannot validate under available trust anchors, the fallback/acceptance policy is a matter for the receiving authority. Where supported by the receiving authority, the verifier MAY return an operational outcome to the traveller according to the applicable local border-control process.
+**Post‑processing:** the non‑EU verifier validates the credential using ICAO PKI (CSCA/DS via PKD) and its local acceptance policy. If the receiving system requires ICAO ASN.1 DTCContentInfo (DTC-VC compliant with [ICAO-DTC-VC-TR]), an intermediate gateway or the wallet/traveller router may need to extract the disclosed ICAO PhotoID data elements and encapsulate them accordingly. If the verifier cannot validate under available trust anchors, the fallback/acceptance policy is a matter for the receiving authority. Where supported by the receiving authority, the verifier MAY return an operational outcome to the traveller according to the applicable local border-control process.
 
 ### 4.5 Booklet-based proximity presentation to legacy eGate (“fallback”)
 
@@ -457,33 +461,40 @@ APTITUDE DTC (see pre-registration use cases 4.1 or 4.2)
 
 ## 5 Trust Anchors
 
+### Certificates and PKI
+
 The APTITUDE DTC is derived from data contained in the LDS data groups of the corresponding physical eMRTD and is signed by the national issuing authority. The issuing authority SHALL sign the issuer signed data, i.e. the Mobile Security Object (MSO), using a DTC signer key and certificate under the respective CSCA root certificate.
+
+*Note:* If the CSCA of the eMRTD is different to the CSCA of the APTITUDE DTC, the respective trust model is to be validated by the Relying Party according to its policy.
+
 The document signer key and certificate SHALL comply with clause 2.2 in [ICAO-DTC-VC-TR] and SHALL meet the following conditions:
 
-* The DTC signer certificate SHALL include the following OID in the extendedKeyUsage extension : xxxxx;
+* The DTC signer certificate SHALL include the following OIDs in the ``extendedKeyUsage`` extension:
+  <br>``1.0.23220.4.1.2`` according to [ISO/IEC 23220-4] indicating it is an mdoc and
+  <br>``2.23.136.1.1.12.1`` according to [ICAO-DTC-VC-TR] indicating it is DTC.
 
 The following key usage period and certificate/public key validity period SHALL be used for the DTC signer:
 
-* Private key usage period : between xx days and 3 months;
-* certificate/public key validity period : xxx;
-
-* Private key usage period : between xx days and 3 months;
-* certificate/public key validity period : xxx;
-
-The following key usage period and certificate/public key validity period SHALL be used for the DTC signer:
-
-* Private key usage period : between xx days and 3 months;
-* certificate/public key validity period : xxx;
-
-It is recommended to make the CSCA root certificates of the EU Member States available to Relying Parties in the EUDI Wallet ecosytem by a respective EU Trust List, i.e. APTITUDE DTC TL.
-
-CSCA root certificates MAY also be obtained from the ICAO PKD by any Relying Party.
+* Private key usage period : between xx days and 3 months and
+* certificate/public key validity period : xxx.
 
 For the purpose of interoperability tests and piloting, issuing authorities are requested to provide certificates of a test CSCA which
 
-* SHALL be published at a stated distribution point,
+* SHALL be published at a stated distribution point and through the APTITUDE DTC VICAL (see §5.2),
 * SHALL be bounded in validity and
-* SHALL be distinguishable from production trust anchors, and the operator of the test PKI SHALL be name
+* SHALL be distinguishable from production trust anchors, and the operator of the test PKI SHALL be named.
+
+### Trust in EUDI Wallet ecosystem
+
+The root of trust for any Relying Party registered in the EUDI Wallet ecosystem is the list of trusted entities issued by the EU. It is recommended to make the CSCA root certificates of the EU Member States available to Relying Parties within the EUDI Wallet ecosytem by a respective list of trusted entities according to [ETSI TS 119 602] published by the EU, e.g. named APTITUDE-DTC-TL.
+
+In order to allow for international acceptance of the APTITUDE DTC by Relying Parties compliant to protocols defined in [ISO/IEC 18013-5.2] and [ISO/IEC 18013-7.2], it is recommended to issue the content of the EU APTITUDE-DTC-TL as a VICAL according to [ISO/IEC 18013-5.2].
+
+For the purpose of interoperability tests and piloting, the APTITUDE project provides an APTITUDE DTC VICAL.
+
+### Trust according to ICAO
+
+Relying Parties acting as Inspection Systems according to ICAO MAY obtain the CSCA root certificates from the ICAO PKD. They MAY establish trust through the ICAO PKD and its masterlists.
 
 ## 6 Revocation
 
@@ -615,11 +626,12 @@ The first table below aims at showing for each attribute of the APTITUDE DTC whe
 | ``portrait`` | X | | |
 | ``age_over_18`` | | | X |
 | ``document_number`` | | | X |
-| ``person_id`` | | | X |
 | ``dg1`` | X  | | |
 | ``dg2`` | X | | |
 | ``dg14`` | X | | |
 | **Optional Attributes**||||
+| ``person_id`` | | | X |
+| ``age_over_18`` | | | X |
 | ``family_name_viz`` | X | | |
 | ``given_name_viz`` | X | | |
 | ``enrolment_portrait_image`` | | | X |
@@ -634,8 +646,6 @@ The first table below aims at showing for each attribute of the APTITUDE DTC whe
 | ``resident_postal_code`` | | X | |
 | ``resident_country`` | | X | |
 | ``resident_city_latin1`` | | X | |
-| ``sex`` | X | | |
-| ``nationality`` | X | | |
 | ``family_name_latin1`` | | X | |
 | ``given_name_latin1`` | | X | |
 | ``birth_country`` | | X | |
@@ -682,13 +692,13 @@ The second table below defines the rules applicable to each of these attributes 
 | ``given_name`` |This field MAY not be present in the eMRTD.<br><br>If a DG11 is present in the eMRTD this field SHALL contain the given name present in the DE “Name of holder (in full)” of the DG11 (if this DE is present).<br><br>Otherwise, this field SHALL be provided by the DTC issuing authority|
 | ``birth_date`` |This field SHALL contain the DE “Date of birth” as found in DG1 of the eMRTD|
 | ``portrait`` |This field SHALL contain the image present in the DG2 (JPEG or JPEG2000 without any metadata) of the eMRTD|
-| ``age_over_18`` |This field SHALL be computed by the issuing authority at DTC issuance from the DE “date of birth” (see above) and a date of reference.|
 | ``document_number`` |This field SHALL be assigned by the issuing authority at DTC issuance.<br><br>This information is related to the DTC and not the eMRTD.|
-| ``person_id`` |This field SHALL be assigned by the issuing authority at DTC issuance.|
 | ``dg1`` |This field SHALL replicate the DG1 of the eMRTD|
 | ``dg2`` |This field SHALL replicate the DG2 of the eMRTD|
 | ``dg14`` |This field SHALL replicate the DG14 of the eMRTD|
 | **Optional Attributes**||
+| ``person_id`` |This field SHALL be assigned by the issuing authority at DTC issuance.|
+| ``age_over_18`` |This field SHALL be computed by the issuing authority at DTC issuance from the DE “date of birth” (see above) and a date of reference.|
 | ``family_name_viz`` |This field SHALL contain the family name present in the DE “name of holder” as found in DG1 of the eMRTD|
 | ``given_name_viz`` |This field SHALL contain the given name present in the DE “name of holder” as found in DG1 of the eMRTD|
 | ``enrolment_portrait_image`` |This field MAY contain a newer portrait acquired in the course of the DTC issuance process by the issuing authority, provided it is matched with the one stored in the DG2 of the eMRTD <br><br>*Note:* The portriat image in DG2 of eMRTD remains the authoritative passport biometric reference unless national law and the applicable trust framework expressly permit another image.|
