@@ -478,7 +478,7 @@ The following key usage period and certificate/public key validity period SHALL 
 
 For the purpose of interoperability tests and piloting, issuing authorities are requested to provide certificates of a test CSCA which
 
-* SHALL be published at a stated distribution point and through the APTITUDE DTC VICAl (see §5.2),
+* SHALL be published at a stated distribution point and through the APTITUDE DTC VICAL (see §5.2),
 * SHALL be bounded in validity and
 * SHALL be distinguishable from production trust anchors, and the operator of the test PKI SHALL be named.
 
@@ -486,9 +486,9 @@ For the purpose of interoperability tests and piloting, issuing authorities are 
 
 The root of trust for any Relying Party registered in the EUDI Wallet ecosystem is the list of trusted entities issued by the EU. It is recommended to make the CSCA root certificates of the EU Member States available to Relying Parties within the EUDI Wallet ecosytem by a respective list of trusted entities according to [ETSI TS 119 602] published by the EU, e.g. named APTITUDE-DTC-TL.
 
-In order to allow for international acceptance of the APTITUDE DTC by Relying Parties compliant to protocols defined in [ISO/IEC 18013-5.2][ISO/IEC 18013-7], it is recommended to issue the content of the EU APTITUDE-DTC-TL as a VICAL according to [ISO/IEC 18013-5.2].
+In order to allow for international acceptance of the APTITUDE DTC by Relying Parties compliant to protocols defined in [ISO/IEC 18013-5.2][ISO/IEC 18013-7.2], it is recommended to issue the content of the EU APTITUDE-DTC-TL as a VICAL according to [ISO/IEC 18013-5.2].
 
-For the purpose of interoperability tests and piloting, the APTITUDE project provides a VICAL.
+For the purpose of interoperability tests and piloting, the APTITUDE project provides an APTITUDE DTC VICAL.
 
 ### Trust according to ICAO
 
