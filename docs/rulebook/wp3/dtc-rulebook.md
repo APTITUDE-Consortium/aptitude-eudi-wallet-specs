@@ -623,7 +623,7 @@ The first table below aims at showing for each attribute of the APTITUDE DTC whe
 | ``family_name`` | | X | |
 | ``given_name`` | | X | |
 | ``birth_date`` | X | | |
-| ``portrait`` | | X | |
+| ``portrait`` | X | | |
 | ``sex`` | X | | |
 | ``nationality`` | X | | |
 | ``document_number`` | | | X |
@@ -636,7 +636,7 @@ The first table below aims at showing for each attribute of the APTITUDE DTC whe
 | ``family_name_viz`` | X | | |
 | ``given_name_viz`` | X | | |
 | ``enrolment_portrait_image`` | | | X |
-| ``age_in_years`` | | | X |
+| ``age_in_years`` | | X | |
 | ``age_birth_year`` | X | | |
 | ``portrait_capture_date`` | | X | |
 | ``birthplace`` | | X | |
@@ -742,7 +742,7 @@ The second table below defines the rules applicable to each of these attributes 
 | ``version`` |This field SHALL be set to 1.0|
 | ``sod`` |This field SHALL replicate the SOD of the eMRTD.|
 | **Optional Metadata**||
-| ``issuing_subdivision`` |If the eMRTD contains a DG11, this field SHALL contain the issuing subdivision present in the DE “Issuing Authority” (if this DE is present and if it contains also the issuing subdivision).<br><br>Otherwise, this field SHALL be provided by the DTC issuing authority.|
+| ``issuing_subdivision`` |If the eMRTD contains a DG12, this field SHALL contain the issuing subdivision present in the DE “Issuing Authority” (if this DE is present and if it contains also the issuing subdivision).<br><br>Otherwise, this field SHALL be provided by the DTC issuing authority.|
 | ``administrative_number`` |This field SHALL be assigned by the issuing authority at DTC issuance.|
 | ``travel_document_type`` |This field SHALL contain the DE “Document code” as found in DG1 of the eMRTD.|
 | ``travel_document_number`` |This field SHALL contain the DE “Document number” as found in DG1 of the eMRTD.|
