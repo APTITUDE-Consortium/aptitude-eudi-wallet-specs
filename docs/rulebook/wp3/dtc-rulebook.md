@@ -624,6 +624,8 @@ The first table below aims at showing for each attribute of the APTITUDE DTC whe
 | ``given_name`` | | X | |
 | ``birth_date`` | X | | |
 | ``portrait`` | X | | |
+| ``sex`` | X | | |
+| ``nationality`` | X | | |
 | ``document_number`` | | | X |
 | ``dg1`` | X  | | |
 | ``dg2`` | X | | |
