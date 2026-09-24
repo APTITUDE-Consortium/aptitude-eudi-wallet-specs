@@ -465,7 +465,7 @@ APTITUDE DTC (see pre-registration use cases 4.1 or 4.2)
 
 The APTITUDE DTC is derived from data contained in the LDS data groups of the corresponding physical eMRTD and is signed by the national issuing authority. The issuing authority SHALL sign the issuer signed data, i.e. the Mobile Security Object (MSO), using a DTC signer key and certificate under the respective CSCA root certificate.
 
-*Note:* If the CSCA of the eMRTD is different to the CSCA of the APTITUDE DTC, the respective trust model is to be validated by the Relying Party according to its policy.
+*Note:* If the CA of the eMRTD is different to the CA of the APTITUDE DTC, the respective trust model is to be validated by the Relying Party according to its policy.
 
 The document signer key and certificate SHALL comply with clause 2.2 in [ICAO-DTC-VC-TR] and SHALL meet the following conditions:
 
