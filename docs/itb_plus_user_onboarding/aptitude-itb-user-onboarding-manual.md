@@ -25,7 +25,6 @@ Reviewers: Luca Vallone, IPZS.IT; Giancarlo Degani, INFOCERT
   - [3.3 Executing the APTITUDE test suite](#33-executing-the-aptitude-test-suite)
   - [3.4 Accessing debug logs](#34-accessing-debug-logs)
   - [3.5 Downloading a report](#35-downloading-a-report)
-- [4. Submitting a conformance report to WP2/T2.2](#4-submitting-a-conformance-report-to-wp2t22)
 
 ---
 
@@ -259,18 +258,6 @@ To download a report covering all tests executed by your organisation, navigate 
 
 ## 4. Submitting a conformance report to WP2/T2.2
 
-To demonstrate conformance to the relevant APTITUDE RFCs, participants should submit the successful conformance statement report to the APTITUDE project team.
+The report submission process has been moved to a dedicated page:
 
-The report may be submitted through one of the following channels:
-
-- Email to the WP2 leads
-- APTITUDE Slack support channel: `#itb-support`
-
-When submitting the report, please include:
-
-- Organisation name
-- Tested component role: Issuer, Verifier, Wallet Unit, or combination
-- Targeted APTITUDE RFCs / profiles
-- Date of test execution
-- The downloaded conformance statement report
-- Any relevant comments, limitations, or known issues
+- [Reporting Conformance Results](report-submission.md)
