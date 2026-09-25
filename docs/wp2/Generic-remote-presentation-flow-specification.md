@@ -218,6 +218,8 @@ The end-to-end remote presentation flow is presented in a sequence diagram (SD),
 * [Aptitude Trust Revocation RFC-04](../RFCs/RFC004.md)
 * [Aptitude trust framework](https://aptitude-consortium.github.io/wp2-trust-specifications/latest/)
 
+This Generic Flow applies the **APTITUDE Trust Profile**. Accordingly, RFC002's baseline trust-framework exclusions do not apply to this flow: V2.2/V2.3 WRP authentication, V2.4/V2.5 WRPRC authorization-evidence validation, V2.6 presentation-authorization evaluation, and V4.2–V4.4 credential trust and status processing are mandatory and SHALL use RFC003, RFC004, and the applicable APTITUDE Trust Specifications. An implementation that claims only baseline RFC002 conformance does not by itself claim conformance to this Generic Flow.
+
 ```mermaid
 ---
 config:
