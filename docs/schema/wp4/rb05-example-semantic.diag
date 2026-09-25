@@ -1,0 +1,25 @@
+{
+  "docType": "org.example.aptitude.biometric-profile.1",
+  "nameSpaces": {
+    "org.iso.23220.1": {
+      "family_name": "Durand",
+      "given_name": "Camille",
+      "document_number": "BPA-7XQ4-M9VK-2T6P",
+      "issue_date": 1004("2026-09-03"),
+      "expiry_date": 1004("2026-10-03"),
+      "issuing_authority_unicode": "Example Issuer SAS"
+    },
+    "org.example.aptitude.biometric-profile.1": {
+      "biometric_reference": {
+        "modality": "face",
+        "verification_mode": "one_to_one",
+        "reference_type": "protected_template",
+        "format_id": "urn:example:aptitude:rb05:format:face-template-v1",
+        "format_version": "1.0",
+        "protection_profile_id": "urn:example:aptitude:rb05:protection:cancelable-v1",
+        "matcher_profile_id": "urn:example:aptitude:rb05:matcher:face-v1",
+        "payload": h'00010203040506070809'
+      }
+    }
+  }
+}
