@@ -466,20 +466,22 @@ APTITUDE DTC (see pre-registration use cases 4.1 or 4.2)
 
 ### 5.1 Certificates and PKI
 
-The APTITUDE DTC is derived from data contained in the LDS data groups of the corresponding physical eMRTD and is signed by the national issuing authority. The issuing authority SHALL sign the issuer signed data, i.e. the Mobile Security Object (MSO), using a DTC signer key and certificate under the respective CSCA root certificate.
+The APTITUDE DTC is derived from data contained in the LDS data groups of the corresponding physical eMRTD and is signed by the national issuing authority and its Country Signing Certificate Authority (CSCA). The issuing authority SHALL sign the issuer signed data, i.e. the Mobile Security Object (MSO), using a DTC document signer key and certificate under the respective CSCA root certificate.
 
-*Note:* If the CSCA of the eMRTD is different to the CSCA of the APTITUDE DTC, the respective trust model is to be validated by the Relying Party according to its policy.
+*Note:* If the certificate authority of the eMRTD is different to the certificate authority of the APTITUDE DTC, the respective trust model is to be validated by the Relying Party according to its policy.
 
-The document signer key and certificate SHALL comply with clause 2.2 in [ICAO-DTC-VC-TR] and SHALL meet the following conditions:
+The DTC document signer key and certificate SHALL comply with clause 2.2 in [ICAO-DTC-VC-TR] and SHALL meet the following conditions:
 
-* The DTC signer certificate SHALL include the following OIDs in the ``extendedKeyUsage`` extension:
+* The DTC document signer certificate SHALL include the following OIDs in the ``extendedKeyUsage`` extension:
   <br>``1.0.23220.4.1.2`` according to [ISO/IEC 23220-4] indicating it is an mdoc and
   <br>``2.23.136.1.1.12.1`` according to [ICAO-DTC-VC-TR] indicating it is DTC.
 
-The following key usage period and certificate/public key validity period SHALL be used for the DTC signer:
+The following key usage period and certificate/public key validity period MAY be used for the DTC document signer:
 
-* Private key usage period : between xx days and 3 months and
-* certificate/public key validity period : xxx.
+* Private key usage period: 3 months and
+* certificate/public key validity period: 2 years and 3 month.
+
+If the validity time of an APTITUDE DTC is longer than 2 years, the public key validity period SHALL be adapted accordingly.
 
 For the purpose of interoperability tests and piloting, issuing authorities are requested to provide certificates of a test CSCA which
 
