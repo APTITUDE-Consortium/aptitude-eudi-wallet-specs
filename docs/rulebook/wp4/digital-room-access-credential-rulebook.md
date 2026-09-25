@@ -1,4 +1,4 @@
-# Attestation Rulebook for attestations of type Digital Room Access Credential
+# Attestation Rulebook for attestations of type Hotel Pass
 
 - Author(s):
   - Nikos Triantafyllou, University of the Aegean, UAegean i4m Lab
@@ -8,6 +8,7 @@
 | Version | Date       | Description                                                                                             |
 | ------- | ---------- | ------------------------------------------------------------------------------------------------------- |
 | 0.1     | 23-07-2026 | Initial draft based on the SEDIT-X Hospitality material and the APTITUDE Attestation Rulebook template. |
+| 0.2     | 26-08-2026 | Aligned with the issuer schema for Hotel Pass (`room_key_credential`): visual QR pass with `id`, `room_number` and `picture`; not a cryptographic room-key credential. |
 
 
 **Feedback:**
@@ -16,106 +17,104 @@
 
 > **Draft status**
 >
-> This Rulebook is an implementation-oriented proposal for an optional, follow-on
-> hospitality credential.
+> This Rulebook defines the **Hotel Pass** for the APTITUDE / SEDIT-X hospitality
+> pilot. The Wallet display name is **Hotel Pass**. The issuer-configuration
+> identifier and `vct` is `room_key_credential`.
 >
-> This credential is **MVP+ / optional**. It SHALL NOT be treated as a mandatory component
-> of the initial SEDIT-X Hospitality MVP, whose primary credential is the Hotel Booking
-> Reference Credential.
+> The Hotel Pass is a **visual QR pass**. It is **not** a cryptographic room-key
+> credential. It SHALL NOT be treated as lock-system key material.
+>
+> This credential is **MVP+ / optional**. It SHALL NOT be treated as a mandatory
+> component of the initial SEDIT-X Hospitality MVP, whose primary credential is the
+> Accommodation Voucher (`booking_reference_credential`).
 
 ## 1 Introduction
 
 ### 1.1 Document scope and purpose
 
-This Rulebook defines the **Digital Room Access Credential**, a short-lived,
-hotel-issued Electronic Attestation of Attributes stored in a guest's EUDI Wallet after
-successful identity verification and hotel check-in.
+This Rulebook defines the **Hotel Pass**, a short-lived, hotel-issued Electronic
+Attestation of Attributes stored in a guest's EUDI Wallet after successful identity
+verification and hotel check-in.
 
-The credential represents a time-bounded and scope-bounded right to access:
+The issuer-configuration identifier and Verifiable Credential Type (`vct`) is:
 
-- an assigned hotel room;
-- a defined set of common hotel facilities;
-- an assigned accommodation area;
-- another hotel-controlled access point associated with the guest's stay; or
-- a combination of the above.
+```text
+room_key_credential
+```
 
-The credential MAY also support controlled integration with:
+The Wallet display name is **Hotel Pass**.
 
-- room-lock systems;
-- mobile key platforms;
-- lifts and floor-access controls;
-- hotel lounges;
-- parking areas;
-- spa, gym or pool facilities;
-- business centres;
-- meal areas;
-- self-service kiosks; and
-- later stay, checkout or expense-related processes.
+The credential is a visual pass for the assigned room. It contains:
 
-The credential SHALL NOT be treated as the authoritative reservation record. The Hotel
-Booking Reference Credential and the hotel's PMS remain responsible for reservation
-identification and current stay state.
+- an instance identifier;
+- the assigned room number for Wallet display and staff confirmation; and
+- a PNG QR image, as a data URL, encoding the reservation reference.
 
-The Digital Room Access Credential is distinct from:
+The Hotel Pass MAY be used to:
 
+- display the assigned room to the guest;
+- present a scannable QR to hotel staff or an existing scanner;
+- correlate the checked-in stay with the reservation used at check-in; and
+- support later stay, checkout or staff-assisted processes.
+
+The credential SHALL NOT be treated as:
+
+- the authoritative reservation record — that remains the Accommodation Voucher
+  and the hotel's PMS;
+- a cryptographic room-key, mobile-key, lock secret or derived lock capability;
 - PID;
-- the Hotel Booking Reference Credential;
-- a physical or proprietary mobile key;
 - a payment credential;
-- a proof-of-stay credential;
-- a hotel loyalty credential; and
+- a proof-of-stay credential; or
 - a complete hotel guest profile.
+
+Cryptographic integration with room-lock systems, NFC or BLE mobile-key
+provisioning is out of scope for this version.
 
 ### 1.2 Source-supported role
 
 The SEDIT-X source material supports the following baseline:
 
-1. room-access or stay-related credentials are optional follow-on credentials;
-2. they may be issued after successful identity verification and check-in;
-3. they may support access to the room and hotel facilities; and
-4. they may later support checkout or expense-related processes.
+1. a follow-on hospitality credential MAY be issued after successful identity
+  verification and check-in;
+2. it MAY support guest display of the assigned room and staff or scanner
+  recognition of the stay; and
+3. physical key cards and staff-assisted access SHALL remain available.
 
-The source material also states that operational data for room-key issuance and hotel
-services may be generated after the hotel or PMS has retrieved the reservation and
-updated the guest or check-in record.
+Operational room assignment is generated after the hotel or PMS has retrieved
+the reservation (from the Accommodation Voucher), verified PID, completed
+check-in and assigned a room.
 
-All detailed claims and cryptographic access mechanisms below are proposed extensions
-to that baseline.
-
-### 1.3 Credential versus door key
+### 1.3 Visual QR pass, not a door key
 
 This Rulebook distinguishes between:
 
-- the **access credential**, which proves the scope and validity of the guest's access
-rights; and
-- the **door-key material**, which is the lock-system-specific secret, token or derived
-cryptographic capability used to operate a particular lock.
+- the **Hotel Pass**, which is a wallet-held visual QR pass for the assigned
+  room and reservation; and
+- **door-key material**, which is the lock-system-specific secret, token or
+  derived cryptographic capability used to operate a particular lock.
 
-The access credential SHOULD NOT directly contain a long-lived reusable lock secret.
+The Hotel Pass SHALL NOT contain a lock secret, cryptographic key, access token
+or other material capable of operating a lock.
 
-A preferred implementation is:
+The intended use is:
 
-1. the Wallet presents or proves the access credential to an authorised lock gateway,
-  hotel application or reader;
-2. the verifier confirms the credential, access scope, time window and status;
-3. the system derives, retrieves or validates a short-lived lock capability; and
-4. access is granted or denied.
+1. the Wallet displays `room_number` and `picture`;
+2. hotel staff or an existing scanner reads the QR image, which encodes the
+  reservation reference;
+3. the hotel access or PMS system validates the stay and room assignment
+  against live state; and
+4. access or service is granted, denied, or handled by staff, including by
+  issuing or using a physical key card.
 
-Where a lock platform requires key material to be provisioned into the Wallet, it SHALL be:
-
-- device-bound;
-- encrypted;
-- scoped to the authorised lock or lock group;
-- time-bounded;
-- revocable or replaceable;
-- protected against replay and extraction; and
-- separated from human-readable credential claims.
+A display QR SHALL NOT embed a long-lived reusable lock secret. The QR payload
+SHALL encode the reservation reference used at check-in, not lock-system
+credentials.
 
 ### 1.4 Document structure
 
 - Chapter 2 defines attributes and metadata.
-- Chapter 3 defines the proposed SD-JWT VC encoding and lock-system binding models.
-- Chapter 4 defines issuance, activation, use and verification.
+- Chapter 3 defines the SD-JWT VC encoding.
+- Chapter 4 defines issuance, display, use and verification.
 - Chapter 5 defines trust anchors.
 - Chapter 6 defines validity, suspension and revocation.
 - Chapter 7 defines compliance, privacy and security requirements.
@@ -130,15 +129,15 @@ The capitalised words **SHALL**, **SHOULD** and **MAY** are used as specified in
 
 For this Rulebook:
 
-- **Access zone** means a hotel-controlled room, facility, floor, lift, parking area or
-other physical area.
-- **Access point** means a door, gate, reader, turnstile, lift controller or similar
-enforcement component.
-- **Lock gateway** means the system that validates or converts wallet-held access rights
-into a lock-system decision.
+- **Hotel Pass** means the visual QR pass of type `room_key_credential`.
+- **Accommodation Voucher** means the booking attestation of type
+  `booking_reference_credential`.
+- **Reservation reference** means the reservation identifier encoded in the QR
+  image and used to retrieve the stay. It is the same identifier as
+  `reservationReference` on the Accommodation Voucher.
 - **Primary guest** means the guest whose check-in produced the credential.
-- **Delegated guest** means another authorised guest who receives a separate access
-credential for the same room or stay.
+- **Delegated guest** means another authorised guest who receives a separate
+  Hotel Pass for the same room or stay.
 
 ## 2 Attestation attributes and metadata
 
@@ -152,99 +151,79 @@ eaa:eu:non-qualified
 
 ### 2.2 Design principles
 
-1. **Issue after check-in:** the credential SHALL be issued only after successful guest
-  verification and check-in.
-2. **Short-lived access:** validity SHALL be limited to the relevant stay and operational
-  access window.
-3. **Minimum disclosure:** the credential SHALL NOT contain unnecessary civil identity.
-4. **Device binding:** the credential SHOULD be bound to the Wallet Unit.
-5. **Separate access secrets:** reusable door-key secrets SHALL NOT be exposed as ordinary
-  selectively disclosable claims.
-6. **Current hotel state:** the PMS or access-control system remains authoritative for room
-  assignment, checkout, access suspension and lock state.
-7. **Independent delegation:** each guest SHOULD receive a separate credential rather
-  than sharing one wallet credential or key.
-8. **Immediate suspension:** hotel staff SHALL be able to suspend access when required.
-9. **Legacy scanner compatibility:** where existing readers require a QR or barcode, the
-  credential MAY include a display payload carrying the room number or equivalent
-   operational code.
-10. **Fallback:** physical key cards and staff-assisted access SHALL remain available.
+1. **Issue after check-in:** the credential SHALL be issued only after successful
+  guest verification and check-in, once a room has been assigned.
+2. **Visual QR pass:** the credential SHALL be a displayable pass, not a
+  cryptographic room-key.
+3. **Minimum disclosure:** the claim set SHALL be limited to instance identity,
+  room number and the QR image.
+4. **No lock secrets:** reusable door-key secrets SHALL NOT appear in the
+  credential.
+5. **Current hotel state:** the PMS remains authoritative for room assignment,
+  checkout and access suspension.
+6. **Independent copies:** each authorised guest SHOULD receive a separate
+  Hotel Pass rather than sharing one Wallet credential or screenshot.
+7. **Immediate invalidation:** hotel staff SHALL be able to revoke or replace
+  the pass when the room assignment changes or the stay ends.
+8. **Legacy scanner compatibility:** `picture` SHALL be a PNG QR image that
+  existing staff or scanners can read.
+9. **Fallback:** physical key cards and staff-assisted access SHALL remain
+  available.
 
-### 2.3 Mandatory attributes
+### 2.3 Credential attributes
 
-
-| **Data Identifier**    | **Definition**                                                     | **Data type**               | **Example value**                                 |
-| ---------------------- | ------------------------------------------------------------------ | --------------------------- | ------------------------------------------------- |
-| `access_credential_id` | Unique identifier of the Digital Room Access Credential.           | string                      | `drac_01JZ7R4M9P2K6T8V3Q5D`                       |
-| `hotel_id`             | Stable identifier of the hotel or property.                        | string                      | `hotel_gr_skg_001`                                |
-| `booking_reference`    | Booking reference associated with the checked-in stay.             | string                      | `AVRA-HTL-2026-004821`                            |
-| `display_room_number`  | Human-readable room number for Wallet display and operational use. | string                      | `504`                                             |
-| `access_scope`         | Set of access zones authorised by the credential.                  | array of strings or objects | `["assigned_room","guest_lift","breakfast_area"]` |
-| `access_valid_from`    | Beginning of the access period.                                    | date-time                   | `2026-08-04T15:00:00+03:00`                       |
-| `access_valid_until`   | End of the access period.                                          | date-time                   | `2026-08-08T11:00:00+03:00`                       |
-| `access_status`        | Current issuer-known access state.                                 | string enum                 | `active`                                          |
+The credential attribute set SHALL match the APTITUDE issuer configuration for
+`room_key_credential`.
 
 
-Permitted values for `access_status` SHOULD include:
-
-- `issued`;
-- `active`;
-- `temporarily_suspended`;
-- `revoked`;
-- `expired`;
-- `checked_out`; and
-- `replaced`.
-
-### 2.4 Optional attributes
+| **Data Identifier** | **Definition**                                                                                         | **Data type** | **Example value**                          |
+| ------------------- | ------------------------------------------------------------------------------------------------------ | ------------- | ------------------------------------------ |
+| `id`                | Unique identifier of this Hotel Pass instance.                                                         | string        | `c3a91b2e-4d7f-4e18-8b05-9f6a2c1d0e77`     |
+| `room_number`       | Human-readable assigned room number for Wallet display and operational confirmation.                   | string        | `412`                                      |
+| `picture`           | PNG QR image as a data URL, encoding the reservation reference associated with the checked-in stay.    | string        | `data:image/png;base64,...`                |
 
 
-| **Data Identifier**        | **Definition**                                                                                                                                      | **Data type**    | **Example value**                                 |
-| -------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------- | ------------------------------------------------- |
-| `hotel_name`               | Human-readable hotel name.                                                                                                                          | string           | `Aegean City Hotel`                               |
-| `floor`                    | Authorised floor for display or lift control.                                                                                                       | string           | `5`                                               |
-| `guest_role`               | Role of the holder in the stay.                                                                                                                     | string enum      | `primary_guest`                                   |
-| `access_zone_details`      | Structured list of authorised access zones and conditions.                                                                                          | array of objects | `[{"zone":"spa","from":"08:00","until":"20:00"}]` |
-| `facility_entitlements`    | Hotel facilities available to the guest.                                                                                                            | array of strings | `["breakfast_area","gym"]`                        |
-| `parking_access`           | Indicates access to the hotel parking facility.                                                                                                     | boolean          | `true`                                            |
-| `lift_access`              | Indicates use of guest lifts or specified floors.                                                                                                   | boolean          | `true`                                            |
-| `late_checkout_access`     | Indicates that access extends beyond the standard checkout time.                                                                                    | boolean          | `false`                                           |
-| `access_method`            | Supported access interaction method.                                                                                                                | array of strings | `["nfc","ble","qr"]`                              |
-| `display_qr_payload`       | Optional QR or barcode payload for compatibility with existing hotel scanners. MAY encode the room number or an equivalent operational access code. | binary or string | `ROOM:504`                                        |
-| `credential_display_label` | Wallet-facing label.                                                                                                                                | string           | `Room 504 Access`                                 |
+`picture` SHALL be a `data:` URL with media type `image/png`. The QR symbol
+encoded in that image SHALL represent the reservation reference, not lock-system
+key material and not a biometric portrait.
 
+`picture` is an operational QR image. It SHALL NOT be interpreted as a PID
+portrait or as a facial image.
 
-Permitted values for `guest_role` SHOULD include:
+The credential SHALL NOT include:
 
-- `primary_guest`;
-- `additional_guest`;
-- `delegated_guest`; and
-- `staff_authorised_guest`.
+- lock secrets, mobile-key material or access tokens;
+- PID attributes;
+- payment data;
+- accessibility or medical data; or
+- the full reservation record.
 
-### 2.5 Mandatory metadata
+### 2.4 Mandatory metadata
 
 
 | **Data Identifier**      | **Definition**                                            | **Data type**           | **Example value**                                           |
 | ------------------------ | --------------------------------------------------------- | ----------------------- | ----------------------------------------------------------- |
 | `category`               | Legal category of the attestation.                        | string                  | `eaa:eu:non-qualified`                                      |
-| `issuer`                 | Identifier of the hotel or authorised room-access issuer. | string or URI           | `https://issuer.aegeancityhotel.example`                    |
-| `credential_type`        | Encoding-independent credential type identifier.          | string                  | `urn:aptitude.eu:seditx:digital-room-access:1`              |
-| `issued_at`              | Credential issuance timestamp.                            | date-time               | `2026-08-04T14:52:00+03:00`                                 |
-| `schema_version`         | Credential schema version.                                | string                  | `0.1`                                                       |
-| `status_reference`       | Credential status or revocation reference.                | URI or structured value | `https://status.hotel.example/access/atl/2026-08/04#5042`   |
+| `issuer`                 | Identifier of the hotel or authorised Hotel Pass issuer.  | string or URI           | `https://issuer.examplehotel.example`                       |
+| `credential_type`        | Encoding-independent credential type identifier.          | string                  | `room_key_credential`                                       |
+| `issued_at`              | Credential issuance timestamp.                            | date-time               | `2026-06-12T14:52:00+03:00`                                 |
+| `status_reference`       | Credential status or revocation reference.                | URI or structured value | `https://status.hotel.example/pass/atl/2026-06/12#412`      |
 | `trust_anchor_reference` | Location of issuer trust information.                     | URI                     | `https://trust.aptitude.example/hospitality-access-issuers` |
 
 
-### 2.6 Optional metadata
+### 2.5 Optional metadata
 
 
 | **Data Identifier**      | **Definition**                       | **Data type** | **Example value**                                    |
 | ------------------------ | ------------------------------------ | ------------- | ---------------------------------------------------- |
-| `credential_name`        | Human-readable credential name.      | string        | `Digital Room Access Credential`                     |
-| `credential_description` | Wallet-facing description.           | string        | `Access to Room 504 and authorised hotel facilities` |
-| `issuer_name`            | Human-readable hotel or issuer name. | string        | `Aegean City Hotel`                                  |
+| `expires_at`             | Credential expiry. SHOULD align with checkout plus a limited grace period. | date-time     | `2026-06-15T12:00:00+03:00`                          |
+| `valid_from`             | Beginning of credential validity.    | date-time     | `2026-06-12T15:00:00+03:00`                          |
+| `credential_name`        | Human-readable credential name. SHALL be `Hotel Pass`. | string        | `Hotel Pass`                                         |
+| `credential_description` | Wallet-facing description.           | string        | `Visual pass for Room 412, Example Hotel Athens`     |
+| `issuer_name`            | Human-readable hotel or issuer name. | string        | `Example Hotel Athens`                               |
 | `issuer_logo_uri`        | Issuer logo URI.                     | URI           | `https://hotel.example/logo.png`                     |
 | `privacy_notice`         | Privacy-notice URI.                  | URI           | `https://hotel.example/privacy`                      |
-| `issuer_policy`          | Access-credential policy URI.        | URI           | `https://hotel.example/digital-key-policy`           |
+| `issuer_policy`          | Hotel Pass policy URI.               | URI           | `https://hotel.example/hotel-pass-policy`            |
 | `display_locale`         | Preferred display language.          | string        | `en`                                                 |
 
 
@@ -252,46 +231,39 @@ Permitted values for `guest_role` SHOULD include:
 
 ## 3.1 ISO/IEC 18013-5-compliant encoding
 
-Version 0.1 does not define a complete mdoc representation.
+This version does not define an mdoc representation.
 
-A future proximity profile MAY use mdoc where:
-
-- the lock or access reader acts as an authorised proximity verifier;
-- the requested data is minimal;
-- verifier authentication is available;
-- offline verification is required; and
-- the access-control protocol remains separate from the ordinary attribute namespace.
-
-A proposed future document type could be:
-
-```text
-urn:aptitude.eu:seditx:digital-room-access:1
-```
-
-This value is not yet normative.
+A future proximity profile MAY use mdoc where the same semantic model is
+preserved: instance identifier, room number and visual QR image, with no
+cryptographic lock secret in the attribute namespace.
 
 ## 3.2 SD-JWT VC-based encoding
 
+The Hotel Pass SHALL be issued as `dc+sd-jwt`.
+
 ### 3.2.1 Verifiable Credential Type
 
-The proposed `vct` value is:
+The `vct` value SHALL be:
 
 ```text
-urn:aptitude.eu:seditx:digital-room-access:1
+room_key_credential
 ```
+
+This matches the APTITUDE issuer configuration identifier and scope
+`room_key_credential`. The Wallet display name for this type is **Hotel Pass**.
 
 ### 3.2.2 Registered JWT claims
 
 
-| **Data Identifier**  | **Claim** | **Format** | **Disclosable** |
-| -------------------- | --------- | ---------- | --------------- |
-| `issuer`             | `iss`     | string     | MUST NOT        |
-| `issued_at`          | `iat`     | integer    | MUST NOT        |
-| `access_valid_from`  | `nbf`     | integer    | MUST NOT        |
-| `access_valid_until` | `exp`     | integer    | MUST NOT        |
-| `credential_type`    | `vct`     | string     | MUST NOT        |
-| `holder_binding`     | `cnf`     | object     | MUST NOT        |
-| `status_reference`   | `status`  | object     | MUST NOT        |
+| **Data Identifier** | **Claim** | **Format** | **Disclosable** |
+| ------------------- | --------- | ---------- | --------------- |
+| `issuer`            | `iss`     | string     | MUST NOT        |
+| `issued_at`         | `iat`     | integer    | MUST NOT        |
+| `valid_from`        | `nbf`     | integer    | MUST NOT        |
+| `expires_at`        | `exp`     | integer    | MUST NOT        |
+| `credential_type`   | `vct`     | string     | MUST NOT        |
+| `holder_binding`    | `cnf`     | object     | MUST NOT        |
+| `status_reference`  | `status`  | object     | MUST NOT        |
 
 
 ### 3.2.3 Private claims
@@ -300,332 +272,249 @@ urn:aptitude.eu:seditx:digital-room-access:1
 | **Data Identifier**      | **Claim**                | **Format** | **Disclosable** |
 | ------------------------ | ------------------------ | ---------- | --------------- |
 | `category`               | `category`               | string     | MUST NOT        |
-| `access_credential_id`   | `access_credential_id`   | string     | MUST NOT        |
-| `hotel_id`               | `hotel_id`               | string     | MUST            |
-| `hotel_name`             | `hotel_name`             | string     | MUST            |
-| `booking_reference`      | `booking_reference`      | string     | MUST            |
-| `display_room_number`    | `display_room_number`    | string     | MUST            |
-| `floor`                  | `floor`                  | string     | MUST            |
-| `guest_role`             | `guest_role`             | string     | MUST            |
-| `access_scope`           | `access_scope`           | array      | MUST            |
-| `access_zone_details`    | `access_zone_details`    | array      | MUST            |
-| `facility_entitlements`  | `facility_entitlements`  | array      | MUST            |
-| `access_status`          | `access_status`          | string     | MUST            |
-| `parking_access`         | `parking_access`         | boolean    | MUST            |
-| `lift_access`            | `lift_access`            | boolean    | MUST            |
-| `late_checkout_access`   | `late_checkout_access`   | boolean    | MUST            |
-| `access_method`          | `access_method`          | array      | MUST            |
-| `display_qr_payload`     | `display_qr_payload`     | string     | MUST            |
-| `schema_version`         | `schema_version`         | string     | MUST NOT        |
+| `id`                     | `id`                     | string     | MUST NOT        |
+| `room_number`            | `room_number`            | string     | MUST            |
+| `picture`                | `picture`                | string     | MUST            |
 | `trust_anchor_reference` | `trust_anchor_reference` | string     | MUST NOT        |
 
 
-Door-key or lock-provider material SHALL NOT appear as a normal SD-JWT disclosure.
+Door-key or lock-provider material SHALL NOT appear as a claim or disclosure.
 
 ### 3.2.4 Illustrative claim set
 
 ```json
 {
-  "iss": "https://issuer.aegeancityhotel.example",
-  "iat": 1785851520,
-  "nbf": 1785852000,
-  "exp": 1786176000,
-  "vct": "urn:aptitude.eu:seditx:digital-room-access:1",
+  "iss": "https://issuer.examplehotel.example",
+  "iat": 1781267520,
+  "nbf": 1781268000,
+  "exp": 1781524800,
+  "vct": "room_key_credential",
   "cnf": {
     "jkt": "wallet-key-thumbprint"
   },
   "status": {
     "status_list": {
-      "idx": 5042,
-      "uri": "https://status.hotel.example/access/atl/2026-08/04"
+      "idx": 412,
+      "uri": "https://status.hotel.example/pass/atl/2026-06/12"
     }
   },
   "category": "eaa:eu:non-qualified",
-  "access_credential_id": "drac_01JZ7R4M9P2K6T8V3Q5D",
-  "hotel_id": "hotel_gr_skg_001",
-  "hotel_name": "Aegean City Hotel",
-  "booking_reference": "AVRA-HTL-2026-004821",
-  "display_room_number": "504",
-  "guest_role": "primary_guest",
-  "access_scope": [
-    "assigned_room",
-    "guest_lift",
-    "breakfast_area",
-    "gym"
-  ],
-  "access_status": "active",
-  "access_method": [
-    "nfc",
-    "ble",
-    "qr"
-  ],
-  "display_qr_payload": "ROOM:504",
-  "schema_version": "0.1",
+  "id": "c3a91b2e-4d7f-4e18-8b05-9f6a2c1d0e77",
+  "room_number": "412",
+  "picture": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAA...",
   "trust_anchor_reference": "https://trust.aptitude.example/hospitality-access-issuers"
 }
 ```
 
+The `picture` value in the example is truncated. A production credential SHALL
+contain a complete PNG data URL whose QR payload encodes the reservation
+reference (for example `BR-2026-00042`).
+
+### 3.2.5 Human-readable wallet representation
+
+The Wallet Unit SHOULD display:
+
+```text
+Hotel Pass
+Hotel: Example Hotel Athens
+Room: 412
+[QR image]
+```
+
+The Wallet Unit SHOULD inform the User that:
+
+- this is a visual pass for the assigned room;
+- the QR encodes the reservation reference;
+- the pass does not cryptographically unlock the door;
+- a physical key card or staff process remains available; and
+- the User can refuse presentation.
+
 ## 3.3 W3C Verifiable Credentials Data Model-based encoding
 
-Version 0.1 does not define a W3C VCDM representation.
-
-## 3.4 Lock-system binding
-
-The access credential MAY be integrated with a lock platform using one of three
-proposed models. This Rulebook does not define the lock-provider cryptographic
-protocol. The final profile SHALL specify whether access uses presentation to a
-connected verifier, NFC, Bluetooth Low Energy, a Wallet-to-lock reader protocol, a
-display QR for existing scanners, a hotel mobile-key SDK, secure hardware, or a
-combination of these.
-
-### Model A — Online credential verification
-
-1. the Wallet presents the credential to a lock gateway or hotel reader;
-2. the gateway validates the credential and live access state;
-3. the gateway instructs the lock to open.
-
-This model avoids provisioning a reusable lock secret into the credential.
-
-### Model B — Protected mobile-key provisioning
-
-1. the hotel validates the stay and Wallet Unit;
-2. the lock platform provisions encrypted device-bound key material separately from
-  the credential claims;
-3. the Wallet or secure hardware uses the material through NFC or BLE;
-4. the key expires or is revoked at checkout.
-
-### Model C — Display QR for existing scanners
-
-1. the Wallet displays `display_qr_payload`, which MAY encode the room number or an
-  equivalent operational code;
-2. an existing hotel scanner or reader processes the QR or barcode;
-3. the hotel access system validates the stay and room assignment against live state;
-4. access is granted or denied.
-
-A display QR used for legacy scanners SHALL NOT embed a long-lived reusable lock secret.
+This version does not define a W3C VCDM representation.
 
 # 4 Attestation usage
 
 ## 4.1 Issuance trigger
 
-The credential SHALL be issued only after:
+The Hotel Pass SHALL be issued only after:
 
-1. a valid Hotel Booking Reference Credential or equivalent reservation record exists;
+1. a valid Accommodation Voucher (`booking_reference_credential`) or equivalent
+  reservation record exists;
 2. the hotel has successfully retrieved the reservation;
-3. required PID attributes have been verified;
+3. required PID attributes (`urn:eu.europa.ec.eudi:pid:1`) have been verified;
 4. the guest has completed hotel registration requirements;
 5. check-in has been completed or approved;
 6. a room has been assigned;
 7. the hotel or PMS has created an active stay record;
-8. the access scope and time window have been determined; and
+8. a PNG QR image encoding the reservation reference has been generated; and
 9. the User has consented to receive the credential.
 
-This is a follow-on issuance step after check-in, not part of the initial booking-
-reference issuance flow.
+An optional European Disability Card presentation during check-in MAY influence
+room assignment (for example an easier-access room). It SHALL NOT add claims to
+the Hotel Pass.
+
+This is a follow-on issuance step after check-in, not part of the initial
+Accommodation Voucher issuance flow.
 
 ## 4.2 Issuer
 
 The credential SHALL be issued by:
 
 - the hotel;
-- the hotel group's authorised access issuer;
-- the hotel's PMS or digital-key service acting under hotel authority; or
+- the hotel group's authorised issuer;
+- the hotel's PMS acting under hotel authority; or
 - an authorised Attestation Provider acting for the hotel.
 
-A travel agent or booking platform SHOULD NOT issue room-access rights unless it has
-explicit, current authorisation from the hotel and access-control system.
+A travel agent or booking platform SHOULD NOT issue a Hotel Pass unless it has
+explicit, current authorisation from the hotel.
 
 ## 4.3 Device binding
 
-The credential **SHALL be device-bound** where it is used to operate a physical lock.
+The credential **SHOULD be device-bound**.
 
-The binding SHOULD use a key held by the Wallet Unit or device secure hardware.
-
-The issuer SHALL ensure that:
-
-- the credential cannot be copied to another device without authorisation;
-- access-key material is not exportable as clear text;
-- replacement on a new device invalidates or suspends the previous credential; and
-- device loss can trigger immediate suspension.
+Device binding of the SD-JWT does not prevent a screenshot of the displayed QR
+image. The hotel access process SHALL therefore validate the encoded reservation
+reference and live stay state, and SHALL NOT treat possession of a QR image as
+sufficient proof of an active stay.
 
 ## 4.4 Wallet display and consent
 
 Before issuance, the Wallet SHOULD display:
 
-- hotel name;
-- room or accommodation label;
-- access-validity period;
-- authorised facility access;
+- hotel or issuer name;
+- room number;
+- that the credential is a visual QR pass;
+- that it does not cryptographically unlock the door;
 - issuer;
-- device-binding notice;
 - conditions of use; and
-- emergency or staff fallback information.
+- staff fallback information.
 
-The Wallet SHOULD avoid displaying internal lock identifiers or cryptographic material.
+The Wallet SHOULD render `picture` as the scannable QR image and `room_number`
+as the primary label.
 
-## 4.5 Room access transaction
+## 4.5 Use at the hotel
 
-A normal access transaction SHOULD follow these steps:
+A normal use SHOULD follow these steps:
 
-1. the guest approaches the access point;
-2. the Wallet is unlocked or authorises background use according to Wallet policy;
-3. the access point and Wallet establish the supported channel;
-4. the Wallet proves possession of the credential or protected capability;
-5. the verifier checks time, scope, device binding and status;
-6. the hotel access system confirms that the stay remains active;
-7. access is granted or denied; and
-8. a minimal access event may be recorded.
+1. the guest opens the Hotel Pass in the Wallet;
+2. the Wallet displays `room_number` and the QR image;
+3. hotel staff or a scanner reads the QR, recovering the reservation reference;
+4. the hotel system looks up the stay and current room assignment;
+5. the system confirms that the stay remains active and the room matches
+  `room_number`;
+6. service or access is granted, denied, or handled by staff; and
+7. a minimal event MAY be recorded.
 
-Repeated explicit consent for every room-door operation MAY be replaced by a prior
-time-bounded authorisation where allowed by the Wallet and hotel policy.
+OpenID4VP presentation MAY disclose `room_number` (and, where required, support
+verification of the signed credential) without relying only on the visual QR.
 
-High-risk or exceptional access operations MAY require explicit User authentication.
+The Hotel Pass SHALL NOT be used as a cryptographic command to a lock.
 
-## 4.6 Facility access
+## 4.6 Delegated and additional-guest passes
 
-The credential MAY authorise facilities in addition to the room.
+A primary guest MAY request a pass for another registered guest where hotel
+policy allows it.
 
-The verifier SHALL check that:
+The hotel SHALL issue a separate Hotel Pass to the delegated or additional
+guest.
 
-- the facility appears in `access_scope`;
-- the current time is within any facility-specific interval;
-- the guest role permits access;
-- the stay is active; and
-- the credential has not been suspended.
+Each pass SHALL:
 
-Facility access SHALL NOT imply permission to charge the guest. Payment or charge
-authorisation SHALL be handled separately.
-
-## 4.7 Delegated and additional-guest access
-
-A primary guest MAY request access for another registered guest where hotel policy
-allows it.
-
-The hotel SHALL issue a separate credential to the delegated or additional guest.
-
-The delegated credential SHALL:
-
-- have its own identifier;
-- be bound to the recipient's Wallet Unit;
-- identify the permitted access scope;
-- cover the same stay or room;
+- have its own `id`;
+- identify the same or an authorised `room_number`;
+- encode the applicable reservation reference in `picture`;
 - have an independent status;
 - have a validity period no longer than the primary stay; and
 - be individually revocable.
 
-Guests SHALL NOT be expected to share a Wallet, QR code, secret or credential file.
+Guests SHALL NOT be expected to share a Wallet, screenshot, QR image or
+credential file as the sole access method.
 
-## 4.8 Room change
+## 4.7 Room change
 
 When the room assignment changes, the hotel SHALL:
 
-1. suspend or revoke the old room-access scope;
-2. update the PMS and access-control system;
-3. issue or refresh the credential for the new room;
-4. replace any protected key material or display QR payload; and
-5. prevent the old credential from opening the previous room.
+1. suspend or revoke the previous Hotel Pass;
+2. update the PMS;
+3. issue a replacement Hotel Pass with the new `room_number` and a new QR
+  image; and
+4. prevent the previous pass from being treated as valid for the old room.
 
-The lock authorisation SHALL reflect the new room assignment immediately.
-
-## 4.9 Checkout
+## 4.8 Checkout
 
 At checkout, the hotel SHALL:
 
-- set the stay state to `checked_out`;
-- revoke, expire or disable access;
-- invalidate protected key material;
-- stop facility access unless a post-checkout entitlement exists;
+- set the stay state to checked out;
+- revoke, expire or disable the Hotel Pass;
 - preserve only required audit events; and
 - optionally issue a separate proof-of-stay credential.
 
-The access credential SHOULD cease functioning at the earlier of:
+The Hotel Pass SHOULD cease to be accepted at the earlier of:
 
 - checkout completion;
-- `access_valid_until`;
+- credential expiry;
 - revocation; or
 - replacement.
 
-## 4.10 Verifier obligations
+## 4.9 Verifier obligations
 
-The lock gateway, reader or hotel access system SHALL:
+The hotel staff application, scanner or Intermediary Service SHALL:
 
-1. verify issuer signature and integrity;
-2. verify issuer trust and authority for the hotel;
-3. verify device binding;
+1. recover the reservation reference from the QR image, or verify the presented
+  SD-JWT;
+2. verify issuer signature and integrity where the SD-JWT is presented;
+3. verify issuer trust and authority for the hotel;
 4. verify validity and current time;
-5. verify credential status;
-6. verify the requested access point against `access_scope`;
-7. verify current stay or access state where connectivity exists;
-8. prevent replay and credential cloning;
-9. apply room changes and checkout promptly;
-10. return a clear grant or denial decision; and
-11. log only the minimum event required for security and operations.
+5. verify credential status where the SD-JWT is presented;
+6. retrieve current stay and room assignment from the PMS;
+7. confirm that `room_number` matches the live assignment;
+8. return a clear accept or deny decision; and
+9. log only the minimum event required for security and operations.
 
 A typical decision result is:
 
 ```json
 {
   "credential_valid": true,
-  "device_binding_valid": true,
+  "reservation_found": true,
   "stay_active": true,
-  "access_point_authorised": true,
-  "time_valid": true,
-  "decision": "granted",
-  "correlation_id": "access_evt_01JZ..."
+  "room_match": true,
+  "decision": "accepted",
+  "correlation_id": "pass_evt_01JZ..."
 }
 ```
 
-## 4.11 Offline use
+## 4.10 Access-event logging
 
-Offline use MAY be supported, but the deployment SHALL define:
+A minimal event MAY contain:
 
-- maximum offline duration;
-- trusted clock requirements;
-- lock and key scope;
-- cached revocation age;
-- replay detection;
-- duplicate credential handling;
-- room-change behaviour;
-- checkout reconciliation; and
-- emergency override.
-
-Offline access SHALL NOT continue indefinitely merely because the credential's original
-expiry has not yet been reached.
-
-## 4.12 Access-event logging
-
-A minimal access event MAY contain:
-
-- pseudonymous credential or booking reference;
-- access-point identifier;
+- pseudonymous credential or reservation reference;
 - timestamp;
 - result;
-- reason code;
-- verifier or lock identifier; and
-- security-event indicator.
+- reason code; and
+- verifier or scanner identifier.
 
 It SHOULD NOT contain:
 
 - PID attributes;
-- complete credential data;
-- booking details unrelated to access;
+- the QR image or complete credential;
+- booking details unrelated to the event;
 - medical or accessibility information;
 - payment data; or
-- the reusable lock secret.
+- any lock secret.
 
-## 4.13 Failure and fallback
+## 4.11 Failure and fallback
 
-Access SHALL be denied or routed to staff when:
+The pass SHALL be rejected or routed to staff when:
 
-- signature or trust verification fails;
+- the QR cannot be read;
+- the reservation cannot be found;
+- signature or trust verification fails where the SD-JWT is presented;
 - the credential is expired, suspended or revoked;
-- the Wallet Unit binding is invalid;
-- the access point is outside the scope;
 - the stay is no longer active;
-- the room assignment has changed;
-- the capability is replayed or malformed;
-- the reader cannot establish required freshness; or
-- the lock system requires staff intervention.
+- the room assignment has changed; or
+- staff intervention is required.
 
 The hotel SHALL maintain a physical key-card or staff-assisted fallback.
 
@@ -634,23 +523,14 @@ The hotel SHALL maintain a physical key-card or staff-assisted fallback.
 The verifier SHALL establish that the issuer:
 
 1. is the hotel or an authorised service acting for it;
-2. controls or is authorised to configure access for the relevant property;
-3. is authorised to issue the Digital Room Access Credential;
-4. uses accepted signing keys and certificates; and
-5. remains authorised at verification time.
+2. controls or is authorised to issue Hotel Passes for the relevant property;
+3. uses accepted signing keys and certificates; and
+4. remains authorised at verification time.
 
 For the APTITUDE pilot, trust SHOULD be obtained through the WP2 trust framework.
 
-The trust model SHOULD distinguish:
-
-- hotel identity;
-- property identity;
-- PMS or access-platform identity;
-- delegated issuer identity; and
-- verifier or lock-reader identity.
-
-A credential issued for one hotel SHALL NOT be accepted by another property merely
-because the same vendor operates both lock systems.
+A Hotel Pass issued for one hotel SHALL NOT be accepted by another property
+merely because the same vendor operates both systems.
 
 # 6 Revocation and status
 
@@ -658,8 +538,8 @@ because the same vendor operates both lock systems.
 
 The credential SHALL be short-lived and aligned with the active stay.
 
-`access_valid_until` SHOULD normally correspond to the authorised checkout time,
-including only a limited operational grace period where hotel policy requires it.
+Expiry SHOULD normally correspond to the authorised checkout time, including
+only a limited operational grace period where hotel policy requires it.
 
 ## 6.2 Revocation and suspension triggers
 
@@ -669,30 +549,28 @@ The credential SHALL be suspended, revoked or replaced when:
 - the booking or stay is cancelled;
 - the room assignment changes;
 - the device is lost or compromised;
-- the credential is suspected of being copied;
+- the QR image is suspected of being copied and misused;
 - the guest requests replacement;
 - the hotel blocks room access;
 - a delegated guest loses authorisation;
-- payment or security policy lawfully requires access suspension;
-- the issuer or lock platform is compromised; or
-- the credential was issued in error.
+- the credential was issued in error; or
+- the issuer is no longer authorised.
 
-## 6.3 Immediate access-state checks
+## 6.3 Live stay-state checks
 
-Status-list propagation alone may be insufficient for room access.
+Because the Hotel Pass is a visual QR encoding a reservation reference,
+status-list propagation alone may be insufficient.
 
-Where feasible, the verifier SHOULD also check a live hotel access-control or PMS
-service for current stay and room assignment.
-
-The final profile SHALL define the maximum delay between hotel suspension and lock
-enforcement.
+Where feasible, the verifier SHOULD also check a live PMS service for current
+stay and room assignment. A scanned QR for a checked-out or reassigned stay
+SHALL be rejected even if the original image is still displayed in a Wallet.
 
 ## 6.4 Replacement
 
-Issuing a replacement credential SHALL invalidate the previous active credential unless
-the hotel intentionally permits multiple guests or devices.
+Issuing a replacement Hotel Pass SHALL invalidate the previous active pass
+unless the hotel intentionally permits multiple guests or devices.
 
-Each authorised guest or device SHALL have a separately identifiable credential.
+Each authorised guest SHALL have a separately identifiable pass.
 
 # 7 Compliance
 
@@ -711,28 +589,22 @@ This Rulebook is designed to align with:
 The Rulebook enforces:
 
 1. issuance only after verification and check-in;
-2. separation from the Hotel Booking Reference Credential;
-3. short-lived room and facility access;
-4. device binding;
-5. separation of access claims from cryptographic door-key material;
-6. live or near-live access-state checks;
-7. independent delegated credentials;
+2. separation from the Accommodation Voucher;
+3. Wallet display name **Hotel Pass** and `vct` `room_key_credential`;
+4. the issuer-config claim set (`id`, `room_number`, `picture`);
+5. visual QR pass semantics, not cryptographic room-key semantics;
+6. live or near-live stay-state checks;
+7. independent delegated passes;
 8. immediate room-change and checkout handling;
-9. minimal access-event logging; and
+9. minimal event logging; and
 10. physical or staff-assisted fallback.
 
 The following matters remain open and require technical partner input:
 
-- final credential type identifier;
-- lock-provider integration protocol;
-- NFC, BLE, QR and OS-wallet support;
-- display QR payload format for existing scanners;
-- secure-element or hardware-key requirements;
-- online versus offline access model;
-- final access-scope vocabulary;
-- verifier authentication for door readers;
+- QR payload encoding convention for the reservation reference;
+- scanner and Wallet rendering profiles for the PNG data URL;
+- whether a future cryptographic mobile-key profile is required;
 - final status and live-state endpoints;
-- key rotation and recovery;
 - multi-device policy;
 - emergency and staff override;
 - room sharing and delegation rules;
@@ -745,6 +617,7 @@ The following matters remain open and require technical partner input:
 | **Item Reference**                     | **Standard name/details**                                                        |
 | -------------------------------------- | -------------------------------------------------------------------------------- |
 | [European Digital Identity Regulation] | Regulation (EU) 2024/1183                                                        |
+| [APTITUDE issuer-config]               | NXD-Foundation / nxd-wallet-conformance-backend, `data/issuer-config.json`, `room_key_credential` |
 | [SEDIT-X Hospitality Working Paper]    | SEDIT-X Frictionless Hotel Check-in and Guest Verification Using the EUDI Wallet |
 | [APTITUDE D4.1]                        | APTITUDE D4.1: UC Specifications and Scenarios, final version                    |
 | [ARF]                                  | European Digital Identity Wallet Architecture and Reference Framework            |
@@ -757,5 +630,7 @@ The following matters remain open and require technical partner input:
 | [Topic 10]                             | ARF Annex 2, Topic 10 — Issuing a PID or attestation to a Wallet Unit            |
 | [Topic 12]                             | ARF Annex 2, Topic 12 — Attestation Rulebooks                                    |
 | [ETSI TS 119 472-1]                    | Electronic Attestation of Attributes; building blocks and general requirements   |
-
+| [Accommodation Voucher Rulebook]       | APTITUDE WP4 Rulebook for `booking_reference_credential`                         |
+| [European Disability Card Rulebook]    | APTITUDE WP4 Rulebook for `european_disability_card`                             |
+| [PID Implementing Regulation]          | Commission Implementing Regulation (EU) 2024/2977 — PID                          |
 
