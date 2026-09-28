@@ -128,7 +128,7 @@ The objective is to preserve a single interoperable DTC representation that is:
 | ``age_in_years`` | according to [ISO/IEC 23220-4] | 28  |
 | ``sex`` | according to [ISO/IEC 23220-4] <br> This field SHALL take either the values '1' (for male), '2' (for female) or '0' (when unknown)| '1' (for male) |
 | ``nationality`` | according to [ISO/IEC 23220-4] <br> This field SHALL be encoded in three letter code (alpha-3 code) defined in ISO 3166-1| ITA  |
-| ``document_number`` | identifier of the APTITUDE DTC according to [ISO/IEC 23220-2.2] | YA1234567 |
+| ``document_number`` | identifier of the APTITUDE DTC according to [ISO/IEC 23220-2.2]<br> further description is given in Annex A | YA1234567 |
 | ``dg1`` | according to [ISO/IEC 23220-4] | PPITAHARDT<<GIOVANNI<<<<<<<<<<<<<<<<<<<<<<<<<br>YA12345676ITA8009010M3304042<<<<<<<<<<<<<<08 |
 | ``dg2`` | according to [ISO/IEC 23220-4] | ... |
 | ``dg14`` | according to [ISO/IEC 23220-4] | ... |
@@ -161,7 +161,7 @@ Details about conditions and options related to the attributes are given in clau
 | ``resident_street`` | according to [ISO/IEC 23220-4] | Roma |
 | ``resident_house_number`` | according to [ISO/IEC 23220-4] | 45 |
 | ``resident_state`` | according to [ISO/IEC 23220-4] | IT |
-| ``person_id`` | according to [ISO/IEC 23220-4] | 1234567890 |
+| ``person_id`` | according to [ISO/IEC 23220-4]<br> further description is given in Annex A | 1234567890 |
 | ``dg5`` | according to [ISO/IEC 23220-4] | ... |
 | ``dg6`` | according to [ISO/IEC 23220-4] | ... |
 | ``dg7`` | according to [ISO/IEC 23220-4] | ... |
@@ -187,7 +187,7 @@ Details about conditions and options related to the attributes are given in clau
 | ``version`` | according to [ISO/IEC 23220-4] | 1.0 |
 | ``sod`` | Security object data of related eMRTD according to [ISO/IEC 23220-4] | ... |
 | ``travel_document_type`` | according to [ISO/IEC 23220-2.2] | PP |
-| ``travel_document_number`` | according to [ISO/IEC 23220-4] | I13235678 |
+| ``travel_document_number`` | according to [ISO/IEC 23220-4]<br> further description is given in Annex A | I13235678 |
 | ``travel_document_mrz`` | according to [ISO/IEC 23220-4] | PPITA<<HARDT<<GIOVANNI<<<<<<<<<<<<<<<< |
 
 ### 2.5 Optional metadata
@@ -195,7 +195,7 @@ Details about conditions and options related to the attributes are given in clau
 | **Identifier** | **Description** | **Example** |
 | --- | --- | --- |
 | ``issuing_subdivision`` | according to [ISO/IEC 23220-2.2] | TN  |
-| ``administrative_number`` | according to [ISO/IEC 23220-4] | 9876543210 |
+| ``administrative_number`` | according to [ISO/IEC 23220-4]<br> further description is given in Annex A | 9876543210 |
 
 ## 3 Attestation Encoding
 
@@ -776,7 +776,7 @@ Several data elements of the APTITUDE DTC carry an identifier-like name and refe
 
 | **Identifier**             | **Meaning**                                                                                                                                   | **Presence in APTITUDE DTC** | **Provenance (origin)**                                                                    | **Cross-reference**                             | **Distinguishing note**                                                                                                                                                                                                                                                                                                                                   |
 | -------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------- | ------------------------------------------------------------------------------------------ | ----------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| ``person_id``              | A national (or issuing-authority) identifier of the **holder person** (e.g. national identification number), where such an identifier exists. | Optional (O)                 | Assigned by the issuing authority at DTC issuance; may originate from a national register. | §2.3 (optional attributes); §3.1.3 Table 2; §8  | Identifies the *person*, not any document or credential. **Not** present in the eMRTD LDS; **not** the DTC credential identifier and **not** the passport number. Absent where the Member State has no person-level identifier or does not provide it.                                                                                                    |
+| ``person_id``              | A national (or issuing-authority) identifier of the **holder person** (e.g. national identification number or ``personal_administrative_number`` given in PID), where such an identifier exists. | Optional (O)                 | Assigned by the issuing authority at DTC issuance; may originate from a national register. | §2.3 (optional attributes); §3.1.3 Table 2; §8  | Identifies the *person*, not any document or credential. **Not** present in the eMRTD LDS; **not** the DTC credential identifier and **not** the passport number. Absent where the Member State has no person-level identifier or does not provide it.                                                                                                    |
 | ``document_number``        | The identifier **of the APTITUDE DTC credential** (per §8: "related to the DTC and not the eMRTD").                                           | Mandatory (M)                | Assigned by the issuing authority at DTC issuance (§8).                                    | §2.2 (mandatory attributes); §3.1.2 Table 1; §8 | Identifies the *credential* (the mdoc), **not** the physical passport. §8 states the value is "related to the DTC and not the eMRTD," i.e. it is assigned by the issuing authority at DTC issuance; the rulebook does **not** explicitly require the value to differ from the eMRTD document number. The §2.2 example ``YA1234567`` is illustrative only. |
 | ``travel_document_number`` | The number of the **underlying physical eMRTD** (e.g. passport number).                                                                       | Mandatory (M)                | Replicated from the eMRTD: DE "Document number" of DG1.                                    | §2.4 (mandatory metadata); §3.1.3 Table 2; §8   | Identifies the *physical eMRTD*, **not** the APTITUDE DTC credential. Unlike ``document_number``, it is *replicated* from the passport (DG1) and must match the MRZ. Do not confuse with ``travel_document_mrz`` (the full MRZ of DG1) or with ``document_number`` (the DTC's own identifier).                                                            |
 | ``administrative_number``  | An optional **administrative / internal reference** of the issuing authority relating to the credential or issuance process.                  | Optional (O)                 | Assigned by the issuing authority at DTC issuance.                                         | §2.5 (optional metadata); §3.1.3 Table 2; §8    | An *internal administrative* reference, **not** used for holder identity or document identification. It is assigned by the issuing authority and is distinct from ``person_id`` (person), ``document_number`` (DTC credential) and ``travel_document_number`` (eMRTD). May be absent.                                                                     |
