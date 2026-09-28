@@ -4,13 +4,11 @@
   - Nikos Triantafyllou, University of the Aegean, UAegean i4m Lab
   - Petros Kavassalis, University of the Aegean, UAegean i4m Lab
 
-
 | Version | Date       | Description                                                                                                  |
 | ------- | ---------- | ------------------------------------------------------------------------------------------------------------ |
 | 0.1     | 23-07-2026 | Initial draft based on the SEDIT-X Hospitality working paper and the APTITUDE Attestation Rulebook template. |
 | 0.2     | 24-07-2026 | Aligned data model and `vct` with the APTITUDE issuer configuration (`booking_reference_credential`).        |
 | 0.3     | 26-08-2026 | Aligned display name, nested claim set and check-in composition with the issuer schema for Accommodation Voucher (`booking_reference_credential`), PID and optional European Disability Card. |
-
 
 **Feedback:**
 
@@ -22,11 +20,7 @@
 > match the APTITUDE issuer configuration for `booking_reference_credential`
 > (Wallet display name: **Accommodation Voucher**).
 
-
-
 ## 1 Introduction
-
-
 
 ### 1.1 Document scope and purpose
 
@@ -73,8 +67,6 @@ The credential is also distinct from:
 - a proof-of-stay credential; and
 - the authoritative reservation record held by the hotel, DMC, booking platform or PMS.
 
-
-
 ### 1.2 Architectural role
 
 The credential acts primarily as a trusted **reservation lookup and binding artefact**.
@@ -98,8 +90,6 @@ cancelled
 no_show
 ```
 
-
-
 ### 1.3 Document structure
 
 - Chapter 2 defines attributes and metadata.
@@ -109,8 +99,6 @@ no_show
 - Chapter 6 defines validity, status and revocation.
 - Chapter 7 defines compliance and privacy requirements.
 - Chapter 8 lists references.
-
-
 
 ### 1.4 Key words
 
@@ -134,11 +122,7 @@ wallet presentation is used for booking retrieval or check-in.
 after successful check-in.
 - **PID** means Person Identification Data of type `urn:eu.europa.ec.eudi:pid:1`.
 
-
-
 ## 2 Attestation attributes and metadata
-
-
 
 ### 2.1 Legal category
 
@@ -147,8 +131,6 @@ For the SEDIT-X pilot, the credential is a **non-qualified EAA**:
 ```text
 eaa:eu:non-qualified
 ```
-
-
 
 ### 2.2 Design principles
 
@@ -167,13 +149,10 @@ eaa:eu:non-qualified
   where the guest opts in, not from this voucher.
 9. A manual or staff-assisted lookup process SHALL remain available.
 
-
-
 ### 2.3 Credential attributes
 
 The credential attribute set SHALL match the APTITUDE issuer configuration for
 `booking_reference_credential`. Nested objects SHALL be preserved as issued.
-
 
 | **Data Identifier**      | **Definition**                                                                                          | **Data type** | **Example value**            |
 | ------------------------ | ------------------------------------------------------------------------------------------------------- | ------------- | ---------------------------- |
@@ -191,7 +170,6 @@ The credential attribute set SHALL match the APTITUDE issuer configuration for
 | `guest.givenName`        | Given name of the primary guest as recorded on the reservation.                                         | string        | `Hanna`                      |
 | `guest.familyName`       | Family name of the primary guest as recorded on the reservation.                                        | string        | `Matkalainen`                |
 
-
 The credential SHALL NOT include PAN, IBAN, payment tokens, cryptograms or other
 sensitive payment-instrument data.
 
@@ -199,7 +177,6 @@ The credential SHALL NOT include PID attributes other than the minimal guest nam
 needed for reservation matching.
 
 ### 2.4 Mandatory metadata
-
 
 | **Data Identifier**      | **Definition**                                                                        | **Data type**           | **Example value**                                    |
 | ------------------------ | ------------------------------------------------------------------------------------- | ----------------------- | ---------------------------------------------------- |
@@ -210,11 +187,7 @@ needed for reservation matching.
 | `status_reference`       | Status or revocation reference.                                                       | URI or structured value | `https://status.booking.example/atl/2026-06/12#4821` |
 | `trust_anchor_reference` | Location of issuer trust information.                                                 | URI                     | `https://trust.aptitude.example/hospitality-issuers` |
 
-
-
-
 ### 2.5 Optional metadata
-
 
 | **Data Identifier**      | **Definition**                                                                        | **Data type** | **Example value**                                          |
 | ------------------------ | ------------------------------------------------------------------------------------- | ------------- | ---------------------------------------------------------- |
@@ -228,12 +201,7 @@ needed for reservation matching.
 | `issuer_policy`          | URI of issuance and verification policy.                                              | URI           | `https://issuer.example/policy`                            |
 | `display_locale`         | Preferred display language.                                                           | string        | `en`                                                       |
 
-
-
-
-# 3 Attestation encoding
-
-
+## 3 Attestation encoding
 
 ## 3.1 ISO/IEC 18013-5-compliant encoding
 
@@ -260,7 +228,6 @@ This matches the APTITUDE issuer configuration identifier and scope
 
 ### 3.2.2 Registered JWT claims
 
-
 | **Data Identifier** | **Claim** | **Format** | **Disclosable** |
 | ------------------- | --------- | ---------- | --------------- |
 | `issuer`            | `iss`     | string     | MUST NOT        |
@@ -271,11 +238,7 @@ This matches the APTITUDE issuer configuration identifier and scope
 | `holder_binding`    | `cnf`     | object     | MUST NOT        |
 | `status_reference`  | `status`  | object     | MUST NOT        |
 
-
-
-
 ### 3.2.3 Private claims
-
 
 | **Data Identifier**      | **Claim**                | **Format** | **Disclosable** |
 | ------------------------ | ------------------------ | ---------- | --------------- |
@@ -298,7 +261,6 @@ This matches the APTITUDE issuer configuration identifier and scope
 | `guest.givenName`        | `givenName`              | string     | MUST            |
 | `guest.familyName`       | `familyName`             | string     | MUST            |
 | `trust_anchor_reference` | `trust_anchor_reference` | string     | MUST NOT        |
-
 
 Nested objects SHALL be selectively disclosable at the smallest practical semantic
 unit. A verifier SHALL be able to request `reservationReference` and `property.id`
@@ -348,15 +310,11 @@ without receiving the full guest name where that name is not required.
 }
 ```
 
-
-
 ## 3.3 W3C Verifiable Credentials Data Model-based encoding
 
 This version does not define a W3C VCDM representation.
 
-# 4 Attestation usage
-
-
+## 4 Attestation usage
 
 ## 4.1 Issuance trigger
 
@@ -379,8 +337,6 @@ The source-defined flow is:
 5. the User accepts it;
 6. the Wallet completes OpenID4VCI issuance; and
 7. the credential is stored in the Wallet.
-
-
 
 ## 4.2 Holder binding
 
@@ -463,8 +419,6 @@ That presentation is optional. The hotel SHALL NOT treat absence of the card as
 absence of an accessibility need. The requested EDC claims and verifier
 obligations are defined in the European Disability Card Rulebook.
 
-
-
 ## 4.4 Verification obligations
 
 The hotel, PMS or Intermediary Service SHALL:
@@ -498,8 +452,6 @@ Example:
   "correlation_id": "hci_01JZ..."
 }
 ```
-
-
 
 ## 4.5 Reservation-state progression
 
@@ -555,8 +507,6 @@ The verifier SHOULD retain only:
 - check-in outcome; and
 - minimum legal-registration data where applicable.
 
-
-
 ## 4.8 Failure and fallback
 
 The verifier SHALL return `denied`, `not_found` or `manual_review` where:
@@ -575,7 +525,7 @@ A staff-assisted reservation lookup SHALL remain possible.
 Absence or failure of an optional European Disability Card presentation SHALL NOT
 by itself deny check-in.
 
-# 5 Trust anchors
+## 5 Trust anchors
 
 The credential may be issued by:
 
@@ -598,9 +548,7 @@ The verifier SHALL determine:
 
 For the APTITUDE pilot, trust SHOULD be obtained through the WP2 trust framework.
 
-# 6 Revocation and status
-
-
+## 6 Revocation and status
 
 ## 6.1 Validity
 
@@ -624,8 +572,6 @@ The credential SHALL be revocable or status-checkable when:
 - the Wallet or credential is compromised; or
 - the issuer is no longer authorised.
 
-
-
 ## 6.3 Mutable state versus revocation
 
 Live reservation-state checks in the booking or PMS system do not eliminate the need
@@ -638,7 +584,7 @@ The verifier SHOULD check both:
 
 The final APTITUDE status-list endpoint remains to be defined.
 
-# 7 Compliance
+## 7 Compliance
 
 This Rulebook is designed to align with:
 
@@ -679,10 +625,7 @@ Open matters include:
 - country-specific hotel-registration profiles; and
 - Hotel Pass issuance after check-in.
 
-
-
-# 8 References
-
+## 8 References
 
 | **Item Reference**                     | **Standard name/details**                                                                                  |
 | -------------------------------------- | ---------------------------------------------------------------------------------------------------------- |
@@ -703,4 +646,3 @@ Open matters include:
 | [PID Implementing Regulation]          | Commission Implementing Regulation (EU) 2024/2977 — PID                                                    |
 | [European Disability Card Rulebook]    | APTITUDE WP4 Rulebook for `european_disability_card` (`urn:eu.europa.ec.eudi:edc:1`)                       |
 | [Hotel Pass Rulebook]                  | APTITUDE WP4 Rulebook for `room_key_credential`                                                            |
-

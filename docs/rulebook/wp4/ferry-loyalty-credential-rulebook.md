@@ -1,8 +1,8 @@
 # Attestation Rulebook for attestations of type Ferry Loyalty Card
 
 * Author(s):
-    * Nikos Triantafyllou, University of the Aegean, UAegean i4m Lab
-    * Petros Kavassalis, University of the Aegean, UAegean i4m Lab
+  * Nikos Triantafyllou, University of the Aegean, UAegean i4m Lab
+  * Petros Kavassalis, University of the Aegean, UAegean i4m Lab
 
 | Version | Date | Description |
 |---------|------------|------------|
@@ -18,8 +18,6 @@
 > working paper defines the Ferry Loyalty Credential at a high level as an optional  
 > credential issued by a ferry company or loyalty programme and used during remote  
 > booking to prove eligibility for loyalty benefits, points, tier benefits or discounts.
-
-
 
 ## 1 Introduction
 
@@ -222,7 +220,7 @@ presented repeatedly, subject to validity, expiry, and revocation rules.
 | LC-IR-05 | Optional contact and address attributes SHALL be requested and disclosed only where required for the specific service interaction. | Supports data minimisation and selective disclosure. | Wallet presentation policy, verifier request policy, and relying-party business rules. | Verifier SHALL NOT require unnecessary optional attributes. Wallet SHOULD allow the Holder to review and consent to disclosure. |
 | LC-IR-06 | Where identity matching is required, `customer.first_name` and `customer.last_name` SHOULD be compared with PID or another accepted identity source. | Ensures that the presenter is the customer to whom the loyalty card applies. | Relying Party business validation. | Verifier SHOULD reject the transaction where required identity matching fails. |
 
-# 3 Attestation encoding
+## 3 Attestation encoding
 
 ## 3.1 ISO/IEC 18013-5-compliant encoding
 
@@ -532,8 +530,6 @@ suspend the attestation or ensure that backend verification detects the invalid 
 This Rulebook is designed to align with the EUDI Wallet architectural approach for
 Electronic Attestations of Attributes and with the Attestation Rulebook structure
 defined in the ARF.
-
- 
 
 The Rulebook supports the following compliance objectives:
 

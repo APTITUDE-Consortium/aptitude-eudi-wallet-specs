@@ -1,8 +1,8 @@
 # Attestation Rulebook for attestations of type Student ID
 
 * Author(s):
-    * Nikos Triantafyllou, University of the Aegean, UAegean i4m Lab
-    * Petros Kavassalis, University of the Aegean, UAegean i4m Lab
+  * Nikos Triantafyllou, University of the Aegean, UAegean i4m Lab
+  * Petros Kavassalis, University of the Aegean, UAegean i4m Lab
 
 | Version | Date | Description |
 |---------|------------|------------|
@@ -231,7 +231,7 @@ using SD-JWT VC. The model aligns with the following issuer metadata parameters:
 | `SID-IR-06` | Selective disclosure SHALL allow the Holder to reveal only the attributes required for the transaction. | Supports privacy and data minimisation. | Issuer credential construction and Wallet presentation logic. | Verifier SHALL request only necessary claims. Wallet SHOULD allow the Holder to review the disclosed claims. |
 | `SID-IR-07` | `eduPersonPrimaryAffiliation` SHOULD be `student` or an issuer-defined student-equivalent value for this attestation type. | Ensures that the attestation actually represents student status. | Issuer business rules and verifier business validation. | Verifier SHOULD reject the credential for student-status decisions if the affiliation does not indicate student status. |
 
-# 3 Attestation encoding
+## 3 Attestation encoding
 
 ## 3.1 ISO/IEC 18013-5-compliant encoding
 

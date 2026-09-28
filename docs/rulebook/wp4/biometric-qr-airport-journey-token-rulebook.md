@@ -10,11 +10,9 @@
 - Reviewer(s):
   - Nicolas Portolleau, IN Groupe
 
-
 | Version | Date       | Description                                                                                                    |
 | ------- | ---------- | -------------------------------------------------------------------------------------------------------------- |
 | 0.1     | 22-07-2026 | Initial draft based on the SEDIT-X Smart Airport working paper and the APTITUDE Attestation Rulebook template. |
-
 
 **Feedback:**
 
@@ -31,11 +29,7 @@
 > or **proposed** require confirmation through the APTITUDE WP2/WP4 governance process before
 > production use.
 
-
-
 ## 1 Introduction
-
-
 
 ### 1.1 Document scope and purpose
 
@@ -88,8 +82,6 @@ This Rulebook is structured as follows:
 - Chapter 7 describes compliance with the EUDI Wallet framework and the SEDIT-X privacy model.
 - Chapter 8 lists references.
 
-
-
 ### 1.3 Key words
 
 This document uses the capitalised key words **SHALL**, **SHOULD** and **MAY** as
@@ -116,11 +108,7 @@ processing steps to which the attestation applies.
 - **Checkpoint** means an airport operational touchpoint authorised to verify the attestation.
 - **DCS** means an airline Departure Control System or equivalent operational system.
 
-
-
 ## 2 Attestation attributes and metadata
-
-
 
 ### Chapter overview and requirements
 
@@ -162,10 +150,7 @@ The following design principles apply:
 8. **Fallback:** unsuccessful credential or biometric verification SHALL result in staff-assisted
   handling rather than automatic adverse decision-making beyond the immediate airport process.
 
-
-
 ### 2.2 Mandatory attributes
-
 
 | **Data Identifier**           | **Definition**                                                                                                   | **Data type**    | **Example value**                          |
 | ----------------------------- | ---------------------------------------------------------------------------------------------------------------- | ---------------- | ------------------------------------------ |
@@ -184,7 +169,6 @@ The following design principles apply:
 | `protected_biometric_payload` | Base64url-encoded encrypted payload embedding the portrait (or template) and journey context for 1:1 comparison. It SHALL NOT be an external biometric reference. | string | `eyJlbmMiOiJBMjU2R0NNIn0..3v9X...` |
 | `biometric_use`               | Permitted biometric processing mode. The value SHALL be `one_to_one_verification`.                               | string enum      | `one_to_one_verification`                  |
 | `authorised_checkpoints`      | Airport processing steps at which the token may be used.                                                         | array of strings | `["bag_drop","security","boarding_gate"]`  |
-
 
 Permitted values for `biometric_binding_type` are:
 
@@ -205,10 +189,7 @@ Permitted values for entries in `authorised_checkpoints` are:
 - `boarding_gate`; and
 - another value defined by an approved airport deployment profile.
 
-
-
 ### 2.3 Optional attributes
-
 
 | **Data Identifier**           | **Definition**                                                                                                              | **Data type** | **Example value**           |
 | ----------------------------- | --------------------------------------------------------------------------------------------------------------------------- | ------------- | --------------------------- |
@@ -227,7 +208,6 @@ Permitted values for entries in `authorised_checkpoints` are:
 | `issuing_airport`             | IATA code of the airport-side issuer context.                                                                               | string        | `SKG`                       |
 | `display_name`                | Human-readable wallet display name.                                                                                         | string        | `SKG Airport Journey Token` |
 
-
 Permitted values for `journey_status` SHOULD include:
 
 - `issued`;
@@ -245,10 +225,7 @@ Permitted values for `enrolment_method` are:
 - `identity_proofing_and_liveness`; or
 - `approved_external_photo_identity`.
 
-
-
 ### 2.4 Conditional attributes
-
 
 | **Data Identifier**           | **Definition**                                                                                                           | **Data type**    | **Example value**                                                               |
 | ----------------------------- | ------------------------------------------------------------------------------------------------------------------------ | ---------------- | ------------------------------------------------------------------------------- |
@@ -258,7 +235,6 @@ Permitted values for `enrolment_method` are:
 | `document_issuing_country`    | Country that issued the identity evidence. MAY be included only where necessary for journey eligibility.                 | string           | `GRC`                                                                           |
 | `additional_flight_segments`  | Additional segments covered by the same journey token. Present only when explicitly permitted by the deployment profile. | array of objects | `[{"flight_number":"A3982","departure_airport":"ATH","arrival_airport":"JTR"}]` |
 | `cryptographically_bound_to`  | Attestation type to which this credential is cryptographically bound. Mandatory under this Rulebook.                     | string           | `urn:eu.europa.ec.eudi:pid:1`                                                   |
-
 
 The credential SHALL be cryptographically bound to the Wallet Unit and to the verified
 journey context. The `cryptographically_bound_to` value SHALL identify the PID type used
@@ -274,7 +250,6 @@ Rulebook MAY define an additional formal cross-credential binding mechanism.
 
 ### 2.5 Mandatory metadata
 
-
 | **Data Identifier**      | **Definition**                                                                 | **Data type**           | **Example value**                                |
 | ------------------------ | ------------------------------------------------------------------------------ | ----------------------- | ------------------------------------------------ |
 | `category`               | Legal category of the attestation.                                             | string                  | `eaa:eu:non-qualified`                           |
@@ -288,12 +263,10 @@ Rulebook MAY define an additional formal cross-credential binding mechanism.
 | `status_reference`       | Reference used for status or revocation checking.                              | URI or structured value | `https://status.skg.example/atl/2026-07/42#9182` |
 | `trust_anchor_reference` | Location from which the applicable issuer trust information can be obtained.   | URI                     | `https://trust.aptitude.example/airport-issuers` |
 
-
 The identifiers and URLs above are illustrative and SHALL be replaced by values approved
 through APTITUDE governance.
 
 ### 2.6 Optional metadata
-
 
 | **Data Identifier**      | **Definition**                                                       | **Data type** | **Example value**                                 |
 | ------------------------ | -------------------------------------------------------------------- | ------------- | ------------------------------------------------- |
@@ -304,11 +277,7 @@ through APTITUDE governance.
 | `issuer_policy`          | Reference to the issuer policy governing issuance and verification.  | URI           | `https://airport.example/eudi/issuer-policy`      |
 | `display_locale`         | Preferred language for wallet display.                               | string        | `en`                                              |
 
-
-
-
 ### 2.7 Conditional metadata
-
 
 | **Data Identifier**   | **Definition**                                                                                              | **Data type** | **Example value**                           |
 | --------------------- | ----------------------------------------------------------------------------------------------------------- | ------------- | ------------------------------------------- |
@@ -316,12 +285,7 @@ through APTITUDE governance.
 | `status_list_uri`     | URI of the applicable Attestation Status List. Mandatory when list-based status is used.                    | URI           | `https://status.skg.example/atl/2026-07/42` |
 | `revocation_list_uri` | URI of the applicable Attestation Revocation List. Mandatory when a revocation-list mechanism is used.      | URI           | `https://status.skg.example/arl/2026-07`    |
 
-
-
-
-# 3 Attestation encoding
-
-
+## 3 Attestation encoding
 
 ## 3.1 ISO/IEC 18013-5-compliant encoding
 
@@ -339,8 +303,6 @@ an issuer SHALL NOT advertise an mdoc document type for this attestation.
 
 ## 3.2 SD-JWT VC-based encoding
 
-
-
 ### 3.2.1 Verifiable Credential Type
 
 The proposed Verifiable Credential Type is:
@@ -357,7 +319,6 @@ the applicable HAIP profile.
 
 ### 3.2.2 Registered JWT claims
 
-
 | **Data Identifier** | **Attribute identifier** | **Encoding format** | **Reference/Notes**             | **Disclosable** |
 | ------------------- | ------------------------ | ------------------- | ------------------------------- | --------------- |
 | `issuer`            | `iss`                    | string              | JWT issuer identifier           | MUST NOT        |
@@ -368,11 +329,7 @@ the applicable HAIP profile.
 | `holder_binding`    | `cnf`                    | object              | Holder-binding confirmation key | MUST NOT        |
 | `status_reference`  | `status`                 | object              | Credential status metadata      | MUST NOT        |
 
-
-
-
 ### 3.2.3 Private claims specific to this attestation
-
 
 | **Data Identifier**           | **Attribute identifier**      | **Encoding format** | **Notes**                                           | **Disclosable** |
 | ----------------------------- | ----------------------------- | ------------------- | --------------------------------------------------- | --------------- |
@@ -411,7 +368,6 @@ the applicable HAIP profile.
 | `schema_version`              | `schema_version`              | string              | Rulebook/schema version                             | MUST NOT        |
 | `trust_anchor_reference`      | `trust_anchor_reference`      | string              | Trust-anchor lookup location                        | MUST NOT        |
 | `privacy_notice`              | `privacy_notice`              | string              | Privacy information                                 | MAY             |
-
 
 `protected_biometric_payload` is highly sensitive. It SHALL be a Base64url-encoded
 encrypted structure (for example a JWE under a deployment-profile key) that embeds the
@@ -503,8 +459,6 @@ The Wallet Unit SHOULD prominently inform the User that:
 - presentation requires local User authentication; and
 - the User can refuse presentation and use the staff-assisted process.
 
-
-
 ### 3.2.6 Protected QR presentation representation
 
 The QR code displayed by the Wallet Unit is a presentation representation of the
@@ -543,8 +497,6 @@ At minimum, the protected QR representation SHALL:
   `protected_biometric_payload`; and
 8. be verifiable by the EUDIW Intermediary Service or an authorised airport verifier.
 
-
-
 ## 3.3 W3C Verifiable Credentials Data Model-based encoding
 
 Version 0.1 of this Rulebook does not define a W3C Verifiable Credentials Data Model
@@ -555,8 +507,6 @@ Wallet framework and accompanied by an approved selective-disclosure and present
 profile.
 
 ## 4 Attestation usage
-
-
 
 ### 4.1 Issuance prerequisites
 
@@ -584,8 +534,6 @@ Where the PID does not contain a usable portrait image, issuance SHALL include:
 - liveness verification;
 - binding of the live enrolment subject to the verified identity; and
 - confirmation of a valid Boarding Pass Credential.
-
-
 
 ### 4.2 Device and holder binding
 
@@ -677,8 +625,6 @@ Biometric-enhanced usage SHALL follow these requirements:
 - the biometric result SHALL NOT be reused for unrelated purposes; and
 - operational logging SHALL exclude facial images and biometric templates.
 
-
-
 ### 4.6 Freshness, replay prevention and QR display
 
 The final QR freshness profile remains to be defined. The implementation SHALL nevertheless
@@ -690,8 +636,6 @@ or equivalent anti-replay mechanism;
 - the verifier detects expired or previously consumed single-use presentations where the
 deployment uses one-time semantics; and
 - acceptance of a fresh QR does not replace the current DCS eligibility check.
-
-
 
 ### 4.7 Transactional data
 
@@ -714,8 +658,6 @@ The automated flow SHALL stop and route the passenger to staff-assisted processi
 - `protected_biometric_payload` cannot be decrypted, is malformed, or is of an unsupported
 type; or
 - legal or operational policy requires manual verification.
-
-
 
 ## 5 Trust anchors
 
@@ -749,8 +691,6 @@ A verifier SHALL verify both:
 The illustrative domain names in this Rulebook are not operational trust endpoints.
 
 ## 6 Revocation
-
-
 
 ### 6.1 Validity model
 
@@ -846,10 +786,7 @@ is published:
 - permitted offline operation and cache policy; and
 - final data-controller and processor responsibilities for each airport touchpoint.
 
-
-
 ## 8 References
-
 
 | **Item Reference**                     | **Standard name/details**                                                                                                                                                                     |
 | -------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -873,5 +810,3 @@ is published:
 | [Topic 20]                             | ARF Annex 2, Topic 20 — Strong User authentication for electronic payments                                                                                                                    |
 | [EDPB Opinion 11/2024]                 | Opinion 11/2024 on the use of facial recognition to streamline airport passengers' flow                                                                                                       |
 | [ETSI TS 119 472-1]                    | Electronic Signatures and Trust Infrastructures; Electronic Attestation of Attributes; Part 1: Building blocks and general requirements                                                       |
-
-

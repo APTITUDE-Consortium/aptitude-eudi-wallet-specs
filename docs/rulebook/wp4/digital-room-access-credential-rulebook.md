@@ -4,12 +4,10 @@
   - Nikos Triantafyllou, University of the Aegean, UAegean i4m Lab
   - Petros Kavassalis, University of the Aegean, UAegean i4m Lab
 
-
 | Version | Date       | Description                                                                                             |
 | ------- | ---------- | ------------------------------------------------------------------------------------------------------- |
 | 0.1     | 23-07-2026 | Initial draft based on the SEDIT-X Hospitality material and the APTITUDE Attestation Rulebook template. |
 | 0.2     | 26-08-2026 | Aligned with the issuer schema for Hotel Pass (`room_key_credential`): visual QR pass with `id`, `room_number` and `picture`; not a cryptographic room-key credential. |
-
 
 **Feedback:**
 
@@ -175,13 +173,11 @@ eaa:eu:non-qualified
 The credential attribute set SHALL match the APTITUDE issuer configuration for
 `room_key_credential`.
 
-
 | **Data Identifier** | **Definition**                                                                                         | **Data type** | **Example value**                          |
 | ------------------- | ------------------------------------------------------------------------------------------------------ | ------------- | ------------------------------------------ |
 | `id`                | Unique identifier of this Hotel Pass instance.                                                         | string        | `c3a91b2e-4d7f-4e18-8b05-9f6a2c1d0e77`     |
 | `room_number`       | Human-readable assigned room number for Wallet display and operational confirmation.                   | string        | `412`                                      |
 | `picture`           | PNG QR image as a data URL, encoding the reservation reference associated with the checked-in stay.    | string        | `data:image/png;base64,...`                |
-
 
 `picture` SHALL be a `data:` URL with media type `image/png`. The QR symbol
 encoded in that image SHALL represent the reservation reference, not lock-system
@@ -200,7 +196,6 @@ The credential SHALL NOT include:
 
 ### 2.4 Mandatory metadata
 
-
 | **Data Identifier**      | **Definition**                                            | **Data type**           | **Example value**                                           |
 | ------------------------ | --------------------------------------------------------- | ----------------------- | ----------------------------------------------------------- |
 | `category`               | Legal category of the attestation.                        | string                  | `eaa:eu:non-qualified`                                      |
@@ -210,9 +205,7 @@ The credential SHALL NOT include:
 | `status_reference`       | Credential status or revocation reference.                | URI or structured value | `https://status.hotel.example/pass/atl/2026-06/12#412`      |
 | `trust_anchor_reference` | Location of issuer trust information.                     | URI                     | `https://trust.aptitude.example/hospitality-access-issuers` |
 
-
 ### 2.5 Optional metadata
-
 
 | **Data Identifier**      | **Definition**                       | **Data type** | **Example value**                                    |
 | ------------------------ | ------------------------------------ | ------------- | ---------------------------------------------------- |
@@ -226,8 +219,7 @@ The credential SHALL NOT include:
 | `issuer_policy`          | Hotel Pass policy URI.               | URI           | `https://hotel.example/hotel-pass-policy`            |
 | `display_locale`         | Preferred display language.          | string        | `en`                                                 |
 
-
-# 3 Attestation encoding
+## 3 Attestation encoding
 
 ## 3.1 ISO/IEC 18013-5-compliant encoding
 
@@ -254,7 +246,6 @@ This matches the APTITUDE issuer configuration identifier and scope
 
 ### 3.2.2 Registered JWT claims
 
-
 | **Data Identifier** | **Claim** | **Format** | **Disclosable** |
 | ------------------- | --------- | ---------- | --------------- |
 | `issuer`            | `iss`     | string     | MUST NOT        |
@@ -265,9 +256,7 @@ This matches the APTITUDE issuer configuration identifier and scope
 | `holder_binding`    | `cnf`     | object     | MUST NOT        |
 | `status_reference`  | `status`  | object     | MUST NOT        |
 
-
 ### 3.2.3 Private claims
-
 
 | **Data Identifier**      | **Claim**                | **Format** | **Disclosable** |
 | ------------------------ | ------------------------ | ---------- | --------------- |
@@ -276,7 +265,6 @@ This matches the APTITUDE issuer configuration identifier and scope
 | `room_number`            | `room_number`            | string     | MUST            |
 | `picture`                | `picture`                | string     | MUST            |
 | `trust_anchor_reference` | `trust_anchor_reference` | string     | MUST NOT        |
-
 
 Door-key or lock-provider material SHALL NOT appear as a claim or disclosure.
 
@@ -333,7 +321,7 @@ The Wallet Unit SHOULD inform the User that:
 
 This version does not define a W3C VCDM representation.
 
-# 4 Attestation usage
+## 4 Attestation usage
 
 ## 4.1 Issuance trigger
 
@@ -518,7 +506,7 @@ The pass SHALL be rejected or routed to staff when:
 
 The hotel SHALL maintain a physical key-card or staff-assisted fallback.
 
-# 5 Trust anchors
+## 5 Trust anchors
 
 The verifier SHALL establish that the issuer:
 
@@ -532,7 +520,7 @@ For the APTITUDE pilot, trust SHOULD be obtained through the WP2 trust framework
 A Hotel Pass issued for one hotel SHALL NOT be accepted by another property
 merely because the same vendor operates both systems.
 
-# 6 Revocation and status
+## 6 Revocation and status
 
 ## 6.1 Validity period
 
@@ -572,7 +560,7 @@ unless the hotel intentionally permits multiple guests or devices.
 
 Each authorised guest SHALL have a separately identifiable pass.
 
-# 7 Compliance
+## 7 Compliance
 
 This Rulebook is designed to align with:
 
@@ -611,8 +599,7 @@ The following matters remain open and require technical partner input:
 - checkout grace periods; and
 - separation from a later Proof of Stay Credential.
 
-# 8 References
-
+## 8 References
 
 | **Item Reference**                     | **Standard name/details**                                                        |
 | -------------------------------------- | -------------------------------------------------------------------------------- |
@@ -633,4 +620,3 @@ The following matters remain open and require technical partner input:
 | [Accommodation Voucher Rulebook]       | APTITUDE WP4 Rulebook for `booking_reference_credential`                         |
 | [European Disability Card Rulebook]    | APTITUDE WP4 Rulebook for `european_disability_card`                             |
 | [PID Implementing Regulation]          | Commission Implementing Regulation (EU) 2024/2977 — PID                          |
-

@@ -1,8 +1,8 @@
 # Attestation Rulebook for attestations of type Passenger Ferry Boarding Credential
 
 * Author(s):
-    * Nikos Triantafyllou, University of the Aegean, UAegean i4m Lab
-    * Petros Kavassalis, University of the Aegean, UAegean i4m Lab
+  * Nikos Triantafyllou, University of the Aegean, UAegean i4m Lab
+  * Petros Kavassalis, University of the Aegean, UAegean i4m Lab
 
 | Version | Date | Description |
 |---------|------------|------------|
@@ -241,7 +241,7 @@ issuer documents the convention.
 | `PBP-IR-06` | Cabin claims under `accommodation` MUST be omitted if no cabin is allocated. | Prevents misleading cabin allocation information for seat-only tickets. | Issuer business rules and schema validation. | Issuer SHALL omit cabin claims for non-cabin products. Verifier SHOULD ignore or reject inconsistent cabin data. |
 | `PBP-IR-07` | Passenger name attributes SHOULD be compared with PID or another accepted identity source when the boarding process requires identity matching. | Ensures that the person presenting the boarding credential is the intended passenger. | Relying Party business validation. | Verifier SHOULD reject the boarding transaction where required identity matching fails. |
 
-# 3 Attestation encoding
+## 3 Attestation encoding
 
 ## 3.1 ISO/IEC 18013-5-compliant encoding
 

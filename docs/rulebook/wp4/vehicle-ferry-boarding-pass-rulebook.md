@@ -1,8 +1,8 @@
 # Attestation Rulebook for attestations of type Vehicle Ferry Boarding Credential
 
 * Author(s):
-    * Nikos Triantafyllou, University of the Aegean, UAegean i4m Lab
-    * Petros Kavassalis, University of the Aegean, UAegean i4m Lab
+  * Nikos Triantafyllou, University of the Aegean, UAegean i4m Lab
+  * Petros Kavassalis, University of the Aegean, UAegean i4m Lab
 
 | Version | Date | Description |
 |---------|------------|------------|
@@ -212,7 +212,7 @@ credential SHOULD NOT duplicate the complete mVRC.
 | `VBP-IR-05` | `ticket.ticketLet` and `ticket.ticketNumber` SHALL be non-empty. | Ensures a usable ticket identifier for embarkation and audit. | Schema validation and issuer business rules. | Issuer SHALL reject empty ticket identifiers. Verifier SHALL reject incomplete ticket data. |
 | `VBP-IR-06` | Where vehicle matching is required, `vehicle.plateNumber` SHOULD be compared with the mVRC and the physical vehicle. | Ensures that the vehicle presented for embarkation is the vehicle entitled to board. | Relying Party business validation. | Verifier SHOULD reject the boarding transaction where required vehicle matching fails. |
 
-# 3 Attestation encoding
+## 3 Attestation encoding
 
 ## 3.1 ISO/IEC 18013-5-compliant encoding
 

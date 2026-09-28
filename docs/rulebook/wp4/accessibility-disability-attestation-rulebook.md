@@ -4,12 +4,10 @@
   - Nikos Triantafyllou, University of the Aegean, UAegean i4m Lab
   - Petros Kavassalis, University of the Aegean, UAegean i4m Lab
 
-
 | Version | Date       | Description                                                                                                        |
 | ------- | ---------- | ------------------------------------------------------------------------------------------------------------------ |
 | 0.1     | 23-07-2026 | Initial draft based on the SEDIT-X use case, APTITUDE UC7 material and the APTITUDE Attestation Rulebook template. |
 | 0.2     | 26-08-2026 | Aligned with the issuer schema for European Disability Card (`european_disability_card`, `vct` `urn:eu.europa.ec.eudi:edc:1`) and optional hospitality check-in use. |
-
 
 **Feedback:**
 
@@ -26,11 +24,7 @@
 > by the Relying Party after verification; they are not encoded as additional
 > claims in this credential.
 
-
-
 ## 1 Introduction
-
-
 
 ### 1.1 Document scope and purpose
 
@@ -86,8 +80,6 @@ The primary objectives are to:
   trust framework; and
 6. allow operational service systems to receive a clear eligibility outcome.
 
-
-
 ### 1.2 Document structure
 
 This Rulebook is structured as follows:
@@ -99,8 +91,6 @@ This Rulebook is structured as follows:
 - Chapter 6 defines validity and revocation.
 - Chapter 7 describes compliance with the EUDI Wallet framework and privacy principles.
 - Chapter 8 lists references.
-
-
 
 ### 1.3 Key words
 
@@ -132,11 +122,7 @@ For this Rulebook:
   `booking_reference_credential`.
 - **PID** means Person Identification Data of type `urn:eu.europa.ec.eudi:pid:1`.
 
-
-
 ## 2 Attestation attributes and metadata
-
-
 
 ### Chapter overview and requirements
 
@@ -188,10 +174,7 @@ The following design principles apply:
 11. **Fallback:** a User who cannot or does not present the credential SHALL
   retain access to an appropriate manual or assisted process.
 
-
-
 ### 2.2 Mandatory attributes
-
 
 | **Data Identifier**              | **Definition**                                                                                          | **Data type** | **Example value**                      |
 | -------------------------------- | ------------------------------------------------------------------------------------------------------- | ------------- | -------------------------------------- |
@@ -206,7 +189,6 @@ The following design principles apply:
 | `portrait`                       | Facial image of the holder as a data URL, for visual inspection where required.                         | string        | `data:image/jpeg;base64,...`           |
 | `assistant_entitlement`          | Indicates that the holder is entitled to an assistant or accompanying person under the scheme.          | boolean       | `true`                                 |
 | `disability_status_recognised`   | Indicates that the holder is recognised under the applicable disability-card scheme.                    | boolean       | `true`                                 |
-
 
 `issuing_country` SHALL use ISO 3166-1 alpha-2 codes.
 
@@ -233,11 +215,9 @@ extending this card.
 
 ### 2.4 Conditional attributes
 
-
 | **Data Identifier**          | **Definition**                                                                 | **Data type** | **Example value**             |
 | ---------------------------- | ------------------------------------------------------------------------------ | ------------- | ----------------------------- |
 | `cryptographically_bound_to` | Attestation type to which this credential is cryptographically bound. Present where formal binding to PID is required. | string        | `urn:eu.europa.ec.eudi:pid:1` |
-
 
 Where `cryptographically_bound_to` is present, its value SHOULD identify the PID type
 used to bind the holder to the attestation:
@@ -246,10 +226,7 @@ used to bind the holder to the attestation:
 urn:eu.europa.ec.eudi:pid:1
 ```
 
-
-
 ### 2.5 Mandatory metadata
-
 
 | **Data Identifier**      | **Definition**                                                           | **Data type**           | **Example value**                                      |
 | ------------------------ | ------------------------------------------------------------------------ | ----------------------- | ------------------------------------------------------ |
@@ -260,11 +237,7 @@ urn:eu.europa.ec.eudi:pid:1
 | `status_reference`       | Reference used for status or revocation checking. Credential identification for status purposes SHALL be expressed only through this status metadata (for example status-list URI and index), not through a separate attestation identifier claim beyond `id`. | URI or structured value | `https://status.example/edc/atl/2026-01/15#1234` |
 | `trust_anchor_reference` | Location from which applicable issuer trust information can be obtained. | URI                     | `https://trust.aptitude.example/accessibility-issuers` |
 
-
-
-
 ### 2.6 Optional metadata
-
 
 | **Data Identifier**      | **Definition**                                | **Data type** | **Example value**                                   |
 | ------------------------ | --------------------------------------------- | ------------- | --------------------------------------------------- |
@@ -277,11 +250,7 @@ urn:eu.europa.ec.eudi:pid:1
 | `terms_of_use`           | URI of terms governing credential use.        | URI           | `https://issuer.example/terms`                      |
 | `display_locale`         | Preferred language for wallet display.        | string        | `en`                                                |
 
-
-
-
 ### 2.7 Conditional metadata
-
 
 | **Data Identifier**   | **Definition**                                                                                         | **Data type** | **Example value**                         |
 | --------------------- | ------------------------------------------------------------------------------------------------------ | ------------- | ----------------------------------------- |
@@ -289,12 +258,7 @@ urn:eu.europa.ec.eudi:pid:1
 | `status_list_uri`     | URI of the applicable Attestation Status List. Mandatory when list-based status is used.               | URI           | `https://status.example/edc/atl/2026-01/15` |
 | `revocation_list_uri` | URI of the applicable Attestation Revocation List. Mandatory when a revocation-list mechanism is used. | URI           | `https://status.example/edc/arl/2026-01`  |
 
-
-
-
-# 3 Attestation encoding
-
-
+## 3 Attestation encoding
 
 ## 3.1 ISO/IEC 18013-5-compliant encoding
 
@@ -312,8 +276,6 @@ for this attestation.
 
 ## 3.2 SD-JWT VC-based encoding
 
-
-
 ### 3.2.1 Verifiable Credential Type
 
 The Verifiable Credential Type SHALL be:
@@ -329,7 +291,6 @@ and HAIP profiles selected by APTITUDE WP2.
 
 ### 3.2.2 Registered JWT claims
 
-
 | **Data Identifier** | **Attribute identifier** | **Encoding format** | **Reference/Notes**                          | **Disclosable** |
 | ------------------- | ------------------------ | ------------------- | -------------------------------------------- | --------------- |
 | `issuer`            | `iss`                    | string              | JWT issuer identifier                        | MUST NOT        |
@@ -340,11 +301,7 @@ and HAIP profiles selected by APTITUDE WP2.
 | `holder_binding`    | `cnf`                    | object              | Holder-binding confirmation key, where used  | MUST NOT        |
 | `status_reference`  | `status`                 | object              | Credential status metadata.                  | MUST NOT        |
 
-
-
-
 ### 3.2.3 Private claims specific to this attestation
-
 
 | **Data Identifier**            | **Attribute identifier**       | **Encoding format** | **Notes**                             | **Disclosable** |
 | ------------------------------ | ------------------------------ | ------------------- | ------------------------------------- | --------------- |
@@ -363,7 +320,6 @@ and HAIP profiles selected by APTITUDE WP2.
 | `cryptographically_bound_to`   | `cryptographically_bound_to`   | string              | PID type where bound                  | MUST NOT        |
 | `trust_anchor_reference`       | `trust_anchor_reference`       | string              | Trust-anchor lookup                   | MUST NOT        |
 | `privacy_notice`               | `privacy_notice`               | string              | Privacy information                   | MAY             |
-
 
 A verifier SHALL be able to request `disability_status_recognised` and
 `assistant_entitlement` without also receiving `portrait`, `serial_number` or
@@ -430,15 +386,11 @@ The Wallet Unit SHOULD inform the User that:
 - the User can refuse the presentation; and
 - a manual or staff-assisted process should remain available.
 
-
-
 ## 3.3 W3C Verifiable Credentials Data Model-based encoding
 
 This version of the Rulebook does not define a W3C VCDM representation.
 
 ## 4 Attestation usage
-
-
 
 ### 4.1 Issuance prerequisites
 
@@ -574,7 +526,6 @@ A typical hospitality result SHOULD be limited to:
 }
 ```
 
-
 ### 4.5 Identity attributes
 
 Name, birth date, serial number and portrait MAY be present in the issued
@@ -608,7 +559,6 @@ The Relying Party SHALL:
 - restrict internal access;
 - define short retention periods; and
 - avoid using the data for profiling, advertising, employment decisions or unrelated risk scoring.
-
 
 ### 4.7 Transactional data
 
@@ -677,8 +627,6 @@ The illustrative endpoints in this draft are not operational.
 
 ## 6 Revocation
 
-
-
 ### 6.1 Validity model
 
 The attestation MAY be medium- or long-lived, depending on the issuing scheme.
@@ -692,8 +640,6 @@ The validity period SHOULD reflect:
 - expiry of the physical or digital disability card;
 - age-related or temporary entitlement conditions; and
 - the issuer's status-management capability.
-
-
 
 ### 6.2 Revocation and status
 
@@ -771,10 +717,7 @@ The following matters remain open:
 - handling of temporary entitlements; and
 - retention rules for transport and hospitality operators.
 
-
-
 ## 8 References
-
 
 | **Item Reference**                     | **Standard name/details**                                                                                                                                                                     |
 | -------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -800,4 +743,3 @@ The following matters remain open:
 | [PID Implementing Regulation]          | Commission Implementing Regulation (EU) 2024/2977 — PID                                                                                                                                       |
 | [Accommodation Voucher Rulebook]       | APTITUDE WP4 Rulebook for `booking_reference_credential`                                                                                                                                      |
 | [Hotel Pass Rulebook]                  | APTITUDE WP4 Rulebook for `room_key_credential`                                                                                                                                               |
-
