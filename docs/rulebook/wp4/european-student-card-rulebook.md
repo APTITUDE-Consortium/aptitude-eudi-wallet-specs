@@ -1,4 +1,4 @@
-# Attestation Rulebook for attestations of type Student ID
+# Attestation Rulebook for attestations of type European Student Card
 
 * Author(s):
     * Nikos Triantafyllou, University of the Aegean, UAegean i4m Lab
@@ -7,7 +7,8 @@
 | Version | Date | Description |
 |---------|------------|------------|
 | 0.1 | 23-07-2026 | Initial draft based on the SEDIT-X use case, ERUA-iD materials and the APTITUDE Attestation Rulebook template. |
-| 0.2 | 24-07-2026 | Aligned data model and SD-JWT VC encoding with the StudentID Attestation model. |
+| 0.2 | 24-07-2026 | Aligned data model and SD-JWT VC encoding with the European Student Card Attestation model. |
+| 0.3 | 02-10-2026 | Renamed credential from Student ID / StudentID Attestation to European Student Card Attestation. |
 
 **Feedback:**
 
@@ -15,7 +16,7 @@
 
 > **Draft status**
 >
-> This Rulebook defines the StudentID Attestation for the APTITUDE / SEDIT-X education
+> This Rulebook defines the European Student Card Attestation for the APTITUDE / SEDIT-X education
 > and student-service pilot context. The attribute model, metadata, integrity rules and
 > SD-JWT VC encoding below are the normative claim set for this attestation type.
 
@@ -23,10 +24,10 @@
 
 ### 1.1 Document scope and purpose
 
-This Rulebook defines the **StudentID Attestation** for use in the European Digital
+This Rulebook defines the **European Student Card Attestation** for use in the European Digital
 Identity Wallet ecosystem.
 
-The StudentID Attestation expresses the real-world fact that a natural person is, or was
+The European Student Card Attestation expresses the real-world fact that a natural person is, or was
 during the applicable validity period, affiliated with an educational organisation in a
 student capacity. It enables relying parties to verify student status and selected
 identity or affiliation attributes using the EUDI Wallet.
@@ -40,7 +41,7 @@ status, public or private service providers accepting student status, and other
 authorised verifiers.
 
 In practical terms, the attestation enables a student to present proof of student status
-through an EUDI Wallet using selective disclosure. It can reduce reliance on paper
+through an EUDI Wallet using selective disclosure. It can reduce reliance on physical
 student cards, manual checks, or real-time backend lookups, provided that the relying
 party can verify the issuer, credential signature, validity period, credential status
 where applicable, and the disclosed attributes needed for the transaction.
@@ -94,11 +95,11 @@ In addition, the following domain-specific terms are used:
 
 | Term | Meaning |
 |------|---------|
-| StudentID Attestation | A Verifiable Credential representing a person's student affiliation and selected student identity attributes. |
+| European Student Card Attestation | A Verifiable Credential representing a person's student affiliation and selected student identity attributes. |
 | Educational organisation | A university, higher-education institution, or other authorised academic organisation acting as the authentic source for student status. |
 | Authorised academic identity provider | A system or organisation authorised by an educational organisation to issue or manage student identity attestations. |
 | Student | The natural person to whom the student affiliation applies. |
-| Relying Party | An organisation or system that verifies the StudentID Attestation to make an access, eligibility, discount, or service decision. |
+| Relying Party | An organisation or system that verifies the European Student Card Attestation to make an access, eligibility, discount, or service decision. |
 | SCHAC | Schema for Academia, a set of attributes commonly used in research and education identity federations. |
 | eduPerson | A set of attributes commonly used to represent persons and affiliations in education and research identity federations. |
 
@@ -106,18 +107,18 @@ In addition, the following domain-specific terms are used:
 
 ### Chapter overview and requirements
 
-This chapter defines the attributes and metadata that a StudentID Attestation may
+This chapter defines the attributes and metadata that a European Student Card Attestation may
 contain. The attributes are defined in an encoding-independent manner. Each attribute is
 classified as mandatory, optional, or conditional.
 
-The StudentID Attestation is typically medium- to long-lived, for example for an
+The European Student Card Attestation is typically medium- to long-lived, for example for an
 academic year, and is intended for repeated presentation with selective disclosure. The
 attribute set is designed to support data minimisation by allowing a Holder to disclose
 only the student attributes required for a specific transaction.
 
 ### 2.1 Introduction
 
-The StudentID Attestation is defined as a non-qualified Electronic Attestation of
+The European Student Card Attestation is defined as a non-qualified Electronic Attestation of
 Attributes unless a future version of this Rulebook explicitly defines a qualified or
 public-sector legal category.
 
@@ -136,9 +137,9 @@ The attestation model consists of the following logical groups:
 The attestation is issued as a Verifiable Credential compatible with the EUDI Wallet
 using SD-JWT VC. The model aligns with the following issuer metadata parameters:
 
-* `scope`: `StudentID`;
+* `scope`: `EuropeanStudentCard`;
 * `format`: `vc+sd-jwt`;
-* `vct`: `VerifiableStudentID`;
+* `vct`: `VerifiableEuropeanStudentCard`;
 * `claims`: the claims defined in this Rulebook;
 * `proof_types_supported`: issuer-defined, including `jwt` where supported;
 * `cryptographic_binding_methods_supported`: issuer-defined, for example `jwk` or
@@ -183,7 +184,7 @@ using SD-JWT VC. The model aligns with the following issuer metadata parameters:
 
 | **Data Identifier** | **Semantic Reference** | **Definition** | **Data type** | **Example value** |
 |---------------------|------------------------|----------------|---------------|-------------------|
-| `vct` | SD-JWT VC | Verifiable Credential Type identifying this attestation type. | string | `VerifiableStudentID` |
+| `vct` | SD-JWT VC | Verifiable Credential Type identifying this attestation type. | string | `VerifiableEuropeanStudentCard` |
 | `iss` | SD-JWT VC / JWT | Identifier of the issuer of the credential. | string | `https://issuer.example-university.edu` |
 | `iat` | JWT | Time at which the credential was issued. | integer | `1772366400` |
 | `exp` | JWT | Expiration time of the credential. For this attestation it SHOULD reflect the end of the applicable student-status validity period, such as the academic year or enrolment period. | integer | `1798761600` |
@@ -203,8 +204,8 @@ using SD-JWT VC. The model aligns with the following issuer metadata parameters:
 
 | **Data Identifier** | **Semantic Reference** | **Definition** | **Data type** | **Example value** |
 |---------------------|------------------------|----------------|---------------|-------------------|
-| `status` | SD-JWT VC status mechanism, where used | SHOULD be present where the StudentID Attestation is medium- or long-lived and may need to be revoked, suspended, or updated before expiry. | object | `{ "status_list": { ... } }` |
-| `cryptographically_bound_to` | ARF Topic 12 / ARB_28 | SHOULD be present where the StudentID Attestation must be presented together with PID or another identity attestation for strong holder matching. | string | `urn:eudi:pid:1` |
+| `status` | SD-JWT VC status mechanism, where used | SHOULD be present where the European Student Card Attestation is medium- or long-lived and may need to be revoked, suspended, or updated before expiry. | object | `{ "status_list": { ... } }` |
+| `cryptographically_bound_to` | ARF Topic 12 / ARB_28 | SHOULD be present where the European Student Card Attestation must be presented together with PID or another identity attestation for strong holder matching. | string | `urn:eudi:pid:1` |
 
 ### 2.8 Code lists
 
@@ -223,22 +224,22 @@ using SD-JWT VC. The model aligns with the following issuer metadata parameters:
 
 | **Rule ID** | **Rule statement** | **Why it exists** | **Where enforced** | **Verifier / issuer behavior on failure** |
 |-------------|--------------------|-------------------|--------------------|-------------------------------------------|
-| `SID-IR-01` | `identifier`, `firstName`, `familyName`, `schacHomeOrganization`, `eduPersonPrincipalName`, and `eduPersonPrimaryAffiliation` SHALL be present. | Ensures that the credential contains the mandatory student identification, organisation, identity, and affiliation data. | Issuer business rules, schema validation, verifier business validation. | Issuer SHALL reject incomplete credential data. Verifier SHALL treat the attestation as invalid or insufficient if mandatory claims are missing. |
-| `SID-IR-02` | If `dateOfBirth` is included, it SHALL represent the subject's birth date and SHALL NOT be in the future. | Prevents invalid identity data and supports correct age-related or matching checks. | Issuer business rules and verifier business validation. | Issuer SHALL reject invalid dates. Verifier SHALL reject or ignore an invalid `dateOfBirth` claim depending on the transaction. |
-| `SID-IR-03` | If `eduPersonScopedAffiliation` values are included, they SHOULD be consistent with `schacHomeOrganization`, for example by using a matching scoping domain. | Ensures that scoped affiliation can be interpreted consistently. | Issuer business rules and verifier business validation. | Issuer SHOULD prevent inconsistent scoped affiliations. Verifier MAY reject or downgrade confidence in inconsistent values. |
-| `SID-IR-04` | If `eduPersonAffiliation` is present, it SHOULD include the value of `eduPersonPrimaryAffiliation`. | Ensures that the primary affiliation is consistent with the broader affiliation list. | Issuer business rules and verifier business validation. | Issuer SHOULD align the values. Verifier MAY treat inconsistent affiliation data as insufficient. |
-| `SID-IR-05` | If `schacPersonalUniqueID` is multi-valued, each entry SHOULD be unique within the array. | Prevents duplicate identifiers and ambiguity. | Issuer business rules and schema validation. | Issuer SHOULD remove duplicates. Verifier MAY ignore duplicate entries. |
-| `SID-IR-06` | Selective disclosure SHALL allow the Holder to reveal only the attributes required for the transaction. | Supports privacy and data minimisation. | Issuer credential construction and Wallet presentation logic. | Verifier SHALL request only necessary claims. Wallet SHOULD allow the Holder to review the disclosed claims. |
-| `SID-IR-07` | `eduPersonPrimaryAffiliation` SHOULD be `student` or an issuer-defined student-equivalent value for this attestation type. | Ensures that the attestation actually represents student status. | Issuer business rules and verifier business validation. | Verifier SHOULD reject the credential for student-status decisions if the affiliation does not indicate student status. |
+| `ESC-IR-01` | `identifier`, `firstName`, `familyName`, `schacHomeOrganization`, `eduPersonPrincipalName`, and `eduPersonPrimaryAffiliation` SHALL be present. | Ensures that the credential contains the mandatory student identification, organisation, identity, and affiliation data. | Issuer business rules, schema validation, verifier business validation. | Issuer SHALL reject incomplete credential data. Verifier SHALL treat the attestation as invalid or insufficient if mandatory claims are missing. |
+| `ESC-IR-02` | If `dateOfBirth` is included, it SHALL represent the subject's birth date and SHALL NOT be in the future. | Prevents invalid identity data and supports correct age-related or matching checks. | Issuer business rules and verifier business validation. | Issuer SHALL reject invalid dates. Verifier SHALL reject or ignore an invalid `dateOfBirth` claim depending on the transaction. |
+| `ESC-IR-03` | If `eduPersonScopedAffiliation` values are included, they SHOULD be consistent with `schacHomeOrganization`, for example by using a matching scoping domain. | Ensures that scoped affiliation can be interpreted consistently. | Issuer business rules and verifier business validation. | Issuer SHOULD prevent inconsistent scoped affiliations. Verifier MAY reject or downgrade confidence in inconsistent values. |
+| `ESC-IR-04` | If `eduPersonAffiliation` is present, it SHOULD include the value of `eduPersonPrimaryAffiliation`. | Ensures that the primary affiliation is consistent with the broader affiliation list. | Issuer business rules and verifier business validation. | Issuer SHOULD align the values. Verifier MAY treat inconsistent affiliation data as insufficient. |
+| `ESC-IR-05` | If `schacPersonalUniqueID` is multi-valued, each entry SHOULD be unique within the array. | Prevents duplicate identifiers and ambiguity. | Issuer business rules and schema validation. | Issuer SHOULD remove duplicates. Verifier MAY ignore duplicate entries. |
+| `ESC-IR-06` | Selective disclosure SHALL allow the Holder to reveal only the attributes required for the transaction. | Supports privacy and data minimisation. | Issuer credential construction and Wallet presentation logic. | Verifier SHALL request only necessary claims. Wallet SHOULD allow the Holder to review the disclosed claims. |
+| `ESC-IR-07` | `eduPersonPrimaryAffiliation` SHOULD be `student` or an issuer-defined student-equivalent value for this attestation type. | Ensures that the attestation actually represents student status. | Issuer business rules and verifier business validation. | Verifier SHOULD reject the credential for student-status decisions if the affiliation does not indicate student status. |
 
 # 3 Attestation encoding
 
 ## 3.1 ISO/IEC 18013-5-compliant encoding
 
 This version of the Rulebook does not define an ISO/IEC 18013-5 mdoc encoding for the
-StudentID Attestation.
+European Student Card Attestation.
 
-The StudentID Attestation defined in this Rulebook is specified for SD-JWT VC-based
+The European Student Card Attestation defined in this Rulebook is specified for SD-JWT VC-based
 issuance and presentation. If a future version of this Rulebook defines an
 ISO/IEC 18013-5-compliant mdoc representation, that version SHALL define a unique
 document type, namespaces, attribute identifiers, CBOR encoding rules, and
@@ -246,12 +247,12 @@ illustrative mdoc examples.
 
 ## 3.2 SD-JWT VC-based encoding
 
-The StudentID Attestation SHALL be issued as an SD-JWT VC.
+The European Student Card Attestation SHALL be issued as an SD-JWT VC.
 
 The Verifiable Credential Type (`vct`) for this attestation type is:
 
 ```text
-VerifiableStudentID
+VerifiableEuropeanStudentCard
 ```
 
 The credential claims defined in this section SHALL follow SD-JWT VC and HAIP
@@ -272,7 +273,7 @@ MUST NOT make the claim selectively disclosable.
 | `jti` | `jti` | string | Unique credential instance identifier, where used. | MUST NOT |
 | `cnf` | `cnf` | object | Holder binding confirmation claim, where used. | MUST NOT |
 | `status` | `status` | object | Status or revocation information, where used. | MUST NOT |
-| `vct` | `vct` | string | SD-JWT VC type. Value SHALL be `VerifiableStudentID`. | MUST NOT |
+| `vct` | `vct` | string | SD-JWT VC type. Value SHALL be `VerifiableEuropeanStudentCard`. | MUST NOT |
 
 ### 3.2.2 Public or reusable claims
 
@@ -285,7 +286,7 @@ MUST NOT make the claim selectively disclosable.
 | `dateOfBirth` | `dateOfBirth` | string | Date of birth formatted as ISO 8601 date, where disclosed. | MAY |
 | `mail` | `mail` | string | Email address. | MAY |
 
-### 3.2.3 Private claims specific to the StudentID Attestation
+### 3.2.3 Private claims specific to the European Student Card Attestation
 
 | **Data Identifier** | **Attribute identifier** | **Encoding format** | **Notes** | **Disclosable** |
 |---------------------|--------------------------|---------------------|-----------|-----------------|
@@ -311,7 +312,7 @@ MUST NOT make the claim selectively disclosable.
   "nbf": 1772366400,
   "exp": 1798761600,
   "jti": "urn:uuid:4f6a8e9a-40c2-4d21-96f8-7b85cc3f6c20",
-  "vct": "VerifiableStudentID",
+  "vct": "VerifiableEuropeanStudentCard",
   "attestation_legal_category": "non-qualified-EAA",
   "identifier": "STU-2026-000123",
   "schacPersonalUniqueCode": "urn:schac:personalUniqueCode:int:esi:example.edu:123456",
@@ -366,7 +367,7 @@ receive a presentation disclosing the following claims:
 
 ```json
 {
-  "vct": "VerifiableStudentID",
+  "vct": "VerifiableEuropeanStudentCard",
   "identifier": "STU-2026-000123",
   "schacHomeOrganization": "aegean.gr",
   "firstName": "Nikos",
@@ -389,7 +390,7 @@ and SHALL remain available to the verifier for technical validation.
 ## 3.3 W3C Verifiable Credentials Data Model-based encoding
 
 This version of the Rulebook does not define a W3C Verifiable Credentials Data Model
-encoding for the StudentID Attestation.
+encoding for the European Student Card Attestation.
 
 If a future version defines a W3C VCDM representation, that version SHALL define the
 credential context, type, credential subject structure, proof type, selective disclosure
@@ -397,7 +398,7 @@ mechanism, and presentation requirements.
 
 ## 4 Attestation usage
 
-The StudentID Attestation is intended for verifying student status and selected student
+The European Student Card Attestation is intended for verifying student status and selected student
 identity or affiliation attributes.
 
 Typical usage scenarios include:
@@ -417,7 +418,7 @@ A Relying Party receiving the attestation SHALL verify:
 
 * the issuer signature;
 * the SD-JWT VC type (`vct`);
-* the issuer authorisation to issue StudentID Attestations;
+* the issuer authorisation to issue European Student Card Attestations;
 * the credential validity period;
 * the credential status, where a status mechanism is present;
 * holder binding, where used;
@@ -426,7 +427,7 @@ A Relying Party receiving the attestation SHALL verify:
 
 The Relying Party SHOULD request and verify PID or another accepted identity credential
 where the transaction requires strong identity matching. For low-risk student-status
-checks, the Relying Party MAY rely on the StudentID Attestation alone, provided that the
+checks, the Relying Party MAY rely on the European Student Card Attestation alone, provided that the
 issuer, signature, validity, status, and holder binding checks are successful and this
 is consistent with the relying party's policy.
 
@@ -445,14 +446,14 @@ identity matching is required. Where this binding is used, the metadata attribut
 urn:eudi:pid:1
 ```
 
-No payment-specific transactional data is defined by this Rulebook. If the StudentID
+No payment-specific transactional data is defined by this Rulebook. If the European Student Card
 Attestation is used as part of a transaction that also involves payment,
 payment-related requirements SHALL be defined in a separate payment attestation,
 payment profile, or transaction-specific rulebook.
 
 ## 5 Trust anchors
 
-A Relying Party SHALL verify that the issuer of the StudentID Attestation is authorised
+A Relying Party SHALL verify that the issuer of the European Student Card Attestation is authorised
 to issue this attestation type.
 
 For non-qualified EAA deployments, the Relying Party SHOULD obtain trust anchor
@@ -476,7 +477,7 @@ The Relying Party SHALL use the trust anchor to verify that:
 
 * the issuer signing key or certificate chains to a trusted authority or registered
   trust anchor;
-* the issuer is authorised to issue the `VerifiableStudentID` attestation type;
+* the issuer is authorised to issue the `VerifiableEuropeanStudentCard` attestation type;
 * the issuer metadata or trust framework entry has not expired or been revoked;
 * the issuer identity in the credential is consistent with the issuer identity in the
   trust framework;
@@ -488,7 +489,7 @@ determine whether the provider is authorised to issue this attestation type.
 
 ## 6 Revocation
 
-The StudentID Attestation is typically medium- to long-lived and intended for repeated
+The European Student Card Attestation is typically medium- to long-lived and intended for repeated
 presentation, for example during an academic year or enrolment period.
 
 The credential expiration time (`exp`) SHOULD be aligned with the end of the applicable
