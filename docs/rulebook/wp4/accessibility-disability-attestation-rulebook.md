@@ -195,7 +195,12 @@ The following design principles apply:
 
 1. **Entitlement, not diagnosis:** the credential SHALL represent card recognition
   and constant attendance allowance rather than diagnostic or clinical data.
-2. **Selective disclosure:** each claim SHOULD be independently disclosable.
+2. **Selective disclosure:** application-level attributes defined in Sections 2.2
+  and 2.4 SHOULD be independently selectively disclosable where supported by the
+  credential format. Registered JWT claims and credential-level metadata required
+  for credential validation, such as `iss`, `iat`, `exp`, `nbf`, `vct`, `cnf`
+  and `status`, are not subject to this requirement and SHALL be disclosed or
+  processed according to the applicable SD-JWT VC profile.
 3. **Minimum identity disclosure:** name, birth date, document number and portrait
   SHALL be requested only where needed for fraud prevention, visual inspection
   or legal rules. For SEDIT-X Episode 4 hospitality, the primary requested claim
@@ -229,7 +234,7 @@ The following design principles apply:
 | `family_name`                     | Holder's family name as recorded on the card.                                                           | string        | `Rossi`                                |
 | `given_name`                      | Holder's given name as recorded on the card.                                                            | string        | `Mario`                                |
 | `birth_date`                      | Holder's date of birth as recorded on the card.                                                         | date          | `1980-01-10`                           |
-| `document_number`                 | Document number of the European Disability Card.                                                        | string        | `XXXXXXXXXX`                           |
+| `document_number`                 | Document number assigned to the European Disability Card by the issuing authority. Its syntax is scheme-specific and SHALL be reproduced exactly as provided by the authoritative source; this Rulebook does not define an additional format constraint. | string        | `XXXXXXXXXX`                           |
 | `expiry_date`                     | Administrative expiration date of the credential / card.                                                | date          | `2031-01-14`                           |
 | `issuing_authority`               | Name of the administrative authority that issued the credential.                                        | string        | `Istituto Poligrafico e Zecca dello Stato` |
 | `issuing_country`                 | ISO 3166-1 alpha-2 country code of the issuing jurisdiction.                        | string        | `IT`                                   |
@@ -286,14 +291,17 @@ the registered `cnf` claim (see section 3.2).
 ### 2.5 Mandatory metadata
 
 
-| **Data Identifier**      | **Definition**                                                           | **Data type**           | **Example value**                                      |
-| ------------------------ | ------------------------------------------------------------------------ | ----------------------- | ------------------------------------------------------ |
-| `category`               | Legal category of the attestation.                                       | string                  | `eaa:eu:non-qualified`                                 |
-| `issuer`                 | Identifier of the Credential Issuer (`iss`).                             | URI                     | `https://issuer.example.org`                           |
-| `credential_type`        | Encoding-independent credential type identifier. SHALL equal the `vct`.  | string                  | `urn:eudi:EuropeanDisabilityCard:it:1`                 |
-| `issued_at`              | Time of credential issuance (`iat`).                                     | date-time / NumericDate | `2026-01-15T09:30:00Z`                                 |
-| `status_reference`       | Reference used for status or revocation checking (`status.status_list`). | URI or structured value | `https://status.example/edc/atl/2026-01/15#1234`       |
-| `trust_anchor_reference` | Location from which applicable issuer trust information can be obtained. | URI                     | `https://trust.aptitude.example/accessibility-issuers` |
+| **Data Identifier**      | **Definition** | **Data type** | **Example value** |
+| ------------------------ | -------------- | ------------- | ----------------- |
+| `category`               | Legal category of the attestation. | string | `eaa:eu:non-qualified` |
+| `issuer`                 | Identifier of the Credential Issuer. Encoded as the JWT `iss` claim. | URI | `https://issuer.example.org` |
+| `subject`                | Subject identifier of the credential holder. It SHALL be unique within the issuer's identifier space and SHALL be represented by the SD-JWT VC `sub` claim. For the APTITUDE pilot, UUIDv4 SHALL be used. | string (UUIDv4) | `550e8400-e29b-41d4-a716-446655440000` |
+| `credential_type`        | Encoding-independent credential type identifier. SHALL equal the `vct`. | string | `urn:eudi:EuropeanDisabilityCard:it:1` |
+| `issued_at`              | Time at which the credential was issued. Encoded as JWT `iat`. | date-time / NumericDate | `2026-01-15T09:30:00Z` |
+| `expires_at`             | Time after which the SD-JWT VC SHALL NOT be accepted. Encoded as JWT `exp`. This is distinct from the administrative card attribute `expiry_date`. | date-time / NumericDate | `2031-01-14T23:59:59Z` |
+| `holder_binding`         | Cryptographic holder-binding information associated with the Wallet Unit. Encoded using the JWT `cnf` claim; for this profile `cnf.jwk` contains the holder public key. | object | `{"jwk":{"kty":"EC","crv":"P-256","x":"...","y":"..."}}` |
+| `status_reference`       | Structured reference used for credential status checking. Encoded using the JWT `status` claim. | object | see Section 2.7 |
+| `trust_anchor_reference` | Location from which applicable issuer trust information can be obtained. | URI | `https://trust.aptitude.example/accessibility-issuers` |
 
 
 
@@ -317,12 +325,13 @@ the registered `cnf` claim (see section 3.2).
 ### 2.7 Conditional metadata
 
 
-| **Data Identifier**   | **Definition**                                                                                         | **Data type** | **Example value**                         |
-| --------------------- | ------------------------------------------------------------------------------------------------------ | ------------- | ----------------------------------------- |
-| `status_list_index`   | Entry index in an applicable Attestation Status List (`status.status_list.idx`). Mandatory when a list-based mechanism is used. | integer       | `1234`                                    |
-| `status_list_uri`     | URI of the applicable Attestation Status List (`status.status_list.uri`). Mandatory when list-based status is used. | URI           | `https://status.example/edc/atl/2026-01/15` |
-| `revocation_list_uri` | URI of the applicable Attestation Revocation List. Mandatory when a revocation-list mechanism is used. | URI           | `https://status.example/edc/arl/2026-01`  |
-| `verification`        | Optional verification object (`trust_framework`, `assurance_level`) where issued.                      | object        | see section 3.2                         |
+| **Data Identifier**   | **Definition** | **Data type** | **Example value** |
+| --------------------- | -------------- | ------------- | ----------------- |
+| `valid_from`          | Earliest time from which the credential may be accepted. Where present, encoded as the JWT `nbf` claim. | date-time / NumericDate | `2026-01-15T09:30:00Z` |
+| `status_list_index`   | Entry index in an applicable Attestation Status List. Mandatory when a list-based mechanism is used. | integer | `1234` |
+| `status_list_uri`     | URI of the applicable Attestation Status List. Mandatory when list-based status is used. | URI | `https://status.example/edc/atl/2026-01/15` |
+| `revocation_list_uri` | URI of the applicable Attestation Revocation List. Mandatory when a revocation-list mechanism is used. | URI | `https://status.example/edc/arl/2026-01` |
+| `verification`        | Optional verification object containing trust-framework or assurance information where issued. | object | see Section 3.2 |
 
 
 # 3 Attestation encoding
@@ -354,23 +363,38 @@ The OpenID4VCI credential configuration for this profile is:
 The credential SHALL be issued as `dc+sd-jwt` and SHALL comply with the SD-JWT VC
 and HAIP profiles selected by APTITUDE WP2.
 
+Only data identifiers that are encoded in the SD-JWT VC payload are mapped to
+JWT claim identifiers in Sections 3.2 and 3.3.
+
+Display, policy and configuration metadata defined in Section 2.6, such as
+`credential_name`, `credential_description`, `issuer_logo_uri`,
+`privacy_notice`, `issuer_policy`, `terms_of_use` and `display_locale`, are
+not application claims of the issued credential unless explicitly stated
+otherwise. They SHALL be conveyed through the applicable issuer or credential
+metadata mechanisms rather than through implementation-specific JWT claim names.
+
+An issuer SHALL NOT introduce alternative JWT claim identifiers for any
+data identifier for which this Rulebook defines an encoding.
+
 ## 3.2 Registered JWT claims
 
 
-| **Data Identifier** | **Attribute identifier** | **Encoding format** | **Reference/Notes**                          | **Disclosable** |
-| ------------------- | ------------------------ | ------------------- | -------------------------------------------- | --------------- |
-| `issuer`            | `iss`                    | string (URI)        | Credential Issuer unique identifier          | MUST NOT        |
-| `subject`           | `sub`                    | string (UUID)       | Subject identifier of the SD-JWT             | MUST NOT        |
-| `issued_at`         | `iat`                    | number              | NumericDate (RFC 7519)                       | MUST NOT        |
-| `expires_at`        | `exp`                    | number              | NumericDate. Distinct from card `expiry_date`. | MUST NOT        |
-| `valid_from`        | `nbf`                    | number              | NumericDate where used                       | MUST NOT        |
-| `credential_type`   | `vct`                    | string              | SHALL be `urn:eudi:EuropeanDisabilityCard:it:1` | MUST NOT        |
-| `vct_integrity`     | `vct#integrity`          | string              | Integrity metadata for the `vct` resource, where used | MUST NOT        |
-| `holder_binding`    | `cnf`                    | object              | Holder-binding JWK (`cnf.jwk`)               | MUST NOT        |
-| `status_reference`  | `status`                 | object              | `status.status_list` with `idx` and `uri`    | MUST NOT        |
-| `sd_digests`        | `_sd`                    | array of string     | Digests of disclosures                       | MUST NOT        |
-| `sd_alg`            | `_sd_alg`                | string              | Hash algorithm; this profile: `sha-256`      | MUST NOT        |
-| `verification`      | `verification`           | object              | Optional: `trust_framework`, `assurance_level` | MUST NOT        |
+| **Data Identifier** | **Attribute identifier** | **Encoding format** | **Reference/Notes** | **Selectively disclosable** |
+| ------------------- | ------------------------ | ------------------- | ------------------- | ---------------------------- |
+| `issuer` | `iss` | string (URI) | Credential Issuer unique identifier | SHALL NOT |
+| `subject` | `sub` | string (UUIDv4) | Subject identifier of the SD-JWT. The APTITUDE profile uses UUIDv4. | SHALL NOT |
+| `issued_at` | `iat` | number | NumericDate (RFC 7519) | SHALL NOT |
+| `expires_at` | `exp` | number | NumericDate. Distinct from card `expiry_date`. | SHALL NOT |
+| `valid_from` | `nbf` | number | NumericDate, where used | SHALL NOT |
+| `credential_type` | `vct` | string | SHALL be `urn:eudi:EuropeanDisabilityCard:it:1` | SHALL NOT |
+| `vct_integrity` | `vct#integrity` | string | Integrity metadata for the `vct` resource, where used | SHALL NOT |
+| `holder_binding` | `cnf` | object | Holder-binding JWK (`cnf.jwk`) | SHALL NOT |
+| `status_reference` | `status` | object | Credential status information | SHALL NOT |
+| `status_list_index` | `status.status_list.idx` | integer | Entry index in the Attestation Status List | SHALL NOT |
+| `status_list_uri` | `status.status_list.uri` | string (URI) | URI of the Attestation Status List | SHALL NOT |
+| `sd_digests` | `_sd` | array of string | Digests of disclosures | SHALL NOT |
+| `sd_alg` | `_sd_alg` | string | Hash algorithm; this profile uses `sha-256` | SHALL NOT |
+| `verification` | `verification` | object | Optional `trust_framework` and `assurance_level` information | SHALL NOT |
 
 
 
@@ -378,18 +402,19 @@ and HAIP profiles selected by APTITUDE WP2.
 ## 3.3 Private claims specific to this attestation
 
 
-| **Data Identifier**             | **Attribute identifier**        | **Encoding format** | **Notes**                                      | **Disclosable** |
-| ------------------------------- | ------------------------------- | ------------------- | ---------------------------------------------- | --------------- |
-| `issuing_authority`             | `issuing_authority`             | string              | Administrative issuer name                     | MUST            |
-| `issuing_country`               | `issuing_country`               | string              | ISO 3166-1 alpha-2;          | MUST            |
-| `expiry_date`                   | `expiry_date`                   | string (date)       | Administrative card / credential expiry        | MUST            |
-| `link_qr_code`                  | `link_qr_code`                  | string (URI)        | QR-code link                                   | MUST            |
-| `given_name`                    | `given_name`                    | string              | First name                                     | MUST            |
-| `family_name`                   | `family_name`                   | string              | Family name                                    | MUST            |
-| `birth_date`                    | `birth_date`                    | string (date)       | Date of birth                                  | MUST            |
-| `portrait`                      | `portrait`                      | string              | Card photograph (e.g. base64)                  | MUST            |
-| `constant_attendance_allowance` | `constant_attendance_allowance` | boolean             | Accompanying assistance / additional support   | MUST            |
-| `document_number`               | `document_number`               | string              | Document number                                | MUST            |
+| **Data Identifier** | **Attribute identifier** | **Encoding format** | **Notes** | **Selectively disclosable** |
+| ------------------- | ------------------------ | ------------------- | --------- | ---------------------------- |
+| `issuing_authority` | `issuing_authority` | string | Administrative issuer name | SHALL |
+| `issuing_country` | `issuing_country` | string | ISO 3166-1 alpha-2 | SHALL |
+| `expiry_date` | `expiry_date` | string (date) | Administrative card expiry | SHALL |
+| `link_qr_code` | `link_qr_code` | string (URI) | QR-code link | SHALL |
+| `given_name` | `given_name` | string | First name | SHALL |
+| `family_name` | `family_name` | string | Family name | SHALL |
+| `birth_date` | `birth_date` | string (date) | Date of birth | SHALL |
+| `portrait` | `portrait` | string | Card photograph, e.g. base64-encoded | SHALL |
+| `constant_attendance_allowance` | `constant_attendance_allowance` | boolean | Accompanying assistance / additional support | SHALL |
+| `document_number` | `document_number` | string | Scheme-specific document number as provided by the issuing authority | SHALL |
+| `cryptographically_bound_to` | `cryptographically_bound_to` | string | Formal binding to another attestation type, where applicable | SHALL NOT |
 
 
 A verifier SHALL be able to request `constant_attendance_allowance` without also
@@ -400,7 +425,14 @@ For SEDIT-X Episode 4, the requested disclosure SHOULD primarily be
 `family_name` SHOULD be requested only if the hotel (or other) journey genuinely
 needs them.
 
-## 3.4 Illustrative JWT claim set
+## 3.4 Illustrative SD-JWT VC
+
+### 3.4.1 Illustrative JWT claim set
+
+The following claim set illustrates the logical content of an issued credential.
+Selectively disclosable application claims are represented by digests in `_sd`
+rather than as clear-text payload members. Digests below are illustrative
+placeholders.
 
 ```json
 {
@@ -425,22 +457,57 @@ needs them.
     }
   },
   "_sd_alg": "sha-256",
-  "issuing_authority": "Istituto Poligrafico e Zecca dello Stato",
-  "issuing_country": "IT",
-  "expiry_date": "2031-01-14",
-  "link_qr_code": "https://example.it/edc/qr/XXXXXXXXXX",
-  "given_name": "Mario",
-  "family_name": "Rossi",
-  "birth_date": "1980-01-10",
-  "portrait": "/9j/4AAQSkZJRgABAQ...",
-  "constant_attendance_allowance": true,
-  "document_number": "XXXXXXXXXX"
+  "_sd": [
+    "<digest-issuing_authority>",
+    "<digest-issuing_country>",
+    "<digest-expiry_date>",
+    "<digest-link_qr_code>",
+    "<digest-given_name>",
+    "<digest-family_name>",
+    "<digest-birth_date>",
+    "<digest-portrait>",
+    "<digest-constant_attendance_allowance>",
+    "<digest-document_number>"
+  ]
 }
 ```
 
-The example includes more attributes than a normal presentation should disclose. An
-actual service request SHALL select only the relevant claims. APTITUDE pilot
-issuance MAY use mock values that conform to this structure.
+### 3.4.2 Illustrative encoded SD-JWT VC
+
+The following value illustrates the compact encoded form of an issued SD-JWT VC.
+Line breaks are added only for readability.
+
+```text
+eyJhbGciOiJFUzI1NiIsInR5cCI6ImRjK3NkLWp3dCIsImtpZCI6Ii4uLiJ9.
+eyJpc3MiOiJodHRwczovL2lzc3Vlci5leGFtcGxlLm9yZyIsInN1YiI6
+IjU1MGU4NDAwLWUyOWItNDFkNC1hNzE2LTQ0NjY1NTQ0MDAwMCIs...
+<illustrative-value-truncated>
+```
+
+The example above is illustrative and SHALL NOT be interpreted as a test vector.
+A conformant implementation SHALL generate the encoded SD-JWT VC from the
+actual protected header, payload, disclosures and issuer signature.
+
+### 3.4.3 Illustrative disclosures
+
+The selectively disclosable application claims may be represented as SD-JWT
+disclosures. For example, a disclosure for `constant_attendance_allowance`
+conceptually represents:
+
+```json
+[
+  "<salt>",
+  "constant_attendance_allowance",
+  true
+]
+```
+
+A presentation requesting only `constant_attendance_allowance` SHALL NOT require
+disclosure of `given_name`, `family_name`, `birth_date`, `portrait` or
+`document_number`.
+
+APTITUDE pilot issuance MAY use mock values that conform to this structure. An
+actual service request SHALL select only the relevant disclosures.
 
 ## 3.5 Human-readable wallet representation
 
@@ -795,7 +862,7 @@ The Rulebook enforces these properties:
   SD-JWT claims);
 3. the attestation expresses card recognition and constant attendance allowance
   rather than diagnosis;
-4. claims are selectively disclosable;
+4. application-level attributes are selectively disclosable where required by Sections 2.2, 2.4 and 3.3;
 5. identity data and portrait are requested only where operationally needed;
 6. SEDIT-X Episode 4 primarily requests `constant_attendance_allowance`;
 7. no biometric template is issued;
