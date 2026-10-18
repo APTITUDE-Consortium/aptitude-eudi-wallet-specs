@@ -3,6 +3,8 @@
 - Author(s):
   - Nikos Triantafyllou, University of the Aegean, UAegean i4m Lab
   - Petros Kavassalis, University of the Aegean, UAegean i4m Lab
+- Reviewer(s):
+  - Eleonora Moro, Pagopa.it
 
 
 | Version | Date       | Description                                                                                                        |
@@ -845,8 +847,6 @@ This Rulebook is designed to align with:
 - SD-JWT VC and HAIP;
 - GDPR principles, including data minimisation and protection by design;
 - SEDIT-X's inclusive-by-design approach;
-- the APTITUDE European Disability Card profile based on the Italian IT-Wallet /
-  Documenti su IO model (IT Wallet Specification v1.3.3);
 - OpenID4VCI configuration
   `dc_sd_jwt_EuropeanDisabilityCard` / scope `EuropeanDisabilityCard`; and
 - the European Disability Card example in APTITUDE UC7 (pilot use of mock data).
