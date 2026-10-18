@@ -9,6 +9,7 @@
 | 0.1 | 23-07-2026 | Initial draft based on the SEDIT-X use case, ERUA-iD materials and the APTITUDE Attestation Rulebook template. |
 | 0.2 | 24-07-2026 | Aligned data model and SD-JWT VC encoding with the European Student Card Attestation model. |
 | 0.3 | 02-10-2026 | Renamed credential from Student ID / StudentID Attestation to European Student Card Attestation. |
+| 0.4 | 18-10-2026 | Clarified that one attestation is one current student affiliation for one validity period, including short enrolments and mobility periods. Recorded the European Student Identifier in `schacPersonalUniqueCode`. Excluded lifelong, alumni, and post-enrolment use. |
 
 **Feedback:**
 
@@ -27,9 +28,9 @@
 This Rulebook defines the **European Student Card Attestation** for use in the European Digital
 Identity Wallet ecosystem.
 
-The European Student Card Attestation expresses the real-world fact that a natural person is, or was
-during the applicable validity period, affiliated with an educational organisation in a
-student capacity. It enables relying parties to verify student status and selected
+The European Student Card Attestation expresses the real-world fact that a natural person
+holds a student affiliation with an educational organisation during the credential validity
+period. It enables relying parties to verify current student status and selected
 identity or affiliation attributes using the EUDI Wallet.
 
 The attestation is intended to be issued by an authentic source, such as a university,
@@ -49,7 +50,8 @@ where applicable, and the disclosed attributes needed for the transaction.
 The attestation supports education and student-service use cases, including online and
 offline verification for campus services, discounted services, access control, mobility
 scenarios, academic services, and other scenarios where proof of student affiliation is
-required.
+required. Section 1.5 defines the boundary with person identity, later enrolments, and
+lifelong-learning records.
 
 The credential is an **identity and affiliation credential**. It SHALL NOT be interpreted
 as proof of:
@@ -95,13 +97,50 @@ In addition, the following domain-specific terms are used:
 
 | Term | Meaning |
 |------|---------|
-| European Student Card Attestation | A Verifiable Credential representing a person's student affiliation and selected student identity attributes. |
+| European Student Card Attestation | A Verifiable Credential representing one current student affiliation with one educational organisation, for one validity period, together with selected student identity attributes. |
 | Educational organisation | A university, higher-education institution, or other authorised academic organisation acting as the authentic source for student status. |
 | Authorised academic identity provider | A system or organisation authorised by an educational organisation to issue or manage student identity attestations. |
-| Student | The natural person to whom the student affiliation applies. |
+| Student | The natural person who holds a current student affiliation with the issuing educational organisation for the validity period of the attestation. |
+| European Student Identifier | A higher-education student identifier carried as a SCHAC `schacPersonalUniqueCode` URN of the form `urn:schac:personalUniqueCode:int:esi:<scope>:<code>`. It identifies the same student across institutions for mobility and related higher-education services. It is not a lifelong identity, and it does not by itself prove that an enrolment is still current. |
 | Relying Party | An organisation or system that verifies the European Student Card Attestation to make an access, eligibility, discount, or service decision. |
 | SCHAC | Schema for Academia, a set of attributes commonly used in research and education identity federations. |
 | eduPerson | A set of attributes commonly used to represent persons and affiliations in education and research identity federations. |
+
+### 1.5 Scope boundaries
+
+One European Student Card Attestation represents one current student affiliation with one
+educational organisation for one validity period. A later enrolment, or an enrolment at
+another organisation, is a separate attestation. Where a person holds several current
+affiliations, the Holder may hold several attestations and present the one a transaction
+requires.
+
+The Holder's persistent identity is a PID or another accepted identity attestation. This
+attestation does not replace that identity. Where strong holder matching is required, this
+attestation SHOULD be cryptographically bound to it, as specified in Sections 2.6 and 4.
+The Holder controls whether to present an attestation and which selectively disclosable
+claims to release. The educational organisation remains the authentic source of the
+affiliation.
+
+The following are out of scope:
+
+* lifelong validity, or any use as proof of student status after the attested affiliation has ended;
+* alumni, professional, or other post-enrolment status;
+* persons with no current student affiliation at an issuing educational organisation, including prospective students who have not been admitted and learners with no institutional enrolment;
+* identification before enrolment, other than presentation of an attestation already issued by the student's home organisation;
+* diplomas, grades, micro-credentials, and other achievement or qualification records, which are separate attestations and bind to the Holder through the wallet identity;
+* individual learning accounts and training entitlements.
+
+Employers, informal-learning providers, and organisations that are not the authentic source
+of the subject's student status are not issuers of this attestation type. Authorising any
+further provider type is a decision of the applicable trust framework. This Rulebook does
+not create that authorisation, and it does not define a provider-independent learner
+identity.
+
+Council Recommendation 2022/C 243/02, Council Recommendation 2022/C 243/03, and the
+proposed Skills Portability Act concern learning achievements, training entitlements, and
+digital qualification attestations across a person's life. Those instruments sit beside
+this attestation in the wallet. They do not extend the validity of a student affiliation
+beyond the enrolment it attests.
 
 ## 2 Attestation attributes and metadata
 
@@ -111,10 +150,11 @@ This chapter defines the attributes and metadata that a European Student Card At
 contain. The attributes are defined in an encoding-independent manner. Each attribute is
 classified as mandatory, optional, or conditional.
 
-The European Student Card Attestation is typically medium- to long-lived, for example for an
-academic year, and is intended for repeated presentation with selective disclosure. The
-attribute set is designed to support data minimisation by allowing a Holder to disclose
-only the student attributes required for a specific transaction.
+The European Student Card Attestation is valid for the affiliation it attests. That period
+MAY be an academic year, a mobility period, or a shorter enrolment. During that period it
+is intended for repeated presentation with selective disclosure. The attribute set is
+designed to support data minimisation by allowing a Holder to disclose only the student
+attributes required for a specific transaction.
 
 ### 2.1 Introduction
 
@@ -161,7 +201,7 @@ using SD-JWT VC. The model aligns with the following issuer metadata parameters:
 
 | **Data Identifier** | **Semantic Reference** | **Definition** | **Data type** | **Example value** |
 |---------------------|------------------------|----------------|---------------|-------------------|
-| `schacPersonalUniqueCode` | SCHAC `schacPersonalUniqueCode` | Unique code associated with the student. | string | `urn:schac:personalUniqueCode:int:esi:example.edu:123456` |
+| `schacPersonalUniqueCode` | SCHAC `schacPersonalUniqueCode` / European Student Identifier | European Student Identifier assigned to the student, as a SCHAC ESI URN. See the conditional rule in Section 2.4. | string | `urn:schac:personalUniqueCode:int:esi:example.edu:123456` |
 | `schacPersonalUniqueID` | SCHAC `schacPersonalUniqueID` | One or more unique identifiers for the student. | array of strings | `["urn:schac:personalUniqueID:gr:student:123456"]` |
 | `displayName` | OIDC `name` or education profile display name | Display name formatted for user interfaces. | string | `Nikos Triantafyllou` |
 | `commonName` | Common name / CN | Alternate display or preferred name. | string | `Nikos Triantafyllou` |
@@ -175,6 +215,7 @@ using SD-JWT VC. The model aligns with the following issuer metadata parameters:
 
 | **Data Identifier** | **Semantic Reference** | **Definition** | **Data type** | **Example value** |
 |---------------------|------------------------|----------------|---------------|-------------------|
+| `schacPersonalUniqueCode` | SCHAC `schacPersonalUniqueCode` / European Student Identifier | SHALL be included when the issuer has assigned a European Student Identifier to the subject. The value SHALL be that ESI as a SCHAC URN. An issuer that assigns an ESI SHOULD reuse the same value on later attestations of the same student. | string | `urn:schac:personalUniqueCode:int:esi:example.edu:123456` |
 | `dateOfBirth` | ISO 8601 date / OIDC `birthdate` where applicable | SHALL be included only where needed for holder matching, age-related eligibility, or another justified relying-party purpose. If included, it SHALL represent the subject's birth date and SHALL NOT be in the future. | date | `1990-04-12` |
 | `mail` | RFC 5322 mailbox | SHOULD be disclosed only where the transaction requires a contact email or account matching. | string | `ntriantafyllou@aegean.gr` |
 | `eduPersonScopedAffiliation` | eduPerson `eduPersonScopedAffiliation` | SHOULD be included where a relying party needs both the affiliation value and the organisational scope. | array of strings | `["student@aegean.gr"]` |
@@ -187,7 +228,7 @@ using SD-JWT VC. The model aligns with the following issuer metadata parameters:
 | `vct` | SD-JWT VC | Verifiable Credential Type identifying this attestation type. | string | `VerifiableEuropeanStudentCard` |
 | `iss` | SD-JWT VC / JWT | Identifier of the issuer of the credential. | string | `https://issuer.example-university.edu` |
 | `iat` | JWT | Time at which the credential was issued. | integer | `1772366400` |
-| `exp` | JWT | Expiration time of the credential. For this attestation it SHOULD reflect the end of the applicable student-status validity period, such as the academic year or enrolment period. | integer | `1798761600` |
+| `exp` | JWT | Expiration time of the credential. For this attestation it SHOULD reflect the end of the applicable student-status validity period, such as an academic year, a mobility period, or a shorter enrolment. | integer | `1798761600` |
 | `cnf` | SD-JWT VC / JOSE | Confirmation claim binding the credential to key material controlled by the Holder or Wallet Unit, where holder binding is used. | object | `{ "jwk": { ... } }` |
 | `status` | SD-JWT VC status mechanism, where used | Status information enabling revocation or suspension checks. | object | `{ "status_list": { ... } }` |
 
@@ -213,8 +254,9 @@ using SD-JWT VC. The model aligns with the following issuer metadata parameters:
 |----------------|--------------------|-------------|--------------------------|---------------------------|
 | `dateOfBirth` | ISO 8601 date values | Subject's date of birth. | ISO 8601 | Date-only format `YYYY-MM-DD` SHALL be used where possible. |
 | `mail` | RFC 5322-compliant mailbox strings | Email address. | RFC 5322 | Implementations SHOULD apply practical email validation appropriate for the issuing context. |
+| `schacPersonalUniqueCode` | SCHAC URN; European Student Identifier values use `urn:schac:personalUniqueCode:int:esi:<scope>:<code>` | Cross-institutional student identifier, where assigned. | SCHAC / European Student Identifier | `<scope>` is a country code or the `schacHomeOrganization` domain, as required for the identifier to be globally unique. The value identifies the student. Current enrolment is expressed by `eduPersonPrimaryAffiliation` together with the credential validity period. |
 | `schacHomeOrganization` | Issuer-defined organisation identifiers, commonly domain-style values | Identifies the home educational organisation. | SCHAC / issuer-defined controlled values | Values SHOULD be stable and consistently interpreted across issuers and relying parties. |
-| `eduPersonPrimaryAffiliation` | Issuer-defined controlled vocabulary; recommended values include `student` | Primary affiliation of the subject. | eduPerson / issuer-defined controlled values | For this attestation, the value SHOULD be `student` unless the issuer has a specific student-equivalent category. |
+| `eduPersonPrimaryAffiliation` | Issuer-defined controlled vocabulary; the value for this attestation is `student` or an issuer-defined student-equivalent | Primary affiliation of the subject. | eduPerson / issuer-defined controlled values | The value SHALL indicate current student status. A former-affiliation value, including `alum`, SHALL NOT be used. |
 | `eduPersonAffiliation` | Issuer-defined controlled vocabulary; examples include `student`, `member`, `affiliate` | One or more affiliations of the subject. | eduPerson / issuer-defined controlled values | Values SHOULD be consistent with `eduPersonPrimaryAffiliation`. |
 | `eduPersonScopedAffiliation` | Scoped affiliation strings, commonly `affiliation@scope` | Affiliation value scoped to an organisation or domain. | eduPerson / SCHAC context | Scope SHOULD be consistent with `schacHomeOrganization`. |
 | `eduPersonAssurance` | Assurance URIs or issuer-defined assurance values | Assurance information for the subject or attributes. | eduPerson / REFEDS or issuer-defined assurance framework | Additional values SHOULD only be used if documented by the issuer or trust framework. |
@@ -230,7 +272,8 @@ using SD-JWT VC. The model aligns with the following issuer metadata parameters:
 | `ESC-IR-04` | If `eduPersonAffiliation` is present, it SHOULD include the value of `eduPersonPrimaryAffiliation`. | Ensures that the primary affiliation is consistent with the broader affiliation list. | Issuer business rules and verifier business validation. | Issuer SHOULD align the values. Verifier MAY treat inconsistent affiliation data as insufficient. |
 | `ESC-IR-05` | If `schacPersonalUniqueID` is multi-valued, each entry SHOULD be unique within the array. | Prevents duplicate identifiers and ambiguity. | Issuer business rules and schema validation. | Issuer SHOULD remove duplicates. Verifier MAY ignore duplicate entries. |
 | `ESC-IR-06` | Selective disclosure SHALL allow the Holder to reveal only the attributes required for the transaction. | Supports privacy and data minimisation. | Issuer credential construction and Wallet presentation logic. | Verifier SHALL request only necessary claims. Wallet SHOULD allow the Holder to review the disclosed claims. |
-| `ESC-IR-07` | `eduPersonPrimaryAffiliation` SHOULD be `student` or an issuer-defined student-equivalent value for this attestation type. | Ensures that the attestation actually represents student status. | Issuer business rules and verifier business validation. | Verifier SHOULD reject the credential for student-status decisions if the affiliation does not indicate student status. |
+| `ESC-IR-07` | `eduPersonPrimaryAffiliation` SHALL be `student` or an issuer-defined student-equivalent value. A value that indicates a former affiliation, including `alum`, SHALL NOT be used. | Ensures that the attestation represents current student status and cannot be kept as an alumni or post-enrolment credential. | Issuer business rules and verifier business validation. | Issuer SHALL NOT issue this attestation type with a primary affiliation that does not indicate current student status. Verifier SHALL reject the credential for student-status decisions if the affiliation does not indicate current student status. |
+| `ESC-IR-08` | When the issuer has assigned a European Student Identifier, `schacPersonalUniqueCode` SHALL contain that identifier as a SCHAC ESI URN, and the issuer SHOULD reuse the same value on later attestations of the same student. | Gives mobility and alliance verifiers a stable student identifier without treating that identifier as lifelong identity or as proof of current enrolment. | Issuer business rules and verifier business validation. | Issuer SHALL include the assigned ESI. Verifier SHALL NOT treat a missing ESI as a failed enrolment check. Verifier SHALL NOT treat the ESI alone as proof that the affiliation is current. |
 
 # 3 Attestation encoding
 
@@ -292,7 +335,7 @@ MUST NOT make the claim selectively disclosable.
 |---------------------|--------------------------|---------------------|-----------|-----------------|
 | `attestation_legal_category` | `attestation_legal_category` | string | SHALL be `non-qualified-EAA`. | MUST NOT |
 | `identifier` | `identifier` | string | Unique student identifier, such as institutional student number or equivalent. | MUST |
-| `schacPersonalUniqueCode` | `schacPersonalUniqueCode` | string | Unique code associated with the student. | MAY |
+| `schacPersonalUniqueCode` | `schacPersonalUniqueCode` | string | European Student Identifier, where assigned, as a SCHAC ESI URN. | MUST |
 | `schacPersonalUniqueID` | `schacPersonalUniqueID` | array of strings | One or more unique identifiers for the student. | MAY |
 | `schacHomeOrganization` | `schacHomeOrganization` | string | Home organisation or institution domain or identifier. | MUST |
 | `eduPersonPrincipalName` | `eduPersonPrincipalName` | string | Principal name, often in `user@realm` format. | MAY |
@@ -434,7 +477,16 @@ is consistent with the relying party's policy.
 The Relying Party SHALL apply data minimisation and SHALL request only the attributes
 required for the transaction. For example, a discount service may only need
 `eduPersonPrimaryAffiliation` and `schacHomeOrganization`, while an account-linking
-process may require `eduPersonPrincipalName` or `mail`.
+process may require `eduPersonPrincipalName` or `mail`. A mobility or alliance verifier
+SHALL request `schacPersonalUniqueCode` only where the transaction requires the European
+Student Identifier. Age-limited discounts SHALL request `dateOfBirth` only where the
+scheme requires an age check.
+
+A successful verification proves the disclosed affiliation for the credential validity
+period. It does not prove lifelong student status, eligibility to enrol at another
+organisation, or a qualification. A person who is not yet enrolled is identified with a
+PID or another accepted identity attestation. A later enrolment, including enrolment after
+a previous affiliation has ended, is issued as a new attestation.
 
 The attestation SHOULD be device-bound through holder binding where supported by the
 EUDI Wallet and the applicable SD-JWT VC profile. The attestation MAY be
@@ -484,13 +536,19 @@ The Relying Party SHALL use the trust anchor to verify that:
 * the issuer is an educational organisation or authorised academic identity provider for
   the relevant student population.
 
+Employers, informal-learning providers, and other organisations that are not the authentic
+source of the subject's student status SHALL NOT be accepted as issuers of this
+attestation type. A trust framework MAY authorise a further provider type. This Rulebook
+does not grant that authorisation.
+
 Wallet Units MAY also use the same trust framework information during issuance to
 determine whether the provider is authorised to issue this attestation type.
 
 ## 6 Revocation
 
-The European Student Card Attestation is typically medium- to long-lived and intended for repeated
-presentation, for example during an academic year or enrolment period.
+The European Student Card Attestation is intended for repeated presentation during the
+affiliation it attests, whether that is an academic year, a mobility period, or a shorter
+enrolment.
 
 The credential expiration time (`exp`) SHOULD be aligned with the end of the applicable
 student-status validity period, such as the end of an academic year, enrolment period,
@@ -515,6 +573,11 @@ The issuer SHOULD revoke or suspend the attestation if the student is no longer
 enrolled, loses the relevant student status, the credential was issued incorrectly, the
 credential is reported compromised, or the underlying student identifier is no longer
 valid for presentation.
+
+The issuer SHALL NOT extend this attestation, and SHALL NOT issue this attestation type,
+to represent lifelong, alumni, or post-enrolment status. A later enrolment is a new
+attestation. Where the issuer previously assigned a European Student Identifier, the new
+attestation SHOULD carry the same `schacPersonalUniqueCode`.
 
 ## 7 Compliance
 
@@ -552,6 +615,10 @@ not define ISO/IEC 18013-5 mdoc or W3C VCDM encodings in this version.
 | [SD-JWT VC] | SD-JWT-based Verifiable Credentials |
 | [SCHAC] | Schema for Academia attributes used in research and education identity contexts |
 | [eduPerson] | eduPerson schema attributes used in research and education identity contexts |
+| [European Student Identifier] | European Student Identifier, carried as SCHAC `schacPersonalUniqueCode`, `urn:schac:personalUniqueCode:int:esi:<scope>:<code>` |
+| [Council Recommendation 2022/C 243/02] | Council Recommendation of 16 June 2022 on a European approach to micro-credentials for lifelong learning and employability |
+| [Council Recommendation 2022/C 243/03] | Council Recommendation of 16 June 2022 on individual learning accounts |
+| [COM(2026) 992] | Proposal for a Regulation on portability of qualifications and skills (Skills Portability Act), 15 September 2026. Informative only: digital qualification attestations are a separate attestation type. |
 | [RFC 2119] | Key words for use in RFCs to Indicate Requirement Levels |
 | [RFC 5322] | Internet Message Format |
 | [Topic 7] | ARF Annex 2, Topic 7 — Attestation revocation and revocation checking |
