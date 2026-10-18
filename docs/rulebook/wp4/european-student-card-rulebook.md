@@ -3,6 +3,8 @@
 * Author(s):
     * Nikos Triantafyllou, University of the Aegean, UAegean i4m Lab
     * Petros Kavassalis, University of the Aegean, UAegean i4m Lab
+* Reviewer(s):
+    * Andrijana Todosijevic, SIROS Foundation
 
 | Version | Date | Description |
 |---------|------------|------------|
