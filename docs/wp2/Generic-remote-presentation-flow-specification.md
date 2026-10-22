@@ -1,7 +1,7 @@
 # Generic remote presentation flow specification
 
 Version 1.0
-Date 16-10-2026
+Date 22-10-2026
 
 ## Authors
 
@@ -203,7 +203,7 @@ impacting presentation flow and designed validation checks.
 
 #### 3.1.4 Additional Aptitude requirements
 
-In some cases to simplify implementation for the partners there are number of additional requirements added on the top of all formal standards and specifications. At this moment here it is only a placeholder, with ver 1.1 we will add Aptitude requirement around optional browser mediation (DC API) usage.
+In some cases to simplify implementation for the partners there are number of additional requirements added on the top of all formal standards and specifications. At this moment it is only a placeholder, with ver 1.1 we will add Aptitude requirement around optional browser mediation (DC API) usage.
 
 |**Requirement**|**Scope decision**|
 |-|-|
@@ -278,7 +278,7 @@ sequenceDiagram
     R->>L: [V4.2] Fetch and validate QEAA-/(Pub)EAA-Provider LoTE
     L-->>R: LoTE
     Note over R: [V4.3] Validate credentials
-    opt Credential revocation check is required
+    opt Credential status check is applicable
       R->>S: [4.3] Retrieve Status List Token
       S-->>R: Status List Token
       Note over R: [V4.4] Validate credential status
@@ -300,7 +300,7 @@ sequenceDiagram
 | --- | --- | --- |
 | 1.1 | Request service | The User starts a service interaction with the RP or RPI. |
 | 1.2 | Request Wallet metadata | Optionally retrieve the Wallet metadata and supported presentation formats. See [RFC002 §6.1.1](../RFCs/RFC002.md#611-wallet-metadata-discovery), [RFC002 §6.2.1](../RFCs/RFC002.md#621-wallet-metadata-discovery) and [RFC002 §8.5](../RFCs/RFC002.md#85-wallet-metadata-interface) |
-| 2a.1 | Send same-device Authorization Request | Invoke the Wallet app from the browser session runing on the mobile device. See [RFC002 §6.1.3](../RFCs/RFC002.md#613-wallet-invocation) and [RFC002 §8.1](../RFCs/RFC002.md#81-wallet-invocation-interface) |
+| 2a.1 | Send same-device Authorization Request | Invoke the Wallet app from the browser session running on the mobile device and pass `client_id`, `request_uri` and optional `request_uri_method`. See [RFC002 §6.1.3](../RFCs/RFC002.md#613-wallet-invocation) and [RFC002 §8.1](../RFCs/RFC002.md#81-wallet-invocation-interface) |
 | 2b.1 | Display cross-device Authorization Request | Encode the Authorization Request reference in a QR code for scanning by the Wallet. See [RFC002 §6.2.2](../RFCs/RFC002.md#622-presentation-request-creation-and-display), [RFC002 §6.2.3](../RFCs/RFC002.md#623-wallet-invocation-via-qr-link-or-equivalent) and [RFC002 §8.1](../RFCs/RFC002.md#81-wallet-invocation-interface) |
 | 2.2 | Retrieve Request Object | Retrieve the signed JAR Request Object by reference from `request_uri`. See [RFC002 §6.1.4](../RFCs/RFC002.md#614-request-object-retrieval) and [RFC002 §6.2.4](../RFCs/RFC002.md#624-request-object-retrieval). Further [RFC002 §6.1.2](../RFCs/RFC002.md#612-presentation-request-creation) and [RFC002 §8.3](../RFCs/RFC002.md#83-presentation-request-object) provide more info on JAR object itself.  [RFC002 §8.2](../RFCs/RFC002.md#82-signed-presentation-request-object-retrieval) provides info on different protocol options that can be used to retrieve JAR object |
 | V2.1 | Validate Request Object | Parse the Request Object and validate the applicable profile requirements for `typ`, `client_id` with `x509_hash`, `aud`, `nonce`, validity, `response_type`, `response_mode`, `response_uri`, `client_metadata`, `dcql_query`, `state`, `verifier_info`, and `x5c`. Cryptographic WRP authentication is completed in V2.3. See [RFC002 §6.1.5](../RFCs/RFC002.md#615-wallet-validation) and [RFC002 §8.3.4](../RFCs/RFC002.md#834-request-validation-expectations) |
@@ -313,7 +313,7 @@ sequenceDiagram
 | 3.1 | Authenticate User | Authenticate the User locally before allowing credential disclosure. |
 | 3.2 | Select credentials and disclosures | Select credentials and disclosures that satisfy `dcql_query`. Where applicable, include `transaction_data` in the information presented for User consent. See [RFC002 §6.1.6](../RFCs/RFC002.md#616-holder-consent) and [OpenID4VP DCQL processing](https://openid.net/specs/openid-4-verifiable-presentations-1_0.html) |
 | 3.3 | Approve or deny disclosure | Ask the User to approve or deny disclosure after displaying the final RP and the authorization information and advisories produced by V2.6. See the [Authorization Process User approval steps](https://aptitude-consortium.github.io/wp2-trust-specifications/latest/sections/trust-evaluation-process/#authorization-during-presentation). |
-| 3.4 | Generate or omit holder proof | For SD-JWT VC, generate a KB-JWT. For `mso_mdoc`, generate the `DeviceResponse` and `DeviceAuth` using the reconstructed `SessionTranscript` when `mdoc-openid4vp` applies. If holder binding is not required, omit the proof while retaining request/response correlation and anti-replay validation. See [RFC9901 §4.3](https://www.rfc-editor.org/rfc/rfc9901.html#section-4.3), [RFC002 §6.1.7](../RFCs/RFC002.md#617-presentation-generation) and [RFC002 §8.4.1](../RFCs/RFC002.md#841-response-contents) |
+| 3.4 | Generate or omit holder proof | For SD-JWT VC, generate binding through KB-JWT by using `nonce` and `audience` . For `mso_mdoc`, generate the `DeviceResponse` and `DeviceAuth` using the reconstructed `SessionTranscript` when `mdoc-openid4vp` applies. If holder binding is not required, omit the proof while retaining request/response correlation and anti-replay validation. See [RFC9901 §4.3](https://www.rfc-editor.org/rfc/rfc9901.html#section-4.3), [RFC002 §6.1.7](../RFCs/RFC002.md#617-presentation-generation) and [RFC002 §8.4.1](../RFCs/RFC002.md#841-response-contents) |
 | 3.5 | Encrypt Authorization Response | Encrypt the response as JWE using the verifier's fresh per-request key from `client_metadata` and the applicable `alg`, `enc`, and `kid`. See [RFC002 §6.1.7](../RFCs/RFC002.md#617-presentation-generation) and [RFC002 §8.4.2](../RFCs/RFC002.md#842-eu-eaap-response-encryption) |
 | 4.1 | Submit Authorization Response | Send an HTTP POST using `response_mode=direct_post.jwt`, with the encrypted JWE in the `response` parameter. See [RFC002 §6.1.8](../RFCs/RFC002.md#618-presentation-submission), [RFC002 §6.2.8](../RFCs/RFC002.md#628-presentation-submission) and [RFC002 §8.4](../RFCs/RFC002.md#84-presentation-response-interface)|
 | 4.2 | Decrypt Authorization Response | Decrypt the JWE using the verifier's corresponding per-request private key before validating the enclosed response and presentations. See  [OpenID4VP encrypted responses](https://openid.net/specs/openid-4-verifiable-presentations-1_0.html#name-encrypted-responses) |
@@ -322,6 +322,6 @@ sequenceDiagram
 | V4.3 | Validate credentials | Validate every returned credential or attestation, including its issuer signature, Sign/Seal certificate chain against the Trust Anchor obtained in V4.2, temporal validity, disclosed claims, and applicable format constraints. See the [Sign/Seal Validation Process](https://aptitude-consortium.github.io/wp2-trust-specifications/latest/sections/trust-evaluation-process/#signseal-validation-process), [X.509 Certificate Chain Validation](https://aptitude-consortium.github.io/wp2-trust-specifications/latest/sections/trust-evaluation-process/#certificate-path-validation) and [RFC002 §7.2 Verifier Requirements](../RFCs/RFC002.md#72-verifier-requirements)|
 | 4.3 | Retrieve Status List Token | For each returned credential with an applicable status reference, retrieve the Status List Token from the Credential Issuer. See the [APTITUDE Trust Management and Lifecycle](https://aptitude-consortium.github.io/wp2-trust-specifications/latest/sections/trust-management-lifecycle/) and [RFC004 §7.3](../RFCs/RFC004.md#73-tsl-endpoint). |
 | V4.4 | Validate credential status | Validate the referenced artifact and status reference, SLT signature and trust, subject URI binding, `iat`, `exp`, and `ttl`, decompression, index bounds, and profile-specific status mapping. Accept `VALID`, reject `INVALID`, and apply issuer policy to `SUSPENDED`. See [RFC004 §6.1, §10.1.2, §10.1.3, §10.1.4, and TSL-VAL-01 through -08](../RFCs/RFC004.md#1012-token-status-list-digital-credentials-profile). |
-| 4.4 | Return same-device redirect URI | After the response POST in a same-device flow, return `redirect_uri` to the Wallet. This step does not apply to cross-device presentation. See [RFC002 §6.2.10](../RFCs/RFC002.md#6110-same-device-redirect-and-session-completion) |
-| 4.5 | Follow same-device redirect URI | Follow `redirect_uri` in the same session. The Verifier rejects a missing redirect or one associated with a different session. See [RFC002 §6.2.10](../RFCs/RFC002.md#6110-same-device-redirect-and-session-completion) and the [OpenID4VP session-fixation considerations](https://openid.net/specs/openid-4-verifiable-presentations-1_0.html#name-session-fixation) |
+| 4.4 | Return same-device redirect URI | After the response POST in a same-device flow, return `redirect_uri` to the Wallet. This step does not apply to cross-device presentation. See [RFC002 §6.1.10](../RFCs/RFC002.md#6110-same-device-redirect-and-session-completion) |
+| 4.5 | Follow same-device redirect URI | Follow `redirect_uri` in the same session. The Verifier rejects a missing redirect or one associated with a different session. See [RFC002 §6.1.10](../RFCs/RFC002.md#6110-same-device-redirect-and-session-completion) and the [OpenID4VP session-fixation considerations](https://openid.net/specs/openid-4-verifiable-presentations-1_0.html#name-session-fixation) |
 | 5.1 | Continue service usage | Continue the RP service only after successful presentation processing and, for same-device presentation, successful redirect completion. |
