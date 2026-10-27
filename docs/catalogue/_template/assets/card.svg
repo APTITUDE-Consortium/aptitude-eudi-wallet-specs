@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="400" height="252" viewBox="0 0 400 252">
+  <title>{{title}}</title>
+  <rect width="400" height="252" rx="16" fill="#0B2A5B"/>
+  <text x="24" y="44" font-family="Arial, Helvetica, sans-serif" font-size="22" font-weight="bold" fill="#FFFFFF">{{title}}</text>
+  <line x1="24" y1="58" x2="376" y2="58" stroke="#FFFFFF" stroke-opacity="0.4"/>
+  <text x="24" y="96" font-family="Arial, Helvetica, sans-serif" font-size="14" fill="#FFFFFF">Example: {{example_attribute}}</text>
+</svg>
