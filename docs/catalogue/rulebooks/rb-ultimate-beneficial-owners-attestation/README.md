@@ -98,6 +98,8 @@ EWC participating Business Registries don’t impose any data or attributes spec
 
 UBO attributes have been decided together by business registries in the EWC pilot in accordance with the BORIS (Beneficial ownership registers interconnection system) data model.
 
+The claim structure and claim names of the owners follow the WE BUILD UBO attestation. The `legal_person` object, `inactive_date`, `last_change_date`, `tax_domicile` and `is_alive` are APTITUDE additions to that structure. Attributes of the entries of `ubo` are listed with the prefix `ubo[]`.
+
 This table contains the name of the attribute, its description, and whether the attribute is required or not.
 
 | Property Name | Description | Required |
@@ -107,31 +109,73 @@ This table contains the name of the attribute, its description, and whether the 
 | legal_person.legal_person_id | Unique ID for organisations in EUID structure. | Yes |
 | legal_person.legal_form_type | Legal form of the company. | Yes |
 | legal_person.registered_address | The address of the company. | Yes |
-| ultimate_beneficial_owner | Details of the Ultimate Beneficial Owner(s) of the company; at least one entry. | Yes |
-| ultimate_beneficial_owner[].natural_person_details | Details of the natural person representing the UBO. | Yes |
-| ...natural_person_details.family_name | Family name of the natural person representing the UBO. | Yes |
-| ...natural_person_details.first_name | First name of the natural person representing the UBO. | Yes |
-| ...natural_person_details.identifier | Unique identifier for the natural person representing the UBO. | No |
-| ...natural_person_details.birth_date | Date of birth of the natural person representing the UBO. | Yes |
-| ...natural_person_details.postal_address | Postal address of the natural person representing the UBO. | Yes |
-| ...natural_person_details.tax_domicile | Country of taxation of the natural person representing the UBO in the ISO 3166-1 alpha-3 standard. | No |
-| ...natural_person_details.is_alive | Indicates if the natural person representing the UBO is alive. | No |
-| ...natural_person_details.nationality | Citizenship of the natural person representing the UBO. | No |
-| ultimate_beneficial_owner[].ownership_details | Details of the ownership of the UBO on the company, a list of entries. | Yes |
-| ...ownership_details.nature_of_control | Nature of the interest held by the UBO in the company: `voting_rights`, `control_through_ownership`, `senior_management_position` or `other_means_of_control`. | Yes |
-| ...ownership_details.ownership_type | The type of ownership held by the UBO: `direct`, `indirect` or `both`. | Yes |
-| ...ownership_details.ownership_percentage | The percentage of ownership held by the UBO in the company, either a number between 0 and 100 or a bracket (`0-25`, `25-50`, `50-75`, `75-100`). | Yes |
-| ...ownership_details.registrable_date | Date when the UBO's interest was registered. | Yes |
-| ...ownership_details.inactive_date | Date when the UBO's interest became inactive (if applicable). | No |
-| ...ownership_details.last_change_date | Date when the UBO's interest was last changed. | No |
+| ubo | Details of the ultimate beneficial owner(s) of the company, one entry per identified natural person; at least one entry. | Yes |
+| ubo[].jurisdiction | Jurisdiction of the beneficial ownership information (ISO 3166-1 alpha-2). | Yes (per entry) |
+| ubo[].person | Personal identity attributes of the UBO. | Yes (per entry) |
+| ubo[].person.first_name | First name(s) / given name(s) of the natural person, including middle names where applicable. | Yes (per entry) |
+| ubo[].person.surname | Surname(s) / family name(s) of the natural person. | Yes (per entry) |
+| ubo[].person.birth_date | Date of birth of the natural person (ISO 8601 YYYY-MM-DD). | Yes (per entry) |
+| ubo[].birth_place | Place of birth of the UBO. | Yes (per entry) |
+| ubo[].birth_place.locality | City or locality of birth. | Yes (per entry) |
+| ubo[].birth_place.country | Country of birth (ISO 3166-1 alpha-2). | Yes (per entry) |
+| ubo[].birth_place.region | Region or state of birth. | No |
+| ubo[].citizenship | Nationality or nationalities held by the natural person; SHALL use ISO 3166-1 alpha-2 codes; SHALL contain at least one entry. | Yes (per entry) |
+| ubo[].residential_address | Registered residential address of the UBO. All members are mandatory within the address. | Yes (per entry) |
+| ubo[].residential_address.street | Street name of the address. | Yes (per entry) |
+| ubo[].residential_address.house_number | House or building number of the address. | Yes (per entry) |
+| ubo[].residential_address.locality | City or locality of the address. | Yes (per entry) |
+| ubo[].residential_address.region | Region or state of the address. | Yes (per entry) |
+| ubo[].residential_address.postal_code | Postal code of the address. | Yes (per entry) |
+| ubo[].residential_address.country | Country of the address (ISO 3166-1 alpha-2). | Yes (per entry) |
+| ubo[].contact_address | Optional alternative contact address of the UBO. All members are mandatory within the address. | No |
+| ubo[].contact_address.street | Street name of the address. | Yes (if parent present) |
+| ubo[].contact_address.house_number | House or building number of the address. | Yes (if parent present) |
+| ubo[].contact_address.locality | City or locality of the address. | Yes (if parent present) |
+| ubo[].contact_address.region | Region or state of the address. | Yes (if parent present) |
+| ubo[].contact_address.postal_code | Postal code of the address. | Yes (if parent present) |
+| ubo[].contact_address.country | Country of the address (ISO 3166-1 alpha-2). | Yes (if parent present) |
+| ubo[].person_identifier | Government-issued identity document details of the UBO. | Yes (per entry) |
+| ubo[].person_identifier.document_type | Type of identity document, aligned with ICAO 9303. | Yes (per entry) |
+| ubo[].person_identifier.document_number | Number of the identity document as printed on the document. | Yes (per entry) |
+| ubo[].person_identifier.issuing_country | Country that issued the identity document (ISO 3166-1 alpha-2). | Yes (per entry) |
+| ubo[].person_identifier.expiry_date | Expiry date of the identity document (ISO 8601 YYYY-MM-DD). | Yes (per entry) |
+| ubo[].person_unique_identifier | Optional unique identifier assigned to the UBO by an authority. | No |
+| ubo[].person_unique_identifier.identifier_unique | A unique identifier assigned to the natural person by an issuing authority. | No |
+| ubo[].person_unique_identifier.identifier_issuing_authority | The authority that issued the unique identifier. | No |
+| ubo[].justification | How and why this person qualifies as UBO under AMLR. | Yes (per entry) |
+| ubo[].justification.threshold_met | Array of applicable AML thresholds or control criteria met; at least one value required. | Yes (per entry) |
+| ubo[].justification.ownership_percentage | Total direct and indirect ownership percentage held (0-100). | Yes (per entry) |
+| ubo[].justification.voting_rights_percentage | Total direct and indirect voting rights percentage held (0-100). | Yes (per entry) |
+| ubo[].justification.control_details | Free text description of control exercised through means other than ownership percentage. | No |
+| ubo[].effective_date | Date when this ownership or control relationship became legally effective (ISO 8601 YYYY-MM-DD). | Yes (per entry) |
+| ubo[].inactive_date | Date when the UBO's interest became inactive (if applicable). | No |
+| ubo[].last_change_date | Date when the UBO's interest was last changed. | No |
+| ubo[].tax_domicile | Country of taxation of the UBO (ISO 3166-1 alpha-2). | No |
+| ubo[].is_alive | Indicates if the natural person representing the UBO is alive. | No |
+| ubo[].source | Supporting evidence for the UBO determination; at least one entry. | Yes (per entry) |
+| ubo[].source[].id | Unique identifier for the source document. | Yes (per entry) |
+| ubo[].source[].type | Type of source document. | Yes (per entry) |
+| ubo[].source[].url | URI reference to the source or evidence document. | No |
+| ubo[].source[].data | Base64-encoded source document; SHALL be provided if url is not a publicly accessible URI. | No |
 
 The attestation is an SD-JWT VC with the `vct` value `eu.aptitude.ultimate-beneficial-owners-attestation.1`. The claims sit at the top level of the SD-JWT VC payload; revocation uses the SD-JWT VC `status` claim.
 
 The UBO schema is available in this catalogue: [UBO data schema](../../data-schemas/sd-jwt/ultimate-beneficial-owners-attestation-sd-jwt.json).
 
-**Note**: The UBO attestation metadata are aligned with the LPID. The necessary information about those can be found in the [LPID Rulebook](../rb-legal-person-identification-data/README.md).
+**Note**: The attributes of the UBO attestation follow the WE BUILD ultimate beneficial owners attestation. The legal person is identified as in the [LPID Rulebook](../rb-legal-person-identification-data/README.md).
 
-### 4.1 Minimum number of optional attributes
+### 4.1 Code lists
+
+`ubo[].justification.threshold_met` takes one or more of the following values, aligned with AMLR Article 3(17):
+
+- Ownership: `ownership_25_plus`, `ownership_direct`, `ownership_indirect`.
+- Voting rights: `control_voting_25_plus`, `control_voting_direct`, `control_voting_indirect`.
+- Management and other control: `control_management`, `control_veto`, `control_contractual`, `control_family_relationships`, `control_acting_in_concert`, `control_nominee`, `control_other_means`.
+- Legal arrangements: `arrangement_settlor`, `arrangement_trustee`, `arrangement_beneficiary`, `arrangement_protector`, `arrangement_object_of_power`, `arrangement_default_taker`, `arrangement_other_control`.
+
+`ubo[].person_identifier.document_type` takes one of `PASSPORT`, `NATIONAL_ID`, `RESIDENCE_PERMIT`, `DRIVING_LICENSE` and `OTHER`. `ubo[].source[].type` takes one of `ShareRegister`, `CommercialRegister`, `TransparencyRegister`, `TrustDeed`, `ShareholderAgreement`, `ArticlesOfAssociation`, `GovernanceChart`, `AMLOfficerDeclaration`, `NotarialDeed` and `Other`. Countries use ISO 3166-1 alpha-2 and dates use ISO 8601 YYYY-MM-DD.
+
+### 4.2 Minimum number of optional attributes
 
 There is no minimum number of optional attributes for the UBO. Each Business Registry will have the responsibility to fill in the attributes when registered in their national registry.
 

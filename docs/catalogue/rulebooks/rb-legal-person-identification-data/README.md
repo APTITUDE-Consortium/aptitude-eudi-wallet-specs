@@ -98,16 +98,16 @@ The LPID data schema is available in this catalogue: [LPID data schema](../../da
 
 | Attribute | Description | Required |
 | --------- | ----------- | -------- |
-| issuing_authority | Name of the administrative authority that issued this credential, or the ISO 3166 Alpha-2 country code of the Member State if no separate authority is authorized to issue it. | Yes |
-| issuing_authority_id | Identifier of the issuing authority (business register identifier, for example as used in BRIS). | Yes |
-| issuing_country | Alpha-2 country code, as defined in ISO 3166-1, of the issuing country or territory. | Yes |
+| id | EUID where available, otherwise a similar constructed, unique per issuer identifier. | Yes |
+| name | Official name of the EBW owner (economic operator or public sector body). | Yes |
+| issuing_authority | Name of the administrative authority, Commission (for Union entities), or QTSP issuing the EAA/QEAA; or ISO 3166-1 alpha-2 where applicable. | Yes |
+| issuing_country | ISO 3166-1 alpha-2 code of the provider’s country/territory. | Yes |
+| date_of_expiry | Administrative expiry date following ISO 8601 (`YYYY-MM-DD`). | No |
+| issuing_authority_id | Identifier of the issuing authority (business register identifier, for example as used in BRIS). | No |
 | issuing_jurisdiction | Country subdivision code of the issuing jurisdiction, as defined in ISO 3166-2:2020, Clause 8. The first part of the code is the same as issuing_country. | No |
-| issuance_date | Date and possibly time when the credential was issued. | Yes |
-| expiry_date | Date and possibly time when the credential expires. | Yes |
+| issuance_date | Date and possibly time when the credential was issued. | No |
 | authentic_source_id | Identifier of the public sector body or private entity responsible for the authentic source that is the primary source of the information or is recognized as authentic in national law. | No |
 | authentic_source_name | Name of the public sector body or private entity responsible for the authentic source that is the primary source of the information or is recognized as authentic in national law. | No |
-| legal_person_id | Unique identifier of the organisation in EUID structure. | Yes |
-| legal_person_name | Official current legal person name as registered in the business register. | Yes |
 
 ## 4 Trust infrastructure details
 

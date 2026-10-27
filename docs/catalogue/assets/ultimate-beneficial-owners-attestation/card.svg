@@ -6,6 +6,6 @@
   <text x="24" y="88" font-size="15" fill="#FFFFFF">{{legal_person.legal_person_name}}</text>
   <text x="24" y="118" font-size="15" fill="#FFFFFF">{{legal_person.legal_person_id}}</text>
   <text x="24" y="148" font-size="15" fill="#FFFFFF">{{legal_person.legal_form_type}}</text>
-  <text x="24" y="178" font-size="15" fill="#FFFFFF">{{ultimate_beneficial_owner}}</text>
+  <text x="24" y="178" font-size="15" fill="#FFFFFF">{{legal_person.registered_address}}</text>
   <text x="24" y="234" font-size="11" fill="#FFFFFF">APTITUDE</text>
 </svg>

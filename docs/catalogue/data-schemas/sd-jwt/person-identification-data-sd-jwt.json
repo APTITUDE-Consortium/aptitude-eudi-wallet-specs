@@ -3,7 +3,7 @@
   "$id": "https://registry.siros.org/aptitude-consortium/person-identification-data.schema.json",
   "title": "Person Identification Data",
   "description": "Physical Person Identification Data (PID) as an SD-JWT VC, following the ARF PID attribute definitions (EWC WP3).",
-  "version": "1.1.0",
+  "version": "2.0.0",
   "type": "object",
   "additionalProperties": true,
   "properties": {
@@ -36,33 +36,76 @@
     },
     "place_of_birth": {
       "type": "object",
-      "description": "The country, region or locality where the PID user was born.",
+      "description": "Place of birth object as per EKYC: at least one of country, region, locality.",
       "properties": {
         "country": {
           "type": "string",
           "description": "The country where the PID user was born, as an alpha-2 country code as specified in ISO 3166-1.",
-          "pattern": "^[A-Z]{2}$"
+          "pattern": "^[A-Z]{2}$",
+          "minLength": 2,
+          "maxLength": 2,
+          "examples": [
+            "DE"
+          ]
         },
         "region": {
           "type": "string",
-          "description": "The state, province, district or other region where the PID user was born."
+          "description": "The state, province, district or other region where the PID user was born.",
+          "examples": [
+            "Bavaria"
+          ]
         },
         "locality": {
           "type": "string",
-          "description": "The municipality, city, town or village where the PID user was born."
+          "description": "The municipality, city, town or village where the PID user was born.",
+          "examples": [
+            "Munich"
+          ]
         }
-      }
+      },
+      "additionalProperties": false,
+      "anyOf": [
+        {
+          "required": [
+            "country"
+          ]
+        },
+        {
+          "required": [
+            "region"
+          ]
+        },
+        {
+          "required": [
+            "locality"
+          ]
+        }
+      ]
     },
     "nationalities": {
       "type": "array",
+      "description": "One or more alpha-2 country codes as specified in ISO 3166-1, representing the nationality of the PID user.",
       "items": {
-        "type": "string"
+        "type": "string",
+        "minLength": 2,
+        "maxLength": 2,
+        "pattern": "^[A-Z]{2}$",
+        "examples": [
+          "DE"
+        ]
       },
-      "description": "One or more alpha-2 country codes as specified in ISO 3166-1, representing the nationality of the PID user."
+      "minItems": 1,
+      "uniqueItems": true,
+      "examples": [
+        [
+          "DE",
+          "FR"
+        ]
+      ]
     },
     "address": {
       "type": "object",
-      "description": "The place where the PID user currently resides or can be contacted.",
+      "description": "OIDC-style address object: the place where the PID user currently resides or can be contacted.",
       "properties": {
         "formatted": {
           "type": "string",
@@ -71,7 +114,9 @@
         "country": {
           "type": "string",
           "description": "The country where the PID user currently resides, as an alpha-2 country code as specified in ISO 3166-1.",
-          "pattern": "^[A-Z]{2}$"
+          "pattern": "^[A-Z]{2}$",
+          "minLength": 2,
+          "maxLength": 2
         },
         "region": {
           "type": "string",
@@ -106,15 +151,23 @@
     "email": {
       "type": "string",
       "description": "Electronic mail address of the PID user, in conformance with RFC 5322.",
-      "format": "email"
+      "format": "email",
+      "examples": [
+        "maria.andersson@example.com"
+      ]
     },
     "phone_number": {
       "type": "string",
-      "description": "Mobile telephone number of the PID user, starting with the '+' symbol as the international code prefix and the country code, followed by numbers only."
+      "description": "Mobile telephone number of the PID user, starting with the '+' symbol as the international code prefix and the country code, followed by numbers only (OIDC / E.164 compliant).",
+      "pattern": "^\\+[0-9]{4,15}$",
+      "examples": [
+        "+46701234567"
+      ]
     },
     "picture": {
       "type": "string",
-      "description": "Facial image of the PID user compliant with ISO 19794-5 or ISO 39794 specifications, encoded as binary data."
+      "description": "Facial image of the PID user as a data URL with the base64-encoded portrait in JPEG format.",
+      "pattern": "^data:image/jpeg;base64,[A-Za-z0-9+/=]+$"
     },
     "personal_administrative_number": {
       "type": "string",
@@ -132,7 +185,7 @@
         6,
         9
       ],
-      "description": "0 = not known; 1 = male; 2 = female; 3 = other; 4 = inter; 5 = diverse; 6 = open; 9 = not applicable. For values 0, 1, 2 and 9, ISO/IEC 5218 applies."
+      "description": "Sex code: 0 = not known; 1 = male; 2 = female; 3 = other; 4 = inter; 5 = diverse; 6 = open; 9 = not applicable. For values 0, 1, 2 and 9, ISO/IEC 5218 applies."
     },
     "age_over_18": {
       "type": "boolean",
@@ -170,11 +223,11 @@
     },
     "issuing_authority": {
       "type": "string",
-      "description": "Name of the issuer from the Member State that issued the PID instance."
+      "description": "Name of the administrative authority that issued the person identification data, or the ISO 3166 alpha-2 country code of the respective Member State if there is no separate authority entitled to issue person identification data."
     },
     "issuing_country": {
       "type": "string",
-      "description": "Alpha-2 country code, as defined in ISO 3166-1, of the issuing country or territory.",
+      "description": "Alpha-2 country code, as specified in ISO 3166-1, of the country or territory of the provider of the person identification data.",
       "minLength": 2,
       "maxLength": 2,
       "pattern": "^[A-Z]{2}$"
@@ -183,25 +236,30 @@
       "type": "string",
       "description": "Subdivision code as defined in ISO 3166-2:2020 of the issuing country or territory.",
       "minLength": 2,
-      "maxLength": 6
+      "maxLength": 6,
+      "examples": [
+        "DE-BY"
+      ]
     },
     "date_of_issuance": {
       "type": "string",
-      "description": "Date and possibly time of issuance of the PID.",
-      "format": "date-time"
+      "description": "Administrative issuance date in YYYY-MM-DD format.",
+      "format": "date",
+      "examples": [
+        "2025-01-15"
+      ]
     },
     "date_of_expiry": {
       "type": "string",
-      "description": "Date and possibly time of expiration of the PID.",
-      "format": "date-time"
+      "description": "Administrative expiry date in YYYY-MM-DD format.",
+      "format": "date",
+      "examples": [
+        "2030-12-31"
+      ]
     },
     "document_number": {
       "type": "string",
       "description": "A number for the PID, assigned by the PID provider."
-    },
-    "trust_anchor": {
-      "type": "string",
-      "description": "URL at which a machine-readable version of the trust anchor used for verifying the PID can be found or looked up. Mandatory for QEAAs under the European Digital Identity Regulation; optional for PIDs so that Relying Parties can validate PIDs in the same manner."
     },
     "iss": {
       "type": "string",
@@ -260,12 +318,14 @@
     }
   },
   "required": [
-    "family_name",
+    "vct",
     "given_name",
+    "family_name",
     "birthdate",
+    "place_of_birth",
     "nationalities",
+    "date_of_expiry",
     "issuing_authority",
-    "issuing_country",
-    "date_of_expiry"
+    "issuing_country"
   ]
 }

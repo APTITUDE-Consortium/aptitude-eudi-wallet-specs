@@ -3,7 +3,7 @@
   "$id": "https://registry.siros.org/aptitude-consortium/eu-company-certificate.schema.json",
   "title": "EU Company Certificate",
   "description": "EU Company Certificate (EUCC): evidence of the incorporation of a company and of its registered information, issued by a business register. Defined by EWC WP3.",
-  "version": "1.1.0",
+  "version": "2.0.0",
   "type": "object",
   "additionalProperties": true,
   "properties": {
@@ -14,14 +14,14 @@
     },
     "issuing_authority": {
       "type": "string",
-      "description": "Name of the administrative authority that issued this credential, or the ISO 3166 Alpha-2 country code of the Member State if no separate authority is authorized to issue it.",
+      "description": "Name of issuer from the MS that issued the ODI instance",
       "examples": [
         "Brønnøysund Register Centre"
       ]
     },
     "issuing_authority_id": {
       "type": "string",
-      "description": "Identifier of the issuing authority (business register identifier, for example as used in BRIS).",
+      "description": "ODI Id of the issuing authority. (Business register identifier for BRIS)",
       "examples": [
         "NO.BRC"
       ]
@@ -38,16 +38,14 @@
     },
     "issuing_jurisdiction": {
       "type": "string",
-      "description": "Country subdivision code of the issuing jurisdiction, as defined in ISO 3166-2:2020, Clause 8. The first part of the code is the same as issuing_country.",
-      "minLength": 2,
-      "maxLength": 6,
+      "description": "As defined in ISO 3166-2:2020, of the issuing country or territory.",
       "examples": [
         "NO-03"
       ]
     },
     "issuance_date": {
       "type": "string",
-      "description": "Date and possibly time when the credential was issued.",
+      "description": "Date and possibly time of issuance",
       "format": "date-time",
       "examples": [
         "2025-01-15T09:00:00Z"
@@ -63,204 +61,197 @@
     },
     "authentic_source_id": {
       "type": "string",
-      "description": "Identifier of the public sector body or private entity responsible for the authentic source that is the primary source of the information or is recognized as authentic in national law."
+      "description": "ODI Id of the issuing authority. (Business register identifier for BRIS)"
     },
     "authentic_source_name": {
       "type": "string",
-      "description": "Name of the public sector body or private entity responsible for the authentic source that is the primary source of the information or is recognized as authentic in national law."
+      "description": "Name of issuer from the MS that issued the ODI instance"
     },
-    "legal_person": {
+    "legal_person_name": {
+      "type": "string",
+      "description": "Official current legal person name as registered in the business register."
+    },
+    "legal_person_id": {
+      "type": "string",
+      "description": "Unique id for organisations in EUID structure"
+    },
+    "legal_form_type": {
+      "type": "string",
+      "description": "Legal form of the company"
+    },
+    "registration_member_state": {
+      "type": "string",
+      "description": "Member State where the company is registered, Alpha-2 country code, as defined in ISO 3166-1",
+      "examples": [
+        "NO"
+      ],
+      "pattern": "^[A-Z]{2}$"
+    },
+    "registered_address": {
       "type": "object",
-      "description": "Information regarding the legal entity, including name, ID and legal form.",
+      "description": "Registered office of the company (full address or part of it)",
       "properties": {
-        "legal_person_name": {
+        "care_of": {
           "type": "string",
-          "description": "Official current legal person name as registered in the business register."
+          "description": "Used when an address is at the address of another person or legal entity."
         },
-        "legal_person_id": {
+        "full_address": {
           "type": "string",
-          "description": "Unique identifier of the organisation in EUID structure."
-        },
-        "legal_form_type": {
-          "type": "string",
-          "description": "Legal form of the company."
-        },
-        "registration_member_state": {
-          "type": "string",
-          "description": "Member State where the company is registered, Alpha-2 country code as defined in ISO 3166-1.",
-          "minLength": 2,
-          "maxLength": 2,
+          "description": "The complete address written as a string, separated with \";\".",
           "examples": [
-            "NO"
-          ],
-          "pattern": "^[A-Z]{2}$"
-        },
-        "registered_address": {
-          "type": "object",
-          "description": "Registered office of the company (full address or part of it).",
-          "properties": {
-            "care_of": {
-              "type": "string",
-              "description": "Used when an address is at the address of another person or legal entity."
-            },
-            "full_address": {
-              "type": "string",
-              "description": "The complete address written as a string, separated with \";\".",
-              "examples": [
-                "Storgata 1;0155 Oslo;NO"
-              ]
-            },
-            "thorough_fare": {
-              "type": "string",
-              "description": "The name of a passage or way through from one location to another."
-            },
-            "locator_designator": {
-              "type": "string",
-              "description": "A number or a sequence of characters that uniquely identifies the locator within the relevant scope."
-            },
-            "post_code": {
-              "type": "string",
-              "description": "The code created and maintained for postal purposes to identify a subdivision of addresses and postal delivery points."
-            },
-            "post_name": {
-              "type": "string",
-              "description": "A name created and maintained for postal purposes to identify a subdivision of addresses and postal delivery points."
-            },
-            "post_office_box": {
-              "type": "string",
-              "description": "A location designator for a postal delivery point at a post office, usually a number."
-            },
-            "locator_name": {
-              "type": "string",
-              "description": "Proper noun(s) applied to the real world entity identified by the locator, such as the name of a property, complex, building or room."
-            },
-            "admin_unit_level_1": {
-              "type": "string",
-              "description": "The uppermost administrative unit for the address, almost always a country."
-            },
-            "admin_unit_level_2": {
-              "type": "string",
-              "description": "The name of a secondary level or region of the address, usually a county, state or other area that typically encompasses several localities."
-            }
-          },
-          "required": [
-            "full_address"
+            "Storgata 1;0155 Oslo;NO"
           ]
         },
-        "registration_date": {
+        "thorough_fare": {
           "type": "string",
-          "description": "Date of registration of the company.",
-          "format": "date",
-          "examples": [
-            "2010-05-20"
-          ]
+          "description": "The name of a passage or way through from one location to another.",
+          "title": "Thoroughfare"
         },
-        "share_capital": {
-          "type": "object",
-          "description": "Amount of the subscribed capital with currency.",
-          "properties": {
-            "amount": {
-              "type": "string",
-              "description": "Amount of the capital subscribed.",
-              "examples": [
-                "30000"
-              ]
-            },
-            "currency": {
-              "type": "string",
-              "description": "Currency code of the capital subscribed, as defined in ISO 4217:2015.",
-              "minLength": 3,
-              "maxLength": 3,
-              "examples": [
-                "NOK"
-              ],
-              "pattern": "^[A-Z]{3}$"
-            }
-          }
-        },
-        "legal_person_status": {
+        "locator_designator": {
           "type": "string",
-          "description": "Status of the company as defined in national law and recorded in the national register.",
-          "enum": [
-            "active",
-            "inactive"
-          ]
+          "description": "A number or a sequence of characters that uniquely identifies the locator within the relevant scope."
         },
-        "legal_person_activity": {
-          "type": "object",
-          "description": "Main activity or activities of the company, expressed using the Statistical Classification of Economic Activities in the European Community (NACE).",
-          "properties": {
-            "code": {
-              "type": "string",
-              "description": "Legal person activity NACE code.",
-              "examples": [
-                "62.01"
-              ]
-            },
-            "description": {
-              "type": "string",
-              "description": "Short description of the legal person activity."
-            }
-          }
-        },
-        "legal_person_duration": {
+        "post_code": {
           "type": "string",
-          "description": "Duration of the company, where its duration is limited.",
-          "format": "date"
+          "description": "The code created and maintained for postal purposes to identify a subdivision of addresses and postal delivery points."
         },
-        "contact_point": {
-          "type": "object",
-          "description": "Correspondence address of the company, such as electronic mail or postal address (full or partial).",
-          "properties": {
-            "contact_page": {
-              "type": "string",
-              "description": "Details of the company website.",
-              "format": "uri"
-            },
-            "contact_email": {
-              "type": "string",
-              "description": "Details of the company email.",
-              "format": "email"
-            }
-          }
+        "post_name": {
+          "type": "string",
+          "description": "A name created and maintained for postal purposes to identify a subdivision of addresses and postal delivery points."
+        },
+        "post_office_box": {
+          "type": "string",
+          "description": "A location designator for a postal delivery point at a post office, usually a number."
+        },
+        "locator_name": {
+          "type": "string",
+          "description": "Proper noun(s) applied to the real world entity identified by the locator. The locator name could be the name of the property or complex, of the building or part of the building, or it could be the name of a room inside a building."
+        },
+        "admin_unit_level_1": {
+          "type": "string",
+          "description": "The uppermost administrative unit for the address, almost always a country."
+        },
+        "admin_unit_level_2": {
+          "type": "string",
+          "description": "The name of a secondary level/region of the address, usually a county, state or other such area that typically encompasses several localities."
         }
       },
       "required": [
-        "legal_person_name",
-        "legal_person_id",
-        "legal_form_type",
-        "registration_member_state",
-        "registered_address",
-        "registration_date",
-        "legal_person_status",
-        "legal_person_activity"
+        "full_address"
+      ],
+      "additionalProperties": false
+    },
+    "registration_date": {
+      "type": "string",
+      "description": "Date of registration of the company",
+      "format": "date",
+      "examples": [
+        "2010-05-20"
       ]
+    },
+    "share_capital": {
+      "type": "object",
+      "description": "Amount of the capital subscribed with currency",
+      "properties": {
+        "amount": {
+          "type": "string",
+          "description": "Amount of the capital subscribed",
+          "examples": [
+            "30000"
+          ]
+        },
+        "currency": {
+          "type": "string",
+          "description": "Currency code used of the capital subscribed, as defined in ISO 4217:2015",
+          "examples": [
+            "NOK"
+          ],
+          "pattern": "^[A-Z]{3}$"
+        }
+      },
+      "required": [
+        "amount",
+        "currency"
+      ],
+      "additionalProperties": false
+    },
+    "legal_person_status": {
+      "type": "string",
+      "description": "Status of the company as defined in national law and where recorded in the national register",
+      "enum": [
+        "active",
+        "inactive"
+      ]
+    },
+    "legal_person_activity": {
+      "type": "object",
+      "description": "Object of the company describing its main activity or activities, which must be expressed using the Statistical Classification of Economic Activities in the European Community (NACE)",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "Legal person activity NACE code",
+          "examples": [
+            "62.01"
+          ]
+        },
+        "description": {
+          "type": "string",
+          "description": "Short description of the legal person activity"
+        }
+      },
+      "required": [
+        "code",
+        "description"
+      ],
+      "additionalProperties": false
+    },
+    "legal_person_duration": {
+      "type": "string",
+      "description": "Duration of the company, where its duration is limited",
+      "format": "date"
+    },
+    "digital_contact_point": {
+      "type": "object",
+      "description": "Correspondence address of the company, such as electronic mail or website",
+      "properties": {
+        "website": {
+          "type": "string",
+          "description": "Details of the company website",
+          "format": "uri"
+        },
+        "email": {
+          "type": "string",
+          "description": "Details of the company email",
+          "format": "email"
+        }
+      },
+      "additionalProperties": false
     },
     "legal_representative": {
       "type": "array",
-      "description": "Persons authorized by the company to represent it alone or jointly; each entry is either a natural person or a legal person.",
+      "description": "Information about any person authorized by the company to represent it alone or jointly",
       "items": {
         "oneOf": [
           {
             "type": "object",
-            "description": "Representative of the company who is a natural person.",
+            "description": "Details about the representative of the company if incarnated by a natural person",
             "properties": {
               "full_name": {
                 "type": "string",
-                "description": "Full name of the natural person representing the company."
+                "description": "Full name of the natural person representing the company"
               },
               "date_of_birth": {
                 "type": "string",
-                "description": "Date of birth of the natural person representing the company.",
+                "description": "Date of birth of the natural person representing the company",
                 "format": "date"
               },
               "nationality": {
                 "type": "string",
-                "description": "Nationality of the natural person representing the company."
+                "description": "Nationality of the natural person representing the company"
               },
               "signatory_rule": {
                 "type": "string",
-                "description": "Whether the representative can engage the company alone or jointly.",
+                "description": "Information if the representative can engage the company alone or jointly",
                 "enum": [
                   "alone",
                   "joint"
@@ -271,27 +262,28 @@
               "full_name",
               "date_of_birth",
               "signatory_rule"
-            ]
+            ],
+            "additionalProperties": false
           },
           {
             "type": "object",
-            "description": "Representative of the company who is a legal person.",
+            "description": "Details about the representative of the company if incarnated by a legal person",
             "properties": {
-              "legal_person_name": {
+              "name": {
                 "type": "string",
                 "description": "Official current legal person name as registered in the business register."
               },
-              "legal_person_id": {
+              "id": {
                 "type": "string",
-                "description": "Unique identifier of the organisation in EUID structure."
+                "description": "Unique id for organisations in EUID structure"
               },
               "legal_form_type": {
                 "type": "string",
-                "description": "Legal form of the legal person representing the company."
+                "description": "Legal form of the company"
               },
               "signatory_rule": {
                 "type": "string",
-                "description": "Whether the representative can engage the company alone or jointly.",
+                "description": "Information if the representative can engage the company alone or jointly",
                 "enum": [
                   "alone",
                   "joint"
@@ -299,14 +291,16 @@
               }
             },
             "required": [
-              "legal_person_name",
-              "legal_person_id",
+              "name",
+              "id",
               "legal_form_type",
               "signatory_rule"
-            ]
+            ],
+            "additionalProperties": false
           }
         ]
-      }
+      },
+      "minItems": 1
     },
     "iss": {
       "type": "string",
@@ -365,14 +359,20 @@
     }
   },
   "required": [
+    "legal_person_name",
+    "legal_person_id",
+    "legal_form_type",
+    "registration_member_state",
+    "registered_address",
+    "registration_date",
+    "legal_person_status",
+    "legal_person_activity",
     "issuing_authority",
     "issuing_authority_id",
     "issuing_country",
     "issuance_date",
-    "expiry_date",
     "authentic_source_id",
     "authentic_source_name",
-    "legal_person",
     "legal_representative"
   ]
 }

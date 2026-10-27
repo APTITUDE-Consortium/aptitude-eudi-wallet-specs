@@ -3,7 +3,7 @@
   "$id": "https://registry.siros.org/aptitude-consortium/legal-person-identification-data.schema.json",
   "title": "Legal Person Identification Data",
   "description": "Legal PID (LPID): identification data for a legal person, issued by a company registration office as authentic source. Defined by EWC WP3.",
-  "version": "1.1.0",
+  "version": "2.0.0",
   "type": "object",
   "additionalProperties": true,
   "properties": {
@@ -12,11 +12,44 @@
       "const": "eu.aptitude.legal-person-identification-data.1",
       "description": "Credential type identifier of the Legal Person Identification Data."
     },
+    "id": {
+      "type": "string",
+      "description": "EUID where available, otherwise a similar constructed, unique per issuer identifier.",
+      "examples": [
+        "NOFOR.123456789"
+      ]
+    },
+    "name": {
+      "type": "string",
+      "description": "Official name of the EBW owner (economic operator or public sector body).",
+      "examples": [
+        "Example AS"
+      ]
+    },
     "issuing_authority": {
       "type": "string",
-      "description": "Name of the administrative authority that issued this credential, or the ISO 3166 Alpha-2 country code of the Member State if no separate authority is authorized to issue it.",
+      "description": "Name of the administrative authority, Commission (for Union entities), or QTSP issuing the EAA/QEAA; or ISO 3166-1 alpha-2 where applicable.",
       "examples": [
         "Brønnøysund Register Centre"
+      ]
+    },
+    "issuing_country": {
+      "type": "string",
+      "description": "ISO 3166-1 alpha-2 code of the provider’s country/territory.",
+      "minLength": 2,
+      "maxLength": 2,
+      "examples": [
+        "NO",
+        "DE"
+      ],
+      "pattern": "^[A-Z]{2}$"
+    },
+    "date_of_expiry": {
+      "type": "string",
+      "description": "Administrative expiry date following ISO 8601.",
+      "format": "date",
+      "examples": [
+        "2027-12-31"
       ]
     },
     "issuing_authority_id": {
@@ -25,16 +58,6 @@
       "examples": [
         "NO.BRC"
       ]
-    },
-    "issuing_country": {
-      "type": "string",
-      "description": "Alpha-2 country code, as defined in ISO 3166-1, of the issuing country or territory.",
-      "minLength": 2,
-      "maxLength": 2,
-      "examples": [
-        "NO"
-      ],
-      "pattern": "^[A-Z]{2}$"
     },
     "issuing_jurisdiction": {
       "type": "string",
@@ -53,14 +76,6 @@
         "2025-01-15T09:00:00Z"
       ]
     },
-    "expiry_date": {
-      "type": "string",
-      "description": "Date and possibly time when the credential expires.",
-      "format": "date-time",
-      "examples": [
-        "2026-01-15T09:00:00Z"
-      ]
-    },
     "authentic_source_id": {
       "type": "string",
       "description": "Identifier of the public sector body or private entity responsible for the authentic source that is the primary source of the information or is recognized as authentic in national law."
@@ -68,20 +83,6 @@
     "authentic_source_name": {
       "type": "string",
       "description": "Name of the public sector body or private entity responsible for the authentic source that is the primary source of the information or is recognized as authentic in national law."
-    },
-    "legal_person_id": {
-      "type": "string",
-      "description": "Unique identifier of the organisation in EUID structure.",
-      "examples": [
-        "NO.BRC.923456789"
-      ]
-    },
-    "legal_person_name": {
-      "type": "string",
-      "description": "Official current legal person name as registered in the business register.",
-      "examples": [
-        "Example AS"
-      ]
     },
     "iss": {
       "type": "string",
@@ -140,12 +141,9 @@
     }
   },
   "required": [
+    "id",
+    "name",
     "issuing_authority",
-    "issuing_authority_id",
-    "issuing_country",
-    "issuance_date",
-    "expiry_date",
-    "legal_person_id",
-    "legal_person_name"
+    "issuing_country"
   ]
 }

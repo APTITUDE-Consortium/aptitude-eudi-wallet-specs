@@ -2,8 +2,8 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://registry.siros.org/aptitude-consortium/ultimate-beneficial-owners-attestation.schema.json",
   "title": "Ultimate Beneficial Owners Attestation",
-  "description": "Attests the ultimate beneficial owners of a legal person and the nature of their ownership or control, as registered in a national business register (EWC WP3).",
-  "version": "0.10.0",
+  "description": "Attests the ultimate beneficial owners of a legal person and the nature of their ownership or control, as registered in a national business register (EWC WP3). The claim structure of the owners follows the WE BUILD UBO attestation.",
+  "version": "0.11.0",
   "type": "object",
   "additionalProperties": true,
   "properties": {
@@ -40,132 +40,352 @@
         "registered_address"
       ]
     },
-    "ultimate_beneficial_owner": {
+    "ubo": {
       "type": "array",
-      "description": "Details of the Ultimate Beneficial Owner(s) of the company.",
-      "minItems": 1,
+      "description": "Details of the ultimate beneficial owner(s) of the company, one entry per identified natural person; at least one entry.",
       "items": {
         "type": "object",
+        "description": "A single ultimate beneficial owner entry.",
         "properties": {
-          "natural_person_details": {
+          "jurisdiction": {
+            "type": "string",
+            "description": "Jurisdiction of the beneficial ownership information (ISO 3166-1 alpha-2).",
+            "pattern": "^[A-Z]{2}$"
+          },
+          "person": {
             "type": "object",
-            "description": "Details of the natural person representing the UBO.",
+            "description": "Personal identity attributes of the UBO.",
             "properties": {
-              "family_name": {
-                "type": "string",
-                "description": "Family name of the natural person representing the UBO."
-              },
               "first_name": {
                 "type": "string",
-                "description": "First name of the natural person representing the UBO."
+                "description": "First name(s) / given name(s) of the natural person, including middle names where applicable.",
+                "minLength": 1
               },
-              "identifier": {
+              "surname": {
                 "type": "string",
-                "description": "Unique identifier for the natural person representing the UBO."
+                "description": "Surname(s) / family name(s) of the natural person.",
+                "minLength": 1
               },
               "birth_date": {
                 "type": "string",
-                "format": "date",
-                "description": "Date of birth of the natural person representing the UBO."
-              },
-              "postal_address": {
-                "type": "string",
-                "description": "Postal address of the natural person representing the UBO."
-              },
-              "tax_domicile": {
-                "type": "string",
-                "description": "Country of taxation of the natural person representing the UBO in the ISO 3166-1 alpha-3 standard."
-              },
-              "is_alive": {
-                "type": "boolean",
-                "description": "Indicates if the natural person representing the UBO is alive."
-              },
-              "nationality": {
-                "type": "string",
-                "description": "Citizenship of the natural person representing the UBO."
+                "description": "Date of birth of the natural person (ISO 8601 YYYY-MM-DD).",
+                "format": "date"
               }
             },
             "required": [
-              "family_name",
               "first_name",
-              "birth_date",
-              "postal_address"
+              "surname",
+              "birth_date"
             ]
           },
-          "ownership_details": {
+          "birth_place": {
+            "type": "object",
+            "description": "Place of birth of the UBO.",
+            "properties": {
+              "locality": {
+                "type": "string",
+                "description": "City or locality of birth.",
+                "minLength": 1
+              },
+              "country": {
+                "type": "string",
+                "description": "Country of birth (ISO 3166-1 alpha-2).",
+                "pattern": "^[A-Z]{2}$"
+              },
+              "region": {
+                "type": "string",
+                "description": "Region or state of birth.",
+                "minLength": 1
+              }
+            },
+            "required": [
+              "locality",
+              "country"
+            ]
+          },
+          "citizenship": {
             "type": "array",
-            "description": "Details of the ownership of the UBO on the company.",
+            "description": "Nationality or nationalities held by the natural person; SHALL use ISO 3166-1 alpha-2 codes; SHALL contain at least one entry.",
             "items": {
-              "type": "object",
-              "properties": {
-                "nature_of_control": {
+              "type": "string",
+              "pattern": "^[A-Z]{2}$"
+            },
+            "minItems": 1
+          },
+          "residential_address": {
+            "type": "object",
+            "description": "Registered residential address of the UBO. All members are mandatory within the address.",
+            "properties": {
+              "street": {
+                "type": "string",
+                "description": "Street name of the address."
+              },
+              "house_number": {
+                "type": "string",
+                "description": "House or building number of the address."
+              },
+              "locality": {
+                "type": "string",
+                "description": "City or locality of the address."
+              },
+              "region": {
+                "type": "string",
+                "description": "Region or state of the address."
+              },
+              "postal_code": {
+                "type": "string",
+                "description": "Postal code of the address."
+              },
+              "country": {
+                "type": "string",
+                "description": "Country of the address (ISO 3166-1 alpha-2).",
+                "pattern": "^[A-Z]{2}$"
+              }
+            },
+            "required": [
+              "street",
+              "house_number",
+              "locality",
+              "region",
+              "postal_code",
+              "country"
+            ]
+          },
+          "contact_address": {
+            "type": "object",
+            "description": "Optional alternative contact address of the UBO. All members are mandatory within the address.",
+            "properties": {
+              "street": {
+                "type": "string",
+                "description": "Street name of the address."
+              },
+              "house_number": {
+                "type": "string",
+                "description": "House or building number of the address."
+              },
+              "locality": {
+                "type": "string",
+                "description": "City or locality of the address."
+              },
+              "region": {
+                "type": "string",
+                "description": "Region or state of the address."
+              },
+              "postal_code": {
+                "type": "string",
+                "description": "Postal code of the address."
+              },
+              "country": {
+                "type": "string",
+                "description": "Country of the address (ISO 3166-1 alpha-2).",
+                "pattern": "^[A-Z]{2}$"
+              }
+            },
+            "required": [
+              "street",
+              "house_number",
+              "locality",
+              "region",
+              "postal_code",
+              "country"
+            ]
+          },
+          "person_identifier": {
+            "type": "object",
+            "description": "Government-issued identity document details of the UBO.",
+            "properties": {
+              "document_type": {
+                "type": "string",
+                "description": "Type of identity document, aligned with ICAO 9303.",
+                "enum": [
+                  "PASSPORT",
+                  "NATIONAL_ID",
+                  "RESIDENCE_PERMIT",
+                  "DRIVING_LICENSE",
+                  "OTHER"
+                ]
+              },
+              "document_number": {
+                "type": "string",
+                "description": "Number of the identity document as printed on the document.",
+                "minLength": 1
+              },
+              "issuing_country": {
+                "type": "string",
+                "description": "Country that issued the identity document (ISO 3166-1 alpha-2).",
+                "pattern": "^[A-Z]{2}$"
+              },
+              "expiry_date": {
+                "type": "string",
+                "description": "Expiry date of the identity document (ISO 8601 YYYY-MM-DD).",
+                "format": "date"
+              }
+            },
+            "required": [
+              "document_type",
+              "document_number",
+              "issuing_country",
+              "expiry_date"
+            ]
+          },
+          "person_unique_identifier": {
+            "type": "object",
+            "description": "Optional unique identifier assigned to the UBO by an authority.",
+            "properties": {
+              "identifier_unique": {
+                "type": "string",
+                "description": "A unique identifier assigned to the natural person by an issuing authority.",
+                "minLength": 1
+              },
+              "identifier_issuing_authority": {
+                "type": "string",
+                "description": "The authority that issued the unique identifier.",
+                "minLength": 1
+              }
+            }
+          },
+          "justification": {
+            "type": "object",
+            "description": "How and why this person qualifies as UBO under AMLR.",
+            "properties": {
+              "threshold_met": {
+                "type": "array",
+                "description": "Array of applicable AML thresholds or control criteria met; at least one value required.",
+                "items": {
                   "type": "string",
                   "enum": [
-                    "voting_rights",
-                    "control_through_ownership",
-                    "senior_management_position",
-                    "other_means_of_control"
-                  ],
-                  "description": "Nature of the interest held by the UBO in the company."
-                },
-                "ownership_type": {
-                  "type": "string",
-                  "enum": [
-                    "direct",
-                    "indirect",
-                    "both"
-                  ],
-                  "description": "The type of ownership held by the UBO (direct, indirect or both)."
-                },
-                "ownership_percentage": {
-                  "description": "The percentage of ownership held by the UBO in the company, either a number between 0 and 100 or a bracket.",
-                  "oneOf": [
-                    {
-                      "type": "number",
-                      "minimum": 0,
-                      "maximum": 100
-                    },
-                    {
-                      "type": "string",
-                      "enum": [
-                        "0-25",
-                        "25-50",
-                        "50-75",
-                        "75-100"
-                      ]
-                    }
+                    "ownership_25_plus",
+                    "ownership_direct",
+                    "ownership_indirect",
+                    "control_voting_25_plus",
+                    "control_voting_direct",
+                    "control_voting_indirect",
+                    "control_management",
+                    "control_veto",
+                    "control_contractual",
+                    "control_family_relationships",
+                    "control_acting_in_concert",
+                    "control_nominee",
+                    "control_other_means",
+                    "arrangement_settlor",
+                    "arrangement_trustee",
+                    "arrangement_beneficiary",
+                    "arrangement_protector",
+                    "arrangement_object_of_power",
+                    "arrangement_default_taker",
+                    "arrangement_other_control"
                   ]
                 },
-                "registrable_date": {
+                "minItems": 1
+              },
+              "ownership_percentage": {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 100,
+                "description": "Total direct and indirect ownership percentage held (0-100)."
+              },
+              "voting_rights_percentage": {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 100,
+                "description": "Total direct and indirect voting rights percentage held (0-100)."
+              },
+              "control_details": {
+                "type": "string",
+                "description": "Free text description of control exercised through means other than ownership percentage.",
+                "minLength": 1
+              }
+            },
+            "required": [
+              "threshold_met",
+              "ownership_percentage",
+              "voting_rights_percentage"
+            ]
+          },
+          "effective_date": {
+            "type": "string",
+            "description": "Date when this ownership or control relationship became legally effective (ISO 8601 YYYY-MM-DD).",
+            "format": "date"
+          },
+          "inactive_date": {
+            "type": "string",
+            "description": "Date when the UBO's interest became inactive (if applicable).",
+            "format": "date"
+          },
+          "last_change_date": {
+            "type": "string",
+            "description": "Date when the UBO's interest was last changed.",
+            "format": "date"
+          },
+          "tax_domicile": {
+            "type": "string",
+            "description": "Country of taxation of the UBO (ISO 3166-1 alpha-2).",
+            "pattern": "^[A-Z]{2}$"
+          },
+          "is_alive": {
+            "type": "boolean",
+            "description": "Indicates if the natural person representing the UBO is alive."
+          },
+          "source": {
+            "type": "array",
+            "description": "Supporting evidence for the UBO determination; at least one entry.",
+            "items": {
+              "type": "object",
+              "description": "A source or evidence document.",
+              "properties": {
+                "id": {
                   "type": "string",
-                  "format": "date",
-                  "description": "Date when the UBO's interest was registered."
+                  "description": "Unique identifier for the source document.",
+                  "minLength": 1
                 },
-                "inactive_date": {
+                "type": {
                   "type": "string",
-                  "format": "date",
-                  "description": "Date when the UBO's interest became inactive (if applicable)."
+                  "description": "Type of source document.",
+                  "enum": [
+                    "ShareRegister",
+                    "CommercialRegister",
+                    "TransparencyRegister",
+                    "TrustDeed",
+                    "ShareholderAgreement",
+                    "ArticlesOfAssociation",
+                    "GovernanceChart",
+                    "AMLOfficerDeclaration",
+                    "NotarialDeed",
+                    "Other"
+                  ]
                 },
-                "last_change_date": {
+                "url": {
                   "type": "string",
-                  "format": "date",
-                  "description": "Date when the UBO's interest was last changed."
+                  "description": "URI reference to the source or evidence document.",
+                  "format": "uri"
+                },
+                "data": {
+                  "type": "string",
+                  "description": "Base64-encoded source document; SHALL be provided if url is not a publicly accessible URI.",
+                  "contentEncoding": "base64"
                 }
               },
               "required": [
-                "nature_of_control",
-                "ownership_type",
-                "ownership_percentage",
-                "registrable_date"
+                "id",
+                "type"
               ]
-            }
+            },
+            "minItems": 1
           }
         },
         "required": [
-          "natural_person_details",
-          "ownership_details"
+          "jurisdiction",
+          "person",
+          "birth_place",
+          "citizenship",
+          "residential_address",
+          "person_identifier",
+          "justification",
+          "effective_date",
+          "source"
         ]
-      }
+      },
+      "minItems": 1
     },
     "iss": {
       "type": "string",
@@ -226,6 +446,62 @@
   "required": [
     "vct",
     "legal_person",
-    "ultimate_beneficial_owner"
+    "ubo"
+  ],
+  "examples": [
+    {
+      "vct": "eu.aptitude.ultimate-beneficial-owners-attestation.1",
+      "legal_person": {
+        "legal_person_name": "Example GmbH",
+        "legal_person_id": "DE-HRB-123456",
+        "legal_form_type": "GmbH",
+        "registered_address": "Musterstrasse 1, 10115 Berlin"
+      },
+      "ubo": [
+        {
+          "jurisdiction": "DE",
+          "person": {
+            "first_name": "Maria Anna",
+            "surname": "Müller",
+            "birth_date": "1982-07-14"
+          },
+          "birth_place": {
+            "locality": "Munich",
+            "country": "DE"
+          },
+          "citizenship": [
+            "DE"
+          ],
+          "residential_address": {
+            "street": "Musterstrasse",
+            "house_number": "1",
+            "locality": "Berlin",
+            "region": "Berlin",
+            "postal_code": "10115",
+            "country": "DE"
+          },
+          "person_identifier": {
+            "document_type": "PASSPORT",
+            "document_number": "C01X00T47",
+            "issuing_country": "DE",
+            "expiry_date": "2031-03-20"
+          },
+          "justification": {
+            "threshold_met": [
+              "ownership_25_plus"
+            ],
+            "ownership_percentage": 35,
+            "voting_rights_percentage": 35
+          },
+          "effective_date": "2024-01-15",
+          "source": [
+            {
+              "id": "urn:example:register:123",
+              "type": "CommercialRegister"
+            }
+          ]
+        }
+      ]
+    }
   ]
 }

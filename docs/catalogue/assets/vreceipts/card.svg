@@ -4,8 +4,8 @@
   <text x="24" y="46" font-family="Arial, Helvetica, sans-serif" font-size="22" font-weight="bold" fill="#FFFFFF">vReceipt</text>
   <text x="24" y="68" font-family="Arial, Helvetica, sans-serif" font-size="12" fill="#FFFFFF">Verifiable purchase receipt</text>
   <line x1="24" y1="82" x2="376" y2="82" stroke="#FFFFFF" stroke-opacity="0.5"/>
-  <text x="24" y="112" font-family="Arial, Helvetica, sans-serif" font-size="15" fill="#FFFFFF">Receipt: {{iD}}</text>
-  <text x="24" y="142" font-family="Arial, Helvetica, sans-serif" font-size="15" fill="#FFFFFF">Issued: {{issueDate}}</text>
-  <text x="24" y="172" font-family="Arial, Helvetica, sans-serif" font-size="15" fill="#FFFFFF">Currency: {{documentCurrencyCode}}</text>
-  <text x="24" y="202" font-family="Arial, Helvetica, sans-serif" font-size="15" fill="#FFFFFF">Total: {{legalMonetaryTotal.payableAmount}}</text>
+  <text x="24" y="112" font-family="Arial, Helvetica, sans-serif" font-size="15" fill="#FFFFFF">Receipt: {{receipt_number}}</text>
+  <text x="24" y="142" font-family="Arial, Helvetica, sans-serif" font-size="15" fill="#FFFFFF">Issued: {{receipt_timestamp}}</text>
+  <text x="24" y="172" font-family="Arial, Helvetica, sans-serif" font-size="15" fill="#FFFFFF">Currency: {{currency_iso_code}}</text>
+  <text x="24" y="202" font-family="Arial, Helvetica, sans-serif" font-size="15" fill="#FFFFFF">Total: {{total_price_inc_vat}}</text>
 </svg>

@@ -42,7 +42,7 @@ The Signatory Rights attestation will be used by companies in the EWC pilots wit
 
 ### 1.3 Goal of the Signatory Rights attestation
 
-The goal of the Signatory Rights attestation is to clearly identify the legal or natural person, registered in the National Business Registry, who has full signatory right defined by national law to engage a company. This attestation does not allow any limitation of this right, except the possible necessity to act jointly with another Signatory in order to engage the company. This unique rule is not used in EWC and will only allow signatory to act alone.
+The goal of the Signatory Rights attestation is to clearly identify the legal or natural person, registered in the National Business Registry, who has full signatory right defined by national law to engage a company. This attestation does not allow any limitation of this right, except the possible necessity to act jointly with another Signatory in order to engage the company. The attribute `person_role.representation_type` records whether a signatory acts alone (`SOLE`) or jointly with others (`JOINT`).
 
 ### 1.4 Key words
 
@@ -106,47 +106,95 @@ EWC participating Business Registries don’t impose any data or attributes spec
 
 Signatory Rights attributes have been decided together by business registries in the EWC pilot in accordance with the LPID and EU Company Certificate attestation.
 
-This table contains the name of the attribute, its description and whether the attribute is required or not. Attributes under `signatory_rights` are listed with the prefix `signatory_rights[]`; each entry describes one signatory, held either by a natural person or by a legal person (see section 4.1).
+This table contains the name of the attribute, its description and whether the attribute is required or not. The claim structure and claim names follow the WE BUILD AuthorisedSignatories attestation. Attributes of the entries of `authorised_persons` and `authorised_legal_persons` are listed with the prefix `authorised_persons[]` and `authorised_legal_persons[]`; each entry describes one signatory, held either by a natural person or by a legal person (see section 4.1).
 
 | Attribute | Description | Required |
 |-----------|-------------|----------|
-| legal_person_name | Official current legal person name as registered in the business register. | Yes |
-| legal_person_id | Unique id for organisations in EUID structure. | Yes |
-| signatory_rights | Information about the persons and their signatory rights over the legal person. | Yes |
-| signatory_rights[].full_name | Full name of the natural person representing the company (natural person signatory). | Yes |
-| signatory_rights[].date_of_birth | Date of birth of the natural person representing the company (natural person signatory). | Yes |
-| signatory_rights[].nationality | Nationality of the natural person representing the company (natural person signatory). | No |
-| signatory_rights[].legal_person_name | Official current legal person name of the signatory as registered in the business register (legal person signatory). | Yes |
-| signatory_rights[].legal_person_id | Unique id of the signatory organisation in EUID structure (legal person signatory). | Yes |
-| signatory_rights[].signatory_rule | Information if the signatory can engage the company alone or jointly. Only the value `alone` is allowed. | Yes |
-| signatory_rights[].post | Role of the signatory as registered, a list of posts. | No |
-| signatory_rights[].post[].code | National code of the post. | No |
-| signatory_rights[].post[].name | Name of the post as registered. | Yes (per post) |
+| legal_entity | Identifies the legal entity on whose behalf the authorised persons act. SHALL appear exactly once. | Yes |
+| legal_entity.legal_person | The official legal name and legal form of the entity. | Yes |
+| legal_entity.legal_person.legal_person_name | The complete official legal name of the legal entity. | Yes |
+| legal_entity.legal_person.legal_form_type | The legal form of the legal entity (e.g., GmbH, S.A., Ltd, BV). | Yes |
+| legal_entity.identifier | Legal identifiers for the entity. The EUID is mandatory; LEI and tax number are optional. | Yes |
+| legal_entity.identifier.euid | The European Unique Identifier (EUID) of the legal entity per Directive (EU) 2017/1132. SHALL be a non-empty string. | Yes |
+| legal_entity.identifier.lei | Legal Entity Identifier (LEI) per ISO 17442. When present, SHALL be exactly 20 characters. | No |
+| legal_entity.identifier.tax | National company tax or registration number. Optional. | No |
+| legal_entity.identifier.gln | Global Location Number for legal entities — GS1 identifier | No |
+| legal_entity.identifier.duns | Data Universal Numbering System — Dun & Bradstreet identifier | No |
+| legal_entity.identifier.eori | Economic Operators Registration and Identification number — EU customs identifier | No |
+| legal_entity.identifier.bpnl | Business Partner Number Legal entity — Catena-X identifier per ICD 0243 | No |
+| legal_entity.identifier.siren | Système d'Identification du Répertoire des ENtreprises — French company identifier | No |
+| authorised_persons | Array of authorised person objects. Each entry represents a natural person authorised to act on behalf of the legal entity. | Conditional (at least one of authorised_persons and authorised_legal_persons) |
+| authorised_persons[].natural_person | Core personal identity attributes of the authorised person. All three fields are mandatory. | Yes (per entry) |
+| authorised_persons[].natural_person.first_name | The first names in full (including all given names and middle names) of the authorised person. | Yes (per entry) |
+| authorised_persons[].natural_person.surname | The surnames in full (all family names/last names) of the authorised person. | Yes (per entry) |
+| authorised_persons[].natural_person.date_of_birth | Day, month, and year of birth of the authorised person per ISO 8601. Format: YYYY-MM-DD. | Yes (per entry) |
+| authorised_persons[].birth_place | Place of birth of the authorised person. Locality and country are mandatory; region is optional. | Yes (per entry) |
+| authorised_persons[].birth_place.locality | Locality (city or town) where the natural person was born. | Yes (per entry) |
+| authorised_persons[].birth_place.country | Country where the natural person was born. SHALL be a valid ISO 3166-1 alpha-2 country code. | Yes (per entry) |
+| authorised_persons[].birth_place.region | Optional additional detail on the region or state of birth. | No |
+| authorised_persons[].citizenship | Nationality or nationalities of the authorised person. SHALL contain at least one valid ISO 3166-1 alpha-2 country code. | Yes (per entry) |
+| authorised_persons[].person_role | Role and representation power of the authorised person within the legal entity. representation_type is mandatory; role is optional. | Yes (per entry) |
+| authorised_persons[].person_role.representation_type | The nature of the power of representation. SHALL be one of the standardized values defined in the rulebook: 'SOLE' (single signatory has full authority) or 'JOINT' (multiple signatories required). | Yes (per entry) |
+| authorised_persons[].person_role.role | The role of the authorised person within the company (e.g., CEO, CFO, Director). Optional. | No |
+| authorised_persons[].person_role.email | The email of the authorised person. Optional. | No |
+| authorised_persons[].person_role.phone | The phone of the authorised person. Optional. | No |
+| authorised_persons[].residence_address | Optional residential address of the authorised person. When present, country SHALL be a valid ISO 3166-1 alpha-2 code. | No |
+| authorised_persons[].residence_address.address | The street address where the authorised person currently resides. | No |
+| authorised_persons[].residence_address.locality | The city where the authorised person currently resides. | No |
+| authorised_persons[].residence_address.postal_code | The postal or ZIP code of the authorised person's address. | No |
+| authorised_persons[].residence_address.region | The state, province, or region of the authorised person's address. | No |
+| authorised_persons[].residence_address.country | ISO 3166-1 alpha-2 country code where the authorised person resides. | No |
+| authorised_persons[].identifier | Optional identity document details for enhanced identification of the authorised person. When present, ALL FOUR fields SHALL be provided together: document_type, document_number, issuing_country, and document_expiry_date. | No |
+| authorised_persons[].identifier.document_type | Type of the identity document. SHALL use one of the standardized values defined in the rulebook. | Yes (if parent present) |
+| authorised_persons[].identifier.document_number | The number of the identity document (passport number, national ID number, etc.). | Yes (if parent present) |
+| authorised_persons[].identifier.issuing_country | The country that issued the identity document. SHALL be a valid ISO 3166-1 alpha-2 country code. | Yes (if parent present) |
+| authorised_persons[].identifier.document_expiry_date | The expiration date of the identity document per ISO 8601. Format: YYYY-MM-DD. | Yes (if parent present) |
+| authorised_legal_persons | Array of legal persons that hold signatory rights over the legal entity. Optional; use it when a legal person, not a natural person, is the registered signatory. | Conditional (at least one of authorised_persons and authorised_legal_persons) |
+| authorised_legal_persons[].legal_person | The official legal name of the signatory legal person as registered in the business register. | Yes (per entry) |
+| authorised_legal_persons[].legal_person.legal_person_name | The complete official legal name of the signatory legal person. | Yes (per entry) |
+| authorised_legal_persons[].identifier | Legal identifier of the signatory legal person. | Yes (per entry) |
+| authorised_legal_persons[].identifier.euid | The European Unique Identifier (EUID) of the signatory legal person per Directive (EU) 2017/1132. SHALL be a non-empty string. | Yes (per entry) |
+| authorised_legal_persons[].person_role | Role and representation power of the signatory legal person within the legal entity. representation_type is mandatory; role is optional. | Yes (per entry) |
+| authorised_legal_persons[].person_role.representation_type | The nature of the power of representation. SHALL be one of the standardized values defined in the rulebook: 'SOLE' (single signatory has full authority) or 'JOINT' (multiple signatories required). | Yes (per entry) |
+| authorised_legal_persons[].person_role.role | The role of the authorised person within the company (e.g., CEO, CFO, Director). Optional. | No |
 
 The attestation is an SD-JWT VC with the `vct` value `eu.aptitude.signatory-rights-attestation.1`. The claims sit at the top level of the SD-JWT VC payload; revocation uses the SD-JWT VC `status` claim.
 
 The **Signatory Rights schema** is available in this catalogue: [Signatory Rights data schema](../../data-schemas/sd-jwt/signatory-rights-attestation-sd-jwt.json).
 
-**Note**: The Signatory Rights attestation metadata are aligned with the LPID. The necessary information about those can be found in the [LPID Rulebook](../rb-legal-person-identification-data/README.md).
+**Note**: The attributes of the Signatory Rights attestation follow the WE BUILD authorised signatories attestation. The legal person is identified as in the [LPID Rulebook](../rb-legal-person-identification-data/README.md).
 
 ### 4.1 Signatory rights related attributes
 
-This document defines the following attributes related to the signatory of a company. This list of attributes allows Signatory rights attestation issuers to use either or both list in order to describe a signatory who is a natural person or a legal person.
+This document defines the following attributes related to the signatory of a company. Issuers use `authorised_persons` for signatories who are natural persons and `authorised_legal_persons` for signatories who are legal persons, and use either or both lists.
 
 #### Attributes to define the signatory right when held by a natural person
 
-- full_name
-- date_of_birth
-- nationality
-- signatory_rule
-- post
+- natural_person (first_name, surname, date_of_birth)
+- birth_place
+- citizenship
+- person_role (representation_type, role)
+- residence_address
+- identifier (identity document)
 
 #### Attributes to define the signatory right when held by a legal person
 
-- legal_person_name
-- legal_person_id
-- signatory_rule
-- post
+- legal_person (legal_person_name)
+- identifier (euid)
+- person_role (representation_type, role)
+
+#### Representation type
+
+`person_role.representation_type` takes one of the following values:
+
+| Value | Definition |
+|-------|------------|
+| SOLE | A single signatory has full authority to act and sign on behalf of the legal entity independently, without requiring the co-signature of any other person. |
+| JOINT | Two or more signatories are required to act together to make binding commitments on behalf of the legal entity. |
+
+#### Identity document type
+
+`authorised_persons[].identifier.document_type` takes one of the values `Passport`, `National identity card`, `Driver's license`, `Residence permit` and `Other official identity document`.
 
 ### 4.2 Minimum number of optional attributes
 

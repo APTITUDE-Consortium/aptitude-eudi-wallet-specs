@@ -2,77 +2,97 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://registry.siros.org/aptitude-consortium/student-id.schema.json",
   "title": "Student ID",
-  "description": "Student identity credential carrying SCHAC and eduPerson attributes, issued as an SD-JWT VC (OpenID4VCI scope StudentID).",
-  "version": "0.10.0",
+  "description": "Student identity credential carrying SCHAC and eduPerson attributes, issued as an SD-JWT VC. Multi-valued eduPerson and SCHAC attributes are arrays.",
+  "version": "0.11.0",
   "type": "object",
   "additionalProperties": true,
   "properties": {
     "vct": {
       "type": "string",
-      "const": "VerifiableStudentIDSDJWT",
-      "description": "Verifiable credential type identifier of the student ID."
+      "const": "eu.aptitude.student-id.1",
+      "description": "Verifiable Credential Type identifier of the student ID."
     },
     "identifier": {
       "type": "string",
-      "description": "Unique identifier of the student credential."
+      "description": "Unique student identifier, such as an institutional student number or equivalent."
     },
     "schacPersonalUniqueCode": {
       "type": "string",
-      "description": "SCHAC personal unique code of the student."
+      "description": "Unique code associated with the student."
     },
     "schacPersonalUniqueID": {
-      "type": "string",
-      "description": "SCHAC personal unique ID of the student."
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "minItems": 1,
+      "uniqueItems": true,
+      "description": "One or more unique identifiers for the student."
     },
     "schacHomeOrganization": {
       "type": "string",
-      "description": "SCHAC identifier of the student's home organisation."
+      "description": "Home organisation or institution domain or identifier."
     },
     "familyName": {
       "type": "string",
-      "description": "Family name of the student."
+      "description": "Student family name."
     },
     "firstName": {
       "type": "string",
-      "description": "First name of the student."
+      "description": "Student given name."
     },
     "displayName": {
       "type": "string",
-      "description": "Name of the student as preferred for display."
+      "description": "Display name formatted for user interfaces."
     },
     "dateOfBirth": {
       "type": "string",
-      "description": "Date of birth of the student.",
+      "description": "Student date of birth, as an ISO 8601 date (YYYY-MM-DD). SHALL NOT be in the future.",
       "format": "date"
     },
     "commonName": {
       "type": "string",
-      "description": "Common name (cn) of the student."
+      "description": "Alternate display or preferred name."
     },
     "mail": {
       "type": "string",
-      "description": "E-mail address of the student.",
+      "description": "Email address (RFC 5322 mailbox).",
       "format": "email"
     },
     "eduPersonPrincipalName": {
       "type": "string",
-      "description": "eduPerson principal name (scoped identifier) of the student."
+      "description": "Principal name of the student, often expressed in user@realm format."
     },
     "eduPersonPrimaryAffiliation": {
       "type": "string",
-      "description": "eduPerson primary affiliation of the student with the home organisation."
+      "description": "Primary affiliation of the subject with the educational organisation; the value SHOULD be 'student' unless the issuer has a specific student-equivalent category."
     },
     "eduPersonAffiliation": {
-      "type": "string",
-      "description": "eduPerson affiliation of the student with the home organisation."
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "minItems": 1,
+      "uniqueItems": true,
+      "description": "One or more affiliations, such as 'student', 'member' or 'affiliate'. SHOULD include the value of eduPersonPrimaryAffiliation."
     },
     "eduPersonScopedAffiliation": {
-      "type": "string",
-      "description": "eduPerson affiliation of the student, scoped to the home organisation domain."
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "minItems": 1,
+      "uniqueItems": true,
+      "description": "One or more scoped affiliation values, commonly 'affiliation@scope'. The scope SHOULD be consistent with schacHomeOrganization."
     },
     "eduPersonAssurance": {
-      "type": "string",
-      "description": "eduPerson assurance profile that applies to the student's identity."
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "minItems": 1,
+      "uniqueItems": true,
+      "description": "One or more assurance values (URIs or issuer-defined) for the subject or attributes."
     },
     "iss": {
       "type": "string",
@@ -128,9 +148,49 @@
       "required": [
         "status_list"
       ]
+    },
+    "jti": {
+      "type": "string",
+      "description": "Unique identifier of the credential instance."
+    },
+    "cryptographically_bound_to": {
+      "type": "string",
+      "description": "Identifier of another attestation type to which this attestation is cryptographically bound, where such binding is used."
     }
   },
   "required": [
-    "vct"
+    "vct",
+    "identifier",
+    "schacHomeOrganization",
+    "firstName",
+    "familyName",
+    "eduPersonPrincipalName",
+    "eduPersonPrimaryAffiliation"
+  ],
+  "examples": [
+    {
+      "vct": "eu.aptitude.student-id.1",
+      "identifier": "STU-2026-000123",
+      "schacHomeOrganization": "aegean.gr",
+      "firstName": "Nikos",
+      "familyName": "Triantafyllou",
+      "eduPersonPrincipalName": "ntriantafyllou@aegean.gr",
+      "eduPersonPrimaryAffiliation": "student",
+      "eduPersonAffiliation": [
+        "student",
+        "member"
+      ],
+      "eduPersonScopedAffiliation": [
+        "student@aegean.gr"
+      ],
+      "eduPersonAssurance": [
+        "https://refeds.org/assurance"
+      ],
+      "schacPersonalUniqueID": [
+        "urn:schac:personalUniqueID:gr:student:123456"
+      ],
+      "mail": "ntriantafyllou@aegean.gr",
+      "dateOfBirth": "1990-04-12"
+    }
   ]
 }
