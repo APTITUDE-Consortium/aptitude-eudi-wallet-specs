@@ -58,6 +58,6 @@ Each rulebook folder has a line in `.github/CODEOWNERS` that names the work pack
 
 ## Checks
 
-`script/validate_catalogue.py` validates the tree: valid JSON; JSON Schema 2020-12; the root keys `$schema`, `title`, `description` and `version`; a string `properties.vct.const` for SD-JWT VC schemas; `required` entries that exist in `properties`; file and folder names; a rulebook for every schema and a schema for every rulebook; and the card rules. It prints warnings for rulebooks without the standard chapters and for schemas without examples, and `--strict` turns warnings into errors.
+`script/validate_catalogue.py` validates the tree: valid JSON; JSON Schema 2020-12; the root keys `$schema`, `title`, `description` and `version`; a string `properties.vct.const` for SD-JWT VC schemas; `required` entries that exist in `properties`; file and folder names; a rulebook for every schema and a schema for every rulebook; and the card rules. It prints warnings for rulebooks without the standard chapters and for schemas without examples. Warnings show in the check output; `--strict` turns them into errors for a tree that conforms completely.
 
 The `Catalogue` workflow runs the validator and builds the tree with registry-cli, and the site build renders the rulebooks and lists the types on the [catalogue page](index.md).
