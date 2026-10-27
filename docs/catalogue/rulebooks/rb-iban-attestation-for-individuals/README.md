@@ -2,7 +2,7 @@
 
 Status: Approved by the EWC LSP (phase 02)
 
-The original rulebook is also available as a PDF: [rulebook.pdf](rulebook.pdf).
+The original rulebook is also available as a PDF: [the original rulebook as a PDF file](rulebook.pdf).
 
 ## Table of Contents
 

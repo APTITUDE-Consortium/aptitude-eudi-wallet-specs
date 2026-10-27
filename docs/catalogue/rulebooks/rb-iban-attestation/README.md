@@ -5,26 +5,26 @@ Status: Approved by the EWC LSP (phase 02)
 ## Table of Contents
 
 1. [Introduction](#1-introduction)
-   
+
     1.1. [Scope](#11-scope)  
     1.2. [Background](#12-background)  
     1.3. [Goal of the IBAN Attestation](#13-goal-of-the-iban-attestation)  
     1.4. [Key words](#14-key-words)  
-    1.5. [Terminology](#15terminology)  
-2. [IBAN attestation Issuance process](#2-iban-attestation-issuance-process)  
-3. [IBAN attestation Verification process](#3-iban-attestation-verification-process)  
-4. [IBAN attributes](#4-iban-attestation-attributes)
-   
+    1.5. [Terminology](#15-terminology)  
+2. IBAN attestation Issuance process  
+3. IBAN attestation Verification process  
+4. [IBAN attributes](#4-iban-attributes)
+
    4.1. [Parties-related attributes](#41-parties-related-attributes)  
-   4.2. [Minimum number of optional attributes](#42-minimum-number-of-optionnal-attributes)
-   
-6. [Trust infrastructure details](#5-trust-infrastructure-details)
-   
+   4.2. [Minimum number of optional attributes](#42-minimum-number-of-optional-attributes)
+
+5. [Trust infrastructure details](#5-trust-infrastructure-details)
+
     5.1. [Trust requirements on the IBAN attestation from the perspective of company registration offices as authentic sources for the IBAN](#51-trust-requirements-on-the-iban-attestation-from-the-perspective-of-company-registration-offices-as-authentic-sources-for-the-iban)  
-    5.2. [Trust a signature or seal over a IBAN](#52-trust-a-signature-or-seal-over-an-iban)  
+    5.2. [Trust a signature or seal over a IBAN](#52-trust-a-signature-or-seal-over-a-iban)  
     5.3. [IBAN Provider Trusted List](#53-iban-provider-trusted-list)  
     5.4. [SD-JWT-compliant](#54-sd-jwt-compliant)  
-7. [References](#6-references)  
+6. [References](#6-references)  
 
 ## 1. Introduction
 
@@ -74,7 +74,6 @@ To fully understand the data schema, the following definitions are provided :
 - **SWIFT** (Society for Worldwide Interbank Financial Telecommunication): A global provider of secure messaging services and financial transactions among banks and financial institutions.
 - **Open Banking**: The practice of enabling third-party financial service providers to access banking and transaction data via APIs, typically under PSD2 compliance.
 
-
 ## 2. IBAN Issuance process
 
 Only financial institutions acting as Account Servicing Payment Service Providers (ASPSP) are authorized to issue IBAN attestations. These entities are considered the authentic sources of IBAN information. Issuance may occur directly or through a delegated Qualified Electronic Attestation Authority (QEAA).
@@ -97,7 +96,7 @@ During the testing phase, there will be no restrictions on the Holder's wallet r
 
 ## 4. IBAN attributes
 
-IBAN attributes have been defined together by Archipels and _**WP 2.3**_  stakeholders in the EWC pilot in accordance with the PSD2.
+IBAN attributes have been defined together by Archipels and ***WP 2.3***  stakeholders in the EWC pilot in accordance with the PSD2.
 
 This table contains the name of the attribute, its description, and whether the attribute is required or not.
 
@@ -121,7 +120,6 @@ This table contains the name of the attribute, its description, and whether the 
 | account_provider.BIC | BIC or SWIFT code, as defined in ISO 9362, of the financial institution. | No |
 | account_provider.clearing_number | Clearing number, only used in some countries, of the identification of the financial institution. | No |
 
-
 IBAN metadata are aligned with the metadata of organizational credential attestations already defined in [EUDI wallet data schemas](https://github.com/EWC-consortium/eudi-wallet-rulebooks-and-schemas/tree/main/data-schemas)
 
 This table contains the name of the metadatum, its description, and whether the metadatum is required or not.
@@ -142,7 +140,7 @@ The IBAN schema is available in this catalogue: [IBAN data schema](../../data-sc
 
 ### 4.1 Parties-related attributes
 
-*Note*: The "owner_name" field is only intended for the legal name of the company. If the company is owned by a single physical person, this physical person's relation to the company SHALL be indicated in the "parties" field. 
+*Note*: The "owner_name" field is only intended for the legal name of the company. If the company is owned by a single physical person, this physical person's relation to the company SHALL be indicated in the "parties" field.
 This document defines the following attributes related to the parties of the IBAN holder:
 
 - full_name
@@ -150,7 +148,7 @@ This document defines the following attributes related to the parties of the IBA
 
 The detailed attributes allow the IBAN attestation to encapsulate the natural person that have access to the legal entity's bank account.
 
-Parties included in the IBAN attestation serve solely to provide information about the individuals with access to or ownership of the bank account. 
+Parties included in the IBAN attestation serve solely to provide information about the individuals with access to or ownership of the bank account.
 The presence of a party in the attestation DOES NOT determine who can present or use the IBAN attestation in a business process.
 
 ### 4.2 Minimum number of optional attributes
@@ -178,7 +176,7 @@ The IBAN SHALL follow the SD-JWT format.
 It SHALL not be possible to log into company registers solely with the IBAN, since procedures legally require an individual person to act.
 
 IBAN Issuers SHALL follow the IBAN requirements and trust mechanisms defined by Authentic Sources on a national level.
-Authentic Sources that are company registration offices need to accept each other's PUB-EAA attestations according to the regulation. Therefore, common legal trust mechanisms need to be established ifor the trust ecosystem to be trustworthy: 
+Authentic Sources that are company registration offices need to accept each other's PUB-EAA attestations according to the regulation. Therefore, common legal trust mechanisms need to be established ifor the trust ecosystem to be trustworthy:
 
 - The IBAN unique identifier SHALL be unique and agreed upon on EU and EES level.
 - There SHALL be one common schema for the IBAN which is accepted by all company registries offices.
@@ -186,7 +184,7 @@ Authentic Sources that are company registration offices need to accept each othe
 - The IBAN SHALL be in a machine-readable format defined in the ARF during its whole lifecycle.
 - The IBAN SHALL be in a format that can scale to additional/new legal forms.
 - The IBAN SHALL apply for all legal persons.
-- The issuer of the IBAN SHALL be responsible for its revocation. 
+- The issuer of the IBAN SHALL be responsible for its revocation.
 
 ### 5.2 Trust a signature or seal over a IBAN
 

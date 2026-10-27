@@ -5,7 +5,7 @@ Status: Approved by the EWC LSP (phase 02)
 ## Table of Contents
 
 1. [Introduction](#1-introduction)
-   
+
     1.1. [Scope](#11-scope)  
     1.2. [Background](#12-background)  
     1.3. [Goal of the EUCC attestation](#13-goal-of-the-eucc-attestation)  
@@ -15,7 +15,7 @@ Status: Approved by the EWC LSP (phase 02)
 3. [EUCC Verification process](#3-eucc-verification-process)  
 4. [EUCC attributes](#4-eucc-attributes)  
 5. [Trust infrastructure details](#5-trust-infrastructure-details)
-   
+
     5.1. [Trust requirements on the EUCC attestation from the perspective of company registration offices as authentic sources for the EUCC](#51-trust-requirements-on-the-eucc-attestation-from-the-perspective-of-company-registration-offices-as-authentic-sources-for-the-eucc)  
     5.2. [Trust a signature or seal over a EUCC](#52-trust-a-signature-or-seal-over-a-eucc)  
     5.3. [EUCC Provider Trusted List](#53-eucc-provider-trusted-list)  
@@ -58,17 +58,17 @@ In addition to the attributes definition necessary to understand the data schema
 
 - **Natural person**: an individual human being who has legal rights and obligations. Unlike a legal person (which refers to an organization or entity), a natural person is a human with the capacity to engage in legal relationships, enter into contracts, own property, and be subject to legal actions.
   Natural persons are distinct from artificial entities (like corporations or governments).
-  In legal terms, a natural person is someone who exists as a human being, as opposed to a corporate or fictional entity. 
+  In legal terms, a natural person is someone who exists as a human being, as opposed to a corporate or fictional entity.
 - **Legal person**: an entity that has legal rights and obligations, similar to a natural person (an individual). It is an organization or group recognized by law as having the capacity to enter into contracts, sue, and be sued, and own property. Legal persons are distinct from the individuals who may own, manage, or be part of them.
   Examples of legal persons include Corporations, Government agencies, public entities (that are granted legal recognition to act on behalf of the state), Nonprofit organizations
-  A legal person exists as a separate legal entity, meaning it can perform legal actions in its own name, distinct from the actions of its members. 
+  A legal person exists as a separate legal entity, meaning it can perform legal actions in its own name, distinct from the actions of its members.
 - **Legal entity**: an organization or structure that is recognized by law as having legal rights and responsibilities distinct from those of its members or owners. A legal entity can enter into contracts, own property, incur debts, and be held liable for legal actions in its own name.
   Legal entities include various forms of organizations such as Corporations, Limited liability companies (LLCs), Nonprofit organizations, Partnerships
   The key characteristic of a legal entity is that it has its own legal existence, allowing it to perform actions independently of the individuals who are involved with it.  
 - **Legal representative**: Natural or legal person authorized to act on behalf of another person or organization in legal matters. This person has the legal authority to represent the interests of the entity, such as a company, in dealings with other parties, including signing contracts, making decisions, and appearing in legal proceedings.
   For businesses, a legal representative can be a director, officer, or another person designated by the company’s governing body (like the board of directors) to represent the company in legal matters. In the case of individuals, a legal representative might include a guardian, power of attorney holder, or someone with similar legal authority to act on behalf of the person.  
 - **Signatory rights**: the authority or power granted to an individual or entity to legally bind an organization or company by signing contracts, agreements, or other formal documents. This authority can be granted to a specific person, such as an executive, director, or authorized representative, and can be either individual (where one person alone can sign) or joint (where multiple individuals are required to sign together). Signatory rights are important because they ensure that any commitments made by the organization are legally valid and enforceable.
-  The terms and scope of signatory rights are usually outlined in the organization's internal governance documents, such as its bylaws, and can vary based on the level of responsibility and the nature of the agreements being signed. 
+  The terms and scope of signatory rights are usually outlined in the organization's internal governance documents, such as its bylaws, and can vary based on the level of responsibility and the nature of the agreements being signed.
 
 ## 2. EUCC Issuance process
 
@@ -160,11 +160,11 @@ This document defines the following attributes related to the registered address
 - admin_unit_level_1
 - admin_unit_level_2
 
-The detailed attributes allow the EUCC attestation to represent the granularity of the elements describing a registered address as defined in the [EU Core Business Vocabulary](https://semiceu.github.io/Core-Business-Vocabulary/releases/2.2.0/#Address).. 
+The detailed attributes allow the EUCC attestation to represent the granularity of the elements describing a registered address as defined in the [EU Core Business Vocabulary](https://semiceu.github.io/Core-Business-Vocabulary/releases/2.2.0/#Address)..
 
 ### 4.2 Legal representative-related attributes
 
-This document defines the following attributes related to the legal representation of a company. This list of attributes allows EUCC issuers to use either or both list in order to describe a legal representative who is a natural person or a legal person. 
+This document defines the following attributes related to the legal representation of a company. This list of attributes allows EUCC issuers to use either or both list in order to describe a legal representative who is a natural person or a legal person.
 
 **Attributes to define a natural person holding a legal representative right:**
 
@@ -207,7 +207,7 @@ The EUCC SHALL follow the SD-JWT format.
 It SHALL not be possible to log into company registers solely with the EUCC, since procedures legally require an individual person to act.
 
 EUCC Issuers SHALL follow the EUCC requirements and trust mechanisms defined by Authentic Sources on a national level.
-Authentic Sources that are company registration offices need to accept each other's PUB-EAA attestations according to the regulation. Therefore, common legal trust mechanisms need to be established ifor the trust ecosystem to be trustworthy: 
+Authentic Sources that are company registration offices need to accept each other's PUB-EAA attestations according to the regulation. Therefore, common legal trust mechanisms need to be established ifor the trust ecosystem to be trustworthy:
 
 - The EUCC unique identifier SHALL be unique and agreed upon on EU and EES level.
 - There SHALL be one common schema for the EUCC which is accepted by all company registries offices.
@@ -215,7 +215,7 @@ Authentic Sources that are company registration offices need to accept each othe
 - The EUCC SHALL be in a machine-readable format defined in the ARF during its whole lifecycle.
 - The EUCC SHALL be in a format that can scale to additional/new legal forms.
 - The EUCC SHALL apply for all legal persons.
-- The issuer of the EUCC SHALL be responsible for its revocation. 
+- The issuer of the EUCC SHALL be responsible for its revocation.
 
 ### 5.2 Trust a signature or seal over a EUCC
 

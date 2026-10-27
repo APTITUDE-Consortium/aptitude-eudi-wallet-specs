@@ -69,6 +69,7 @@ The changes below alter what an issuer or a verifier sends, so they are not appl
 Legend: B = BREAKING (changes what an issuer or verifier sends), C = COMPATIBLE. "Shared block" means item 1 of section 2 (C). All edits below also require the matching rulebook attribute table row to be updated.
 
 ### ds001 EU Company Certificate (`ds001-eu-company-certificate-sd-jwt.json`)
+
 - C: `issuing_country`, `registration_member_state`: add `pattern ^[A-Z]{2}$` (keep length).
 - C: `share_capital.currency`: add `pattern ^[A-Z]{3}$` (ISO 4217).
 - C: `legal_person_id`: description names EUID (format from Commission Implementing Regulation (EU) 2021/1042, pattern not added, to verify).
@@ -77,6 +78,7 @@ Legend: B = BREAKING (changes what an issuer or verifier sends), C = COMPATIBLE.
 - C: add one example for `legal_representative`.
 
 ### ds002 IBAN Attestation and ds015 IBAN for Individuals
+
 - C: `IBAN` (and `account_token_number`): pattern to `^[A-Z]{2}[0-9]{2}[A-Z0-9]{11,30}$` (ISO 13616: country letters, 2 check digits, up to 30 alphanumerics, 15 to 34 characters). The current `[0-9A-Z]{13,30}` caps at 32 characters.
 - C: `BIC`: current pattern already matches ISO 9362 (8 or 11 characters); no edit.
 - C: `account_currency`, `provider_country`: add `^[A-Z]{3}$`, `^[A-Z]{2}$` patterns.
@@ -86,26 +88,31 @@ Legend: B = BREAKING (changes what an issuer or verifier sends), C = COMPATIBLE.
 - ds015: B if `account_token_number` is meant to differ from an IBAN (then drop the IBAN pattern from it; Q13).
 
 ### ds003 Signatory Rights Attestation
+
 - C: add `$defs` descriptions already present; add `status`, `cnf`, `iss`, `iat`, `exp` shared block.
 - B (Q3): `signatory_rule` enum `["alone"]` -> `["alone","joint"]` in `signatory_rights_held_by_person` and `_legal_person` if joint signatures are in scope. This widens accepted data; BREAKING for verifiers that rely on "alone".
 - C: `date_of_birth` already `format: date`; `nationality`: add `^[A-Z]{2}$` pattern (ISO 3166-1 alpha-2) if the rulebook agrees; otherwise leave description.
 
 ### ds004 Legal Person Identification Data
+
 - C: description: "Deprecated by ADR 001 (replace LPID with EBWOID); do not reference from new specifications."
 - C: `issuing_country` pattern; shared block.
 - B (Q2): migrate to EBWOID claims `id`, `name`, and vct `uri:eu.ebw.oid.1`. Not recommended inside this PR.
 
 ### ds005 Ferry Boarding Pass
+
 - B: vct -> `eu.aptitude.ferry-boarding-pass.1`.
 - C: add `pattern`/format to `departureTime`/`arrivalTime` (`^[0-2][0-9]:[0-5][0-9](:[0-5][0-9])?$`), examples, shared block.
 
 ### ds006 Ultimate Beneficial Owners
+
 - C: `ownership_details.nature_of_control`/`ownership_type` enums stay; `nationality`, `tax_domicile`: add `^[A-Z]{2}$`.
 - C: `legal_person.registered_address`, `postal_address` stay strings (WB uses an address object; do not change).
 - C: add examples (none today); shared block (`exp` etc.).
 - B (Q4): converge to WB `ubo` (`jurisdiction`, `person`, `citizenship[]`, `effective_date`, ...). Not recommended in this PR.
 
 ### ds007 Payment Wallet Attestation
+
 - B: vct `PaymentWalletAttestation` -> `eu.aptitude.payment-wallet-attestation.1` (or a WB SCA URL, Q5).
 - C: `iat`, `nbf`, `exp`: `number` -> `integer`.
 - C: `fundingSource.currency` already `^[A-Z]{3}$`; `bic` add BIC pattern (same as ds002); `ibanLastFour` pattern `^[A-Z0-9]{4}$` kept.
@@ -114,21 +121,25 @@ Legend: B = BREAKING (changes what an issuer or verifier sends), C = COMPATIBLE.
 - C: examples exist; keep.
 
 ### ds009 Personal Contact Details
+
 - C: `iat`: `integer` fine; add `nbf`, `status`, `cnf`; `country_address`: `^[A-Z]{2}$`; `phone`: `^\+[1-9][0-9]{6,14}$` (E.164; WB contact-person uses it; "to verify" that EC pcd rulebook agrees).
 - B (Q6): rename `surname` to `family_name` and `email_address` to `email` to match PID; not recommended unless the EC `pcd` definition allows it.
 
 ### ds010 Student ID
+
 - B: vct `VerifiableStudentIDSDJWT` -> `eu.aptitude.student-id.1` (or `VerifiableStudentID` to match rb-student; Q7).
 - B: `schacPersonalUniqueID`, `eduPersonAffiliation`, `eduPersonScopedAffiliation`, `eduPersonAssurance` -> arrays of strings (WB rb-student 3.x tables).
 - C: `mail` stays `format: email`; `dateOfBirth` already `format: date`; add examples, `exp`, `cnf`, `status`.
 
 ### ds011 vReceipts
+
 - B: vct `VerifiablevReceiptSDJWT` -> `eu.aptitude.vreceipts.1`.
 - C: `documentCurrencyCode`: `^[A-Z]{3}$`; `*.countryIdentifier`: `^[A-Z]{2}$`; add examples.
 - C: `purchaseReceiptLine[].item` defines `additionalItemProperty` twice (once under `itemInstance`, once directly); confirm which is intended (Q8). Removing one is BREAKING.
 - C: `paidAmount`, `taxableAmount` and other amounts are strings; add description "decimal string" (no pattern; WB e-receipt uses integer minor units, do not change).
 
 ### ds012 PID (`ds012-person-identification-data-sd-jwt.json`)
+
 - B: `date_of_expiry`, `date_of_issuance`: `format: date-time` -> `format: date` (ARF PID rulebook and WB ds002-pid use full-date; to verify in the ARF Annex).
 - B: add `place_of_birth` to `required` (ARF PID mandatory attribute, to verify; WB requires it).
 - C: `place_of_birth.country`, `address.country`: add `^[A-Z]{2}$`; `nationalities.items`: `^[A-Z]{2}$`.
@@ -138,12 +149,14 @@ Legend: B = BREAKING (changes what an issuer or verifier sends), C = COMPATIBLE.
 - C: `vct` const `urn:eudi:pid:aptitude:1` follows the `urn:eudi:pid:<domain>:1` pattern of national PID types with `aptitude` as the domain, so that it differs from WB's `urn:eudi:pid:1`; the description states the pattern.
 
 ### ds013 Photo ID
+
 - C: `issuing_country`, `resident_country`, `nationality`, `birth_country`: `^[A-Z]{2}$` (ISO 3166-1 alpha-2; ISO/IEC 23220 uses alpha-2, to verify).
 - C: `dtc_*` and `dg_content_info`: replace `format: binary` (not a JSON Schema 2020-12 format) with `contentEncoding: base64`; no change for valid data.
 - C: `sex` description: ISO/IEC 5218 (to verify); `age_over_18` stays required.
 - C: `portrait`: keep data-URI pattern; add example; shared block.
 
 ### ds014 ID Proofing ETSI 461
+
 - C: country fields: `^[A-Z]{2}$`; `nationality`; `resident_country`.
 - C: `age_over_NN` is a placeholder for `age_over_<NN>` claims (ARF); express as `patternProperties` `^age_over_[0-9]{2}$` boolean instead of a literal property name (C if no literal `age_over_NN` was ever issued; B otherwise, Q9).
 - C: description cross-reference to ETSI TS 119 461 (identity proofing levels) in `identityProofingProcessCompliance.compliant_with`; add `examples`.
@@ -164,7 +177,6 @@ Legend: B = BREAKING (changes what an issuer or verifier sends), C = COMPATIBLE.
 11. Q11: Do owners want `schema_version` and `trust_anchor_url` parity with WB payloads?
 12. Q12: May `IBAN`/`BIC` be renamed to `iban`/`bic` (ds002, ds015)?
 13. Q13: Is `bank_account_token.account_token_number` IBAN-shaped?
-
 
 ## Notes on the analysis
 
