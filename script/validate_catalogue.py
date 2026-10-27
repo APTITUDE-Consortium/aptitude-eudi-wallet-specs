@@ -69,7 +69,7 @@ def check_rulebook(path, errors, warnings):
     text = path.read_text(encoding="utf-8")
     if not re.search(r"^# \S", text, re.M):
         errors.append(f"{rel}: the rulebook needs a level-1 title")
-    headings = [re.sub(r"^\d+(\.\d+)*\s*", "", h).strip() for h in re.findall(r"^#{2}\s+(.+)$", text, re.M)]
+    headings = [re.sub(r"^\d+(\.\d+)*\.?\s*", "", h).strip() for h in re.findall(r"^#{2}\s+(.+)$", text, re.M)]
     for chapter in CHAPTERS:
         if chapter not in headings:
             warnings.append(f"{rel}: chapter '{chapter}' is missing")
