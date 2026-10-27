@@ -10,22 +10,23 @@ Author(s):
 
 Feedback:
 
-* <jhan@iata.org>
+- <jhan@iata.org>
 
 ## 1 Introduction
 
 ### 1.1 Document scope and purpose
 
 Within the European context and in accordance with the EUDI Wallet Architecture and Reference Framework, the Digital Travel Authorization (DTA) can be managed by an EUDI Wallet following the format of an electronic attestation of attributes. The DTA enables travelers to hold a digitally issued and verifiable travel authorization in their Wallet Unit for pre-travel admissibility's check and border-control use cases, in place of or alongside a printed or emailed authorization.
- 
+
 The primary objective of the DTA is to support pre-travel authorization checks and border verification, pre-clearance and the port of entry. The DTA complements the authorization record held by the issuing State and uses EUDI Wallet presentation mechanisms to support remote and proximity presentation and, where permitted by the credential format and protocol, selective disclosure and strong cryptographic verification.
- 
+
 Within this context, the target model builds on the ICAO DTA as defined in [ICAO-DTA-TR] and linked to the holder's passport. This rulebook therefore draws on the ICAO DTA data model as its baseline while adapting the encoding and presentation layer to EUDI Wallet mechanisms. Divergence from the strict ICAO specification is expected in data content (EUDI Wallet-specific extensions) and presentation protocols (EUDI Wallet remote/proximity presentation). For details see §7.
- 
-The present rulebook specifies the following listed items for APTITUDE DTA: 
-- The attributes and metadata 
-- Encoding and its mapping to the data elements. 
-- The issuance, presentation and verification requirements. 
+
+The present rulebook specifies the following listed items for APTITUDE DTA:
+
+- The attributes and metadata
+- Encoding and its mapping to the data elements.
+- The issuance, presentation and verification requirements.
 - The trust anchor, revocation and compliance requirements that apply to the attestation.
 
 ### 1.2 Document structure
@@ -153,17 +154,18 @@ The attestation is intended to be proximity-presentable and internet-presentable
 The `docType` and `namespace` for the **APTITUDE DTA mdoc** SHALL be `eu.europa.ec.eudiw.dta.1`.
 
 #### 3.1.2 DTA data elements matching table
+
 The following general encoding rules apply:
 
-* `tstr`, `uint`, `bstr`, and `bool` follow the CDDL representation conventions.
-* All string values SHALL be UTF-8 encoded.
-* Dates expressed as textual values SHOULD follow RFC 3339-compatible syntax where applicable.
-* Canonical CBOR encoding SHOULD be used for mdoc payloads.
+- `tstr`, `uint`, `bstr`, and `bool` follow the CDDL representation conventions.
+- All string values SHALL be UTF-8 encoded.
+- Dates expressed as textual values SHOULD follow RFC 3339-compatible syntax where applicable.
+- Canonical CBOR encoding SHOULD be used for mdoc payloads.
 
 The table below . "Presence" indicates whether the element is mandatory (M), optional (O) or conditional (C) in this mdoc profile.
 
-| identifier                   | CBOR type          | Presence | [ICAO-DTA-TR] source or description               | VDS-NC field (§3.3) | 
-| ---------------------------- | ----------------- | ---------- | ------------------------------------------------ | ---------------------- | 
+| identifier                   | CBOR type          | Presence | [ICAO-DTA-TR] source or description               | VDS-NC field (§3.3) |
+| ---------------------------- | ----------------- | ---------- | ------------------------------------------------ | ---------------------- |
 | `dta_number`                  | tstr               | M        | §2.5.4 "DTA Number"                               | `dtan`                  |
 | `authority_doc_name`          | tstr               | M        | §2.5.4 "Document"                                 | N.A  |
 | `travel_doc_holder_name`      | tstr               | M        | §2.5.4 "Name"; §2.7.1                             | `pi.n`                  |
@@ -191,6 +193,7 @@ The table below . "Presence" indicates whether the element is mandatory (M), opt
 If a Relying Party requires document response encryption in addition to the session encryption layer, it SHALL use the mechanism defined in [ISO/IEC 18013-5.2]. The EUDI Wallet SHALL encrypt the requested data elements according to [ISO/IEC 18013-5.2].
 
 ## 4 Attestation Usage
+
 This section briefly describes example use cases for **APTITUDE DTA**. All requested attributes are examples and the request may include other data elements as given in the use cases.
 
 ### 4.1 Remote Online readiness to travel verification
@@ -211,7 +214,7 @@ This section briefly describes example use cases for **APTITUDE DTA**. All reque
 
 ### 4.3 Proximity presentation for Border inspection at e-gate or kiosk
 
-**Context:** Traveler is able to present its APTITUDE DTA from EUDI wallet to the border control e-gate, kiosk or reader. It can be shared in combination with APTITUDE DTC for border crossing and controls. 
+**Context:** Traveler is able to present its APTITUDE DTA from EUDI wallet to the border control e-gate, kiosk or reader. It can be shared in combination with APTITUDE DTC for border crossing and controls.
 
 **Requested attributes:** all mandatory elements of §2.2, plus `duration_of_stay` and `additional_information` where present and applicable.
 
@@ -233,9 +236,10 @@ Note: If the CSCA of the eMRTD is different to the CSCA of the APTITUDE DTA, the
 
 ## 6 Revocation
 
-[ICAO-DTA-TR] does not itself define a revocation mechanism for a DTA (the Notification is a static, signed artefact). 
+[ICAO-DTA-TR] does not itself define a revocation mechanism for a DTA (the Notification is a static, signed artefact).
 
 For the APTITUDE DTA mdoc:
+
 - Revocation SHALL be implemented according to [ISO/IEC 18013-5.2] MSO revocation mechanisms. The issuing authority SHALL provide the corresponding status list.
 - If it is marked revoked, a Relying Party SHALL reject it and all disclosed data elements, and SHALL NOT rely on the embedded VDS-NC alone to establish current validity.
 - Reasons for revocation include but not limited to: refusal reversal after issuance, fraud or data-error findings, replacement of the linked passport (which changes `travel_doc_number`), or loss/compromise of the Wallet Unit.
