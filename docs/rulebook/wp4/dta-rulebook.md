@@ -1,31 +1,32 @@
-Author(s):
-
-- 
-
 # Attestation Rulebook for attestations of type *Digital Travel Authorizations (DTA)*
 
 | Version | Date       | Description                                                                 |
 | ------- | ---------- | ---------------------------------------------------------------------------- |
 | 0.1     | 2026-09-15 | First draft of APTITUDE DTA to be managed inside EUDI wallet in accordance with [ICAO DTA TR] version 2.15 published on 2021. |
 
+Author(s):
+
+- Nitesh Jha (IATA)
+
 Feedback:
 
-* <jhan@iata.org>
+- <jhan@iata.org>
 
 ## 1 Introduction
 
 ### 1.1 Document scope and purpose
 
 Within the European context and in accordance with the EUDI Wallet Architecture and Reference Framework, the Digital Travel Authorization (DTA) can be managed by an EUDI Wallet following the format of an electronic attestation of attributes. The DTA enables travelers to hold a digitally issued and verifiable travel authorization in their Wallet Unit for pre-travel admissibility's check and border-control use cases, in place of or alongside a printed or emailed authorization.
- 
+
 The primary objective of the DTA is to support pre-travel authorization checks and border verification, pre-clearance and the port of entry. The DTA complements the authorization record held by the issuing State and uses EUDI Wallet presentation mechanisms to support remote and proximity presentation and, where permitted by the credential format and protocol, selective disclosure and strong cryptographic verification.
- 
+
 Within this context, the target model builds on the ICAO DTA as defined in [ICAO-DTA-TR] and linked to the holder's passport. This rulebook therefore draws on the ICAO DTA data model as its baseline while adapting the encoding and presentation layer to EUDI Wallet mechanisms. Divergence from the strict ICAO specification is expected in data content (EUDI Wallet-specific extensions) and presentation protocols (EUDI Wallet remote/proximity presentation). For details see §7.
- 
-The present rulebook specifies the following listed items for APTITUDE DTA: 
-- The attributes and metadata 
-- Encoding and its mapping to the data elements. 
-- The issuance, presentation and verification requirements. 
+
+The present rulebook specifies the following listed items for APTITUDE DTA:
+
+- The attributes and metadata
+- Encoding and its mapping to the data elements.
+- The issuance, presentation and verification requirements.
 - The trust anchor, revocation and compliance requirements that apply to the attestation.
 
 ### 1.2 Document structure
@@ -153,17 +154,18 @@ The attestation is intended to be proximity-presentable and internet-presentable
 The `docType` and `namespace` for the **APTITUDE DTA mdoc** SHALL be `eu.europa.ec.eudiw.dta.1`.
 
 #### 3.1.2 DTA data elements matching table
+
 The following general encoding rules apply:
 
-* `tstr`, `uint`, `bstr`, and `bool` follow the CDDL representation conventions.
-* All string values SHALL be UTF-8 encoded.
-* Dates expressed as textual values SHOULD follow RFC 3339-compatible syntax where applicable.
-* Canonical CBOR encoding SHOULD be used for mdoc payloads.
+- `tstr`, `uint`, `bstr`, and `bool` follow the CDDL representation conventions.
+- All string values SHALL be UTF-8 encoded.
+- Dates expressed as textual values SHOULD follow RFC 3339-compatible syntax where applicable.
+- Canonical CBOR encoding SHOULD be used for mdoc payloads.
 
 The table below . "Presence" indicates whether the element is mandatory (M), optional (O) or conditional (C) in this mdoc profile.
 
-| identifier                   | CBOR type          | Presence | [ICAO-DTA-TR] source or description               | VDS-NC field (§3.3) | 
-| ---------------------------- | ----------------- | ---------- | ------------------------------------------------ | ---------------------- | 
+| identifier                   | CBOR type          | Presence | [ICAO-DTA-TR] source or description               | VDS-NC field (§3.3) |
+| ---------------------------- | ----------------- | ---------- | ------------------------------------------------ | ---------------------- |
 | `dta_number`                  | tstr               | M        | §2.5.4 "DTA Number"                               | `dtan`                  |
 | `authority_doc_name`          | tstr               | M        | §2.5.4 "Document"                                 | N.A  |
 | `travel_doc_holder_name`      | tstr               | M        | §2.5.4 "Name"; §2.7.1                             | `pi.n`                  |
@@ -191,19 +193,28 @@ The table below . "Presence" indicates whether the element is mandatory (M), opt
 If a Relying Party requires document response encryption in addition to the session encryption layer, it SHALL use the mechanism defined in [ISO/IEC 18013-5.2]. The EUDI Wallet SHALL encrypt the requested data elements according to [ISO/IEC 18013-5.2].
 
 ## 4 Attestation Usage
+
 This section briefly describes example use cases for **APTITUDE DTA**. All requested attributes are examples and the request may include other data elements as given in the use cases.
 
 ### 4.1 Remote Online readiness to travel verification
 
-**Context:** An airline or travel agent verifies ahead of departure that the passenger holds a valid **APTITUDE DTA** for the destination State, per [ICAO-DTA-TR] §2.4 (aircraft-operator benefits). This can also be requested during airline checkin process.
+**Context:** For Airline use case where iAPI capability is non-existent, an airline or travel agent verifies ahead of departure that the passenger holds a valid **APTITUDE DTA** for the destination State, per [ICAO-DTA-TR] §2.4 (aircraft-operator benefits). This can be requested during airline checkin process.
 
 **Requested attributes:** `dta_number`, `travel_doc_holder_name`, `travel_doc_number`, `valid_from_date`, `valid_until_date`, `number_of_entries`, `type_class_category`, `visible_digital_seal`.
 
-**Post-processing:** the verifier SHALL validate the mdoc issuer signature and optionally VDS-NC signature against the DTA signer certificate chain rooted at the applicable CSCA (§5). It MAY check revocation/status using the applicable trust anchors. Verification outcome drives pre-assessment workflows. If selective disclosure was used, the backend SHALL verify the integrity and authenticity of the disclosed data elements using the cryptographic mechanism of the selected data format.
+**Post-processing:** the verifier SHALL validate the mdoc issuer signature and optionally VDS-NC signature against the DTA signer certificate chain rooted at the applicable trust anchorrs (§5). It MAY check revocation/status using the applicable trust anchors. Verification outcome drives pre-assessment workflows. If selective disclosure was used, the backend SHALL verify the integrity and authenticity of the disclosed data elements using the cryptographic mechanism of the selected data format.
 
 ### 4.2 Remote Online Border inspection verification
 
-**Context:** Traveler is able to present online its APTITUDE DTA from EUDI wallet to the border control verifier. Border officials verify a DTA. 
+**Context:** Traveler is able to present online its APTITUDE DTA from EUDI wallet to the border control verifier directly.
+
+**Requested attributes:** all mandatory elements of §2.2, plus `duration_of_stay` and `additional_information` where present and applicable.
+
+**Post-processing:** Same as defined in §4.1.
+
+### 4.3 Proximity presentation for Border inspection at e-gate or kiosk
+
+**Context:** Traveler is able to present its APTITUDE DTA from EUDI wallet to the border control e-gate, kiosk or reader. It can be shared in combination with APTITUDE DTC for border crossing and controls.
 
 **Requested attributes:** all mandatory elements of §2.2, plus `duration_of_stay` and `additional_information` where present and applicable.
 
@@ -215,13 +226,20 @@ According to [ICAO-DTA-TR] §3.1, the CSCA used to sign the DTA barcode signer *
 
 The mdoc issuer-signed structure (MSO) SHALL be signed by a APTITUDE DTA-issuer key certified under the same CSCA hierarchy, so a single trust chain verifies both the embedded VDS-NC and the mdoc MSO. CSCA root certificates MAY be obtained from the ICAO PKD by any Relying Party, consistent with [ICAO-DTA-TR] §3.1.
 
-For interoperability testing, issuing authorities SHOULD provide a test CSCA distinguishable from production trust anchors.
+The root of trust for any Relying Party registered in the EUDI Wallet ecosystem is the list of trusted entities issued by the EU. It is recommended to make the CSCA root certificates of the EU Member States available to Relying Parties within the EUDI Wallet ecosytem by a respective list of trusted entities according to [ETSI TS 119 602] published by the EU, e.g. named APTITUDE-DTA-TL.
+
+In order to allow for international acceptance of the APTITUDE DTA by Relying Parties compliant to protocols defined in [ISO/IEC 18013-5.2] and [ISO/IEC 18013-7.2], it is recommended to issue the content of the EU APTITUDE-DTA-TL as a VICAL according to [ISO/IEC 18013-5.2].
+
+The countries list where the EU Trust lists does not apply MAY need to consider for the interoperability purpose, EU initiatives such as Third Countries Trusted List Program. This will be relevant for cross border travel use cases where APTITUDE DTC is issued for a EU national inside the EUDI wallet and APTITUDE DTA is issued by a third country where the EU national is travelling.
+
+Note: If the CSCA of the eMRTD is different to the CSCA of the APTITUDE DTA, the respective trust model is to be validated by the Relying Party according to its policy.
 
 ## 6 Revocation
 
-[ICAO-DTA-TR] does not itself define a revocation mechanism for a DTA (the Notification is a static, signed artefact). 
+[ICAO-DTA-TR] does not itself define a revocation mechanism for a DTA (the Notification is a static, signed artefact).
 
 For the APTITUDE DTA mdoc:
+
 - Revocation SHALL be implemented according to [ISO/IEC 18013-5.2] MSO revocation mechanisms. The issuing authority SHALL provide the corresponding status list.
 - If it is marked revoked, a Relying Party SHALL reject it and all disclosed data elements, and SHALL NOT rely on the embedded VDS-NC alone to establish current validity.
 - Reasons for revocation include but not limited to: refusal reversal after issuance, fraud or data-error findings, replacement of the linked passport (which changes `travel_doc_number`), or loss/compromise of the Wallet Unit.
@@ -230,8 +248,8 @@ For the APTITUDE DTA mdoc:
 
 ### 7.1 Compliance with ICAO DTA specification
 
-1. The APTITUDE DTA mdoc is compliant with [ICAO-DTA-TR] §2.5.4 in that it carries every mandatory Notification field listed there.
-2. The APTITUDE DTA mdoc embeds a VDS-NC object compliant with [ICAO-DTA-TR] §3, satisfying the mandatory "Verification feature" requirement without requiring a separate printed barcode.
+1. The APTITUDE DTA is compliant with [ICAO-DTA-TR] §2.5.4 in that it carries every mandatory Notification field listed there.
+2. The APTITUDE DTA embeds a VDS-NC object compliant with [ICAO-DTA-TR] §3, satisfying the mandatory "Verification feature" requirement without requiring a separate printed barcode.
 3. Where a Relying Party's reader supports only VDS-NC/VDS barcode scanning (not mdoc), the wallet SHOULD be able to render the VDS barcode since [ICAO-DTA-TR] does not mandate mdoc support by all readers.
 4. The choice between VDS and VDS-NC as the embedded barcode format is left to the issuing State per [ICAO-DTA-TR] §3.4, this rulebook assumes VDS-NC, as it "includes the barcode signer and does not require a separate distribution mechanism."
 5. APTITUDE DTA can be verified by any reader, i.e. Relying Party, within EUDI-Wallet ecosystem.
