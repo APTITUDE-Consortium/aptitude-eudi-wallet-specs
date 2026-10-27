@@ -1,12 +1,12 @@
-Author(s):
-
-- 
-
 # Attestation Rulebook for attestations of type *Digital Travel Authorizations (DTA)*
 
 | Version | Date       | Description                                                                 |
 | ------- | ---------- | ---------------------------------------------------------------------------- |
 | 0.1     | 2026-09-15 | First draft of APTITUDE DTA to be managed inside EUDI wallet in accordance with [ICAO DTA TR] version 2.15 published on 2021. |
+
+Author(s):
+
+- Nitesh Jha (IATA)
 
 Feedback:
 
@@ -195,15 +195,23 @@ This section briefly describes example use cases for **APTITUDE DTA**. All reque
 
 ### 4.1 Remote Online readiness to travel verification
 
-**Context:** An airline or travel agent verifies ahead of departure that the passenger holds a valid **APTITUDE DTA** for the destination State, per [ICAO-DTA-TR] §2.4 (aircraft-operator benefits). This can also be requested during airline checkin process.
+**Context:** For Airline use case where iAPI capability is non-existent, an airline or travel agent verifies ahead of departure that the passenger holds a valid **APTITUDE DTA** for the destination State, per [ICAO-DTA-TR] §2.4 (aircraft-operator benefits). This can be requested during airline checkin process.
 
 **Requested attributes:** `dta_number`, `travel_doc_holder_name`, `travel_doc_number`, `valid_from_date`, `valid_until_date`, `number_of_entries`, `type_class_category`, `visible_digital_seal`.
 
-**Post-processing:** the verifier SHALL validate the mdoc issuer signature and optionally VDS-NC signature against the DTA signer certificate chain rooted at the applicable CSCA (§5). It MAY check revocation/status using the applicable trust anchors. Verification outcome drives pre-assessment workflows. If selective disclosure was used, the backend SHALL verify the integrity and authenticity of the disclosed data elements using the cryptographic mechanism of the selected data format.
+**Post-processing:** the verifier SHALL validate the mdoc issuer signature and optionally VDS-NC signature against the DTA signer certificate chain rooted at the applicable trust anchorrs (§5). It MAY check revocation/status using the applicable trust anchors. Verification outcome drives pre-assessment workflows. If selective disclosure was used, the backend SHALL verify the integrity and authenticity of the disclosed data elements using the cryptographic mechanism of the selected data format.
 
 ### 4.2 Remote Online Border inspection verification
 
-**Context:** Traveler is able to present online its APTITUDE DTA from EUDI wallet to the border control verifier. Border officials verify a DTA. 
+**Context:** Traveler is able to present online its APTITUDE DTA from EUDI wallet to the border control verifier directly.
+
+**Requested attributes:** all mandatory elements of §2.2, plus `duration_of_stay` and `additional_information` where present and applicable.
+
+**Post-processing:** Same as defined in §4.1.
+
+### 4.3 Proximity presentation for Border inspection at e-gate or kiosk
+
+**Context:** Traveler is able to present its APTITUDE DTA from EUDI wallet to the border control e-gate, kiosk or reader. It can be shared in combination with APTITUDE DTC for border crossing and controls. 
 
 **Requested attributes:** all mandatory elements of §2.2, plus `duration_of_stay` and `additional_information` where present and applicable.
 
@@ -215,7 +223,13 @@ According to [ICAO-DTA-TR] §3.1, the CSCA used to sign the DTA barcode signer *
 
 The mdoc issuer-signed structure (MSO) SHALL be signed by a APTITUDE DTA-issuer key certified under the same CSCA hierarchy, so a single trust chain verifies both the embedded VDS-NC and the mdoc MSO. CSCA root certificates MAY be obtained from the ICAO PKD by any Relying Party, consistent with [ICAO-DTA-TR] §3.1.
 
-For interoperability testing, issuing authorities SHOULD provide a test CSCA distinguishable from production trust anchors.
+The root of trust for any Relying Party registered in the EUDI Wallet ecosystem is the list of trusted entities issued by the EU. It is recommended to make the CSCA root certificates of the EU Member States available to Relying Parties within the EUDI Wallet ecosytem by a respective list of trusted entities according to [ETSI TS 119 602] published by the EU, e.g. named APTITUDE-DTA-TL.
+
+In order to allow for international acceptance of the APTITUDE DTA by Relying Parties compliant to protocols defined in [ISO/IEC 18013-5.2] and [ISO/IEC 18013-7.2], it is recommended to issue the content of the EU APTITUDE-DTA-TL as a VICAL according to [ISO/IEC 18013-5.2].
+
+The countries list where the EU Trust lists does not apply MAY need to consider for the interoperability purpose, EU initiatives such as Third Countries Trusted List Program. This will be relevant for cross border travel use cases where APTITUDE DTC is issued for a EU national inside the EUDI wallet and APTITUDE DTA is issued by a third country where the EU national is travelling.
+
+Note: If the CSCA of the eMRTD is different to the CSCA of the APTITUDE DTA, the respective trust model is to be validated by the Relying Party according to its policy.
 
 ## 6 Revocation
 
@@ -230,8 +244,8 @@ For the APTITUDE DTA mdoc:
 
 ### 7.1 Compliance with ICAO DTA specification
 
-1. The APTITUDE DTA mdoc is compliant with [ICAO-DTA-TR] §2.5.4 in that it carries every mandatory Notification field listed there.
-2. The APTITUDE DTA mdoc embeds a VDS-NC object compliant with [ICAO-DTA-TR] §3, satisfying the mandatory "Verification feature" requirement without requiring a separate printed barcode.
+1. The APTITUDE DTA is compliant with [ICAO-DTA-TR] §2.5.4 in that it carries every mandatory Notification field listed there.
+2. The APTITUDE DTA embeds a VDS-NC object compliant with [ICAO-DTA-TR] §3, satisfying the mandatory "Verification feature" requirement without requiring a separate printed barcode.
 3. Where a Relying Party's reader supports only VDS-NC/VDS barcode scanning (not mdoc), the wallet SHOULD be able to render the VDS barcode since [ICAO-DTA-TR] does not mandate mdoc support by all readers.
 4. The choice between VDS and VDS-NC as the embedded barcode format is left to the issuing State per [ICAO-DTA-TR] §3.4, this rulebook assumes VDS-NC, as it "includes the barcode signer and does not require a separate distribution mechanism."
 5. APTITUDE DTA can be verified by any reader, i.e. Relying Party, within EUDI-Wallet ecosystem.
