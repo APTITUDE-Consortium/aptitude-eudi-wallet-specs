@@ -2,7 +2,7 @@
 
 Status: Approved by the EWC LSP (phase 02)
 
-The original rulebook is also available as a PDF: [the original rulebook as a PDF file](./rulebook.pdf).
+The original rulebook is also available as a PDF: [the original rulebook as a PDF file](https://github.com/APTITUDE-Consortium/aptitude-eudi-wallet-specs/blob/main/docs/catalogue/rulebooks/rb-iban-attestation-for-individuals/rulebook.pdf).
 
 ## Table of Contents
 
