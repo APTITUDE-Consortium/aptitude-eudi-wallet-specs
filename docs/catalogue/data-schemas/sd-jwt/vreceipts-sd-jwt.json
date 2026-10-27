@@ -1,0 +1,940 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://registry.siros.org/aptitude-consortium/vreceipts.schema.json",
+  "title": "vReceipt",
+  "description": "Purchase receipt with merchant, line items, VAT breakdown, payments and technical verifications, issued as an SD-JWT VC. Claim names, structure and amounts (integers in the currency minor unit) follow the WE BUILD eReceipt attestation.",
+  "version": "0.11.0",
+  "type": "object",
+  "additionalProperties": true,
+  "properties": {
+    "vct": {
+      "type": "string",
+      "const": "eu.aptitude.vreceipts.1",
+      "description": "Credential type identifier of the vReceipt."
+    },
+    "type": {
+      "type": "string",
+      "description": "Transaction type. One of: PURCHASE, RETURN, PURCHASE_AND_RETURN.",
+      "enum": [
+        "PURCHASE",
+        "RETURN",
+        "PURCHASE_AND_RETURN"
+      ],
+      "examples": [
+        "PURCHASE"
+      ]
+    },
+    "receipt_number": {
+      "type": "string",
+      "description": "Merchant-assigned receipt identifier. Unique within the issuing branch.",
+      "examples": [
+        "R-2026-04-23-000412"
+      ]
+    },
+    "receipt_timestamp": {
+      "type": "string",
+      "description": "Date and time at which the receipt was issued by the merchant POS.",
+      "format": "date-time",
+      "examples": [
+        "2026-04-23T10:14:32Z"
+      ]
+    },
+    "currency_iso_code": {
+      "type": "string",
+      "description": "Currency of the transaction, as an ISO 4217 alphabetic code.",
+      "pattern": "^[A-Z]{3}$",
+      "examples": [
+        "EUR"
+      ]
+    },
+    "total_price_exc_vat": {
+      "type": "integer",
+      "description": "Total amount of the transaction excluding VAT, expressed in the currency minor unit.",
+      "examples": [
+        4250
+      ]
+    },
+    "total_vat_amount": {
+      "type": "integer",
+      "description": "Total VAT amount across all lines, in the currency minor unit.",
+      "examples": [
+        1020
+      ]
+    },
+    "total_price_inc_vat": {
+      "type": "integer",
+      "description": "Total amount including VAT, in the currency minor unit. SHALL equal total_price_exc_vat + total_vat_amount.",
+      "examples": [
+        5270
+      ]
+    },
+    "merchant": {
+      "type": "object",
+      "description": "Merchant that issued the receipt.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Legal name of the merchant.",
+          "examples": [
+            "Acme Retail Oy"
+          ]
+        },
+        "company_id": {
+          "type": "string",
+          "description": "Merchant company identifier (VAT ID or national register).",
+          "examples": [
+            "FI12345678"
+          ]
+        },
+        "branch": {
+          "type": "object",
+          "description": "Branch or store of the merchant.",
+          "properties": {
+            "id": {
+              "type": "string",
+              "description": "Unique identifier of the branch or store.",
+              "examples": [
+                "BR-HEL-001"
+              ]
+            },
+            "pos_id": {
+              "type": "string",
+              "description": "Identifier of the point-of-sale terminal.",
+              "examples": [
+                "POS-12"
+              ]
+            },
+            "name": {
+              "type": "string",
+              "description": "Name of the branch or store.",
+              "examples": [
+                "Acme Helsinki Centre"
+              ]
+            },
+            "sub_name": {
+              "type": "string",
+              "description": "Sub-name or department within the branch.",
+              "examples": [
+                "Café"
+              ]
+            },
+            "email": {
+              "type": "string",
+              "description": "Contact email of the branch.",
+              "examples": [
+                "helsinki@acme.fi"
+              ]
+            },
+            "phone": {
+              "type": "string",
+              "description": "Contact phone of the branch.",
+              "examples": [
+                "+358 9 1234 5678"
+              ]
+            },
+            "website_url": {
+              "type": "string",
+              "description": "Website URL of the merchant.",
+              "examples": [
+                "https://www.acme.fi"
+              ]
+            }
+          },
+          "additionalProperties": false,
+          "required": [
+            "id",
+            "pos_id",
+            "name"
+          ]
+        },
+        "address": {
+          "type": "object",
+          "description": "Address of the branch.",
+          "properties": {
+            "street_address": {
+              "type": "string",
+              "description": "Street address of the branch.",
+              "examples": [
+                "Mannerheimintie 10"
+              ]
+            },
+            "city": {
+              "type": "string",
+              "description": "City of the branch.",
+              "examples": [
+                "Helsinki"
+              ]
+            },
+            "zip_code": {
+              "type": "string",
+              "description": "Postal/ZIP code of the branch.",
+              "examples": [
+                "00100"
+              ]
+            },
+            "country": {
+              "type": "string",
+              "description": "Country code of the branch, as an ISO 3166-1 alpha-2 code.",
+              "pattern": "^[A-Z]{2}$",
+              "examples": [
+                "FI"
+              ]
+            }
+          },
+          "additionalProperties": false,
+          "required": [
+            "street_address",
+            "city",
+            "zip_code",
+            "country"
+          ]
+        }
+      },
+      "additionalProperties": false,
+      "required": [
+        "name",
+        "company_id",
+        "branch",
+        "address"
+      ]
+    },
+    "products": {
+      "type": "array",
+      "description": "Line items of the receipt.",
+      "items": {
+        "type": "object",
+        "description": "Line item of the receipt.",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "Name or description of the product or service.",
+            "examples": [
+              "Espresso"
+            ]
+          },
+          "quantity": {
+            "type": "string",
+            "description": "Quantity purchased. Encoded as a string to preserve precision (e.g. \"1.500\").",
+            "examples": [
+              "2"
+            ]
+          },
+          "quantity_code": {
+            "type": "string",
+            "description": "Unit of measurement code, UN/ECE Recommendation 20 (e.g. H87 piece, KGM kilogram, LTR litre).",
+            "examples": [
+              "H87"
+            ]
+          },
+          "unit_price_inc_vat": {
+            "type": "integer",
+            "description": "Unit price including VAT, in the currency minor unit.",
+            "examples": [
+              350
+            ]
+          },
+          "unit_price_inc_vat_decimal": {
+            "type": "string",
+            "description": "Unit price including VAT in decimal form, for display only.",
+            "examples": [
+              "3.50"
+            ]
+          },
+          "total_amount_exc_vat": {
+            "type": "integer",
+            "description": "Total line amount excluding VAT, in the currency minor unit.",
+            "examples": [
+              565
+            ]
+          },
+          "total_amount_inc_vat": {
+            "type": "integer",
+            "description": "Total line amount including VAT, in the currency minor unit.",
+            "examples": [
+              700
+            ]
+          },
+          "vats": {
+            "type": "array",
+            "description": "VAT breakdown per line item.",
+            "items": {
+              "type": "object",
+              "description": "VAT breakdown of a line item.",
+              "properties": {
+                "vat_rate": {
+                  "type": "string",
+                  "description": "VAT rate applied to this line item, expressed as a percentage string.",
+                  "examples": [
+                    "24"
+                  ]
+                },
+                "vat_amount": {
+                  "type": "integer",
+                  "description": "VAT amount for this line item, in the currency minor unit.",
+                  "examples": [
+                    135
+                  ]
+                },
+                "total_amount_exc_vat": {
+                  "type": "integer",
+                  "description": "Line amount excluding VAT, in the currency minor unit.",
+                  "examples": [
+                    565
+                  ]
+                },
+                "total_amount_inc_vat": {
+                  "type": "integer",
+                  "description": "Line amount including VAT, in the currency minor unit.",
+                  "examples": [
+                    700
+                  ]
+                },
+                "vat_code": {
+                  "type": "string",
+                  "description": "VAT category code for the line item, an EN 16931-1 duty/tax/fee category code.",
+                  "enum": [
+                    "S",
+                    "Z",
+                    "E",
+                    "AE",
+                    "K",
+                    "G",
+                    "O",
+                    "L",
+                    "M",
+                    "B"
+                  ],
+                  "examples": [
+                    "S"
+                  ]
+                }
+              },
+              "additionalProperties": false,
+              "required": [
+                "vat_rate",
+                "vat_amount",
+                "total_amount_exc_vat",
+                "total_amount_inc_vat"
+              ]
+            },
+            "minItems": 1
+          },
+          "discounts": {
+            "type": "array",
+            "description": "Array of discounts applied to this line item.",
+            "items": {}
+          },
+          "ean_code": {
+            "type": "string",
+            "description": "EAN/GTIN barcode of the product (valid EAN-8, EAN-13 or GTIN-14).",
+            "examples": [
+              "6411400000123"
+            ]
+          },
+          "product_id": {
+            "type": "string",
+            "description": "Merchant-internal product identifier.",
+            "examples": [
+              "SKU-ESP-200"
+            ]
+          },
+          "free_text": {
+            "type": "string",
+            "description": "Free-text note for this line item.",
+            "examples": [
+              "Decaf"
+            ]
+          },
+          "categorization": {
+            "type": "object",
+            "description": "Merchant-defined categorisation object (e.g. category code, department). Structure defined by issuer.",
+            "additionalProperties": true
+          },
+          "custom_attributes": {
+            "type": "array",
+            "description": "Array of {key, value} pairs for merchant-specific line-level data.",
+            "items": {}
+          }
+        },
+        "additionalProperties": false,
+        "required": [
+          "name",
+          "quantity",
+          "quantity_code",
+          "unit_price_inc_vat",
+          "total_amount_exc_vat",
+          "total_amount_inc_vat",
+          "vats"
+        ]
+      },
+      "minItems": 1
+    },
+    "vats": {
+      "type": "array",
+      "description": "VAT breakdown at receipt level.",
+      "items": {
+        "type": "object",
+        "description": "VAT breakdown at receipt level.",
+        "properties": {
+          "vat_rate": {
+            "type": "string",
+            "description": "VAT rate at receipt level, expressed as a percentage string.",
+            "examples": [
+              "24"
+            ]
+          },
+          "total_vat_amount": {
+            "type": "integer",
+            "description": "Total VAT amount at this rate, in the currency minor unit.",
+            "examples": [
+              1020
+            ]
+          },
+          "total_amount_exc_vat": {
+            "type": "integer",
+            "description": "Total amount at this rate excluding VAT, in the currency minor unit.",
+            "examples": [
+              4250
+            ]
+          },
+          "total_amount_inc_vat": {
+            "type": "integer",
+            "description": "Total amount at this rate including VAT, in the currency minor unit.",
+            "examples": [
+              5270
+            ]
+          },
+          "vat_code": {
+            "type": "string",
+            "description": "VAT category code, an EN 16931-1 duty/tax/fee category code.",
+            "enum": [
+              "S",
+              "Z",
+              "E",
+              "AE",
+              "K",
+              "G",
+              "O",
+              "L",
+              "M",
+              "B"
+            ],
+            "examples": [
+              "S"
+            ]
+          }
+        },
+        "additionalProperties": false,
+        "required": [
+          "vat_rate",
+          "total_vat_amount",
+          "total_amount_exc_vat",
+          "total_amount_inc_vat"
+        ]
+      },
+      "minItems": 1
+    },
+    "payments": {
+      "type": "array",
+      "description": "Payments made for the receipt.",
+      "items": {
+        "type": "object",
+        "description": "Payment made for the receipt.",
+        "properties": {
+          "type": {
+            "type": "string",
+            "description": "Payment method type.",
+            "enum": [
+              "CARD",
+              "CREDIT_TRANSFER",
+              "MOBILEPAY",
+              "GIFTCARD"
+            ],
+            "examples": [
+              "CARD"
+            ]
+          },
+          "amount": {
+            "type": "integer",
+            "description": "Amount paid with this payment method, in the currency minor unit. For RETURN and PURCHASE_AND_RETURN this amount MAY be non-positive (negative).",
+            "examples": [
+              5270
+            ]
+          },
+          "attributes": {
+            "type": "object",
+            "description": "EMV/PSP payment attributes. Supported sub-fields: AID, TVR, TSI, AC, cryptogramType, CID, CVM, authorizationCode, transactionId, terminalId, maskedPAN, APP, ENTRY, ARC. Additional PSP-specific keys are permitted.",
+            "additionalProperties": true,
+            "properties": {
+              "AID": {
+                "type": "string"
+              },
+              "TVR": {
+                "type": "string"
+              },
+              "TSI": {
+                "type": "string"
+              },
+              "AC": {
+                "type": "string"
+              },
+              "cryptogramType": {
+                "type": "string"
+              },
+              "CID": {
+                "type": "string"
+              },
+              "CVM": {
+                "type": "string"
+              },
+              "authorizationCode": {
+                "type": "string"
+              },
+              "transactionId": {
+                "type": "string"
+              },
+              "terminalId": {
+                "type": "string"
+              },
+              "maskedPAN": {
+                "type": "string"
+              },
+              "APP": {
+                "type": "string"
+              },
+              "ENTRY": {
+                "type": "string"
+              },
+              "ARC": {
+                "type": "string"
+              }
+            },
+            "examples": [
+              {
+                "AID": "A0000000031010",
+                "maskedPAN": "411111******1111",
+                "authorizationCode": "AB12CD"
+              }
+            ]
+          }
+        },
+        "additionalProperties": false,
+        "required": [
+          "type",
+          "amount"
+        ]
+      },
+      "minItems": 1
+    },
+    "verifications": {
+      "type": "array",
+      "description": "Technical proofs of the underlying transaction.",
+      "items": {
+        "type": "object",
+        "description": "Technical proof of the underlying transaction.",
+        "properties": {
+          "type": {
+            "type": "string",
+            "description": "Standard of the technical proof carried in verifications[]: EMV for card authorisation cryptograms; OCMF for charge-metering proofs; SCT or SCT-INST for SEPA credit transfer (account-to-account). The EMV cryptogram itself is carried in payments[].attributes, not here.",
+            "enum": [
+              "EMV",
+              "OCMF",
+              "SCT",
+              "SCT-INST"
+            ],
+            "examples": [
+              "EMV"
+            ]
+          },
+          "version": {
+            "type": "string",
+            "description": "Version of the verification schema used.",
+            "examples": [
+              "1.0"
+            ]
+          },
+          "public_key": {
+            "type": "string",
+            "description": "Public key used for transaction signing, base64url-encoded.",
+            "examples": [
+              "MIIBIjANBg"
+            ]
+          },
+          "transaction_id": {
+            "type": "string",
+            "description": "Unique identifier of the underlying payment transaction, as assigned by the PSP or payment scheme. When payments[].attributes.transactionId is also present, both SHALL identify the same payment transaction.",
+            "examples": [
+              "T-20260423-000871"
+            ]
+          },
+          "current_type": {
+            "type": "string",
+            "description": "For an OCMF metering proof, the electrical-current type: AC (alternating current) or DC (direct current). REQUIRED when type is OCMF; not applicable otherwise.",
+            "enum": [
+              "AC",
+              "DC"
+            ],
+            "examples": [
+              "AC"
+            ]
+          },
+          "transaction_begin": {
+            "type": "object",
+            "description": "Signed data captured at the beginning of the verification event. REQUIRED when type is OCMF.",
+            "properties": {
+              "signed_data": {
+                "type": "string",
+                "description": "Signed data as defined by the verifications[].type profile (for example OCMF metering data), base64url-encoded."
+              }
+            },
+            "additionalProperties": false
+          },
+          "transaction_end": {
+            "type": "object",
+            "description": "Signed data captured at the end of the verification event. REQUIRED when the profile defines it.",
+            "properties": {
+              "signed_data": {
+                "type": "string",
+                "description": "Signed data as defined by the verifications[].type profile (for example OCMF metering data), base64url-encoded."
+              }
+            },
+            "additionalProperties": false
+          }
+        },
+        "additionalProperties": false,
+        "required": [
+          "type",
+          "version",
+          "public_key",
+          "transaction_id"
+        ],
+        "if": {
+          "properties": {
+            "type": {
+              "const": "OCMF"
+            }
+          },
+          "required": [
+            "type"
+          ]
+        },
+        "then": {
+          "required": [
+            "current_type",
+            "transaction_begin"
+          ],
+          "properties": {
+            "transaction_begin": {
+              "required": [
+                "signed_data"
+              ]
+            }
+          }
+        }
+      },
+      "minItems": 1
+    },
+    "free_text": {
+      "type": "string",
+      "description": "Free-text field for merchant notes (e.g. promotional message).",
+      "examples": [
+        "Thank you for your purchase!"
+      ]
+    },
+    "custom_attributes": {
+      "type": "array",
+      "description": "Array of {key, value} pairs for merchant-specific receipt-level data.",
+      "items": {}
+    },
+    "original_receipt_number": {
+      "type": "string",
+      "description": "For a correction receipt (type RETURN or PURCHASE_AND_RETURN that reverses or corrects a prior transaction), the receipt_number of the original receipt being corrected.",
+      "examples": [
+        "R-2026-04-23-000412"
+      ]
+    },
+    "journey": {
+      "type": "object",
+      "description": "Journey object, present only for travel and mobility receipts.",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "Mode of transport.",
+          "enum": [
+            "TRAIN",
+            "BUS",
+            "TAXI",
+            "FLIGHT",
+            "FERRY"
+          ],
+          "examples": [
+            "TRAIN"
+          ]
+        },
+        "id": {
+          "type": "string",
+          "description": "Journey or booking identifier.",
+          "examples": [
+            "BK-7781"
+          ]
+        },
+        "distance": {
+          "type": "integer",
+          "description": "Distance travelled, in metres.",
+          "examples": [
+            184000
+          ]
+        },
+        "duration": {
+          "type": "integer",
+          "description": "Duration of the journey, in minutes.",
+          "examples": [
+            92
+          ]
+        },
+        "co2_emissions": {
+          "type": "integer",
+          "description": "CO2 emissions for this journey, in grams.",
+          "examples": [
+            12500
+          ]
+        },
+        "origin": {
+          "type": "object",
+          "description": "Origin of the journey, with sub-fields name, city, country, latitude, longitude, datetime.",
+          "properties": {
+            "name": {
+              "type": "string"
+            },
+            "city": {
+              "type": "string"
+            },
+            "country": {
+              "type": "string",
+              "pattern": "^[A-Z]{2}$",
+              "description": "ISO 3166-1 alpha-2 code."
+            },
+            "latitude": {
+              "type": "number"
+            },
+            "longitude": {
+              "type": "number"
+            },
+            "datetime": {
+              "type": "string",
+              "format": "date-time"
+            }
+          },
+          "additionalProperties": false
+        },
+        "destination": {
+          "type": "object",
+          "description": "Destination of the journey, with the same sub-fields as origin.",
+          "properties": {
+            "name": {
+              "type": "string"
+            },
+            "city": {
+              "type": "string"
+            },
+            "country": {
+              "type": "string",
+              "pattern": "^[A-Z]{2}$",
+              "description": "ISO 3166-1 alpha-2 code."
+            },
+            "latitude": {
+              "type": "number"
+            },
+            "longitude": {
+              "type": "number"
+            },
+            "datetime": {
+              "type": "string",
+              "format": "date-time"
+            }
+          },
+          "additionalProperties": false
+        }
+      },
+      "additionalProperties": false,
+      "required": [
+        "type",
+        "origin",
+        "destination"
+      ]
+    },
+    "attachments": {
+      "type": "array",
+      "description": "Attachments such as tickets or vouchers.",
+      "items": {
+        "type": "object",
+        "description": "Attachment such as a ticket or voucher.",
+        "properties": {
+          "type": {
+            "type": "string",
+            "description": "Attachment encoding type.",
+            "enum": [
+              "BARCODE",
+              "QRCODE"
+            ],
+            "examples": [
+              "QRCODE"
+            ]
+          },
+          "kind": {
+            "type": "string",
+            "description": "Attachment purpose.",
+            "enum": [
+              "TICKET",
+              "RETURN",
+              "VOUCHER"
+            ],
+            "examples": [
+              "TICKET"
+            ]
+          },
+          "title": {
+            "type": "string",
+            "description": "Title or label for the attachment.",
+            "examples": [
+              "Boarding pass HEL-TPE"
+            ]
+          },
+          "data": {
+            "type": "string",
+            "description": "Encoded attachment data (string).",
+            "examples": [
+              "BAR:1234567890ABC"
+            ]
+          },
+          "description": {
+            "type": "string",
+            "description": "Human-readable description of the attachment.",
+            "examples": [
+              "Boarding pass"
+            ]
+          },
+          "valid_until": {
+            "type": "string",
+            "description": "Expiry date/time of the attachment.",
+            "format": "date-time",
+            "examples": [
+              "2026-04-24T08:00:00Z"
+            ]
+          }
+        },
+        "additionalProperties": false,
+        "required": [
+          "type",
+          "kind",
+          "title",
+          "data"
+        ]
+      }
+    },
+    "cryptographically_bound_to": {
+      "type": "string",
+      "description": "Identifies another attestation type (or vct) on the same Wallet Unit to which this receipt is cryptographically bound.",
+      "examples": [
+        "urn:eudi:pid:1"
+      ]
+    },
+    "iss": {
+      "type": "string",
+      "format": "uri",
+      "description": "Issuer of the attestation, as an HTTPS URL that identifies the issuer."
+    },
+    "iat": {
+      "type": "integer",
+      "description": "Time of issuance as a NumericDate (seconds since the Unix epoch)."
+    },
+    "nbf": {
+      "type": "integer",
+      "description": "Time before which the attestation is not valid, as a NumericDate."
+    },
+    "exp": {
+      "type": "integer",
+      "description": "Time at which the attestation expires, as a NumericDate."
+    },
+    "cnf": {
+      "type": "object",
+      "description": "Confirmation claim that binds the attestation to the key of the holder (RFC 7800).",
+      "properties": {
+        "jwk": {
+          "type": "object",
+          "description": "Public key of the holder as a JWK."
+        }
+      }
+    },
+    "status": {
+      "type": "object",
+      "description": "Reference to the Token Status List entry that carries the revocation status of the attestation.",
+      "properties": {
+        "status_list": {
+          "type": "object",
+          "properties": {
+            "idx": {
+              "type": "integer",
+              "minimum": 0,
+              "description": "Index of the attestation in the status list."
+            },
+            "uri": {
+              "type": "string",
+              "format": "uri",
+              "description": "URI of the status list token."
+            }
+          },
+          "required": [
+            "idx",
+            "uri"
+          ]
+        }
+      },
+      "required": [
+        "status_list"
+      ]
+    }
+  },
+  "required": [
+    "vct",
+    "type",
+    "receipt_number",
+    "receipt_timestamp",
+    "currency_iso_code",
+    "total_price_exc_vat",
+    "total_vat_amount",
+    "total_price_inc_vat",
+    "merchant",
+    "products",
+    "vats",
+    "payments",
+    "verifications"
+  ],
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "type": {
+            "const": "PURCHASE"
+          }
+        },
+        "required": [
+          "type"
+        ]
+      },
+      "then": {
+        "properties": {
+          "total_price_exc_vat": {
+            "minimum": 0
+          },
+          "total_vat_amount": {
+            "minimum": 0
+          },
+          "total_price_inc_vat": {
+            "minimum": 0
+          }
+        }
+      }
+    }
+  ]
+}

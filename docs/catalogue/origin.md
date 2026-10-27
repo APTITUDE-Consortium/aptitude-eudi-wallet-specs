@@ -1,0 +1,11 @@
+# Origin of the first attestation types
+
+The first fourteen attestation types of the catalogue continue the rulebooks and data schemas of the EWC Large Scale Pilot, from the repository [EWC-consortium/eudi-wallet-rulebooks-and-schemas](https://github.com/EWC-consortium/eudi-wallet-rulebooks-and-schemas) (Apache License 2.0), at commit `0434604`. They were brought into the structure of this catalogue as follows.
+
+- Each data schema describes the SD-JWT VC payload as flat top-level claims with `properties.vct.const`, JSON Schema 2020-12 and a `version`. The credential envelope of the W3C data model (`credential_subject`, `credential_status`, `credential_schema`) is replaced by top-level claims and the SD-JWT VC `status` claim.
+- Three schemas that were not valid JSON are repaired, and three OpenID4VCI metadata files are rewritten as claim schemas.
+- Each rulebook has attribute tables that list the attributes, descriptions and required flags of its data schema. Rulebook numbers keep the EWC prefix, for example `EWC RB-003`, so that they do not collide with the `RB` numbers of the rulebook index of this repository.
+- The `vct` values follow the rules in [Structure of the catalogue](structure.md). The identifiers of the former EWC types that had none are `eu.aptitude.<slug>.1`, and the person identification data type is `urn:eudi:pid:aptitude:1`.
+- The standard SD-JWT VC claims `iss`, `iat`, `nbf`, `exp`, `cnf` and `status` are optional properties, and country, currency and IBAN values have the patterns of their standards. The types that have a counterpart in the WE BUILD catalogue take its claim names and structure; [Alignment with WE BUILD](alignment-with-webuild.md) records what each type takes, what stays different, and the questions for the owners.
+- Seven types have no rulebook yet: ferry boarding pass, payment wallet attestation, personal contact details, student ID, vReceipt, person identification data and photo ID. The registry lists them as type metadata, and its TS11 API lists a type once it has a rulebook.
+- The payment data confirmation schema of the EWC repository describes transaction data of a presentation and is not an attestation type, so the catalogue does not include it.

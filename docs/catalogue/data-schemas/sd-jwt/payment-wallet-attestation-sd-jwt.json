@@ -1,0 +1,344 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://registry.siros.org/aptitude-consortium/payment-wallet-attestation.schema.json",
+  "title": "Payment Wallet Attestation",
+  "description": "Payment Wallet Attestation (PWA) issued by a payment service provider (PSP) to bind a wallet to a funding source: a payment card, an account or both. Claim names and semantics follow the WE BUILD SCA family (SCA-Card DPC, SCA-IBAN, SCA-User) of TS12.",
+  "version": "0.11.0",
+  "type": "object",
+  "additionalProperties": true,
+  "properties": {
+    "iss": {
+      "description": "Issuer URL identifying the attestation provider.",
+      "type": "string",
+      "examples": [
+        "https://psp.example.com"
+      ],
+      "format": "uri"
+    },
+    "aud": {
+      "description": "Audience of this attestation; SHALL be URL(s) of RPs allowed for the 2-party model. Not evaluated when the attestation is used for payment.",
+      "examples": [
+        "https://pisp.example.eu"
+      ],
+      "oneOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      ]
+    },
+    "sub": {
+      "description": "Random unique value identifying the attestation subject in the authentic source. Usage of UUID or prefixed UUID is recommended.",
+      "type": "string",
+      "examples": [
+        "urn:uuid:123e4567-e89b-12d3-a456-426614174000"
+      ]
+    },
+    "iat": {
+      "description": "Unix timestamp designating the time when the attestation was issued.",
+      "type": "integer"
+    },
+    "nbf": {
+      "description": "Unix timestamp denoting the first time the attestation may be used. Conditionally mandatory when nbf and iat differ.",
+      "type": "integer"
+    },
+    "exp": {
+      "description": "Unix timestamp denoting the technical validity expiration of the attestation.",
+      "type": "integer"
+    },
+    "vct": {
+      "type": "string",
+      "const": "eu.aptitude.payment-wallet-attestation.1",
+      "description": "Credential type identifier of the Payment Wallet Attestation."
+    },
+    "jti": {
+      "description": "Unique identifier assigned and retained by the PSP for this credential.",
+      "type": "string"
+    },
+    "funding_source_type": {
+      "description": "Type of funding source, supported values are account, card, and any.",
+      "type": "string",
+      "enum": [
+        "account",
+        "card",
+        "any"
+      ]
+    },
+    "credential_id": {
+      "description": "Unique identifier of this specific credential instance. The value is issuer-specific and must uniquely identify the credential within the issuer's namespace. It SHOULD be generated using a collision-resistant mechanism (e.g., UUID). The credential_id identifies the credential artefact itself rather than the underlying payment card.",
+      "type": "string",
+      "minLength": 1,
+      "examples": [
+        "urn:uuid:9f2b7a2e-3b74-4a0d-9b1a-0e6a91f5d2c8"
+      ]
+    },
+    "network": {
+      "description": "Payment network or scheme associated with the credential, as a single string value. Each attestation is issued for exactly one network. Open list of lower-case payment network identifiers, e.g. mastercard, maestro, visa.",
+      "type": "string",
+      "minLength": 1,
+      "examples": [
+        "mastercard"
+      ]
+    },
+    "card_id": {
+      "description": "Opaque identifier of the digitised payment instrument for which this attestation is issued, specific to this attestation's network, typically the token or card reference provisioned by that network's token service provider. The value is issuer-specific and MUST NOT reveal sensitive card data such as the full PAN.",
+      "type": "string",
+      "minLength": 1,
+      "examples": [
+        "mc-8c3f2d1a"
+      ]
+    },
+    "masked_iban": {
+      "description": "Masked IBAN where first 4 and last 4 characters are unmasked.",
+      "type": "string",
+      "examples": [
+        "CZ55***********8745"
+      ]
+    },
+    "iban": {
+      "description": "Full IBAN number.",
+      "type": "string",
+      "examples": [
+        "CZ5508000000001234567899"
+      ]
+    },
+    "national_bank_code": {
+      "description": "National bank code.",
+      "type": "string",
+      "examples": [
+        "0300"
+      ]
+    },
+    "bic": {
+      "description": "BIC of bank, Bank Identifier Code as per ISO 9362.",
+      "type": "string",
+      "examples": [
+        "CEKOCZPP"
+      ]
+    },
+    "scheme_identifier": {
+      "description": "Proprietary scheme identifier for routing purposes. May be multivalued.",
+      "examples": [
+        "bancomat"
+      ],
+      "oneOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      ]
+    },
+    "display_name": {
+      "description": "Friendly name of account for display/distinguishing purposes.",
+      "type": "string",
+      "examples": [
+        "My current account"
+      ]
+    },
+    "currency": {
+      "description": "ISO 4217 currency code; may be an array for multicurrency accounts.",
+      "examples": [
+        "EUR"
+      ],
+      "oneOf": [
+        {
+          "type": "string",
+          "pattern": "^[A-Z]{3}$"
+        },
+        {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^[A-Z]{3}$"
+          }
+        }
+      ]
+    },
+    "masked_psu_id": {
+      "description": "Masked identifier of the PSU (Payment Service User) of the credential in the bank.",
+      "type": "string",
+      "examples": [
+        "DE89****3000"
+      ]
+    },
+    "pan_last_four": {
+      "description": "Last four digits of the Primary Account Number (PAN).",
+      "type": "string",
+      "pattern": "^[0-9]{4}$"
+    },
+    "iin": {
+      "description": "Issuer Identification Number (IIN), also called Bank Identification Number (BIN).",
+      "type": "string",
+      "pattern": "^[0-9]{6,8}$"
+    },
+    "par_last_four": {
+      "description": "Last four characters of the EMV Payment Account Reference (PAR).",
+      "type": "string",
+      "maxLength": 4
+    },
+    "icon": {
+      "description": "URI to logo or card art.",
+      "type": "string",
+      "format": "uri"
+    },
+    "cnf": {
+      "description": "Object containing information for cryptographic holder binding.",
+      "type": "object",
+      "properties": {
+        "jwk": {
+          "description": "JSON Web Key as per specification.",
+          "type": "object",
+          "properties": {
+            "kty": {
+              "description": "Key type.",
+              "type": "string"
+            },
+            "crv": {
+              "description": "Curve of the key.",
+              "type": "string"
+            },
+            "x": {
+              "description": "The x-coordinate for the elliptic curve point.",
+              "type": "string"
+            },
+            "y": {
+              "description": "The y-coordinate for the elliptic curve point.",
+              "type": "string"
+            }
+          },
+          "required": [
+            "kty",
+            "crv",
+            "x",
+            "y"
+          ]
+        }
+      },
+      "required": [
+        "jwk"
+      ]
+    },
+    "status": {
+      "type": "object",
+      "description": "Reference to the Token Status List entry that carries the revocation status of the attestation.",
+      "properties": {
+        "status_list": {
+          "type": "object",
+          "properties": {
+            "idx": {
+              "type": "integer",
+              "minimum": 0,
+              "description": "Index of the attestation in the status list."
+            },
+            "uri": {
+              "type": "string",
+              "format": "uri",
+              "description": "URI of the status list token."
+            }
+          },
+          "required": [
+            "idx",
+            "uri"
+          ]
+        }
+      },
+      "required": [
+        "status_list"
+      ]
+    }
+  },
+  "required": [
+    "iss",
+    "sub",
+    "iat",
+    "exp",
+    "vct",
+    "funding_source_type",
+    "cnf"
+  ],
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "funding_source_type": {
+            "const": "card"
+          }
+        },
+        "required": [
+          "funding_source_type"
+        ]
+      },
+      "then": {
+        "required": [
+          "credential_id",
+          "network"
+        ]
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "funding_source_type": {
+            "const": "account"
+          }
+        },
+        "required": [
+          "funding_source_type"
+        ]
+      },
+      "then": {
+        "required": [
+          "masked_iban"
+        ]
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "funding_source_type": {
+            "const": "any"
+          }
+        },
+        "required": [
+          "funding_source_type"
+        ]
+      },
+      "then": {
+        "not": {
+          "anyOf": [
+            {
+              "required": [
+                "card_id"
+              ]
+            },
+            {
+              "required": [
+                "currency"
+              ]
+            },
+            {
+              "required": [
+                "network"
+              ]
+            },
+            {
+              "required": [
+                "icon"
+              ]
+            }
+          ]
+        }
+      }
+    }
+  ]
+}
