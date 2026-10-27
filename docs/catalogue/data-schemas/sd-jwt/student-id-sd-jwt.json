@@ -1,0 +1,136 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://registry.siros.org/aptitude-consortium/student-id.schema.json",
+  "title": "Student ID",
+  "description": "Student identity credential carrying SCHAC and eduPerson attributes, issued as an SD-JWT VC (OpenID4VCI scope StudentID).",
+  "version": "0.10.0",
+  "type": "object",
+  "additionalProperties": true,
+  "properties": {
+    "vct": {
+      "type": "string",
+      "const": "VerifiableStudentIDSDJWT",
+      "description": "Verifiable credential type identifier of the student ID."
+    },
+    "identifier": {
+      "type": "string",
+      "description": "Unique identifier of the student credential."
+    },
+    "schacPersonalUniqueCode": {
+      "type": "string",
+      "description": "SCHAC personal unique code of the student."
+    },
+    "schacPersonalUniqueID": {
+      "type": "string",
+      "description": "SCHAC personal unique ID of the student."
+    },
+    "schacHomeOrganization": {
+      "type": "string",
+      "description": "SCHAC identifier of the student's home organisation."
+    },
+    "familyName": {
+      "type": "string",
+      "description": "Family name of the student."
+    },
+    "firstName": {
+      "type": "string",
+      "description": "First name of the student."
+    },
+    "displayName": {
+      "type": "string",
+      "description": "Name of the student as preferred for display."
+    },
+    "dateOfBirth": {
+      "type": "string",
+      "description": "Date of birth of the student.",
+      "format": "date"
+    },
+    "commonName": {
+      "type": "string",
+      "description": "Common name (cn) of the student."
+    },
+    "mail": {
+      "type": "string",
+      "description": "E-mail address of the student.",
+      "format": "email"
+    },
+    "eduPersonPrincipalName": {
+      "type": "string",
+      "description": "eduPerson principal name (scoped identifier) of the student."
+    },
+    "eduPersonPrimaryAffiliation": {
+      "type": "string",
+      "description": "eduPerson primary affiliation of the student with the home organisation."
+    },
+    "eduPersonAffiliation": {
+      "type": "string",
+      "description": "eduPerson affiliation of the student with the home organisation."
+    },
+    "eduPersonScopedAffiliation": {
+      "type": "string",
+      "description": "eduPerson affiliation of the student, scoped to the home organisation domain."
+    },
+    "eduPersonAssurance": {
+      "type": "string",
+      "description": "eduPerson assurance profile that applies to the student's identity."
+    },
+    "iss": {
+      "type": "string",
+      "format": "uri",
+      "description": "Issuer of the attestation, as an HTTPS URL that identifies the issuer."
+    },
+    "iat": {
+      "type": "integer",
+      "description": "Time of issuance as a NumericDate (seconds since the Unix epoch)."
+    },
+    "nbf": {
+      "type": "integer",
+      "description": "Time before which the attestation is not valid, as a NumericDate."
+    },
+    "exp": {
+      "type": "integer",
+      "description": "Time at which the attestation expires, as a NumericDate."
+    },
+    "cnf": {
+      "type": "object",
+      "description": "Confirmation claim that binds the attestation to the key of the holder (RFC 7800).",
+      "properties": {
+        "jwk": {
+          "type": "object",
+          "description": "Public key of the holder as a JWK."
+        }
+      }
+    },
+    "status": {
+      "type": "object",
+      "description": "Reference to the Token Status List entry that carries the revocation status of the attestation.",
+      "properties": {
+        "status_list": {
+          "type": "object",
+          "properties": {
+            "idx": {
+              "type": "integer",
+              "minimum": 0,
+              "description": "Index of the attestation in the status list."
+            },
+            "uri": {
+              "type": "string",
+              "format": "uri",
+              "description": "URI of the status list token."
+            }
+          },
+          "required": [
+            "idx",
+            "uri"
+          ]
+        }
+      },
+      "required": [
+        "status_list"
+      ]
+    }
+  },
+  "required": [
+    "vct"
+  ]
+}

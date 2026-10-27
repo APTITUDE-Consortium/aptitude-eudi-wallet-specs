@@ -1,0 +1,323 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://registry.siros.org/aptitude-consortium/photo-id.schema.json",
+  "title": "Photo ID",
+  "description": "Verifiable credential for a Photo ID based on ISO/IEC 23220-1 and the org.iso.23220.photoid.1 claims, with optional ICAO Digital Travel Credential (DTC) data groups.",
+  "version": "1.1.0",
+  "type": "object",
+  "additionalProperties": true,
+  "properties": {
+    "vct": {
+      "type": "string",
+      "const": "eu.europa.ec.eudi.photoid.1",
+      "description": "Verifiable credential type identifier of the Photo ID."
+    },
+    "family_name_unicode": {
+      "description": "Unicode-encoded family name of the document holder.",
+      "type": "string"
+    },
+    "given_name_unicode": {
+      "description": "Unicode-encoded first name of the document holder.",
+      "type": "string"
+    },
+    "birth_date": {
+      "description": "Date of birth in ISO 8601 format.",
+      "type": "string",
+      "format": "date"
+    },
+    "portrait": {
+      "description": "A portrait image encoded as a Data URI.",
+      "type": "string",
+      "pattern": "^data:image\\/(png|jpeg);base64,[a-zA-Z0-9+/=]+$"
+    },
+    "issue_date": {
+      "description": "Date when the document was issued.",
+      "type": "string",
+      "format": "date"
+    },
+    "expiry_date": {
+      "description": "The date when the document expires.",
+      "type": "string",
+      "format": "date"
+    },
+    "issuing_authority_unicode": {
+      "description": "The authority responsible for issuing the document.",
+      "type": "string"
+    },
+    "issuing_country": {
+      "description": "The country issuing the document.",
+      "type": "string"
+    },
+    "sex": {
+      "description": "Holder's sex using values as defined in ISO/IEC 5218. 0= Not known, 1 = Male, 2 = Female, 9 = non-applicable",
+      "type": "integer"
+    },
+    "nationality": {
+      "description": "Nationality of the holder as two letter country code (alpha-2 code) or three letter code alpha-3 code) defined in ISO 3166-1.",
+      "type": "string"
+    },
+    "document_number": {
+      "description": "Unique number identifying the document.",
+      "type": "string"
+    },
+    "name_at_birth": {
+      "description": "The name of the individual at birth.",
+      "type": "string"
+    },
+    "birthplace": {
+      "description": "Place of birth (country and municipality or state/province).",
+      "type": "string"
+    },
+    "portrait_capture_date": {
+      "description": "Date when the portrait was taken.",
+      "type": "string",
+      "format": "date-time"
+    },
+    "resident_address_unicode": {
+      "description": "Unicode-encoded resident address of the individual.",
+      "type": "string"
+    },
+    "resident_city_unicode": {
+      "description": "Unicode-encoded city of residence.",
+      "type": "string"
+    },
+    "resident_postal_code": {
+      "description": "Postal code of the residence.",
+      "type": "string"
+    },
+    "resident_country": {
+      "description": "Country of residence.",
+      "type": "string"
+    },
+    "age_over_18": {
+      "description": "Indicates if the individual is over 18.",
+      "type": "boolean"
+    },
+    "age_in_years": {
+      "description": "The age of the individual in years.",
+      "type": "integer"
+    },
+    "age_birth_year": {
+      "description": "The birth year of the individual.",
+      "type": "integer"
+    },
+    "family_name_latin1": {
+      "description": "latin1-encoded family name of the document holder.",
+      "type": "string"
+    },
+    "given_name_latin1": {
+      "description": "latin1-encoded first name of the document holder.",
+      "type": "string"
+    },
+    "person_id": {
+      "description": "Unique personal identifier.",
+      "type": "string"
+    },
+    "birth_country": {
+      "description": "Country where the individual was born.",
+      "type": "string"
+    },
+    "birth_state": {
+      "description": "State or province where the individual was born.",
+      "type": "string"
+    },
+    "birth_city": {
+      "description": "City where the individual was born.",
+      "type": "string"
+    },
+    "administrative_number": {
+      "description": "A number assigned by the Photo ID holder issuer for audit control or other purposes.",
+      "type": "string"
+    },
+    "resident_street": {
+      "description": "Street address of the individual's residence.",
+      "type": "string"
+    },
+    "resident_house_number": {
+      "description": "House number of the individual's residence.",
+      "type": "string"
+    },
+    "travel_document_number": {
+      "description": "Number of the travel document (e.g., passport number).",
+      "type": "string"
+    },
+    "resident_state": {
+      "description": "The state/province/district where the Photo ID holder lives.",
+      "type": "string"
+    },
+    "dtc_version": {
+      "description": "Version of the DTC definition",
+      "type": "string"
+    },
+    "dtc_dg1": {
+      "description": "The full MRZ data for DTC Data Group 1, encoded as a string.",
+      "type": "string",
+      "contentEncoding": "base64"
+    },
+    "dtc_dg2": {
+      "description": "The biometric data for DTC Data Group 2 (e.g., facial image).",
+      "type": "string",
+      "contentEncoding": "base64"
+    },
+    "dtc_dg3": {
+      "description": "Binary data for DTC Data Group 3.",
+      "type": "string",
+      "contentEncoding": "base64"
+    },
+    "dtc_dg4": {
+      "description": "Binary data for DTC Data Group 4.",
+      "type": "string",
+      "contentEncoding": "base64"
+    },
+    "dtc_dg5": {
+      "description": "Binary data for DTC Data Group 5.",
+      "type": "string",
+      "contentEncoding": "base64"
+    },
+    "dtc_dg6": {
+      "description": "Binary data for DTC Data Group 6.",
+      "type": "string",
+      "contentEncoding": "base64"
+    },
+    "dtc_dg7": {
+      "description": "Binary data for DTC Data Group 7.",
+      "type": "string",
+      "contentEncoding": "base64"
+    },
+    "dtc_dg8": {
+      "description": "Binary data for DTC Data Group 8.",
+      "type": "string",
+      "contentEncoding": "base64"
+    },
+    "dtc_dg9": {
+      "description": "Binary data for DTC Data Group 9.",
+      "type": "string",
+      "contentEncoding": "base64"
+    },
+    "dtc_dg10": {
+      "description": "Binary data for DTC Data Group 10.",
+      "type": "string",
+      "contentEncoding": "base64"
+    },
+    "dtc_dg11": {
+      "description": "Binary data for DTC Data Group 11.",
+      "type": "string",
+      "contentEncoding": "base64"
+    },
+    "dtc_dg12": {
+      "description": "Binary data for DTC Data Group 12.",
+      "type": "string",
+      "contentEncoding": "base64"
+    },
+    "dtc_dg13": {
+      "description": "Binary data for DTC Data Group 13.",
+      "type": "string",
+      "contentEncoding": "base64"
+    },
+    "dtc_dg14": {
+      "description": "Binary data for DTC Data Group 14.",
+      "type": "string",
+      "contentEncoding": "base64"
+    },
+    "dtc_dg15": {
+      "description": "Binary data for DTC Data Group 15.",
+      "type": "string",
+      "contentEncoding": "base64"
+    },
+    "dtc_dg16": {
+      "description": "Binary data for DTC Data Group 16.",
+      "type": "string",
+      "contentEncoding": "base64"
+    },
+    "dtc_sod": {
+      "description": "The encoded Security Object Document (SOD) for DTC, which contains the digital signature and other cryptographic information.",
+      "type": "string",
+      "contentEncoding": "base64"
+    },
+    "dg_content_info": {
+      "description": "Binary data of the DTCContentInfo",
+      "type": "string",
+      "contentEncoding": "base64"
+    },
+    "iss": {
+      "type": "string",
+      "format": "uri",
+      "description": "Issuer of the attestation, as an HTTPS URL that identifies the issuer."
+    },
+    "iat": {
+      "type": "integer",
+      "description": "Time of issuance as a NumericDate (seconds since the Unix epoch)."
+    },
+    "nbf": {
+      "type": "integer",
+      "description": "Time before which the attestation is not valid, as a NumericDate."
+    },
+    "exp": {
+      "type": "integer",
+      "description": "Time at which the attestation expires, as a NumericDate."
+    },
+    "cnf": {
+      "type": "object",
+      "description": "Confirmation claim that binds the attestation to the key of the holder (RFC 7800).",
+      "properties": {
+        "jwk": {
+          "type": "object",
+          "description": "Public key of the holder as a JWK."
+        }
+      }
+    },
+    "status": {
+      "type": "object",
+      "description": "Reference to the Token Status List entry that carries the revocation status of the attestation.",
+      "properties": {
+        "status_list": {
+          "type": "object",
+          "properties": {
+            "idx": {
+              "type": "integer",
+              "minimum": 0,
+              "description": "Index of the attestation in the status list."
+            },
+            "uri": {
+              "type": "string",
+              "format": "uri",
+              "description": "URI of the status list token."
+            }
+          },
+          "required": [
+            "idx",
+            "uri"
+          ]
+        }
+      },
+      "required": [
+        "status_list"
+      ]
+    }
+  },
+  "required": [
+    "family_name_unicode",
+    "given_name_unicode",
+    "birth_date",
+    "portrait",
+    "issue_date",
+    "expiry_date",
+    "issuing_authority_unicode",
+    "issuing_country",
+    "age_over_18"
+  ],
+  "dependentRequired": {
+    "dtc_dg1": [
+      "dtc_dg2",
+      "dtc_sod"
+    ],
+    "dtc_dg2": [
+      "dtc_dg1",
+      "dtc_sod"
+    ],
+    "dtc_sod": [
+      "dtc_dg1",
+      "dtc_dg2"
+    ]
+  }
+}

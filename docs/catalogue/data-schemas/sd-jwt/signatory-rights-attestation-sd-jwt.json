@@ -1,0 +1,190 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://registry.siros.org/aptitude-consortium/signatory-rights-attestation.schema.json",
+  "title": "Signatory Rights Attestation",
+  "description": "Attests which natural or legal persons hold full signatory rights to engage a legal person, as registered in a national business register (EWC WP3).",
+  "version": "1.1.0",
+  "type": "object",
+  "additionalProperties": true,
+  "properties": {
+    "vct": {
+      "type": "string",
+      "const": "eu.aptitude.signatory-rights-attestation.1",
+      "description": "Verifiable credential type identifier of the Signatory Rights attestation."
+    },
+    "legal_person_name": {
+      "type": "string",
+      "description": "Official current legal person name as registered in the business register.",
+      "examples": [
+        "Example Holding AB"
+      ]
+    },
+    "legal_person_id": {
+      "type": "string",
+      "description": "Unique id for organisations in EUID structure.",
+      "examples": [
+        "SE.5560000000"
+      ]
+    },
+    "signatory_rights": {
+      "type": "array",
+      "description": "Information about the persons and their signatory rights over the legal person.",
+      "items": {
+        "oneOf": [
+          {
+            "$ref": "#/$defs/signatory_rights_held_by_person"
+          },
+          {
+            "$ref": "#/$defs/signatory_rights_held_by_legal_person"
+          }
+        ]
+      }
+    },
+    "iss": {
+      "type": "string",
+      "format": "uri",
+      "description": "Issuer of the attestation, as an HTTPS URL that identifies the issuer."
+    },
+    "iat": {
+      "type": "integer",
+      "description": "Time of issuance as a NumericDate (seconds since the Unix epoch)."
+    },
+    "nbf": {
+      "type": "integer",
+      "description": "Time before which the attestation is not valid, as a NumericDate."
+    },
+    "exp": {
+      "type": "integer",
+      "description": "Time at which the attestation expires, as a NumericDate."
+    },
+    "cnf": {
+      "type": "object",
+      "description": "Confirmation claim that binds the attestation to the key of the holder (RFC 7800).",
+      "properties": {
+        "jwk": {
+          "type": "object",
+          "description": "Public key of the holder as a JWK."
+        }
+      }
+    },
+    "status": {
+      "type": "object",
+      "description": "Reference to the Token Status List entry that carries the revocation status of the attestation.",
+      "properties": {
+        "status_list": {
+          "type": "object",
+          "properties": {
+            "idx": {
+              "type": "integer",
+              "minimum": 0,
+              "description": "Index of the attestation in the status list."
+            },
+            "uri": {
+              "type": "string",
+              "format": "uri",
+              "description": "URI of the status list token."
+            }
+          },
+          "required": [
+            "idx",
+            "uri"
+          ]
+        }
+      },
+      "required": [
+        "status_list"
+      ]
+    }
+  },
+  "required": [
+    "vct",
+    "legal_person_name",
+    "legal_person_id",
+    "signatory_rights"
+  ],
+  "$defs": {
+    "post": {
+      "type": "array",
+      "description": "Role of the signatory as registered.",
+      "items": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "string",
+            "description": "National code of the post."
+          },
+          "name": {
+            "type": "string",
+            "description": "Name of the post as registered."
+          }
+        },
+        "required": [
+          "name"
+        ]
+      }
+    },
+    "signatory_rights_held_by_person": {
+      "type": "object",
+      "description": "Signatory right held by a natural person.",
+      "properties": {
+        "full_name": {
+          "type": "string",
+          "description": "Full name of the natural person representing the company."
+        },
+        "date_of_birth": {
+          "type": "string",
+          "format": "date",
+          "description": "Date of birth of the natural person representing the company."
+        },
+        "nationality": {
+          "type": "string",
+          "description": "Nationality of the natural person representing the company."
+        },
+        "signatory_rule": {
+          "type": "string",
+          "enum": [
+            "alone"
+          ],
+          "description": "Information if the signatory can engage the company alone or jointly."
+        },
+        "post": {
+          "$ref": "#/$defs/post"
+        }
+      },
+      "required": [
+        "full_name",
+        "date_of_birth",
+        "signatory_rule"
+      ]
+    },
+    "signatory_rights_held_by_legal_person": {
+      "type": "object",
+      "description": "Signatory right held by a legal person.",
+      "properties": {
+        "legal_person_name": {
+          "type": "string",
+          "description": "Official current legal person name of the signatory as registered in the business register."
+        },
+        "legal_person_id": {
+          "type": "string",
+          "description": "Unique id of the signatory organisation in EUID structure."
+        },
+        "signatory_rule": {
+          "type": "string",
+          "enum": [
+            "alone"
+          ],
+          "description": "Information if the signatory can engage the company alone or jointly."
+        },
+        "post": {
+          "$ref": "#/$defs/post"
+        }
+      },
+      "required": [
+        "legal_person_name",
+        "legal_person_id",
+        "signatory_rule"
+      ]
+    }
+  }
+}

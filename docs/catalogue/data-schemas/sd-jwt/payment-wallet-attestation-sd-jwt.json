@@ -1,0 +1,291 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://registry.siros.org/aptitude-consortium/payment-wallet-attestation.schema.json",
+  "title": "Payment Wallet Attestation",
+  "description": "Payment Wallet Attestation (PWA) issued by a payment service provider (PSP) to bind a wallet to a funding source.",
+  "version": "0.10.0",
+  "type": "object",
+  "additionalProperties": true,
+  "properties": {
+    "iss": {
+      "description": "Issuer of the credential.",
+      "type": "string",
+      "examples": [
+        "https://psp.example.com"
+      ],
+      "format": "uri"
+    },
+    "aud": {
+      "description": "Intended audience of the credential.",
+      "type": "string"
+    },
+    "sub": {
+      "description": "Unique identifier assigned and retained by the PSP for the holder.",
+      "type": "string"
+    },
+    "iat": {
+      "description": "Time of issuance.",
+      "type": "integer"
+    },
+    "nbf": {
+      "description": "Not to be used before this time.",
+      "type": "integer"
+    },
+    "exp": {
+      "description": "Expiry time of the credential.",
+      "type": "integer"
+    },
+    "vct": {
+      "type": "string",
+      "const": "PaymentWalletAttestation",
+      "description": "Credential type identifier; the only supported value is PaymentWalletAttestation."
+    },
+    "jti": {
+      "description": "Unique identifier assigned and retained by the PSP for this credential.",
+      "type": "string"
+    },
+    "fundingSource": {
+      "description": "Details about the funding source for which the PWA is valid.",
+      "type": "object",
+      "properties": {
+        "type": {
+          "description": "Type of funding source, supported values are account, card, and any.",
+          "type": "string",
+          "enum": [
+            "account",
+            "card",
+            "any"
+          ]
+        },
+        "panLastFour": {
+          "description": "Last four digits of the Primary Account Number (PAN).",
+          "type": "string",
+          "pattern": "^[0-9]{4}$"
+        },
+        "iin": {
+          "description": "Issuer Identification Number (IIN), also called Bank Identification Number (BIN).",
+          "type": "string",
+          "pattern": "^[0-9]{6,8}$"
+        },
+        "parLastFour": {
+          "description": "Last four characters of the EMV Payment Account Reference (PAR).",
+          "type": "string",
+          "maxLength": 4
+        },
+        "ibanLastFour": {
+          "description": "Last four characters of the account's IBAN.",
+          "type": "string",
+          "pattern": "^[A-Z0-9]{4}$"
+        },
+        "bic": {
+          "description": "Bank Identifier Code (BIC) as per ISO 9362.",
+          "type": "string"
+        },
+        "sortCode": {
+          "description": "National bank sort or routing code.",
+          "type": "string"
+        },
+        "aliasId": {
+          "description": "Unique identifier assigned and retained by the PSP for the funding source.",
+          "type": "string"
+        },
+        "currency": {
+          "description": "Currency for the funding source in 3-letter alphabetic code.",
+          "type": "string",
+          "pattern": "^[A-Z]{3}$"
+        },
+        "scheme": {
+          "description": "Scheme of the funding source.",
+          "type": "string",
+          "enum": [
+            "Visa",
+            "American Express",
+            "Discover",
+            "JCB",
+            "Mastercard",
+            "UnionPay",
+            "SEPA",
+            "SEPA SCT",
+            "SEPA SCT Inst"
+          ]
+        },
+        "icon": {
+          "description": "URI to logo or card art.",
+          "type": "string",
+          "format": "uri"
+        }
+      },
+      "examples": [
+        {
+          "type": "card",
+          "panLastFour": "1234",
+          "iin": "411111"
+        }
+      ]
+    },
+    "cnf": {
+      "description": "Object containing information for cryptographic holder binding.",
+      "type": "object",
+      "properties": {
+        "jwk": {
+          "description": "JSON Web Key as per specification.",
+          "type": "object",
+          "properties": {
+            "kty": {
+              "description": "Key type.",
+              "type": "string"
+            },
+            "crv": {
+              "description": "Curve of the key.",
+              "type": "string"
+            },
+            "x": {
+              "description": "The x-coordinate for the elliptic curve point.",
+              "type": "string"
+            },
+            "y": {
+              "description": "The y-coordinate for the elliptic curve point.",
+              "type": "string"
+            }
+          },
+          "required": [
+            "kty",
+            "crv",
+            "x",
+            "y"
+          ]
+        }
+      },
+      "required": [
+        "jwk"
+      ]
+    },
+    "status": {
+      "type": "object",
+      "description": "Reference to the Token Status List entry that carries the revocation status of the attestation.",
+      "properties": {
+        "status_list": {
+          "type": "object",
+          "properties": {
+            "idx": {
+              "type": "integer",
+              "minimum": 0,
+              "description": "Index of the attestation in the status list."
+            },
+            "uri": {
+              "type": "string",
+              "format": "uri",
+              "description": "URI of the status list token."
+            }
+          },
+          "required": [
+            "idx",
+            "uri"
+          ]
+        }
+      },
+      "required": [
+        "status_list"
+      ]
+    }
+  },
+  "required": [
+    "iss",
+    "sub",
+    "iat",
+    "vct",
+    "fundingSource",
+    "cnf"
+  ],
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "fundingSource": {
+            "properties": {
+              "type": {
+                "const": "card"
+              }
+            }
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "fundingSource": {
+            "required": [
+              "panLastFour",
+              "iin"
+            ]
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "fundingSource": {
+            "properties": {
+              "type": {
+                "const": "account"
+              }
+            }
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "fundingSource": {
+            "required": [
+              "ibanLastFour",
+              "bic"
+            ]
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "fundingSource": {
+            "properties": {
+              "type": {
+                "const": "any"
+              }
+            }
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "fundingSource": {
+            "not": {
+              "anyOf": [
+                {
+                  "required": [
+                    "aliasId"
+                  ]
+                },
+                {
+                  "required": [
+                    "currency"
+                  ]
+                },
+                {
+                  "required": [
+                    "scheme"
+                  ]
+                },
+                {
+                  "required": [
+                    "icon"
+                  ]
+                }
+              ]
+            }
+          }
+        }
+      }
+    }
+  ]
+}

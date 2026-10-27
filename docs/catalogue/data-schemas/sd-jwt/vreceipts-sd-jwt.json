@@ -1,0 +1,444 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://registry.siros.org/aptitude-consortium/vreceipts.schema.json",
+  "title": "vReceipt",
+  "description": "Purchase receipt with seller, customer, payment, delivery, tax and line item data, issued as an SD-JWT VC (OpenID4VCI scope vReceipt).",
+  "version": "0.10.0",
+  "type": "object",
+  "additionalProperties": true,
+  "properties": {
+    "vct": {
+      "type": "string",
+      "const": "VerifiablevReceiptSDJWT",
+      "description": "Verifiable credential type identifier of the vReceipt."
+    },
+    "iD": {
+      "type": "string",
+      "description": "I d of the purchase receipt."
+    },
+    "issueDate": {
+      "type": "string",
+      "description": "Issue date of the purchase receipt.",
+      "format": "date"
+    },
+    "note": {
+      "type": "string",
+      "description": "Note of the purchase receipt."
+    },
+    "documentCurrencyCode": {
+      "type": "string",
+      "description": "Document currency code of the purchase receipt."
+    },
+    "taxIncludedIndicator": {
+      "type": "boolean",
+      "description": "Tax included indicator of the purchase receipt."
+    },
+    "sellerSupplierParty": {
+      "type": "object",
+      "properties": {
+        "party": {
+          "type": "object",
+          "properties": {
+            "partyIdentification": {
+              "type": "object",
+              "properties": {
+                "iD": {
+                  "type": "string",
+                  "description": "I d of the party identification."
+                }
+              },
+              "description": "Party identification of the party, structured as party identification."
+            },
+            "partyName": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string",
+                  "description": "Name of the party name."
+                }
+              },
+              "description": "Party name of the party, structured as party name."
+            },
+            "postalAddress": {
+              "type": "object",
+              "properties": {
+                "streetName": {
+                  "type": "string",
+                  "description": "Street name of the address."
+                },
+                "cityName": {
+                  "type": "string",
+                  "description": "City name of the address."
+                },
+                "postcode": {
+                  "type": "string",
+                  "description": "Postcode of the address."
+                },
+                "countryIdentifier": {
+                  "type": "string",
+                  "description": "Country identifier of the address."
+                }
+              },
+              "description": "Postal address of the party, structured as address."
+            }
+          },
+          "description": "Party of the supplier party, structured as party."
+        },
+        "supplierPartyID": {
+          "type": "string",
+          "description": "Supplier party id of the supplier party."
+        }
+      },
+      "description": "Seller supplier party of the purchase receipt, structured as supplier party."
+    },
+    "accountingCustomerParty": {
+      "type": "object",
+      "properties": {
+        "party": {
+          "type": "object",
+          "properties": {
+            "partyIdentification": {
+              "type": "object",
+              "properties": {
+                "iD": {
+                  "type": "string",
+                  "description": "I d of the party identification."
+                }
+              },
+              "description": "Party identification of the party, structured as party identification."
+            },
+            "partyName": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string",
+                  "description": "Name of the party name."
+                }
+              },
+              "description": "Party name of the party, structured as party name."
+            },
+            "postalAddress": {
+              "type": "object",
+              "properties": {
+                "streetName": {
+                  "type": "string",
+                  "description": "Street name of the address."
+                },
+                "cityName": {
+                  "type": "string",
+                  "description": "City name of the address."
+                },
+                "postcode": {
+                  "type": "string",
+                  "description": "Postcode of the address."
+                },
+                "countryIdentifier": {
+                  "type": "string",
+                  "description": "Country identifier of the address."
+                }
+              },
+              "description": "Postal address of the party, structured as address."
+            }
+          },
+          "description": "Party of the customer party, structured as party."
+        }
+      },
+      "description": "Accounting customer party of the purchase receipt, structured as customer party."
+    },
+    "paymentMeans": {
+      "type": "object",
+      "properties": {
+        "cardAccount": {
+          "type": "object",
+          "properties": {
+            "networkID": {
+              "type": "string",
+              "description": "Network id of the card account."
+            },
+            "accountNumberID": {
+              "type": "string",
+              "description": "Account number id of the card account."
+            }
+          },
+          "description": "Card account of the payment means, structured as card account."
+        },
+        "paymentMeansCode": {
+          "type": "string",
+          "description": "Payment means code of the payment means."
+        }
+      },
+      "description": "Payment means of the purchase receipt, structured as payment means."
+    },
+    "payment": {
+      "type": "object",
+      "properties": {
+        "authorizationID": {
+          "type": "string",
+          "description": "Authorization id of the payment."
+        },
+        "paidAmount": {
+          "type": "string",
+          "description": "Paid amount of the payment."
+        },
+        "transactionID": {
+          "type": "string",
+          "description": "Transaction id of the payment."
+        }
+      },
+      "description": "Payment of the purchase receipt, structured as payment."
+    },
+    "delivery": {
+      "type": "object",
+      "properties": {
+        "actualDeliveryDate": {
+          "type": "string",
+          "description": "Actual delivery date of the delivery.",
+          "format": "date"
+        },
+        "deliveryAddress": {
+          "type": "object",
+          "properties": {
+            "streetName": {
+              "type": "string",
+              "description": "Street name of the address."
+            },
+            "cityName": {
+              "type": "string",
+              "description": "City name of the address."
+            },
+            "postcode": {
+              "type": "string",
+              "description": "Postcode of the address."
+            },
+            "countryIdentifier": {
+              "type": "string",
+              "description": "Country identifier of the address."
+            }
+          },
+          "description": "Delivery address of the delivery, structured as address."
+        },
+        "actualDeliveryTime": {
+          "type": "string",
+          "description": "Actual delivery time of the delivery."
+        }
+      },
+      "description": "Delivery of the purchase receipt, structured as delivery."
+    },
+    "taxTotal": {
+      "type": "object",
+      "properties": {
+        "taxSubtotal": {
+          "type": "object",
+          "properties": {
+            "taxableAmount": {
+              "type": "string",
+              "description": "Taxable amount of the tax subtotal."
+            },
+            "taxSubtotalTaxAmount": {
+              "type": "string",
+              "description": "Tax subtotal tax amount of the tax subtotal."
+            },
+            "taxCategory": {
+              "type": "object",
+              "properties": {
+                "taxScheme": {
+                  "type": "object",
+                  "properties": {
+                    "taxSchemeName": {
+                      "type": "string",
+                      "description": "Tax scheme name of the tax scheme."
+                    }
+                  },
+                  "description": "Tax scheme of the tax category, structured as tax scheme."
+                }
+              },
+              "description": "Tax category of the tax subtotal, structured as tax category."
+            },
+            "percent": {
+              "type": "string",
+              "description": "Percent of the tax subtotal."
+            }
+          },
+          "description": "Tax subtotal of the tax total, structured as tax subtotal."
+        },
+        "taxAmount": {
+          "type": "string",
+          "description": "Tax amount of the tax total."
+        }
+      },
+      "description": "Tax total of the purchase receipt, structured as tax total."
+    },
+    "legalMonetaryTotal": {
+      "type": "object",
+      "properties": {
+        "lineExtensionAmount": {
+          "type": "string",
+          "description": "Line extension amount of the monetary total."
+        },
+        "taxInclusiveAmount": {
+          "type": "string",
+          "description": "Tax inclusive amount of the monetary total."
+        },
+        "payableAmount": {
+          "type": "string",
+          "description": "Payable amount of the monetary total."
+        }
+      },
+      "description": "Legal monetary total of the purchase receipt, structured as monetary total."
+    },
+    "salesDocumentReference": {
+      "type": "object",
+      "properties": {
+        "iD": {
+          "type": "string",
+          "description": "I d of the document reference."
+        }
+      },
+      "description": "Sales document reference of the purchase receipt, structured as document reference."
+    },
+    "purchaseReceiptLine": {
+      "type": "array",
+      "description": "Line items of the purchase receipt.",
+      "items": {
+        "type": "object",
+        "properties": {
+          "item": {
+            "type": "object",
+            "properties": {
+              "commodityClassification": {
+                "type": "object",
+                "properties": {
+                  "itemClassificationCode": {
+                    "type": "string",
+                    "description": "Item classification code of the commodity classification."
+                  }
+                },
+                "description": "Commodity classification of the item, structured as commodity classification."
+              },
+              "itemInstance": {
+                "type": "object",
+                "properties": {
+                  "additionalItemProperty": {
+                    "type": "object",
+                    "properties": {
+                      "itemPropertyName": {
+                        "type": "string",
+                        "description": "Item property name of the item property."
+                      },
+                      "value": {
+                        "type": "string",
+                        "description": "Value of the item property."
+                      }
+                    },
+                    "description": "Additional item property of the item instance, structured as item property."
+                  }
+                },
+                "description": "Item instance of the item, structured as item instance."
+              },
+              "additionalItemProperty": {
+                "type": "object",
+                "properties": {
+                  "itemPropertyName": {
+                    "type": "string",
+                    "description": "Item property name of the item property."
+                  },
+                  "value": {
+                    "type": "string",
+                    "description": "Value of the item property."
+                  }
+                },
+                "description": "Additional item property of the item, structured as item property."
+              }
+            },
+            "description": "Item of the purchase receipt line, structured as item."
+          },
+          "quantity": {
+            "type": "string",
+            "description": "Quantity of the purchase receipt line."
+          },
+          "allowanceCharge": {
+            "type": "object",
+            "properties": {
+              "amount": {
+                "type": "string",
+                "description": "Amount of the allowance charge."
+              },
+              "allowanceChargeReason": {
+                "type": "string",
+                "description": "Allowance charge reason of the allowance charge."
+              }
+            },
+            "description": "Allowance charge of the purchase receipt line, structured as allowance charge."
+          },
+          "taxInclusiveLineExtentionAmount": {
+            "type": "string",
+            "description": "Tax inclusive line extention amount of the purchase receipt line."
+          },
+          "iD": {
+            "type": "string",
+            "description": "I d of the purchase receipt line."
+          }
+        },
+        "description": "Purchase receipt line of the purchase receipt, structured as purchase receipt line."
+      }
+    },
+    "iss": {
+      "type": "string",
+      "format": "uri",
+      "description": "Issuer of the attestation, as an HTTPS URL that identifies the issuer."
+    },
+    "iat": {
+      "type": "integer",
+      "description": "Time of issuance as a NumericDate (seconds since the Unix epoch)."
+    },
+    "nbf": {
+      "type": "integer",
+      "description": "Time before which the attestation is not valid, as a NumericDate."
+    },
+    "exp": {
+      "type": "integer",
+      "description": "Time at which the attestation expires, as a NumericDate."
+    },
+    "cnf": {
+      "type": "object",
+      "description": "Confirmation claim that binds the attestation to the key of the holder (RFC 7800).",
+      "properties": {
+        "jwk": {
+          "type": "object",
+          "description": "Public key of the holder as a JWK."
+        }
+      }
+    },
+    "status": {
+      "type": "object",
+      "description": "Reference to the Token Status List entry that carries the revocation status of the attestation.",
+      "properties": {
+        "status_list": {
+          "type": "object",
+          "properties": {
+            "idx": {
+              "type": "integer",
+              "minimum": 0,
+              "description": "Index of the attestation in the status list."
+            },
+            "uri": {
+              "type": "string",
+              "format": "uri",
+              "description": "URI of the status list token."
+            }
+          },
+          "required": [
+            "idx",
+            "uri"
+          ]
+        }
+      },
+      "required": [
+        "status_list"
+      ]
+    }
+  },
+  "required": [
+    "vct"
+  ]
+}
