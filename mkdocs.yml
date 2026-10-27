@@ -143,10 +143,13 @@ nav:
       - References: rulebook/wp2-trust-specifications/docs/sections/references.md
   - RFCs:
     - Overview: RFCs/index.md
+    - Generic Issuance Flow: wp2/generic-issuance-flow-specification.md
+    - Generic Remote Presentation Flow: wp2/Generic-remote-presentation-flow-specification.md
     - RFC-01 Credential Issuance Profile: RFCs/RFC001.md
     - RFC-02 Presentation Profile: RFCs/RFC002.md
     - RFC-03 Trust Evaluation: RFCs/RFC003.md
     - RFC-04 Revocation Profile: RFCs/RFC004.md
+    - RFC-05 Proximity Presentation Profile: RFCs/RFC005.md
   - Testing and Conformance:
     - Overview: itb_plus_user_onboarding/index.md
     - ITB+ User Onboarding Guide: itb_plus_user_onboarding/aptitude-itb-user-onboarding-manual.md
