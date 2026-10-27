@@ -19,6 +19,7 @@ Feedback:
 ## 1 Introduction
 
 ### 1.1 Document scope and purpose
+
 This Rulebook defines a Digital Boarding Pass as an Electronic Attestation represented by an ISO/IEC 18013-5 mdoc.
 
 The Digital Boarding Pass contains a Bar Coded Boarding Pass (BCBP) value as
@@ -150,7 +151,7 @@ lengths of their respective data areas. These values are required for robust
 parsing and lossless reconstruction of the BCBP value.
 
 The BCBP may be carried in PDF417, Aztec, QR Code, DataMatrix, or Code 128
-representations. 
+representations.
 
 This Rulebook does not prescribe a physical barcode
 symbology; `bcbp_string` preserves the BCBP data independent of the storage and rendering
@@ -205,7 +206,6 @@ The following table is normative for this profile.
 The mdoc envelope SHALL use the issuer-authentication and device-authentication
 structures required by the applicable ISO/IEC 18013-5 profile.
 
-
 ## 4 Attestation Usage
 
 This section describes how Digital Boarding Pass attestations are intended to
@@ -215,7 +215,7 @@ request other data required by an approved use case.
 ### 4.1 Airline remote issuance
 
 At online check-in, the airline or an authorised issuer creates the BCBP value,
-validates the booking and DCS data, passenger admissibility for international travel and issues the mdoc to the Wallet Unit. For passenger admissibility during international travel(non-schengen area) airline MAY request additional information which may include APTITUDE DTC and optionally APTITUDE DTA (only for non-existent Interactive Advance Passenger Information System). On successful admissibility check it SHALL issue the boarding pass into the wallet as per the attestation encoding defined in §3. 
+validates the booking and DCS data, passenger admissibility for international travel and issues the mdoc to the Wallet Unit. For passenger admissibility during international travel(non-schengen area) airline MAY request additional information which may include APTITUDE DTC and optionally APTITUDE DTA (only for non-existent Interactive Advance Passenger Information System). On successful admissibility check it SHALL issue the boarding pass into the wallet as per the attestation encoding defined in §3.
 
 ### 4.2 Proximity presentation at airport touchpoint(s)
 
@@ -225,6 +225,7 @@ Other on-demand or offline presentations SHOULD use this profile.
 At the day of travel, an airport touchpoint reader MAY present QR code for device engagement. The presentation request MAY include noarding pass to verify the journy details together with travel credential such as APTITUDE DTC to esverifytablish the passenger identity. The proximity flow SHALL follow the [ISO/IEC 18013-5:2021] specification.
 
 Validation will include
+
 - Issuer data authentication of credentials
 - Validation of certificate chain
 - Mobile security object validation for mdoc
