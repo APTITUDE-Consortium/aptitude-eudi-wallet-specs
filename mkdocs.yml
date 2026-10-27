@@ -64,10 +64,14 @@ extra_javascript:
   - media/mathjax-init.js
   - media/mathjax-tex-mml-chtml.js
 
+hooks:
+  - script/mkdocs_catalogue.py
+
 plugins:
   - tags
   - exclude:
       glob:
+        - 'catalogue/_template/**'
         - 'rulebook/wp2-trust-specifications/README.md'
         - 'rulebook/wp2-trust-specifications/CONTRIBUTING.md'
         - 'rulebook/wp2-trust-specifications/terminology.md'
@@ -128,6 +132,10 @@ nav:
     - Overview: rulebook/index.md
     - mVRC: rulebook/wp5/mVRC-rulebook.md
     - DTC: rulebook/wp3/dtc-rulebook.md
+  - Attestation Catalogue:
+    - Overview: catalogue/index.md
+    - Structure: catalogue/structure.md
+    - Publishing in the registry: catalogue/registry.md
   - Trust Specifications:
     - Trust Framework:
       - Overview: rulebook/wp2-trust-specifications/docs/trust-framework.md
