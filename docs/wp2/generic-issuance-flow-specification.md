@@ -1,7 +1,7 @@
 # Generic issuance flow specification
 
 Version 1.1
-Date 23-10-2026
+Date 26-10-2026
 
 ## Verion history
 
