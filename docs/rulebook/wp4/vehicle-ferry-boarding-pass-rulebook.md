@@ -4,14 +4,12 @@
   - Nikos Triantafyllou, University of the Aegean, UAegean i4m Lab
   - Petros Kavassalis, University of the Aegean, UAegean i4m Lab
 
-
 | Version | Date       | Description                                                                                                                                                                                                 |
 | ------- | ---------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | 0.1     | 23-07-2026 | Initial draft based on the SEDIT-X Ferry Transport working paper and the APTITUDE Attestation Rulebook template.                                                                                            |
 | 0.2     | 24-07-2026 | Simplified structure aligned with the passenger Ferry Boarding Pass model.                                                                                                                                  |
 | 0.3     | 24-07-2026 | SD-JWT claim model aligned with the Vehicle Boarding Credential JSON Schema. Withdrawn as the encoding by version 0.4.                                                                                      |
 | 0.4     | 02-11-2026 | Replaces the SD-JWT encoding with an ISO/IEC 18013-5 mdoc. `docType` is `eu.europa.ec.eudi.aptitude.vehicle_ferry_boarding.1`. The lane verifies the `DeviceResponse` offline.                             |
-
 
 **Feedback:**
 
@@ -288,9 +286,9 @@ on `validityInfo` and the disclosed journey elements.
 | `VBP-IR-05` | `ticket_let` and `ticket_number` SHALL be non-empty. | The lane needs a ticket identifier. | Issuer, before signing. | Issuer SHALL NOT issue the mdoc. |
 | `VBP-IR-06` | Where the lane matches the vehicle by plate, `plate_number` SHOULD be compared with the mVRC and with the vehicle at the lane. | The vehicle in the lane is the vehicle on the ticket. | Reader, as a separate check from mdoc verification. | Reader SHOULD refuse embarkation when that match fails. |
 
-# 3 Attestation encoding
+## 3 Attestation encoding
 
-## 3.1 ISO/IEC 18013-5-compliant encoding
+### 3.1 ISO/IEC 18013-5-compliant encoding
 
 The Vehicle Ferry Boarding Credential SHALL be issued as an ISO/IEC 18013-5
 mdoc. The issued object is an `IssuerSigned` structure as defined in that
@@ -302,7 +300,7 @@ Those steps are separate. Device engagement SHALL be by QR code or NFC.
 Device retrieval SHALL be by BLE or NFC, as the lane reader offers. BLE is a
 retrieval transport. It is not a device-engagement method.
 
-### 3.1.1 Document type and namespace
+#### 3.1.1 Document type and namespace
 
 The `docType` SHALL be:
 
@@ -320,7 +318,7 @@ eu.europa.ec.eudi.aptitude.vehicle_ferry_boarding.1
 withdrawn version 0.3 type `VehicleBoardingCredential` SHALL NOT be used as
 the `docType`, the namespace, or an SD-JWT `vct` for this credential.
 
-### 3.1.2 Data elements
+#### 3.1.2 Data elements
 
 | **Data Identifier** | **Element identifier** | **Encoding** | **Presence** |
 | ------------------- | ---------------------- | ------------ | ------------ |
@@ -388,7 +386,7 @@ only the elements required for the boarding decision. A boarding decision
 SHALL request the mandatory journey, vehicle-category and ticket elements.
 It SHALL also request `plate_number` when §2.5 requires that element.
 
-### 3.1.3 Mobile Security Object
+#### 3.1.3 Mobile Security Object
 
 `issuerAuth` SHALL be a `COSE_Sign1` whose payload is the Mobile Security
 Object, wrapped as a CBOR tag 24 byte string, as defined in ISO/IEC 18013-5.
@@ -421,7 +419,7 @@ Device authentication is not part of `issuerAuth`. During presentation the
 Wallet SHALL authenticate the `DeviceResponse` with a device signature or a
 device MAC, as defined in ISO/IEC 18013-5, bound to the `SessionTranscript`.
 
-### 3.1.4 CDDL
+#### 3.1.4 CDDL
 
 ```cddl
 vehicle_ferry_boarding_elements = {
@@ -450,7 +448,7 @@ with `random` at least 16 bytes long. The `COSE_Sign1` payload is the Mobile
 Security Object, also as a CBOR tag 24 byte string. `validityInfo` dates are
 CBOR tag 0 date-times.
 
-### 3.1.5 Illustrative issuer-signed structure
+#### 3.1.5 Illustrative issuer-signed structure
 
 The structure below is the issued `issuerSigned` content, shown inside the
 `docType` used on a `DeviceResponse` document. `deviceSigned` is produced at
@@ -589,7 +587,7 @@ included because this example is a lane that matches the vehicle by plate.
 }
 ```
 
-### 3.1.6 Wallet display
+#### 3.1.6 Wallet display
 
 The Wallet Unit SHOULD display:
 
@@ -610,7 +608,7 @@ The Wallet Unit SHOULD inform the User that:
 - a staff-assisted boarding process remains available where ferry policy
   allows it.
 
-## 3.2 SD-JWT VC-based encoding
+### 3.2 SD-JWT VC-based encoding
 
 This version does not define an SD-JWT VC representation.
 
@@ -618,13 +616,13 @@ The withdrawn version 0.3 profile (`vct` `VehicleBoardingCredential`, with
 nested `departure`, `arrival`, `vehicle` and `ticket` objects) SHALL NOT be
 issued as a Vehicle Ferry Boarding Credential.
 
-## 3.3 W3C Verifiable Credentials Data Model-based encoding
+### 3.3 W3C Verifiable Credentials Data Model-based encoding
 
 This version does not define a W3C VCDM representation.
 
-# 4 Attestation usage
+## 4 Attestation usage
 
-## 4.1 Issuance trigger
+### 4.1 Issuance trigger
 
 The Vehicle Ferry Boarding Credential SHALL be issued only after:
 
@@ -638,7 +636,7 @@ the port.
 
 The same entity MAY operate ticketing and issue this credential.
 
-## 4.2 Issuer
+### 4.2 Issuer
 
 The credential SHALL be issued by:
 
@@ -649,7 +647,7 @@ The issuer is the authentic source for this boarding entitlement. A party
 that only resells the ticket SHOULD NOT issue the credential unless the
 operator has explicitly authorised it to do so.
 
-## 4.3 Device binding
+### 4.3 Device binding
 
 The credential SHALL be device-bound.
 
@@ -659,7 +657,7 @@ ISO/IEC 18013-5, bound to the `SessionTranscript`. A reader SHALL NOT accept
 an `IssuerSigned` structure that is not carried in a `DeviceResponse`
 authenticated for that session.
 
-## 4.4 Wallet disclosure and consent
+### 4.4 Wallet disclosure and consent
 
 Before issuance, the Wallet SHOULD display:
 
@@ -672,7 +670,7 @@ Before issuance, the Wallet SHOULD display:
   device retrieval; and
 - the validity window.
 
-## 4.5 Presentation at the vehicle lane
+### 4.5 Presentation at the vehicle lane
 
 A normal use SHOULD follow these steps:
 
@@ -701,7 +699,7 @@ timestamp, a result, a reason code and a reader identifier. It SHOULD NOT
 contain PID attributes, the device key, the Mobile Security Object, or
 payment data.
 
-## 4.6 Vehicle, passenger and registration checks
+### 4.6 Vehicle, passenger and registration checks
 
 mdoc verification and vehicle matching are separate.
 
@@ -717,7 +715,7 @@ not claims of this mdoc.
 This Rulebook does not define a cryptographic binding between this credential
 and the mVRC. The lane compares the disclosed values.
 
-## 4.7 Verifier obligations
+### 4.7 Verifier obligations
 
 The lane reader SHALL:
 
@@ -747,7 +745,7 @@ be a refusal.
 A reader SHALL NOT accept a credential for another operator only because the
 same vendor operates both lanes.
 
-## 4.8 Failure and fallback
+### 4.8 Failure and fallback
 
 The reader SHALL refuse embarkation on the strength of this credential when:
 
@@ -763,7 +761,7 @@ The reader SHALL refuse embarkation on the strength of this credential when:
 The operator SHALL keep a staff-assisted boarding path where ferry policy
 allows it. Refusal of the mdoc SHALL NOT by itself close that path.
 
-# 5 Trust anchors
+## 5 Trust anchors
 
 The lane reader SHALL establish that the issuer:
 
@@ -780,9 +778,9 @@ to it. It does not fetch them during the presentation.
 A credential issued for one operator SHALL NOT be accepted by another
 operator merely because the same vendor operates both systems.
 
-# 6 Revocation and status
+## 6 Revocation and status
 
-## 6.1 Validity period
+### 6.1 Validity period
 
 The credential SHALL be short-lived and limited to one journey.
 
@@ -797,7 +795,7 @@ period is set at issuance. A reader SHALL NOT add one.
 This window is the time control an offline reader can enforce. After
 `validUntil`, the reader SHALL NOT accept the credential for boarding.
 
-## 6.2 Revocation and suspension triggers
+### 6.2 Revocation and suspension triggers
 
 The issuer SHOULD revoke, suspend or replace the credential when:
 
@@ -808,7 +806,7 @@ The issuer SHOULD revoke, suspend or replace the credential when:
 - the credential was issued in error; or
 - the issuer is no longer authorised.
 
-## 6.3 Offline readers and status
+### 6.3 Offline readers and status
 
 An offline reader SHALL enforce `validityInfo` and the disclosed journey
 elements, and SHALL NOT depend on a live status service. ISO/IEC 18013-5:2021
@@ -824,7 +822,7 @@ accept the credential. Cancellation handling therefore SHOULD combine
 revocation with as short a `validUntil` as the sailing allows, and with the
 staff path in §4.8.
 
-# 7 Compliance
+## 7 Compliance
 
 This Rulebook is designed to align with:
 
@@ -868,7 +866,7 @@ The following matters remain open and require operator input:
 
 This version does not define an SD-JWT VC or a W3C VCDM encoding.
 
-# 8 References
+## 8 References
 
 | **Item Reference** | **Standard name/details** |
 | ------------------ | ------------------------- |
