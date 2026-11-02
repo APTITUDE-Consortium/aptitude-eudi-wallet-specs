@@ -9,7 +9,7 @@
 | 0.1     | 23-07-2026 | Initial draft based on the SEDIT-X Ferry Transport working paper and the APTITUDE Attestation Rulebook template.                                                                                            |
 | 0.2     | 24-07-2026 | Simplified structure aligned with the passenger Ferry Boarding Pass model.                                                                                                                                  |
 | 0.3     | 24-07-2026 | SD-JWT claim model aligned with the Vehicle Boarding Credential JSON Schema. Withdrawn as the encoding by version 0.4.                                                                                      |
-| 0.4     | 02-11-2026 | Replaces the SD-JWT encoding with an ISO/IEC 18013-5 mdoc. `docType` is `eu.europa.ec.eudi.aptitude.vehicle_ferry_boarding.1`. The lane verifies the `DeviceResponse` offline.                             |
+| 0.4     | 02-11-2026 | Replaces the SD-JWT encoding with an ISO/IEC 18013-5 mdoc. `docType` is `eu.europa.ec.eudi.aptitude.vehicle_ferry_boarding.1`. Calendar dates are CBOR `full-date` (tag 1004). The lane verifies the `DeviceResponse` offline. |
 
 **Feedback:**
 
@@ -205,9 +205,11 @@ The issued credential SHALL use exactly one of these category values.
 
 These attributes SHALL be present.
 
-`departure_date` and `arrival_date` SHALL use `YYYY-MM-DD`. The times are
-local port time, not an instant with a numeric offset. The acceptance window
-the reader enforces is `validityInfo`, which does carry a date-time.
+`departure_date` and `arrival_date` SHALL be calendar dates, `YYYY-MM-DD`,
+encoded as a CBOR `full-date` (tag 1004) as defined in [RFC 8943] and used for
+dates in ISO/IEC 18013-5. The times are local port time, not an instant with a
+numeric offset, and remain text strings. The acceptance window the reader
+enforces is `validityInfo`, which does carry a date-time.
 
 ### 2.4 Optional attributes
 
@@ -225,6 +227,11 @@ the reader enforces is `validityInfo`, which does carry a date-time.
 | `plate_number` | SHALL be present when the lane matches the vehicle to the ticket by plate. MAY be omitted when vehicle binding is established by other means under ferry policy. | string | `NIK-1234` |
 | `departure_gate` | SHOULD be present when a gate or lane is assigned at issuance and the holder needs it to find the lane. | string | `RFN-LANE-02` |
 | `reservation_number` | SHOULD be present when the operator's reservation number is not the same value as `ticket_number`. | string | `RES-2026-000991` |
+
+A change of lane or gate after issuance SHALL NOT by itself invalidate the
+credential. The operator SHOULD communicate a new lane outside this mdoc. The
+reader SHALL NOT refuse a credential only because `departure_gate` is absent
+or no longer matches the lane where the vehicle is presented.
 
 The credential SHALL NOT include:
 
@@ -248,6 +255,12 @@ The credential SHALL NOT include:
 The ferry operator and the authorised ticketing system MAY be the same entity.
 An authorised issuer acting for the operator satisfies `issuer`.
 
+`category` is the only item in this table that is also an mdoc data element.
+`credential_type` is the `docType`. `issued_at`, `valid_from` and `expires_at`
+are `validityInfo`. `issuer` is identified by the issuer certificate in
+`issuerAuth`, not by a data element. `trust_anchor_reference` is provisioned
+to the reader. It is not an `IssuerSignedItem`.
+
 ### 2.7 Optional metadata
 
 | **Data Identifier** | **Definition** | **Data type** | **Example value** |
@@ -270,7 +283,7 @@ on `validityInfo` and the disclosed journey elements.
 | -------------- | ------------------ | ----------- | ----------------------- | --------- |
 | `credential_type` | `eu.europa.ec.eudi.aptitude.vehicle_ferry_boarding.1` | Credential type identifier. | This Rulebook | SHALL equal the `docType`. |
 | `category` | `eaa:eu:non-qualified`, `eaa:eu:qualified` | Legal category. | This Rulebook | The pilot value is `eaa:eu:non-qualified`. |
-| `departure_date` / `arrival_date` | ISO 8601 date | Scheduled local date. | ISO 8601 | `YYYY-MM-DD`. |
+| `departure_date` / `arrival_date` | ISO 8601 full-date | Scheduled local date. | RFC 8943, encoded as CBOR tag 1004 | `YYYY-MM-DD`. |
 | `departure_time` / `arrival_time` | `HH:MM` or `HH:MM:SS` | Scheduled local port time. | This Rulebook | Not a zoned instant. |
 | `departure_port` / `arrival_port` | Port identifier | Port. | UN/LOCODE recommended | An operator code MAY be used in the pilot. |
 | `vehicle_type_code` | Issuer-defined tariff code | Fare or loading category. | Ferry operator tariff vocabulary | Examples include `PC`, `MC`, `VAN`, `BUS`. |
@@ -324,10 +337,10 @@ the `docType`, the namespace, or an SD-JWT `vct` for this credential.
 | ------------------- | ---------------------- | ------------ | ------------ |
 | `id` | `id` | tstr | M |
 | `category` | `category` | tstr | M |
-| `departure_date` | `departure_date` | tstr | M |
+| `departure_date` | `departure_date` | full-date | M |
 | `departure_time` | `departure_time` | tstr | M |
 | `departure_port` | `departure_port` | tstr | M |
-| `arrival_date` | `arrival_date` | tstr | M |
+| `arrival_date` | `arrival_date` | full-date | M |
 | `arrival_time` | `arrival_time` | tstr | M |
 | `arrival_port` | `arrival_port` | tstr | M |
 | `vehicle_type` | `vehicle_type` | tstr | M |
@@ -377,8 +390,10 @@ as defined in ISO/IEC 18013-5, and SHALL contain:
 
 The digest in the Mobile Security Object SHALL be computed over the
 deterministic CBOR encoding of the `IssuerSignedItem`, as specified in
-ISO/IEC 18013-5. For every element in this section, `elementValue` SHALL be a
-UTF-8 text string (`tstr`).
+ISO/IEC 18013-5. `elementValue` SHALL be a UTF-8 text string (`tstr`), except
+`departure_date` and `arrival_date`, whose `elementValue` SHALL be a
+`full-date`: CBOR tag 1004 around a `YYYY-MM-DD` text string, as defined in
+[RFC 8943].
 
 The reader requests the elements it needs. Elements the reader does not
 request are not disclosed in the `DeviceResponse`. The reader SHALL request
@@ -422,13 +437,15 @@ device MAC, as defined in ISO/IEC 18013-5, bound to the `SessionTranscript`.
 #### 3.1.4 CDDL
 
 ```cddl
+full-date = #6.1004(tstr)
+
 vehicle_ferry_boarding_elements = {
   "id": tstr,
   "category": tstr,
-  "departure_date": tstr,
+  "departure_date": full-date,
   "departure_time": tstr,
   "departure_port": tstr,
-  "arrival_date": tstr,
+  "arrival_date": full-date,
   "arrival_time": tstr,
   "arrival_port": tstr,
   "vehicle_type": tstr,
@@ -443,17 +460,18 @@ vehicle_ferry_boarding_elements = {
 ```
 
 Each entry is issued as an `IssuerSignedItem` per ISO/IEC 18013-5: a CBOR tag
-24 byte string of `{ "digestID": uint, "random": bstr, "elementIdentifier": tstr, "elementValue": tstr }`,
-with `random` at least 16 bytes long. The `COSE_Sign1` payload is the Mobile
-Security Object, also as a CBOR tag 24 byte string. `validityInfo` dates are
-CBOR tag 0 date-times.
+24 byte string of `{ "digestID": uint, "random": bstr, "elementIdentifier": tstr, "elementValue": tstr / full-date }`,
+with `random` at least 16 bytes long. `full-date` is CBOR tag 1004. The
+`COSE_Sign1` payload is the Mobile Security Object, also as a CBOR tag 24
+byte string. `validityInfo` dates are CBOR tag 0 date-times.
 
 #### 3.1.5 Illustrative issuer-signed structure
 
 The structure below is the issued `issuerSigned` content, shown inside the
 `docType` used on a `DeviceResponse` document. `deviceSigned` is produced at
 presentation and is omitted here. Digest values, the certificate and the
-signature are placeholders. `validityInfo` dates use CBOR tag 0. Optional
+signature are placeholders. `departure_date` and `arrival_date` use CBOR tag
+1004. `validityInfo` dates use CBOR tag 0. Optional
 elements that this issuance did not include are absent. `plate_number` is
 included because this example is a lane that matches the vehicle by plate.
 
@@ -479,7 +497,7 @@ included because this example is a lane that matches the vehicle by plate.
           "digestID": 2,
           "random": h'F1D3FF8443297732862DF21DC4E57262',
           "elementIdentifier": "departure_date",
-          "elementValue": "2026-06-15"
+          "elementValue": 1004("2026-06-15")
         }>>),
         24(<<{
           "digestID": 3,
@@ -497,7 +515,7 @@ included because this example is a lane that matches the vehicle by plate.
           "digestID": 5,
           "random": h'FFEEDDCCBBAA99887766554433221100',
           "elementIdentifier": "arrival_date",
-          "elementValue": "2026-06-15"
+          "elementValue": 1004("2026-06-15")
         }>>),
         24(<<{
           "digestID": 6,
@@ -806,6 +824,10 @@ The issuer SHOULD revoke, suspend or replace the credential when:
 - the credential was issued in error; or
 - the issuer is no longer authorised.
 
+A successful presentation SHALL NOT by itself revoke the credential. The
+vehicle may be checked again before departure. A change of lane or gate SHALL
+NOT by itself be a revocation trigger.
+
 ### 6.3 Offline readers and status
 
 An offline reader SHALL enforce `validityInfo` and the disclosed journey
@@ -878,6 +900,7 @@ This version does not define an SD-JWT VC or a W3C VCDM encoding.
 | [OpenID4VCI] | OpenID for Verifiable Credential Issuance |
 | [RFC 2119] | Key words for use in RFCs to Indicate Requirement Levels |
 | [RFC 8610] | Concise Data Definition Language (CDDL) |
+| [RFC 8943] | Full-date and partial-time CBOR tags. Tag 1004 is the `full-date` used for `departure_date` and `arrival_date`. |
 | [RFC 8949] | Concise Binary Object Representation (CBOR) |
 | [Topic 7] | ARF Annex 2, Topic 7 — Attestation revocation and revocation checking |
 | [Topic 10] | ARF Annex 2, Topic 10 — Issuing a PID or attestation to a Wallet Unit |
