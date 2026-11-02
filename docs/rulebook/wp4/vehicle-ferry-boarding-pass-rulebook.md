@@ -1,532 +1,886 @@
 # Attestation Rulebook for attestations of type Vehicle Ferry Boarding Credential
 
-* Author(s):
-    * Nikos Triantafyllou, University of the Aegean, UAegean i4m Lab
-    * Petros Kavassalis, University of the Aegean, UAegean i4m Lab
+- Author(s):
+  - Nikos Triantafyllou, University of the Aegean, UAegean i4m Lab
+  - Petros Kavassalis, University of the Aegean, UAegean i4m Lab
 
-| Version | Date | Description |
-|---------|------------|------------|
-| 0.1 | 23-07-2026 | Initial draft based on the SEDIT-X Ferry Transport working paper and the APTITUDE Attestation Rulebook template. |
-| 0.2 | 24-07-2026 | Simplified structure aligned with the passenger Ferry Boarding Pass model. |
-| 0.3 | 24-07-2026 | Aligned claim model with the Vehicle Ferry Boarding Credential JSON Schema. |
+
+| Version | Date       | Description                                                                                                                                                                                                 |
+| ------- | ---------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 0.1     | 23-07-2026 | Initial draft based on the SEDIT-X Ferry Transport working paper and the APTITUDE Attestation Rulebook template.                                                                                            |
+| 0.2     | 24-07-2026 | Simplified structure aligned with the passenger Ferry Boarding Pass model.                                                                                                                                  |
+| 0.3     | 24-07-2026 | SD-JWT claim model aligned with the Vehicle Boarding Credential JSON Schema. Withdrawn as the encoding by version 0.4.                                                                                      |
+| 0.4     | 02-11-2026 | Replaces the SD-JWT encoding with an ISO/IEC 18013-5 mdoc. `docType` is `eu.europa.ec.eudi.aptitude.vehicle_ferry_boarding.1`. The lane verifies the `DeviceResponse` offline.                             |
+
 
 **Feedback:**
 
-* To be defined by the APTITUDE WP4 / SEDIT-X governance process.
+- To be defined by the APTITUDE WP4 / SEDIT-X governance process.
 
 > **Draft status**
 >
-> This Rulebook defines the Vehicle Ferry Boarding Credential for the APTITUDE /
-> SEDIT-X ferry pilot. The SD-JWT claim model below is aligned with the Vehicle
-> Boarding Credential JSON Schema (`credentialType`: `VehicleBoardingCredential`).
+> This Rulebook defines the **Vehicle Ferry Boarding Credential**. The Wallet
+> display name is **Vehicle Ferry Boarding Credential**. The credential type
+> identifier, mdoc `docType` and namespace are
+> `eu.europa.ec.eudi.aptitude.vehicle_ferry_boarding.1`.
+>
+> The credential is an **ISO/IEC 18013-5 mdoc**. The Wallet presents it with
+> that standard's device engagement and device retrieval. The vehicle-lane
+> reader verifies the `DeviceResponse` offline and uses the result to decide
+> whether the vehicle may embark.
+>
+> Version 0.3, an SD-JWT VC with `vct` `VehicleBoardingCredential` and nested
+> `departure`, `arrival`, `vehicle` and `ticket` objects, is withdrawn as the
+> encoding. This credential SHALL NOT be issued as an SD-JWT VC.
 
 ## 1 Introduction
 
 ### 1.1 Document scope and purpose
 
-This Rulebook defines the **Vehicle Ferry Boarding Credential** for use in the
-European Digital Identity Wallet ecosystem.
+This Rulebook defines the **Vehicle Ferry Boarding Credential**, a short-lived
+Electronic Attestation of Attributes for the European Digital Identity Wallet.
 
-The credential expresses the real-world fact that a specific vehicle is entitled to
-board a specific ferry journey at a given departure date and time.
+The credential type identifier is:
 
-The attestation is intended to be issued by an authentic source, such as a ferry
-operator or an authorised ticketing system acting on behalf of the ferry operator. The
-Holder is typically the passenger who booked the vehicle. Relying Parties include ferry
-operators, port boarding gates, vehicle-lane terminals, authorised boarding control
-staff, and other authorised systems that need to verify vehicle boarding entitlement.
+```text
+eu.europa.ec.eudi.aptitude.vehicle_ferry_boarding.1
+```
 
-In practical terms, the attestation enables a passenger to present proof that a named
-vehicle may embark on a specific sailing. It can reduce reliance on paper vehicle tickets
-and can reduce the need for real-time backend lookups during boarding, provided that the
-Relying Party can verify the issuer, the signature, the validity period, the journey
-details, and the vehicle attributes needed for embarkation.
+The Wallet display name is **Vehicle Ferry Boarding Credential**.
 
-The attestation does not replace:
+The credential expresses the fact that one vehicle is entitled to board one
+ferry journey at a scheduled departure. A journey is one sailing: one
+departure port, one arrival port, and one scheduled departure date and time.
 
-* the passenger **Ferry Boarding Pass**, which represents the passenger's boarding right;
-* the **mVRC**, which provides authoritative vehicle-registration attributes;
-* the **PID** credential; or
-* a payment confirmation or eReceipt.
+The attestation is issued by an authentic source, such as a ferry operator or
+an authorised ticketing system acting for that operator. The Holder is the
+passenger who holds the vehicle booking. The verifier is the vehicle-lane
+reader, or boarding staff using such a reader, at the departure port.
 
-Where vehicle-to-ticket binding must be checked at the port, the Vehicle Ferry Boarding
-Credential SHOULD be presented together with the minimum required mVRC attributes and,
-where required by policy, the passenger Ferry Boarding Pass and PID.
+The credential MAY be used to:
 
-### 1.2 Document structure
+- present vehicle boarding entitlement at a lane reader that supports
+  ISO/IEC 18013-5 device engagement and device retrieval;
+- show the holder the sailing, vehicle and ticket in the Wallet; and
+- let the operator accept the vehicle without a live ticketing lookup, when
+  the reader can verify the mdoc from provisioned trust anchors.
 
-This Rulebook is structured as follows:
+The credential SHALL NOT be treated as:
 
-* Chapter 2 describes the attestation attributes and metadata in an encoding-independent manner.
-* Chapter 3 specifies how the attestation attributes and metadata are encoded using SD-JWT VC. ISO/IEC 18013-5 and W3C VCDM encodings are not defined in this version of the Rulebook.
-* Chapter 4 specifies attestation usage, including presentation and verification expectations.
-* Chapter 5 defines how trust anchors for attestation verification can be obtained.
-* Chapter 6 defines revocation and expiry mechanisms.
-* Chapter 7 provides compliance information.
-* Chapter 8 lists references.
+- the passenger **Ferry Boarding Pass**, which is the passenger's own boarding
+  right;
+- the **mVRC**, which provides the vehicle-registration attributes;
+- **PID**; or
+- a payment confirmation or eReceipt.
 
-### 1.3 Key words
+Where the lane must match the vehicle to the ticket, this credential SHOULD be
+presented together with the minimum required mVRC attributes. Where policy
+also requires the person, the lane SHOULD request the passenger Ferry Boarding
+Pass and PID. Those are separate presentations. This mdoc does not embed them.
 
-This document uses the capitalised key words **SHALL**, **SHOULD** and **MAY** as
-specified in [RFC 2119], i.e., to indicate requirements, recommendations and options
-specified in this document.
+### 1.2 Architectural role
 
-In addition, 'must' (non-capitalised) is used to indicate an external constraint, i.e.,
-a requirement that is not mandated by this document, but, for instance, by an external
-document. The word 'can' indicates a capability, whereas other words, such as 'will',
-and 'is' or 'are' are intended as statements of fact.
+The mdoc is what the lane verifies. A reader that has no network connection
+SHALL be able to decide using:
 
-### 1.4 Terminology
+- issuer authentication (`issuerAuth` over the Mobile Security Object);
+- the digests of the disclosed data elements;
+- device authentication bound to the `SessionTranscript`;
+- `validityInfo` in the Mobile Security Object; and
+- a match between the disclosed journey and vehicle elements and the sailing
+  this lane is boarding.
+
+The operator's ticketing system remains authoritative for the booking. A
+reader with connectivity SHOULD apply revocation and status. A reader without
+connectivity relies on the signed validity window and the disclosed journey
+elements, and SHALL NOT refuse an otherwise valid mdoc only because it cannot
+reach the ticketing system.
+
+`validityInfo` is the acceptance window. It does not by itself identify the
+sailing. The reader SHALL still match `departure_port`, `departure_date` and
+`departure_time` to the sailing it is boarding.
+
+### 1.3 Document structure
+
+- Chapter 2 defines attributes and metadata.
+- Chapter 3 defines the ISO/IEC 18013-5 mdoc encoding.
+- Chapter 4 defines issuance, presentation and verification.
+- Chapter 5 defines trust anchors.
+- Chapter 6 defines validity, suspension and revocation.
+- Chapter 7 defines compliance, privacy and security requirements.
+- Chapter 8 lists references.
+
+### 1.4 Key words
+
+The capitalised words **SHALL**, **SHOULD** and **MAY** are used as specified in
+[RFC 2119].
+
+In addition, 'must' (non-capitalised) indicates an external constraint, not a
+requirement created by this document. 'can' indicates a capability.
+
+### 1.5 Terminology
 
 This document uses the terminology specified in Annex 1 of the ARF.
 
-In addition, the following domain-specific terms are used:
+For this Rulebook:
 
-| Term | Meaning |
-|------|---------|
-| Vehicle Ferry Boarding Credential | A Verifiable Credential representing a vehicle's entitlement to board a specific ferry journey. |
-| Ferry operator | The organisation operating the ferry journey or acting as the authentic source for the boarding entitlement. |
-| Authorised ticketing system | A system authorised by the ferry operator to issue or manage boarding passes. |
-| mVRC | Mobile Vehicle Registration Credential providing authoritative vehicle-registration attributes. |
-| Boarding gate / vehicle lane | A physical or digital checkpoint where vehicle boarding entitlement is verified. |
-| Journey | A specific ferry trip between a departure port and an arrival port at a scheduled date and time. |
+- **Vehicle Ferry Boarding Credential** means the mdoc whose `docType` is
+  `eu.europa.ec.eudi.aptitude.vehicle_ferry_boarding.1`.
+- **Journey** means one ferry sailing between a departure port and an arrival
+  port at a scheduled date and time.
+- **Ferry operator** means the organisation operating that sailing, or the
+  authentic source for the vehicle boarding entitlement.
+- **Authorised ticketing system** means a system the ferry operator authorises
+  to issue this credential.
+- **mVRC** means the Mobile Vehicle Registration Credential. It provides
+  vehicle-registration attributes. This credential does not replace it.
+- **Lane reader** means the mdoc reader at the vehicle boarding lane or port
+  gate. It performs ISO/IEC 18013-5 device engagement and device retrieval and
+  decides whether the vehicle may embark.
+- **PID** means Person Identification Data of type
+  `urn:eu.europa.ec.eudi:pid:1`.
 
 ## 2 Attestation attributes and metadata
 
-### Chapter overview and requirements
+### 2.1 Legal category
 
-This chapter defines the attributes and metadata that a Vehicle Ferry Boarding Credential
-may contain. The attributes are defined in an encoding-independent manner. Each
-attribute is classified as mandatory, optional, or conditional.
+For the SEDIT-X pilot, the credential is a **non-qualified EAA**:
 
-The credential is journey-specific and time-bound. It contains only the information
-necessary to verify that a specific vehicle is entitled to board a specific ferry
-service. The claim model is nested under `departure`, `arrival`, `vehicle` and
-`ticket` objects as defined by the Vehicle Boarding Credential schema.
+```text
+eaa:eu:non-qualified
+```
 
-### 2.1 Introduction
+A deployment MAY issue the credential as a qualified EAA when the issuer is a
+qualified trust service provider and the attestation meets the requirements
+for a qualified electronic attestation of attributes:
 
-The Vehicle Ferry Boarding Credential is defined as a non-qualified Electronic
-Attestation of Attributes unless a future version of this Rulebook explicitly defines a
-qualified or public-sector legal category.
+```text
+eaa:eu:qualified
+```
 
-The attribute `attestation_legal_category` SHALL be included and SHALL have the value
-`non-qualified-EAA`.
+The issued credential SHALL use exactly one of these category values.
 
-The attestation model consists of the following logical groups:
+### 2.2 Design principles
 
-* credential type;
-* departure port-call details;
-* arrival details;
-* vehicle identification and category data;
-* ticket identifiers;
-* optional vessel and reservation information;
-* credential metadata.
+1. **One vehicle, one journey.** The credential SHALL describe a single
+   vehicle and a single sailing. It SHALL NOT be reused for another sailing,
+   vessel, date or vehicle.
+2. **mdoc boarding credential.** The credential SHALL be an ISO/IEC 18013-5
+   mdoc. Presentation SHALL use device engagement and device retrieval as
+   defined in that standard.
+3. **Offline verification.** A lane reader SHALL be able to verify the
+   credential without a live call to the ticketing system.
+4. **Minimum disclosure.** The data elements SHALL be limited to the sailing,
+   the vehicle category, the ticket identifier and, where the lane matches the
+   vehicle, the plate number.
+5. **No payment data.** The credential SHALL NOT carry a payment confirmation,
+   card number or eReceipt.
+6. **Device binding.** The Mobile Security Object SHALL contain the Wallet
+   `deviceKey`. The reader SHALL verify ISO/IEC 18013-5 device authentication
+   bound to the `SessionTranscript`.
+7. **Short validity.** `validityInfo.validUntil` SHALL be no later than the
+   scheduled departure, plus only a limited grace period where the operator
+   defines one.
+8. **Separate credentials.** Passenger boarding, vehicle registration and
+   payment remain other attestations. This credential SHOULD NOT duplicate the
+   mVRC.
+9. **Fallback.** Staff-assisted boarding SHALL remain available where ferry
+   policy allows it. Failure of wallet verification SHALL NOT by itself remove
+   that path.
 
-The attestation is bound to a single vehicle and a single ferry journey. It SHALL NOT
-be treated as a reusable credential after the scheduled departure time.
+### 2.3 Mandatory attributes
 
-The mVRC remains the authoritative source of vehicle-registration attributes. This
-credential SHOULD NOT duplicate the complete mVRC.
+| **Data Identifier** | **Definition** | **Data type** | **Example value** |
+| ------------------- | -------------- | ------------- | ----------------- |
+| `id` | Unique identifier of this credential instance. | string | `2aacf8dc-3f0b-4b30-987d-5eacb9dba222` |
+| `category` | Legal category. Either `eaa:eu:non-qualified` or `eaa:eu:qualified`. | string | `eaa:eu:non-qualified` |
+| `departure_date` | Scheduled departure date at the departure port. | date | `2026-06-15` |
+| `departure_time` | Scheduled departure time at the departure port, local port time, `HH:MM` or `HH:MM:SS`. | string | `07:30` |
+| `departure_port` | Departure port identifier. UN/LOCODE is recommended. | string | `GRRFN` |
+| `arrival_date` | Scheduled arrival date at the arrival port. | date | `2026-06-15` |
+| `arrival_time` | Scheduled arrival time at the arrival port, local port time, `HH:MM` or `HH:MM:SS`. | string | `12:45` |
+| `arrival_port` | Arrival port identifier. UN/LOCODE is recommended. | string | `GRMLO` |
+| `vehicle_type` | Human-readable ferry vehicle category. | string | `Passenger Car` |
+| `vehicle_type_code` | Operator or tariff code for that category. | string | `PC` |
+| `ticket_let` | Ticket letter, class code or other operator classification. | string | `V` |
+| `ticket_number` | Ferry vehicle-ticket number. | string | `000123456` |
 
-### 2.2 Mandatory attributes
+These attributes SHALL be present.
 
-| **Data Identifier** | **Semantic Reference** | **Definition** | **Data type** | **Example value** |
-|---------------------|------------------------|----------------|---------------|-------------------|
-| `attestation_legal_category` | ARF Topic 12 / Rulebook legal category indication | Indicates the legal category of the attestation. | string | `non-qualified-EAA` |
-| `credentialType` | Schema const | Credential type discriminator. SHALL be `VehicleBoardingCredential`. | string | `VehicleBoardingCredential` |
-| `departure.date` | ISO 8601 date | Scheduled departure date. | date | `2026-06-15` |
-| `departure.time` | Local time `HH:MM` or `HH:MM:SS` | Scheduled departure time at the departure port. | string | `07:30` |
-| `departure.port` | Port identifier | Departure port. | string | `GRRFN` |
-| `arrival.date` | ISO 8601 date | Scheduled arrival date. | date | `2026-06-15` |
-| `arrival.time` | Local time `HH:MM` or `HH:MM:SS` | Scheduled arrival time at the arrival port. | string | `12:45` |
-| `arrival.port` | Port identifier | Arrival port. | string | `GRMLO` |
-| `vehicle.vehicleType` | Ferry tariff / vehicle category | Human-readable ferry-relevant vehicle type. | string | `Passenger Car` |
-| `vehicle.vehicleTypeCode` | Ferry tariff code | Operator or tariff code for the vehicle type. | string | `PC` |
-| `ticket.ticketLet` | N/A | Ticket letter, class code, or other operator-specific classification. | string | `V` |
-| `ticket.ticketNumber` | N/A | Ferry vehicle-ticket number. | string | `000123456` |
+`departure_date` and `arrival_date` SHALL use `YYYY-MM-DD`. The times are
+local port time, not an instant with a numeric offset. The acceptance window
+the reader enforces is `validityInfo`, which does carry a date-time.
 
-### 2.3 Optional attributes
+### 2.4 Optional attributes
 
-| **Data Identifier** | **Semantic Reference** | **Definition** | **Data type** | **Example value** |
-|---------------------|------------------------|----------------|---------------|-------------------|
-| `vesselDescription` | N/A | Description or name of the ferry vessel. | string | `Fast Ferries Andros` |
-| `reservationNumber` | N/A | Booking or reservation number associated with the vehicle ticket. | string | `RES-2026-000991` |
-| `departure.gate` | N/A | Departure gate, lane or boarding area. | string | `RFN-LANE-02` |
-| `vehicle.plateNumber` | Vehicle registration mark | Registration / plate number of the vehicle entitled to board. | string | `NIK-1234` |
+| **Data Identifier** | **Definition** | **Data type** | **Example value** |
+| ------------------- | -------------- | ------------- | ----------------- |
+| `departure_gate` | Departure gate, lane or boarding area, when known at issuance. | string | `RFN-LANE-02` |
+| `vessel_description` | Name or description of the ferry vessel. | string | `Fast Ferries Andros` |
+| `reservation_number` | Booking number, when the operator uses one distinct from `ticket_number`. | string | `RES-2026-000991` |
+| `plate_number` | Registration mark of the vehicle entitled to board. | string | `NIK-1234` |
 
-### 2.4 Conditional attributes
+### 2.5 Conditional attributes
 
-| **Data Identifier** | **Semantic Reference** | **Definition** | **Data type** | **Example value** |
-|---------------------|------------------------|----------------|---------------|-------------------|
-| `vehicle.plateNumber` | Vehicle registration mark | SHOULD be present where the boarding process requires clear-text plate matching against the mVRC or physical vehicle. MAY be omitted where vehicle binding is established by other means under ferry policy. | string | `NIK-1234` |
-| `departure.gate` | N/A | SHOULD be present where gate or lane assignment is known at issuance and needed for embarkation guidance. | string | `RFN-LANE-02` |
-| `reservationNumber` | N/A | SHOULD be present where the ferry system uses a reservation number distinct from `ticket.ticketNumber`. | string | `RES-2026-000991` |
+| **Data Identifier** | **Definition** | **Data type** | **Example value** |
+| ------------------- | -------------- | ------------- | ----------------- |
+| `plate_number` | SHALL be present when the lane matches the vehicle to the ticket by plate. MAY be omitted when vehicle binding is established by other means under ferry policy. | string | `NIK-1234` |
+| `departure_gate` | SHOULD be present when a gate or lane is assigned at issuance and the holder needs it to find the lane. | string | `RFN-LANE-02` |
+| `reservation_number` | SHOULD be present when the operator's reservation number is not the same value as `ticket_number`. | string | `RES-2026-000991` |
 
-### 2.5 Mandatory metadata
+The credential SHALL NOT include:
 
-| **Data Identifier** | **Semantic Reference** | **Definition** | **Data type** | **Example value** |
-|---------------------|------------------------|----------------|---------------|-------------------|
-| `vct` | SD-JWT VC | Verifiable Credential Type identifying this attestation type. | string | `VehicleBoardingCredential` |
-| `iss` | SD-JWT VC / JWT | Identifier of the issuer of the credential. | string | `https://issuer.example-ferry.gr` |
-| `iat` | JWT | Time at which the credential was issued. | integer | `1780315200` |
-| `exp` | JWT | Expiration time of the credential. For this attestation it SHALL NOT be later than the scheduled departure time unless operational rules explicitly require a short post-departure grace period. | integer | `1781508600` |
-| `cnf` | SD-JWT VC / JOSE | Confirmation claim binding the credential to key material controlled by the Holder or Wallet Unit, where holder binding is used. | object | `{ "jwk": { ... } }` |
-| `status` | SD-JWT VC status mechanism, where used | Status information enabling revocation or suspension checks, where revocation is supported. | object | `{ "status_list": { ... } }` |
+- PID attributes;
+- a full copy of the mVRC;
+- payment data; or
+- the passenger Ferry Boarding Pass.
 
-### 2.6 Optional metadata
+### 2.6 Mandatory metadata
 
-| **Data Identifier** | **Semantic Reference** | **Definition** | **Data type** | **Example value** |
-|---------------------|------------------------|----------------|---------------|-------------------|
-| `nbf` | JWT | Time before which the credential MUST NOT be accepted. | integer | `1780315200` |
-| `jti` | JWT | Unique identifier of the credential instance. | string | `urn:uuid:2aacf8dc-3f0b-4b30-987d-5eacb9dba222` |
-| `trust_anchor` | ARF Topic 12 | Location or identifier of the machine-readable trust anchor or trust framework entry used to verify issuer authorisation. | string | `https://trust.example.eu/ferry/operators/fast-ferries` |
-| `cryptographically_bound_to` | ARF Topic 12 / ARB_28 | Identifier of another attestation type to which this attestation is cryptographically bound, where such binding is used. | string | `urn:eudi:vehicle-registration:1` |
+| **Data Identifier** | **Definition** | **Data type** | **Example value** |
+| ------------------- | -------------- | ------------- | ----------------- |
+| `category` | Legal category of the attestation. See §2.3. | string | `eaa:eu:non-qualified` |
+| `issuer` | Identifier of the credential issuer, such as the ferry operator or an authorised ticketing system. | string or URI | `https://issuer.example-ferry.gr` |
+| `credential_type` | Encoding-independent credential type identifier. SHALL equal the `docType`. | string | `eu.europa.ec.eudi.aptitude.vehicle_ferry_boarding.1` |
+| `issued_at` | Credential issuance time. Carried as `validityInfo.signed`. | date-time | `2026-06-01T10:00:00+03:00` |
+| `valid_from` | Beginning of the acceptance window. Carried as `validityInfo.validFrom`. | date-time | `2026-06-01T10:00:00+03:00` |
+| `expires_at` | End of the acceptance window. Carried as `validityInfo.validUntil`. | date-time | `2026-06-15T07:30:00+03:00` |
+| `trust_anchor_reference` | Location of issuer trust information provisioned to lane readers. | URI | `https://trust.example.eu/ferry/operators/fast-ferries` |
 
-### 2.7 Conditional metadata
+The ferry operator and the authorised ticketing system MAY be the same entity.
+An authorised issuer acting for the operator satisfies `issuer`.
 
-| **Data Identifier** | **Semantic Reference** | **Definition** | **Data type** | **Example value** |
-|---------------------|------------------------|----------------|---------------|-------------------|
-| `status` | SD-JWT VC status mechanism, where used | SHALL be present if the issuer supports revocation or suspension for the boarding credential. MAY be omitted where the attestation is short-lived and expires at or before departure time. | object | `{ "status_list": { ... } }` |
-| `cryptographically_bound_to` | ARF Topic 12 / ARB_28 | SHOULD be present where the vehicle boarding credential is required to be presented together with an mVRC or another accepted vehicle-registration attestation. | string | `urn:eudi:vehicle-registration:1` |
+### 2.7 Optional metadata
+
+| **Data Identifier** | **Definition** | **Data type** | **Example value** |
+| ------------------- | -------------- | ------------- | ----------------- |
+| `credential_name` | Human-readable credential name. SHALL be `Vehicle Ferry Boarding Credential`. | string | `Vehicle Ferry Boarding Credential` |
+| `credential_description` | Wallet-facing description. | string | `Rafina–Milos, 15 June 2026, 07:30` |
+| `issuer_name` | Human-readable operator or issuer name. | string | `Fast Ferries` |
+| `issuer_logo_uri` | Issuer logo URI. | URI | `https://issuer.example-ferry.gr/logo.png` |
+| `privacy_notice` | Privacy-notice URI. | URI | `https://issuer.example-ferry.gr/privacy` |
+| `display_locale` | Preferred display language. | string | `en` |
+| `status_reference` | Operational status pointer for a reader that can reach the issuer. Not an mdoc data element and not a Mobile Security Object field. | URI or structured value | `https://status.example-ferry.gr/vehicle-boarding/000123456` |
+
+`status_reference` is not carried in the mdoc. ISO/IEC 18013-5:2021 does not
+put a status list in the Mobile Security Object. An offline reader SHALL rely
+on `validityInfo` and the disclosed journey elements.
 
 ### 2.8 Code lists
 
-| **Field name** | **Allowed values** | **Meaning** | **Source / vocabulary** | **Notes / extensibility** |
-|----------------|--------------------|-------------|--------------------------|---------------------------|
-| `credentialType` | `VehicleBoardingCredential` | Credential type discriminator. | Vehicle Boarding Credential schema | Const value; additional values SHALL NOT be used. |
-| `departure.date` / `arrival.date` | ISO 8601 date | Scheduled date. | ISO 8601 | Date-only format `YYYY-MM-DD` SHALL be used. |
-| `departure.time` / `arrival.time` | `HH:MM` or `HH:MM:SS` | Scheduled local time. | Schema time pattern | Time-zone handling SHALL be clear to the verifier as local port time. |
-| `departure.port` / `arrival.port` | Valid port identifiers | Identifies the port. | UN/LOCODE recommended | Operator-specific port identifiers MAY be used during pilots. |
-| `vehicle.vehicleTypeCode` | Issuer-defined tariff codes | Identifies the fare/loading category code. | Ferry operator tariff vocabulary | Examples include `PC`, `MC`, `VAN`, `BUS`. |
-| `attestation_legal_category` | `non-qualified-EAA`, `QEAA`, `PuB-EAA` | Indicates the legal category of the attestation. | ARF Topic 12 / Rulebook template | This Rulebook uses `non-qualified-EAA`. |
+| **Field name** | **Allowed values** | **Meaning** | **Source / vocabulary** | **Notes** |
+| -------------- | ------------------ | ----------- | ----------------------- | --------- |
+| `credential_type` | `eu.europa.ec.eudi.aptitude.vehicle_ferry_boarding.1` | Credential type identifier. | This Rulebook | SHALL equal the `docType`. |
+| `category` | `eaa:eu:non-qualified`, `eaa:eu:qualified` | Legal category. | This Rulebook | The pilot value is `eaa:eu:non-qualified`. |
+| `departure_date` / `arrival_date` | ISO 8601 date | Scheduled local date. | ISO 8601 | `YYYY-MM-DD`. |
+| `departure_time` / `arrival_time` | `HH:MM` or `HH:MM:SS` | Scheduled local port time. | This Rulebook | Not a zoned instant. |
+| `departure_port` / `arrival_port` | Port identifier | Port. | UN/LOCODE recommended | An operator code MAY be used in the pilot. |
+| `vehicle_type_code` | Issuer-defined tariff code | Fare or loading category. | Ferry operator tariff vocabulary | Examples include `PC`, `MC`, `VAN`, `BUS`. |
 
 ### 2.9 Integrity rules
 
-| **Rule ID** | **Rule statement** | **Why it exists** | **Where enforced** | **Verifier / issuer behavior on failure** |
-|-------------|--------------------|-------------------|--------------------|-------------------------------------------|
-| `VBP-IR-01` | `arrival.date` SHALL NOT precede `departure.date`. | Prevents temporally inconsistent journey information. | Issuer business rules, schema validation, verifier business validation. | Issuer SHALL reject inconsistent journey data. Verifier SHALL reject the attestation for boarding if this rule fails. |
-| `VBP-IR-02` | The credential SHALL be bound to a single journey and a single vehicle. | Prevents reuse across different services, vessels, dates, or vehicles. | Issuer business rules and verifier business validation. | Verifier SHALL reject the attestation if it cannot determine the specific journey or vehicle. |
-| `VBP-IR-03` | The attestation SHALL NOT be reusable after the scheduled departure time. | Boarding entitlement is time-bound and journey-specific. | Issuer validity period and verifier freshness checks. | Verifier SHALL reject the attestation after expiry, unless a locally defined operational grace period applies. |
-| `VBP-IR-04` | `credentialType` SHALL equal `VehicleBoardingCredential`. | Ensures type-safe interpretation of the claim set. | Schema validation and verifier business validation. | Verifier SHALL reject credentials with an unexpected `credentialType`. |
-| `VBP-IR-05` | `ticket.ticketLet` and `ticket.ticketNumber` SHALL be non-empty. | Ensures a usable ticket identifier for embarkation and audit. | Schema validation and issuer business rules. | Issuer SHALL reject empty ticket identifiers. Verifier SHALL reject incomplete ticket data. |
-| `VBP-IR-06` | Where vehicle matching is required, `vehicle.plateNumber` SHOULD be compared with the mVRC and the physical vehicle. | Ensures that the vehicle presented for embarkation is the vehicle entitled to board. | Relying Party business validation. | Verifier SHOULD reject the boarding transaction where required vehicle matching fails. |
+| **Rule ID** | **Rule statement** | **Why it exists** | **Where enforced** | **Behaviour on failure** |
+| ----------- | ------------------ | ----------------- | ------------------ | ------------------------ |
+| `VBP-IR-01` | `arrival_date` SHALL NOT precede `departure_date`. | Prevents a journey that runs backwards. | Issuer, before signing. | Issuer SHALL NOT issue the mdoc. |
+| `VBP-IR-02` | The credential SHALL describe one journey and one vehicle. | Prevents reuse across sailings or vehicles. | Issuer. The reader checks the disclosed sailing against the lane. | Reader SHALL refuse when it cannot determine that sailing or vehicle. |
+| `VBP-IR-03` | The credential SHALL NOT be accepted after `validityInfo.validUntil`. | Boarding entitlement ends at departure, plus only a defined grace period. | Reader, against its clock. | Reader SHALL refuse. |
+| `VBP-IR-04` | `docType` SHALL equal `eu.europa.ec.eudi.aptitude.vehicle_ferry_boarding.1`. | Identifies this attestation type. | Reader. | Reader SHALL refuse any other `docType`. |
+| `VBP-IR-05` | `ticket_let` and `ticket_number` SHALL be non-empty. | The lane needs a ticket identifier. | Issuer, before signing. | Issuer SHALL NOT issue the mdoc. |
+| `VBP-IR-06` | Where the lane matches the vehicle by plate, `plate_number` SHOULD be compared with the mVRC and with the vehicle at the lane. | The vehicle in the lane is the vehicle on the ticket. | Reader, as a separate check from mdoc verification. | Reader SHOULD refuse embarkation when that match fails. |
 
 # 3 Attestation encoding
 
 ## 3.1 ISO/IEC 18013-5-compliant encoding
 
-This version of the Rulebook does not define an ISO/IEC 18013-5 mdoc encoding for the
-Vehicle Ferry Boarding Credential.
+The Vehicle Ferry Boarding Credential SHALL be issued as an ISO/IEC 18013-5
+mdoc. The issued object is an `IssuerSigned` structure as defined in that
+standard. ISO/IEC 18013-5 does not define how a credential is issued. Where
+OpenID4VCI is used, the credential format SHALL be `mso_mdoc`.
 
-The credential defined in this Rulebook is specified for SD-JWT VC-based issuance and
-presentation. If a future version defines an ISO/IEC 18013-5-compliant mdoc
-representation, that version SHALL define a unique document type, namespaces, attribute
-identifiers, CBOR encoding rules, and illustrative mdoc examples.
+Presentation SHALL use ISO/IEC 18013-5 device engagement and device retrieval.
+Those steps are separate. Device engagement SHALL be by QR code or NFC.
+Device retrieval SHALL be by BLE or NFC, as the lane reader offers. BLE is a
+retrieval transport. It is not a device-engagement method.
+
+### 3.1.1 Document type and namespace
+
+The `docType` SHALL be:
+
+```text
+eu.europa.ec.eudi.aptitude.vehicle_ferry_boarding.1
+```
+
+The namespace for the data elements in §3.1.2 SHALL be:
+
+```text
+eu.europa.ec.eudi.aptitude.vehicle_ferry_boarding.1
+```
+
+`docType` and the namespace are the same reverse-domain identifier. The
+withdrawn version 0.3 type `VehicleBoardingCredential` SHALL NOT be used as
+the `docType`, the namespace, or an SD-JWT `vct` for this credential.
+
+### 3.1.2 Data elements
+
+| **Data Identifier** | **Element identifier** | **Encoding** | **Presence** |
+| ------------------- | ---------------------- | ------------ | ------------ |
+| `id` | `id` | tstr | M |
+| `category` | `category` | tstr | M |
+| `departure_date` | `departure_date` | tstr | M |
+| `departure_time` | `departure_time` | tstr | M |
+| `departure_port` | `departure_port` | tstr | M |
+| `arrival_date` | `arrival_date` | tstr | M |
+| `arrival_time` | `arrival_time` | tstr | M |
+| `arrival_port` | `arrival_port` | tstr | M |
+| `vehicle_type` | `vehicle_type` | tstr | M |
+| `vehicle_type_code` | `vehicle_type_code` | tstr | M |
+| `ticket_let` | `ticket_let` | tstr | M |
+| `ticket_number` | `ticket_number` | tstr | M |
+| `plate_number` | `plate_number` | tstr | C |
+| `departure_gate` | `departure_gate` | tstr | O |
+| `vessel_description` | `vessel_description` | tstr | O |
+| `reservation_number` | `reservation_number` | tstr | O |
+
+Presence `M` means the element SHALL be present in `issuerSigned.nameSpaces`.
+Presence `O` means the element MAY be present. Presence `C` means the element
+SHALL be present when §2.5 requires it.
+
+`category` SHALL be `eaa:eu:non-qualified` or `eaa:eu:qualified`.
+
+Version 0.3 nested JSON paths map to these element identifiers as follows.
+The nested paths are not used in the mdoc.
+
+| **Version 0.3 path** | **Element identifier** |
+| -------------------- | ---------------------- |
+| `attestation_legal_category` | `category` |
+| `departure.date` | `departure_date` |
+| `departure.time` | `departure_time` |
+| `departure.port` | `departure_port` |
+| `departure.gate` | `departure_gate` |
+| `arrival.date` | `arrival_date` |
+| `arrival.time` | `arrival_time` |
+| `arrival.port` | `arrival_port` |
+| `vehicle.vehicleType` | `vehicle_type` |
+| `vehicle.vehicleTypeCode` | `vehicle_type_code` |
+| `vehicle.plateNumber` | `plate_number` |
+| `ticket.ticketLet` | `ticket_let` |
+| `ticket.ticketNumber` | `ticket_number` |
+| `vesselDescription` | `vessel_description` |
+| `reservationNumber` | `reservation_number` |
+
+Each issued element SHALL be carried as an `IssuerSignedItem` under the
+namespace in §3.1.1. The item SHALL be encoded as a CBOR tag 24 byte string,
+as defined in ISO/IEC 18013-5, and SHALL contain:
+
+- `digestID`, an unsigned integer unique within the namespace;
+- `random`, a byte string of at least 16 bytes;
+- `elementIdentifier`; and
+- `elementValue`.
+
+The digest in the Mobile Security Object SHALL be computed over the
+deterministic CBOR encoding of the `IssuerSignedItem`, as specified in
+ISO/IEC 18013-5. For every element in this section, `elementValue` SHALL be a
+UTF-8 text string (`tstr`).
+
+The reader requests the elements it needs. Elements the reader does not
+request are not disclosed in the `DeviceResponse`. The reader SHALL request
+only the elements required for the boarding decision. A boarding decision
+SHALL request the mandatory journey, vehicle-category and ticket elements.
+It SHALL also request `plate_number` when §2.5 requires that element.
+
+### 3.1.3 Mobile Security Object
+
+`issuerAuth` SHALL be a `COSE_Sign1` whose payload is the Mobile Security
+Object, wrapped as a CBOR tag 24 byte string, as defined in ISO/IEC 18013-5.
+
+The Mobile Security Object SHALL include:
+
+- `version` with the value `1.0`;
+- `digestAlgorithm` set to `SHA-256`, `SHA-384` or `SHA-512`;
+- `docType` equal to `eu.europa.ec.eudi.aptitude.vehicle_ferry_boarding.1`;
+- `valueDigests` for the namespace in §3.1.1, with one digest for every issued
+  `IssuerSignedItem`;
+- `deviceKeyInfo.deviceKey`, a COSE key of the Wallet; and
+- `validityInfo.signed`, `validityInfo.validFrom` and `validityInfo.validUntil`,
+  each a CBOR tag 0 date-time (`tdate`).
+
+`validityInfo.validFrom` and `validityInfo.validUntil` are the acceptance
+window the lane reader checks offline. A reader SHALL reject an mdoc when its
+clock is before `validFrom` or after `validUntil`.
+
+`validUntil` SHALL NOT be later than the scheduled departure unless the
+operator defines a short grace period. That grace period SHALL be reflected
+in `validUntil` at issuance. The reader does not invent a grace period of
+its own.
+
+The issuer SHALL sign `issuerAuth` with a signature algorithm permitted by
+ISO/IEC 18013-5. The example in §3.1.5 uses ES256 (COSE algorithm identifier
+-7).
+
+Device authentication is not part of `issuerAuth`. During presentation the
+Wallet SHALL authenticate the `DeviceResponse` with a device signature or a
+device MAC, as defined in ISO/IEC 18013-5, bound to the `SessionTranscript`.
+
+### 3.1.4 CDDL
+
+```cddl
+vehicle_ferry_boarding_elements = {
+  "id": tstr,
+  "category": tstr,
+  "departure_date": tstr,
+  "departure_time": tstr,
+  "departure_port": tstr,
+  "arrival_date": tstr,
+  "arrival_time": tstr,
+  "arrival_port": tstr,
+  "vehicle_type": tstr,
+  "vehicle_type_code": tstr,
+  "ticket_let": tstr,
+  "ticket_number": tstr,
+  ? "plate_number": tstr,
+  ? "departure_gate": tstr,
+  ? "vessel_description": tstr,
+  ? "reservation_number": tstr
+}
+```
+
+Each entry is issued as an `IssuerSignedItem` per ISO/IEC 18013-5: a CBOR tag
+24 byte string of `{ "digestID": uint, "random": bstr, "elementIdentifier": tstr, "elementValue": tstr }`,
+with `random` at least 16 bytes long. The `COSE_Sign1` payload is the Mobile
+Security Object, also as a CBOR tag 24 byte string. `validityInfo` dates are
+CBOR tag 0 date-times.
+
+### 3.1.5 Illustrative issuer-signed structure
+
+The structure below is the issued `issuerSigned` content, shown inside the
+`docType` used on a `DeviceResponse` document. `deviceSigned` is produced at
+presentation and is omitted here. Digest values, the certificate and the
+signature are placeholders. `validityInfo` dates use CBOR tag 0. Optional
+elements that this issuance did not include are absent. `plate_number` is
+included because this example is a lane that matches the vehicle by plate.
+
+```cbor-diag
+{
+  "docType": "eu.europa.ec.eudi.aptitude.vehicle_ferry_boarding.1",
+  "issuerSigned": {
+    "nameSpaces": {
+      "eu.europa.ec.eudi.aptitude.vehicle_ferry_boarding.1": [
+        24(<<{
+          "digestID": 0,
+          "random": h'7F9C2BA4E88F827D616045507605853E',
+          "elementIdentifier": "id",
+          "elementValue": "2aacf8dc-3f0b-4b30-987d-5eacb9dba222"
+        }>>),
+        24(<<{
+          "digestID": 1,
+          "random": h'0D61F8370CAD1D412F80B84D143E1257',
+          "elementIdentifier": "category",
+          "elementValue": "eaa:eu:non-qualified"
+        }>>),
+        24(<<{
+          "digestID": 2,
+          "random": h'F1D3FF8443297732862DF21DC4E57262',
+          "elementIdentifier": "departure_date",
+          "elementValue": "2026-06-15"
+        }>>),
+        24(<<{
+          "digestID": 3,
+          "random": h'A1B2C3D4E5F60718293A4B5C6D7E8F90',
+          "elementIdentifier": "departure_time",
+          "elementValue": "07:30"
+        }>>),
+        24(<<{
+          "digestID": 4,
+          "random": h'00112233445566778899AABBCCDDEEFF',
+          "elementIdentifier": "departure_port",
+          "elementValue": "GRRFN"
+        }>>),
+        24(<<{
+          "digestID": 5,
+          "random": h'FFEEDDCCBBAA99887766554433221100',
+          "elementIdentifier": "arrival_date",
+          "elementValue": "2026-06-15"
+        }>>),
+        24(<<{
+          "digestID": 6,
+          "random": h'0123456789ABCDEFFEDCBA9876543210',
+          "elementIdentifier": "arrival_time",
+          "elementValue": "12:45"
+        }>>),
+        24(<<{
+          "digestID": 7,
+          "random": h'89ABCDEF0123456789ABCDEF01234567',
+          "elementIdentifier": "arrival_port",
+          "elementValue": "GRMLO"
+        }>>),
+        24(<<{
+          "digestID": 8,
+          "random": h'1112131415161718191A1B1C1D1E1F20',
+          "elementIdentifier": "vehicle_type",
+          "elementValue": "Passenger Car"
+        }>>),
+        24(<<{
+          "digestID": 9,
+          "random": h'2122232425262728292A2B2C2D2E2F30',
+          "elementIdentifier": "vehicle_type_code",
+          "elementValue": "PC"
+        }>>),
+        24(<<{
+          "digestID": 10,
+          "random": h'3132333435363738393A3B3C3D3E3F40',
+          "elementIdentifier": "ticket_let",
+          "elementValue": "V"
+        }>>),
+        24(<<{
+          "digestID": 11,
+          "random": h'4142434445464748494A4B4C4D4E4F50',
+          "elementIdentifier": "ticket_number",
+          "elementValue": "000123456"
+        }>>),
+        24(<<{
+          "digestID": 12,
+          "random": h'5152535455565758595A5B5C5D5E5F60',
+          "elementIdentifier": "plate_number",
+          "elementValue": "NIK-1234"
+        }>>)
+      ]
+    },
+    "issuerAuth": [
+      h'A10126',
+      { 33: [ h'308201AA...ISSUER_LEAF_CERT_DER...' ] },
+      24(<<{
+        "version": "1.0",
+        "digestAlgorithm": "SHA-256",
+        "docType": "eu.europa.ec.eudi.aptitude.vehicle_ferry_boarding.1",
+        "valueDigests": {
+          "eu.europa.ec.eudi.aptitude.vehicle_ferry_boarding.1": {
+            0: h'1111111111111111111111111111111111111111111111111111111111111111',
+            1: h'2222222222222222222222222222222222222222222222222222222222222222',
+            2: h'3333333333333333333333333333333333333333333333333333333333333333',
+            3: h'4444444444444444444444444444444444444444444444444444444444444444',
+            4: h'5555555555555555555555555555555555555555555555555555555555555555',
+            5: h'6666666666666666666666666666666666666666666666666666666666666666',
+            6: h'7777777777777777777777777777777777777777777777777777777777777777',
+            7: h'8888888888888888888888888888888888888888888888888888888888888888',
+            8: h'9999999999999999999999999999999999999999999999999999999999999999',
+            9: h'AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA',
+            10: h'BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB',
+            11: h'CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC',
+            12: h'DDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD'
+          }
+        },
+        "deviceKeyInfo": {
+          "deviceKey": {
+            1: 2,
+            -1: 1,
+            -2: h'6C8F25B6C9A7B3E4F19D2A5C7E9B11223344556677889900AABBCCDDEEFF0011',
+            -3: h'7D9E36C7DA8BC4F20A1B2C3D4E5F60718293A4B5C6D7E8F90123456789ABCDEF'
+          }
+        },
+        "validityInfo": {
+          "signed": 0("2026-06-01T10:00:00+03:00"),
+          "validFrom": 0("2026-06-01T10:00:00+03:00"),
+          "validUntil": 0("2026-06-15T07:30:00+03:00")
+        }
+      }>>),
+      h'5F8D3C2A1B0099EE...SIGNATURE...'
+    ]
+  }
+}
+```
+
+### 3.1.6 Wallet display
+
+The Wallet Unit SHOULD display:
+
+```text
+Vehicle Ferry Boarding Credential
+Rafina (GRRFN) – Milos (GRMLO)
+15 June 2026, 07:30
+Vehicle: Passenger Car, NIK-1234
+Ticket: V 000123456
+Valid until: 15 June 2026, 07:30
+```
+
+The Wallet Unit SHOULD inform the User that:
+
+- this credential is presented at the vehicle lane with ISO/IEC 18013-5
+  device engagement and device retrieval;
+- the User can refuse presentation; and
+- a staff-assisted boarding process remains available where ferry policy
+  allows it.
 
 ## 3.2 SD-JWT VC-based encoding
 
-The Vehicle Ferry Boarding Credential SHALL be issued as an SD-JWT VC.
+This version does not define an SD-JWT VC representation.
 
-The Verifiable Credential Type (`vct`) for this attestation type is:
-
-```text
-VehicleBoardingCredential
-```
-
-This value SHALL match the claim `credentialType`.
-
-The credential claims defined in this section SHALL follow SD-JWT VC and HAIP
-conventions where applicable. Claim names are either IANA-registered JWT claims,
-public names, or private names specific to this attestation type.
-
-For all claims, this Rulebook specifies whether an Attestation Provider MUST, MAY, or
-MUST NOT make the claim selectively disclosable.
-
-### 3.2.1 IANA-registered and standard JWT / SD-JWT VC claims
-
-| **Data Identifier** | **Attribute identifier** | **Encoding format** | **Reference/Notes** | **Disclosable** |
-|---------------------|--------------------------|---------------------|---------------------|-----------------|
-| `iss` | `iss` | string | JWT issuer identifier. | MUST NOT |
-| `iat` | `iat` | integer | Issued-at timestamp. | MUST NOT |
-| `nbf` | `nbf` | integer | Not-before timestamp, where used. | MUST NOT |
-| `exp` | `exp` | integer | Expiration timestamp. SHALL NOT be later than the scheduled departure time unless operational rules define a short grace period. | MUST NOT |
-| `jti` | `jti` | string | Unique credential instance identifier, where used. | MUST NOT |
-| `cnf` | `cnf` | object | Holder binding confirmation claim, where used. | MUST NOT |
-| `status` | `status` | object | Status or revocation information, where used. | MUST NOT |
-| `vct` | `vct` | string | SD-JWT VC type. Value SHALL be `VehicleBoardingCredential`. | MUST NOT |
-
-### 3.2.2 Private claims specific to the Vehicle Ferry Boarding Credential
-
-| **Data Identifier** | **Attribute identifier** | **Encoding format** | **Notes** | **Disclosable** |
-|---------------------|--------------------------|---------------------|-----------|-----------------|
-| `attestation_legal_category` | `attestation_legal_category` | string | SHALL be `non-qualified-EAA`. | MUST NOT |
-| `credentialType` | `credentialType` | string | SHALL be `VehicleBoardingCredential`. | MUST NOT |
-| `departure` | `departure` | object | Departure port-call object. | MUST NOT |
-| `departure.date` | `date` | string | ISO 8601 date. | MUST |
-| `departure.time` | `time` | string | Local time `HH:MM` or `HH:MM:SS`. | MUST |
-| `departure.port` | `port` | string | Departure port identifier. | MUST |
-| `departure.gate` | `gate` | string | Gate or lane, where present. | MAY |
-| `arrival` | `arrival` | object | Arrival object. | MUST NOT |
-| `arrival.date` | `date` | string | ISO 8601 date. | MUST |
-| `arrival.time` | `time` | string | Local time `HH:MM` or `HH:MM:SS`. | MUST |
-| `arrival.port` | `port` | string | Arrival port identifier. | MUST |
-| `vesselDescription` | `vesselDescription` | string | Vessel name or description, where present. | MAY |
-| `reservationNumber` | `reservationNumber` | string | Reservation number, where present. | MAY |
-| `vehicle` | `vehicle` | object | Vehicle object. | MUST NOT |
-| `vehicle.vehicleType` | `vehicleType` | string | Human-readable vehicle type. | MUST |
-| `vehicle.vehicleTypeCode` | `vehicleTypeCode` | string | Vehicle type / tariff code. | MUST |
-| `vehicle.plateNumber` | `plateNumber` | string | Plate / registration number, where present. | MAY |
-| `ticket` | `ticket` | object | Ticket object. | MUST NOT |
-| `ticket.ticketLet` | `ticketLet` | string | Ticket letter or class code. | MUST |
-| `ticket.ticketNumber` | `ticketNumber` | string | Ticket number. | MUST |
-| `trust_anchor` | `trust_anchor` | string | Trust-anchor reference, where used. | MUST NOT |
-| `cryptographically_bound_to` | `cryptographically_bound_to` | string | Bound attestation type, where used. | MUST NOT |
-
-### 3.2.3 Example JWT claim set
-
-```json
-{
-  "iss": "https://issuer.example-ferry.gr",
-  "iat": 1780315200,
-  "nbf": 1780315200,
-  "exp": 1781508600,
-  "jti": "urn:uuid:2aacf8dc-3f0b-4b30-987d-5eacb9dba222",
-  "vct": "VehicleBoardingCredential",
-  "attestation_legal_category": "non-qualified-EAA",
-  "credentialType": "VehicleBoardingCredential",
-  "departure": {
-    "date": "2026-06-15",
-    "time": "07:30",
-    "port": "GRRFN",
-    "gate": "RFN-LANE-02"
-  },
-  "arrival": {
-    "date": "2026-06-15",
-    "time": "12:45",
-    "port": "GRMLO"
-  },
-  "vesselDescription": "Fast Ferries Andros",
-  "reservationNumber": "RES-2026-000991",
-  "vehicle": {
-    "vehicleType": "Passenger Car",
-    "vehicleTypeCode": "PC",
-    "plateNumber": "NIK-1234"
-  },
-  "ticket": {
-    "ticketLet": "V",
-    "ticketNumber": "000123456"
-  },
-  "trust_anchor": "https://trust.example.eu/ferry/operators/fast-ferries",
-  "cnf": {
-    "jwk": {
-      "kty": "EC",
-      "crv": "P-256",
-      "x": "...",
-      "y": "..."
-    }
-  }
-}
-```
-
-### 3.2.4 Example issued SD-JWT
-
-The following is a non-normative placeholder example. A production SD-JWT SHALL be
-generated by the issuer using the applicable signing algorithm, disclosure
-construction, holder binding, and SD-JWT VC rules.
-
-```text
-<issuer-signed-sd-jwt>~<disclosure-1>~<disclosure-2>~<disclosure-n>~<holder-binding-jwt>
-```
-
-### 3.2.5 Example human-readable disclosed payload
-
-A verifier that requests the minimum data needed for vehicle boarding may receive a
-presentation disclosing the following claims:
-
-```json
-{
-  "vct": "VehicleBoardingCredential",
-  "credentialType": "VehicleBoardingCredential",
-  "departure": {
-    "date": "2026-06-15",
-    "time": "07:30",
-    "port": "GRRFN"
-  },
-  "arrival": {
-    "date": "2026-06-15",
-    "time": "12:45",
-    "port": "GRMLO"
-  },
-  "vehicle": {
-    "vehicleType": "Passenger Car",
-    "vehicleTypeCode": "PC",
-    "plateNumber": "NIK-1234"
-  },
-  "ticket": {
-    "ticketLet": "V",
-    "ticketNumber": "000123456"
-  }
-}
-```
-
-The issuer identity, credential type metadata, expiry time, signature, holder binding
-proof, and trust anchor information are not treated as selectively disclosable vehicle
-attributes and SHALL remain available to the verifier for technical validation.
+The withdrawn version 0.3 profile (`vct` `VehicleBoardingCredential`, with
+nested `departure`, `arrival`, `vehicle` and `ticket` objects) SHALL NOT be
+issued as a Vehicle Ferry Boarding Credential.
 
 ## 3.3 W3C Verifiable Credentials Data Model-based encoding
 
-This version of the Rulebook does not define a W3C Verifiable Credentials Data Model
-encoding for the Vehicle Ferry Boarding Credential.
+This version does not define a W3C VCDM representation.
 
-If a future version defines a W3C VCDM representation, that version SHALL define the
-credential context, type, credential subject structure, proof type, selective
-disclosure mechanism, and presentation requirements.
+# 4 Attestation usage
 
-## 4 Attestation usage
+## 4.1 Issuance trigger
 
-The Vehicle Ferry Boarding Credential is intended for verifying vehicle boarding
-entitlement for a specific ferry journey.
+The Vehicle Ferry Boarding Credential SHALL be issued only after:
 
-Typical usage scenarios include:
+1. a vehicle booking exists for one sailing;
+2. the vehicle category and ticket identifier are known;
+3. where §2.5 requires it, the plate number is known; and
+4. the User has consented to receive the credential.
 
-* presentation by the passenger at a vehicle boarding lane or port gate;
-* scanning or digital verification by authorised boarding staff;
-* online verification by a ferry operator system;
-* offline or low-connectivity verification where the verifier can validate the
-  credential signature, issuer, validity period, disclosed journey data, and vehicle
-  attributes without relying on a real-time ticketing backend.
+Issuance MAY happen at booking time. It does not require the vehicle to be at
+the port.
 
-A Relying Party receiving the attestation SHALL verify:
+The same entity MAY operate ticketing and issue this credential.
 
-* the issuer signature;
-* the SD-JWT VC type (`vct`) and `credentialType`;
-* the issuer authorisation to issue Vehicle Ferry Boarding Credentials;
-* the credential validity period;
-* the credential status, where a status mechanism is present;
-* holder binding, where used;
-* the integrity rules defined in Section 2.9;
-* that the journey and vehicle details match the boarding context.
+## 4.2 Issuer
 
-The Relying Party SHOULD request and verify an mVRC or another accepted
-vehicle-registration credential when the boarding process requires vehicle matching. In
-such cases, the Relying Party SHOULD compare relevant vehicle attributes, such as
-`vehicle.plateNumber` and `vehicle.vehicleTypeCode`, with the Vehicle Ferry Boarding
-Credential. The Relying Party SHALL apply data minimisation and SHALL request only the
-attributes required for the boarding decision.
+The credential SHALL be issued by:
 
-Where passenger identity matching is also required, the Relying Party SHOULD request
-the passenger Ferry Boarding Pass and PID according to ferry policy.
+- the ferry operator; or
+- an authorised ticketing system acting for that operator.
 
-The attestation SHOULD be device-bound through holder binding where supported by the
-EUDI Wallet and the applicable SD-JWT VC profile. The attestation MAY be
-cryptographically bound to an mVRC or another accepted vehicle-registration attestation
-where stronger vehicle matching is required. Where this binding is used, the metadata
-attribute `cryptographically_bound_to` SHOULD identify the relevant vehicle-registration
-attestation type.
+The issuer is the authentic source for this boarding entitlement. A party
+that only resells the ticket SHOULD NOT issue the credential unless the
+operator has explicitly authorised it to do so.
 
-No payment-specific transactional data is defined by this Rulebook. If the Vehicle
-Ferry Boarding Credential is used as part of a transaction that also involves payment,
-payment-related requirements SHALL be defined in a separate payment attestation,
-payment profile, or transaction-specific rulebook.
+## 4.3 Device binding
 
-Failure of wallet verification SHALL NOT by itself deny access to a staff-assisted
-boarding process where ferry policy allows it.
+The credential SHALL be device-bound.
 
-## 5 Trust anchors
+The Mobile Security Object SHALL contain `deviceKeyInfo.deviceKey`. During
+presentation the Wallet SHALL provide device authentication as defined in
+ISO/IEC 18013-5, bound to the `SessionTranscript`. A reader SHALL NOT accept
+an `IssuerSigned` structure that is not carried in a `DeviceResponse`
+authenticated for that session.
 
-A Relying Party SHALL verify that the issuer of the Vehicle Ferry Boarding Credential
-is authorised to issue this attestation type.
+## 4.4 Wallet disclosure and consent
 
-For non-qualified EAA deployments, the Relying Party SHOULD obtain trust anchor
-information through one or more of the following mechanisms:
+Before issuance, the Wallet SHOULD display:
 
-* a machine-readable trust list or trust registry used by the relevant ecosystem;
-* an issuer metadata endpoint published by the ferry operator or authorised ticketing
-  operator;
-* a trust framework entry managed by APTITUDE WP2 or by another authorised governance
-  body;
-* a pilot trust list used for controlled interoperability testing.
+- operator or issuer name;
+- departure and arrival ports;
+- departure date and time;
+- vehicle category and, where present, plate number;
+- ticket identifier;
+- that the credential is presented with ISO/IEC 18013-5 device engagement and
+  device retrieval; and
+- the validity window.
 
-Where the metadata attribute `trust_anchor` is present, it SHOULD identify the
-location or registry entry from which the Relying Party can obtain the issuer trust
-anchor or issuer authorisation information.
+## 4.5 Presentation at the vehicle lane
 
-The Relying Party SHALL use the trust anchor to verify that:
+A normal use SHOULD follow these steps:
 
-* the issuer signing key or certificate chains to a trusted authority or registered
-  trust anchor;
-* the issuer is authorised to issue the `VehicleBoardingCredential` attestation type;
-* the issuer metadata or trust framework entry has not expired or been revoked;
-* the issuer identity in the credential is consistent with the issuer identity in the
-  trust framework.
+1. the Wallet and the lane reader perform ISO/IEC 18013-5 device engagement
+   by QR code or NFC;
+2. they establish an encrypted session and retrieve data over BLE or NFC, as
+   the reader offers;
+3. the reader sends a `DeviceRequest` for `docType`
+   `eu.europa.ec.eudi.aptitude.vehicle_ferry_boarding.1`, requesting the
+   elements required for the boarding decision from that same namespace;
+4. the Wallet obtains the User's consent and returns a `DeviceResponse`;
+5. the reader verifies `issuerAuth`, the `IssuerSignedItem` digests, device
+   authentication and `validityInfo`, as specified in §4.7;
+6. the reader checks that `departure_port`, `departure_date` and
+   `departure_time` are the sailing this lane is boarding;
+7. where vehicle matching applies, the reader compares `plate_number` and
+   `vehicle_type_code` as specified in §4.6;
+8. the reader allows embarkation or refuses; and
+9. a minimal event MAY be recorded when the reader can store or forward one.
 
-Wallet Units MAY also use the same trust framework information during issuance to
-determine whether the provider is authorised to issue this attestation type.
+The reader SHALL perform mdoc verification locally. It SHALL NOT require a
+live ticketing lookup in order to accept the credential.
 
-## 6 Revocation
+A minimal event MAY contain a pseudonymous credential reference (`id`), a
+timestamp, a result, a reason code and a reader identifier. It SHOULD NOT
+contain PID attributes, the device key, the Mobile Security Object, or
+payment data.
 
-The Vehicle Ferry Boarding Credential is typically short-lived and journey-specific.
+## 4.6 Vehicle, passenger and registration checks
 
-The preferred validity model for this attestation is short validity. The credential
-expiration time (`exp`) SHALL be set no later than the scheduled departure time unless
-a clearly defined operational grace period is required by the ferry operator or port
-boarding process.
+mdoc verification and vehicle matching are separate.
 
-After departure, the attestation SHALL be considered expired and SHALL NOT be accepted
-for boarding.
+When the lane matches the vehicle by plate, the reader SHOULD request this
+credential's `plate_number` and the minimum mVRC attributes needed for the
+comparison, and SHOULD compare them with the vehicle at the lane. The reader
+SHALL request only those attributes.
 
-Revocation MAY be handled by one or more of the following mechanisms:
+Where policy also identifies the driver or passengers, the reader SHOULD
+request the passenger Ferry Boarding Pass and PID. Those presentations are
+not claims of this mdoc.
 
-* short validity, where the attestation expires at or before departure time;
-* backend verification by the ferry operator or authorised boarding system;
-* an attestation status list mechanism, where supported;
-* an attestation revocation list mechanism, where supported.
+This Rulebook does not define a cryptographic binding between this credential
+and the mVRC. The lane compares the disclosed values.
 
-If a status or revocation mechanism is included in the credential, the Relying Party
-SHALL check the status before accepting the attestation, unless offline operating
-rules explicitly allow deferred status checking.
+## 4.7 Verifier obligations
 
-If a vehicle ticket is cancelled, refunded, exchanged, duplicated, or otherwise
-invalidated before departure, or if the vehicle is removed or replaced on the booking,
-the issuer SHOULD either revoke or suspend the attestation, or ensure that backend
-verification detects the invalid state.
+The lane reader SHALL:
 
-## 7 Compliance
+1. complete ISO/IEC 18013-5 device engagement and encrypted device retrieval;
+2. decrypt and parse the `DeviceResponse`;
+3. confirm that the document `docType` and the Mobile Security Object
+   `docType` are both `eu.europa.ec.eudi.aptitude.vehicle_ferry_boarding.1`;
+4. verify the `issuerAuth` `COSE_Sign1` and the issuer certificate chain
+   against a trust anchor provisioned for this operator;
+5. recompute the digest of each disclosed `IssuerSignedItem` and match it to
+   `valueDigests` for that `digestID`;
+6. verify device authentication, either a device signature or a device MAC,
+   against the `SessionTranscript` and the `deviceKey` in the Mobile Security
+   Object;
+7. verify `validityInfo` against the reader's clock;
+8. confirm that the disclosed `departure_port`, `departure_date` and
+   `departure_time` match the sailing this lane is boarding;
+9. confirm that a requested mandatory element was disclosed;
+10. apply `VBP-IR-01` to the disclosed dates;
+11. where the reader has connectivity and a status source is available, reject
+    a revoked or suspended credential; and
+12. allow embarkation only when these checks succeed.
 
-This Rulebook is designed to align with the EUDI Wallet architectural approach for
-Electronic Attestations of Attributes and with the Attestation Rulebook structure
-defined in the ARF.
+A missing requested element, a digest mismatch or a `docType` mismatch SHALL
+be a refusal.
 
-The Rulebook supports the following compliance objectives:
+A reader SHALL NOT accept a credential for another operator only because the
+same vendor operates both lanes.
 
-* it defines the attestation purpose and scope;
-* it defines mandatory, optional, and conditional attributes in an encoding-independent manner;
-* it defines a legal category indication through `attestation_legal_category`;
-* it defines an SD-JWT VC `vct` value and `credentialType` for the attestation type;
-* it defines issuer, validity, and status metadata needed for verification;
-* it defines code lists and integrity rules required for consistent interpretation;
-* it defines how trust anchors can be obtained and used;
-* it defines expiry and revocation expectations;
-* it supports selective disclosure and data minimisation;
-* it keeps vehicle entitlement separate from passenger, payment and registration credentials.
+## 4.8 Failure and fallback
 
-This Rulebook does not define a qualified EAA or public-sector EAA profile. It also
-does not define ISO/IEC 18013-5 mdoc or W3C VCDM encodings in this version.
+The reader SHALL refuse embarkation on the strength of this credential when:
 
-## 8 References
+- device engagement or device retrieval fails;
+- `issuerAuth`, a data-element digest or device authentication fails;
+- the reader does not trust the issuer for this operator;
+- the current time is outside `validityInfo`;
+- the credential is revoked or suspended and the reader can determine that;
+- the disclosed sailing is not the sailing this lane is boarding;
+- a requested mandatory element is missing; or
+- required vehicle matching fails.
+
+The operator SHALL keep a staff-assisted boarding path where ferry policy
+allows it. Refusal of the mdoc SHALL NOT by itself close that path.
+
+# 5 Trust anchors
+
+The lane reader SHALL establish that the issuer:
+
+1. is the ferry operator or an authorised ticketing system acting for it;
+2. is authorised to issue Vehicle Ferry Boarding Credentials for this
+   operator;
+3. uses a certificate chain the reader has been provisioned to trust; and
+4. was authorised at issuance, as carried by that chain.
+
+Readers for the APTITUDE pilot SHOULD obtain that trust information through
+the WP2 trust framework. An offline reader uses the trust anchors provisioned
+to it. It does not fetch them during the presentation.
+
+A credential issued for one operator SHALL NOT be accepted by another
+operator merely because the same vendor operates both systems.
+
+# 6 Revocation and status
+
+## 6.1 Validity period
+
+The credential SHALL be short-lived and limited to one journey.
+
+`validityInfo.validFrom` SHOULD be no earlier than issuance. It MAY be the
+start of the boarding window where the operator wants the credential refused
+before that window.
+
+`validityInfo.validUntil` SHALL be no later than the scheduled departure,
+plus only a limited grace period where the operator defines one. The grace
+period is set at issuance. A reader SHALL NOT add one.
+
+This window is the time control an offline reader can enforce. After
+`validUntil`, the reader SHALL NOT accept the credential for boarding.
+
+## 6.2 Revocation and suspension triggers
+
+The issuer SHOULD revoke, suspend or replace the credential when:
+
+- the vehicle ticket is cancelled, refunded or exchanged;
+- the vehicle is removed or replaced on the booking;
+- the sailing, ports or departure time change;
+- the device is lost or compromised;
+- the credential was issued in error; or
+- the issuer is no longer authorised.
+
+## 6.3 Offline readers and status
+
+An offline reader SHALL enforce `validityInfo` and the disclosed journey
+elements, and SHALL NOT depend on a live status service. ISO/IEC 18013-5:2021
+verification does not itself fetch a status list. Checking status is a
+profile rule for a reader that has connectivity and a status source.
+
+A reader that has connectivity SHALL check the issuer's status information
+and SHALL reject a suspended or revoked credential even when `validUntil` has
+not passed.
+
+Until `validUntil`, a reader which has not received revocation may still
+accept the credential. Cancellation handling therefore SHOULD combine
+revocation with as short a `validUntil` as the sailing allows, and with the
+staff path in §4.8.
+
+# 7 Compliance
+
+This Rulebook is designed to align with:
+
+- Regulation (EU) 2024/1183;
+- the EUDI Wallet Architecture and Reference Framework;
+- ARF Annex 2 Topic 12;
+- ISO/IEC 18013-5 for the mdoc, including `IssuerSigned`, the Mobile Security
+  Object, device engagement by QR code or NFC, and device retrieval by BLE or
+  NFC;
+- OpenID4VCI where the issuance transport is OpenID4VCI;
+- applicable GDPR requirements; and
+- the SEDIT-X Ferry Transport source material.
+
+The Rulebook enforces:
+
+1. one vehicle and one journey per credential;
+2. separation from the passenger Ferry Boarding Pass, the mVRC, PID and
+   payment;
+3. Wallet display name **Vehicle Ferry Boarding Credential** and `docType`
+   `eu.europa.ec.eudi.aptitude.vehicle_ferry_boarding.1`;
+4. the data elements in §3.1.2;
+5. ISO/IEC 18013-5 device engagement (QR code or NFC) and device retrieval
+   (BLE or NFC), verified at the lane;
+6. device authentication bound to the `SessionTranscript`;
+7. a signed validity window that an offline reader can enforce, together with
+   a match of the disclosed sailing to the lane;
+8. revocation on cancellation or vehicle change, applied by readers that can
+   see status;
+9. minimal event logging; and
+10. a staff-assisted fallback where ferry policy allows it.
+
+The following matters remain open and require operator input:
+
+- confirmation of the `docType`, namespace and data elements against the
+  operator's ticketing profile, where that profile assigns different
+  identifiers;
+- how lane readers are provisioned with issuer trust anchors;
+- the status mechanism an online reader uses;
+- the length of any post-departure grace period; and
+- when `plate_number` is mandatory for a given operator.
+
+This version does not define an SD-JWT VC or a W3C VCDM encoding.
+
+# 8 References
 
 | **Item Reference** | **Standard name/details** |
-|--------------------|---------------------------|
+| ------------------ | ------------------------- |
 | [European Digital Identity Regulation] | Regulation (EU) 2024/1183 |
+| [ISO/IEC 18013-5] | Personal identification — ISO-compliant driving licence — Part 5: Mobile driving licence (mDL) application. mdoc structure, device engagement (QR code, NFC) and device retrieval (BLE, NFC). |
 | [APTITUDE D4.1] | APTITUDE D4.1: UC Specifications and Scenarios, final version, 29 May 2026 |
 | [SEDIT-X Ferry Working Paper] | APTITUDE WP4, SEDIT-X Ferry Transport, Version 0.1, May 2026 |
 | [ARF] | European Digital Identity Wallet Architecture and Reference Framework |
-| [HAIP] | OpenID4VC High Assurance Interoperability Profile |
 | [OpenID4VCI] | OpenID for Verifiable Credential Issuance |
-| [OpenID4VP] | OpenID for Verifiable Presentations |
-| [SD-JWT VC] | SD-JWT-based Verifiable Credentials |
 | [RFC 2119] | Key words for use in RFCs to Indicate Requirement Levels |
+| [RFC 8610] | Concise Data Definition Language (CDDL) |
+| [RFC 8949] | Concise Binary Object Representation (CBOR) |
 | [Topic 7] | ARF Annex 2, Topic 7 — Attestation revocation and revocation checking |
 | [Topic 10] | ARF Annex 2, Topic 10 — Issuing a PID or attestation to a Wallet Unit |
 | [Topic 12] | ARF Annex 2, Topic 12 — Attestation Rulebooks |
