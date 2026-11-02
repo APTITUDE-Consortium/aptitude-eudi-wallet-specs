@@ -10,6 +10,7 @@
 | 0.1     | 23-07-2026 | Initial draft based on the SEDIT-X Hospitality working paper and the APTITUDE Attestation Rulebook template. |
 | 0.2     | 24-07-2026 | Aligned data model and `vct` with the APTITUDE issuer configuration (`booking_reference_credential`).        |
 | 0.3     | 26-08-2026 | Aligned display name, nested claim set and check-in composition with the issuer schema for Accommodation Voucher (`booking_reference_credential`), PID and optional European Disability Card. |
+| 0.4     | 02-11-2026 | Allowed one entity to fill every role, optional `supplierReference` and guest name, a qualified EAA where the issuer is a QTSP, and the Digital Room Key as a separate mdoc. |
 
 
 **Feedback:**
@@ -20,7 +21,8 @@
 >
 > This Rulebook is an implementation-oriented draft. The attribute model below SHALL
 > match the APTITUDE issuer configuration for `booking_reference_credential`
-> (Wallet display name: **Accommodation Voucher**).
+> (Wallet display name: **Accommodation Voucher**). Claims marked optional in
+> §2.3 MAY be omitted.
 
 
 
@@ -53,6 +55,9 @@ travel agent or authorised intermediary to:
 - reduce manual entry of booking details; and
 - return a structured booking-validation result.
 
+These parties MAY be a single organisation. An issuer that itself operates
+booking and check-in conforms to this Rulebook.
+
 The credential is not a PID and SHALL NOT duplicate the traveller's full identity.
 A minimal guest name MAY be included so that the voucher can be matched to the
 reservation. Identity attributes needed for legal hotel registration SHALL be
@@ -68,8 +73,9 @@ Rulebook.
 The credential is also distinct from:
 
 - a payment confirmation or eReceipt;
-- the **Hotel Pass** (`room_key_credential`), which is a visual QR pass issued
-  after check-in and is not a cryptographic room-key credential;
+- the **Digital Room Key** (`eu.europa.ec.eudi.aptitude.room_key.1`), an ISO/IEC 18013-5 mdoc
+  presented over NFC or BLE and verified offline at the door, as defined in
+  the Digital Room Key Rulebook;
 - a proof-of-stay credential; and
 - the authoritative reservation record held by the hotel, DMC, booking platform or PMS.
 
@@ -121,8 +127,9 @@ The capitalised words **SHALL**, **SHOULD** and **MAY** are used as specified in
 
 - **Reservation reference** means the reservation identifier used to retrieve the
 booking (`reservationReference`).
-- **Supplier reference** means the identifier assigned by the supplier, DMC or
-booking platform (`supplierReference`).
+- **Supplier reference** means a reference associated with the reservation
+(`supplierReference`). It MAY be assigned by a supplier, DMC, booking platform
+or the issuer. It MAY be omitted when the issuer has no such reference.
 - **Voucher reference** means the issuer-assigned voucher identifier
 (`voucherReference`).
 - **Property identifier** means a stable identifier of the target hotel or
@@ -130,8 +137,8 @@ accommodation in the pilot or production environment (`property.id`).
 - **PMS** means the hotel's Property Management System.
 - **Primary guest** means the traveller to whom the credential was issued and whose
 wallet presentation is used for booking retrieval or check-in.
-- **Hotel Pass** means the follow-on visual QR pass (`room_key_credential`) issued
-after successful check-in.
+- **Digital Room Key** means the mdoc whose `docType` is
+`eu.europa.ec.eudi.aptitude.room_key.1`, defined in the Digital Room Key Rulebook.
 - **PID** means Person Identification Data of type `urn:eu.europa.ec.eudi:pid:1`.
 
 
@@ -148,7 +155,15 @@ For the SEDIT-X pilot, the credential is a **non-qualified EAA**:
 eaa:eu:non-qualified
 ```
 
+A deployment MAY issue the credential as a qualified EAA when the issuer is a
+qualified trust service provider and the attestation meets the requirements
+for a qualified electronic attestation of attributes:
 
+```text
+eaa:eu:qualified
+```
+
+The issued credential SHALL use exactly one of these category values.
 
 ### 2.2 Design principles
 
@@ -172,14 +187,15 @@ eaa:eu:non-qualified
 ### 2.3 Credential attributes
 
 The credential attribute set SHALL match the APTITUDE issuer configuration for
-`booking_reference_credential`. Nested objects SHALL be preserved as issued.
+`booking_reference_credential`, except that claims marked optional below MAY
+be omitted. Nested objects SHALL be preserved as issued.
 
 
 | **Data Identifier**      | **Definition**                                                                                          | **Data type** | **Example value**            |
 | ------------------------ | ------------------------------------------------------------------------------------------------------- | ------------- | ---------------------------- |
 | `id`                     | Unique identifier of this voucher instance.                                                             | string        | `8f2c1e4a-6b9d-4c21-9a0e-2d7f5b8c1a90` |
 | `reservationReference`   | Reservation or booking reference. Primary lookup value for hotel check-in.                              | string        | `BR-2026-00042`              |
-| `supplierReference`      | Supplier, DMC or booking-platform reference associated with the reservation.                            | string        | `SUP-2026-00001`             |
+| `supplierReference`      | Optional. Reference associated with the reservation at a supplier, DMC, booking platform or the issuer. MAY be omitted. | string        | `SUP-2026-00001`             |
 | `property.id`            | Stable identifier of the target hotel or property.                                                      | string        | `hotel-123`                  |
 | `property.name`          | Human-readable property name for Wallet display and verifier confirmation.                              | string        | `Example Hotel Athens`       |
 | `stay.checkInDate`       | Arrival or check-in date.                                                                               | date          | `2026-06-12`                 |
@@ -188,15 +204,17 @@ The credential attribute set SHALL match the APTITUDE issuer configuration for
 | `ratePlanCode`           | Rate-plan or tariff code associated with the reservation.                                               | string        | `BAR`                        |
 | `reservationStatus`      | Issuer-known reservation status at issuance. Live state remains in the booking or PMS system.           | string        | `Confirmed`                  |
 | `voucherReference`       | Issuer-assigned voucher identifier.                                                                     | string        | `VCH-2026-00042`             |
-| `guest.givenName`        | Given name of the primary guest as recorded on the reservation.                                         | string        | `Hanna`                      |
-| `guest.familyName`       | Family name of the primary guest as recorded on the reservation.                                        | string        | `Matkalainen`                |
+| `guest.givenName`        | Optional. Given name of the primary guest as recorded on the reservation. MAY be omitted.                | string        | `Hanna`                      |
+| `guest.familyName`       | Optional. Family name of the primary guest as recorded on the reservation. MAY be omitted.              | string        | `Matkalainen`                |
 
 
 The credential SHALL NOT include PAN, IBAN, payment tokens, cryptograms or other
 sensitive payment-instrument data.
 
 The credential SHALL NOT include PID attributes other than the minimal guest name
-needed for reservation matching.
+needed for reservation matching. That name MAY be omitted.
+
+`supplierReference`, `guest.givenName` and `guest.familyName` MAY be absent.
 
 ### 2.4 Mandatory metadata
 
@@ -204,7 +222,7 @@ needed for reservation matching.
 | **Data Identifier**      | **Definition**                                                                        | **Data type**           | **Example value**                                    |
 | ------------------------ | ------------------------------------------------------------------------------------- | ----------------------- | ---------------------------------------------------- |
 | `category`               | Legal category.                                                                       | string                  | `eaa:eu:non-qualified`                               |
-| `issuer`                 | Identifier of the booking platform, DMC, hotel or authorised issuer.                  | string or URI           | `https://issuer.avratours.example`                   |
+| `issuer`                 | Identifier of the credential issuer, such as a DMC, hotel or authorised issuer.       | string or URI           | `https://issuer.avratours.example`                   |
 | `credential_type`        | Encoding-independent credential type identifier. SHALL equal the issuer-config `vct`. | string                  | `booking_reference_credential`                       |
 | `issued_at`              | Credential issuance timestamp.                                                        | date-time               | `2026-06-12T11:30:00Z`                               |
 | `status_reference`       | Status or revocation reference.                                                       | URI or structured value | `https://status.booking.example/atl/2026-06/12#4821` |
@@ -237,10 +255,15 @@ needed for reservation matching.
 
 ## 3.1 ISO/IEC 18013-5-compliant encoding
 
-This version does not define an mdoc representation.
+This version does not define an mdoc representation. The Accommodation Voucher
+SHALL be issued as the SD-JWT VC in §3.2.
 
-A future profile MAY define mdoc for on-premises proximity check-in, provided the same
-semantic model, status checks and selective-disclosure rules are preserved.
+The Digital Room Key is a separate credential. Its mdoc encoding is defined in
+the Digital Room Key Rulebook and is not a profile of this voucher.
+
+A future profile MAY define an mdoc encoding of this voucher for on-premises
+proximity check-in, provided the same semantic model, status checks and
+selective-disclosure rules are preserved.
 
 ## 3.2 SD-JWT VC-based encoding
 
@@ -299,6 +322,12 @@ This matches the APTITUDE issuer configuration identifier and scope
 | `guest.familyName`       | `familyName`             | string     | MUST            |
 | `trust_anchor_reference` | `trust_anchor_reference` | string     | MUST NOT        |
 
+
+In this table, **Disclosable** states whether the issuer must make the claim
+selectively disclosable when the claim is issued (ARF Annex 2 Topic 12,
+ARB_30). It does not by itself require the claim to be present.
+`supplierReference`, `guest.givenName` and `guest.familyName` MAY be absent,
+as specified in §2.3. When they are issued, the MUST rows apply.
 
 Nested objects SHALL be selectively disclosable at the smallest practical semantic
 unit. A verifier SHALL be able to request `reservationReference` and `property.id`
@@ -379,6 +408,10 @@ The source-defined flow is:
 5. the User accepts it;
 6. the Wallet completes OpenID4VCI issuance; and
 7. the credential is stored in the Wallet.
+
+The same entity MAY perform each of these steps. A deployment in which one
+organisation is the booking system, the issuer and the check-in operator
+conforms to this flow.
 
 
 
@@ -467,7 +500,8 @@ obligations are defined in the European Disability Card Rulebook.
 
 ## 4.4 Verification obligations
 
-The hotel, PMS or Intermediary Service SHALL:
+The hotel, PMS or Intermediary Service SHALL do the following. The same
+entity MAY hold more than one of these roles.
 
 1. verify credential signature and integrity;
 2. verify issuer trust and authority;
@@ -512,8 +546,8 @@ resolved in favour of the PMS.
 The credential SHOULD NOT be reissued for every PMS state change unless required by
 the chosen implementation model.
 
-Successful check-in MAY trigger issuance of a **Hotel Pass**
-(`room_key_credential`) as defined in the Hotel Pass Rulebook.
+Successful check-in MAY trigger issuance of a **Digital Room Key**
+(`eu.europa.ec.eudi.aptitude.room_key.1`) as defined in the Digital Room Key Rulebook.
 
 ## 4.6 PMS integration
 
@@ -526,7 +560,7 @@ used to:
 - complete check-in;
 - assign a room;
 - record an optional accessibility-assistance request;
-- trigger Hotel Pass issuance; and
+- trigger Digital Room Key issuance; and
 - support check-out.
 
 Where PMS integration does not exist, the verified result MAY be displayed to hotel
@@ -534,7 +568,8 @@ staff for manual processing.
 
 ## 4.7 Data minimisation and retention
 
-The Intermediary Service SHOULD NOT act as a long-term store of traveller identity.
+The party that receives the presentation SHOULD NOT act as a long-term store
+of traveller identity, including where that party is also the issuer.
 
 Raw PID attributes SHOULD be retained only for the short period required to:
 
@@ -654,9 +689,9 @@ This Rulebook is designed to align with:
 
 The Rulebook enforces:
 
-1. the issuer-config claim set (`id`, `reservationReference`, `supplierReference`,
-  `property`, `stay`, `room`, `ratePlanCode`, `reservationStatus`,
-  `voucherReference`, `guest`);
+1. the issuer-config claim set (`id`, `reservationReference`, `property`,
+  `stay`, `room`, `ratePlanCode`, `reservationStatus`, `voucherReference`),
+  with `supplierReference` and `guest` optional as specified in §2.3;
 2. Wallet display name **Accommodation Voucher**;
 3. separation of the voucher from PID
   (`urn:eu.europa.ec.eudi:pid:1`);
@@ -677,7 +712,7 @@ Open matters include:
 - final status-list infrastructure;
 - whether an mdoc representation is required;
 - country-specific hotel-registration profiles; and
-- Hotel Pass issuance after check-in.
+- Digital Room Key issuance after check-in.
 
 
 
@@ -702,5 +737,5 @@ Open matters include:
 | [ETSI TS 119 472-1]                    | Electronic Attestation of Attributes; building blocks and general requirements                             |
 | [PID Implementing Regulation]          | Commission Implementing Regulation (EU) 2024/2977 — PID                                                    |
 | [European Disability Card Rulebook]    | APTITUDE WP4 Rulebook for `european_disability_card` (`urn:eu.europa.ec.eudi:edc:1`)                       |
-| [Hotel Pass Rulebook]                  | APTITUDE WP4 Rulebook for `room_key_credential`                                                            |
+| [Digital Room Key Rulebook]            | APTITUDE WP4 Rulebook for `eu.europa.ec.eudi.aptitude.room_key.1`                                          |
 
