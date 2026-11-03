@@ -122,7 +122,7 @@ The attribute `attestation_legal_category` SHALL be included and SHALL have the 
 The attestation model consists of the following logical groups:
 
 * loyalty account holder information;
-* loyalty-card information;
+* loyalty-account information;
 * organisation information;
 * credential metadata.
 
