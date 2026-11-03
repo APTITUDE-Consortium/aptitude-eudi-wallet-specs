@@ -42,7 +42,7 @@ that need to verify customer loyalty status or customer identity information for
 legitimate service purpose.
 
 In practical terms, the attestation enables a customer to present loyalty-card
-information through an EUDI Wallet. It can support customer identification, service
+information through an EUDI Wallet. It can support customer identification (LoA Low), service
 personalisation, loyalty benefits, journey-related discounts, and reduced reliance on
 physical loyalty cards or account lookups.
 
@@ -108,7 +108,7 @@ attribute is classified as mandatory, optional, or conditional.
 The Ferry Loyalty Account Attestation is a reusable, customer-specific attestation. It is
 not bound to a single journey. Its attribute set is designed to support customer
 identification, loyalty-card verification, and controlled disclosure of optional
-customer information.
+customer information. It's LoA under this rulebook is considered LoA Low
 
 ### 2.1 Introduction
 
@@ -286,9 +286,9 @@ MUST NOT make the claim selectively disclosable.
 | `customer.phone` | `phone` | string | Fixed phone number. | MAY |
 | `customer.mobile` | `mobile` | string | Mobile phone number. | MAY |
 | `customer.email` | `email` | string | Customer email address. | MAY |
-| `loyalty_card` | `loyalty_card` | object | Loyalty-card information object. | MUST NOT |
-| `loyalty_card.id` | `id` | string | Unique loyalty-account identifier. | MUST |
-| `loyalty_card.issue_date` | `issue_date` | string | Date of issuance, formatted as ISO 8601 date. | MUST |
+| `loyalty_credential` | `loyalty_credential` | object | Loyalty-credential information object. | MUST NOT |
+| `loyalty_credential.id` | `id` | string | Unique loyalty-account identifier. | MUST |
+| `loyalty_credential.issue_date` | `issue_date` | string | Date of issuance, formatted as ISO 8601 date. | MUST |
 | `organization` | `organization` | object | Issuing ferry operator information object. | MUST NOT |
 | `organization.name` | `name` | string | Ferry operator name. | MUST NOT |
 | `organization.id` | `id` | string | Ferry operator identifier. | MUST NOT |
@@ -417,7 +417,7 @@ Typical usage scenarios include:
 * presentation by the customer during online ferry booking;
 * presentation at a ticket office or customer-service point;
 * verification of loyalty-account membership for customer benefits or discounts;
-* customer identification for service personalisation;
+* customer identification for service personalisation under LoA low;
 * controlled disclosure of optional contact or residency information where required
   for a specific service interaction;
 * repeated presentation across multiple journeys, subject to validity and revocation
