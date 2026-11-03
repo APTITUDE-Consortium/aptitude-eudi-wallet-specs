@@ -95,7 +95,7 @@ In addition, the following domain-specific terms are used:
 | Term | Meaning |
 |------|---------|
 | Passenger Ferry Boarding Credential | A Verifiable Credential representing a passenger's entitlement to board a specific ferry journey. |
-| Ferry operator | The organisation operating the ferry journey or acting as the authentic source for the boarding entitlement. |
+| Ferry operator | The organisation operating the ferry journey or acting as the authoritative source for the boarding entitlement. |
 | Authorised ticketing system | A system authorised by the ferry operator to issue or manage boarding passes. |
 | Passenger | The natural person to whom the boarding entitlement applies. |
 | Boarding gate | A physical or digital checkpoint where the boarding entitlement is verified. |
