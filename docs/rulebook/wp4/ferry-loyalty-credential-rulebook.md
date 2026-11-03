@@ -498,7 +498,7 @@ trusted issuer framework.
 
 ## 6 Revocation
 
-The Ferry Loyalty Card Attestation is intended for repeated use and is typically
+The Ferry Loyalty Account Attestation is intended for repeated use and is typically
 longer-lived than a boarding pass.
 
 The credential SHALL be considered invalid when:
