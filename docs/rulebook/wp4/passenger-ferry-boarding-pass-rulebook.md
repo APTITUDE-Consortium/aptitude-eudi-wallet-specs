@@ -455,7 +455,7 @@ Typical usage scenarios include:
 * scanning or digital verification by authorised boarding staff;
 * online verification by a ferry operator system;
 * offline or low-connectivity verification where the verifier can validate the
-  credential signature, issuer, validity period, and disclosed journey data without
+  credential signature, issuer, validity period, and disclosed itinerary data without
   relying on a real-time ticketing backend.
 
 A Relying Party receiving the attestation SHALL verify:
