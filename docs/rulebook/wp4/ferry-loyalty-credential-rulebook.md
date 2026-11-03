@@ -164,7 +164,7 @@ presented repeatedly, subject to validity, expiry, and revocation rules.
 
 | **Data Identifier** | **Semantic Reference** | **Definition** | **Data type** | **Example value** |
 |---------------------|------------------------|----------------|---------------|-------------------|
-| `credential.expiry_date` | ISO 8601 date | SHALL be present where the loyalty programme issues cards with a defined expiry date. MAY be omitted where the card remains valid until revoked. | date | `2028-01-07` |
+| `credential.expiry_date` | ISO 8601 date | SHALL be present where the loyalty programme issues credentials with a defined expiry date. MAY be omitted where the credential remains valid until revoked. | date | `2028-01-07` |
 | `customer.birth_date` | ISO 8601 date | SHOULD be present only where age-related checks, age-based benefits, or customer disambiguation require it. | date | `1985-04-12` |
 | `customer.email` | RFC 5322 | SHOULD be present only where the customer has consented to share email contact information or where it is required for the specific service interaction. | string | `nikos@example.com` |
 | `customer.address`, `customer.city`, `customer.zip_code` | N/A | SHOULD be present only where residency, address-based service rules, billing, or customer-service processes require address information. | string | `Athens` |
