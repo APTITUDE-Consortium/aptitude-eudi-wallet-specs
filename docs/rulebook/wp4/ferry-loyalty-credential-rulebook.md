@@ -126,7 +126,7 @@ The attestation model consists of the following logical groups:
 * organisation information;
 * credential metadata.
 
-The attestation is bound to a single registered customer and a single loyalty-card
+The attestation is bound to a single registered customer and a single loyalty-account
 record issued by a specific ferry operator or authorised operator system. It MAY be
 presented repeatedly, subject to validity, expiry, and revocation rules.
 
