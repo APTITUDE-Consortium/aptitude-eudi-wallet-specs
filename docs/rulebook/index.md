@@ -13,7 +13,7 @@ This section contains the official attestation rulebooks for the APTITUDE projec
 | --- | --- | --- |
 | RB03 | Digital Boarding Pass (air) | Attests the traveller's entitlement to board a specific flight, used at check-in, baggage drop, security, and boarding gate |
 | RB04 | Electronic Travel Authorization (ETA) | Attests that a traveller has been pre-authorised to enter a destination country, issued by the destination-country authority. |
-| RB05 | Biometric Profile Attestation | Carrier-held credential encapsulating the traveller's biometric reference data, enabling seamless automated verification across airport touchpoints. |
+| RB05 | [Biometric Profile Attestation — draft v0.1](wp4/RB05_BIOMETRIC_PROFILE_RULEBOOK_v0.1.md) | Carrier-held credential encapsulating the traveller's biometric reference data, enabling seamless automated verification across airport touchpoints. |
 | RB06 | Ferry Boarding Credential | Attests the traveller's entitlement to board a specific ferry journey, issued at booking time and validated at port for fast boarding. |
 | RB07 | Train Ticket | Attests a confirmed rail journey entitlement, usable for both online booking verification and proximity validation by conductors. |
 | RB08 | Bus / Urban Mobility Ticket | Attests the holder's right to access urban public transport services, supporting discount entitlement and turnstile access. |

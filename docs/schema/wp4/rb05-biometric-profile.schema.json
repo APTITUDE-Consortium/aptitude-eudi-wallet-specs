@@ -1,0 +1,157 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:example:aptitude:rb05:schema:0.1",
+  "title": "RB05 Biometric Profile Attestation v0.1 — semantic mdoc projection",
+  "description": "Non-production validation mirror of the complete issuance/full-credential RB05 ISO mdoc namespace values. It is not a selectively disclosed DeviceResponse schema and does not validate ISO/IEC 18013-5 cryptography or CBOR structures.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "docType",
+    "nameSpaces"
+  ],
+  "properties": {
+    "docType": {
+      "const": "org.example.aptitude.biometric-profile.1",
+      "description": "Reserved test-only document type. It must be replaced after APTITUDE governance allocates the production value."
+    },
+    "nameSpaces": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "org.iso.23220.1",
+        "org.example.aptitude.biometric-profile.1"
+      ],
+      "properties": {
+        "org.iso.23220.1": {
+          "$ref": "#/$defs/isoData"
+        },
+        "org.example.aptitude.biometric-profile.1": {
+          "$ref": "#/$defs/rb05Data"
+        }
+      }
+    }
+  },
+  "$defs": {
+    "isoData": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "family_name",
+        "given_name",
+        "document_number",
+        "issue_date",
+        "expiry_date",
+        "issuing_authority_unicode"
+      ],
+      "properties": {
+        "family_name": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Family name derived only from the authenticated source field using the exact RB05-D22-approved mapping and Unicode-normalisation rule. Exact ISO/IEC 23220-2 upper constraint is pending RB05-D10/D11; do not silently truncate, transliterate or make a lossy change."
+        },
+        "given_name": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Given name(s) derived only from the authenticated source field using the exact RB05-D22-approved mapping and Unicode-normalisation rule. Exact ISO/IEC 23220-2 upper constraint is pending RB05-D10/D11; do not silently truncate, transliterate or make a lossy change."
+        },
+        "document_number": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Unique, never-reassigned issuer-scoped RB05 serial; never a passport, PID, PhotoID, DTC, booking or loyalty identifier. Exact ISO/IEC 23220-2 upper constraint is pending RB05-D10."
+        },
+        "issue_date": {
+          "type": "string",
+          "format": "date",
+          "description": "Administrative issue date. The mdoc field name is issue_date, not issuance_date."
+        },
+        "expiry_date": {
+          "type": "string",
+          "format": "date",
+          "description": "Administrative expiry date, subject to the RB05 maximum-lifetime rule."
+        },
+        "issuing_authority_unicode": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Legal name of the RB05 issuing authority. Exact ISO/IEC 23220-2 upper constraint is pending RB05-D10."
+        }
+      }
+    },
+    "rb05Data": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "biometric_reference"
+      ],
+      "properties": {
+        "biometric_reference": {
+          "$ref": "#/$defs/biometricReference"
+        }
+      }
+    },
+    "biometricReference": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "modality",
+        "verification_mode",
+        "reference_type",
+        "format_id",
+        "format_version",
+        "protection_profile_id",
+        "matcher_profile_id",
+        "payload"
+      ],
+      "properties": {
+        "modality": {
+          "const": "face"
+        },
+        "verification_mode": {
+          "const": "one_to_one"
+        },
+        "reference_type": {
+          "const": "protected_template"
+        },
+        "format_id": {
+          "type": "string",
+          "format": "uri",
+          "minLength": 1,
+          "maxLength": 512
+        },
+        "format_version": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 32
+        },
+        "protection_profile_id": {
+          "type": "string",
+          "format": "uri",
+          "minLength": 1,
+          "maxLength": 512
+        },
+        "matcher_profile_id": {
+          "type": "string",
+          "format": "uri",
+          "minLength": 1,
+          "maxLength": 512
+        },
+        "payload": {
+          "type": "string",
+          "contentEncoding": "base64",
+          "anyOf": [
+            {
+              "pattern": "^(?:[A-Za-z0-9+/]{4})*(?:[A-Za-z0-9+/]{2}==|[A-Za-z0-9+/]{3}=)?$",
+              "minLength": 4,
+              "maxLength": 21844
+            },
+            {
+              "pattern": "^(?:[A-Za-z0-9+/]{4}){5461}[A-Za-z0-9+/]{2}==$",
+              "minLength": 21848,
+              "maxLength": 21848
+            }
+          ],
+          "description": "Canonical padded Base64 projection of 1–16,384 protected-template bytes. JSON Schema checks syntax/size; additional semantic validation is required to enforce zero pad bits. Examples are synthetic only."
+        }
+      }
+    }
+  }
+}
