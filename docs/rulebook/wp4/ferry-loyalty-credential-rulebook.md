@@ -427,7 +427,7 @@ A Relying Party receiving the attestation SHALL verify:
 
 * the issuer signature;
 * the SD-JWT VC type (`vct`);
-* the issuer authorisation to issue Ferry Loyalty Card Attestations;
+* the issuer authorisation to issue Ferry Loyalty Account Attestations;
 * the credential validity period, where defined;
 * the credential status, where a status mechanism is present;
 * holder binding, where used;
