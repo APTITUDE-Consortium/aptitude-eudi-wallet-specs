@@ -138,7 +138,7 @@ presented repeatedly, subject to validity, expiry, and revocation rules.
 | `customer.first_name` | OIDC `given_name` where applicable | Customer given name. | string | `Nikos` |
 | `customer.last_name` | OIDC `family_name` where applicable | Customer family name. | string | `Triantafyllou` |
 | `loyalty_card.id` | N/A | Unique loyalty-account identifier issued by the ferry operator. | string | `LC-FAST-000123456` |
-| `loyalty_card.issue_date` | ISO 8601 date | Date on which the loyalty card was issued. | date | `2026-01-07` |
+| `loyalty_card.issue_date` | ISO 8601 date | Date on which the loyalty account was issued. | date | `2026-01-07` |
 | `organization.name` | N/A | Legal or operating name of the ferry operator. | string | `Fast Ferries S.A.` |
 | `organization.id` | N/A | Ferry operator identifier. | string | `GR-FAST-FERRIES` |
 | `organization.country` | ISO 3166-1 alpha-2 recommended | Country of registration or operation of the ferry operator. | string | `GR` |
