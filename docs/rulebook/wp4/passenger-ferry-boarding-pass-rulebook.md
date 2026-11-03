@@ -527,7 +527,7 @@ determine whether the provider is authorised to issue this attestation type.
 
 ## 6 Revocation
 
-The Passenger Ferry Boarding Credential is typically short-lived and journey-specific.
+The Passenger Ferry Boarding Credential is typically short-lived and itinerary-specific.
 
 The preferred validity model for this attestation is short validity. The credential
 expiration time (`exp`) SHALL be set no later than the scheduled departure time unless
