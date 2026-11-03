@@ -94,7 +94,7 @@ In addition, the following domain-specific terms are used:
 | Ferry operator | The organisation operating ferry services and managing, or authorising the management of, the loyalty programme. |
 | Authorised customer-management system | A system authorised by the ferry operator to create, manage, or issue loyalty-card records. |
 | Customer | The natural person to whom the loyalty card applies. |
-| Loyalty card | A customer identifier or membership record used by a ferry operator to recognise loyalty-programme participation. |
+| Loyalty account | A customer identifier or membership record used by a ferry operator to recognise loyalty-programme participation. |
 | Loyalty programme | A ferry operator programme used to provide customer identification, service personalisation, benefits, or journey-related offers. |
 
 ## 2 Attestation attributes and metadata
