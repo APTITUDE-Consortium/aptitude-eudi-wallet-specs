@@ -90,7 +90,7 @@ In addition, the following domain-specific terms are used:
 
 | Term | Meaning |
 |------|---------|
-| Ferry Loyalty Card Attestation | A Verifiable Credential representing a customer's membership in a ferry operator's loyalty or frequent traveller programme. |
+| Ferry Loyalty Account Attestation | A Verifiable Credential representing a customer's membership in a ferry operator's loyalty or frequent traveller programme. |
 | Ferry operator | The organisation operating ferry services and managing, or authorising the management of, the loyalty programme. |
 | Authorised customer-management system | A system authorised by the ferry operator to create, manage, or issue loyalty-card records. |
 | Customer | The natural person to whom the loyalty card applies. |
