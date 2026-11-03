@@ -25,7 +25,7 @@
 
 ### 1.1 Document scope and purpose
 
-This Rulebook defines the **Ferry Loyalty Card Attestation** for use in the European
+This Rulebook defines the **Ferry Loyalty Account Attestation** for use in the European
 Digital Identity Wallet ecosystem, including the APTITUDE / SEDIT-X ferry pilot.
 
 The Ferry Loyalty Card Attestation expresses the real-world fact that a natural person
