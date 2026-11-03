@@ -237,7 +237,7 @@ illustrative mdoc examples.
 
 ## 3.2 SD-JWT VC-based encoding
 
-The Ferry Loyalty Card Attestation SHALL be issued as an SD-JWT VC.
+The Ferry Loyalty Account Attestation SHALL be issued as an SD-JWT VC.
 
 The Verifiable Credential Type (`vct`) for this attestation type is:
 
