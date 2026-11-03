@@ -229,7 +229,7 @@ presented repeatedly, subject to validity, expiry, and revocation rules.
 This version of the Rulebook does not define an ISO/IEC 18013-5 mdoc encoding for the
 Ferry Loyalty Card Attestation.
 
-The Ferry Loyalty Card Attestation defined in this Rulebook is specified for SD-JWT
+The Ferry Loyalty Account Attestation defined in this Rulebook is specified for SD-JWT
 VC-based issuance and presentation. If a future version of this Rulebook defines an
 ISO/IEC 18013-5-compliant mdoc representation, that version SHALL define a unique
 document type, namespaces, attribute identifiers, CBOR encoding rules, and
