@@ -105,7 +105,7 @@ This chapter defines the attributes and metadata that a Ferry Loyalty Card Attes
 may contain. The attributes are defined in an encoding-independent manner. Each
 attribute is classified as mandatory, optional, or conditional.
 
-The Ferry Loyalty Card Attestation is a reusable, customer-specific attestation. It is
+The Ferry Loyalty Account Attestation is a reusable, customer-specific attestation. It is
 not bound to a single journey. Its attribute set is designed to support customer
 identification, loyalty-card verification, and controlled disclosure of optional
 customer information.
