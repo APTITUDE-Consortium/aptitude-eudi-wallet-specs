@@ -33,7 +33,7 @@ is a registered customer of a ferry operator and participates in that operator's
 loyalty or frequent traveller programme. It proves the existence and validity of a
 loyalty card issued by, or on behalf of, a ferry operator.
 
-The attestation is intended to be issued by an authentic source, such as a ferry
+The attestation is intended to be issued by an authoritative source, such as a ferry
 operator or an authorised customer-management or ticketing system acting on behalf of
 the ferry operator. The Holder is the registered customer to whom the loyalty card
 applies. Relying Parties include ferry operators, authorised ticketing systems,
