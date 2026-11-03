@@ -112,7 +112,7 @@ customer information.
 
 ### 2.1 Introduction
 
-The Ferry Loyalty Card Attestation is defined as a non-qualified Electronic Attestation
+The Ferry Loyalty Account Attestation is defined as a non-qualified Electronic Attestation
 of Attributes unless a future version of this Rulebook explicitly defines a qualified
 or public-sector legal category.
 
