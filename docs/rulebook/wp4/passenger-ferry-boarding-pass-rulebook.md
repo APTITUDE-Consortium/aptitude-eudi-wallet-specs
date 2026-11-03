@@ -33,7 +33,7 @@ The credential expresses the real-world fact that a natural person holds a valid
 boarding entitlement for a specific ferry journey and is entitled to board a specific
 vessel at a given departure date and time.
 
-The attestation is intended to be issued by an authentic source, such as a ferry
+The attestation is intended to be issued by an authoritative source, such as a ferry
 operator or an authorised ticketing system acting on behalf of the ferry operator. The
 Holder is the passenger to whom the boarding entitlement applies. Relying Parties
 include ferry operators, port boarding gates, authorised boarding control staff, and
