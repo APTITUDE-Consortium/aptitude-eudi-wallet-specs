@@ -287,7 +287,7 @@ MUST NOT make the claim selectively disclosable.
 | `customer.mobile` | `mobile` | string | Mobile phone number. | MAY |
 | `customer.email` | `email` | string | Customer email address. | MAY |
 | `loyalty_card` | `loyalty_card` | object | Loyalty-card information object. | MUST NOT |
-| `loyalty_card.id` | `id` | string | Unique loyalty-card identifier. | MUST |
+| `loyalty_card.id` | `id` | string | Unique loyalty-account identifier. | MUST |
 | `loyalty_card.issue_date` | `issue_date` | string | Date of issuance, formatted as ISO 8601 date. | MUST |
 | `organization` | `organization` | object | Issuing ferry operator information object. | MUST NOT |
 | `organization.name` | `name` | string | Ferry operator name. | MUST NOT |
