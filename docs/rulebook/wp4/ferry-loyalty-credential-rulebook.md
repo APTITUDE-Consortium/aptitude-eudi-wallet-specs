@@ -452,7 +452,7 @@ urn:eudi:pid:1
 ```
 
 No payment-specific transactional data is defined by this Rulebook. If the Ferry
-Loyalty Card Attestation is used as part of a transaction that also involves payment
+Loyalty Account Attestation is used as part of a transaction that also involves payment
 or discounts, payment-related requirements SHALL be defined in a separate payment
 attestation, payment profile, discount rulebook, or transaction-specific rulebook.
 
