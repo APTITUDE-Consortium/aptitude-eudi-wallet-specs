@@ -204,7 +204,7 @@ presented repeatedly, subject to validity, expiry, and revocation rules.
 |----------------|--------------------|-------------|-------------------------|---------------------------|
 | `customer.nationality` | ISO 3166-1 country codes | Identifies the nationality of the customer. | ISO 3166-1 | Alpha-2 representation is RECOMMENDED unless the ecosystem profile specifies otherwise. |
 | `organization.country` | ISO 3166-1 country codes | Identifies the country of registration or operation of the ferry operator. | ISO 3166-1 | Alpha-2 representation is RECOMMENDED. |
-| `loyalty_card.issue_date` | ISO 8601 date | Date on which the loyalty card was issued. | ISO 8601 | Date-only format SHOULD be used. |
+| `loyalty_card.issue_date` | ISO 8601 date | Date on which the loyalty credential was issued. | ISO 8601 | Date-only format SHOULD be used. |
 | `credential.issuance_date` | ISO 8601 date | Date on which the credential was issued. | ISO 8601 | Date-only format SHOULD be used. |
 | `credential.expiry_date` | ISO 8601 date | Date after which the credential SHALL NOT be accepted. | ISO 8601 | Date-only format SHOULD be used. |
 | `customer.birth_date` | ISO 8601 date | Customer date of birth. | ISO 8601 | Date-only format SHOULD be used. |
