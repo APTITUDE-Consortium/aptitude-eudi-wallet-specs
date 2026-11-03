@@ -196,7 +196,7 @@ presented repeatedly, subject to validity, expiry, and revocation rules.
 |---------------------|------------------------|----------------|---------------|-------------------|
 | `exp` | JWT | SHALL be present where the credential has a fixed validity period. SHOULD be present where `credential.expiry_date` is present. | integer | `1830859200` |
 | `status` | SD-JWT VC status mechanism, where used | SHALL be present where the issuer supports revocation or suspension. SHOULD be present for reusable loyalty-card attestations. | object | `{ "status_list": { ... } }` |
-| `cryptographically_bound_to` | ARF Topic 12 / ARB_28 | SHOULD be present where the loyalty card is required to be presented together with PID or another identity attestation for stronger customer identity matching. | string | `urn:eudi:pid:1` |
+| `cryptographically_bound_to` | ARF Topic 12 / ARB_28 | SHOULD be present where the loyalty credential is required to be presented together with PID or another identity attestation for stronger customer identity matching. | string | `urn:eudi:pid:1` |
 
 ### 2.8 Code lists
 
