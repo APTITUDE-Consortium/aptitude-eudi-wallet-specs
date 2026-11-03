@@ -467,7 +467,7 @@ A Relying Party receiving the attestation SHALL verify:
 * the credential status, where a status mechanism is present;
 * holder binding, where used;
 * the integrity rules defined in Section 2.9;
-* that the journey and passenger details match the boarding context.
+* that the itinerary and passenger details match the boarding context.
 
 The Relying Party SHOULD request and verify PID or another accepted identity
 credential when the boarding process requires passenger identity matching. In such
