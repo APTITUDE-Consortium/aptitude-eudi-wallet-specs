@@ -461,7 +461,7 @@ purchase a standard fare without loyalty benefits.
 
 ## 5 Trust anchors
 
-A Relying Party SHALL verify that the issuer of the Ferry Loyalty Card Attestation is
+A Relying Party SHALL verify that the issuer of the Ferry Loyalty Account Attestation is
 authorised to issue this attestation type.
 
 For non-qualified EAA deployments, the Relying Party SHOULD obtain trust anchor
