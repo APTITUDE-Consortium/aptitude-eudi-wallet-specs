@@ -447,7 +447,7 @@ disclosure mechanism, and presentation requirements.
 ## 4 Attestation usage
 
 The Passenger Ferry Boarding Credential is intended for verifying passenger boarding
-entitlement for a specific ferry journey.
+entitlement for a specific ferry itinerary.
 
 Typical usage scenarios include:
 
