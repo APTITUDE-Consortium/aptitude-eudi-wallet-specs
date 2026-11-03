@@ -109,7 +109,7 @@ This chapter defines the attributes and metadata that a Passenger Ferry Boarding
 Credential may contain. The attributes are defined in an encoding-independent manner.
 Each attribute is classified as mandatory, optional, or conditional.
 
-The credential is journey-specific and time-bound. It contains only the information
+The credential is itinerary-specific and time-bound. It contains only the information
 necessary to verify that the Holder is entitled to board a specific ferry service. The
 claim model is nested under `departure`, `arrival`, `passenger`, `ticket` and
 `accommodation` objects as defined by the Passenger Boarding Credential schema.
