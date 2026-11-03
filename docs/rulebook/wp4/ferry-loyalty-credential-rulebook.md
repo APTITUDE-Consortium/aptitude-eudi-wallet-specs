@@ -28,7 +28,7 @@
 This Rulebook defines the **Ferry Loyalty Account Attestation** for use in the European
 Digital Identity Wallet ecosystem, including the APTITUDE / SEDIT-X ferry pilot.
 
-The Ferry Loyalty Card Attestation expresses the real-world fact that a natural person
+The Ferry Loyalty Account Attestation expresses the real-world fact that a natural person
 is a registered customer of a ferry operator and participates in that operator's
 loyalty or frequent traveller programme. It proves the existence and validity of a
 loyalty card issued by, or on behalf of, a ferry operator.
