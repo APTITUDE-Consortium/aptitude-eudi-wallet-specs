@@ -416,7 +416,7 @@ Typical usage scenarios include:
 
 * presentation by the customer during online ferry booking;
 * presentation at a ticket office or customer-service point;
-* verification of loyalty-card membership for customer benefits or discounts;
+* verification of loyalty-account membership for customer benefits or discounts;
 * customer identification for service personalisation;
 * controlled disclosure of optional contact or residency information where required
   for a specific service interaction;
