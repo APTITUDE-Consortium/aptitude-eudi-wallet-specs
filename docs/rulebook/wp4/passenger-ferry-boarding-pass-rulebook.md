@@ -3,6 +3,7 @@
 - Author(s):
   - Nikos Triantafyllou, University of the Aegean, UAegean i4m Lab
   - Petros Kavassalis, University of the Aegean, UAegean i4m Lab
+  - Mike Luparelli Mathieu, Skitag
 
 | Version | Date       | Description                                                                                                                                                                                                 |
 | ------- | ---------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -50,7 +51,7 @@ eu.europa.ec.eudi.aptitude.passenger_ferry_boarding.1
 The Wallet display name is **Passenger Ferry Boarding Credential**.
 
 The credential expresses the fact that one passenger is entitled to board one
-ferry journey at a scheduled departure. A journey is one sailing: one
+ferry itinerary at a scheduled departure. An itinerary is one sailing: one
 departure port, one arrival port, and one scheduled departure date and time.
 
 The attestation is issued by an authentic source, such as a ferry operator or
@@ -63,8 +64,9 @@ The credential MAY be used to:
 - present passenger boarding entitlement at a gate reader that supports
   ISO/IEC 18013-5 device engagement and device retrieval;
 - show the holder the sailing, ticket and seat or cabin in the Wallet; and
-- let the operator accept the passenger without a live ticketing lookup, when
-  the reader can verify the mdoc from provisioned trust anchors.
+- let the operator accept the passenger at the gate in the same way as with a
+  conventional paper ticket or e-ticket: the presented ticket is checked for
+  that sailing, without a live call to the ticketing backend.
 
 The names in this credential are the names on the ticket. They are not PID,
 and this credential is not a combined identity-and-boarding document. Where
@@ -86,19 +88,25 @@ entitlement attestation itself is not embedded here.
 
 ### 1.2 Architectural role
 
-The mdoc is what the gate verifies. A reader that has no network connection
-SHALL be able to decide using:
+Greek ferry boarding with a paper ticket or e-ticket already works without a
+live ticketing-system lookup at every gate: the passenger presents the ticket
+(and, where required, an identity document), and the gate checks that it
+matches the sailing being boarded. Port connectivity is often poor, so the
+presented ticket has to stand on its own. This credential follows that same
+operational model. The mdoc is the ticket the gate verifies.
+
+A reader that has no network connection SHALL be able to decide using:
 
 - issuer authentication (`issuerAuth` over the Mobile Security Object);
 - the digests of the disclosed data elements;
 - device authentication bound to the `SessionTranscript`;
 - `validityInfo` in the Mobile Security Object; and
-- a match between the disclosed journey and passenger elements and the sailing
+- a match between the disclosed itinerary and passenger elements and the sailing
   this gate is boarding.
 
 The operator's ticketing system remains authoritative for the booking. A
 reader with connectivity SHOULD apply revocation and status. A reader without
-connectivity relies on the signed validity window and the disclosed journey
+connectivity relies on the signed validity window and the disclosed itinerary
 elements, and SHALL NOT refuse an otherwise valid mdoc only because it cannot
 reach the ticketing system.
 
@@ -136,7 +144,7 @@ For this Rulebook:
 
 - **Passenger Ferry Boarding Credential** means the mdoc whose `docType` is
   `eu.europa.ec.eudi.aptitude.passenger_ferry_boarding.1`.
-- **Journey** means one ferry sailing between a departure port and an arrival
+- **Itinerary** means one ferry sailing between a departure port and an arrival
   port at a scheduled date and time.
 - **Ferry operator** means the organisation operating that sailing, or the
   authentic source for the passenger boarding entitlement.
@@ -171,14 +179,15 @@ The issued credential SHALL use exactly one of these category values.
 
 ### 2.2 Design principles
 
-1. **One passenger, one journey.** The credential SHALL describe a single
+1. **One passenger, one itinerary.** The credential SHALL describe a single
    passenger and a single sailing. It SHALL NOT be reused for another sailing,
    vessel, date or passenger.
 2. **mdoc boarding credential.** The credential SHALL be an ISO/IEC 18013-5
    mdoc. Presentation SHALL use device engagement and device retrieval as
    defined in that standard.
 3. **Offline verification.** A gate reader SHALL be able to verify the
-   credential without a live call to the ticketing system.
+   credential without a live call to the ticketing system, as with a
+   conventional paper ticket or e-ticket at a Greek ferry gate.
 4. **Minimum disclosure.** The data elements SHALL be limited to the sailing,
    the ticketed name, the ticket identifier, the seat and, where booked, the
    cabin.
@@ -296,7 +305,7 @@ An authorised issuer acting for the operator satisfies `issuer`.
 
 `status_reference` is not carried in the mdoc. ISO/IEC 18013-5:2021 does not
 put a status list in the Mobile Security Object. An offline reader SHALL rely
-on `validityInfo` and the disclosed journey elements.
+on `validityInfo` and the disclosed itinerary elements.
 
 ### 2.8 Code lists
 
@@ -314,8 +323,8 @@ on `validityInfo` and the disclosed journey elements.
 
 | **Rule ID** | **Rule statement** | **Why it exists** | **Where enforced** | **Behaviour on failure** |
 | ----------- | ------------------ | ----------------- | ------------------ | ------------------------ |
-| `PBP-IR-01` | `arrival_date` SHALL NOT precede `departure_date`. | Prevents a journey that runs backwards. | Issuer, before signing. | Issuer SHALL NOT issue the mdoc. |
-| `PBP-IR-02` | The credential SHALL describe one journey and one passenger. | Prevents reuse across sailings or passengers. | Issuer. The reader checks the disclosed sailing against the gate. | Reader SHALL refuse when it cannot determine that sailing or passenger. |
+| `PBP-IR-01` | `arrival_date` SHALL NOT precede `departure_date`. | Prevents an itinerary that runs backwards. | Issuer, before signing. | Issuer SHALL NOT issue the mdoc. |
+| `PBP-IR-02` | The credential SHALL describe one itinerary and one passenger. | Prevents reuse across sailings or passengers. | Issuer. The reader checks the disclosed sailing against the gate. | Reader SHALL refuse when it cannot determine that sailing or passenger. |
 | `PBP-IR-03` | The credential SHALL NOT be accepted after `validityInfo.validUntil`. | Boarding entitlement ends at departure, plus only a defined grace period. | Reader, against its clock. | Reader SHALL refuse. |
 | `PBP-IR-04` | `docType` SHALL equal `eu.europa.ec.eudi.aptitude.passenger_ferry_boarding.1`. | Identifies this attestation type. | Reader. | Reader SHALL refuse any other `docType`. |
 | `PBP-IR-05` | `ticket_let` and `ticket_number` SHALL be non-empty. | The gate needs a ticket identifier. | Issuer, before signing. | Issuer SHALL NOT issue the mdoc. |
@@ -441,7 +450,7 @@ an unsigned integer (`uint`).
 The reader requests the elements it needs. Elements the reader does not
 request are not disclosed in the `DeviceResponse`. The reader SHALL request
 only the elements required for the boarding decision. A boarding decision
-SHALL request the mandatory journey, name, ticket and seat elements. It
+SHALL request the mandatory itinerary, name, ticket and seat elements. It
 SHALL NOT request cabin elements when the passenger has no cabin, and it
 SHALL NOT request `discount` unless the decision uses the fare basis.
 
@@ -771,7 +780,10 @@ A normal use SHOULD follow these steps:
 9. a minimal event MAY be recorded when the reader can store or forward one.
 
 The reader SHALL perform mdoc verification locally. It SHALL NOT require a
-live ticketing lookup in order to accept the credential.
+live ticketing lookup in order to accept the credential. That matches current
+Greek ferry practice with paper tickets and e-tickets: the gate checks the
+presented ticket against the sailing; it does not depend on reaching the
+booking backend for every boarding.
 
 The boarding context is the sailing this gate is operating: its departure
 port, date and time. Passenger matching, when policy requires it, is a
@@ -866,7 +878,7 @@ operator merely because the same vendor operates both systems.
 
 ### 6.1 Validity period
 
-The credential SHALL be short-lived and limited to one journey.
+The credential SHALL be short-lived and limited to one itinerary.
 
 `validityInfo.validFrom` SHOULD be no earlier than issuance. It MAY be the
 start of the boarding window where the operator wants the credential refused
@@ -898,7 +910,7 @@ A gate change SHALL NOT by itself be a revocation trigger.
 
 ### 6.3 Offline readers and status
 
-An offline reader SHALL enforce `validityInfo` and the disclosed journey
+An offline reader SHALL enforce `validityInfo` and the disclosed itinerary
 elements, and SHALL NOT depend on a live status service. ISO/IEC 18013-5:2021
 verification does not itself fetch a status list. Checking status is a
 profile rule for a reader that has connectivity and a status source.
@@ -928,7 +940,7 @@ This Rulebook is designed to align with:
 
 The Rulebook enforces:
 
-1. one passenger and one journey per credential;
+1. one passenger and one itinerary per credential;
 2. separation from the Vehicle Ferry Boarding Credential, the mVRC, PID and
    payment;
 3. Wallet display name **Passenger Ferry Boarding Credential** and `docType`
