@@ -6,14 +6,12 @@
 - Reviewer(s):
   - Eleonora Moro, Pagopa.it
 
-
 | Version | Date       | Description                                                                                                        |
 | ------- | ---------- | ------------------------------------------------------------------------------------------------------------------ |
 | 0.1     | 23-07-2026 | Initial draft based on the SEDIT-X use case, APTITUDE UC7 material and the APTITUDE Attestation Rulebook template. |
 | 0.2     | 26-08-2026 | Aligned with an earlier APTITUDE issuer schema (`european_disability_card`, `vct` `urn:eu.europa.ec.eudi:edc:1`) and optional hospitality check-in use. |
 | 0.3     | 02-10-2026 | Defines the APTITUDE European Disability Card SD-JWT profile based on the Italian IT-Wallet / Documenti su IO model (IT Wallet Specification v1.3.3): `vct` `urn:eudi:EuropeanDisabilityCard:it:1`, claim set with `constant_attendance_allowance` as the primary accessibility claim. |
 | 0.4     | 09-11-2026 | Records SD-JWT encoding metadata (`vct_integrity`, `sd_digests`, `sd_alg`), states that `revocation_list_uri` is mdoc-only, extends the wallet display, and states that proximity presentation uses this SD-JWT profile. Hotel check-in outcomes stay off the card. |
-
 
 **Feedback:**
 
@@ -44,11 +42,7 @@
 > produced by the Relying Party after verification; they are not encoded as
 > additional claims in this credential.
 
-
-
 ## 1 Introduction
-
-
 
 ### 1.1 Document scope and purpose
 
@@ -112,8 +106,6 @@ The primary objectives are to:
   trust framework; and
 6. allow operational service systems to receive a clear eligibility outcome.
 
-
-
 ### 1.2 Document structure
 
 This Rulebook is structured as follows:
@@ -125,8 +117,6 @@ This Rulebook is structured as follows:
 - Chapter 6 defines validity and revocation.
 - Chapter 7 describes compliance with the EUDI Wallet framework and privacy principles.
 - Chapter 8 lists references.
-
-
 
 ### 1.3 Key words
 
@@ -164,11 +154,7 @@ For this Rulebook:
   programme whose European Disability Card technical model is the basis of this
   Rulebook. APTITUDE uses that model with mock data for the pilot.
 
-
-
 ## 2 Attestation attributes and metadata
-
-
 
 ### Chapter overview and requirements
 
@@ -227,10 +213,7 @@ The following design principles apply:
 11. **Fallback:** a User who cannot or does not present the credential SHALL
   retain access to an appropriate manual or assisted process.
 
-
-
 ### 2.2 Mandatory attributes
-
 
 | **Data Identifier**               | **Definition**                                                                                          | **Data type** | **Example value**                      |
 | --------------------------------- | ------------------------------------------------------------------------------------------------------- | ------------- | -------------------------------------- |
@@ -245,8 +228,7 @@ The following design principles apply:
 | `link_qr_code`                    | URI associated with the card QR code.                                                                   | URI           | `https://example.it/edc/qr/...`        |
 | `constant_attendance_allowance`   | Indicates entitlement to accompanying assistance / additional support under the scheme.                 | boolean       | `true`                                 |
 
-
-`issuing_country` SHALL use ISO 3166-1 alpha-2 codes. 
+`issuing_country` SHALL use ISO 3166-1 alpha-2 codes.
 
 `portrait` is a card photograph for visual comparison. It SHALL NOT be treated as
 authorisation to perform automated biometric matching unless a specific legal
@@ -273,11 +255,9 @@ extending this card.
 
 ### 2.4 Conditional attributes
 
-
 | **Data Identifier**          | **Definition**                                                                 | **Data type** | **Example value**             |
 | ---------------------------- | ------------------------------------------------------------------------------ | ------------- | ----------------------------- |
 | `cryptographically_bound_to` | Attestation type to which this credential is cryptographically bound. Present where formal binding to PID is required beyond `cnf`. | string        | `urn:eu.europa.ec.eudi:pid:1` |
-
 
 Where `cryptographically_bound_to` is present, its value SHOULD identify the PID type
 used to bind the holder to the attestation:
@@ -289,10 +269,7 @@ urn:eu.europa.ec.eudi:pid:1
 Holder key binding is primarily expressed through
 the registered `cnf` claim (see section 3.2).
 
-
-
 ### 2.5 Mandatory metadata
-
 
 | **Data Identifier**      | **Definition** | **Data type** | **Example value** |
 | ------------------------ | -------------- | ------------- | ----------------- |
@@ -306,11 +283,7 @@ the registered `cnf` claim (see section 3.2).
 | `status_reference`       | Structured reference used for credential status checking. Encoded using the JWT `status` claim. | object | see Section 2.7 |
 | `trust_anchor_reference` | Location from which applicable issuer trust information can be obtained. | URI | `https://trust.aptitude.example/accessibility-issuers` |
 
-
-
-
 ### 2.6 Optional metadata
-
 
 | **Data Identifier**      | **Definition**                                | **Data type** | **Example value**                                   |
 | ------------------------ | --------------------------------------------- | ------------- | --------------------------------------------------- |
@@ -323,10 +296,7 @@ the registered `cnf` claim (see section 3.2).
 | `terms_of_use`           | URI of terms governing credential use.        | URI           | `https://issuer.example/terms`                      |
 | `display_locale`         | Preferred language for wallet display.        | string        | `it` / `en`                                         |
 
-
-
 ### 2.7 Conditional metadata
-
 
 | **Data Identifier**   | **Definition** | **Data type** | **Example value** |
 | --------------------- | -------------- | ------------- | ----------------- |
@@ -339,21 +309,17 @@ the registered `cnf` claim (see section 3.2).
 | `sd_alg`              | Hash algorithm for SD-JWT disclosures. SD-JWT only. Encoded as `_sd_alg`. This profile uses `sha-256`. | string | `sha-256` |
 | `verification`        | Optional verification object containing trust-framework or assurance information where issued. | object | see Section 3.2 |
 
-
 `revocation_list_uri` applies only to an mdoc Attestation Revocation List. This
 Rulebook does not define an mdoc profile, so issuers SHALL NOT encode
 `revocation_list_uri` in the SD-JWT VC. Status checking uses `status.status_list`
 (`status_list_index` and `status_list_uri`), as specified in Section 6.2.
 
-
-# 3 Attestation encoding
+## 3 Attestation encoding
 
 This attestation SHALL be encoded as an SD-JWT VC (`dc+sd-jwt`). No other
 encoding is defined by this Rulebook.
 
-
-
-## 3.1 Verifiable Credential Type
+### 3.1 Verifiable Credential Type
 
 The Verifiable Credential Type SHALL be:
 
@@ -388,8 +354,7 @@ metadata mechanisms rather than through implementation-specific JWT claim names.
 An issuer SHALL NOT introduce alternative JWT claim identifiers for any
 data identifier for which this Rulebook defines an encoding.
 
-## 3.2 Registered JWT claims
-
+### 3.2 Registered JWT claims
 
 | **Data Identifier** | **Attribute identifier** | **Encoding format** | **Reference/Notes** | **Selectively disclosable** |
 | ------------------- | ------------------------ | ------------------- | ------------------- | ---------------------------- |
@@ -408,11 +373,7 @@ data identifier for which this Rulebook defines an encoding.
 | `sd_alg` | `_sd_alg` | string | Hash algorithm; this profile uses `sha-256` | SHALL NOT |
 | `verification` | `verification` | object | Optional `trust_framework` and `assurance_level` information | SHALL NOT |
 
-
-
-
-## 3.3 Private claims specific to this attestation
-
+### 3.3 Private claims specific to this attestation
 
 | **Data Identifier** | **Attribute identifier** | **Encoding format** | **Notes** | **Selectively disclosable** |
 | ------------------- | ------------------------ | ------------------- | --------- | ---------------------------- |
@@ -428,7 +389,6 @@ data identifier for which this Rulebook defines an encoding.
 | `document_number` | `document_number` | string | Scheme-specific document number as provided by the issuing authority | SHALL |
 | `cryptographically_bound_to` | `cryptographically_bound_to` | string | Formal binding to another attestation type, where applicable | SHALL NOT |
 
-
 A verifier SHALL be able to request `constant_attendance_allowance` without also
 receiving `portrait`, `document_number` or name claims.
 
@@ -437,9 +397,9 @@ For SEDIT-X Episode 4, the requested disclosure SHOULD primarily be
 `family_name` SHOULD be requested only if the hotel (or other) journey genuinely
 needs them.
 
-## 3.4 Illustrative SD-JWT VC
+### 3.4 Illustrative SD-JWT VC
 
-### 3.4.1 Illustrative JWT claim set
+#### 3.4.1 Illustrative JWT claim set
 
 The following claim set illustrates the logical content of an issued credential.
 Selectively disclosable application claims are represented by digests in `_sd`
@@ -484,7 +444,7 @@ placeholders.
 }
 ```
 
-### 3.4.2 Illustrative encoded SD-JWT VC
+#### 3.4.2 Illustrative encoded SD-JWT VC
 
 The following value illustrates the compact encoded form of an issued SD-JWT VC.
 Line breaks are added only for readability.
@@ -500,7 +460,7 @@ The example above is illustrative and SHALL NOT be interpreted as a test vector.
 A conformant implementation SHALL generate the encoded SD-JWT VC from the
 actual protected header, payload, disclosures and issuer signature.
 
-### 3.4.3 Illustrative disclosures
+#### 3.4.3 Illustrative disclosures
 
 The selectively disclosable application claims may be represented as SD-JWT
 disclosures. For example, a disclosure for `constant_attendance_allowance`
@@ -521,7 +481,7 @@ disclosure of `given_name`, `family_name`, `birth_date`, `portrait` or
 APTITUDE pilot issuance MAY use mock values that conform to this structure. An
 actual service request SHALL select only the relevant disclosures.
 
-## 3.5 Human-readable wallet representation
+### 3.5 Human-readable wallet representation
 
 The Wallet Unit SHOULD display:
 
@@ -553,11 +513,7 @@ The Wallet Unit SHOULD inform the User that:
 - the User can refuse the presentation; and
 - a manual or staff-assisted process should remain available.
 
-
-
 ## 4 Attestation usage
-
-
 
 ### 4.1 Issuance prerequisites
 
@@ -700,7 +656,6 @@ A typical hospitality result SHOULD be limited to:
 }
 ```
 
-
 ### 4.5 Identity attributes
 
 Name, birth date, document number and portrait MAY be present in the issued
@@ -734,7 +689,6 @@ The Relying Party SHALL:
 - restrict internal access;
 - define short retention periods; and
 - avoid using the data for profiling, advertising, employment decisions or unrelated risk scoring.
-
 
 ### 4.7 Transactional data
 
@@ -808,8 +762,6 @@ The illustrative endpoints in this draft are not operational.
 
 ## 6 Revocation
 
-
-
 ### 6.1 Validity model
 
 The attestation MAY be medium- or long-lived, depending on the issuing scheme.
@@ -824,8 +776,6 @@ The validity period SHOULD reflect:
 - expiry of the physical or digital disability card;
 - age-related or temporary entitlement conditions; and
 - the issuer's status-management capability.
-
-
 
 ### 6.2 Revocation and status
 
@@ -909,20 +859,17 @@ The following matters remain open:
 - handling of temporary entitlements; and
 - retention rules for transport and hospitality operators.
 
-
-
 ## 8 References
-
 
 | **Item Reference**                     | **Standard name/details**                                                                                                                                                                     |
 | -------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | [European Digital Identity Regulation] | Regulation (EU) 2024/1183 of the European Parliament and of the Council of 11 April 2024 amending Regulation (EU) No 910/2014 as regards establishing the European Digital Identity Framework |
 | [European Disability Card Regulation]  | Regulation (EU) 2024/2841 of the European Parliament and of the Council on the European Disability Card and the European Parking Card                                                         |
-| [IT-Wallet Specs]                      | Italian IT-Wallet Technical Specifications (Department for Digital Transformation / IPZS), including v1.3.3 — https://github.com/italia/eid-wallet-it-docs                                    |
-| [IT-Wallet Docs]                       | Official IT-Wallet Technical Documentation — https://italia.github.io/eid-wallet-it-docs/                                                                                                     |
-| [IT-Wallet PID-EAA data model]         | Digital Credential / PID-(Q)EAA data model (European Disability Card SD-JWT examples) — https://italia.github.io/eid-wallet-it-docs/versione-corrente/en/pid-eaa-data-model.html            |
-| [IT-Wallet Credential Issuer config]   | Credential Issuer entity configuration (`dc_sd_jwt_EuropeanDisabilityCard`, scope `EuropeanDisabilityCard`, `vct` `urn:eudi:EuropeanDisabilityCard:it:1`) — https://italia.github.io/eid-wallet-it-docs/versione-corrente/en/pid-eaa-entity-configuration.html |
-| [IT-Wallet Issuance]                   | PID-(Q)EAA issuance flow with `scope=EuropeanDisabilityCard` — https://italia.github.io/eid-wallet-it-docs/versione-corrente/en/pid-eaa-issuance.html                                         |
+| [IT-Wallet Specs]                      | Italian IT-Wallet Technical Specifications (Department for Digital Transformation / IPZS), including v1.3.3 — <https://github.com/italia/eid-wallet-it-docs>                                    |
+| [IT-Wallet Docs]                       | Official IT-Wallet Technical Documentation — <https://italia.github.io/eid-wallet-it-docs/>                                                                                                     |
+| [IT-Wallet PID-EAA data model]         | Digital Credential / PID-(Q)EAA data model (European Disability Card SD-JWT examples) — <https://italia.github.io/eid-wallet-it-docs/versione-corrente/en/pid-eaa-data-model.html>            |
+| [IT-Wallet Credential Issuer config]   | Credential Issuer entity configuration (`dc_sd_jwt_EuropeanDisabilityCard`, scope `EuropeanDisabilityCard`, `vct` `urn:eudi:EuropeanDisabilityCard:it:1`) — <https://italia.github.io/eid-wallet-it-docs/versione-corrente/en/pid-eaa-entity-configuration.html> |
+| [IT-Wallet Issuance]                   | PID-(Q)EAA issuance flow with `scope=EuropeanDisabilityCard` — <https://italia.github.io/eid-wallet-it-docs/versione-corrente/en/pid-eaa-issuance.html>                                         |
 | [APTITUDE D4.1]                        | APTITUDE D4.1: UC Specifications and Scenarios, final version, 29 May 2026                                                                                                                    |
 | [APTITUDE UC7]                         | Accessing Discounted Train Fares via EUDIW — European Disability Card example and candidate data model                                                                                        |
 | [SEDIT-X Airport Working Paper]        | APTITUDE WP4, SEDIT-X at the Airport, Version 4.1, May 2026                                                                                                                                   |
