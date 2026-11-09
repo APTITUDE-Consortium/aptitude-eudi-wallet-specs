@@ -12,6 +12,7 @@
 | 0.1     | 23-07-2026 | Initial draft based on the SEDIT-X use case, APTITUDE UC7 material and the APTITUDE Attestation Rulebook template. |
 | 0.2     | 26-08-2026 | Aligned with an earlier APTITUDE issuer schema (`european_disability_card`, `vct` `urn:eu.europa.ec.eudi:edc:1`) and optional hospitality check-in use. |
 | 0.3     | 02-10-2026 | Defines the APTITUDE European Disability Card SD-JWT profile based on the Italian IT-Wallet / Documenti su IO model (IT Wallet Specification v1.3.3): `vct` `urn:eudi:EuropeanDisabilityCard:it:1`, claim set with `constant_attendance_allowance` as the primary accessibility claim. |
+| 0.4     | 09-11-2026 | Records SD-JWT encoding metadata (`vct_integrity`, `sd_digests`, `sd_alg`), states that `revocation_list_uri` is mdoc-only, extends the wallet display, and states that proximity presentation uses this SD-JWT profile. Hotel check-in outcomes stay off the card. |
 
 
 **Feedback:**
@@ -262,9 +263,9 @@ claim for companion or assistant-related service decisions in SEDIT-X.
 ### 2.3 Optional attributes
 
 This profile does not define additional optional application claims beyond
-the set in section 2.2. Registered JWT claims such as `nbf`, `vct#integrity` and
-the optional `verification` object are treated as encoding / metadata (see
-sections 2.5–2.7 and Chapter 3).
+the set in section 2.2. Registered JWT and SD-JWT encoding metadata such as
+`nbf`, `vct#integrity`, `_sd`, `_sd_alg` and the optional `verification` object
+are defined in sections 2.5–2.7 and mapped in Chapter 3.
 
 PID remains a separate credential. Where stronger identity matching is required,
 the Relying Party SHALL request PID (`urn:eu.europa.ec.eudi:pid:1`) rather than
@@ -332,8 +333,17 @@ the registered `cnf` claim (see section 3.2).
 | `valid_from`          | Earliest time from which the credential may be accepted. Where present, encoded as the JWT `nbf` claim. | date-time / NumericDate | `2026-01-15T09:30:00Z` |
 | `status_list_index`   | Entry index in an applicable Attestation Status List. Mandatory when a list-based mechanism is used. | integer | `1234` |
 | `status_list_uri`     | URI of the applicable Attestation Status List. Mandatory when list-based status is used. | URI | `https://status.example/edc/atl/2026-01/15` |
-| `revocation_list_uri` | URI of the applicable Attestation Revocation List. Mandatory when a revocation-list mechanism is used. | URI | `https://status.example/edc/arl/2026-01` |
+| `revocation_list_uri` | URI of an Attestation Revocation List. mdoc only. This SD-JWT profile does not encode it. | URI | `https://status.example/edc/arl/2026-01` |
+| `vct_integrity`       | Integrity metadata for the `vct` resource, where used. SD-JWT only. Encoded as `vct#integrity`. | string | see Section 3.2 |
+| `sd_digests`          | Digests of selectively disclosable claims. SD-JWT only. Encoded as `_sd`. Required when application claims are issued as disclosures. | array of string | see Section 3.4 |
+| `sd_alg`              | Hash algorithm for SD-JWT disclosures. SD-JWT only. Encoded as `_sd_alg`. This profile uses `sha-256`. | string | `sha-256` |
 | `verification`        | Optional verification object containing trust-framework or assurance information where issued. | object | see Section 3.2 |
+
+
+`revocation_list_uri` applies only to an mdoc Attestation Revocation List. This
+Rulebook does not define an mdoc profile, so issuers SHALL NOT encode
+`revocation_list_uri` in the SD-JWT VC. Status checking uses `status.status_list`
+(`status_list_index` and `status_list_uri`), as specified in Section 6.2.
 
 
 # 3 Attestation encoding
@@ -518,12 +528,21 @@ The Wallet Unit SHOULD display:
 ```text
 European Disability Card / Carta della disabilità europea
 Holder: Mario Rossi
+Date of birth: 10 January 1980
 Document number: XXXXXXXXXX
 Issuing country: IT
 Issuing authority: Istituto Poligrafico e Zecca dello Stato
+Card link: https://example.it/edc/qr/...
+Portrait: card photograph
 Constant attendance allowance: Yes
+Issued on: 15 January 2026
 Valid until: 14 January 2031
 ```
+
+Each selectively disclosable attribute in Section 3.3 SHOULD have a corresponding
+human-readable line. `Issued on` shows `issued_at`. `Valid until` shows the
+administrative `expiry_date`. `Portrait` is shown as the card photograph, not as
+raw image bytes.
 
 The Wallet Unit SHOULD inform the User that:
 
@@ -589,7 +608,9 @@ Where both this card and PID are presented, `family_name`, `given_name` and
 
 ### 4.3 Presentation contexts
 
-The attestation may be presented remotely or in proximity.
+The attestation may be presented remotely or in proximity. Both cases use the
+SD-JWT VC encoding defined in Chapter 3. This Rulebook does not define an mdoc
+profile.
 
 Relevant SEDIT-X contexts include:
 
@@ -823,8 +844,9 @@ The issuer SHALL revoke or suspend the credential when, for example:
 
 ### 6.3 Status-list location
 
-The target implementation SHOULD use the status-list or revocation-list mechanism
+The target implementation SHOULD use the status-list mechanism
 selected by APTITUDE WP2 (compatible with the `status.status_list` shape).
+An mdoc Attestation Revocation List is not part of this profile.
 
 The final production endpoint has not been defined.
 
@@ -870,9 +892,11 @@ The Rulebook enforces these properties:
 9. hospitality check-in use is optional;
 10. user consent is required for presentation;
 11. special-category data receives enhanced protection;
-12. status and revocation are supported via `status.status_list`;
-13. credential copies are not routinely retained; and
-14. manual fallback remains available.
+12. status checking uses `status.status_list`; an mdoc revocation list is not encoded;
+13. credential copies are not routinely retained;
+14. manual fallback remains available; and
+15. operational results of hotel check-in SHALL NOT be written back as claims on
+  this card or on the Hotel Pass.
 
 The following matters remain open:
 
