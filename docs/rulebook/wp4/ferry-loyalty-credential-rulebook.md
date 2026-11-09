@@ -1,4 +1,4 @@
-# Attestation Rulebook for attestations of type Ferry Loyalty Card
+# Attestation Rulebook for attestations of type Ferry Loyalty Account
 
 * Author(s):
   * Nikos Triantafyllou, University of the Aegean, UAegean i4m Lab
@@ -29,22 +29,22 @@ Digital Identity Wallet ecosystem, including the APTITUDE / SEDIT-X ferry pilot.
 The Ferry Loyalty Account Attestation expresses the real-world fact that a natural person
 is a registered customer of a ferry operator and participates in that operator's
 loyalty or frequent traveller programme. It proves the existence and validity of a
-loyalty card issued by, or on behalf of, a ferry operator.
+loyalty account issued by, or on behalf of, a ferry operator.
 
 The attestation is intended to be issued by an authoritative source, such as a ferry
 operator or an authorised customer-management or ticketing system acting on behalf of
-the ferry operator. The Holder is the registered customer to whom the loyalty card
+the ferry operator. The Holder is the registered customer to whom the loyalty account
 applies. Relying Parties include ferry operators, authorised ticketing systems,
 customer-service systems, booking portals, port services, and other authorised partners
 that need to verify customer loyalty status or customer identity information for a
 legitimate service purpose.
 
-In practical terms, the attestation enables a customer to present loyalty-card
+In practical terms, the attestation enables a customer to present loyalty-account
 information through an EUDI Wallet. It can support customer identification (LoA Low), service
 personalisation, loyalty benefits, journey-related discounts, and reduced reliance on
 physical loyalty cards or account lookups.
 
-The attestation contains customer, loyalty-card, organisation, and credential metadata.
+The attestation contains customer, loyalty-account, organisation, and credential metadata.
 Because it is intended for repeated use across multiple journeys, it is longer-lived
 than a boarding pass and SHALL support revocation or status checking where
 operationally required.
@@ -90,8 +90,8 @@ In addition, the following domain-specific terms are used:
 |------|---------|
 | Ferry Loyalty Account Attestation | A Verifiable Credential representing a customer's membership in a ferry operator's loyalty or frequent traveller programme. |
 | Ferry operator | The organisation operating ferry services and managing, or authorising the management of, the loyalty programme. |
-| Authorised customer-management system | A system authorised by the ferry operator to create, manage, or issue loyalty-card records. |
-| Customer | The natural person to whom the loyalty card applies. |
+| Authorised customer-management system | A system authorised by the ferry operator to create, manage, or issue loyalty-account records. |
+| Customer | The natural person to whom the loyalty account applies. |
 | Loyalty account | A customer identifier or membership record used by a ferry operator to recognise loyalty-programme participation. |
 | Loyalty programme | A ferry operator programme used to provide customer identification, service personalisation, benefits, or journey-related offers. |
 
@@ -99,14 +99,14 @@ In addition, the following domain-specific terms are used:
 
 ### Chapter overview and requirements
 
-This chapter defines the attributes and metadata that a Ferry Loyalty Card Attestation
+This chapter defines the attributes and metadata that a Ferry Loyalty Account Attestation
 may contain. The attributes are defined in an encoding-independent manner. Each
 attribute is classified as mandatory, optional, or conditional.
 
 The Ferry Loyalty Account Attestation is a reusable, customer-specific attestation. It is
 not bound to a single journey. Its attribute set is designed to support customer
-identification, loyalty-card verification, and controlled disclosure of optional
-customer information. It's LoA under this rulebook is considered LoA Low
+identification, loyalty-account verification, and controlled disclosure of optional
+customer information. The assurance level of this attestation under this Rulebook is LoA Low.
 
 ### 2.1 Introduction
 
@@ -193,7 +193,7 @@ presented repeatedly, subject to validity, expiry, and revocation rules.
 | **Data Identifier** | **Semantic Reference** | **Definition** | **Data type** | **Example value** |
 |---------------------|------------------------|----------------|---------------|-------------------|
 | `exp` | JWT | SHALL be present where the credential has a fixed validity period. SHOULD be present where `credential.expiry_date` is present. | integer | `1830859200` |
-| `status` | SD-JWT VC status mechanism, where used | SHALL be present where the issuer supports revocation or suspension. SHOULD be present for reusable loyalty-card attestations. | object | `{ "status_list": { ... } }` |
+| `status` | SD-JWT VC status mechanism, where used | SHALL be present where the issuer supports revocation or suspension. SHOULD be present for reusable loyalty-account attestations. | object | `{ "status_list": { ... } }` |
 | `cryptographically_bound_to` | ARF Topic 12 / ARB_28 | SHOULD be present where the loyalty credential is required to be presented together with PID or another identity attestation for stronger customer identity matching. | string | `urn:eudi:pid:1` |
 
 ### 2.8 Code lists
@@ -202,7 +202,7 @@ presented repeatedly, subject to validity, expiry, and revocation rules.
 |----------------|--------------------|-------------|-------------------------|---------------------------|
 | `customer.nationality` | ISO 3166-1 country codes | Identifies the nationality of the customer. | ISO 3166-1 | Alpha-2 representation is RECOMMENDED unless the ecosystem profile specifies otherwise. |
 | `organization.country` | ISO 3166-1 country codes | Identifies the country of registration or operation of the ferry operator. | ISO 3166-1 | Alpha-2 representation is RECOMMENDED. |
-| `loyalty_card.issue_date` | ISO 8601 date | Date on which the loyalty credential was issued. | ISO 8601 | Date-only format SHOULD be used. |
+| `loyalty_card.issue_date` | ISO 8601 date | Date on which the loyalty account was issued. | ISO 8601 | Date-only format SHOULD be used. |
 | `credential.issuance_date` | ISO 8601 date | Date on which the credential was issued. | ISO 8601 | Date-only format SHOULD be used. |
 | `credential.expiry_date` | ISO 8601 date | Date after which the credential SHALL NOT be accepted. | ISO 8601 | Date-only format SHOULD be used. |
 | `customer.birth_date` | ISO 8601 date | Customer date of birth. | ISO 8601 | Date-only format SHOULD be used. |
@@ -213,9 +213,9 @@ presented repeatedly, subject to validity, expiry, and revocation rules.
 
 | **Rule ID** | **Rule statement** | **Why it exists** | **Where enforced** | **Verifier / issuer behavior on failure** |
 |-------------|--------------------|-------------------|--------------------|-------------------------------------------|
-| LC-IR-01 | `loyalty_card.id` MUST be unique per issuer. | Enables unambiguous identification of the loyalty-account record. | Issuer business rules and verifier business validation. | Issuer SHALL prevent duplicate active card identifiers. Verifier MAY reject duplicated identifiers if detected. |
+| LC-IR-01 | `loyalty_card.id` MUST be unique per issuer. | Enables unambiguous identification of the loyalty-account record. | Issuer business rules and verifier business validation. | Issuer SHALL prevent duplicate active account identifiers. Verifier MAY reject duplicated identifiers if detected. |
 | LC-IR-02 | If `credential.expiry_date` is present, it MUST be later than `credential.issuance_date`. | Prevents temporally invalid credentials. | Issuer business rules, schema validation, verifier business validation. | Issuer SHALL reject invalid validity periods. Verifier SHALL reject credentials with invalid validity periods. |
-| LC-IR-03 | Expired loyalty cards SHALL NOT be accepted. | Ensures that relying parties do not provide benefits or services based on expired membership. | Verifier freshness checks and business validation. | Verifier SHALL reject the attestation if the credential is expired. |
+| LC-IR-03 | An expired Ferry Loyalty Account Attestation SHALL NOT be accepted. | Ensures that relying parties do not provide benefits or services based on expired membership. | Verifier freshness checks and business validation. | Verifier SHALL reject the attestation if the credential is expired. |
 | LC-IR-04 | The attestation SHALL refer to a single loyalty-account record and a single issuing organisation. | Prevents ambiguous membership claims. | Issuer business rules and verifier business validation. | Issuer SHALL reject ambiguous source data. Verifier SHALL reject the attestation if issuer or organisation data is inconsistent. |
 | LC-IR-05 | Optional contact and address attributes SHALL be requested and disclosed only where required for the specific service interaction. | Supports data minimisation and selective disclosure. | Wallet presentation policy, verifier request policy, and relying-party business rules. | Verifier SHALL NOT require unnecessary optional attributes. Wallet SHOULD allow the Holder to review and consent to disclosure. |
 | LC-IR-06 | Where identity matching is required, `customer.first_name` and `customer.last_name` SHOULD be compared with PID or another accepted identity source. | Ensures that the presenter is the customer to whom the loyalty account applies. | Relying Party business validation. | Verifier SHOULD reject the transaction where required identity matching fails. |
@@ -225,7 +225,7 @@ presented repeatedly, subject to validity, expiry, and revocation rules.
 ## 3.1 ISO/IEC 18013-5-compliant encoding
 
 This version of the Rulebook does not define an ISO/IEC 18013-5 mdoc encoding for the
-Ferry Loyalty Card Attestation.
+Ferry Loyalty Account Attestation.
 
 The Ferry Loyalty Account Attestation defined in this Rulebook is specified for SD-JWT
 VC-based issuance and presentation. If a future version of this Rulebook defines an
@@ -270,7 +270,7 @@ MUST NOT make the claim selectively disclosable.
 | `customer.first_name` | `customer.first_name` | string | Customer given name. May be mapped to OIDC `given_name` in implementations that use OIDC naming conventions. | MUST |
 | `customer.last_name` | `customer.last_name` | string | Customer family name. May be mapped to OIDC `family_name` in implementations that use OIDC naming conventions. | MUST |
 
-### 3.2.3 Private claims specific to the Ferry Loyalty Card Attestation
+### 3.2.3 Private claims specific to the Ferry Loyalty Account Attestation
 
 | **Data Identifier** | **Attribute identifier** | **Encoding format** | **Notes** | **Disclosable** |
 |---------------------|--------------------------|---------------------|-----------|-----------------|
@@ -284,9 +284,9 @@ MUST NOT make the claim selectively disclosable.
 | `customer.phone` | `phone` | string | Fixed phone number. | MAY |
 | `customer.mobile` | `mobile` | string | Mobile phone number. | MAY |
 | `customer.email` | `email` | string | Customer email address. | MAY |
-| `loyalty_credential` | `loyalty_credential` | object | Loyalty-credential information object. | MUST NOT |
-| `loyalty_credential.id` | `id` | string | Unique loyalty-account identifier. | MUST |
-| `loyalty_credential.issue_date` | `issue_date` | string | Date of issuance, formatted as ISO 8601 date. | MUST |
+| `loyalty_card` | `loyalty_card` | object | Loyalty-account information object. | MUST NOT |
+| `loyalty_card.id` | `id` | string | Unique loyalty-account identifier. | MUST |
+| `loyalty_card.issue_date` | `issue_date` | string | Date on which the loyalty account was issued, formatted as an ISO 8601 date. | MUST |
 | `organization` | `organization` | object | Issuing ferry operator information object. | MUST NOT |
 | `organization.name` | `name` | string | Ferry operator name. | MUST NOT |
 | `organization.id` | `id` | string | Ferry operator identifier. | MUST NOT |
@@ -399,7 +399,7 @@ technical validation.
 ## 3.3 W3C Verifiable Credentials Data Model-based encoding
 
 This version of the Rulebook does not define a W3C Verifiable Credentials Data Model
-encoding for the Ferry Loyalty Card Attestation.
+encoding for the Ferry Loyalty Account Attestation.
 
 If a future version defines a W3C VCDM representation, that version SHALL define the
 credential context, type, credential subject structure, proof type, selective
@@ -407,7 +407,7 @@ disclosure mechanism, and presentation requirements.
 
 ## 4 Attestation usage
 
-The Ferry Loyalty Card Attestation is intended for verifying a customer's
+The Ferry Loyalty Account Attestation is intended for verifying a customer's
 loyalty-programme membership and, where necessary, selected customer information.
 
 Typical usage scenarios include:
@@ -430,12 +430,12 @@ A Relying Party receiving the attestation SHALL verify:
 * the credential status, where a status mechanism is present;
 * holder binding, where used;
 * the integrity rules defined in Section 2.9;
-* that the loyalty-card and organisation details match the service context.
+* that the loyalty-account and organisation details match the service context.
 
 The Relying Party SHOULD request and verify PID or another accepted identity
 credential when the service requires stronger customer identity matching. In such
 cases, the Relying Party SHOULD compare the relevant identity attributes, such as
-customer name, with the Ferry Loyalty Card Attestation. The Relying Party SHALL apply
+customer name, with the Ferry Loyalty Account Attestation. The Relying Party SHALL apply
 data minimisation and SHALL request only the attributes required for the specific
 loyalty or customer-service decision.
 
@@ -504,10 +504,10 @@ The credential SHALL be considered invalid when:
 * the `credential.expiry_date` has been reached, where present;
 * the technical expiry timestamp `exp` has been reached, where present;
 * the credential has been revoked or suspended by the issuer;
-* the underlying loyalty-card record has been cancelled, replaced, closed, or
+* the underlying loyalty-account record has been cancelled, replaced, closed, or
   otherwise invalidated.
 
-Revocation SHOULD be supported for this attestation type because loyalty-card status
+Revocation SHOULD be supported for this attestation type because loyalty-account status
 may change before the declared expiry date.
 
 Revocation MAY be handled by one or more of the following mechanisms:
@@ -522,7 +522,7 @@ If a status or revocation mechanism is included in the credential, the Relying P
 SHALL check the status before accepting the attestation, unless offline operating
 rules explicitly allow deferred status checking.
 
-If a loyalty card is cancelled, replaced, or suspended, the issuer SHOULD revoke or
+If a loyalty account is cancelled, replaced, or suspended, the issuer SHOULD revoke or
 suspend the attestation or ensure that backend verification detects the invalid state.
 
 ## 7 Compliance
@@ -542,7 +542,7 @@ The Rulebook supports the following compliance objectives:
 * it defines how trust anchors can be obtained and used;
 * it defines expiry and revocation expectations;
 * it supports selective disclosure and data minimisation;
-* it recognises the reusable nature of the loyalty-card attestation and therefore
+* it recognises the reusable nature of the loyalty-account attestation and therefore
   recommends status or revocation support.
 
 This Rulebook does not define a qualified EAA or public-sector EAA profile. It also
