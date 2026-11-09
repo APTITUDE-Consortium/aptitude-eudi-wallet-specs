@@ -10,6 +10,8 @@
 | 0.2     | 24-07-2026 | Simplified structure aligned with the passenger Ferry Boarding Pass model.                                                                                                                                  |
 | 0.3     | 24-07-2026 | SD-JWT claim model aligned with the Vehicle Boarding Credential JSON Schema. Withdrawn as the encoding by version 0.4.                                                                                      |
 | 0.4     | 02-11-2026 | Replaces the SD-JWT encoding with an ISO/IEC 18013-5 mdoc. `docType` is `eu.europa.ec.eudi.aptitude.vehicle_ferry_boarding.1`. Calendar dates are CBOR `full-date` (tag 1004). The lane verifies the `DeviceResponse` offline. |
+| 0.5     | 09-11-2026 | The issued mdoc stays ISO/IEC 18013-5. Proximity presentation at the vehicle lane stays part 5, and a lane reader can verify it offline. The same mdoc MAY be presented online under ISO/IEC TS 18013-7. The SEDIT-X vehicle lane uses proximity only. |
+| 0.6     | 09-11-2026 | Embarkation requires two checks. The reader verifies the mdoc locally, and matches `ticket_number` to the sailing manifest provisioned for that sailing. A valid signature alone does not allow embarkation. |
 
 **Feedback:**
 
@@ -22,10 +24,16 @@
 > identifier, mdoc `docType` and namespace are
 > `eu.europa.ec.eudi.aptitude.vehicle_ferry_boarding.1`.
 >
-> The credential is an **ISO/IEC 18013-5 mdoc**. The Wallet presents it with
+> The credential is an **ISO/IEC 18013-5 mdoc**. Proximity presentation uses
 > that standard's device engagement and device retrieval. The vehicle-lane
-> reader verifies the `DeviceResponse` offline and uses the result to decide
-> whether the vehicle may embark.
+> reader verifies the `DeviceResponse` locally, then matches `ticket_number`
+> to the sailing manifest held for that sailing. A valid signature alone does
+> not allow the vehicle to embark.
+>
+> The same mdoc MAY be presented online under **ISO/IEC TS 18013-7**, with
+> the same `docType`, namespace, data elements, `issuerAuth` and device
+> binding. Online presentation does not replace the lane. The SEDIT-X
+> vehicle lane uses proximity presentation only.
 >
 > Version 0.3, an SD-JWT VC with `vct` `VehicleBoardingCredential` and nested
 > `departure`, `arrival`, `vehicle` and `ticket` objects, is withdrawn as the
@@ -59,9 +67,11 @@ The credential MAY be used to:
 
 - present vehicle boarding entitlement at a lane reader that supports
   ISO/IEC 18013-5 device engagement and device retrieval;
+- present the same mdoc online under ISO/IEC TS 18013-7, where a verifier
+  requests that channel;
 - show the holder the sailing, vehicle and ticket in the Wallet; and
-- let the operator accept the vehicle without a live ticketing lookup, when
-  the reader can verify the mdoc from provisioned trust anchors.
+- let the lane match the disclosed ticket number to the sailing manifest
+  held at the gate, refreshing that manifest when the reader has connectivity.
 
 The credential SHALL NOT be treated as:
 
@@ -78,8 +88,10 @@ Pass and PID. Those are separate presentations. This mdoc does not embed them.
 
 ### 1.2 Architectural role
 
-The mdoc is what the lane verifies. A reader that has no network connection
-SHALL be able to decide using:
+Embarkation uses two checks.
+
+The first is authenticity of the mdoc. A reader that has no network connection
+SHALL be able to perform it from trust anchors already on the reader:
 
 - issuer authentication (`issuerAuth` over the Mobile Security Object);
 - the digests of the disclosed data elements;
@@ -88,15 +100,22 @@ SHALL be able to decide using:
 - a match between the disclosed journey and vehicle elements and the sailing
   this lane is boarding.
 
-The operator's ticketing system remains authoritative for the booking. A
-reader with connectivity SHOULD apply revocation and status. A reader without
-connectivity relies on the signed validity window and the disclosed journey
-elements, and SHALL NOT refuse an otherwise valid mdoc only because it cannot
-reach the ticketing system.
+The second is the sailing manifest, specified in §6.3. The operator's
+ticketing system remains authoritative for the booking. The manifest is that
+authority as held at the lane: the list of vehicle tickets entitled to board
+this sailing. The reader SHALL match the disclosed `ticket_number` to an
+entry on it. A valid signature, a matching sailing and an open `validityInfo`
+window SHALL NOT by themselves allow embarkation.
 
 `validityInfo` is the acceptance window. It does not by itself identify the
-sailing. The reader SHALL still match `departure_port`, `departure_date` and
+sailing, and it does not show that the ticket is still held on the manifest.
+The reader SHALL still match `departure_port`, `departure_date` and
 `departure_time` to the sailing it is boarding.
+
+Online presentation, specified in §4.9, is a separate channel for the same
+mdoc. It does not replace the lane, and it does not remove the manifest
+match where the presentation is used to decide embarkation. The SEDIT-X
+vehicle lane uses proximity presentation only.
 
 ### 1.3 Document structure
 
@@ -104,7 +123,7 @@ sailing. The reader SHALL still match `departure_port`, `departure_date` and
 - Chapter 3 defines the ISO/IEC 18013-5 mdoc encoding.
 - Chapter 4 defines issuance, presentation and verification.
 - Chapter 5 defines trust anchors.
-- Chapter 6 defines validity, suspension and revocation.
+- Chapter 6 defines validity, the sailing manifest, suspension and revocation.
 - Chapter 7 defines compliance, privacy and security requirements.
 - Chapter 8 lists references.
 
@@ -133,8 +152,13 @@ For this Rulebook:
 - **mVRC** means the Mobile Vehicle Registration Credential. It provides
   vehicle-registration attributes. This credential does not replace it.
 - **Lane reader** means the mdoc reader at the vehicle boarding lane or port
-  gate. It performs ISO/IEC 18013-5 device engagement and device retrieval and
-  decides whether the vehicle may embark.
+  gate. It performs ISO/IEC 18013-5 device engagement and device retrieval,
+  verifies the mdoc, matches the disclosed ticket to the sailing manifest,
+  and on both checks decides whether the vehicle may embark.
+- **Sailing manifest** means the operator's list of vehicle tickets entitled
+  to board one sailing. The lane matches `ticket_number` to an entry on that
+  list. The operator provisions the list to the reader. It is not an mdoc
+  data element.
 - **PID** means Person Identification Data of type
   `urn:eu.europa.ec.eudi:pid:1`.
 
@@ -164,10 +188,14 @@ The issued credential SHALL use exactly one of these category values.
    vehicle and a single sailing. It SHALL NOT be reused for another sailing,
    vessel, date or vehicle.
 2. **mdoc boarding credential.** The credential SHALL be an ISO/IEC 18013-5
-   mdoc. Presentation SHALL use device engagement and device retrieval as
-   defined in that standard.
-3. **Offline verification.** A lane reader SHALL be able to verify the
-   credential without a live call to the ticketing system.
+   mdoc. Proximity presentation SHALL use device engagement and device
+   retrieval as defined in that standard. The same mdoc MAY be presented
+   online as defined in ISO/IEC TS 18013-7, with the same `docType`,
+   namespace, data elements, `issuerAuth` and device binding.
+3. **Two checks.** The reader SHALL verify the mdoc from provisioned trust
+   anchors. That check can be done without a live call. The reader SHALL
+   also match `ticket_number` to the sailing manifest. A valid signature
+   alone SHALL NOT allow embarkation.
 4. **Minimum disclosure.** The data elements SHALL be limited to the sailing,
    the vehicle category, the ticket identifier and, where the lane matches the
    vehicle, the plate number.
@@ -274,8 +302,9 @@ to the reader. It is not an `IssuerSignedItem`.
 | `status_reference` | Operational status pointer for a reader that can reach the issuer. Not an mdoc data element and not a Mobile Security Object field. | URI or structured value | `https://status.example-ferry.gr/vehicle-boarding/000123456` |
 
 `status_reference` is not carried in the mdoc. ISO/IEC 18013-5:2021 does not
-put a status list in the Mobile Security Object. An offline reader SHALL rely
-on `validityInfo` and the disclosed journey elements.
+put a status list in the Mobile Security Object. The lane applies ticket
+status through the sailing manifest in §6.3. A reader SHALL NOT treat a
+valid signature as a substitute for that manifest.
 
 ### 2.8 Code lists
 
@@ -298,6 +327,7 @@ on `validityInfo` and the disclosed journey elements.
 | `VBP-IR-04` | `docType` SHALL equal `eu.europa.ec.eudi.aptitude.vehicle_ferry_boarding.1`. | Identifies this attestation type. | Reader. | Reader SHALL refuse any other `docType`. |
 | `VBP-IR-05` | `ticket_let` and `ticket_number` SHALL be non-empty. | The lane needs a ticket identifier. | Issuer, before signing. | Issuer SHALL NOT issue the mdoc. |
 | `VBP-IR-06` | Where the lane matches the vehicle by plate, `plate_number` SHOULD be compared with the mVRC and with the vehicle at the lane. | The vehicle in the lane is the vehicle on the ticket. | Reader, as a separate check from mdoc verification. | Reader SHOULD refuse embarkation when that match fails. |
+| `VBP-IR-07` | The reader SHALL match `ticket_number` to an entitled entry on the sailing manifest. A valid signature alone SHALL NOT allow embarkation. | The manifest is the operator's list of tickets for this sailing. The signature authenticates the statement. It does not show that the ticket is still on that list. | Reader, against the manifest provisioned for this sailing. | Reader SHALL refuse embarkation on this credential. |
 
 ## 3 Attestation encoding
 
@@ -308,10 +338,27 @@ mdoc. The issued object is an `IssuerSigned` structure as defined in that
 standard. ISO/IEC 18013-5 does not define how a credential is issued. Where
 OpenID4VCI is used, the credential format SHALL be `mso_mdoc`.
 
-Presentation SHALL use ISO/IEC 18013-5 device engagement and device retrieval.
-Those steps are separate. Device engagement SHALL be by QR code or NFC.
-Device retrieval SHALL be by BLE or NFC, as the lane reader offers. BLE is a
-retrieval transport. It is not a device-engagement method.
+Proximity presentation SHALL use ISO/IEC 18013-5 device engagement and device
+retrieval. Those steps are separate. Device engagement SHALL be by QR code or
+NFC. Device retrieval SHALL be by BLE or NFC, as the lane reader offers. BLE
+is a retrieval transport. It is not a device-engagement method. The vehicle
+lane uses this proximity presentation. The reader SHALL be able to verify
+the `DeviceResponse` without a network connection. That verification
+authenticates the issuer's statement. Embarkation also requires the
+sailing-manifest match in §6.3. A valid signature alone does not allow
+embarkation.
+
+The QR code or NFC field used for device engagement is the session setup.
+It is not a ticket code. A paper or PDF vehicle ticket used at this lane
+carries a code whose payload is the ticket number, which the lane looks up
+on the sailing manifest. The Wallet presents that ticket number as the
+`ticket_number` element of the signed mdoc, and the lane looks it up on the
+same manifest.
+
+The same issued mdoc MAY be presented online under ISO/IEC TS 18013-7, as
+specified in §4.9. Online presentation does not change the issued mdoc and
+does not replace proximity presentation at the vehicle lane. The SEDIT-X
+vehicle lane uses proximity presentation only.
 
 #### 3.1.1 Document type and namespace
 
@@ -622,6 +669,8 @@ The Wallet Unit SHOULD inform the User that:
 
 - this credential is presented at the vehicle lane with ISO/IEC 18013-5
   device engagement and device retrieval;
+- where a verifier requests it, the same credential MAY be presented online
+  under ISO/IEC TS 18013-7;
 - the User can refuse presentation; and
 - a staff-assisted boarding process remains available where ferry policy
   allows it.
@@ -684,13 +733,15 @@ Before issuance, the Wallet SHOULD display:
 - departure date and time;
 - vehicle category and, where present, plate number;
 - ticket identifier;
-- that the credential is presented with ISO/IEC 18013-5 device engagement and
-  device retrieval; and
+- that the credential is presented at the vehicle lane with ISO/IEC 18013-5
+  device engagement and device retrieval, and MAY be presented online under
+  ISO/IEC TS 18013-7; and
 - the validity window.
 
 ### 4.5 Presentation at the vehicle lane
 
-A normal use SHOULD follow these steps:
+The SEDIT-X vehicle lane uses this proximity flow. Online presentation is
+specified in §4.9. A normal lane use SHOULD follow these steps:
 
 1. the Wallet and the lane reader perform ISO/IEC 18013-5 device engagement
    by QR code or NFC;
@@ -706,11 +757,19 @@ A normal use SHOULD follow these steps:
    `departure_time` are the sailing this lane is boarding;
 7. where vehicle matching applies, the reader compares `plate_number` and
    `vehicle_type_code` as specified in §4.6;
-8. the reader allows embarkation or refuses; and
-9. a minimal event MAY be recorded when the reader can store or forward one.
+8. the reader refreshes the sailing manifest when it has connectivity, then
+   matches `ticket_number` to that manifest as specified in §6.3 and, where
+   §2.5 requires `plate_number`, matches that plate to the same entry;
+9. the reader allows embarkation or refuses; and
+10. a minimal event MAY be recorded when the reader can store or forward one.
 
-The reader SHALL perform mdoc verification locally. It SHALL NOT require a
-live ticketing lookup in order to accept the credential.
+The reader SHALL perform mdoc verification locally, from trust anchors
+already on the reader. A reader with connectivity SHALL refresh the sailing
+manifest before the match. When that refresh cannot be completed, the reader
+SHALL use the manifest loaded for this boarding window if it is within the
+maximum age in §6.3. The reader SHALL NOT accept the credential for
+embarkation when that manifest has no current entitled entry for the
+disclosed `ticket_number`.
 
 A minimal event MAY contain a pseudonymous credential reference (`id`), a
 timestamp, a result, a reason code and a reader identifier. It SHOULD NOT
@@ -753,9 +812,14 @@ The lane reader SHALL:
    `departure_time` match the sailing this lane is boarding;
 9. confirm that a requested mandatory element was disclosed;
 10. apply `VBP-IR-01` to the disclosed dates;
-11. where the reader has connectivity and a status source is available, reject
-    a revoked or suspended credential; and
-12. allow embarkation only when these checks succeed.
+11. where the reader has connectivity, refresh the sailing manifest before
+    matching it;
+12. match `ticket_number` to that manifest as specified in §6.3, apply
+    `VBP-IR-07`, and reject a ticket that is cancelled, suspended, refunded,
+    exchanged or already accepted; and
+13. allow embarkation only when these checks succeed, including a current
+    entitled manifest entry. A valid signature with no such entry SHALL be
+    a refusal.
 
 A missing requested element, a digest mismatch or a `docType` mismatch SHALL
 be a refusal.
@@ -773,11 +837,34 @@ The reader SHALL refuse embarkation on the strength of this credential when:
 - the current time is outside `validityInfo`;
 - the credential is revoked or suspended and the reader can determine that;
 - the disclosed sailing is not the sailing this lane is boarding;
-- a requested mandatory element is missing; or
-- required vehicle matching fails.
+- a requested mandatory element is missing;
+- required vehicle matching fails;
+- the sailing manifest is missing, or older than the operator allows; or
+- the disclosed ticket is not an entitled, not-yet-accepted entry on that
+  manifest.
 
 The operator SHALL keep a staff-assisted boarding path where ferry policy
 allows it. Refusal of the mdoc SHALL NOT by itself close that path.
+
+### 4.9 Online presentation
+
+The same mdoc MAY be presented online under ISO/IEC TS 18013-7. Where the
+EUDI Wallet remote presentation protocol is used, the mdoc is carried over
+OpenID4VP as specified in ISO/IEC TS 18013-7.
+
+Online presentation uses the issued mdoc unchanged: the same `docType`,
+namespace, data elements, `issuerAuth` and device binding. The verifier
+SHALL apply the mdoc checks in §4.7 other than proximity device engagement
+and device retrieval, which ISO/IEC TS 18013-7 replaces. Those checks are
+the `docType`, `issuerAuth` and issuer trust, the disclosed
+`IssuerSignedItem` digests, device authentication bound to the session,
+`validityInfo`, and disclosure of each requested mandatory element.
+
+Where the online presentation is used to decide embarkation, the verifier
+SHALL also apply the sailing match, the sailing-manifest match in §6.3 and,
+where §2.5 requires it, the vehicle match in §4.7. A valid signature alone
+does not allow embarkation. The SEDIT-X vehicle lane does not use this
+channel. It uses the proximity flow in §4.5.
 
 ## 5 Trust anchors
 
@@ -791,7 +878,8 @@ The lane reader SHALL establish that the issuer:
 
 Readers for the APTITUDE pilot SHOULD obtain that trust information through
 the WP2 trust framework. An offline reader uses the trust anchors provisioned
-to it. It does not fetch them during the presentation.
+to it. It does not fetch them during the presentation. The sailing manifest
+is provisioned separately, as specified in §6.3.
 
 A credential issued for one operator SHALL NOT be accepted by another
 operator merely because the same vendor operates both systems.
@@ -810,8 +898,10 @@ before that window.
 plus only a limited grace period where the operator defines one. The grace
 period is set at issuance. A reader SHALL NOT add one.
 
-This window is the time control an offline reader can enforce. After
-`validUntil`, the reader SHALL NOT accept the credential for boarding.
+This window is the time bound on the signed statement. After `validUntil`,
+the reader SHALL NOT accept the credential for boarding. A clock time inside
+the window does not by itself entitle the vehicle to embark. The sailing
+manifest in §6.3 does that.
 
 ### 6.2 Revocation and suspension triggers
 
@@ -828,21 +918,54 @@ A successful presentation SHALL NOT by itself revoke the credential. The
 vehicle may be checked again before departure. A change of lane or gate SHALL
 NOT by itself be a revocation trigger.
 
-### 6.3 Offline readers and status
+### 6.3 Sailing manifest
 
-An offline reader SHALL enforce `validityInfo` and the disclosed journey
-elements, and SHALL NOT depend on a live status service. ISO/IEC 18013-5:2021
-verification does not itself fetch a status list. Checking status is a
-profile rule for a reader that has connectivity and a status source.
+The sailing manifest is the operator's list of vehicle tickets entitled to
+board one sailing. It is the list a lane uses when it reads the code on a
+paper or PDF vehicle ticket and looks up the ticket number. The Wallet
+presents that ticket number inside the signed mdoc. The lane still matches
+it to this list.
 
-A reader that has connectivity SHALL check the issuer's status information
-and SHALL reject a suspended or revoked credential even when `validUntil` has
-not passed.
+The manifest is not an mdoc data element. The operator provisions it to the
+lane reader before the lane opens for that sailing. Each entry the reader
+uses for this credential SHALL identify the ticket by `ticket_number` and
+SHALL say whether that ticket is entitled to board. Where §2.5 requires
+`plate_number`, the entry SHALL include the plate.
 
-Until `validUntil`, a reader which has not received revocation may still
-accept the credential. Cancellation handling therefore SHOULD combine
-revocation with as short a `validUntil` as the sailing allows, and with the
-staff path in §4.8.
+A reader with connectivity SHALL refresh the manifest from the ticketing
+system before accepting a vehicle, so that a cancellation, refund, exchange,
+vehicle change or earlier acceptance is visible. A reader without
+connectivity at the moment of presentation SHALL use the manifest loaded for
+this boarding window.
+
+The operator defines the maximum age of a manifest copy a reader may use
+when it cannot refresh. The reader SHALL refuse embarkation on this
+credential when:
+
+- it has no manifest for the sailing this lane is boarding;
+- the copy it holds is older than that maximum age; or
+- the disclosed `ticket_number` is absent, or the entry is not entitled to
+  board, including when the ticket is cancelled, refunded, exchanged or
+  already accepted.
+
+Where §2.5 requires `plate_number`, the reader SHALL also refuse when the
+disclosed plate does not match the manifest entry.
+
+A valid `issuerAuth`, a matching sailing and a `validityInfo` window that
+still contains the reader's clock SHALL NOT by themselves allow embarkation.
+The manifest match is required. The staff path in §4.8 applies when the
+reader refuses because the manifest is missing or too old.
+
+When the reader accepts the vehicle, it SHALL mark that `ticket_number` as
+accepted on the manifest it holds and SHALL refuse a later presentation of
+the same ticket number for this sailing. A reader with connectivity SHALL
+make that acceptance visible to the ticketing system.
+
+ISO/IEC 18013-5:2021 does not fetch a status list during verification. The
+manifest is how this profile carries the status decision the ticketing
+system already makes. `status_reference`, where the operator publishes one,
+is a way for a reader with connectivity to refresh a single ticket. It does
+not replace the manifest, and it is not carried in the mdoc.
 
 ## 7 Compliance
 
@@ -854,6 +977,9 @@ This Rulebook is designed to align with:
 - ISO/IEC 18013-5 for the mdoc, including `IssuerSigned`, the Mobile Security
   Object, device engagement by QR code or NFC, and device retrieval by BLE or
   NFC;
+- ISO/IEC TS 18013-7 where the same mdoc is presented online;
+- OpenID4VP where that online presentation uses the EUDI Wallet remote
+  presentation protocol;
 - OpenID4VCI where the issuance transport is OpenID4VCI;
 - applicable GDPR requirements; and
 - the SEDIT-X Ferry Transport source material.
@@ -867,12 +993,15 @@ The Rulebook enforces:
    `eu.europa.ec.eudi.aptitude.vehicle_ferry_boarding.1`;
 4. the data elements in §3.1.2;
 5. ISO/IEC 18013-5 device engagement (QR code or NFC) and device retrieval
-   (BLE or NFC), verified at the lane;
+   (BLE or NFC) at the vehicle lane, so the reader can authenticate the mdoc
+   without a network connection, and ISO/IEC TS 18013-7 where the same mdoc
+   is presented online;
 6. device authentication bound to the `SessionTranscript`;
-7. a signed validity window that an offline reader can enforce, together with
-   a match of the disclosed sailing to the lane;
-8. revocation on cancellation or vehicle change, applied by readers that can
-   see status;
+7. a signed validity window, a match of the disclosed sailing to the lane,
+   and a match of `ticket_number` to the sailing manifest. A valid signature
+   alone does not allow embarkation;
+8. cancellation, exchange and prior acceptance, applied from the sailing
+   manifest, which a reader with connectivity refreshes;
 9. minimal event logging; and
 10. a staff-assisted fallback where ferry policy allows it.
 
@@ -882,7 +1011,8 @@ The following matters remain open and require operator input:
   operator's ticketing profile, where that profile assigns different
   identifiers;
 - how lane readers are provisioned with issuer trust anchors;
-- the status mechanism an online reader uses;
+- the concrete format of the sailing-manifest feed, and the maximum age of
+  a manifest copy a reader may use when it cannot refresh;
 - the length of any post-departure grace period; and
 - when `plate_number` is mandatory for a given operator.
 
@@ -894,6 +1024,8 @@ This version does not define an SD-JWT VC or a W3C VCDM encoding.
 | ------------------ | ------------------------- |
 | [European Digital Identity Regulation] | Regulation (EU) 2024/1183 |
 | [ISO/IEC 18013-5] | Personal identification — ISO-compliant driving licence — Part 5: Mobile driving licence (mDL) application. mdoc structure, device engagement (QR code, NFC) and device retrieval (BLE, NFC). |
+| [ISO/IEC 18013-7] | ISO/IEC TS 18013-7, Personal identification — ISO-compliant driving licence — Part 7: Mobile driving licence (mDL) add-on functions. Online presentation of an mdoc. Second edition, 2025-05. |
+| [OpenID4VP] | OpenID for Verifiable Presentations. Used where online presentation of this mdoc follows the EUDI Wallet remote presentation protocol. |
 | [APTITUDE D4.1] | APTITUDE D4.1: UC Specifications and Scenarios, final version, 29 May 2026 |
 | [SEDIT-X Ferry Working Paper] | APTITUDE WP4, SEDIT-X Ferry Transport, Version 0.1, May 2026 |
 | [ARF] | European Digital Identity Wallet Architecture and Reference Framework |
