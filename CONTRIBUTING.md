@@ -69,6 +69,17 @@ To maintain consistency and minimize ambiguity, do not use the following terms. 
 * Do not use **RECOMMENDED**. Use **SHOULD** instead.
 * Do not use **NOT RECOMMENDED**. Use **SHOULD NOT** instead.
 
+## Rulebooks and Data Schemas
+
+Rulebooks and data schemas live in the attestation catalogue under `docs/catalogue/`, in one structure for every attestation type: `rulebooks/rb-<slug>/README.md`, `data-schemas/sd-jwt/<slug>-sd-jwt.json` and, optionally, `assets/<slug>/card.svg`. [Structure of the catalogue](docs/catalogue/structure.md) describes the layout, the naming rules and the checks. To start a new attestation type, run:
+
+```bash
+python script/new_catalogue_entry.py <slug> "<Title>"
+python script/validate_catalogue.py
+```
+
+The `Catalogue` check validates the tree on every pull request and builds it with registry-cli.
+
 ## What You Can Contribute
 
 * Propose a new requirement.
