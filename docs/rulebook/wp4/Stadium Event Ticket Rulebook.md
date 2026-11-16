@@ -17,7 +17,7 @@ Reviewers:
 This Rulebook defines the Stadium Event Ticket Attestation for use in the Aptitude consortium.
 The Stadium Event Ticket attestation proves that a person holds a valid admission right for a specific sports match, entertainment event, or other gathering during the specified validity period. It enables a relying parties to verify access rights and ticket entitlement statuses, using the EUDI Wallet.
 The attestation is issued by an authoritative source, such as a sports club, venue operator, or ticketing platform. The holder is the one who possesses the ticket in their wallet. 
-The attestation enables the holder to present proof of admission through an EUDI Wallet / FastID Wallet using selective disclosure or offline proximity presentation. It eliminates the need for paper tickets, static screenshots, or manual barcode scanning.
+The attestation enables the holder to present proof of admission through an EUDI Wallet using selective disclosure or offline proximity presentation. It eliminates the need for paper tickets, static screenshots, or manual barcode scanning.
 The attestation will also support additional entitlements and can be linked to credentials like student cards, municipal social cards or city passes. Which could allow the user to gain discounts or other benefits.Once verified, the issued Stadium Event Ticket carries the entitlement status directly, ensuring that no raw ID document, student card or civil identity attributes are exposed.
 
 ### 1.2 Document structure
