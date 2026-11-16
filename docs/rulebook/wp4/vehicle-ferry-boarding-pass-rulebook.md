@@ -58,7 +58,7 @@ The credential expresses the fact that one vehicle is entitled to board one
 ferry journey at a scheduled departure. A journey is one sailing: one
 departure port, one arrival port, and one scheduled departure date and time.
 
-The attestation is issued by an authentic source, such as a ferry operator or
+The attestation is issued by an authoritative source, such as a ferry operator or
 an authorised ticketing system acting for that operator. The Holder is the
 passenger who holds the vehicle booking. The verifier is the vehicle-lane
 reader, or boarding staff using such a reader, at the departure port.
@@ -146,7 +146,7 @@ For this Rulebook:
 - **Journey** means one ferry sailing between a departure port and an arrival
   port at a scheduled date and time.
 - **Ferry operator** means the organisation operating that sailing, or the
-  authentic source for the vehicle boarding entitlement.
+  authoritative source for the vehicle boarding entitlement.
 - **Authorised ticketing system** means a system the ferry operator authorises
   to issue this credential.
 - **mVRC** means the Mobile Vehicle Registration Credential. It provides
@@ -710,7 +710,7 @@ The credential SHALL be issued by:
 - the ferry operator; or
 - an authorised ticketing system acting for that operator.
 
-The issuer is the authentic source for this boarding entitlement. A party
+The issuer is the authoritative source for this boarding entitlement. A party
 that only resells the ticket SHOULD NOT issue the credential unless the
 operator has explicitly authorised it to do so.
 
