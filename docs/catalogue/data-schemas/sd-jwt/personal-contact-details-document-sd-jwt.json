@@ -1,0 +1,148 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://registry.siros.org/aptitude-consortium/personal-contact-details-document.schema.json",
+  "title": "Personal Contact Details",
+  "description": "Personal contact details (name, phone, email and residence address) of an individual.",
+  "version": "0.11.0",
+  "type": "object",
+  "additionalProperties": true,
+  "properties": {
+    "given_name": {
+      "type": "string",
+      "title": "Given Name",
+      "description": "Given name of the individual. Per Schema.org givenName. SHALL be a non-empty string.",
+      "minLength": 1,
+      "examples": [
+        "Anna"
+      ]
+    },
+    "family_name": {
+      "type": "string",
+      "title": "Family Name",
+      "description": "Family name of the individual. Per Schema.org familyName. SHALL be a non-empty string.",
+      "minLength": 1,
+      "examples": [
+        "Schmidt"
+      ]
+    },
+    "telephone": {
+      "type": "string",
+      "title": "Telephone",
+      "description": "Telephone number through which the individual can be contacted. When present, SHALL conform to ITU-T E.164 international public telecommunication numbering plan, including the country code prefix (e.g., +49123456789).",
+      "pattern": "^\\+[1-9][0-9]{6,14}$",
+      "examples": [
+        "+4915123456789"
+      ]
+    },
+    "email": {
+      "type": "string",
+      "title": "Email",
+      "description": "Electronic address through which the individual can be contacted. SHALL be a valid email address conforming to RFC 4021.",
+      "format": "email",
+      "examples": [
+        "anna.schmidt@example.com"
+      ]
+    },
+    "city_address": {
+      "type": "string",
+      "title": "City Address",
+      "description": "The city of the individual's residence."
+    },
+    "street_address": {
+      "type": "string",
+      "title": "Street Address",
+      "description": "The street address of the individual's residence."
+    },
+    "country_address": {
+      "type": "string",
+      "title": "Country Address",
+      "description": "The country of the individual's residence, as an ISO 3166-1 alpha-2 code.",
+      "pattern": "^[A-Z]{2}$",
+      "examples": [
+        "DE"
+      ]
+    },
+    "vct": {
+      "type": "string",
+      "const": "eu.europa.ec.eudi.pcd.1",
+      "description": "Credential type identifier."
+    },
+    "iss": {
+      "type": "string",
+      "format": "uri",
+      "description": "Issuer of the credential."
+    },
+    "iat": {
+      "type": "integer",
+      "description": "Time of issuance (NumericDate)."
+    },
+    "exp": {
+      "type": "integer",
+      "description": "Expiry time of the credential (NumericDate)."
+    },
+    "nbf": {
+      "type": "integer",
+      "description": "Time before which the attestation is not valid, as a NumericDate."
+    },
+    "cnf": {
+      "type": "object",
+      "description": "Confirmation claim that binds the attestation to the key of the holder (RFC 7800).",
+      "properties": {
+        "jwk": {
+          "type": "object",
+          "description": "Public key of the holder as a JWK."
+        }
+      }
+    },
+    "status": {
+      "type": "object",
+      "description": "Reference to the Token Status List entry that carries the revocation status of the attestation.",
+      "properties": {
+        "status_list": {
+          "type": "object",
+          "properties": {
+            "idx": {
+              "type": "integer",
+              "minimum": 0,
+              "description": "Index of the attestation in the status list."
+            },
+            "uri": {
+              "type": "string",
+              "format": "uri",
+              "description": "URI of the status list token."
+            }
+          },
+          "required": [
+            "idx",
+            "uri"
+          ]
+        }
+      },
+      "required": [
+        "status_list"
+      ]
+    }
+  },
+  "required": [
+    "given_name",
+    "family_name",
+    "email",
+    "iss",
+    "iat",
+    "vct"
+  ],
+  "examples": [
+    {
+      "vct": "eu.europa.ec.eudi.pcd.1",
+      "given_name": "Anna",
+      "family_name": "Schmidt",
+      "email": "anna.schmidt@example.com",
+      "telephone": "+4915123456789",
+      "street_address": "Hauptstrasse 1",
+      "city_address": "Munich",
+      "country_address": "DE",
+      "iss": "https://issuer.example.com",
+      "iat": 1736935200
+    }
+  ]
+}

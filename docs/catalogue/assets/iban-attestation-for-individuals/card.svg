@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="400" height="252" viewBox="0 0 400 252" font-family="Arial, Helvetica, sans-serif">
+<title>IBAN Attestation (Individuals)</title>
+<rect width="400" height="252" rx="16" ry="16" fill="#0B5D3B"/>
+<text x="24" y="44" font-size="22" font-weight="bold" fill="#FFFFFF">IBAN Attestation (Individuals)</text>
+<text x="24" y="68" font-size="12" fill="#FFFFFF">APTITUDE credential</text>
+<line x1="24" y1="82" x2="376" y2="82" stroke="#FFFFFF" stroke-opacity="0.6"/>
+<text x="24" y="110" font-size="14" fill="#FFFFFF">IBAN: {{bank_account.iban}}</text><text x="24" y="138" font-size="14" fill="#FFFFFF">Account: {{bank_account.account_name}}</text><text x="24" y="166" font-size="14" fill="#FFFFFF">Owner: {{account_ownership.given_name}} {{account_ownership.surname}}</text><text x="24" y="194" font-size="14" fill="#FFFFFF">Bank: {{account_provider.provider_name}}</text>
+<text x="24" y="232" font-size="12" fill="#FFFFFF">Expires: {{exp}}</text>
+</svg>

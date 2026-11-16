@@ -1,0 +1,273 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://registry.siros.org/aptitude-consortium/idproofing-etsi461.schema.json",
+  "title": "ID Proofing ETSI 119 461",
+  "description": "Identity attestation issued after an identity proofing process compliant with ETSI TS 119 461, combining person identification data with identity document data (EWC WP3).",
+  "version": "1.1.0",
+  "type": "object",
+  "additionalProperties": true,
+  "properties": {
+    "vct": {
+      "type": "string",
+      "const": "eu.aptitude.idproofing-etsi461.1",
+      "description": "Verifiable credential type identifier of the ID proofing attestation."
+    },
+    "family_name": {
+      "type": "string",
+      "description": "Current last name(s) or surname(s) of the identified person."
+    },
+    "given_name": {
+      "type": "string",
+      "description": "Current first name(s), including middle name(s), of the identified person."
+    },
+    "birth_date": {
+      "type": "string",
+      "description": "Date of birth of the identified person.",
+      "format": "date"
+    },
+    "birth_place": {
+      "type": "string",
+      "description": "The country as an alpha-2 country code as specified in ISO 3166-1, or the state, province, district, local area, municipality, city, town or village where the identified person was born."
+    },
+    "nationality": {
+      "type": "string",
+      "description": "One or more alpha-2 country codes as specified in ISO 3166-1, representing the nationality of the identified person."
+    },
+    "resident_address": {
+      "type": "string",
+      "description": "The full address of the place where the identified person currently resides or can be contacted (street name, house number, city etc.)."
+    },
+    "resident_country": {
+      "type": "string",
+      "description": "The country where the identified person currently resides, as an alpha-2 country code as specified in ISO 3166-1.",
+      "pattern": "^[A-Z]{2}$"
+    },
+    "resident_state": {
+      "type": "string",
+      "description": "The state, province, district or local area where the identified person currently resides."
+    },
+    "resident_city": {
+      "type": "string",
+      "description": "The city where the identified person currently resides."
+    },
+    "resident_postal_code": {
+      "type": "string",
+      "description": "The postal code of the place where the identified person currently resides."
+    },
+    "resident_street": {
+      "type": "string",
+      "description": "The street name of the place where the identified person currently resides."
+    },
+    "resident_house_number": {
+      "type": "string",
+      "description": "The house number of the place where the identified person currently resides."
+    },
+    "personal_administrative_number": {
+      "type": "string",
+      "description": "A value assigned to the natural person that is unique among all personal administrative numbers issued by the provider. Where Member States include this attribute, they describe the policy applied to its values in their electronic identification schemes."
+    },
+    "portrait": {
+      "type": "string",
+      "description": "Facial image of the identified person compliant with ISO 19794-5 or ISO 39794 specifications, encoded as binary data."
+    },
+    "family_name_birth": {
+      "type": "string",
+      "description": "Last name(s) or surname(s) of the identified person at the time of birth."
+    },
+    "given_name_birth": {
+      "type": "string",
+      "description": "First name(s), including middle name(s), of the identified person at the time of birth."
+    },
+    "sex": {
+      "type": "integer",
+      "enum": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        9
+      ],
+      "description": "0 = not known; 1 = male; 2 = female; 3 = other; 4 = inter; 5 = diverse; 6 = open; 9 = not applicable. For values 0, 1, 2 and 9, ISO/IEC 5218 applies."
+    },
+    "email_address": {
+      "type": "string",
+      "description": "Electronic mail address of the identified person, in conformance with RFC 5322.",
+      "format": "email"
+    },
+    "mobile_phone_number": {
+      "type": "string",
+      "description": "Mobile telephone number of the identified person, starting with the '+' symbol as the international code prefix and the country code, followed by numbers only."
+    },
+    "age_over_18": {
+      "type": "boolean",
+      "description": "Attests whether the identified person is currently an adult (true) or a minor (false)."
+    },
+    "age_over_NN": {
+      "type": "boolean",
+      "description": "Attests whether the identified person is at least NN years old, where NN is a number other than 18."
+    },
+    "age_in_years": {
+      "type": "integer",
+      "description": "The current age of the identified person in years."
+    },
+    "age_birth_year": {
+      "type": "integer",
+      "description": "The year in which the identified person was born."
+    },
+    "issuing_authority": {
+      "type": "string",
+      "description": "Name of the issuer that performed the identity proofing and issued the attestation."
+    },
+    "issuing_country": {
+      "type": "string",
+      "description": "Alpha-2 country code, as defined in ISO 3166-1, of the issuing country or territory.",
+      "minLength": 2,
+      "maxLength": 2,
+      "pattern": "^[A-Z]{2}$"
+    },
+    "issuing_jurisdiction": {
+      "type": "string",
+      "description": "Subdivision code as defined in ISO 3166-2:2020 of the issuing country or territory.",
+      "minLength": 2,
+      "maxLength": 6
+    },
+    "issuance_date": {
+      "type": "string",
+      "description": "Date (and if possible time) when the attestation was issued and/or its administrative validity period began.",
+      "format": "date-time"
+    },
+    "expiry_date": {
+      "type": "string",
+      "description": "Date and possibly time of expiration of the attestation. Set to the expiry of the identity document used.",
+      "format": "date-time"
+    },
+    "document_number": {
+      "type": "string",
+      "description": "A number for the attestation, assigned by the issuer."
+    },
+    "location_status": {
+      "type": "string",
+      "description": "The location of the validity status information, where the issuer revokes the attestation."
+    },
+    "trust_anchor": {
+      "type": "string",
+      "description": "URL at which a machine-readable version of the trust anchor used for verifying the attestation can be found or looked up."
+    },
+    "documentInfo": {
+      "title": "Identity Document Info",
+      "type": "object",
+      "description": "Data of the official identity document used in the identity proofing process.",
+      "properties": {
+        "document_type": {
+          "type": "string",
+          "description": "Type of official identity document used in the attestation process."
+        },
+        "document_number": {
+          "type": "string",
+          "description": "Unique identifier on the official identity document."
+        },
+        "issued_on": {
+          "type": "string",
+          "description": "Date when the official identity document was issued.",
+          "format": "date"
+        },
+        "expires_on": {
+          "type": "string",
+          "description": "Expiry date of the official identity document.",
+          "format": "date"
+        }
+      },
+      "required": [
+        "document_type",
+        "document_number",
+        "expires_on"
+      ]
+    },
+    "identityProofingProcessCompliance": {
+      "title": "Identity Proofing Process Compliance",
+      "type": "object",
+      "description": "Regulations and certifications satisfied by the identity proofing process and ensured by the issuer.",
+      "properties": {
+        "compliant_with": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Regulation at national or EU level, or technical standard, that has been certified or is ensured by the identity proofing service provider."
+        }
+      },
+      "required": [
+        "compliant_with"
+      ]
+    },
+    "iss": {
+      "type": "string",
+      "format": "uri",
+      "description": "Issuer of the attestation, as an HTTPS URL that identifies the issuer."
+    },
+    "iat": {
+      "type": "integer",
+      "description": "Time of issuance as a NumericDate (seconds since the Unix epoch)."
+    },
+    "nbf": {
+      "type": "integer",
+      "description": "Time before which the attestation is not valid, as a NumericDate."
+    },
+    "exp": {
+      "type": "integer",
+      "description": "Time at which the attestation expires, as a NumericDate."
+    },
+    "cnf": {
+      "type": "object",
+      "description": "Confirmation claim that binds the attestation to the key of the holder (RFC 7800).",
+      "properties": {
+        "jwk": {
+          "type": "object",
+          "description": "Public key of the holder as a JWK."
+        }
+      }
+    },
+    "status": {
+      "type": "object",
+      "description": "Reference to the Token Status List entry that carries the revocation status of the attestation.",
+      "properties": {
+        "status_list": {
+          "type": "object",
+          "properties": {
+            "idx": {
+              "type": "integer",
+              "minimum": 0,
+              "description": "Index of the attestation in the status list."
+            },
+            "uri": {
+              "type": "string",
+              "format": "uri",
+              "description": "URI of the status list token."
+            }
+          },
+          "required": [
+            "idx",
+            "uri"
+          ]
+        }
+      },
+      "required": [
+        "status_list"
+      ]
+    }
+  },
+  "required": [
+    "family_name",
+    "given_name",
+    "birth_date",
+    "birth_place",
+    "nationality",
+    "issuing_authority",
+    "issuing_country",
+    "expiry_date",
+    "documentInfo"
+  ]
+}

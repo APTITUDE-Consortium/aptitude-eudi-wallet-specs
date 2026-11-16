@@ -1,0 +1,196 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://registry.siros.org/aptitude-consortium/student-id.schema.json",
+  "title": "Student ID",
+  "description": "Student identity credential carrying SCHAC and eduPerson attributes, issued as an SD-JWT VC. Multi-valued eduPerson and SCHAC attributes are arrays.",
+  "version": "0.11.0",
+  "type": "object",
+  "additionalProperties": true,
+  "properties": {
+    "vct": {
+      "type": "string",
+      "const": "eu.aptitude.student-id.1",
+      "description": "Verifiable Credential Type identifier of the student ID."
+    },
+    "identifier": {
+      "type": "string",
+      "description": "Unique student identifier, such as an institutional student number or equivalent."
+    },
+    "schacPersonalUniqueCode": {
+      "type": "string",
+      "description": "Unique code associated with the student."
+    },
+    "schacPersonalUniqueID": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "minItems": 1,
+      "uniqueItems": true,
+      "description": "One or more unique identifiers for the student."
+    },
+    "schacHomeOrganization": {
+      "type": "string",
+      "description": "Home organisation or institution domain or identifier."
+    },
+    "familyName": {
+      "type": "string",
+      "description": "Student family name."
+    },
+    "firstName": {
+      "type": "string",
+      "description": "Student given name."
+    },
+    "displayName": {
+      "type": "string",
+      "description": "Display name formatted for user interfaces."
+    },
+    "dateOfBirth": {
+      "type": "string",
+      "description": "Student date of birth, as an ISO 8601 date (YYYY-MM-DD). SHALL NOT be in the future.",
+      "format": "date"
+    },
+    "commonName": {
+      "type": "string",
+      "description": "Alternate display or preferred name."
+    },
+    "mail": {
+      "type": "string",
+      "description": "Email address (RFC 5322 mailbox).",
+      "format": "email"
+    },
+    "eduPersonPrincipalName": {
+      "type": "string",
+      "description": "Principal name of the student, often expressed in user@realm format."
+    },
+    "eduPersonPrimaryAffiliation": {
+      "type": "string",
+      "description": "Primary affiliation of the subject with the educational organisation; the value SHOULD be 'student' unless the issuer has a specific student-equivalent category."
+    },
+    "eduPersonAffiliation": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "minItems": 1,
+      "uniqueItems": true,
+      "description": "One or more affiliations, such as 'student', 'member' or 'affiliate'. SHOULD include the value of eduPersonPrimaryAffiliation."
+    },
+    "eduPersonScopedAffiliation": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "minItems": 1,
+      "uniqueItems": true,
+      "description": "One or more scoped affiliation values, commonly 'affiliation@scope'. The scope SHOULD be consistent with schacHomeOrganization."
+    },
+    "eduPersonAssurance": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "minItems": 1,
+      "uniqueItems": true,
+      "description": "One or more assurance values (URIs or issuer-defined) for the subject or attributes."
+    },
+    "iss": {
+      "type": "string",
+      "format": "uri",
+      "description": "Issuer of the attestation, as an HTTPS URL that identifies the issuer."
+    },
+    "iat": {
+      "type": "integer",
+      "description": "Time of issuance as a NumericDate (seconds since the Unix epoch)."
+    },
+    "nbf": {
+      "type": "integer",
+      "description": "Time before which the attestation is not valid, as a NumericDate."
+    },
+    "exp": {
+      "type": "integer",
+      "description": "Time at which the attestation expires, as a NumericDate."
+    },
+    "cnf": {
+      "type": "object",
+      "description": "Confirmation claim that binds the attestation to the key of the holder (RFC 7800).",
+      "properties": {
+        "jwk": {
+          "type": "object",
+          "description": "Public key of the holder as a JWK."
+        }
+      }
+    },
+    "status": {
+      "type": "object",
+      "description": "Reference to the Token Status List entry that carries the revocation status of the attestation.",
+      "properties": {
+        "status_list": {
+          "type": "object",
+          "properties": {
+            "idx": {
+              "type": "integer",
+              "minimum": 0,
+              "description": "Index of the attestation in the status list."
+            },
+            "uri": {
+              "type": "string",
+              "format": "uri",
+              "description": "URI of the status list token."
+            }
+          },
+          "required": [
+            "idx",
+            "uri"
+          ]
+        }
+      },
+      "required": [
+        "status_list"
+      ]
+    },
+    "jti": {
+      "type": "string",
+      "description": "Unique identifier of the credential instance."
+    },
+    "cryptographically_bound_to": {
+      "type": "string",
+      "description": "Identifier of another attestation type to which this attestation is cryptographically bound, where such binding is used."
+    }
+  },
+  "required": [
+    "vct",
+    "identifier",
+    "schacHomeOrganization",
+    "firstName",
+    "familyName",
+    "eduPersonPrincipalName",
+    "eduPersonPrimaryAffiliation"
+  ],
+  "examples": [
+    {
+      "vct": "eu.aptitude.student-id.1",
+      "identifier": "STU-2026-000123",
+      "schacHomeOrganization": "aegean.gr",
+      "firstName": "Nikos",
+      "familyName": "Triantafyllou",
+      "eduPersonPrincipalName": "ntriantafyllou@aegean.gr",
+      "eduPersonPrimaryAffiliation": "student",
+      "eduPersonAffiliation": [
+        "student",
+        "member"
+      ],
+      "eduPersonScopedAffiliation": [
+        "student@aegean.gr"
+      ],
+      "eduPersonAssurance": [
+        "https://refeds.org/assurance"
+      ],
+      "schacPersonalUniqueID": [
+        "urn:schac:personalUniqueID:gr:student:123456"
+      ],
+      "mail": "ntriantafyllou@aegean.gr",
+      "dateOfBirth": "1990-04-12"
+    }
+  ]
+}

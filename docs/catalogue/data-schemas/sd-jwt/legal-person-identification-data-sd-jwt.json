@@ -1,0 +1,149 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://registry.siros.org/aptitude-consortium/legal-person-identification-data.schema.json",
+  "title": "Legal Person Identification Data",
+  "description": "Legal PID (LPID): identification data for a legal person, issued by a company registration office as authentic source. Defined by EWC WP3.",
+  "version": "2.0.0",
+  "type": "object",
+  "additionalProperties": true,
+  "properties": {
+    "vct": {
+      "type": "string",
+      "const": "eu.aptitude.legal-person-identification-data.1",
+      "description": "Credential type identifier of the Legal Person Identification Data."
+    },
+    "id": {
+      "type": "string",
+      "description": "EUID where available, otherwise a similar constructed, unique per issuer identifier.",
+      "examples": [
+        "NOFOR.123456789"
+      ]
+    },
+    "name": {
+      "type": "string",
+      "description": "Official name of the EBW owner (economic operator or public sector body).",
+      "examples": [
+        "Example AS"
+      ]
+    },
+    "issuing_authority": {
+      "type": "string",
+      "description": "Name of the administrative authority, Commission (for Union entities), or QTSP issuing the EAA/QEAA; or ISO 3166-1 alpha-2 where applicable.",
+      "examples": [
+        "Brønnøysund Register Centre"
+      ]
+    },
+    "issuing_country": {
+      "type": "string",
+      "description": "ISO 3166-1 alpha-2 code of the provider’s country/territory.",
+      "minLength": 2,
+      "maxLength": 2,
+      "examples": [
+        "NO",
+        "DE"
+      ],
+      "pattern": "^[A-Z]{2}$"
+    },
+    "date_of_expiry": {
+      "type": "string",
+      "description": "Administrative expiry date following ISO 8601.",
+      "format": "date",
+      "examples": [
+        "2027-12-31"
+      ]
+    },
+    "issuing_authority_id": {
+      "type": "string",
+      "description": "Identifier of the issuing authority (business register identifier, for example as used in BRIS).",
+      "examples": [
+        "NO.BRC"
+      ]
+    },
+    "issuing_jurisdiction": {
+      "type": "string",
+      "description": "Country subdivision code of the issuing jurisdiction, as defined in ISO 3166-2:2020, Clause 8. The first part of the code is the same as issuing_country.",
+      "minLength": 2,
+      "maxLength": 6,
+      "examples": [
+        "NO-03"
+      ]
+    },
+    "issuance_date": {
+      "type": "string",
+      "description": "Date and possibly time when the credential was issued.",
+      "format": "date-time",
+      "examples": [
+        "2025-01-15T09:00:00Z"
+      ]
+    },
+    "authentic_source_id": {
+      "type": "string",
+      "description": "Identifier of the public sector body or private entity responsible for the authentic source that is the primary source of the information or is recognized as authentic in national law."
+    },
+    "authentic_source_name": {
+      "type": "string",
+      "description": "Name of the public sector body or private entity responsible for the authentic source that is the primary source of the information or is recognized as authentic in national law."
+    },
+    "iss": {
+      "type": "string",
+      "format": "uri",
+      "description": "Issuer of the attestation, as an HTTPS URL that identifies the issuer."
+    },
+    "iat": {
+      "type": "integer",
+      "description": "Time of issuance as a NumericDate (seconds since the Unix epoch)."
+    },
+    "nbf": {
+      "type": "integer",
+      "description": "Time before which the attestation is not valid, as a NumericDate."
+    },
+    "exp": {
+      "type": "integer",
+      "description": "Time at which the attestation expires, as a NumericDate."
+    },
+    "cnf": {
+      "type": "object",
+      "description": "Confirmation claim that binds the attestation to the key of the holder (RFC 7800).",
+      "properties": {
+        "jwk": {
+          "type": "object",
+          "description": "Public key of the holder as a JWK."
+        }
+      }
+    },
+    "status": {
+      "type": "object",
+      "description": "Reference to the Token Status List entry that carries the revocation status of the attestation.",
+      "properties": {
+        "status_list": {
+          "type": "object",
+          "properties": {
+            "idx": {
+              "type": "integer",
+              "minimum": 0,
+              "description": "Index of the attestation in the status list."
+            },
+            "uri": {
+              "type": "string",
+              "format": "uri",
+              "description": "URI of the status list token."
+            }
+          },
+          "required": [
+            "idx",
+            "uri"
+          ]
+        }
+      },
+      "required": [
+        "status_list"
+      ]
+    }
+  },
+  "required": [
+    "id",
+    "name",
+    "issuing_authority",
+    "issuing_country"
+  ]
+}

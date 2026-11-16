@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="400" height="252" viewBox="0 0 400 252">
+  <title>Student ID</title>
+  <rect width="400" height="252" rx="16" fill="#0B2A5B"/>
+  <text x="24" y="46" font-family="Arial, Helvetica, sans-serif" font-size="22" font-weight="bold" fill="#FFFFFF">Student ID</text>
+  <text x="24" y="68" font-family="Arial, Helvetica, sans-serif" font-size="12" fill="#FFFFFF">Verifiable student credential</text>
+  <line x1="24" y1="82" x2="376" y2="82" stroke="#FFFFFF" stroke-opacity="0.5"/>
+  <text x="24" y="112" font-family="Arial, Helvetica, sans-serif" font-size="15" fill="#FFFFFF">{{firstName}} {{familyName}}</text>
+  <text x="24" y="142" font-family="Arial, Helvetica, sans-serif" font-size="15" fill="#FFFFFF">Organisation: {{schacHomeOrganization}}</text>
+  <text x="24" y="172" font-family="Arial, Helvetica, sans-serif" font-size="15" fill="#FFFFFF">Affiliation: {{eduPersonPrimaryAffiliation}}</text>
+  <text x="24" y="202" font-family="Arial, Helvetica, sans-serif" font-size="15" fill="#FFFFFF">Principal: {{eduPersonPrincipalName}}</text>
+</svg>

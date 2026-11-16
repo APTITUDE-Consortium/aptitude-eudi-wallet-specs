@@ -1,0 +1,132 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://registry.siros.org/aptitude-consortium/ferry-boarding-pass.schema.json",
+  "title": "Ferry Boarding Pass",
+  "description": "Boarding pass for a ferry passenger, issued as an SD-JWT VC (OpenID4VCI scope ferryBoardingPassCredential).",
+  "version": "0.10.0",
+  "type": "object",
+  "additionalProperties": true,
+  "properties": {
+    "vct": {
+      "type": "string",
+      "const": "VerifiableFerryBoardingPassCredentialSDJWT",
+      "description": "Verifiable credential type identifier of the ferry boarding pass."
+    },
+    "identifier": {
+      "type": "string",
+      "description": "Unique identifier of the boarding pass credential."
+    },
+    "ticketQR": {
+      "type": "string",
+      "description": "QR code content of the ticket, used for scanning at boarding."
+    },
+    "ticketNumber": {
+      "type": "string",
+      "description": "Number of the ticket."
+    },
+    "ticketLet": {
+      "type": "string",
+      "description": "Ticket leg (name kept as defined in the source configuration)."
+    },
+    "lastName": {
+      "type": "string",
+      "description": "Last name of the passenger."
+    },
+    "firstName": {
+      "type": "string",
+      "description": "First name of the passenger."
+    },
+    "seatType": {
+      "type": "string",
+      "description": "Type of seat reserved for the passenger."
+    },
+    "seatNumber": {
+      "type": "string",
+      "description": "Number of the seat reserved for the passenger."
+    },
+    "departureDate": {
+      "type": "string",
+      "description": "Date of departure.",
+      "format": "date"
+    },
+    "departureTime": {
+      "type": "string",
+      "description": "Time of departure."
+    },
+    "arrivalDate": {
+      "type": "string",
+      "description": "Date of arrival.",
+      "format": "date"
+    },
+    "arrivalTime": {
+      "type": "string",
+      "description": "Time of arrival."
+    },
+    "arrivalPort": {
+      "type": "string",
+      "description": "Port of arrival."
+    },
+    "vesselDescription": {
+      "type": "string",
+      "description": "Description of the vessel."
+    },
+    "iss": {
+      "type": "string",
+      "format": "uri",
+      "description": "Issuer of the attestation, as an HTTPS URL that identifies the issuer."
+    },
+    "iat": {
+      "type": "integer",
+      "description": "Time of issuance as a NumericDate (seconds since the Unix epoch)."
+    },
+    "nbf": {
+      "type": "integer",
+      "description": "Time before which the attestation is not valid, as a NumericDate."
+    },
+    "exp": {
+      "type": "integer",
+      "description": "Time at which the attestation expires, as a NumericDate."
+    },
+    "cnf": {
+      "type": "object",
+      "description": "Confirmation claim that binds the attestation to the key of the holder (RFC 7800).",
+      "properties": {
+        "jwk": {
+          "type": "object",
+          "description": "Public key of the holder as a JWK."
+        }
+      }
+    },
+    "status": {
+      "type": "object",
+      "description": "Reference to the Token Status List entry that carries the revocation status of the attestation.",
+      "properties": {
+        "status_list": {
+          "type": "object",
+          "properties": {
+            "idx": {
+              "type": "integer",
+              "minimum": 0,
+              "description": "Index of the attestation in the status list."
+            },
+            "uri": {
+              "type": "string",
+              "format": "uri",
+              "description": "URI of the status list token."
+            }
+          },
+          "required": [
+            "idx",
+            "uri"
+          ]
+        }
+      },
+      "required": [
+        "status_list"
+      ]
+    }
+  },
+  "required": [
+    "vct"
+  ]
+}

@@ -136,6 +136,16 @@ nav:
     - Overview: catalogue/index.md
     - Structure: catalogue/structure.md
     - Publishing in the registry: catalogue/registry.md
+    - Origin of the first types: catalogue/origin.md
+    - Alignment with WE BUILD: catalogue/alignment-with-webuild.md
+    - Rulebooks:
+      - EU Company Certificate: catalogue/rulebooks/rb-eu-company-certificate/README.md
+      - IBAN Attestation: catalogue/rulebooks/rb-iban-attestation/README.md
+      - IBAN Attestation for Individuals: catalogue/rulebooks/rb-iban-attestation-for-individuals/README.md
+      - ID Proofing ETSI 119 461: catalogue/rulebooks/rb-idproofing-etsi461/README.md
+      - Legal Person Identification Data (LPID): catalogue/rulebooks/rb-legal-person-identification-data/README.md
+      - Signatory Rights: catalogue/rulebooks/rb-signatory-rights-attestation/README.md
+      - Ultimate Beneficial Owners: catalogue/rulebooks/rb-ultimate-beneficial-owners-attestation/README.md
   - Trust Specifications:
     - Trust Framework:
       - Overview: rulebook/wp2-trust-specifications/docs/trust-framework.md
