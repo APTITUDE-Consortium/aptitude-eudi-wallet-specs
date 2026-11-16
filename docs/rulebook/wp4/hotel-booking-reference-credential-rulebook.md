@@ -4,14 +4,13 @@
   - Nikos Triantafyllou, University of the Aegean, UAegean i4m Lab
   - Petros Kavassalis, University of the Aegean, UAegean i4m Lab
 
-
 | Version | Date       | Description                                                                                                  |
 | ------- | ---------- | ------------------------------------------------------------------------------------------------------------ |
 | 0.1     | 23-07-2026 | Initial draft based on the SEDIT-X Hospitality working paper and the APTITUDE Attestation Rulebook template. |
 | 0.2     | 24-07-2026 | Aligned data model and `vct` with the APTITUDE issuer configuration (`booking_reference_credential`).        |
 | 0.3     | 26-08-2026 | Aligned display name, nested claim set and check-in composition with the issuer schema for Accommodation Voucher (`booking_reference_credential`), PID and optional European Disability Card. |
 | 0.4     | 02-11-2026 | Allowed one entity to fill every role, optional `supplierReference` and guest name, a qualified EAA where the issuer is a QTSP, and the Digital Room Key as a separate mdoc. |
-
+| 0.5     | 16-11-2026 | Set the Verifiable Credential Type to `urn:eu:aptitude:booking:reference:1`, in line with the other APTITUDE rulebooks. The issuer-configuration identifier remains `booking_reference_credential`. |
 
 **Feedback:**
 
@@ -24,11 +23,7 @@
 > (Wallet display name: **Accommodation Voucher**). Claims marked optional in
 > §2.3 MAY be omitted.
 
-
-
 ## 1 Introduction
-
-
 
 ### 1.1 Document scope and purpose
 
@@ -36,10 +31,12 @@ This Rulebook defines the **Accommodation Voucher**, a hotel-booking attestation
 issued to a traveller's EUDI Wallet after a reservation has been successfully
 created or confirmed.
 
-The issuer-configuration identifier and Verifiable Credential Type (`vct`) is:
+The issuer-configuration identifier and scope remain `booking_reference_credential`.
+
+The Verifiable Credential Type (`vct`) is:
 
 ```text
-booking_reference_credential
+urn:eu:aptitude:booking:reference:1
 ```
 
 The Wallet display name is **Accommodation Voucher**.
@@ -79,8 +76,6 @@ The credential is also distinct from:
 - a proof-of-stay credential; and
 - the authoritative reservation record held by the hotel, DMC, booking platform or PMS.
 
-
-
 ### 1.2 Architectural role
 
 The credential acts primarily as a trusted **reservation lookup and binding artefact**.
@@ -104,8 +99,6 @@ cancelled
 no_show
 ```
 
-
-
 ### 1.3 Document structure
 
 - Chapter 2 defines attributes and metadata.
@@ -115,8 +108,6 @@ no_show
 - Chapter 6 defines validity, status and revocation.
 - Chapter 7 defines compliance and privacy requirements.
 - Chapter 8 lists references.
-
-
 
 ### 1.4 Key words
 
@@ -141,11 +132,7 @@ wallet presentation is used for booking retrieval or check-in.
 `eu.europa.ec.eudi.aptitude.room_key.1`, defined in the Digital Room Key Rulebook.
 - **PID** means Person Identification Data of type `urn:eu.europa.ec.eudi:pid:1`.
 
-
-
 ## 2 Attestation attributes and metadata
-
-
 
 ### 2.1 Legal category
 
@@ -182,14 +169,11 @@ The issued credential SHALL use exactly one of these category values.
   where the guest opts in, not from this voucher.
 9. A manual or staff-assisted lookup process SHALL remain available.
 
-
-
 ### 2.3 Credential attributes
 
 The credential attribute set SHALL match the APTITUDE issuer configuration for
 `booking_reference_credential`, except that claims marked optional below MAY
 be omitted. Nested objects SHALL be preserved as issued.
-
 
 | **Data Identifier**      | **Definition**                                                                                          | **Data type** | **Example value**            |
 | ------------------------ | ------------------------------------------------------------------------------------------------------- | ------------- | ---------------------------- |
@@ -207,7 +191,6 @@ be omitted. Nested objects SHALL be preserved as issued.
 | `guest.givenName`        | Optional. Given name of the primary guest as recorded on the reservation. MAY be omitted.                | string        | `Hanna`                      |
 | `guest.familyName`       | Optional. Family name of the primary guest as recorded on the reservation. MAY be omitted.              | string        | `Matkalainen`                |
 
-
 The credential SHALL NOT include PAN, IBAN, payment tokens, cryptograms or other
 sensitive payment-instrument data.
 
@@ -218,21 +201,16 @@ needed for reservation matching. That name MAY be omitted.
 
 ### 2.4 Mandatory metadata
 
-
 | **Data Identifier**      | **Definition**                                                                        | **Data type**           | **Example value**                                    |
 | ------------------------ | ------------------------------------------------------------------------------------- | ----------------------- | ---------------------------------------------------- |
 | `category`               | Legal category.                                                                       | string                  | `eaa:eu:non-qualified`                               |
 | `issuer`                 | Identifier of the credential issuer, such as a DMC, hotel or authorised issuer.       | string or URI           | `https://issuer.avratours.example`                   |
-| `credential_type`        | Encoding-independent credential type identifier. SHALL equal the issuer-config `vct`. | string                  | `booking_reference_credential`                       |
+| `credential_type`        | Encoding-independent credential type identifier. SHALL equal the `vct`.               | string                  | `urn:eu:aptitude:booking:reference:1`                |
 | `issued_at`              | Credential issuance timestamp.                                                        | date-time               | `2026-06-12T11:30:00Z`                               |
 | `status_reference`       | Status or revocation reference.                                                       | URI or structured value | `https://status.booking.example/atl/2026-06/12#4821` |
 | `trust_anchor_reference` | Location of issuer trust information.                                                 | URI                     | `https://trust.aptitude.example/hospitality-issuers` |
 
-
-
-
 ### 2.5 Optional metadata
-
 
 | **Data Identifier**      | **Definition**                                                                        | **Data type** | **Example value**                                          |
 | ------------------------ | ------------------------------------------------------------------------------------- | ------------- | ---------------------------------------------------------- |
@@ -246,14 +224,9 @@ needed for reservation matching. That name MAY be omitted.
 | `issuer_policy`          | URI of issuance and verification policy.                                              | URI           | `https://issuer.example/policy`                            |
 | `display_locale`         | Preferred display language.                                                           | string        | `en`                                                       |
 
+## 3 Attestation encoding
 
-
-
-# 3 Attestation encoding
-
-
-
-## 3.1 ISO/IEC 18013-5-compliant encoding
+### 3.1 ISO/IEC 18013-5-compliant encoding
 
 This version does not define an mdoc representation. The Accommodation Voucher
 SHALL be issued as the SD-JWT VC in §3.2.
@@ -265,24 +238,23 @@ A future profile MAY define an mdoc encoding of this voucher for on-premises
 proximity check-in, provided the same semantic model, status checks and
 selective-disclosure rules are preserved.
 
-## 3.2 SD-JWT VC-based encoding
+### 3.2 SD-JWT VC-based encoding
 
 The Accommodation Voucher SHALL be issued as `dc+sd-jwt`.
 
-### 3.2.1 Verifiable Credential Type
+#### 3.2.1 Verifiable Credential Type
 
 The `vct` value SHALL be:
 
 ```text
-booking_reference_credential
+urn:eu:aptitude:booking:reference:1
 ```
 
-This matches the APTITUDE issuer configuration identifier and scope
+The APTITUDE issuer-configuration identifier and scope remain
 `booking_reference_credential`. The Wallet display name for this type is
 **Accommodation Voucher**.
 
-### 3.2.2 Registered JWT claims
-
+#### 3.2.2 Registered JWT claims
 
 | **Data Identifier** | **Claim** | **Format** | **Disclosable** |
 | ------------------- | --------- | ---------- | --------------- |
@@ -294,11 +266,7 @@ This matches the APTITUDE issuer configuration identifier and scope
 | `holder_binding`    | `cnf`     | object     | MUST NOT        |
 | `status_reference`  | `status`  | object     | MUST NOT        |
 
-
-
-
-### 3.2.3 Private claims
-
+#### 3.2.3 Private claims
 
 | **Data Identifier**      | **Claim**                | **Format** | **Disclosable** |
 | ------------------------ | ------------------------ | ---------- | --------------- |
@@ -322,7 +290,6 @@ This matches the APTITUDE issuer configuration identifier and scope
 | `guest.familyName`       | `familyName`             | string     | MUST            |
 | `trust_anchor_reference` | `trust_anchor_reference` | string     | MUST NOT        |
 
-
 In this table, **Disclosable** states whether the issuer must make the claim
 selectively disclosable when the claim is issued (ARF Annex 2 Topic 12,
 ARB_30). It does not by itself require the claim to be present.
@@ -333,7 +300,7 @@ Nested objects SHALL be selectively disclosable at the smallest practical semant
 unit. A verifier SHALL be able to request `reservationReference` and `property.id`
 without receiving the full guest name where that name is not required.
 
-### 3.2.4 Illustrative claim set
+#### 3.2.4 Illustrative claim set
 
 ```json
 {
@@ -341,7 +308,7 @@ without receiving the full guest name where that name is not required.
   "iat": 1781263800,
   "nbf": 1781263800,
   "exp": 1781607600,
-  "vct": "booking_reference_credential",
+  "vct": "urn:eu:aptitude:booking:reference:1",
   "cnf": {
     "jkt": "wallet-key-thumbprint"
   },
@@ -377,17 +344,13 @@ without receiving the full guest name where that name is not required.
 }
 ```
 
-
-
-## 3.3 W3C Verifiable Credentials Data Model-based encoding
+### 3.3 W3C Verifiable Credentials Data Model-based encoding
 
 This version does not define a W3C VCDM representation.
 
-# 4 Attestation usage
+## 4 Attestation usage
 
-
-
-## 4.1 Issuance trigger
+### 4.1 Issuance trigger
 
 The Accommodation Voucher SHALL be issued only after:
 
@@ -401,8 +364,8 @@ The Accommodation Voucher SHALL be issued only after:
 The source-defined flow is:
 
 1. the reservation is created through the existing booking, DMC or hotel process;
-2. the Booking Platform creates an issuance session for
-  `booking_reference_credential`;
+2. the Booking Platform creates an issuance session for the Accommodation Voucher
+  (`vct` `urn:eu:aptitude:booking:reference:1`);
 3. the Intermediary Service creates a credential offer;
 4. the Wallet receives and displays the offer as **Accommodation Voucher**;
 5. the User accepts it;
@@ -413,9 +376,7 @@ The same entity MAY perform each of these steps. A deployment in which one
 organisation is the booking system, the issuer and the check-in operator
 conforms to this flow.
 
-
-
-## 4.2 Holder binding
+### 4.2 Holder binding
 
 The credential **SHOULD be device-bound**.
 
@@ -427,12 +388,12 @@ The issuer SHOULD associate it with the primary guest using:
 
 The credential SHALL NOT contain full PID data merely to support binding.
 
-## 4.3 Hotel check-in presentation
+### 4.3 Hotel check-in presentation
 
 Hotel check-in is a composed presentation. The verifier SHALL treat the following
 credentials as distinct request objects.
 
-### 4.3.1 Accommodation Voucher
+#### 4.3.1 Accommodation Voucher
 
 The verifier SHOULD request:
 
@@ -443,7 +404,7 @@ The verifier SHOULD request:
 - optionally `property.name`, `reservationStatus`, `room.type`, `voucherReference`
   and `guest` names where useful for confirmation or display.
 
-### 4.3.2 PID
+#### 4.3.2 PID
 
 PID claims SHALL be requested separately from this voucher, using
 `vct` `urn:eu.europa.ec.eudi:pid:1` (`dc+sd-jwt`), and only according to hotel,
@@ -485,7 +446,7 @@ not required for the current registration process.
 `guest.givenName` / `guest.familyName` from the voucher SHOULD be compared with
 PID `given_name` / `family_name` where guest-to-booking binding is required.
 
-### 4.3.3 Optional European Disability Card
+#### 4.3.3 Optional European Disability Card
 
 After or together with voucher and PID verification, the guest MAY present a
 European Disability Card (`european_disability_card`,
@@ -496,9 +457,7 @@ That presentation is optional. The hotel SHALL NOT treat absence of the card as
 absence of an accessibility need. The requested EDC claims and verifier
 obligations are defined in the European Disability Card Rulebook.
 
-
-
-## 4.4 Verification obligations
+### 4.4 Verification obligations
 
 The hotel, PMS or Intermediary Service SHALL do the following. The same
 entity MAY hold more than one of these roles.
@@ -533,9 +492,7 @@ Example:
 }
 ```
 
-
-
-## 4.5 Reservation-state progression
+### 4.5 Reservation-state progression
 
 The credential MAY include `reservationStatus` as known at issuance.
 
@@ -549,7 +506,7 @@ the chosen implementation model.
 Successful check-in MAY trigger issuance of a **Digital Room Key**
 (`eu.europa.ec.eudi.aptitude.room_key.1`) as defined in the Digital Room Key Rulebook.
 
-## 4.6 PMS integration
+### 4.6 PMS integration
 
 Where PMS integration exists, the verified reservation reference and PID attributes MAY be
 used to:
@@ -566,7 +523,7 @@ used to:
 Where PMS integration does not exist, the verified result MAY be displayed to hotel
 staff for manual processing.
 
-## 4.7 Data minimisation and retention
+### 4.7 Data minimisation and retention
 
 The party that receives the presentation SHOULD NOT act as a long-term store
 of traveller identity, including where that party is also the issuer.
@@ -590,9 +547,7 @@ The verifier SHOULD retain only:
 - check-in outcome; and
 - minimum legal-registration data where applicable.
 
-
-
-## 4.8 Failure and fallback
+### 4.8 Failure and fallback
 
 The verifier SHALL return `denied`, `not_found` or `manual_review` where:
 
@@ -610,7 +565,7 @@ A staff-assisted reservation lookup SHALL remain possible.
 Absence or failure of an optional European Disability Card presentation SHALL NOT
 by itself deny check-in.
 
-# 5 Trust anchors
+## 5 Trust anchors
 
 The credential may be issued by:
 
@@ -627,17 +582,15 @@ The verifier SHALL determine:
 1. the issuer's identity;
 2. the issuer's authority over the reservation;
 3. the hotel or booking-system scope covered by that authority;
-4. the accepted credential type (`booking_reference_credential`);
+4. the accepted credential type (`urn:eu:aptitude:booking:reference:1`);
 5. applicable signing certificates or trust anchors; and
 6. whether the issuer remains authorised.
 
 For the APTITUDE pilot, trust SHOULD be obtained through the WP2 trust framework.
 
-# 6 Revocation and status
+## 6 Revocation and status
 
-
-
-## 6.1 Validity
+### 6.1 Validity
 
 The credential expiry SHOULD align with:
 
@@ -646,7 +599,7 @@ The credential expiry SHOULD align with:
 
 It SHOULD NOT remain valid indefinitely.
 
-## 6.2 Revocation triggers
+### 6.2 Revocation triggers
 
 The credential SHALL be revocable or status-checkable when:
 
@@ -659,9 +612,7 @@ The credential SHALL be revocable or status-checkable when:
 - the Wallet or credential is compromised; or
 - the issuer is no longer authorised.
 
-
-
-## 6.3 Mutable state versus revocation
+### 6.3 Mutable state versus revocation
 
 Live reservation-state checks in the booking or PMS system do not eliminate the need
 for credential status checking.
@@ -673,7 +624,7 @@ The verifier SHOULD check both:
 
 The final APTITUDE status-list endpoint remains to be defined.
 
-# 7 Compliance
+## 7 Compliance
 
 This Rulebook is designed to align with:
 
@@ -692,7 +643,7 @@ The Rulebook enforces:
 1. the issuer-config claim set (`id`, `reservationReference`, `property`,
   `stay`, `room`, `ratePlanCode`, `reservationStatus`, `voucherReference`),
   with `supplierReference` and `guest` optional as specified in §2.3;
-2. Wallet display name **Accommodation Voucher**;
+2. `vct` `urn:eu:aptitude:booking:reference:1` and Wallet display name **Accommodation Voucher**;
 3. separation of the voucher from PID
   (`urn:eu.europa.ec.eudi:pid:1`);
 4. optional, separate European Disability Card presentation for hospitality
@@ -714,10 +665,7 @@ Open matters include:
 - country-specific hotel-registration profiles; and
 - Digital Room Key issuance after check-in.
 
-
-
-# 8 References
-
+## 8 References
 
 | **Item Reference**                     | **Standard name/details**                                                                                  |
 | -------------------------------------- | ---------------------------------------------------------------------------------------------------------- |
@@ -738,4 +686,3 @@ Open matters include:
 | [PID Implementing Regulation]          | Commission Implementing Regulation (EU) 2024/2977 — PID                                                    |
 | [European Disability Card Rulebook]    | APTITUDE WP4 Rulebook for `european_disability_card` (`urn:eu.europa.ec.eudi:edc:1`)                       |
 | [Digital Room Key Rulebook]            | APTITUDE WP4 Rulebook for `eu.europa.ec.eudi.aptitude.room_key.1`                                          |
-
