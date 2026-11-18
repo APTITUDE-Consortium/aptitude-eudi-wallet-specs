@@ -181,7 +181,7 @@ Pending that decision, the existing candidate schema and examples remain unchang
 | --- | --- | --- | --- |
 | `document_number` | Issuer-assigned serial number of this RB05 instance. It SHALL be collision-checked, unique within the issuing authority's RB05 namespace and never reassigned. It SHOULD be opaque and generated with enough entropy to resist enumeration. It SHALL NOT encode or reuse a passport, PID, PhotoID, DTC, booking, flight or loyalty identifier. | non-empty text; exact ISO/IEC 23220-2 constraint to be confirmed under D10 | `BPA-7XQ4-M9VK-2T6P` |
 | `issue_date` | Administrative issue date of RB05. | `full-date` | `2026-09-03` |
-| `expiry_date` | Administrative end date. At issuance, it SHALL be no later than the earlier of the validated source credential's expiry date and 30 days after `issue_date`. | `full-date` | `2026-10-03` |
+| `expiry_date` | Administrative end date. At issuance, it SHALL be no later than the earlier of the validated source credential's expiry date and 30 days after `issue_date`. | `full-date` | `2026-10-02` |
 | `issuing_authority_unicode` | Legal name of the RB05 issuing authority. The production value must match the trust registration and certificate policy; the example is fictional. | non-empty Unicode text; exact ISO/IEC 23220-2 constraint to be confirmed under D10 | `Example Issuer SAS` |
 
 The 30-day maximum is a proposal for this draft, subject to validation under RB05-D07. Technical validity is separately encoded in `MSO.validityInfo.validFrom` and `validUntil`. D07/D10 shall also cap technical validity at the applicable WIA/KA validity and status-maintenance horizon, or explicitly document and approve a different current-profile rule and its residual risk. Subsequent withdrawal, account closure, relevant source-credential invalidation or post-issuance Wallet/WIA/KA compromise triggers revocation and deletion under Chapter 6; those future events are not encoded into `expiry_date` at issuance.
@@ -229,6 +229,8 @@ The `docType` of each relevant `Document` in `DeviceResponse.documents[]` and th
 - For the v0.1 proposal, `expiry_date` is the last UTC calendar date on which the administrative credential may be accepted. `validUntil` SHALL be no later than `00:00:00Z` on the following date and no later than `validFrom` plus 30 × 24 hours. The date-only namespace representation also requires that `expiry_date` is no more than 30 calendar-date increments after `issue_date`; only a full-MSO validator can enforce the exact duration.
 - `MSO.validityInfo.signed`, `validFrom` and `validUntil` SHALL satisfy the exact adopted mdoc profile, including `signed` no later than `validFrom` and `validFrom` earlier than `validUntil`. RB05-D10 and RB05-D21 must confirm the boundary interpretation, clock source and permitted skew before an implementation candidate is produced.
 - An mdoc with an unknown `docType`, namespace, format profile, protection profile or matcher profile SHALL be rejected safely.
+
+For example, if `validFrom` is `2026-09-03T00:00:00Z` and `expiry_date` is `2026-10-02`, the latest possible `validUntil` under these two limits is `2026-10-03T00:00:00Z`: midnight after the expiry date and exactly 30 days after the start.
 
 #### 3.1.3 Attribute mapping
 
@@ -279,7 +281,7 @@ The following is a readable projection of the namespaced values, not the binary 
       "given_name": "Camille",
       "document_number": "BPA-7XQ4-M9VK-2T6P",
       "issue_date": "2026-09-03",
-      "expiry_date": "2026-10-03",
+      "expiry_date": "2026-10-02",
       "issuing_authority_unicode": "Example Issuer SAS"
     },
     "org.example.aptitude.biometric-profile.1": {
