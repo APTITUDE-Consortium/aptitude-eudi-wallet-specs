@@ -1,0 +1,58 @@
+name: Catalogue
+
+on:
+  pull_request:
+    paths:
+      - 'docs/catalogue/**'
+      - 'script/catalogue.py'
+      - 'script/validate_catalogue.py'
+      - 'script/new_catalogue_entry.py'
+      - 'script/mkdocs_catalogue.py'
+      - '.github/workflows/catalogue.yml'
+  push:
+    branches: [main]
+    paths:
+      - 'docs/catalogue/**'
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    name: Validate the catalogue and build it with registry-cli
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v7
+
+      - name: Set up Python
+        uses: actions/setup-python@v7
+        with:
+          python-version: "3.12"
+
+      - name: Validate rulebooks, data schemas and cards
+        run: |
+          python -m pip install --upgrade pip jsonschema
+          python script/validate_catalogue.py
+
+      - name: Set up Go
+        uses: actions/setup-go@v6
+        with:
+          go-version: "1.26"
+
+      - name: Build the catalogue with registry-cli
+        run: |
+          expected=$(ls docs/catalogue/data-schemas/sd-jwt/*-sd-jwt.json 2>/dev/null | wc -l)
+          if [ "$expected" = "0" ]; then
+            echo "The catalogue has no SD-JWT VC schemas yet."
+            exit 0
+          fi
+          go install github.com/sirosfoundation/registry-cli/cmd/registry-cli@v0.18.0
+          # registry-cli stages generated files next to a local source, so it builds a copy
+          cp -r docs/catalogue "$RUNNER_TEMP/catalogue"
+          rm -rf "$RUNNER_TEMP/catalogue/_template"
+          printf 'sources:\n  - url: "file://%s"\n    organization: "aptitude-consortium"\n    layout: "rulebook-catalog"\n    options:\n      attestation_los: "iso_18045_high"\n      binding_type: "key"\n' "$RUNNER_TEMP/catalogue" > "$RUNNER_TEMP/sources.yaml"
+          "$(go env GOPATH)/bin/registry-cli" build --sources "$RUNNER_TEMP/sources.yaml" --output "$RUNNER_TEMP/out"
+          actual=$(ls "$RUNNER_TEMP"/out/aptitude-consortium/*.vctm.json | wc -l)
+          echo "SD-JWT VC schemas: $expected, published as type metadata: $actual"
+          test "$expected" = "$actual"
