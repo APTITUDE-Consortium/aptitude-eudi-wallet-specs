@@ -10,37 +10,14 @@
 | ------- | ---------- | ------------------------------------------------------------------------------------------------------------------ |
 | 0.1     | 23-07-2026 | Initial draft based on the SEDIT-X use case, APTITUDE UC7 material and the APTITUDE Attestation Rulebook template. |
 | 0.2     | 26-08-2026 | Aligned with an earlier APTITUDE issuer schema (`european_disability_card`, `vct` `urn:eu.europa.ec.eudi:edc:1`) and optional hospitality check-in use. |
-| 0.3     | 02-10-2026 | Defines the APTITUDE European Disability Card SD-JWT profile based on the Italian IT-Wallet / Documenti su IO model (IT Wallet Specification v1.3.3): `vct` `urn:eudi:EuropeanDisabilityCard:it:1`, claim set with `constant_attendance_allowance` as the primary accessibility claim. |
-| 0.4     | 09-11-2026 | Records SD-JWT encoding metadata (`vct_integrity`, `sd_digests`, `sd_alg`), states that `revocation_list_uri` is mdoc-only, extends the wallet display, and states that proximity presentation uses this SD-JWT profile. Hotel check-in outcomes stay off the card. |
+| 0.3     | 09-11-2026 | Records SD-JWT encoding metadata (`vct_integrity`, `sd_digests`, `sd_alg`), states that `revocation_list_uri` is mdoc-only, extends the wallet display, and states that proximity presentation uses this SD-JWT profile. Hotel check-in outcomes stay off the card. |
 
 **Feedback:**
 
 - To be defined by the APTITUDE WP4 / SEDIT-X governance process.
 
 > **Draft status**
->
-> This Rulebook defines the APTITUDE / SEDIT-X **European Disability Card**
-> profile. It is based on the Italian IT-Wallet (“Documenti su IO”) European
-> Disability Card model (IT Wallet Specification **v1.3.3**). The attribute set,
-> identifiers and SD-JWT encoding rules in the chapters below are the APTITUDE
-> profile.
->
-> The Verifiable Credential Type (`vct`) is:
->
-> ```text
-> urn:eudi:EuropeanDisabilityCard:it:1
-> ```
->
-> The OpenID4VCI credential configuration identifier is:
->
-> ```text
-> dc_sd_jwt_EuropeanDisabilityCard
-> ```
->
-> The APTITUDE / SEDIT-X pilot uses **mock data** that conforms to this profile.
-> Domain-specific service outcomes (for example an easier-access hotel room) are
-> produced by the Relying Party after verification; they are not encoded as
-> additional claims in this credential.
+
 
 ## 1 Introduction
 
@@ -222,7 +199,7 @@ The following design principles apply:
 | `birth_date`                      | Holder's date of birth as recorded on the card.                                                         | date          | `1980-01-10`                           |
 | `document_number`                 | Document number assigned to the European Disability Card by the issuing authority. Its syntax is scheme-specific and SHALL be reproduced exactly as provided by the authoritative source; this Rulebook does not define an additional format constraint. | string        | `XXXXXXXXXX`                           |
 | `expiry_date`                     | Administrative expiration date of the credential / card.                                                | date          | `2031-01-14`                           |
-| `issuing_authority`               | Name of the administrative authority that issued the credential.                                        | string        | `Istituto Poligrafico e Zecca dello Stato` |
+| `issuing_authority`               | Name of the administrative authority that issued the credential.                                        | string        | `Issuing Authority Example Name` |
 | `issuing_country`                 | ISO 3166-1 alpha-2 country code of the issuing jurisdiction.                        | string        | `IT`                                   |
 | `portrait`                        | Facial image of the holder, for visual inspection where required.                                       | string / bytes | *(image)*                             |
 | `link_qr_code`                    | URI associated with the card QR code.                                                                   | URI           | `https://example.it/edc/qr/...`        |
@@ -289,7 +266,7 @@ the registered `cnf` claim (see section 3.2).
 | ------------------------ | --------------------------------------------- | ------------- | --------------------------------------------------- |
 | `credential_name`        | Human-readable wallet display name.           | string        | `European Disability Card` / `Carta della disabilità europea` |
 | `credential_description` | Human-readable explanation of the credential. | string        | `Recognised disability card and constant attendance allowance` |
-| `issuer_name`            | Human-readable issuer name.                   | string        | `Istituto Poligrafico e Zecca dello Stato`          |
+| `issuer_name`            | Human-readable issuer name.                   | string        | `Issuing Authority Example Name`          |
 | `issuer_logo_uri`        | URI of the issuer logo.                       | URI           | `https://issuer.example/logo.png`                   |
 | `privacy_notice`         | URI of the applicable privacy notice.         | URI           | `https://issuer.example/privacy`                    |
 | `issuer_policy`          | URI of the issuance and verification policy.  | URI           | `https://issuer.example/policy`                     |
@@ -491,7 +468,7 @@ Holder: Mario Rossi
 Date of birth: 10 January 1980
 Document number: XXXXXXXXXX
 Issuing country: IT
-Issuing authority: Istituto Poligrafico e Zecca dello Stato
+Issuing authority: Issuing Authority Example Name
 Card link: https://example.it/edc/qr/...
 Portrait: card photograph
 Constant attendance allowance: Yes
