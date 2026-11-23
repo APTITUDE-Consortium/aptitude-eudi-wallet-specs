@@ -12,6 +12,7 @@
 | 0.4     | 02-11-2026 | Replaces the SD-JWT encoding with an ISO/IEC 18013-5 mdoc. `docType` is `eu.europa.ec.eudi.aptitude.vehicle_ferry_boarding.1`. Calendar dates are CBOR `full-date` (tag 1004). The lane verifies the `DeviceResponse` offline. |
 | 0.5     | 09-11-2026 | The issued mdoc stays ISO/IEC 18013-5. Proximity presentation at the vehicle lane stays part 5, and a lane reader can verify it offline. The same mdoc MAY be presented online under ISO/IEC TS 18013-7. The SEDIT-X vehicle lane uses proximity only. |
 | 0.6     | 09-11-2026 | Embarkation requires two checks. The reader verifies the mdoc locally, and matches `ticket_number` to the sailing manifest provisioned for that sailing. A valid signature alone does not allow embarkation. |
+| 0.7     | 23-11-2026 | `validUntil` includes a grace of at least 6 hours after the scheduled departure, set at issuance, so an offline lane can accept a delayed sailing. `VBP-IR-01` orders the journey by each port's UTC offset. |
 
 **Feedback:**
 
@@ -110,7 +111,9 @@ window SHALL NOT by themselves allow embarkation.
 `validityInfo` is the acceptance window. It does not by itself identify the
 sailing, and it does not show that the ticket is still held on the manifest.
 The reader SHALL still match `departure_port`, `departure_date` and
-`departure_time` to the sailing it is boarding.
+`departure_time` to the sailing it is boarding. Those three values are the
+scheduled departure. A delay of that sailing does not change them, and the
+reader SHALL NOT compare them with an estimated time of departure.
 
 Online presentation, specified in §4.9, is a separate channel for the same
 mdoc. It does not replace the lane, and it does not remove the manifest
@@ -204,9 +207,9 @@ The issued credential SHALL use exactly one of these category values.
 6. **Device binding.** The Mobile Security Object SHALL contain the Wallet
    `deviceKey`. The reader SHALL verify ISO/IEC 18013-5 device authentication
    bound to the `SessionTranscript`.
-7. **Short validity.** `validityInfo.validUntil` SHALL be no later than the
-   scheduled departure, plus only a limited grace period where the operator
-   defines one.
+7. **Delay grace.** `validityInfo.validUntil` SHALL be the scheduled departure
+   plus a grace period of at least 6 hours. The issuer sets that instant.
+   A reader SHALL NOT extend it.
 8. **Separate credentials.** Passenger boarding, vehicle registration and
    payment remain other attestations. This credential SHOULD NOT duplicate the
    mVRC.
@@ -238,6 +241,16 @@ encoded as a CBOR `full-date` (tag 1004) as defined in [RFC 8943] and used for
 dates in ISO/IEC 18013-5. The times are local port time, not an instant with a
 numeric offset, and remain text strings. The acceptance window the reader
 enforces is `validityInfo`, which does carry a date-time.
+
+The issuer SHALL order the journey by absolute time, under `VBP-IR-01`.
+It takes the UTC offset in force at each port at that local date and time,
+including the daylight-saving rule, and combines that offset with the local
+date and time. The credential does not carry the offsets. `arrival_date` MAY
+precede `departure_date` when the arrival instant is still later: a departure
+of `2026-06-16` at `00:10` on UTC+2 and an arrival of `2026-06-15` at `23:50`
+on UTC+1 is a 40-minute crossing and SHALL be issued. A same-offset arrival
+of `06:00` after a departure of `07:30` on the same local date SHALL NOT be
+issued. The reader does not repeat this comparison.
 
 ### 2.4 Optional attributes
 
@@ -277,7 +290,7 @@ The credential SHALL NOT include:
 | `credential_type` | Encoding-independent credential type identifier. SHALL equal the `docType`. | string | `eu.europa.ec.eudi.aptitude.vehicle_ferry_boarding.1` |
 | `issued_at` | Credential issuance time. Carried as `validityInfo.signed`. | date-time | `2026-06-01T10:00:00+03:00` |
 | `valid_from` | Beginning of the acceptance window. Carried as `validityInfo.validFrom`. | date-time | `2026-06-01T10:00:00+03:00` |
-| `expires_at` | End of the acceptance window. Carried as `validityInfo.validUntil`. | date-time | `2026-06-15T07:30:00+03:00` |
+| `expires_at` | End of the acceptance window. Carried as `validityInfo.validUntil`. Scheduled departure plus the grace period in §6.1. | date-time | `2026-06-15T13:30:00+03:00` |
 | `trust_anchor_reference` | Location of issuer trust information provisioned to lane readers. | URI | `https://trust.example.eu/ferry/operators/fast-ferries` |
 
 The ferry operator and the authorised ticketing system MAY be the same entity.
@@ -321,9 +334,9 @@ valid signature as a substitute for that manifest.
 
 | **Rule ID** | **Rule statement** | **Why it exists** | **Where enforced** | **Behaviour on failure** |
 | ----------- | ------------------ | ----------------- | ------------------ | ------------------------ |
-| `VBP-IR-01` | `arrival_date` SHALL NOT precede `departure_date`. | Prevents a journey that runs backwards. | Issuer, before signing. | Issuer SHALL NOT issue the mdoc. |
+| `VBP-IR-01` | The arrival instant SHALL be later than the departure instant. The issuer computes each instant from the local date, the local time and the UTC offset in force at that port at that local date and time. | A comparison of local dates alone rejects a westbound crossing that arrives on the previous local date, and accepts a same-day journey whose arrival clock time is earlier. | Issuer, before signing. The reader does not apply this rule. | Issuer SHALL NOT issue the mdoc. When the issuer cannot resolve either offset, it SHALL NOT issue. |
 | `VBP-IR-02` | The credential SHALL describe one journey and one vehicle. | Prevents reuse across sailings or vehicles. | Issuer. The reader checks the disclosed sailing against the lane. | Reader SHALL refuse when it cannot determine that sailing or vehicle. |
-| `VBP-IR-03` | The credential SHALL NOT be accepted after `validityInfo.validUntil`. | Boarding entitlement ends at departure, plus only a defined grace period. | Reader, against its clock. | Reader SHALL refuse. |
+| `VBP-IR-03` | The credential SHALL NOT be accepted after `validityInfo.validUntil`. | The acceptance window ends at the scheduled departure plus the grace period set at issuance. That grace is at least 6 hours, so a delayed sailing remains acceptable offline. | Reader, against its clock. | Reader SHALL refuse. |
 | `VBP-IR-04` | `docType` SHALL equal `eu.europa.ec.eudi.aptitude.vehicle_ferry_boarding.1`. | Identifies this attestation type. | Reader. | Reader SHALL refuse any other `docType`. |
 | `VBP-IR-05` | `ticket_let` and `ticket_number` SHALL be non-empty. | The lane needs a ticket identifier. | Issuer, before signing. | Issuer SHALL NOT issue the mdoc. |
 | `VBP-IR-06` | Where the lane matches the vehicle by plate, `plate_number` SHOULD be compared with the mVRC and with the vehicle at the lane. | The vehicle in the lane is the vehicle on the ticket. | Reader, as a separate check from mdoc verification. | Reader SHOULD refuse embarkation when that match fails. |
@@ -468,10 +481,17 @@ The Mobile Security Object SHALL include:
 window the lane reader checks offline. A reader SHALL reject an mdoc when its
 clock is before `validFrom` or after `validUntil`.
 
-`validUntil` SHALL NOT be later than the scheduled departure unless the
-operator defines a short grace period. That grace period SHALL be reflected
-in `validUntil` at issuance. The reader does not invent a grace period of
-its own.
+`validUntil` SHALL be the scheduled departure at the departure port plus a
+grace period of at least 6 hours. The operator MAY set a longer grace. The
+grace SHOULD NOT exceed 24 hours. The issuer writes the resulting instant
+into `validUntil`. A reader SHALL NOT add a grace period of its own.
+
+The grace keeps an offline lane able to accept the credential when the same
+sailing departs late. Re-issuance does not cover that case: the holder may
+have no connectivity at the port. A new scheduled departure, a different
+sailing or a different port is a different journey and follows §6.2. A clock
+time inside the window does not by itself entitle the vehicle to embark. The
+sailing manifest in §6.3 does that.
 
 The issuer SHALL sign `issuerAuth` with a signature algorithm permitted by
 ISO/IEC 18013-5. The example in §3.1.5 uses ES256 (COSE algorithm identifier
@@ -643,7 +663,7 @@ included because this example is a lane that matches the vehicle by plate.
         "validityInfo": {
           "signed": 0("2026-06-01T10:00:00+03:00"),
           "validFrom": 0("2026-06-01T10:00:00+03:00"),
-          "validUntil": 0("2026-06-15T07:30:00+03:00")
+          "validUntil": 0("2026-06-15T13:30:00+03:00")
         }
       }>>),
       h'5F8D3C2A1B0099EE...SIGNATURE...'
@@ -754,7 +774,8 @@ specified in §4.9. A normal lane use SHOULD follow these steps:
 5. the reader verifies `issuerAuth`, the `IssuerSignedItem` digests, device
    authentication and `validityInfo`, as specified in §4.7;
 6. the reader checks that `departure_port`, `departure_date` and
-   `departure_time` are the sailing this lane is boarding;
+   `departure_time` are the scheduled departure of the sailing this lane is
+   boarding. A delay of that sailing does not change those values;
 7. where vehicle matching applies, the reader compares `plate_number` and
    `vehicle_type_code` as specified in §4.6;
 8. the reader refreshes the sailing manifest when it has connectivity, then
@@ -809,15 +830,15 @@ The lane reader SHALL:
    Object;
 7. verify `validityInfo` against the reader's clock;
 8. confirm that the disclosed `departure_port`, `departure_date` and
-   `departure_time` match the sailing this lane is boarding;
+   `departure_time` match the scheduled departure of the sailing this lane is
+   boarding, and not an estimated time of departure;
 9. confirm that a requested mandatory element was disclosed;
-10. apply `VBP-IR-01` to the disclosed dates;
-11. where the reader has connectivity, refresh the sailing manifest before
+10. where the reader has connectivity, refresh the sailing manifest before
     matching it;
-12. match `ticket_number` to that manifest as specified in §6.3, apply
+11. match `ticket_number` to that manifest as specified in §6.3, apply
     `VBP-IR-07`, and reject a ticket that is cancelled, suspended, refunded,
     exchanged or already accepted; and
-13. allow embarkation only when these checks succeed, including a current
+12. allow embarkation only when these checks succeed, including a current
     entitled manifest entry. A valid signature with no such entry SHALL be
     a refusal.
 
@@ -826,6 +847,10 @@ be a refusal.
 
 A reader SHALL NOT accept a credential for another operator only because the
 same vendor operates both lanes.
+
+A reader SHALL NOT apply `VBP-IR-01` and SHALL NOT refuse a credential only
+because `arrival_date` precedes `departure_date`. That rule uses each port's
+UTC offset, which the credential does not carry.
 
 ### 4.8 Failure and fallback
 
@@ -894,9 +919,16 @@ The credential SHALL be short-lived and limited to one journey.
 start of the boarding window where the operator wants the credential refused
 before that window.
 
-`validityInfo.validUntil` SHALL be no later than the scheduled departure,
-plus only a limited grace period where the operator defines one. The grace
-period is set at issuance. A reader SHALL NOT add one.
+`validityInfo.validUntil` SHALL be the scheduled departure at the departure
+port plus a grace period of at least 6 hours. The operator MAY set a longer
+grace. The grace SHOULD NOT exceed 24 hours. The issuer writes it into
+`validUntil` before signing. A reader SHALL NOT add a grace period of its own.
+
+The 6-hour floor is what lets an offline lane accept a sailing that departs
+late. The disclosed `departure_date` and `departure_time` stay the scheduled
+values, and the reader matches those, as specified in §4.7. A delay longer
+than `validUntil` uses the staff path in §4.8, or a replacement credential
+when the holder can receive one.
 
 This window is the time bound on the signed statement. After `validUntil`,
 the reader SHALL NOT accept the credential for boarding. A clock time inside
@@ -909,7 +941,7 @@ The issuer SHOULD revoke, suspend or replace the credential when:
 
 - the vehicle ticket is cancelled, refunded or exchanged;
 - the vehicle is removed or replaced on the booking;
-- the sailing, ports or departure time change;
+- the scheduled sailing, the ports or the scheduled departure change;
 - the device is lost or compromised;
 - the credential was issued in error; or
 - the issuer is no longer authorised.
@@ -917,6 +949,11 @@ The issuer SHOULD revoke, suspend or replace the credential when:
 A successful presentation SHALL NOT by itself revoke the credential. The
 vehicle may be checked again before departure. A change of lane or gate SHALL
 NOT by itself be a revocation trigger.
+
+An operational delay of the same scheduled sailing SHALL NOT by itself
+require revocation or replacement. The grace period in §6.1 covers that
+delay. A new scheduled departure is a different journey. The manifest entry
+for the scheduled sailing stays the entitlement check during the delay.
 
 ### 6.3 Sailing manifest
 
@@ -1012,8 +1049,7 @@ The following matters remain open and require operator input:
   identifiers;
 - how lane readers are provisioned with issuer trust anchors;
 - the concrete format of the sailing-manifest feed, and the maximum age of
-  a manifest copy a reader may use when it cannot refresh;
-- the length of any post-departure grace period; and
+  a manifest copy a reader may use when it cannot refresh; and
 - when `plate_number` is mandatory for a given operator.
 
 This version does not define an SD-JWT VC or a W3C VCDM encoding.
