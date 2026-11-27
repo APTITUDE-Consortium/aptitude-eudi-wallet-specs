@@ -7,7 +7,7 @@ Date 26-10-2026
 
 | Version# | Date| Description |
 |-----------|-------------|-----------|
-| 1.1 | 26-10-2026 | Added support for embedded user authentication during the credential issuance process, reformated the mapping section |
+| 1.1 | 27-11-2026 | Added support for embedded user authentication during the credential issuance process, reformated the mapping section |
 | 1.0 | 14-09-2026 | Initial delivery  |
 
 ## Authors
@@ -20,7 +20,7 @@ Date 26-10-2026
 
 1. Giancarlo Degani, Infocert
 2. Luca Vallone, IPZS
-3. ...
+3. Thomasz Sikorski, COI
 
 ## Table of Contents
 
@@ -312,15 +312,15 @@ Within the following diagram we introduce the LoTE Provider endpoint as specifie
 | 1a | Select issuer | The User starts issuance process by selecting preconfigured issuer within the wallet. See [OIDVCI–H6](https://openid.net/specs/openid-4-verifiable-credential-issuance-1_0.html#appendix-H.6)|
 | 1b.2A, 1b.2B1, 1b.2D4 | Credential Offer | The User starts issuance process from the Issuer, it uses same device holding its wallet app. Issuer prepares credential offer and invokes wallet app by passing the whole credential offer within the request or just passing uri reference to it. Additionally, in case of pre-authorized code flow issuance, the issuer authenticates the user and provides through a separate channel `tx_code`. See [RFC-01 6.2.2](../RFCs/RFC001.md#622-credential-offer-creation), [RFC-01 6.2.3](../RFCs/RFC001.md#623-credential-offer-delivery-and-wallet-invocation) and [RFC-01 8.1](../RFCs/RFC001.md#81-wallet-invocation-interface)|
 | 1b.2B2, 1b.2C, 1b.2D5, 1b.2E6 | Get Credential Offer | For cross-device and same device flow where wallet receives uri reference to the Credential Offer, it needs to retrieve it from the provided location. See [RFC-01 6.2.3](../RFCs/RFC001.md#623-credential-offer-delivery-and-wallet-invocation) and [RFC-01 8.2](../RFCs/RFC001.md#82-credential-offer-interface)|
-| 2.1 | Retrieve credential issuer metadata | Metadata object contains WRPAC and WRPRC and issuer may embed additional disclosure policies that wallet needs to persist and validate during the presentation session with RP. See [RFC-01 6.1.1](../RFCs/RFC001.md#611-configuration-and-discovery) and [RFC-01 8.9](../RFCs/RFC001.md#89-metadata-endpoints)|
+| 2 | Retrieve credential issuer metadata | Metadata object contains WRPAC and WRPRC and issuer may embed additional disclosure policies that wallet needs to persist and validate during the presentation session with RP. See [RFC-01 6.1.1](../RFCs/RFC001.md#611-configuration-and-discovery) and [RFC-01 8.9](../RFCs/RFC001.md#89-metadata-endpoints)|
 | V2.1 | Validate signature of provided metadata| See [RFC-01 7.7](../RFCs/RFC001.md#77-server-metadata)|
 | V2.2 | Validate WRPAC| See [Aptitude Authentication Process](https://aptitude-consortium.github.io/wp2-trust-specifications/latest/sections/trust-evaluation-process/#authentication-process) and  [Aptitude WRPAC](https://github.com/APTITUDE-Consortium/wp2-trust-specifications/blob/main/docs/topics/access-certificate.md) |
-| V2.3, V2.5, V4a.3, V5.4, V6.4 | Get LoTE | See [LoTE Validation Process](https://aptitude-consortium.github.io/wp2-trust-specifications/latest/sections/trust-evaluation-process/#list-of-trusted-entities-validation-process) and  [RFC-03 LoTE Endpoint](../RFCs/RFC003.md#71-lote-endpoint) |
+| V2.3, V2.5, V4a.3, V5.4, V6.5 | Get LoTE | See [LoTE Validation Process](https://aptitude-consortium.github.io/wp2-trust-specifications/latest/sections/trust-evaluation-process/#list-of-trusted-entities-validation-process) and  [RFC-03 LoTE Endpoint](../RFCs/RFC003.md#71-lote-endpoint) |
 | V2.4 | Validate WRPAC| See [Aptitude Authorization Process](https://aptitude-consortium.github.io/wp2-trust-specifications/latest/sections/trust-evaluation-process/#authentication-process) and  [Aptitude WRPAC](https://aptitude-consortium.github.io/wp2-trust-specifications/latest/sections/trust-artifacts/#wallet-relying-party-access-certificate) |
-| 2.2 | Process Embedded Policy | See [Aptitude embedded disclosure policies](https://github.com/APTITUDE-Consortium/wp2-trust-specifications/blob/main/docs/topics/embedded-disclosure-policy.md)|
-| 2.3 | Retrieve Authorization server metadata | Note that issuer signals to the wallet its support for interactive authorization by providing `authorization_challange_endpoint`. See [RFC-01 8.9](../RFCs/RFC001.md#89-metadata-endpoints)|
-| 3 | Obtain WIA | See [TS3 2.3.1](https://github.com/eu-digital-identity-wallet/eudi-doc-standards-and-technical-specifications/blob/main/docs/technical-specifications/ts3-wallet-unit-attestation.md#231-content-of-wia)|
-| 3.1, 4a.2, 4b.2, 4c.2, 6.2 | Create DPoP | See [IETF OAuth 2.0 Attestation-Based Client Authentication Draft 11 section 5.2](https://datatracker.ietf.org/doc/html/draft-ietf-oauth-attestation-based-client-auth-11#section-5.2)|
+| 2.1 | Process Embedded Policy | See [Aptitude embedded disclosure policies](https://github.com/APTITUDE-Consortium/wp2-trust-specifications/blob/main/docs/topics/embedded-disclosure-policy.md)|
+| 2.2 | Retrieve Authorization server metadata | Note that issuer signals to the wallet its support for interactive authorization by providing `authorization_challange_endpoint`. See [RFC-01 8.9](../RFCs/RFC001.md#89-metadata-endpoints)|
+| 3.1 | Obtain WIA | See [TS3 2.3.1](https://github.com/eu-digital-identity-wallet/eudi-doc-standards-and-technical-specifications/blob/main/docs/technical-specifications/ts3-wallet-unit-attestation.md#231-content-of-wia)|
+| 3.2, 4a.2, 4b.2, 4c.2, 6.2 | Create DPoP | See [IETF OAuth 2.0 Attestation-Based Client Authentication Draft 11 section 5.2](https://datatracker.ietf.org/doc/html/draft-ietf-oauth-attestation-based-client-auth-11#section-5.2)|
 | 4a.1, 4a.3 | PAR request |  See [RFC-01 6.1.3](../RFCs/RFC001.md#613-pushed-authorisation-request-par) and [RFC-01 8.3](../RFCs/RFC001.md#83-par-endpoint). Note that Issuer Authorization server forces fresh nonce value usage by providing initially error response as specified in RFC-01 6.1.3 item 4 and [RFC9449 section 8](https://www.rfc-editor.org/info/rfc9449/#section-8)|
 | V4a.1, V5.2 | Validate WIA | See [Sign/Seal Certificate Path Validation](https://aptitude-consortium.github.io/wp2-trust-specifications/latest/sections/trust-artifacts/#signseal-certificate-path-validation) |
 | V4a.2, V5.3, V6.3 | Get Status list | See [Token Status List](https://aptitude-consortium.github.io/wp2-trust-specifications/latest/sections/trust-management-lifecycle/#token-status-list) |
@@ -336,6 +336,7 @@ Within the following diagram we introduce the LoTE Provider endpoint as specifie
 | 6.3 | Credential request |  See [RFC-01 6.1.6](../RFCs/RFC001.md#616-credential-request), [RFC-01 6.2.7](../RFCs/RFC001.md#627-credential-request)  and [RFC-01 8.5](../RFCs/RFC001.md#85-credential-endpoint) |
 | V6.2 | Validate KA | See [Sign/Seal Certificate Path Validation](https://aptitude-consortium.github.io/wp2-trust-specifications/latest/sections/trust-artifacts/#signseal-certificate-path-validation) and [TS3 2.5.2](https://github.com/eu-digital-identity-wallet/eudi-doc-standards-and-technical-specifications/blob/main/docs/technical-specifications/ts3-wallet-unit-attestation.md#252-ka-revocation) |
 | 6.5 | Deferred Credential request |  See [RFC-01 6.3](../RFCs/RFC001.md#63-deferred-credential-request), [RFC-01 7.6](../RFCs/RFC001.md#76-deferred-credential-endpoint)  and [RFC-01 8.8](../RFCs/RFC001.md#88-deferred-credential-endpoint) |
+| 7.2 | Notification Request| See [RFC-01 8.7](../RFCs/RFC001.md#87-notification-interface)|
 
 \[^1]: Scheduled statuslist checks on WIAs/KAs and attestation life cycle event notifications from wallet instance towards Issuer are not showned within the sequence diagram, as they do not occur during the actual credential issuance process.
 
